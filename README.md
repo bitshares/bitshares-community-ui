@@ -1,10 +1,11 @@
 # bitshares-community-ui (Worker Part 1/2 - 3 months)
 [Worker Proposal] Light and 100% Responsive, BitShares Community DEX/UI - based on Vue.js Framework
 
-
 - All updates on this worker/repository will be maintained through github. 
 
 - Worker details can be found [here](https://www.bitshares.foundation/workers/2018-08-trusty-community-ui-p1).
+
+## Setup [docs/setup](docs/setup.md)
 
 ## Team 
 
