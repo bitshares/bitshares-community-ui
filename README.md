@@ -7,6 +7,8 @@
 
 ## Setup [docs/setup](docs/setup.md)
 
+## Development guide [docs/dev-guide](docs/dev-guide.md)
+
 ## Team 
 
 | Roles (described below)             | GitHub Account |

@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    main
+    Main
   </div>
 </template>
 
@@ -9,6 +9,6 @@
 export default {
   name: 'Main',
   components: {
-  },
+  }
 }
 </script>

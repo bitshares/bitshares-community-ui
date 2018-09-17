@@ -1,5 +1,21 @@
 <template>
   <div class="components">
-    <h1>This is an components page</h1>
+    This is an components page
+    <div>
+      <Button text="test button"/>
+    </div>
+    <div>
+      <Input text="test input"/>
+    </div>
   </div>
 </template>
+
+<script>
+import Button from '@/components/Button'
+import Input from '@/components/Input'
+
+export default {
+  name: 'Components',
+  components: { Button, Input }
+}
+</script>

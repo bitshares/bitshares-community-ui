@@ -1,11 +1,12 @@
 <template>
   <div class="auth">
+    Authentication
   </div>
 </template>
 
 <script>
 export default {
-  name: 'home',
+  name: 'Auth',
   components: {
   }
 }

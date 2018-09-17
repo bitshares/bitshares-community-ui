@@ -18,6 +18,15 @@ export default new Router({
       // this generates a separate chunk (components.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "components" */ './views/Components.vue')
+    },
+    {
+      path: '/auth',
+      name: 'auth',
+      component: () => import(/* webpackChunkName: "auth" */ './views/Auth.vue')
+    },
+    {
+      path: '*',
+      redirect: '/'
     }
   ]
 })
