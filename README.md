@@ -18,7 +18,7 @@
 | Full-stack Developer (**Roman Bellendir**)  |    [ololokiras](https://github.com/ololokiras)     |
 | [BountyClaim](#) / HTML and CSS Developer	       |    Contact [dls-cipher](https://github.com/dls-cipher)     |
 | Front-end JS Developer (**Rostislav Gogolauri**)     |	  [mindfulme](https://github.com/mindfulme)     |
-| Daniel Savin / Web Designer                           |	  [danielvinsa](https://github.com/danielvinsa)     |
+| Web Designer (**Daniel Savin**)   |	  [danielvinsa](https://github.com/danielvinsa)     |
 
 
 - Worker hourly reports (by TopTracker) can be found under [/team/hours](https://github.com/bitshares/bitshares-community-ui/tree/master/team/hours)
