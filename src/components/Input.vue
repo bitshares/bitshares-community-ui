@@ -1,18 +1,25 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <input
+    type="text"
+    :value="value"
+    @input="handeInput"
+  />
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
+  name: 'Input',
+  props: {
+    value: {
+      type: String,
+      required: true
+    }
+  },
+  methods: {
+    handleInput ({ target }) {
+      this.$emit('input', target.value)
+    }
   }
 }
 </script>
