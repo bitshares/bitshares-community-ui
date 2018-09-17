@@ -3,10 +3,10 @@ import Vuex from 'vuex'
 import app from './modules/app'
 
 Vue.use(Vuex)
-
+import vuexBitshares from 'vuex-bitshares'
 // TODO: user vuex-bitshares here
 
-export default new Vuex.Store({
+const store =  new Vuex.Store({
   state: {},
   mutations: {},
   actions: {},
@@ -14,3 +14,7 @@ export default new Vuex.Store({
     app
   }
 })
+
+vuexBitshares(store)
+
+export default store

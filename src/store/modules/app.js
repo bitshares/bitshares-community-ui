@@ -1,4 +1,3 @@
-
 const initialState = {
   theme: 'dark'
 }
