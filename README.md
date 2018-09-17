@@ -25,7 +25,7 @@
 
 - Worker sprint reports (by Worker Manager) can be found [/team/reports](/bitshares/bitshares-community-ui/team/repots)
 
-- Bounty claims are available on issues that remain open(unassigned) - ( [read rules here](/bitshares/bitshares-community-ui/BOUNTY-RULES.md) )
+- Bounty claims are available on issues that remain open(unassigned) - ( [read rules here](https://github.com/bitshares/bitshares-community-ui/blob/master/BOUNTY-RULES.md) )
 
 **NOTICE**
 
