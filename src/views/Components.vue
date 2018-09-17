@@ -5,7 +5,7 @@
       <Button text="test button"/>
     </div>
     <div>
-      <Input text="test input"/>
+      <Input value="test input"/>
     </div>
   </div>
 </template>
