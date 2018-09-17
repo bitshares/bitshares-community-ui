@@ -2,7 +2,7 @@
   <input
     type="text"
     :value="value"
-    @input="handeInput"
+    @input="handleInput"
   />
 </template>
 
