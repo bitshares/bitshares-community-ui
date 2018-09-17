@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import app from './modules/app'
+import vuexBitshares from 'vuex-bitshares'
 
 Vue.use(Vuex)
-import vuexBitshares from 'vuex-bitshares'
 // TODO: user vuex-bitshares here
 
-const store =  new Vuex.Store({
+const store = new Vuex.Store({
   state: {},
   mutations: {},
   actions: {},
