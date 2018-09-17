@@ -21,9 +21,9 @@
 | Alex Volkov / Designer                           |	  Not Available     |
 
 
-- Worker hourly reports (by TopTracker) can be found under [/team/hours](/bitshares/bitshares-community-ui/team/hours)
+- Worker hourly reports (by TopTracker) can be found under [/team/hours](https://github.com/bitshares/bitshares-community-ui/tree/master/team/hours)
 
-- Worker sprint reports (by Worker Manager) can be found [/team/reports](/bitshares/bitshares-community-ui/team/repots)
+- Worker sprint reports (by Worker Manager) can be found [/team/reports](https://github.com/bitshares/bitshares-community-ui/tree/master/team/reports)
 
 - Bounty claims are available on issues that remain open(unassigned) - ( [read rules here](https://github.com/bitshares/bitshares-community-ui/blob/master/BOUNTY-RULES.md) )
 
