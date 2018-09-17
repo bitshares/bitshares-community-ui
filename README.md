@@ -10,15 +10,15 @@
 
 | Roles (described below)             | GitHub Account |
 |:---------------------------------- |:-------------:|
-| General Manager (Milos Preocanin)   |  [dls-cipher](https://github.com/dls-cipher)     |
-| Product Manager / UI/UX Liaison (Armen Azatyan)   |   [hisinbox](https://github.com/hisinbox)     |
+| General Manager (**Milos Preocanin**)   |  [dls-cipher](https://github.com/dls-cipher)     |
+| Product Manager / UI/UX Liaison (**Armen Azatyan**)   |   [hisinbox](https://github.com/hisinbox)     |
 | [BountyClaim](#) / QA and Testing      |    Contact [dls-cipher](https://github.com/dls-cipher)     |
-| JS And Code review (Anton Lopan)   |	 [youaresofunny](https://github.com/youaresofunny)     |
-| Lead Front-End Developer / Architect, Code Review (~~Roman Sabirov~~)	 |  Contact [dls-cipher](https://github.com/dls-cipher)      |
-| Full-stack Developer (Roman Bellendir)  |    [ololokiras](https://github.com/ololokiras)     |
+| JS And Code review (**Anton Lopan**)   |	 [youaresofunny](https://github.com/youaresofunny)     |
+| Lead Front-End Developer / Architect, Code Review (**Roman Sabirov**)	 |  [roma219](https://github.com/roma219)      |
+| Full-stack Developer (**Roman Bellendir**)  |    [ololokiras](https://github.com/ololokiras)     |
 | [BountyClaim](#) / HTML and CSS Developer	       |    Contact [dls-cipher](https://github.com/dls-cipher)     |
-| Front-end JS Developer (Rostislav Gogolauri)     |	  [mindfulme](https://github.com/mindfulme)     |
-| Alex Volkov / Designer                           |	  Not Available     |
+| Front-end JS Developer (**Rostislav Gogolauri**)     |	  [mindfulme](https://github.com/mindfulme)     |
+| Daniel Savin / Web Designer                           |	  [danielvinsa](https://github.com/danielvinsa)     |
 
 
 - Worker hourly reports (by TopTracker) can be found under [/team/hours](https://github.com/bitshares/bitshares-community-ui/tree/master/team/hours)
