@@ -8,6 +8,8 @@
 export default {
   name: 'Button',
   props: {
+    /** Sets button text
+     */
     text: {
       type: String,
       default: ''
