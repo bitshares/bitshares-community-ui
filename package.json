@@ -30,6 +30,7 @@
     "babel-jest": "^23.0.1",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
+    "tailwindcss": "^0.6.5",
     "vue-template-compiler": "^2.5.17"
   },
   "gitHooks": {

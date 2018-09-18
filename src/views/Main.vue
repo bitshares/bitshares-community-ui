@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <h3>Welcome to bitshares-community-wallet</h3>
+    <h3 class="bg-blue text-white">Welcome to bitshares-community-wallet</h3>
   </div>
 </template>
 
