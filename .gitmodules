@@ -1,0 +1,3 @@
+[submodule "vuex-bitshares"]
+	path = vuex-bitshares
+	url = git@github.com:TrustyFund/vuex-bitshares.git
