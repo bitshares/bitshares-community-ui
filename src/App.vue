@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="container mx-auto">
+  <div id="app" class="app container mx-auto">
     <div id="nav">
       <router-link to="/">Main</router-link> |
       <router-link to="/auth">Auth</router-link> |
@@ -12,8 +12,13 @@
 <style lang="scss">
 @import url("~@/assets/css/main.css");
 
+html,
+body {
+  @apply h-full;
+}
+
 .app {
-  
+  @apply h-full;
 }
 
 #nav {

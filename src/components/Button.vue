@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .btn {
   @apply font-bold py-2 px-4 rounded;
 }
