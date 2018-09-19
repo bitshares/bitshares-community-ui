@@ -1,29 +1,24 @@
 ## Tools
 
-### Dependencies
+##### Dependencies
 - [Vue.js](https://vuejs.org/) - Frontend Framework
 - [Vuex](https://vuex.vuejs.org/) - State management
 - [Vue-router](https://router.vuejs.org/en/) - Routing
-- [Date-fns](https://date-fns.org/) - Helper library for Dates & Time
+- [Vuelidate](https://monterail.github.io/vuelidate/) - Form Validation
+- [Date-fns](https://date-fns.org/) - Dates & Time
+- [vuex-bitshares](https://github.com/bitshares/vuex-bitshares/) - vuex modules that handle communication with BitShares via [bitsharesjs-ws](https://github.com/bitshares/bitsharesjs-ws) and [bitsharesjs](https://github.com/bitshares/bitsharesjs) libraries
 
-### DEV Dependencies
+##### DEV Dependencies
 - [Prettier](https://prettier.io/) - Code Formatting
 - [ESLint](https://github.com/eslint/eslint) - Linting
 - [Vue-test-utils](https://vue-test-utils.vuejs.org/) - Unit-Testing
 - [Jest](https://facebook.github.io/jest/) - Unit-Testing
 - [Vue-styleguidist](https://github.com/vue-styleguidist/vue-styleguidist) - Styleguide
 
-### Styleguides
-We are following these styleguides:
-- [ESLint Standard Config](https://standardjs.com/) - JS
+##### Styleguides
+- [ESLint Standard Config](https://standardjs.com/) - ES
 - [Vue.js official styleguide](https://vuejs.org/v2/style-guide/) - Vue
 
-### Issues
-https://github.com/bitshares/bitshares-community-ui/issues
-Most of our commucation should happen throught the issues and comments to them. Just label issue the accordingly and mention people throught @.
-
-### Branches
-Naming: <number of the issue on github>-<short on the branch> e.g. `23-brainkey-authorization`
 
 ## How to contribute
 
@@ -32,31 +27,36 @@ Naming: <number of the issue on github>-<short on the branch> e.g. `23-brainkey-
 #### Internal team
 
 - **production branch** - no one commits to production, production contains the currently deployed code
-- **staging branch** - code in staging
-- **new feature** = new branch, add an issues number in the name of the branch
-- **pull requests** - once done with a feature, submit a pull request, add reviewers
+- **staging branch** - code in staging, main development branch
+- **new feature** = new branch, add an issue's number in the name of the branch, branch out of the staging branch (e.g. `34-brainkey-authorization`)
+- **pull requests** - once done with a feature, submit a pull request to staging, add reviewers. include number of issue in the pr name. if the pull request has some work in progress being done, prepend it with a `wip:` prefix
+- **project board** - move issue you are working on to the according column (`open`, `in progrss`, `review`, `closed`)
 - **tests** - make sure to write a test for the piece of functionality you created
 
 
-#### External contributions
-
-- fork the repository
-- create a branch out of *staging*
-- make your changes and create a Pull Request to the main repository to *staging*.
-
-
 ## Project structure
-src/Components - reusuable UI components are store in here, each component in it's own folder that contains index.js that imports the components and exports it
 
-eg
-Components/Button/
-	Button.vue - components itself
-	Button.md - component docs for styleguidist
-	index.js - file importing components and exporting it (so that you can `import @/Components/Button/`)
+#### Base UI Components
+path: `src/Components`  
 
+Reusuable UI .vue components are stored in here, each component in it's own folder that contains `index.js` that imports the component and exports it and `<component-name>.md` file with documentation for styleguidist.
 
-src/Views - actual view .vue components 
+e.g.:  
 
+```
+Components/Button/  
+	Button.vue - components itself  
+	Button.md - component docs for styleguidist  
+	index.js - file importing components and exporting it (so that you can `import @/Components/Button/`)  
+```
 
+#### View Components 
 
+path: `src/Views/`   
+  
+Actual page layout components are stored in here.  
+Please follow the vue official guidilines for naming and structuring components  
 
+To be continued...
+
+TODO: PR and issue templates, testing guide, styleguidust guide
