@@ -8,8 +8,6 @@ const getters = {
 }
 
 const mutations = {
-  [APP_INIT] () {
-  }
 }
 
 const actions = {
