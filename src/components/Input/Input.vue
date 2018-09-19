@@ -1,6 +1,7 @@
 <template>
   <input
     type="text"
+    class="input focus:outline-none"
     :value="value"
     @input="handleInput"
   />
@@ -23,3 +24,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .input {
+    @apply appearance-none border-b border-b-2 border-teal py-2 bg-transparent  w-full text-grey-darker py-1 px-2 leading-tight;
+  }
+</style>

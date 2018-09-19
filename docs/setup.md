@@ -3,6 +3,13 @@
 npm install
 ```
 
+## vuex-bitshares submodule setup
+git submodule init
+git submodule update
+cd vuex-bitshares
+npm install
+cd ..
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
