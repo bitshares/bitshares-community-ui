@@ -12,9 +12,7 @@ const mutations = {
 
 const actions = {
   init (store) {
-    const { commit } = store
     store.dispatch('connection/initConnection', null, { root: true })
-    commit(APP_INIT)
   }
 }
 
