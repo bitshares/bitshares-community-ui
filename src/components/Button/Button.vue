@@ -1,5 +1,5 @@
 <template>
-  <button @click="$emit('click')" class="btn btn-blue">
+  <button @click="$emit('click')" class="btn btn-blue" v-bind:text="text.default">
     {{ text }}
   </button>
 </template>
@@ -12,7 +12,37 @@ export default {
      */
     text: {
       type: String,
-      default: ''
+      default: 'Button'
+    },
+    /** Sets disabled state
+     */
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    /** Sets loading state
+     */
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    /** Sets size state
+     */
+    size: {
+      type: String,
+      default: 'normal'
+    },
+    /** Sets width state
+     */
+    width: {
+      type: String,
+      default: 'full'
+    },
+    /** Sets loading state
+     */
+    type: {
+      type: String,
+      default: 'round'
     }
   }
 }
