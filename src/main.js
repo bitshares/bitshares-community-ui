@@ -5,7 +5,7 @@ import store from './store/'
 
 Vue.config.productionTip = false
 
-store.dispatch('connection/initConnection')
+store.dispatch('app/init')
 
 new Vue({
   router,
