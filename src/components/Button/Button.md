@@ -1,5 +1,8 @@
-What is Tailwind?
+What is Tailwind styles?
 [about Tailwind](https://tailwindcss.com/docs/what-is-tailwind/)
+
+Loader
+[ref](https://www.npmjs.com/package/vue-button-spinner)
 
 Examples:
  

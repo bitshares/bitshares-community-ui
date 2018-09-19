@@ -1,10 +1,15 @@
 <template>
-  <button @click="$emit('click')" class="btn btn-blue" v-bind:text="text.default">
+  <button @click="$emit('click')" class="btn btn-blue"
+    :isLoading="isLoading"
+    :disabled="isLoading"
+    :status="status">
     {{ text }}
   </button>
 </template>
 
 <script>
+import VueButtonSpinner from 'vue-button-spinner'
+import axios from 'axios';
 export default {
   name: 'Button',
   props: {
@@ -43,6 +48,31 @@ export default {
     type: {
       type: String,
       default: 'round'
+    }
+  },
+  data () {
+    return {
+      isLoading: false,
+      status: ''
+    }
+  },
+  components: {
+    VueButtonSpinner
+  },
+  methods: {
+    onSubmit () {
+      this.isLoading = true
+      axios.get('/url', 'GET')
+        .then(response => {
+          this.isLoading = false
+          this.status = true // or success
+          setTimeout(() => { this.status = '' }, 2000) // to clear the status :)
+        })
+        .catch(error => {
+          console.error(error)
+          this.isLoading = false
+          this.status = false // or error
+        })
     }
   }
 }
