@@ -1,5 +1,3 @@
-const APP_INIT = 'APP_INIT'
-
 const initialState = {
   theme: 'dark'
 }
