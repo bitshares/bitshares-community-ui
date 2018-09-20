@@ -68,8 +68,8 @@ Please follow the vue official guidilines for naming and structuring components
 #### e2e tests
 `tests/e2e/`
 
-To be continued...
-
 ## Styleguide
 To run styleguide use command `npm run styleguide` .     
 [How to document components](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/Documenting.md)
+
+To be continued...
