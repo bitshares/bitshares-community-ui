@@ -58,6 +58,18 @@ path: `src/Views/`
 Actual page layout components are stored in here.  
 Please follow the vue official guidilines for naming and structuring components  
 
+## Tests
+
+#### Unit tests
+`tests/unit/components/` - base UI components tests
+`tests/unit/views/` - view components tests
+`tests/unit/modules/` - vuex modules tests
+
+#### e2e tests
+`tests/e2e/`
+
 To be continued...
 
-TODO: PR and issue templates, testing guide, styleguidust guide
+## Styleguide
+To run styleguide use command `npm run styleguide` .     
+[How to document components](https://github.com/vue-styleguidist/vue-styleguidist/blob/master/docs/Documenting.md)
