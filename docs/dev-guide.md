@@ -26,11 +26,12 @@
 
 #### Internal team
 
-- **production branch** - no one commits to production, production contains the currently deployed code
+- **production branch** - no one commits to 'production' - contains the final deployed code/live
+- **master branch** - no one commits to 'master' without specific request from an admin - contains weekly review of a code by admins for current deployed code from 'staging'
 - **staging branch** - code in staging, main development branch
 - **new feature** = new branch, add an issue's number in the name of the branch, branch out of the staging branch (e.g. `34-brainkey-authorization`)
 - **pull requests** - once done with a feature, submit a pull request to staging, add reviewers. include number of issue in the pr name. if the pull request has some work in progress being done, prepend it with a `wip:` prefix
-- **project board** - move issue you are working on to the according column (`open`, `in progrss`, `review`, `closed`)
+- **project board** - move issue you are working on to the according column (`open`, `in progress`, `review`, `closed`)
 - **tests** - make sure to write a test for the piece of functionality you created
 
 
