@@ -1,7 +1,7 @@
 What is Tailwind styles?
 [about Tailwind](https://tailwindcss.com/docs/what-is-tailwind/)
 
-Loader
+Loader component 
 [ref](https://www.npmjs.com/package/vue-button-spinner)
 
 Examples:

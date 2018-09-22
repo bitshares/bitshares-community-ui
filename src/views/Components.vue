@@ -2,7 +2,7 @@
   <div class="components">
     This is an components page
     <div>
-      <Button text="test button"/>
+      <Button text="button test"/>
     </div>
     <div>
       <Input value="test input"/>

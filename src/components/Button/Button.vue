@@ -1,7 +1,7 @@
 <template>
   <button @click="$emit('click')" class="btn btn-blue"
     :isLoading="isLoading"
-    :disabled="isLoading"
+    :disabled="isDisabled"
     :status="status">
     {{ text }}
   </button>
@@ -9,7 +9,6 @@
 
 <script>
 import VueButtonSpinner from 'vue-button-spinner'
-import axios from 'axios';
 export default {
   name: 'Button',
   props: {
@@ -53,27 +52,14 @@ export default {
   data () {
     return {
       isLoading: false,
-      status: ''
+      status: '',
+      isDisabled: false
     }
   },
   components: {
     VueButtonSpinner
   },
   methods: {
-    onSubmit () {
-      this.isLoading = true
-      axios.get('/url', 'GET')
-        .then(response => {
-          this.isLoading = false
-          this.status = true // or success
-          setTimeout(() => { this.status = '' }, 2000) // to clear the status :)
-        })
-        .catch(error => {
-          console.error(error)
-          this.isLoading = false
-          this.status = false // or error
-        })
-    }
   }
 }
 </script>
@@ -87,5 +73,8 @@ export default {
 }
 .btn-blue:hover {
   @apply bg-blue-dark;
+}
+.btn-blue:active {
+  @apply bg-blue;
 }
 </style>
