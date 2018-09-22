@@ -1,14 +1,14 @@
 <template>
-  <button @click="$emit('click')" class="btn btn-blue"
-    :isLoading="isLoading"
-    :disabled="isDisabled"
-    :status="status">
-    {{ text }}
+  <button @click="$emit('click')" class="btn btn-blue" :class="{'btn--disabled': disabled, 'btn--small':size === 'small', 'btn--big': size === 'big'}"
+    :isLoading=loading
+    :disabled=disabled>
+ {{ text }} <Loader v-if=loading size="medium" />
   </button>
 </template>
 
 <script>
-import VueButtonSpinner from 'vue-button-spinner'
+import Loader from './Loader.vue'
+
 export default {
   name: 'Button',
   props: {
@@ -47,19 +47,16 @@ export default {
     type: {
       type: String,
       default: 'round'
-    }
-  },
-  data () {
-    return {
-      isLoading: false,
-      status: '',
-      isDisabled: false
+    },
+    callback: {
+      type: Function
     }
   },
   components: {
-    VueButtonSpinner
+    Loader
   },
   methods: {
+
   }
 }
 </script>
@@ -76,5 +73,17 @@ export default {
 }
 .btn-blue:active {
   @apply bg-blue;
+}
+.btn--disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+.btn--small {
+  padding:5px;
+  font-size: 10px;
+}
+.btn--big {
+  padding:10px;
+  font-size: 25px;
 }
 </style>
