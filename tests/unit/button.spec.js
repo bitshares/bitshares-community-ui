@@ -1,4 +1,4 @@
-import { shallowMount, mount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import Button from '@/components/Button/Button.vue'
 
 describe('Button.vue', () => {
@@ -13,7 +13,7 @@ describe('Button.vue', () => {
 
 describe('Button.vue', () => {
   it('renders props.isDisabled when passed', () => {
-    const disabled = false;
+    const disabled = false
     const wrapper = shallowMount(Button, {
       propsData: { disabled }
     })
@@ -23,12 +23,10 @@ describe('Button.vue', () => {
 
 describe('Button.vue', () => {
   it('renders props.isLoading when passed', () => {
-    const loading = false;
+    const loading = false
     const wrapper = shallowMount(Button, {
       propsData: { loading }
     })
     expect(wrapper.text()).toMatch(loading)
   })
 })
-
-

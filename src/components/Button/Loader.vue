@@ -7,7 +7,6 @@
   }"></div>
 </template>
 
-
 <script>
 
 export default {
@@ -23,10 +22,10 @@ export default {
       default: true
     }
   },
-  data() {
-    return {};
+  data () {
+    return {}
   }
-};
+}
 
 </script>
 
