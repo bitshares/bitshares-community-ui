@@ -4,11 +4,18 @@ npm install
 ```
 
 ## vuex-bitshares submodule setup
-git submodule init
-git submodule update
-cd vuex-bitshares
-npm install
-cd ..
+```
+git submodule init  
+git submodule update  
+cd vuex-bitshares  
+npm install  
+cd ..  
+```
+
+## generate svg icons
+```
+npm run svg
+```
 
 ### Compiles and hot-reloads for development
 ```
