@@ -3,6 +3,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store/'
 
+import SvgIcon from 'vue-svgicon'
+Vue.use(SvgIcon, {
+  tagName: 'svgicon'
+})
+
 Vue.config.productionTip = false
 
 store.dispatch('app/init')

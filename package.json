@@ -9,7 +9,8 @@
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "styleguide": "vue-cli-service styleguidist",
-    "styleguide:build": "vue-cli-service styleguidist:build"
+    "styleguide:build": "vue-cli-service styleguidist:build",
+    "svg": "vsvg -s ./src/assets/svg -t ./src/assets/icons --es6"
   },
   "dependencies": {
     "date-fns": "^1.29.0",
@@ -35,6 +36,7 @@
     "tailwindcss": "^0.6.5",
     "vue-cli-plugin-styleguidist": "^0.1.7",
     "vue-styleguidist": "^1.8.9",
+    "vue-svgicon": "^3.2.0",
     "vue-template-compiler": "^2.5.17"
   },
   "gitHooks": {
