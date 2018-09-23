@@ -10,7 +10,7 @@
 </template>
 
 <style lang="scss">
-@import url("~@/assets/css/main.css");
+@import url("~@/styles/main.scss");
 
 html,
 body {
