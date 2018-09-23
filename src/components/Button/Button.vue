@@ -1,13 +1,14 @@
 <template>
-  <button @click="$emit('click')" class="btn btn-blue" :class="{'btn--disabled': disabled, 'btn--small':size === 'small', 'btn--big': size === 'big'}"
-    :isLoading=loading
-    :disabled=disabled>
- {{ text }} <Loader v-if=loading size="medium" />
+  <button @click="$emit('click')"
+  class="btn btn-blue"
+  :class="{'btn--loading': loading, 'btn--disabled': disabled, 'btn--small':size === 'small', 'btn--big': size === 'big', 'btn--wide': width === 'full', 'btn--round':type==='round'}"
+  :disabled=disabled>
+ {{ text }} <Loader v-if=loading size="small" />
   </button>
 </template>
 
 <script>
-import Loader from './Loader.vue'
+import Loader from '../Spinner/Spinner.vue'
 
 export default {
   name: 'Button',
@@ -16,7 +17,7 @@ export default {
      */
     text: {
       type: String,
-      default: 'Button'
+      default: ''
     },
     /** Sets disabled state
      */
@@ -40,23 +41,17 @@ export default {
      */
     width: {
       type: String,
-      default: 'full'
+      default: 'standart'
     },
     /** Sets loading state
      */
     type: {
       type: String,
       default: 'round'
-    },
-    callback: {
-      type: Function
     }
   },
   components: {
     Loader
-  },
-  methods: {
-
   }
 }
 </script>
@@ -75,15 +70,21 @@ export default {
   @apply bg-blue;
 }
 .btn--disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
+  @apply pointer-events-none opacity-50 cursor-not-allowed;
 }
 .btn--small {
-  padding:5px;
-  font-size: 10px;
+  @apply py-1 pr-1 cursor-pointer text-xs;
 }
 .btn--big {
-  padding:10px;
-  font-size: 25px;
+  @apply py-2 px-2 cursor-pointer text-2xl;
+}
+.btn--loading {
+  @apply pointer-events-none;
+}
+.btn--wide {
+  @apply px-6;
+}
+.btn--round {
+  @apply rounded;
 }
 </style>

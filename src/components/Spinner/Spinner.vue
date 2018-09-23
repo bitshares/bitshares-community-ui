@@ -47,7 +47,7 @@ export default {
   }
 
   .spinner--medium:before {
-   width: 20px;
+    width: 20px;
     height: 20px;
     margin-top: -20px;
     margin-left: -10px;
@@ -59,7 +59,7 @@ export default {
     height: 14px;
     margin-top: -13px;
     margin-right: 70px;
-    margin-left: -2px;
+    margin-left: -10px;
   }
 
   .spinner--big:before {
@@ -71,8 +71,6 @@ export default {
   }
 
   .spinner--static:before {
-    margin-top: 0;
-    margin-left: 0;
     position: static;
   }
 </style>

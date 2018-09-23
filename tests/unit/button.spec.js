@@ -13,7 +13,7 @@ describe('Button.vue', () => {
 
 describe('Button.vue', () => {
   it('renders props.isDisabled when passed', () => {
-    const disabled = false
+    const disabled = 'Button'
     const wrapper = shallowMount(Button, {
       propsData: { disabled }
     })
@@ -23,10 +23,21 @@ describe('Button.vue', () => {
 
 describe('Button.vue', () => {
   it('renders props.isLoading when passed', () => {
-    const loading = false
+    const loading = 'Button'
     const wrapper = shallowMount(Button, {
       propsData: { loading }
     })
     expect(wrapper.text()).toMatch(loading)
   })
 })
+/*
+describe('Button.vue', () => {
+  it('test click event', () => {
+    const mockCallBack = jest.fn();
+    const ButtonComponent = mount(Button);
+    const button = ButtonComponent.find('Button');
+    button.simulate('click');
+    expect(mockCallBack.mock.calls.length).toEqual(1);
+  })
+})
+*/
