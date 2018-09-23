@@ -222,7 +222,11 @@ module.exports = {
       'Liberation Mono',
       'Courier New',
       'monospace'
-    ]
+    ],
+    'gotham': ['Gotham_Pro'],
+    'gotham-regular': ['Gotham_Pro_Regular'],
+    'gotham-bold': ['Gotham_Pro_Bold'],
+    'gotham-medium': ['Gotham_Pro_Medium']
   },
 
   /*

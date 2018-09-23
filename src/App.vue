@@ -18,7 +18,7 @@ body {
 }
 
 .app {
-  @apply h-full;
+  @apply h-full font-gotham-regular;
 }
 
 #nav {
