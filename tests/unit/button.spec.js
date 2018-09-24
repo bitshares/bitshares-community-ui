@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, mount } from '@vue/test-utils'
 import Button from '@/components/Button/Button.vue'
 
 describe('Button.vue', () => {
@@ -13,7 +13,7 @@ describe('Button.vue', () => {
 
 describe('Button.vue', () => {
   it('renders props.isDisabled when passed', () => {
-    const disabled = 'Button'
+    const disabled = ''
     const wrapper = shallowMount(Button, {
       propsData: { disabled }
     })
@@ -23,21 +23,20 @@ describe('Button.vue', () => {
 
 describe('Button.vue', () => {
   it('renders props.isLoading when passed', () => {
-    const loading = 'Button'
+    const loading = ''
     const wrapper = shallowMount(Button, {
       propsData: { loading }
     })
     expect(wrapper.text()).toMatch(loading)
   })
 })
-/*
+
+
 describe('Button.vue', () => {
-  it('test click event', () => {
-    const mockCallBack = jest.fn();
-    const ButtonComponent = mount(Button);
-    const button = ButtonComponent.find('Button');
-    button.simulate('click');
-    expect(mockCallBack.mock.calls.length).toEqual(1);
+  // Now mount the component and you have the wrapper
+  const wrapper = mount(Button)
+  
+  it('has a button', () => {
+    expect(wrapper.contains('button')).toBe(true)
   })
 })
-*/
