@@ -44,6 +44,6 @@ describe('Button.vue', () => {
   const wrapper = mount(Button)
   wrapper.vm.$emit('click')
   it('emits click event', () => {
-  expect(wrapper.emitted().click).toBeTruthy()
+    expect(wrapper.emitted().click).toBeTruthy()
   })
 })
