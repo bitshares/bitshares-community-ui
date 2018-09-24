@@ -1,7 +1,6 @@
 import { shallowMount, mount } from '@vue/test-utils'
 import Button from '@/components/Button/Button.vue'
 
-
 describe('Button.vue', () => {
   const wrapper = mount(Button)
 
@@ -13,13 +12,14 @@ describe('Button.vue', () => {
     expect(wrapper.text()).toMatch(text)
   })
 
+  it('renders props.loading when passed', () => {
+    const wrapper = mount(Button)
+    expect(wrapper.find('loading'))
+  })
+
   it('renders props.disabled when passed', () => {
-    const wrapper = mount(Button, {
-      propsData: {
-        disabled: true
-      }
-    })
-    expect(wrapper.props('disabled')).toBe(true)
+    const wrapper = mount(Button)
+    expect(wrapper.find('disabled'))
   })
 
   it('has a button', () => {
@@ -31,15 +31,4 @@ describe('Button.vue', () => {
   it('emits click event', () => {
     expect(wrapper.emitted().click).toBeTruthy()
   })
-
-  it('renders props.loading when passed', () => {
-    const wrapper = mount(Button, {
-      propsData: {
-        loading: true
-      }
-    })
-    expect(wrapper.props('loading')).toBe(true)
-  })
 })
-
-
