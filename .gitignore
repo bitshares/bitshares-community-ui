@@ -5,6 +5,8 @@ node_modules
 /tests/e2e/reports/
 selenium-debug.log
 
+src/assets/icons/
+
 # local env files
 .env.local
 .env.*.local
