@@ -1,7 +1,14 @@
 <template>
   <button @click="$emit('click')"
-  class="btn btn-blue"
-  :class="{'btn--loading': loading, 'btn--disabled': disabled, 'btn--small':size === 'small', 'btn--big': size === 'big', 'btn--wide': width === 'full', 'btn--round':type==='round'}"
+  class='btn btn-blue'
+  :class="{
+   'btn--loading': loading,
+   'btn--disabled': disabled,
+   'btn--small':size === 'small',
+   'btn--big': size === 'big',
+   'btn--wide': width === 'full',
+   'btn--round':type==='round'
+   }"
   :disabled=disabled>
  {{ text }} <Spinner v-if=loading size="small" />
   </button>
