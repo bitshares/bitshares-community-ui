@@ -31,11 +31,8 @@ describe('Button.vue', () => {
   })
 })
 
-
 describe('Button.vue', () => {
-  // Now mount the component and you have the wrapper
   const wrapper = mount(Button)
-  
   it('has a button', () => {
     expect(wrapper.contains('button')).toBe(true)
   })
