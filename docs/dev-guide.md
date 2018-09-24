@@ -74,10 +74,13 @@ To run styleguide use command `npm run styleguide` .
 
 ## Icons
 
+#### Placement
+Generated iconcomponents are store in `src/assets/icons`
+
 #### Adding new
 1) Add `[icon-name].svg` icon file to `src/assets/svg`
 2) Run `npm run svg`
-3) Import your icon `import '@icons/[icon-name]'`
+3) Import your icon `import '@icons/[icon-name]'` in component you want to use it
 4) Use it like `<svgicon name=[icon-name]>`
 
 #### After pulling changes with new icons
