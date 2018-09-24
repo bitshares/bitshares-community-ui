@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-function checkKeyDown(el, binding) {
+function checkKeyDown (el, binding) {
   el.addEventListener('keydown', e => {
     // delete, backpsace, tab, escape, enter,
     let special = [46, 8, 9, 27, 13]
@@ -39,7 +39,7 @@ function checkKeyDown(el, binding) {
 }
 
 Vue.directive('restrict', {
-  bind(el, binding) {
+  bind (el, binding) {
     if (binding.value) checkKeyDown(el, binding)
   }
 })

@@ -20,7 +20,7 @@ import Input from '@/components/Input/'
 export default {
   name: 'Components',
   components: { Button, Input },
-  data() {
+  data () {
     return {
       testString: 'wef',
       errorMsg: '234'

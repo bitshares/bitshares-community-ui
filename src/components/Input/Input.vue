@@ -73,7 +73,7 @@ export default {
     error: {
       type: String,
       default: ''
-    },
+    }
   },
   computed: {
     isNumber () {
