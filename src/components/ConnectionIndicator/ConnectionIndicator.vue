@@ -27,7 +27,7 @@ export default {
 
 <style >
   .indicator {
-    @apply rounded-full h-2 w-2 flex;
+    @apply rounded-full h-2 w-2;
   }
   .green {
     @apply bg-green;
