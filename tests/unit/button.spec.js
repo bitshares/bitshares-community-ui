@@ -1,7 +1,10 @@
 import { shallowMount, mount } from '@vue/test-utils'
 import Button from '@/components/Button/Button.vue'
 
+
 describe('Button.vue', () => {
+  const wrapper = mount(Button)
+
   it('renders props.text when passed', () => {
     const text = ''
     const wrapper = shallowMount(Button, {
@@ -9,9 +12,7 @@ describe('Button.vue', () => {
     })
     expect(wrapper.text()).toMatch(text)
   })
-})
 
-describe('Button.vue', () => {
   it('renders props.disabled when passed', () => {
     const wrapper = mount(Button, {
       propsData: {
@@ -20,9 +21,17 @@ describe('Button.vue', () => {
     })
     expect(wrapper.props('disabled')).toBe(true)
   })
-})
 
-describe('Button.vue', () => {
+  it('has a button', () => {
+    expect(wrapper.contains('button')).toBe(true)
+  })
+
+  wrapper.vm.$emit('click')
+
+  it('emits click event', () => {
+    expect(wrapper.emitted().click).toBeTruthy()
+  })
+
   it('renders props.loading when passed', () => {
     const wrapper = mount(Button, {
       propsData: {
@@ -33,17 +42,4 @@ describe('Button.vue', () => {
   })
 })
 
-describe('Button.vue', () => {
-  const wrapper = mount(Button)
-  it('has a button', () => {
-    expect(wrapper.contains('button')).toBe(true)
-  })
-})
 
-describe('Button.vue', () => {
-  const wrapper = mount(Button)
-  wrapper.vm.$emit('click')
-  it('emits click event', () => {
-    expect(wrapper.emitted().click).toBeTruthy()
-  })
-})
