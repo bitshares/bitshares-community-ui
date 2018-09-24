@@ -5,7 +5,10 @@
       <Button text="test button"/>
     </div>
     <div>
-      <Input value="test input"/>
+      <Input v-model="testString" title="title"/>
+      <Input v-model="testString" :disabled="true" title="title"/>
+      <Input v-model="testString" title="username" :error="errorMsg"/>
+      <Input v-model="errorMsg" title="confirm password"/>
     </div>
   </div>
 </template>
@@ -16,6 +19,12 @@ import Input from '@/components/Input/'
 
 export default {
   name: 'Components',
-  components: { Button, Input }
+  components: { Button, Input },
+  data() {
+    return {
+      testString: 'wef',
+      errorMsg: '234'
+    }
+  }
 }
 </script>
