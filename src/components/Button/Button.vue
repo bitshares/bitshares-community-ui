@@ -3,12 +3,12 @@
   class="btn btn-blue"
   :class="{'btn--loading': loading, 'btn--disabled': disabled, 'btn--small':size === 'small', 'btn--big': size === 'big', 'btn--wide': width === 'full', 'btn--round':type==='round'}"
   :disabled=disabled>
- {{ text }} <Loader v-if=loading size="small" />
+ {{ text }} <Spinner v-if=loading size="small" />
   </button>
 </template>
 
 <script>
-import Loader from '../Spinner/Spinner.vue'
+import Spinner from '../Spinner/Spinner.vue'
 
 export default {
   name: 'Button',
@@ -51,7 +51,7 @@ export default {
     }
   },
   components: {
-    Loader
+    Spinner
   }
 }
 </script>
