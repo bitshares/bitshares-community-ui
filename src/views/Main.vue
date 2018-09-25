@@ -13,7 +13,7 @@
 <script>
 import Header from './Header.vue'
 import Footer from './Footer.vue'
-import ConnectionIndicator from '@/components/ConnectionIndicator/'
+import ConnectionIndicator from './ConnectionIndicator.vue'
 
 export default {
   components: { Header, Footer, ConnectionIndicator },

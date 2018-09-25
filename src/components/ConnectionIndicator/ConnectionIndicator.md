@@ -1,1 +1,0 @@
-ConnectionIndicator.md
