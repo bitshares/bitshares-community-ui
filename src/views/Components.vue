@@ -1,8 +1,8 @@
-<template>
+[<template>
   <div class="components">
     This is an components page
     <div>
-      <Button text="test button"/>
+      <Button text="button test" size="small" loading disabled/>
     </div>
     <div>
       <Input v-model="testString" title="create account name"/>
@@ -30,3 +30,4 @@ export default {
   }
 }
 </script>
+]
