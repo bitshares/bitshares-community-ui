@@ -13,6 +13,7 @@
       :name="icon"
       width="24"
       height="24"
+      @click.native="handleIconClick"
     />
 
     <input
@@ -42,7 +43,7 @@
 </template>
 
 <script>
-// import '@icons'
+import '@icons/'
 
 export default {
   props: {
@@ -76,27 +77,30 @@ export default {
     }
   },
   computed: {
-    isNumber () {
+    isNumber() {
       return this.type === 'number'
     }
   },
-  mounted () {
+  mounted() {
     if (this.autofocus) this.$refs.input.focus()
   },
   methods: {
-    handleInput ({ target: { value } }) {
+    handleInput({ target: { value } }) {
       const newValue = this.isNumber ? (parseInt(value) || null) : value
       this.$emit('input', newValue)
     },
-    handlePaste (event) {
+    handlePaste(event) {
       if (!this.isNumber) return
       event.preventDefault()
       const text = event.clipboardData.getData('text')
       const number = this.value + (parseInt(text) || null)
       this.$emit('input', number)
     },
-    handleBlur () {
+    handleBlur() {
       this.$emit('blur', this.$refs.input.value)
+    },
+    handleIconClick() {
+      this.$emit('icon-clicked')
     }
   }
 }
@@ -111,10 +115,9 @@ export default {
 }
 
 .input__icon {
-  margin-bottom: 2px;
   position: absolute;
-  top: 26px;
-  left: 0;
+  top: 16px;
+  right: 0;
 }
 
 .input__input {

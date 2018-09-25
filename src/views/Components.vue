@@ -5,7 +5,7 @@
       <Button text="button test" size="small" loading disabled/>
     </div>
     <div>
-      <Input v-model="testString" title="create account name"/>
+      <Input v-model="testString" title="create account name" icon="copy"/>
       <Input v-model="errorMsg" title="generated password"/>
       <Input v-model="configMsg" title="confirm password"/>
       <Input v-model="testString" :disabled="true" title="title"/>
@@ -21,7 +21,7 @@ import Input from '@/components/Input/'
 export default {
   name: 'Components',
   components: { Button, Input },
-  data () {
+  data() {
     return {
       testString: 'wef',
       errorMsg: '234',
