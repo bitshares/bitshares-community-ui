@@ -48,7 +48,7 @@ export default {
      */
     width: {
       type: String,
-      default: 'standart'
+      default: 'standard'
     },
     /** Sets loading state
      */
