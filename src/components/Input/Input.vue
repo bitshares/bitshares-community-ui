@@ -118,6 +118,7 @@ export default {
   position: absolute;
   top: 16px;
   right: 0;
+  cursor: pointer;
 }
 
 .input__input {
