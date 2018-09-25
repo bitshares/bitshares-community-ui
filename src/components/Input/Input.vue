@@ -7,15 +7,6 @@
       'input--disabled': disabled
     }">
 
-    <svgicon
-      v-if="icon"
-      class="input__icon"
-      :name="icon"
-      width="24"
-      height="24"
-      @click.native="handleIconClick"
-    />
-
     <input
       class="input__input"
       ref="input"
@@ -28,6 +19,15 @@
       @blur="handleBlur"
       @keyup.enter="$refs.input.blur"
     >
+
+    <svgicon
+      v-if="icon"
+      class="input__icon"
+      :name="icon"
+      width="24"
+      height="24"
+      @click.stop.native="handleIconClick"
+    />
 
     <!-- floating title = placeholder -->
     <span
@@ -119,6 +119,7 @@ export default {
   top: 16px;
   right: 0;
   cursor: pointer;
+  z-index: 2;
 }
 
 .input__input {
@@ -165,6 +166,7 @@ export default {
   pointer-events: none;
   z-index: 1;
   text-transform: uppercase;
+  user-select: none;
 }
 
 .input__title.input_hascontent,
