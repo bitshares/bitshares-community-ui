@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import '@icons/'
+import '@/assets/icons/'
 
 export default {
   props: {
