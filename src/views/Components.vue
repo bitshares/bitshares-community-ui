@@ -5,10 +5,11 @@
       <Button text="test button"/>
     </div>
     <div>
-      <Input v-model="testString" title="title"/>
+      <Input v-model="testString" title="create account name"/>
+      <Input v-model="errorMsg" title="generated password"/>
+      <Input v-model="configMsg" title="confirm password"/>
       <Input v-model="testString" :disabled="true" title="title"/>
       <Input v-model="testString" title="username" :error="errorMsg"/>
-      <Input v-model="errorMsg" title="confirm password"/>
     </div>
   </div>
 </template>
@@ -23,7 +24,8 @@ export default {
   data () {
     return {
       testString: 'wef',
-      errorMsg: '234'
+      errorMsg: '234',
+      configMsg: ''
     }
   }
 }

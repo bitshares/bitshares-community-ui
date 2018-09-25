@@ -118,18 +118,16 @@ export default {
 }
 
 .input__input {
-  font-size: 24px;
-  box-sizing: border-box;
-  display: block;
+  @apply text-2xl;
+  color: config('colors.text-primary');
   width: 100%;
-  padding: 5px 0;
+  padding: 5px 0 0;
   background-color: transparent;
   background-image: none;
   border: none;
   border-bottom: 1px solid #ced2d6;
   box-shadow: none !important;
   transition: border-color ease-in-out 0.15s;
-  color:black;
   z-index: 2;
   position: relative;
   &:disabled {
@@ -139,7 +137,7 @@ export default {
   }
   &:focus {
     outline: 0 !important;
-    border-color: #0083ca;
+    border-color: config('colors.text-primary');
   }
   .title {
     color: #a0a6ad;
@@ -153,12 +151,12 @@ export default {
   border-color: #e24640;
 }
 .input__title {
-  font-size: 16px;
+  @apply text-base;
+  color: config('colors.text-primary');
   position: absolute;
-  top: 26px;
+  top: 24px;
   left: 0;
   line-height: 1.5;
-  color: #a0a6ad;
   transition: all 0.3s;
   pointer-events: none;
   z-index: 1;
@@ -167,16 +165,16 @@ export default {
 
 .input__title.input_hascontent,
 .input__input:focus + .input__title {
-  top: 6px;
+  @apply text-xxs;
+  top: 5px;
   opacity: 0.8;
-  font-size: 10px;
 }
 
 .input__error {
+  @apply text-xs;
   position: absolute;
   bottom: 0;
   left: 0;
-  font-size: 12px;
   color: #e24640;
 }
 </style>
