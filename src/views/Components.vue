@@ -17,8 +17,9 @@
         v-model="errorMsg"
         title="generated password"/>
       <VInput
-        v-model="configMsg"
-        title="confirm password"/>
+        v-model="number"
+        type="number"
+        title="number only input"/>
       <VInput
         v-model="testString"
         :disabled="true"
@@ -42,7 +43,8 @@ export default {
     return {
       testString: 'wef',
       errorMsg: '234',
-      configMsg: ''
+      configMsg: '',
+      number: 43
     }
   }
 }
