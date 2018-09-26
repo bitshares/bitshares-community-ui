@@ -4,6 +4,7 @@
     <ConnectionIndicator/>
     <div class="main__content">
       <h3 class="bg-blue text-white">Welcome to bitshares-community-wallet</h3>
+      <Tabs :activetab='test1' :titles="['test1', 'test2', 'test3']" />
       <router-view/>
     </div>
     <Footer/>
@@ -14,9 +15,10 @@
 import Header from './Header.vue'
 import Footer from './Footer.vue'
 import ConnectionIndicator from './ConnectionIndicator.vue'
+import Tabs from '../components/Tabs'
 
 export default {
-  components: { Header, Footer, ConnectionIndicator },
+  components: { Header, Footer, ConnectionIndicator, Tabs },
   name: 'Main'
 }
 </script>
