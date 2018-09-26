@@ -1,6 +1,7 @@
 <template>
   <div class="main">
     <Header/>
+    <ConnectionIndicator/>
     <div class="main__content">
       <h3 class="bg-blue text-white">Welcome to bitshares-community-wallet</h3>
       <router-view/>
@@ -12,9 +13,10 @@
 <script>
 import Header from './Header.vue'
 import Footer from './Footer.vue'
+import ConnectionIndicator from './ConnectionIndicator.vue'
 
 export default {
-  components: { Header, Footer },
+  components: { Header, Footer, ConnectionIndicator },
   name: 'Main'
 }
 </script>
