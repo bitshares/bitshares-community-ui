@@ -91,6 +91,7 @@ export default {
       const newValue = this.isNumber ? (parseInt(value) || null) : value
       this.$emit('input', newValue)
     },
+    // prevent pasting non-numbers if this is a number input
     handlePaste(event) {
       if (!this.isNumber) return
       event.preventDefault()
@@ -120,7 +121,6 @@ export default {
   top: 16px;
   right: 0;
   cursor: pointer;
-  z-index: 2;
 }
 
 .input__input {
@@ -133,8 +133,6 @@ export default {
   border-bottom: 1px solid config('colors.input-border');
   box-shadow: none !important;
   transition: border-color ease-in-out 0.15s;
-  z-index: 2;
-  position: relative;
   &:disabled {
     opacity: 0.3;
     user-select: none;
@@ -150,7 +148,7 @@ export default {
   }
 }
 .input--hasicon .input__input {
-  padding-right: 30px;
+  @apply pr-8;
 }
 .input--haserror .input__input {
   border-color: config('colors.red');
@@ -159,12 +157,11 @@ export default {
   @apply text-base;
   color: config('colors.text-primary');
   position: absolute;
-  top: 24px;
+  top: 22px;
   left: 0;
   line-height: 1.5;
   transition: all 0.3s;
   pointer-events: none;
-  z-index: 1;
   text-transform: uppercase;
   user-select: none;
 }

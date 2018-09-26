@@ -9,35 +9,35 @@
         disabled/>
     </div>
     <div>
-      <Input
+      <VInput
         v-model="testString"
         title="create account name"
-        icon="copy">
-      <Input
+        icon="copy"/>
+      <VInput
         v-model="errorMsg"
-        title="generated password">
-      <Input
+        title="generated password"/>
+      <VInput
         v-model="configMsg"
-        title="confirm password">
-      <Input
+        title="confirm password"/>
+      <VInput
         v-model="testString"
         :disabled="true"
-        title="title">
-      <Input
+        title="title"/>
+      <VInput
         v-model="testString"
         :error="errorMsg"
-        title="username">
+        title="username"/>
     </div>
   </div>
 </template>
 
 <script>
 import Button from '@/components/Button/'
-import Input from '@/components/Input/'
+import VInput from '@/components/Input/'
 
 export default {
   name: 'Components',
-  components: { Button, Input },
+  components: { Button, VInput },
   data() {
     return {
       testString: 'wef',
