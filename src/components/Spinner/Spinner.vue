@@ -1,10 +1,12 @@
 <template>
-  <div class="spinner" :class="{
-    'spinner--static': !absolute,
-    'spinner--medium': size === 'medium',
-    'spinner--small': size === 'small',
-    'spinner--big': size === 'big'
-  }"></div>
+  <div
+    :class="{
+      'spinner--static': !absolute,
+      'spinner--medium': size === 'medium',
+      'spinner--small': size === 'small',
+      'spinner--big': size === 'big'
+    }"
+    class="spinner"/>
 </template>
 
 <script>

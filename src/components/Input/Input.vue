@@ -1,43 +1,44 @@
 <template>
   <div
-    class="input"
     :class="{
       'input--hasicon': icon,
       'input--haserror': error,
       'input--disabled': disabled
-    }">
+    }"
+    class="input">
 
     <input
-      class="input__input"
-      ref="input"
       v-restrict.number="isNumber"
-      type="text"
+      ref="input"
       :value="value"
       :disabled="disabled"
+      class="input__input"
+      type="text"
       @paste="handlePaste"
       @input="handleInput"
       @blur="handleBlur"
       @keyup.enter="$refs.input.blur"
     >
 
+    <!-- floating title = placeholder -->
+    <span
+      :class="{input_hascontent: !!value }"
+      class="input__title">
+      {{ title }}
+    </span>
+
     <svgicon
       v-if="icon"
-      class="input__icon"
       :name="icon"
+      class="input__icon"
       width="24"
       height="24"
       @click.stop.native="handleIconClick"
     />
-
-    <!-- floating title = placeholder -->
-    <span
-      class="input__title"
-      :class="{input_hascontent: !!value }">
-      {{ title }}
-    </span>
-
     <!-- error message -->
-    <div class="input__error" v-if="error">{{ error }}</div>
+    <div
+      v-if="error"
+      class="input__error">{{ error }}</div>
 
   </div>
 </template>
@@ -65,7 +66,8 @@ export default {
     },
     icon: {
       type: String,
-      required: false
+      required: false,
+      default: ''
     },
     autofocus: {
       type: Boolean,
@@ -110,8 +112,7 @@ export default {
 
 .input {
   position: relative;
-  padding-top: 12px;
-  padding-bottom: 16px;
+  @apply pt-3 pb-4;
 }
 
 .input__icon {
@@ -124,13 +125,12 @@ export default {
 
 .input__input {
   @apply text-2xl;
+  @apply pt-1 px-0 pb-0;
   color: config('colors.text-primary');
   width: 100%;
-  padding: 5px 0 0;
   background-color: transparent;
-  background-image: none;
   border: none;
-  border-bottom: 1px solid #ced2d6;
+  border-bottom: 1px solid config('colors.input-border');
   box-shadow: none !important;
   transition: border-color ease-in-out 0.15s;
   z-index: 2;
@@ -153,7 +153,7 @@ export default {
   padding-right: 30px;
 }
 .input--haserror .input__input {
-  border-color: #e24640;
+  border-color: config('colors.red');
 }
 .input__title {
   @apply text-base;

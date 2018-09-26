@@ -2,14 +2,31 @@
   <div class="components">
     This is an components page
     <div>
-      <Button text="button test" size="small" loading disabled/>
+      <Button
+        text="button test"
+        size="small"
+        loading
+        disabled/>
     </div>
     <div>
-      <Input v-model="testString" title="create account name" icon="copy"/>
-      <Input v-model="errorMsg" title="generated password"/>
-      <Input v-model="configMsg" title="confirm password"/>
-      <Input v-model="testString" :disabled="true" title="title"/>
-      <Input v-model="testString" title="username" :error="errorMsg"/>
+      <Input
+        v-model="testString"
+        title="create account name"
+        icon="copy">
+      <Input
+        v-model="errorMsg"
+        title="generated password">
+      <Input
+        v-model="configMsg"
+        title="confirm password">
+      <Input
+        v-model="testString"
+        :disabled="true"
+        title="title">
+      <Input
+        v-model="testString"
+        :error="errorMsg"
+        title="username">
     </div>
   </div>
 </template>

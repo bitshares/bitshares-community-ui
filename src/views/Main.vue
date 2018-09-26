@@ -14,8 +14,8 @@ import Header from './Header.vue'
 import Footer from './Footer.vue'
 
 export default {
-  components: { Header, Footer },
-  name: 'Main'
+  name: 'Main',
+  components: { Header, Footer }
 }
 </script>
 
