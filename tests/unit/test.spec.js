@@ -1,5 +1,5 @@
 describe('suite', () => {
   it('test test', () => {
-    expect(true).toBeTruthy()
+    expect(false).toBeTruthy()
   })
 })
