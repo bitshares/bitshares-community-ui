@@ -7,4 +7,4 @@ RUN npm install
 ARG CACHEBUST=1
 COPY . /usr/src/app/
 ENTRYPOINT ["/bin/bash"]
-CMD ["builder.sh"]
+CMD ["docker-entry.sh"]
