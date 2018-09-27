@@ -6,5 +6,6 @@ RUN npm install
 # TO RUN FROM THIS STEP USE: --build-arg CACHEBUST=$(date +%s)
 ARG CACHEBUST=1
 COPY . /usr/src/app/
+RUN npm run svg
 ENTRYPOINT ["/bin/bash"]
 CMD ["docker-entry.sh"]
