@@ -1,55 +1,57 @@
 <template>
-<div id="tabs" class="container">
-    <div class="tabs">
-        <a  v-bind:key=key v-for="(title, key) in titles" v-on:click="activetab=title" v-bind:class="[ activetab === title ? 'active' : '' ]">{{title}}</a>
+  <div class="card">
+    <div class="tabs-header">
+      <ul class="card-nav nav-tabs card-header-tabs">
+        <li class="nav-item" v-for="tab in tabs">
+          <a
+            :class="activeTab === tab ? 'nav-link active' : 'nav-link'"
+            href="#"
+            @click="(e) => activeTab = tab"
+          >
+            {{ tab }}
+          </a>
+        </li>
+      </ul>
     </div>
-
-    <div>
-        <div v-if="activetab === titles[0]" class="tabcontent" >
-            <slot><div>1</div></slot>
-        </div>
-        <div v-if="activetab === titles[1]" class="tabcontent" >
-            <slot><div>2</div></slot>
-        </div>
-        <div v-if="activetab === titles[2]" class="tabcontent" >
-            <slot><div>3</div></slot>
-        </div>
+    <div class="card-block">
+      <slot :name="tab" v-for="tab in tabs" v-if="tab === activeTab" />
     </div>
-</div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'Tabs',
   props: {
-    /** Sets Tabs text
-     */
-    titles: () => {
-      return {
-        type: Array,
-        default: ['Tab1', 'Tab2', 'Tab3']
-      }
-    },
-    /** Sets Tabs text
-     */
-    activetab: {
-      type: String,
-      default: 'Tab1'
+    tabs: Array
+  },
+  data () {
+    return {
+      activeTab: this.tabs[0]
     }
   }
+
 }
 </script>
 
-<style lang="css">
+<style lang="scss">
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
 .container {
-  max-width: 620px;
-  min-width: 420px;
   margin: 40px auto;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.9em;
@@ -57,19 +59,19 @@ export default {
 }
 
 /* Style the tabs */
-.tabs {
+.tabs-header {
   overflow: hidden;
   margin-left: 20px;
   margin-bottom: -2px;
   color:black;
 }
 
-.tabs ul {
+.tabs-header ul {
   list-style-type: none;
   margin-left: 20px;
 }
 
-.tabs a {
+.tabs-header a {
   float: left;
   cursor: pointer;
   padding: 12px 24px;
@@ -80,12 +82,12 @@ export default {
 }
 
 /* Change background color of tabs on hover */
-.tabs a:hover {
+.tabs-header a:hover {
     color:rgb(165, 165, 165);
 }
 
 /* Styling for active tab */
-.tabs a.active {
+.tabs-header a.active {
   color: #000000;
   border-bottom: 2px solid rgb(0, 0, 0);
   cursor: default;

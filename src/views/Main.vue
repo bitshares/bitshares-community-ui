@@ -4,7 +4,19 @@
     <ConnectionIndicator/>
     <div class="main__content">
       <h3 class="bg-blue text-white">Welcome to bitshares-community-wallet</h3>
-      <Tabs :activetab='test1' :titles="['test1', 'test2', 'test3']" />
+      <Tabs :tabs="['as a link', 'as a form', 'as an iFrame']">
+      <div slot="as a link">
+        <!-- Stuff. -->1
+      </div>
+
+      <div slot="as a form">
+        <!-- Stuff. -->2
+      </div>
+
+      <div slot="as an iFrame">
+        <!-- Stuff.-->3
+      </div>
+      </Tabs>
       <router-view/>
     </div>
     <Footer/>
