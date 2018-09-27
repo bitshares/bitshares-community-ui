@@ -5,13 +5,16 @@
       <div class="login__form">
         <VInput
           v-model="name"
+          :autofocus="true"
           title="account name"/>
         <VInput
           v-model="password"
           title="password"/>
         <Button
+          class="login__btn"
           width="full"
-          text="login"
+          text="log in"
+          :disabled="loginDisabled"
           @click="handleLogin"/>
       </div>
     </div>
@@ -29,6 +32,11 @@ export default {
     return {
       name: '',
       password: ''
+    }
+  },
+  computed: {
+    loginDisabled() {
+      return false
     }
   },
   methods: {
@@ -49,6 +57,7 @@ export default {
   }
   .login {
     @apply max-w-sm w-full;
+    border-radius: 2px;
     flex-shrink: 0;
     background-color: black;
     &__title {
@@ -58,7 +67,10 @@ export default {
       text-transform: uppercase;
     }
     &__form {
-      @apply p-4;
+      @apply p-5;
+    }
+    &__btn {
+      @apply mt-2;
     }
   }
 </style>

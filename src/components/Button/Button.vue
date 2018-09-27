@@ -1,20 +1,22 @@
 <template>
   <button
+    class="btn btn-blue"
     :class="{
       'btn--loading': loading,
       'btn--disabled': disabled,
       'btn--small':size === 'small',
       'btn--big': size === 'big',
       'btn--wide': width === 'full',
-      'btn--round':type==='round',
+      'btn--round': type === 'round',
     }"
     :disabled="disabled"
-    class="btn btn-blue"
     @click="$emit('click')"
   >
-    {{ text }} <Spinner
-      v-if="loading"
-      size="small" />
+    {{ text }} 
+  <Spinner
+    v-if="loading"
+    size="small" 
+  />
   </button>
 </template>
 
@@ -61,7 +63,7 @@ export default {
      */
     type: {
       type: String,
-      default: 'round'
+      default: 'standard'
     }
   }
 }
@@ -69,19 +71,18 @@ export default {
 
 <style lang="scss">
 .btn {
-  @apply font-bold py-2 px-4 rounded;
-}
-.btn-blue {
-  @apply bg-blue text-white;
-}
-.btn-blue:hover {
-  @apply bg-blue-dark;
-}
-.btn-blue:active {
-  @apply bg-blue;
+  @apply font-bold py-4 px-4 text-lg;
+  color: config('colors.button-text');
+  background-color: config('colors.button-bg');
+  text-transform: uppercase;
+  transition: background-color 0.2s, opacity 0.2s;
+  &:hover {
+    background-color: config('colors.button-bg-hover');
+  }
 }
 .btn--disabled {
-  @apply pointer-events-none opacity-50 cursor-not-allowed;
+  @apply pointer-events-none opacity-50;
+  color: config('colors.button-text-disabled');
 }
 .btn--small {
   @apply py-1 pr-1 cursor-pointer text-xs;

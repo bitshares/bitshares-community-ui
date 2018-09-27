@@ -127,6 +127,11 @@ let colors = {
   'pink-lightest': '#ffebef',
 
   'text-primary': 'white',
+  'button-text': 'black',
+  'button-text-disabled': '#7f7f7f',
+  'button-bg': 'white',
+  'button-bg-hover': 'gray',
+  'button-bg-disabled': 'white',
   'input-border': 'white',
   'bg-base': '#3d4852'
 }
@@ -779,7 +784,9 @@ module.exports = {
   opacity: {
     '0': '0',
     '25': '.25',
+    '40': '0.4',
     '50': '.5',
+    '60': '.6',
     '75': '.75',
     '100': '1'
   },
