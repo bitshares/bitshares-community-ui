@@ -30,3 +30,9 @@
 .svg-left {
     transform: rotate(-90deg);
 }
+
+/* links */
+a {
+    @apply text-xs;
+    color: config('colors.text-primary');
+}

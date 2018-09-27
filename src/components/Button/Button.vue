@@ -79,9 +79,12 @@ export default {
   &:hover {
     background-color: config('colors.button-bg-hover');
   }
+  &:focus {
+    outline:none;
+  }
 }
 .btn--disabled {
-  @apply pointer-events-none opacity-50;
+  @apply pointer-events-none opacity-40;
   color: config('colors.button-text-disabled');
 }
 .btn--small {

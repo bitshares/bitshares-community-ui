@@ -13,7 +13,7 @@
       :value="value"
       :disabled="disabled"
       class="input__input"
-      type="text"
+      :type="inputType"
       @paste="handlePaste"
       @input="handleInput"
       @blur="handleBlur"
@@ -30,6 +30,7 @@
     <svgicon
       v-if="icon"
       :name="icon"
+      color="white"
       class="input__icon"
       width="24"
       height="24"
@@ -81,6 +82,9 @@ export default {
   computed: {
     isNumber() {
       return this.type === 'number'
+    },
+    inputType() {
+      return this.type === 'password' ? this.type : 'text'
     }
   },
   mounted() {
@@ -157,9 +161,8 @@ export default {
   @apply text-base;
   color: config('colors.text-primary');
   position: absolute;
-  top: 22px;
+  top: 25px;
   left: 0;
-  line-height: 1.5;
   transition: all 0.3s;
   pointer-events: none;
   text-transform: uppercase;

@@ -4,9 +4,7 @@
     <div>
       <Button
         text="button test"
-        size="small"
-        loading
-        disabled/>
+        size="small"/>
     </div>
     <div>
       <VInput
@@ -49,4 +47,4 @@ export default {
   }
 }
 </script>
-]
+
