@@ -1,10 +1,10 @@
 <template>
-  <div class="card">
+  <div>
     <div class="tabs-header">
-      <ul class="card-nav nav-tabs card-header-tabs">
-        <li class="nav-item" v-for="tab in tabs">
+      <ul>
+        <li v-for="(tab, key) in tabs" v-bind:key=key>
           <a
-            :class="activeTab === tab ? 'nav-link active' : 'nav-link'"
+            :class="activeTab === tab ? 'active' : ''"
             href="#"
             @click="(e) => activeTab = tab"
           >
@@ -13,7 +13,7 @@
         </li>
       </ul>
     </div>
-    <div class="card-block">
+    <div class="tabContent">
       <slot :name="tab" v-for="tab in tabs" v-if="tab === activeTab" />
     </div>
   </div>
@@ -29,7 +29,6 @@ export default {
       activeTab: this.tabs[0]
     }
   }
-
 }
 </script>
 
@@ -50,12 +49,6 @@ a:visited {
 
 a:active {
     text-decoration: none;
-}
-.container {
-  margin: 40px auto;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.9em;
-  color: rgb(0, 0, 0);
 }
 
 /* Style the tabs */
@@ -94,8 +87,8 @@ a:active {
 }
 
 /* Style the tab content */
-.tabcontent {
-  padding: 30px 30px 30px 30px;
+.tabContent {
+  padding: 30px 30px 30px 50px;
   color:black;
 }
 </style>
