@@ -126,8 +126,9 @@ let colors = {
   'pink-lighter': '#ffbbca',
   'pink-lightest': '#ffebef',
 
-  'text-primary': 'black',
-  'input-border': '#ced2d6'
+  'text-primary': 'white',
+  'input-border': 'white',
+  'bg-base': '#3d4852'
 }
 
 module.exports = {

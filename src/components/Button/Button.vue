@@ -93,7 +93,7 @@ export default {
   @apply pointer-events-none;
 }
 .btn--wide {
-  @apply px-6;
+  @apply w-full;
 }
 .btn--round {
   @apply rounded;
