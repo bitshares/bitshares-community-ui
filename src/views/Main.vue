@@ -4,16 +4,16 @@
     <ConnectionIndicator/>
     <div class="main__content">
       <h3 class="bg-blue text-white">Welcome to bitshares-community-wallet</h3>
-      <Tabs :tabs="['as a link', 'as a form', 'as an iFrame']">
-      <div slot="as a link">
+      <Tabs :tabs="['tab1', 'tab2', 'tab3']">
+      <div slot="tab1">
         <!-- Stuff. -->1
       </div>
 
-      <div slot="as a form">
+      <div slot="tab2">
         <!-- Stuff. -->2
       </div>
 
-      <div slot="as an iFrame">
+      <div slot="tab3">
         <!-- Stuff.-->3
       </div>
       </Tabs>

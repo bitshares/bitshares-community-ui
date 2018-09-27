@@ -57,11 +57,13 @@ a:active {
   margin-left: 20px;
   margin-bottom: -2px;
   color:black;
+  width:100%;
 }
 
 .tabs-header ul {
   list-style-type: none;
   margin-left: 20px;
+  width:100%;
 }
 
 .tabs-header a {
