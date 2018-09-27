@@ -1,6 +1,5 @@
 <template>
   <button
-    class="btn btn-blue"
     :class="{
       'btn--loading': loading,
       'btn--disabled': disabled,
@@ -10,13 +9,14 @@
       'btn--round': type === 'round',
     }"
     :disabled="disabled"
+    class="btn btn-blue"
     @click="$emit('click')"
   >
-    {{ text }} 
-  <Spinner
-    v-if="loading"
-    size="small" 
-  />
+    {{ text }}
+    <Spinner
+      v-if="loading"
+      size="small"
+    />
   </button>
 </template>
 

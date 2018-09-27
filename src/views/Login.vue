@@ -11,10 +11,10 @@
           v-model="password"
           title="password"/>
         <Button
+          :disabled="loginDisabled"
           class="login__btn"
           width="full"
           text="log in"
-          :disabled="loginDisabled"
           @click="handleLogin"/>
       </div>
     </div>
