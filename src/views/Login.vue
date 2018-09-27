@@ -3,9 +3,16 @@
     <div class="login h-full sm:h-auto">
       <div class="login__title">Login</div>
       <div class="login__form">
-        <VInput v-model="name" title="account name"/>
-        <VInput v-model="password" title="password"/>
-        <Button width="full" text="login" @click="handleLogin"/>  
+        <VInput
+          v-model="name"
+          title="account name"/>
+        <VInput
+          v-model="password"
+          title="password"/>
+        <Button
+          width="full"
+          text="login"
+          @click="handleLogin"/>
       </div>
     </div>
   </div>
