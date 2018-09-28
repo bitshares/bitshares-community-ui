@@ -4,16 +4,16 @@
     <ConnectionIndicator/>
     <div class="main__content">
       <h3 class="bg-blue text-white">Welcome to bitshares-community-wallet</h3>
-      <Tabs :tabs="['tab1', 'tab2', 'tab3']">
-      <div slot="tab1">
+      <Tabs :tabs="['Tab example #1 with the responsive width', 'Tab example #2 with the responsive width', 'Tab example #3 with the responsive width']">
+      <div slot="Tab example #1 with the responsive width">
         <!-- Stuff. -->1
       </div>
 
-      <div slot="tab2">
+      <div slot="Tab example #2 with the responsive width">
         <!-- Stuff. -->2
       </div>
 
-      <div slot="tab3">
+      <div slot="Tab example #3 with the responsive width">
         <!-- Stuff.-->3
       </div>
       </Tabs>

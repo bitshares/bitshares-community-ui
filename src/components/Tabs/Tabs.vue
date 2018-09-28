@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="tabs">
     <div class="tabs-header">
       <ul>
         <li v-for="(tab, key) in tabs" v-bind:key=key>
@@ -51,6 +51,9 @@ a:active {
     text-decoration: none;
 }
 
+.tabs { 
+  width: 100%;
+}
 /* Style the tabs */
 .tabs-header {
   overflow: hidden;
