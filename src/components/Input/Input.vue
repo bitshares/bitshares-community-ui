@@ -9,11 +9,11 @@
 
     <input
       v-restrict.number="isNumber"
+      class="input__input"
       ref="input"
       :value="value"
       :disabled="disabled"
-      class="input__input"
-      type="text"
+      :type="inputType"
       @paste="handlePaste"
       @input="handleInput"
       @blur="handleBlur"
@@ -79,6 +79,9 @@ export default {
     }
   },
   computed: {
+    inputType() {
+      return this.type === 'password' ? this.type : 'text'
+    },
     isNumber() {
       return this.type === 'number'
     }

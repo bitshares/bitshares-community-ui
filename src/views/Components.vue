@@ -15,6 +15,7 @@
         icon="copy"/>
       <VInput
         v-model="errorMsg"
+        type="password"
         title="password"/>
       <VInput
         v-model="number"
