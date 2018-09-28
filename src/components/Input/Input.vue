@@ -9,11 +9,11 @@
 
     <input
       v-restrict.number="isNumber"
-      class="input__input"
       ref="input"
       :value="value"
       :disabled="disabled"
       :type="inputType"
+      class="input__input"
       @paste="handlePaste"
       @input="handleInput"
       @blur="handleBlur"
