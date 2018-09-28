@@ -1,5 +1,5 @@
 Examples:
- 
+
 Small spinner
 ```js
 <Loader size="small" />

@@ -56,7 +56,6 @@ a:active {
   overflow: hidden;
   margin-left: 20px;
   margin-bottom: -2px;
-  color:black;
   width:100%;
 }
 
@@ -67,30 +66,30 @@ a:active {
 }
 
 .tabs-header a {
-  float: left;
-  cursor: pointer;
+  @apply float-left cursor-pointer;
   padding: 12px 24px;
   transition: background-color 0.2s;
   font-weight: bold;
-  color:rgb(88, 88, 88);
-  border-bottom: 2px solid rgb(122, 122, 122);
+  color:grey;
+  border-bottom: 2px solid grey;
 }
 
 /* Change background color of tabs on hover */
 .tabs-header a:hover {
-    color:rgb(165, 165, 165);
+    color:DarkGrey;
+    border-bottom: 2px solid DarkGrey;
 }
 
 /* Styling for active tab */
 .tabs-header a.active {
-  color: #000000;
-  border-bottom: 2px solid rgb(0, 0, 0);
-  cursor: default;
+  @apply cursor-default;
+  color: white;
+  border-bottom: 2px solid white;
 }
 
 /* Style the tab content */
 .tabContent {
   padding: 30px 30px 30px 50px;
-  color:black;
+  color: black;
 }
 </style>
