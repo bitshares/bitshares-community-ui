@@ -162,7 +162,6 @@ export default {
   position: absolute;
   top: 22px;
   left: 0;
-  line-height: 1.5;
   transition: all 0.3s;
   pointer-events: none;
   text-transform: uppercase;
