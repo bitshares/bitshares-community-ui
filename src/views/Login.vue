@@ -37,6 +37,7 @@ import VInput from '@/components/Input/'
 import Button from '@/components/Button/'
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Login',
@@ -49,7 +50,8 @@ export default {
   data() {
     return {
       name: '',
-      password: ''
+      password: '',
+      inProgress: false
     }
   },
   computed: {
@@ -60,13 +62,24 @@ export default {
       return (!this.$v.password.required && this.$v.password.$dirty) ? 'Enter password' : ''
     },
     loginDisabled() {
-      return this.$v.$dirty && this.$v.$invalid
+      return this.inProgress
     }
   },
   methods: {
-    handleLogin() {
+    ...mapActions({
+      login: 'account/loginWithPassword'
+    }),
+    async handleLogin() {
       this.$v.$touch()
-      console.log(this.name, this.password)
+      if (!this.$v.$invalid) {
+        this.inProgress = true
+        const resp = await this.login({
+          name: this.name,
+          password: this.password
+        })
+        this.inProgress = false
+        console.log(resp)
+      }
       // TODO handle login here
     }
   }
