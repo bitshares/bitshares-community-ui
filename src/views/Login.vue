@@ -7,11 +7,17 @@
         <VInput
           v-model="name"
           :autofocus="true"
-          title="account name"/>
+          :error="nameErrorMsg"
+          title="account name"
+          @input="$v.name.$touch()"
+        />
         <VInput
           v-model="password"
+          :error="passwordErrorMsg"
           type="password"
-          title="password"/>
+          title="password"
+          @input="$v.password.$touch()"
+        />
         <Button
           :disabled="loginDisabled"
           class="login__btn"
@@ -29,10 +35,17 @@
 <script>
 import VInput from '@/components/Input/'
 import Button from '@/components/Button/'
+import { validationMixin } from 'vuelidate'
+import { required } from 'vuelidate/lib/validators'
 
 export default {
   name: 'Login',
   components: { VInput, Button },
+  mixins: [validationMixin],
+  validations: {
+    name: { required },
+    password: { required }
+  },
   data() {
     return {
       name: '',
@@ -40,12 +53,19 @@ export default {
     }
   },
   computed: {
+    nameErrorMsg() {
+      return (!this.$v.name.required && this.$v.name.$dirty) ? 'Enter username' : ''
+    },
+    passwordErrorMsg() {
+      return (!this.$v.password.required && this.$v.password.$dirty) ? 'Enter password' : ''
+    },
     loginDisabled() {
-      return false
+      return this.$v.$dirty && this.$v.$invalid
     }
   },
   methods: {
     handleLogin() {
+      this.$v.$touch()
       console.log(this.name, this.password)
       // TODO handle login here
     }

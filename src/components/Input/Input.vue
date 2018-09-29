@@ -155,7 +155,7 @@ export default {
   @apply pr-8;
 }
 .input--haserror .input__input {
-  border-color: config('colors.red');
+  border-color: config('colors.text-error');
 }
 .input__title {
   @apply text-base;
@@ -181,6 +181,6 @@ export default {
   position: absolute;
   bottom: 0;
   left: 0;
-  color: #e24640;
+  color: config('colors.text-error');
 }
 </style>

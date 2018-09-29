@@ -127,6 +127,7 @@ let colors = {
   'pink-lightest': '#ffebef',
 
   'text-primary': 'white',
+  'text-error': 'yellow',
   'button-text': 'black',
   'button-text-disabled': '#7f7f7f',
   'button-bg': 'white',
