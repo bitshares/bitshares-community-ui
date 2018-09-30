@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import app from './modules/app'
 import createPersistedState from 'vuex-persistedstate'
 import vuexBitsharesModules from 'vuex-bitshares'
-import * as Cookies from 'js-cookie'
+import Cookies from 'js-cookie'
 
 Vue.use(Vuex)
 

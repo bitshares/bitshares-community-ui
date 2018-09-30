@@ -50,7 +50,6 @@
           @input="$v.confirmPin.$touch()"
         />
 
-        
       </div> -->
       <div class="login__footer">
         <router-link :to="{ name: 'login' }">Sign up with new account</router-link>
@@ -63,7 +62,7 @@
 import VInput from '@/components/Input/'
 import Button from '@/components/Button/'
 import { validationMixin } from 'vuelidate'
-import { required, minLength, sameAs } from 'vuelidate/lib/validators'
+import { required } from 'vuelidate/lib/validators'
 import { mapActions } from 'vuex'
 
 export default {

@@ -2,7 +2,9 @@
   <div class="main">
     <Header/>
     <div class="main__content">
-      <h3 class="bg-blue text-white" v-show="userName">
+      <h3
+        v-show="userName"
+        class="bg-blue text-white">
         <b>{{ userName }}</b>, welcome to bitshares-community-wallet
       </h3>
       <router-view/>
@@ -20,15 +22,10 @@ export default {
   name: 'Main',
   components: { Header, Footer },
   computed: {
-    ...mapGetters ({
+    ...mapGetters({
       connected: 'connection/isReady',
       userId: 'acc/getAccountUserId',
       userName: 'user/getUserName'
-    })
-  },
-  methods: {
-    ...mapActions({
-      loadUserData: 'user/fetchUser'
     })
   },
   watch: {
@@ -38,6 +35,11 @@ export default {
       },
       immediate: true
     }
+  },
+  methods: {
+    ...mapActions({
+      loadUserData: 'user/fetchUser'
+    })
   }
 }
 </script>
