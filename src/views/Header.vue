@@ -1,17 +1,19 @@
 <template>
   <div class="header">
     <p>BitSharesApp</p>
+    <ConnectionIndicator/>
     <UserInfo/>
   </div>
 
 </template>
 
 <script>
+import ConnectionIndicator from '@/views/ConnectionIndicator.vue'
 import UserInfo from './UserInfo'
 
 export default {
   name: 'Header',
-  components: { UserInfo }
+  components: { UserInfo, ConnectionIndicator }
 }
 </script>
 
