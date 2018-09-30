@@ -1,9 +1,13 @@
 <template>
   <div class="header">BitSharesApp</div>
+  <!-- <UseerInfo/> -->
 </template>
 
 <script>
+import UserInfo from './UserInfo'
+
 export default {
+  components: { UserInfo },
   name: 'Header'
 }
 </script>

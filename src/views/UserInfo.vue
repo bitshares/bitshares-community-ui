@@ -1,15 +1,15 @@
 <template>
-  <div>
-    <img  class="" />
-    <p></p>
-    <img/>
+  <div class="singleline">
+    <img  class="user_img" />
+    <p>temp</p>
+    <img class="arrow_down" />
   </div>
 </template>
 
 <script type="text/javascript">
 import { mapGetters } from 'vuex'
 export default {
-  name:'Userinfo',
+  name:'UserInfo',
   computed: {
     ...mapGetters({
       userName: 'user/getUserName'
@@ -28,9 +28,12 @@ export default {
     @apply .inline-block
   }
   .user_img {
-    background-image: url(@assets/svg/user_icon.svg);
+    /*background-image: url(@assets/icons/user_icon/);*/
     background-size: contain;
-
+  }
+  .arrow_down {
+    /*background-image: url(@assets/icons/arrow_down/);*/
+    background-size: contain;
   }
   
 </style>
