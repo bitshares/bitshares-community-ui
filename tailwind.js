@@ -124,7 +124,10 @@ let colors = {
   'pink': '#f66d9b',
   'pink-light': '#fa7ea8',
   'pink-lighter': '#ffbbca',
-  'pink-lightest': '#ffebef'
+  'pink-lightest': '#ffebef',
+
+  'text-primary': 'black',
+  'input-border': '#ced2d6'
 }
 
 module.exports = {
@@ -249,6 +252,7 @@ module.exports = {
   */
 
   textSizes: {
+    'xxs': '.65rem', // 10px
     'xs': '.75rem', // 12px
     'sm': '.875rem', // 14px
     'base': '1rem', // 16px
