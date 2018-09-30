@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/views/Main.vue'
+import store from '@/store'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -23,7 +24,10 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: () => import(/* webpackChunkName: "auth" */ './views/Login.vue')
+      component: () => import(/* webpackChunkName: "auth" */ './views/Login.vue'),
+      meta: {
+        noAuth: true
+      }
     },
     {
       path: '*',
@@ -31,3 +35,14 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (!to.meta.noAuth) {
+    const isLoggedIn = store.getters['acc/isLoggedIn']
+    if (!isLoggedIn) next({ name: 'login' })
+  }
+
+  next()
+})
+
+export default router

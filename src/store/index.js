@@ -1,20 +1,30 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import app from './modules/app'
-import vuexBitshares from 'vuex-bitshares'
+import createPersistedState from 'vuex-persistedstate'
+import vuexBitsharesModules from 'vuex-bitshares'
+import * as Cookies from 'js-cookie'
 
 Vue.use(Vuex)
-// TODO: user vuex-bitshares here
 
 const store = new Vuex.Store({
   state: {},
   mutations: {},
   actions: {},
   modules: {
-    app
-  }
+    app,
+    ...vuexBitsharesModules
+  },
+  plugins: [
+    createPersistedState({
+      storage: {
+        getItem: key => Cookies.get(key),
+        setItem: (key, value) => Cookies.set(key, value, { expires: 3 }),
+        removeItem: key => Cookies.remove(key)
+      },
+      paths: ['acc.userId']
+    })
+  ]
 })
-
-vuexBitshares(store)
 
 export default store

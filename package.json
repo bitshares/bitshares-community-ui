@@ -14,13 +14,13 @@
   },
   "dependencies": {
     "date-fns": "^1.29.0",
+    "js-cookie": "^2.2.0",
     "vue": "^2.5.17",
-    "vue-multiselect": "^2.1.0",
-    "vue-popperjs": "^1.5.0",
     "vue-router": "^3.0.1",
     "vuelidate": "^0.7.4",
     "vuex": "^3.0.1",
-    "vuex-bitshares": "file:vuex-bitshares"
+    "vuex-bitshares": "file:vuex-bitshares",
+    "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.3",
