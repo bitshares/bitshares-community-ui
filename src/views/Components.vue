@@ -18,32 +18,14 @@
       <Button text="button test" size="small" loading disabled/>
     </div>
     <div>
-      <VInput
-        v-model="testString"
-        title="create account name"
-        icon="copy"/>
-      <VInput
-        v-model="errorMsg"
-        type="password"
-        title="password"/>
-      <VInput
-        v-model="number"
-        type="number"
-        title="number only input"/>
-      <VInput
-        v-model="testString"
-        :disabled="true"
-        title="disabled input"/>
-      <VInput
-        v-model="testString"
-        :error="errorMsg"
-        title="username"/>
+      <Input value="test input"/>
     </div>
   </div>
 </template>
 
 <script>
 import Button from '@/components/Button/'
+import Input from '@/components/Input/'
 import Tabs from '@/components/Tabs/'
 
 export default {

@@ -1,7 +1,5 @@
 <template>
-  <div
-    :class="{'green': connected}"
-    class="indicator"/>
+  <div class="indicator" :class="{'green': connected}"></div>
 </template>
 
 <script type="text/javascript">

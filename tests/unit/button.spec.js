@@ -12,12 +12,23 @@ describe('Button.vue', () => {
     expect(wrapper.text()).toMatch(text)
   })
 
-  it('has a button element', () => {
+  it('renders props.loading when passed', () => {
+    const wrapper = mount(Button)
+    expect(wrapper.find('loading'))
+  })
+
+  it('renders props.disabled when passed', () => {
+    const wrapper = mount(Button)
+    expect(wrapper.find('disabled'))
+  })
+
+  it('has a button', () => {
     expect(wrapper.contains('button')).toBe(true)
   })
 
-  it('emits click event when clicked', () => {
-    wrapper.trigger('click')
+  wrapper.vm.$emit('click')
+
+  it('emits click event', () => {
     expect(wrapper.emitted().click).toBeTruthy()
   })
 })

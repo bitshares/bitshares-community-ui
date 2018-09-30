@@ -5,6 +5,5 @@ module.exports = {
         '@icons': require('path').resolve(__dirname, 'src/assets/icons/')
       }
     }
-  },
-  baseUrl: './'
+  }
 }

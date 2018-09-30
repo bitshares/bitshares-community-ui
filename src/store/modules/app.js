@@ -9,7 +9,7 @@ const mutations = {
 }
 
 const actions = {
-  init(store) {
+  init (store) {
     store.dispatch('connection/initConnection', null, { root: true })
   }
 }

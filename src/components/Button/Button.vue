@@ -1,20 +1,16 @@
 <template>
-  <button
-    :class="{
-      'btn--loading': loading,
-      'btn--disabled': disabled,
-      'btn--small':size === 'small',
-      'btn--big': size === 'big',
-      'btn--wide': width === 'full',
-      'btn--round':type==='round',
-    }"
-    :disabled="disabled"
-    class="btn btn-blue"
-    @click="$emit('click')"
-  >
-    {{ text }} <Spinner
-      v-if="loading"
-      size="small" />
+  <button @click="$emit('click')"
+  class='btn btn-blue'
+  :class="{
+   'btn--loading': loading,
+   'btn--disabled': disabled,
+   'btn--small':size === 'small',
+   'btn--big': size === 'big',
+   'btn--wide': width === 'full',
+   'btn--round':type==='round'
+   }"
+  :disabled=disabled>
+ {{ text }} <Spinner v-if=loading size="small" />
   </button>
 </template>
 
@@ -23,9 +19,6 @@ import Spinner from '../Spinner/Spinner.vue'
 
 export default {
   name: 'Button',
-  components: {
-    Spinner
-  },
   props: {
     /** Sets button text
      */
@@ -63,6 +56,9 @@ export default {
       type: String,
       default: 'round'
     }
+  },
+  components: {
+    Spinner
   }
 }
 </script>

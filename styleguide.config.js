@@ -1,8 +1,7 @@
 module.exports = {
   // set your styleguidist configuration here
   title: 'Default Style Guide',
-  components: 'src/components/**/[A-Z]*.vue',
-  require: [require('path').join(__dirname, 'src/directives/index.js')]
+  components: 'src/components/**/[A-Z]*.vue'
   // sections: [
   //   {
   //     name: 'First Section',

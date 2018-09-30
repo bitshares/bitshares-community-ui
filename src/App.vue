@@ -1,7 +1,5 @@
 <template>
-  <div
-    id="app"
-    class="app container mx-auto">
+  <div id="app" class="app container mx-auto">
     <router-view/>
   </div>
 </template>

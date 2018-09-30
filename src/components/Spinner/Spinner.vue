@@ -1,12 +1,10 @@
 <template>
-  <div
-    :class="{
-      'spinner--static': !absolute,
-      'spinner--medium': size === 'medium',
-      'spinner--small': size === 'small',
-      'spinner--big': size === 'big'
-    }"
-    class="spinner"/>
+  <div class="spinner" :class="{
+    'spinner--static': !absolute,
+    'spinner--medium': size === 'medium',
+    'spinner--small': size === 'small',
+    'spinner--big': size === 'big'
+  }"></div>
 </template>
 
 <script>
@@ -24,7 +22,7 @@ export default {
       default: true
     }
   },
-  data() {
+  data () {
     return {}
   }
 }
