@@ -38,12 +38,16 @@
     />
 
     <!-- tip message -->
-    <div v-if="tip && !error" class="input__tip">
+    <div
+      v-if="tip && !error"
+      class="input__tip">
       {{ tip }}
     </div>
 
     <!-- error message -->
-    <div v-if="error" class="input__error">
+    <div
+      v-if="error"
+      class="input__error">
       {{ error }}
     </div>
 

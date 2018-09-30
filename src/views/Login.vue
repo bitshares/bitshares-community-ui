@@ -18,7 +18,7 @@
           title="password"
           @input="$v.password.$touch()"
         />
-        
+
       </div> -->
       <div class="login__brainkey">
         <VInput
@@ -32,16 +32,16 @@
 
         <VInput
           v-model.trim="pin"
+          :error="pinErrorMsg"
           tip="PIN code encrypts the private key, stored on this device"
           title="create pin code"
-          :error="pinErrorMsg"
           @input="$v.pin.$touch()"
         />
 
         <VInput
           v-model.trim="confirmPin"
-          title="confirm pin"
           :error="confirmPinErrorMsg"
+          title="confirm pin"
           @input="$v.confirmPin.$touch()"
         />
 
@@ -75,8 +75,8 @@ export default {
     // password: { required }
     brainkey: { required },
     pin: { required, minLength: minLength(6) },
-    confirmPin: { sameAsPin: sameAs('pin') },
-    
+    confirmPin: { sameAsPin: sameAs('pin') }
+
   },
   data() {
     return {
