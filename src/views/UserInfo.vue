@@ -19,7 +19,6 @@ export default {
     }),
     // stub till without auth
     getName () {
-      console.log(this.userName)
       if (!this.userName) return 'default'
       return this.userName
     }
