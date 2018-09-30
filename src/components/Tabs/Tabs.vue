@@ -1,15 +1,15 @@
 <template>
   <div class="tabs">
     <div class="tabs-header">
-      <ul>
+      <ul :class="centered === true ? 'center' : ''">
         <li v-for="(tab, key) in tabs" v-bind:key=key>
-          <a
+          <span
             :class="activeTab === tab ? 'active' : ''"
             href="#"
-            @click="(e) => activeTab = tab"
+            @click="() => activeTab = tab"
           >
             {{ tab }}
-          </a>
+          </span>
         </li>
       </ul>
     </div>
@@ -22,11 +22,13 @@
 <script>
 export default {
   props: {
-    tabs: Array
+    tabs: Array,
+    active: Array,
+    centered: Boolean
   },
   data () {
     return {
-      activeTab: this.tabs[0]
+      activeTab: this.active[0]
     }
   }
 }
@@ -39,26 +41,24 @@ export default {
   padding: 0;
 }
 
-a:link {
+span:link {
     text-decoration: none;
 }
 
-a:visited {
+span:visited {
     text-decoration: none;
 }
 
-a:active {
+span:active {
     text-decoration: none;
 }
 
-.tabs { 
+.tabs {
   width: 100%;
 }
 /* Style the tabs */
 .tabs-header {
   overflow: hidden;
-  margin-left: 20px;
-  margin-bottom: -2px;
   width:100%;
 }
 
@@ -68,31 +68,37 @@ a:active {
   width:100%;
 }
 
-.tabs-header a {
+.center {
+  display:flex;
+  flex-direction:row;
+  flex-wrap:nowrap;
+}
+
+.tabs-header span {
   @apply float-left cursor-pointer;
   padding: 12px 24px;
   transition: background-color 0.2s;
   font-weight: bold;
-  color:grey;
-  border-bottom: 2px solid grey;
+  color: config('colors.grey');
+  border-bottom: 2px solid config('colors.grey');
 }
 
 /* Change background color of tabs on hover */
-.tabs-header a:hover {
-    color:DarkGrey;
-    border-bottom: 2px solid DarkGrey;
+.tabs-header span:hover {
+    color:config('colors.grey-darker');;
+    border-bottom: 2px solid config('colors.grey-darker');
 }
 
 /* Styling for active tab */
-.tabs-header a.active {
+.tabs-header span.active {
   @apply cursor-default;
-  color: white;
-  border-bottom: 2px solid white;
+  color: config('colors.white');
+  border-bottom: 2px solid config('colors.white');
 }
 
 /* Style the tab content */
 .tabContent {
   padding: 30px 30px 30px 50px;
-  color: black;
+  color: config('colors.black');
 }
 </style>

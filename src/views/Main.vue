@@ -4,19 +4,7 @@
     <ConnectionIndicator/>
     <div class="main__content">
       <h3 class="bg-blue text-white">Welcome to bitshares-community-wallet</h3>
-      <Tabs :tabs="['Tab example #1 with the responsive width', 'Tab example #2 with the responsive width', 'Tab example #3 with the responsive width']">
-      <div slot="Tab example #1 with the responsive width">
-        <!-- Stuff. -->1
-      </div>
 
-      <div slot="Tab example #2 with the responsive width">
-        <!-- Stuff. -->2
-      </div>
-
-      <div slot="Tab example #3 with the responsive width">
-        <!-- Stuff.-->3
-      </div>
-      </Tabs>
       <router-view/>
     </div>
     <Footer/>
@@ -27,10 +15,9 @@
 import Header from './Header.vue'
 import Footer from './Footer.vue'
 import ConnectionIndicator from './ConnectionIndicator.vue'
-import Tabs from '../components/Tabs'
 
 export default {
-  components: { Header, Footer, ConnectionIndicator, Tabs },
+  components: { Header, Footer, ConnectionIndicator },
   name: 'Main'
 }
 </script>
