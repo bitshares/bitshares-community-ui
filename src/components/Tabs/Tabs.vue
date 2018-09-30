@@ -14,7 +14,7 @@
       </ul>
     </div>
     <div class="tabContent">
-      <slot :name="tab" v-for="tab in tabs" v-if="tab === activeTab" />
+      <slot :name="tab" v-for="tab in filteredTabs" />
     </div>
   </div>
 </template>
@@ -29,6 +29,15 @@ export default {
   data () {
     return {
       activeTab: this.active[0]
+    }
+  },
+  computed: {
+    filteredTabs: function () {
+      return this.tabs.map((tab) => {
+        if (tab === this.activeTab) {
+          return tab
+        }
+      })
     }
   }
 }
