@@ -10,8 +10,8 @@
 import UserInfo from './UserInfo'
 
 export default {
-  components: { UserInfo },
-  name: 'Header'
+  name: 'Header',
+  components: { UserInfo }
 }
 </script>
 

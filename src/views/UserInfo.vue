@@ -1,8 +1,8 @@
 <template>
   <div class="singleline">
-    <svgicon name="userIcon"> </svgicon>
-    <p>{{getName}}</p>
-    <svgicon name="arrowDown"> </svgicon>
+    <svgicon name="userIcon"/>
+    <p>{{ getName }}</p>
+    <svgicon name="arrowDown"/>
   </div>
 </template>
 
@@ -17,8 +17,7 @@ export default {
     ...mapGetters({
       userName: 'user/getUserName'
     }),
-    // stub till without auth
-    getName () {
+    getName() {
       if (!this.userName) return 'default'
       return this.userName
     }
