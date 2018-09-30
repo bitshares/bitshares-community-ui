@@ -1,6 +1,9 @@
 <template>
-  <div class="header">BitSharesApp</div>
-  <!-- <UseerInfo/> -->
+  <div class="header">
+    <p>BitSharesApp</p>
+    <UserInfo/>
+  </div>
+
 </template>
 
 <script>

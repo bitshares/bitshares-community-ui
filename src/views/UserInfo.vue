@@ -1,21 +1,25 @@
 <template>
   <div class="singleline">
-    <img  class="user_img" />
-    <p>temp</p>
-    <img class="arrow_down" />
+    <svgicon name="userIcon"> </svgicon>
+    <p>{{getName}}</p>
+    <svgicon name="arrowDown"> </svgicon>
   </div>
 </template>
 
 <script type="text/javascript">
 import { mapGetters } from 'vuex'
+import '@icons/userIcon'
+import '@icons/arrowDown'
+
 export default {
-  name:'UserInfo',
+  name: 'UserInfo',
   computed: {
     ...mapGetters({
       userName: 'user/getUserName'
     }),
     // stub till without auth
-    getName() {
+    getName () {
+      console.log(this.userName)
       if (!this.userName) return 'default'
       return this.userName
     }
@@ -25,15 +29,6 @@ export default {
 
 <style scoped>
   .singleline {
-    @apply .inline-block
+    @apply .inline-flex
   }
-  .user_img {
-    /*background-image: url(@assets/icons/user_icon/);*/
-    background-size: contain;
-  }
-  .arrow_down {
-    /*background-image: url(@assets/icons/arrow_down/);*/
-    background-size: contain;
-  }
-  
 </style>
