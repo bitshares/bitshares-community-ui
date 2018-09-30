@@ -5,8 +5,8 @@ import store from './store/'
 import './directives/'
 import SvgIcon from 'vue-svgicon'
 
-window.crypto.randomBytes = require('randombytes')
-console.log(window.crypto.randomBytes)
+// window.crypto.randomBytes = require('randombytes')
+
 Vue.use(SvgIcon, {
   tagName: 'svgicon'
 })

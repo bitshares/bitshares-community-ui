@@ -108,7 +108,7 @@ export default {
       if (!this.$v.confirmPin.sameAsPin) return 'PIN codes do not match'
     },
     loginDisabled() {
-      return this.inProgress
+      return this.$v.confirmPin.$dirty && this.$v.$invalid
     }
   },
   methods: {
