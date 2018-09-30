@@ -36,10 +36,16 @@
       height="24"
       @click.stop.native="handleIconClick"
     />
+
+    <!-- tip message -->
+    <div v-if="tip && !error" class="input__tip">
+      {{ tip }}
+    </div>
+
     <!-- error message -->
-    <div
-      v-if="error"
-      class="input__error">{{ error }}</div>
+    <div v-if="error" class="input__error">
+      {{ error }}
+    </div>
 
   </div>
 </template>
@@ -75,6 +81,10 @@ export default {
       default: false
     },
     error: {
+      type: String,
+      default: ''
+    },
+    tip: {
       type: String,
       default: ''
     }
@@ -117,7 +127,7 @@ export default {
 
 .input {
   position: relative;
-  @apply pt-3 pb-4;
+  @apply pt-3 pb-4 mb-2;
 }
 
 .input__icon {
@@ -179,8 +189,16 @@ export default {
 .input__error {
   @apply text-xs;
   position: absolute;
-  bottom: 0;
+  bottom: -1px;
   left: 0;
   color: config('colors.text-error');
+}
+
+.input__tip {
+  @apply text-xs;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  color: config('colors.text-primary');
 }
 </style>

@@ -3,21 +3,48 @@
     <div class="login h-full sm:h-auto">
       <div class="login__title">Login</div>
       <!-- tabs will go here to switch between this and brainkey/lockfile login -->
-      <div class="login__form">
+      <!-- <div class="login__form">
         <VInput
-          v-model="name"
+          v-model.trim="name"
           :autofocus="true"
           :error="nameErrorMsg"
           title="account name"
           @input="$v.name.$touch()"
         />
         <VInput
-          v-model="password"
+          v-model.trim="password"
           :error="passwordErrorMsg"
           type="password"
           title="password"
           @input="$v.password.$touch()"
         />
+        
+      </div> -->
+      <div class="login__brainkey">
+        <VInput
+          v-model.trim="brainkey"
+          :autofocus="true"
+          :error="brainkeyErrorMsg"
+          tip="Enter 16 words backed up when account was created"
+          title="backup phrase"
+          @input="$v.brainkey.$touch()"
+        />
+
+        <VInput
+          v-model.trim="pin"
+          tip="PIN code encrypts the private key, stored on this device"
+          title="create pin code"
+          :error="pinErrorMsg"
+          @input="$v.pin.$touch()"
+        />
+
+        <VInput
+          v-model.trim="confirmPin"
+          title="confirm pin"
+          :error="confirmPinErrorMsg"
+          @input="$v.confirmPin.$touch()"
+        />
+
         <Button
           :disabled="loginDisabled"
           class="login__btn"
@@ -36,7 +63,7 @@
 import VInput from '@/components/Input/'
 import Button from '@/components/Button/'
 import { validationMixin } from 'vuelidate'
-import { required } from 'vuelidate/lib/validators'
+import { required, minLength, sameAs } from 'vuelidate/lib/validators'
 import { mapActions } from 'vuex'
 
 export default {
@@ -44,13 +71,20 @@ export default {
   components: { VInput, Button },
   mixins: [validationMixin],
   validations: {
-    name: { required },
-    password: { required }
+    // name: { required },
+    // password: { required }
+    brainkey: { required },
+    pin: { required, minLength: minLength(6) },
+    confirmPin: { sameAsPin: sameAs('pin') },
+    
   },
   data() {
     return {
       name: '',
       password: '',
+      brainkey: '',
+      pin: '',
+      confirmPin: '',
       inProgress: false
     }
   },
@@ -61,21 +95,38 @@ export default {
     passwordErrorMsg() {
       return (!this.$v.password.required && this.$v.password.$dirty) ? 'Enter password' : ''
     },
+    brainkeyErrorMsg() {
+      return (!this.$v.brainkey.required && this.$v.brainkey.$dirty) ? 'Enter backup phrase' : ''
+    },
+    pinErrorMsg() {
+      if (!this.$v.pin.$dirty) return ''
+      if (!this.$v.pin.required) return 'Enter PIN'
+      if (!this.$v.pin.minLength) return 'PIN must be 6 characters or more'
+    },
+    confirmPinErrorMsg() {
+      if (!this.$v.confirmPin.$dirty) return ''
+      if (!this.$v.confirmPin.sameAsPin) return 'PIN codes do not match'
+    },
     loginDisabled() {
       return this.inProgress
     }
   },
   methods: {
     ...mapActions({
-      login: 'account/loginWithPassword'
+      login: 'account/loginWithPassword',
+      brainkeyLogin: 'account/login'
     }),
     async handleLogin() {
       this.$v.$touch()
       if (!this.$v.$invalid) {
         this.inProgress = true
-        const resp = await this.login({
-          name: this.name,
-          password: this.password
+        // const resp = await this.login({
+        //   name: this.name,
+        //   password: this.password
+        // })
+        const resp = await this.brainkeyLogin({
+          brainkey: this.brainkey.toLowerCase(),
+          password: this.pin
         })
         this.inProgress = false
         console.log(resp)
@@ -94,7 +145,7 @@ export default {
     justify-content: center;
   }
   .login {
-    @apply max-w-sm w-full;
+    @apply max-w-sm w-full shadow-md;
     border-radius: 2px;
     flex-shrink: 0;
     background-color: black;
@@ -104,7 +155,8 @@ export default {
       text-align: center;
       text-transform: uppercase;
     }
-    &__form {
+    &__form,
+    &__brainkey {
       @apply p-card;
     }
     &__btn {
