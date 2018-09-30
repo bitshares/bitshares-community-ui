@@ -44,19 +44,10 @@
 
 <script>
 import Button from '@/components/Button/'
-import VInput from '@/components/Input/'
 import Tabs from '@/components/Tabs/'
 
 export default {
   name: 'Components',
-  components: { Button, Input, Tabs },
-    data() {
-    return {
-      testString: '',
-      errorMsg: '',
-      configMsg: '',
-      number: 43
-    }
-  }
+  components: { Button, Input, Tabs }
 }
 </script>
