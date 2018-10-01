@@ -55,6 +55,14 @@ import VInput from '@/components/Input/'
 
 export default {
   name: 'Components',
+    data() {
+     return {
+      testString: '',
+      errorMsg: '',
+      configMsg: '',
+      number: 43
+    }
+  },
   components: { Button, VInput, Tabs }
 }
 </script>
