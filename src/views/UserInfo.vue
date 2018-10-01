@@ -1,7 +1,7 @@
 <template>
   <div class="singleline">
     <svgicon name="userIcon"/>
-    <p>{{ getName }}</p>
+    <p>{{ userName || 'default' }}</p>
     <svgicon name="arrowDown"/>
   </div>
 </template>
@@ -16,11 +16,7 @@ export default {
   computed: {
     ...mapGetters({
       userName: 'user/getUserName'
-    }),
-    getName() {
-      if (!this.userName) return 'default'
-      return this.userName
-    }
+    })
   }
 }
 </script>
