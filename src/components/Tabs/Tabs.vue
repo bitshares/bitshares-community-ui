@@ -2,7 +2,9 @@
   <div class="tabs">
     <div class="tabs-header">
       <ul :class="centered === true ? 'center' : ''">
-        <li v-for="(tab, key) in tabs" v-bind:key=key>
+        <li
+          v-for="(tab, key) in tabs"
+          :key="key">
           <span
             :class="activeTab === tab ? 'active' : ''"
             href="#"
@@ -14,7 +16,9 @@
       </ul>
     </div>
     <div class="tabContent">
-      <slot :name="tab" v-for="tab in filteredTabs" />
+      <slot
+        v-for="tab in filteredTabs"
+        :name="tab" />
     </div>
   </div>
 </template>
@@ -22,17 +26,30 @@
 <script>
 export default {
   props: {
-    tabs: Array,
-    active: Array,
-    centered: Boolean
+    tabs: {
+      default: function() {
+        return []
+      },
+      type: Array
+    },
+    active: {
+      default: function() {
+        return []
+      },
+      type: Array
+    },
+    centered: {
+      default: true,
+      type: Boolean
+    }
   },
-  data () {
+  data() {
     return {
       activeTab: this.active[0]
     }
   },
   computed: {
-    filteredTabs: function () {
+    filteredTabs: function() {
       return this.tabs.map((tab) => {
         if (tab === this.activeTab) {
           return tab
