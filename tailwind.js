@@ -129,7 +129,7 @@ let colors = {
   'text-primary': 'black',
   'input-border': '#ced2d6',
   'tab-content': '#22292f',
-  'tab-header':'#b8c2cc',
+  'tab-header': '#b8c2cc',
   'tab-hover': '#606f7b',
   'tab-active': '#ffffff'
 }
