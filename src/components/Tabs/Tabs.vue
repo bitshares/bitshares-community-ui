@@ -56,11 +56,18 @@ export default {
 }
 
 .center {
-  display:flex;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction:row;
   flex-wrap:nowrap;
-  margin-left:auto;
-  margin-right:auto;
+  text-align:center;
+  margin-left: -40px;
+  margin-right: auto;
 }
 
 .tabs-header span {
@@ -87,7 +94,7 @@ export default {
 
 /* Style the tab content */
 .tab-content {
-  padding: 30px 30px 30px 50px;
+  padding: 30px 30px 30px 30px;
   color: config('colors.tab-content');
 }
 </style>
