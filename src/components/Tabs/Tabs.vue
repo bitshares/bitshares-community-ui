@@ -7,18 +7,16 @@
           :key="key">
           <span
             :class="activeTab === tab ? 'active' : ''"
-            href="#"
-            @click="() => activeTab = tab"
+            @click="activeTab = tab"
           >
             {{ tab }}
           </span>
         </li>
       </ul>
     </div>
-    <div class="tabContent">
+    <div class="tab-content">
       <slot
-        v-for="tab in filteredTabs"
-        :name="tab" />
+        :name="activeTab" />
     </div>
   </div>
 </template>
@@ -27,15 +25,7 @@
 export default {
   props: {
     tabs: {
-      default: function() {
-        return []
-      },
-      type: Array
-    },
-    active: {
-      default: function() {
-        return []
-      },
+      default: () => [],
       type: Array
     },
     centered: {
@@ -45,59 +35,32 @@ export default {
   },
   data() {
     return {
-      activeTab: this.active[0]
-    }
-  },
-  computed: {
-    filteredTabs: function() {
-      return this.tabs.map((tab) => {
-        if (tab === this.activeTab) {
-          return tab
-        }
-      })
+      activeTab: this.tabs[0]
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
-span:link {
-    text-decoration: none;
-}
-
-span:visited {
-    text-decoration: none;
-}
-
-span:active {
-    text-decoration: none;
-}
-
-.tabs {
-  width: 100%;
-}
 /* Style the tabs */
 .tabs-header {
   overflow: hidden;
-  width:100%;
 }
 
 .tabs-header ul {
   list-style-type: none;
-  margin-left: 20px;
-  width:100%;
 }
 
 .center {
   display:flex;
   flex-direction:row;
   flex-wrap:nowrap;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .tabs-header span {
@@ -105,26 +68,26 @@ span:active {
   padding: 12px 24px;
   transition: background-color 0.2s;
   font-weight: bold;
-  color: config('colors.grey');
-  border-bottom: 2px solid config('colors.grey');
+  color: config('colors.tab-header');
+  border-bottom: 2px solid config('colors.tab-header');
 }
 
 /* Change background color of tabs on hover */
 .tabs-header span:hover {
-    color:config('colors.grey-darker');;
-    border-bottom: 2px solid config('colors.grey-darker');
+    color:config('colors.tab-hover');;
+    border-bottom: 2px solid config('colors.tab-hover');
 }
 
 /* Styling for active tab */
 .tabs-header span.active {
   @apply cursor-default;
-  color: config('colors.white');
-  border-bottom: 2px solid config('colors.white');
+  color: config('colors.tab-active');
+  border-bottom: 2px solid config('colors.tab-active');
 }
 
 /* Style the tab content */
-.tabContent {
+.tab-content {
   padding: 30px 30px 30px 50px;
-  color: config('colors.black');
+  color: config('colors.tab-content');
 }
 </style>

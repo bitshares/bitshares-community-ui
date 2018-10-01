@@ -40,7 +40,7 @@ Examples:
 
 4 centered tabs example 
 ```js
-      <Tabs :crentered=true :tabs="['Tab example #1', 'Tab example #2', 'Tab example #3', 'Tab example #4']">
+      <Tabs :centered=true :tabs="['Tab example #1', 'Tab example #2', 'Tab example #3', 'Tab example #4']">
       <div slot="Tab example #1">
         <!-- Stuff. -->1
       </div>
@@ -59,9 +59,9 @@ Examples:
       </Tabs>
 ```
 
-4 centered tabs example with default first active tab
+4 centered tabs example 
 ```js
-      <Tabs :active="['Tab example #1']" :crentered=true :tabs="['Tab example #1', 'Tab example #2', 'Tab example #3', 'Tab example #4']">
+      <Tabs :centered=true :tabs="['Tab example #1', 'Tab example #2', 'Tab example #3', 'Tab example #4']">
       <div slot="Tab example #1">
         <!-- Stuff. -->1
       </div>

@@ -8,8 +8,6 @@
 
 <script type="text/javascript">
 import { mapGetters } from 'vuex'
-import '@icons/userIcon'
-import '@icons/arrowDown'
 
 export default {
   name: 'UserInfo',

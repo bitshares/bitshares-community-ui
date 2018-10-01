@@ -4,7 +4,6 @@
     <div>
       <Tabs
         :centered="true"
-        :active="['Tab example #1 with the responsive width']"
         :tabs="['Tab example #1 with the responsive width', 'Tab example #2 with the responsive width', 'Tab example #3 with the responsive width']">
         <div slot="Tab example #1 with the responsive width">
           <!-- Stuff. -->1
