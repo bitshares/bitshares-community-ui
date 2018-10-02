@@ -13,7 +13,8 @@
         icon="copy"/>
       <VInput
         v-model="errorMsg"
-        title="generated password"/>
+        type="password"
+        title="password"/>
       <VInput
         v-model="number"
         type="number"
@@ -21,7 +22,7 @@
       <VInput
         v-model="testString"
         :disabled="true"
-        title="title"/>
+        title="disabled input"/>
       <VInput
         v-model="testString"
         :error="errorMsg"
@@ -39,8 +40,8 @@ export default {
   components: { Button, VInput },
   data() {
     return {
-      testString: 'wef',
-      errorMsg: '234',
+      testString: '',
+      errorMsg: '',
       configMsg: '',
       number: 43
     }

@@ -94,11 +94,11 @@ export default {
     }
   },
   computed: {
-    isNumber() {
-      return this.type === 'number'
-    },
     inputType() {
       return this.type === 'password' ? this.type : 'text'
+    },
+    isNumber() {
+      return this.type === 'number'
     }
   },
   mounted() {

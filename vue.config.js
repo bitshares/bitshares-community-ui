@@ -6,5 +6,6 @@ module.exports = {
       }
     },
     externals: ['crypto']
-  }
+  },
+  baseUrl: './'
 }
