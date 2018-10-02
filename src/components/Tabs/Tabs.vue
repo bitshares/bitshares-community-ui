@@ -65,8 +65,7 @@ export default {
   justify-content: center;
   flex-wrap:nowrap;
   text-align:center;
-  margin-left: -40px;
-  margin-right: auto;
+  margin-left:-40px;
 }
 
 .tabs-header span {
