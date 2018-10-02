@@ -63,7 +63,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction:row;
   flex-wrap:nowrap;
   text-align:center;
   margin-left: -40px;
