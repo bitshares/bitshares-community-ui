@@ -9,6 +9,8 @@ Vue.use(SvgIcon, {
   tagName: 'svgicon'
 })
 
+window.crypto.randomBytes = require('randombytes')
+
 Vue.config.productionTip = false
 
 store.dispatch('app/init')

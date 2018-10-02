@@ -22,7 +22,7 @@ const store = new Vuex.Store({
         setItem: (key, value) => Cookies.set(key, value, { expires: 3 }),
         removeItem: key => Cookies.remove(key)
       },
-      paths: ['acc.userId']
+      paths: ['acc.userId', 'acc.userType']
     })
   ]
 })

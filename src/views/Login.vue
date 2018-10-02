@@ -3,7 +3,7 @@
     <div class="login h-full sm:h-auto">
       <div class="login__title">Login</div>
       <!-- tabs will go here to switch between this and brainkey/lockfile login -->
-      <div class="login__form">
+      <!-- <div class="login__form">
         <VInput
           v-model.trim="name"
           :autofocus="true"
@@ -18,14 +18,9 @@
           title="password"
           @input="$v.password.$touch()"
         />
-        <Button
-          :disabled="loginDisabled"
-          class="login__btn"
-          width="full"
-          text="log in"
-          @click="handleLogin"/>
-      </div>
-      <!-- <div class="login__brainkey">
+        
+      </div> -->
+      <div class="login__brainkey">
         <VInput
           v-model.trim="brainkey"
           :autofocus="true"
@@ -50,7 +45,14 @@
           @input="$v.confirmPin.$touch()"
         />
 
-      </div> -->
+        <Button
+          :disabled="loginDisabled"
+          class="login__btn"
+          width="full"
+          text="log in"
+          @click="handleBrainkeyLogin"/>
+
+      </div>
       <div class="login__footer">
         <router-link :to="{ name: 'login' }">Sign up with new account</router-link>
       </div>
@@ -62,7 +64,7 @@
 import VInput from '@/components/Input/'
 import Button from '@/components/Button/'
 import { validationMixin } from 'vuelidate'
-import { required } from 'vuelidate/lib/validators'
+import { required, minLength, sameAs } from 'vuelidate/lib/validators'
 import { mapActions } from 'vuex'
 
 export default {
@@ -70,11 +72,11 @@ export default {
   components: { VInput, Button },
   mixins: [validationMixin],
   validations: {
-    name: { required },
-    password: { required }
-    // brainkey: { required },
-    // pin: { required, minLength: minLength(6) },
-    // confirmPin: { sameAsPin: sameAs('pin') }
+    // name: { required },
+    // password: { required }
+    brainkey: { required },
+    pin: { required, minLength: minLength(6) },
+    confirmPin: { sameAsPin: sameAs('pin') }
 
   },
   data() {
@@ -114,7 +116,7 @@ export default {
     ...mapActions({
       login: 'acc/cloudLogin',
       // login: 'account/loginWithPassword',
-      brainkeyLogin: 'account/login'
+      brainkeyLogin: 'acc/brainkeyLogin'
     }),
     async handleLogin() {
       this.$v.$touch()
