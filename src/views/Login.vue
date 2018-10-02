@@ -3,7 +3,7 @@
     <div class="login h-full sm:h-auto">
       <div class="login__title">Login</div>
       <!-- tabs will go here to switch between this and brainkey/lockfile login -->
-      <!-- <div class="login__form">
+      <div class="login__form">
         <VInput
           v-model.trim="name"
           :autofocus="true"
@@ -18,9 +18,15 @@
           title="password"
           @input="$v.password.$touch()"
         />
+        <Button
+          :disabled="loginDisabled"
+          class="login__btn"
+          width="full"
+          text="log in"
+          @click="handleLogin"/>
 
-      </div> -->
-      <div class="login__brainkey">
+      </div>
+      <!-- <div class="login__brainkey">
         <VInput
           v-model.trim="brainkey"
           :autofocus="true"
@@ -45,14 +51,7 @@
           @input="$v.confirmPin.$touch()"
         />
 
-        <Button
-          :disabled="loginDisabled"
-          class="login__btn"
-          width="full"
-          text="log in"
-          @click="handleBrainkeyLogin"/>
-
-      </div>
+      </div> -->
       <div class="login__footer">
         <router-link :to="{ name: 'login' }">Sign up with new account</router-link>
       </div>
@@ -71,13 +70,17 @@ export default {
   name: 'Login',
   components: { VInput, Button },
   mixins: [validationMixin],
-  validations: {
-    // name: { required },
-    // password: { required }
-    brainkey: { required },
-    pin: { required, minLength: minLength(6) },
-    confirmPin: { sameAsPin: sameAs('pin') }
-
+  validations() {
+    return this.type === 'cloud'
+      ? {
+        name: { required },
+        password: { required }
+      }
+      : {
+        brainkey: { required },
+        pin: { required, minLength: minLength(6) },
+        confirmPin: { sameAsPin: sameAs('pin') }
+      }
   },
   data() {
     return {
@@ -86,7 +89,8 @@ export default {
       brainkey: '',
       pin: '',
       confirmPin: '',
-      inProgress: false
+      inProgress: false,
+      type: 'cloud'
     }
   },
   computed: {
@@ -115,31 +119,27 @@ export default {
   methods: {
     ...mapActions({
       login: 'acc/cloudLogin',
-      // login: 'account/loginWithPassword',
       brainkeyLogin: 'acc/brainkeyLogin'
     }),
     async handleLogin() {
       this.$v.$touch()
       if (this.$v.$invalid) return
       this.inProgress = true
-      const { error } = await this.login({
-        name: this.name,
-        password: this.password
-      })
+
+      if (this.type === 'cloud') {
+        const { error } = await this.login({
+          name: this.name,
+          password: this.password
+        })
+        if (!error) this.$router.push({ name: 'main' })
+      } else {
+        const { error } = await this.brainkeyLogin({
+          brainkey: this.brainkey.toLowerCase(),
+          password: this.pin
+        })
+        if (!error) this.$router.push({ name: 'main' })
+      }
       this.inProgress = false
-      console.log(error)
-      if (!error) this.$router.push({ name: 'main' })
-    },
-    async handleBrainkeyLogin() {
-      this.$v.$touch()
-      if (this.$v.$invalid) return
-      this.inProgress = true
-      const { error } = await this.brainkeyLogin({
-        brainkey: this.brainkey.toLowerCase(),
-        password: this.pin
-      })
-      this.inProgress = false
-      if (!error) this.$router.push({ name: 'main' })
     }
   }
 }

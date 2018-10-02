@@ -4,6 +4,7 @@ import app from './modules/app'
 import createPersistedState from 'vuex-persistedstate'
 import vuexBitsharesModules from 'vuex-bitshares'
 import Cookies from 'js-cookie'
+import paths from './cachedPaths'
 
 Vue.use(Vuex)
 
@@ -22,7 +23,7 @@ const store = new Vuex.Store({
         setItem: (key, value) => Cookies.set(key, value, { expires: 3 }),
         removeItem: key => Cookies.remove(key)
       },
-      paths: ['acc.userId', 'acc.userType']
+      paths: [...paths]
     })
   ]
 })
