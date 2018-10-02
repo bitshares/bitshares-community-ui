@@ -1,5 +1,7 @@
 <template>
-  <div class="footer">footer</div>
+  <div class="footer">
+    <ConnectionIndicator/>
+  </div>
 </template>
 
 <script>
@@ -11,6 +13,7 @@ export default {
 <style >
   .footer {
     @apply p-2;
-    border: 1px solid black;
+    display: flex;
+    justify-content: flex-end;
   }
 </style>
