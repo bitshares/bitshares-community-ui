@@ -1,7 +1,9 @@
 <template>
-  <div class="tabs">
+  <div >
     <div class="tabs-header">
-      <ul :class="centered === true ? 'center' : ''">
+      <ul
+        :class="centered === true ? 'center' : ''"
+        class="tabs" >
         <li
           v-for="(tab, key) in tabs"
           :key="key">
@@ -49,12 +51,13 @@ export default {
 }
 
 .tabs-header ul {
+  display: flex;
   list-style-type: none;
+  padding: 0;
 }
 
 .center {
-  display: flex;
-  padding: 0
+  justify-content: center;
 }
 
 .tabs-header span {
