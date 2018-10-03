@@ -186,6 +186,7 @@ export default {
 .input__title.input_hascontent,
 .input__input:focus + .input__title {
   @apply text-xxs;
+  color: config('colors.input-title-active');
   top: 5px;
   opacity: 0.8;
 }

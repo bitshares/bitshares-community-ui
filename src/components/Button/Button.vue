@@ -71,7 +71,7 @@ export default {
 
 <style lang="scss">
 .btn {
-  @apply font-bold py-4 px-4 text-lg;
+  @apply py-4 px-4 text-lg font-gotham-medium;
   color: config('colors.button-text');
   background-color: config('colors.button-bg');
   text-transform: uppercase;

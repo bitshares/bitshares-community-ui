@@ -3,7 +3,7 @@
     <div class="login h-full sm:h-auto">
       <div class="login__title">Login</div>
       <!-- tabs will go here to switch between this and brainkey/lockfile login -->
-      <div class="login__form">
+      <!-- <div class="login__form">
         <VInput
           v-model.trim="name"
           :autofocus="true"
@@ -18,15 +18,10 @@
           title="password"
           @input="$v.password.$touch()"
         />
-        <Button
-          :disabled="loginDisabled"
-          class="login__btn"
-          width="full"
-          text="log in"
-          @click="handleLogin"/>
+        
 
-      </div>
-      <!-- <div class="login__brainkey">
+      </div> -->
+      <div class="login__brainkey">
         <VInput
           v-model.trim="brainkey"
           :autofocus="true"
@@ -50,8 +45,15 @@
           title="confirm pin"
           @input="$v.confirmPin.$touch()"
         />
+        <Button
+          :disabled="loginDisabled"
+          :loading="inProgress"
+          class="login__btn"
+          width="full"
+          text="log in"
+          @click="handleLogin"/>
 
-      </div> -->
+      </div>
       <div class="login__footer">
         <router-link :to="{ name: 'login' }">Sign up with new account</router-link>
       </div>
@@ -90,7 +92,7 @@ export default {
       pin: '',
       confirmPin: '',
       inProgress: false,
-      type: 'cloud'
+      type: 'brainkey'
     }
   },
   computed: {
@@ -118,16 +120,15 @@ export default {
   },
   methods: {
     ...mapActions({
-      login: 'acc/cloudLogin',
+      cloudLogin: 'acc/cloudLogin',
       brainkeyLogin: 'acc/brainkeyLogin'
     }),
     async handleLogin() {
       this.$v.$touch()
       if (this.$v.$invalid) return
       this.inProgress = true
-
       if (this.type === 'cloud') {
-        const { error } = await this.login({
+        const { error } = await this.cloudLogin({
           name: this.name,
           password: this.password
         })
@@ -158,7 +159,7 @@ export default {
     flex-shrink: 0;
     background-color: black;
     &__title {
-      @apply pt-5 pb-4 text-lg;
+      @apply pt-5 pb-4 text-lg font-gotham-medium;
       color: config('colors.text-primary');
       text-align: center;
       text-transform: uppercase;

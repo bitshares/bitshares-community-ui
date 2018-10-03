@@ -127,13 +127,14 @@ let colors = {
   'pink-lightest': '#ffebef',
 
   'text-primary': 'white',
-  'text-error': 'yellow',
+  'text-error': '#fff200',
   'button-text': 'black',
   'button-text-disabled': '#7f7f7f',
   'button-bg': 'white',
   'button-bg-hover': 'gray',
   'button-bg-disabled': 'white',
   'input-border': 'white',
+  'input-title-active': '#7a7675',
   'bg-base': '#3d4852'
 }
 
