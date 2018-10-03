@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style >
+<style>
   .header {
     @apply p-2;
     border: 1px solid black;
