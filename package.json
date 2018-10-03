@@ -21,7 +21,7 @@
     "vue-router": "^3.0.1",
     "vuelidate": "^0.7.4",
     "vuex": "^3.0.1",
-    "vuex-bitshares": "^0.2.4"
+    "vuex-bitshares": "file:vuex-bitshares"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.3",
