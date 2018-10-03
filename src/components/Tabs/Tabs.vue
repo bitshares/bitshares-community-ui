@@ -6,8 +6,8 @@
           v-for="(tab, key) in tabs"
           :key="key">
           <span
-            :class="activeTab === tab ? 'active' : ''"
-            @click="activeTab = tab"
+            :class="tabs[activeTabIndex] === tab ? 'active' : ''"
+            @click="activeTabIndex = key"
           >
             {{ tab }}
           </span>
@@ -16,7 +16,7 @@
     </div>
     <div class="tab-content">
       <slot
-        :name="activeTab" />
+        :name="tabs[activeTabIndex]" />
     </div>
   </div>
 </template>
@@ -35,16 +35,13 @@ export default {
   },
   data() {
     return {
-      activeTab: this.tabs[0]
+      activeTabIndex: 0
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-* {
-  box-sizing: border-box;
-}
 
 /* Style the tabs */
 .tabs-header {
@@ -56,16 +53,8 @@ export default {
 }
 
 .center {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap:nowrap;
-  text-align:center;
-  margin-left:-40px;
+  padding: 0
 }
 
 .tabs-header span {
