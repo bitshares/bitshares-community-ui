@@ -2,7 +2,9 @@
   <div class="login-container sm:pt-32 sm:items-start">
     <div class="login h-full sm:h-auto">
       <div class="login__title">Login</div>
-      <Tabs :tabs="['password', 'private key']" @change="changeLoginType">
+      <Tabs
+        :tabs="['password', 'private key']"
+        @change="changeLoginType">
         <div
           slot="password"
           class="login__form">

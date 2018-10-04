@@ -1,6 +1,8 @@
 <template>
   <div class="tabs">
-    <div class="tabs-header" :class="{'tab-hader--centered': centered}">
+    <div
+      :class="{'tab-hader--centered': centered}"
+      class="tabs-header">
       <div
         v-for="(tab, index) in tabs"
         :key="index"
@@ -33,15 +35,15 @@ export default {
       activeTabIndex: 0
     }
   },
+  computed: {
+    tabWidth() {
+      return 100 / this.tabs.length
+    }
+  },
   methods: {
     handleTabClick(index) {
       this.activeTabIndex = index
       this.$emit('change', this.tabs[index])
-    }
-  },
-  computed: {
-    tabWidth() {
-      return 100 / this.tabs.length
     }
   }
 }
