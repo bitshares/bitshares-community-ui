@@ -137,7 +137,7 @@ let colors = {
   'input-title-active': '#7a7675',
   'bg-base': '#3d4852',
   'tab-header': '#7a7675',
-  'tab-hover': '#606f7b',
+  'tab-hover': 'rgba(255, 255, 255, 0.6)',
   'tab-active': '#ffffff'
 }
 

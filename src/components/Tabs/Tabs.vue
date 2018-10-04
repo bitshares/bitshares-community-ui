@@ -70,6 +70,7 @@ export default {
   color: config('colors.tab-header');
   border-bottom: 3px solid config('colors.tab-header');
   text-align: center;
+  transition: color 0.2s, border-color 0.2s;
   &--active {
     @apply cursor-default;
     color: config('colors.tab-active')!important;
