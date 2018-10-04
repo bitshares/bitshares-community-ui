@@ -135,7 +135,10 @@ let colors = {
   'button-bg-disabled': 'white',
   'input-border': 'white',
   'input-title-active': '#7a7675',
-  'bg-base': '#3d4852'
+  'bg-base': '#3d4852',
+  'tab-header': '#7a7675',
+  'tab-hover': '#606f7b',
+  'tab-active': '#ffffff'
 }
 
 module.exports = {

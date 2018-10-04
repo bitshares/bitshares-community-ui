@@ -1,58 +1,66 @@
 <template>
-  <div class="login-container">
+  <div class="login-container sm:pt-32 sm:items-start">
     <div class="login h-full sm:h-auto">
       <div class="login__title">Login</div>
-      <!-- tabs will go here to switch between this and brainkey/lockfile login -->
-      <!-- <div class="login__form">
-        <VInput
-          v-model.trim="name"
-          :autofocus="true"
-          :error="nameErrorMsg"
-          title="account name"
-          @input="$v.name.$touch()"
-        />
-        <VInput
-          v-model.trim="password"
-          :error="passwordErrorMsg"
-          type="password"
-          title="password"
-          @input="$v.password.$touch()"
-        />
+      <Tabs :tabs="['password', 'private key']" @change="changeLoginType">
+        <div
+          slot="password"
+          class="login__form">
+          <VInput
+            v-model.trim="name"
+            :autofocus="true"
+            :error="nameErrorMsg"
+            title="account name"
+            @input="$v.name.$touch"
+          />
+          <VInput
+            v-model.trim="password"
+            :error="passwordErrorMsg"
+            type="password"
+            title="password"
+            @input="$v.password.$touch"
+          />
 
-      </div> -->
-      <div class="login__brainkey">
-        <VInput
-          v-model.trim="brainkey"
-          :autofocus="true"
-          :error="brainkeyErrorMsg"
-          tip="Enter 16 words backed up when account was created"
-          title="backup phrase"
-          @input="$v.brainkey.$touch()"
-        />
+        </div>
+        <div
+          slot="private key"
+          class="login__form">
+          <VInput
+            v-model.trim="brainkey"
+            :autofocus="true"
+            :error="brainkeyErrorMsg"
+            tip="Enter 16 words backed up when account was created"
+            title="backup phrase"
+            @input="$v.brainkey.$touch"
+          />
 
-        <VInput
-          v-model.trim="pin"
-          :error="pinErrorMsg"
-          tip="PIN code encrypts the private key, stored on this device"
-          title="create pin code"
-          @input="$v.pin.$touch()"
-        />
+          <VInput
+            v-model.trim="pin"
+            :error="pinErrorMsg"
+            tip="PIN code encrypts the private key, stored on this device"
+            title="create pin code"
+            @input="$v.pin.$touch"
+          />
 
-        <VInput
-          v-model.trim="confirmPin"
-          :error="confirmPinErrorMsg"
-          title="confirm pin"
-          @input="$v.confirmPin.$touch()"
-        />
+          <VInput
+            v-model.trim="confirmPin"
+            :error="confirmPinErrorMsg"
+            title="confirm pin"
+            @input="$v.confirmPin.$touch"
+          />
+        </div>
+      </Tabs>
+      <div class="login__form">
         <Button
           :disabled="loginDisabled"
           :loading="inProgress"
           class="login__btn"
           width="full"
           text="log in"
-          @click="handleLogin"/>
-
+          @click="handleLogin"
+        />
       </div>
+
       <div class="login__footer">
         <router-link :to="{ name: 'login' }">Sign up with new account</router-link>
       </div>
@@ -63,21 +71,27 @@
 <script>
 import VInput from '@/components/Input/'
 import Button from '@/components/Button/'
+import Tabs from '@/components/Tabs/'
 import { validationMixin } from 'vuelidate'
 import { required, minLength, sameAs } from 'vuelidate/lib/validators'
 import { mapActions } from 'vuex'
 
 export default {
   name: 'Login',
-  components: { VInput, Button },
+  components: { VInput, Button, Tabs },
   mixins: [validationMixin],
   validations() {
-    return this.type === 'cloud'
+    return this.type === 'password'
       ? {
         name: { required },
-        password: { required }
+        password: { required },
+        brainkey: {},
+        pin: {},
+        confirmPin: {}
       }
       : {
+        name: {},
+        password: {},
         brainkey: { required },
         pin: { required, minLength: minLength(6) },
         confirmPin: { sameAsPin: sameAs('pin') }
@@ -91,25 +105,30 @@ export default {
       pin: '',
       confirmPin: '',
       inProgress: false,
-      type: 'brainkey'
+      type: 'password'
     }
   },
   computed: {
     nameErrorMsg() {
+      if (!this.$v.name) return
       return (!this.$v.name.required && this.$v.name.$dirty) ? 'Enter username' : ''
     },
     passwordErrorMsg() {
+      if (!this.$v.password) return
       return (!this.$v.password.required && this.$v.password.$dirty) ? 'Enter password' : ''
     },
     brainkeyErrorMsg() {
+      if (!this.$v.brainkey) return
       return (!this.$v.brainkey.required && this.$v.brainkey.$dirty) ? 'Enter backup phrase' : ''
     },
     pinErrorMsg() {
+      if (!this.$v.pin) return
       if (!this.$v.pin.$dirty) return ''
       if (!this.$v.pin.required) return 'Enter PIN'
       if (!this.$v.pin.minLength) return 'PIN must be 6 characters or more'
     },
     confirmPinErrorMsg() {
+      if (!this.$v.confirmPin) return
       if (!this.$v.confirmPin.$dirty) return ''
       if (!this.$v.confirmPin.sameAsPin) return 'PIN codes do not match'
     },
@@ -126,7 +145,7 @@ export default {
       this.$v.$touch()
       if (this.$v.$invalid) return
       this.inProgress = true
-      if (this.type === 'cloud') {
+      if (this.type === 'password') {
         const { error } = await this.cloudLogin({
           name: this.name,
           password: this.password
@@ -140,6 +159,9 @@ export default {
         if (!error) this.$router.push({ name: 'main' })
       }
       this.inProgress = false
+    },
+    changeLoginType(type) {
+      this.type = type
     }
   }
 }
@@ -149,13 +171,12 @@ export default {
   .login-container {
     height: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
   }
   .login {
     @apply max-w-sm w-full shadow-md;
     border-radius: 2px;
-    flex-shrink: 0;
+    // flex-shrink: 0;
     background-color: black;
     &__title {
       @apply pt-5 pb-4 text-lg font-gotham-medium;
@@ -163,12 +184,11 @@ export default {
       text-align: center;
       text-transform: uppercase;
     }
-    &__form,
-    &__brainkey {
-      @apply p-card;
+    &__form {
+      @apply p-card pb-0;
     }
     &__btn {
-      @apply mt-2;
+      @apply mb-2;
     }
     &__footer {
       text-align: center;
