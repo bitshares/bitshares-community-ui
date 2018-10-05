@@ -3,7 +3,9 @@
     :class="{
       'card-dark': theme === 'dark',
       'card-light': theme === 'light'
-  }">
+    }"
+    class="card-main"
+  >
     <div class="title">
       {{ title }}
     </div>
@@ -34,16 +36,11 @@ export default {
 
 <style scoped lang="scss">
 
-hr {
-}
 .title {
-  text-align:center;
   font-size: 18px;
 }
 
-.card-header {
-  text-align: center;
-}
+.card-header {}
 
 .card-dark {
   background-color: config('colors.card-background-dark');
@@ -55,5 +52,7 @@ hr {
   color: config('colors.card-background-dark');
 }
 
-.card-body{}
+.card-main{
+  text-align: center;
+}
 </style>

@@ -4,7 +4,7 @@
     <div>
       <Card
         :title="'Test title'"
-        :theme="'light'">
+        :theme="'dark'">
         <div slot="header">Special Features</div>
         <div slot="body">
           <h5>Fish and Chips</h5>
