@@ -2,6 +2,17 @@
   <div class="components">
     This is an components page
     <div>
+      <Card
+        :title="'Test title'"
+        :theme="'light'">
+        <div slot="header">Special Features</div>
+        <div slot="body">
+          <h5>Fish and Chips</h5>
+          <p>Super delicious tbh.</p>
+        </div>
+      </Card>
+    </div>
+    <div>
       <Button
         text="button test"
         size="small"
@@ -36,10 +47,11 @@
 <script>
 import Button from '@/components/Button/'
 import VInput from '@/components/Input/'
+import Card from '@/components/Card'
 
 export default {
   name: 'Components',
-  components: { Button, VInput },
+  components: { Button, VInput, Card },
   data() {
     return {
       testString: '',
