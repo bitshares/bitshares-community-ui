@@ -1,8 +1,8 @@
 <template>
   <div
     :class="{
-      'input--hasicon': icon,
-      'input--haserror': error,
+      'input--has-icon': icon,
+      'input--has-error': error,
       'input--disabled': disabled
     }"
     class="input">
@@ -22,7 +22,7 @@
 
     <!-- floating title = placeholder -->
     <span
-      :class="{input_hascontent: !!value }"
+      :class="{'input_has-content': !!value }"
       class="input__title">
       {{ title }}
     </span>
@@ -45,10 +45,14 @@
     </div>
 
     <!-- error message -->
-    <div
+    <!-- <div
       v-if="error"
       class="input__error">
       {{ error }}
+    </div> -->
+
+    <div class="input__error">
+      <slot name="error" />
     </div>
 
   </div>
@@ -85,8 +89,8 @@ export default {
       default: false
     },
     error: {
-      type: String,
-      default: ''
+      type: Boolean,
+      default: false
     },
     tip: {
       type: String,
@@ -127,11 +131,11 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 
 .input {
   position: relative;
-  @apply pt-3 pb-4 mb-2;
+  @apply pt-3 pb-4;
 }
 
 .input__icon {
@@ -146,6 +150,7 @@ export default {
   @apply pt-1 px-0 pb-0;
   color: config('colors.text-primary');
   width: 100%;
+  border-radius: 0;
   background-color: transparent;
   border: none;
   border-bottom: 1px solid config('colors.input-border');
@@ -165,10 +170,10 @@ export default {
     letter-spacing: 0.3px;
   }
 }
-.input--hasicon .input__input {
+.input--has-icon .input__input {
   @apply pr-8;
 }
-.input--haserror .input__input {
+.input--has-error .input__input {
   border-color: config('colors.text-error');
 }
 .input__title {
@@ -183,7 +188,7 @@ export default {
   user-select: none;
 }
 
-.input__title.input_hascontent,
+.input__title.input_has-content,
 .input__input:focus + .input__title {
   @apply text-xxs;
   color: config('colors.input-title-active');
@@ -191,19 +196,16 @@ export default {
   opacity: 0.8;
 }
 
-.input__error {
-  @apply text-xs;
+.input__error,
+.input__tip {
+  @apply text-xs -mt-3;
   position: absolute;
-  bottom: -1px;
+  top: 100%;
   left: 0;
   color: config('colors.text-error');
 }
 
 .input__tip {
-  @apply text-xs;
-  position: absolute;
-  bottom: -1px;
-  left: 0;
   color: config('colors.text-primary');
 }
 </style>

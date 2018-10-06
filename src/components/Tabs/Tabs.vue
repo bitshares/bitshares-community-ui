@@ -62,15 +62,12 @@ export default {
 }
 
 .tabs-header .tab {
-  @apply font-gotham text-base;
+  @apply font-gotham text-base py-3;
   @apply float-left cursor-pointer;
-  padding: 12px 24px;
-  transition: background-color 0.2s;
-  font-weight: bold;
   color: config('colors.tab-header');
   border-bottom: 3px solid config('colors.tab-header');
   text-align: center;
-  transition: color 0.2s, border-color 0.2s;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
   &--active {
     @apply cursor-default;
     color: config('colors.tab-active')!important;

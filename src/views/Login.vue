@@ -8,20 +8,32 @@
         <div
           slot="password"
           class="login__form">
+          
           <VInput
             v-model.trim="name"
             :autofocus="true"
-            :error="nameErrorMsg"
+            :error="$v.name.$dirty && $v.name.$invalid"
             title="account name"
+            class="mb-2"
             @input="$v.name.$touch"
-          />
+          >
+            <span slot="error" v-if="$v.name.$dirty">
+              <span v-show="!$v.name.required">Enter username</span>
+            </span>
+          </VInput>
+
           <VInput
             v-model.trim="password"
-            :error="passwordErrorMsg"
+            :error="$v.password.$dirty && $v.password.$invalid"
             type="password"
             title="password"
+            class="mb-2"
             @input="$v.password.$touch"
-          />
+          >
+            <span slot="error" v-if="$v.password.$dirty">
+              <span v-show="!$v.password.required">Enter password</span>
+            </span>
+          </VInput>
 
         </div>
         <div
@@ -30,26 +42,43 @@
           <VInput
             v-model.trim="brainkey"
             :autofocus="true"
-            :error="brainkeyErrorMsg"
+            :error="$v.brainkey.$dirty && $v.brainkey.$invalid"
+            class="mb-4"
             tip="Enter 16 words backed up when account was created"
             title="backup phrase"
             @input="$v.brainkey.$touch"
-          />
+          >
+            <span slot="error" v-if="$v.brainkey.$dirty">
+              <span v-show="!$v.brainkey.required">Enter backup phrase</span>
+            </span>
+          </VInput>
 
           <VInput
             v-model.trim="pin"
-            :error="pinErrorMsg"
+            :error="$v.pin.$dirty && $v.pin.$invalid"
+            class="mb-4"
+            type="password"
             tip="PIN code encrypts the private key, stored on this device"
             title="create pin code"
             @input="$v.pin.$touch"
-          />
+          >
+            <span slot="error" v-if="$v.pin.$dirty">
+              <span v-show="!$v.pin.required">Enter PIN</span>
+              <span v-show="!$v.pin.minLength">PIN must be 6 characters or more</span>
+            </span>
+          </VInput>
 
           <VInput
             v-model.trim="confirmPin"
-            :error="confirmPinErrorMsg"
+            :error="$v.confirmPin.$dirty && $v.confirmPin.$invalid"
+            type="password"
             title="confirm pin"
             @input="$v.confirmPin.$touch"
-          />
+          >
+            <span slot="error" v-if="$v.confirmPin.$dirty">
+              <span v-show="!$v.confirmPin.sameAsPin">PIN codes do not match</span>
+            </span>
+          </VInput>
         </div>
       </Tabs>
       <div class="login__form">
@@ -111,29 +140,6 @@ export default {
     }
   },
   computed: {
-    nameErrorMsg() {
-      if (!this.$v.name) return
-      return (!this.$v.name.required && this.$v.name.$dirty) ? 'Enter username' : ''
-    },
-    passwordErrorMsg() {
-      if (!this.$v.password) return
-      return (!this.$v.password.required && this.$v.password.$dirty) ? 'Enter password' : ''
-    },
-    brainkeyErrorMsg() {
-      if (!this.$v.brainkey) return
-      return (!this.$v.brainkey.required && this.$v.brainkey.$dirty) ? 'Enter backup phrase' : ''
-    },
-    pinErrorMsg() {
-      if (!this.$v.pin) return
-      if (!this.$v.pin.$dirty) return ''
-      if (!this.$v.pin.required) return 'Enter PIN'
-      if (!this.$v.pin.minLength) return 'PIN must be 6 characters or more'
-    },
-    confirmPinErrorMsg() {
-      if (!this.$v.confirmPin) return
-      if (!this.$v.confirmPin.$dirty) return ''
-      if (!this.$v.confirmPin.sameAsPin) return 'PIN codes do not match'
-    },
     loginDisabled() {
       return this.$v.$dirty && this.$v.$invalid
     }
