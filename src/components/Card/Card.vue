@@ -1,16 +1,11 @@
 <template>
   <div
-    :class="{
-      'card-dark': theme === 'dark',
-      'card-light': theme === 'light'
-    }"
-    class="card-main"
+    class="card"
   >
-    <div class="title">
-      {{ title }}
-    </div>
-    <hr>
     <div class="card-header">
+      <div class="title">
+        <h2> {{ title }} </h2>
+      </div>
       <slot name="header" />
     </div>
     <div class="card-body">
@@ -24,11 +19,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: () => ''
-    },
-    theme: {
-      type: String,
-      default: () => 'light'
+      default: ''
     }
   }
 }
@@ -37,22 +28,14 @@ export default {
 <style scoped lang="scss">
 
 .title {
-  font-size: 18px;
+  text-align: left;
+  padding: 5px;
 }
 
-.card-header {}
-
-.card-dark {
-  background-color: config('colors.card-background-dark');
-  color: config('colors.card-background-light');
-}
-
-.card-light {
-  background-color: config('colors.card-background-light');
-  color: config('colors.card-background-dark');
-}
-
-.card-main{
+.card {
+  background-color: config('colors.card-background');
+  color: config('colors.card-text');
   text-align: center;
 }
+
 </style>

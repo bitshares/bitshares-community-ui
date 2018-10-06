@@ -128,8 +128,8 @@ let colors = {
 
   'text-primary': 'black',
   'input-border': '#ced2d6',
-  'card-background-dark': 'black',
-  'card-background-light': 'white'
+  'card-background': 'black',
+  'card-text': 'white'
 }
 
 module.exports = {

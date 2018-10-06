@@ -44,7 +44,7 @@
 </template>
 
 <script>
-// import '@/assets/icons/'
+import '@/assets/icons/'
 
 export default {
   props: {
