@@ -45,12 +45,6 @@
     </div>
 
     <!-- error message -->
-    <!-- <div
-      v-if="error"
-      class="input__error">
-      {{ error }}
-    </div> -->
-
     <div class="input__error">
       <slot name="error" />
     </div>

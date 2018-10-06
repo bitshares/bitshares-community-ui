@@ -18,14 +18,6 @@ describe('Input.vue', () => {
     expect(wrapper.find('input').element.disabled).toBe(disabled)
   })
 
-  it('Props.error displays error', () => {
-    const error = 'error text'
-    const wrapper = shallowMount(Input, { propsData: { error }, localVue })
-
-    expect(wrapper.find('.input__error').isVisible()).toBe(true)
-    expect(wrapper.find('.input__error').html()).toMatch(error)
-  })
-
   it('Props.title displays title', () => {
     const title = 'test title'
     const wrapper = shallowMount(Input, { propsData: { title }, localVue })
