@@ -8,7 +8,7 @@
         <div
           slot="password"
           class="login__form">
-          
+
           <VInput
             v-model.trim="name"
             :autofocus="true"
@@ -17,7 +17,9 @@
             class="mb-2"
             @input="$v.name.$touch"
           >
-            <span slot="error" v-if="$v.name.$dirty">
+            <span
+              v-if="$v.name.$dirty"
+              slot="error">
               <span v-show="!$v.name.required">Enter username</span>
             </span>
           </VInput>
@@ -30,7 +32,9 @@
             class="mb-2"
             @input="$v.password.$touch"
           >
-            <span slot="error" v-if="$v.password.$dirty">
+            <span
+              v-if="$v.password.$dirty"
+              slot="error">
               <span v-show="!$v.password.required">Enter password</span>
             </span>
           </VInput>
@@ -48,7 +52,9 @@
             title="backup phrase"
             @input="$v.brainkey.$touch"
           >
-            <span slot="error" v-if="$v.brainkey.$dirty">
+            <span
+              v-if="$v.brainkey.$dirty"
+              slot="error">
               <span v-show="!$v.brainkey.required">Enter backup phrase</span>
             </span>
           </VInput>
@@ -62,7 +68,9 @@
             title="create pin code"
             @input="$v.pin.$touch"
           >
-            <span slot="error" v-if="$v.pin.$dirty">
+            <span
+              v-if="$v.pin.$dirty"
+              slot="error">
               <span v-show="!$v.pin.required">Enter PIN</span>
               <span v-show="!$v.pin.minLength">PIN must be 6 characters or more</span>
             </span>
@@ -75,7 +83,9 @@
             title="confirm pin"
             @input="$v.confirmPin.$touch"
           >
-            <span slot="error" v-if="$v.confirmPin.$dirty">
+            <span
+              v-if="$v.confirmPin.$dirty"
+              slot="error">
               <span v-show="!$v.confirmPin.sameAsPin">PIN codes do not match</span>
             </span>
           </VInput>
