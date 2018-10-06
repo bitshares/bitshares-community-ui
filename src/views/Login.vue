@@ -194,7 +194,6 @@ export default {
   .login {
     @apply max-w-sm w-full shadow-md;
     border-radius: 2px;
-    // flex-shrink: 0;
     background-color: black;
     &__title {
       @apply pt-5 pb-4 text-lg font-gotham-medium;
