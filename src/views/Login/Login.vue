@@ -12,7 +12,7 @@
           <VInput
             v-model.trim="name"
             :autofocus="true"
-            :error="$v.name.$dirty && $v.name.$invalid"
+            :error="loginError || $v.name.$dirty && $v.name.$invalid"
             title="account name"
             class="mb-2"
             @input="$v.name.$touch"
@@ -26,16 +26,17 @@
 
           <VInput
             v-model.trim="password"
-            :error="$v.password.$dirty && $v.password.$invalid"
+            :error="loginError || $v.password.$dirty && $v.password.$invalid"
             type="password"
             title="password"
             class="mb-2"
             @input="$v.password.$touch"
           >
             <span
-              v-if="$v.password.$dirty"
+              v-if="loginError || $v.password.$dirty"
               slot="error">
               <span v-show="!$v.password.required">Enter password</span>
+              <div v-show="loginError">Incorrect account name or password, please try again</div>
             </span>
           </VInput>
 
@@ -146,7 +147,8 @@ export default {
       pin: '',
       confirmPin: '',
       inProgress: false,
-      type: 'password'
+      type: 'password',
+      loginError: false
     }
   },
   computed: {
@@ -160,6 +162,7 @@ export default {
       brainkeyLogin: 'acc/brainkeyLogin'
     }),
     async handleLogin() {
+      this.loginError = false
       this.$v.$touch()
       if (this.$v.$invalid) return
       this.inProgress = true
@@ -168,17 +171,21 @@ export default {
           name: this.name,
           password: this.password
         })
-        if (!error) this.$router.push({ name: 'main' })
+        if (error) this.loginError = true
+        else this.$router.push({ name: 'main' })
       } else {
         const { error } = await this.brainkeyLogin({
           brainkey: this.brainkey.toLowerCase(),
           password: this.pin
         })
-        if (!error) this.$router.push({ name: 'main' })
+        if (error) this.loginError = true
+        else this.$router.push({ name: 'main' })
       }
       this.inProgress = false
     },
     changeLoginType(type) {
+      this.loginError = false
+      this.$v.$reset()
       this.type = type
       this.$nextTick(() => { this.$v.$reset() })
     }
