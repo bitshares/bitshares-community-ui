@@ -37,10 +37,13 @@ a {
     color: config('colors.text-primary');
 }
 
+/* prevent autocomplete background */
 input:-webkit-autofill, input:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0 30px black inset;
 }
 
+
+/* Notie toasts styles */
 .notie-container {
   @apply font-gotham;
   text-transform: uppercase;
@@ -49,7 +52,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
     background-color: rgba(26, 74, 16, 0.95);
 }
 .notie-background-error {
-    background-color: rgba(128, 29, 32, 0.95)!important;
+    background-color: rgba(128, 29, 32, 0.95);
 }
 .notie-background-warning {
     background-color: rgba(130, 106, 29, 0.95);
