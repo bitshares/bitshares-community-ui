@@ -23,5 +23,24 @@ A card without a title
       </Card>
 ```  
 
+A card component with two button components inside
+```js
+      <Card
+        :title="'Test title'">
+        <div slot="header">
+          <Button
+            text="button test"
+            size="medium"
+          />
+        </div>
+        <div slot="body">
+          <Button
+            text="button test"
+            size="big"
+          />
+        </div>
+      </Card>
+```
+
 
 

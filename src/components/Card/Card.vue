@@ -6,7 +6,9 @@
       <div class="title">
         <h2> {{ title }} </h2>
       </div>
-      <slot name="header" />
+      <slot
+        class="header"
+        name="header" />
     </div>
     <div class="card-body">
       <slot name="body" />
@@ -27,16 +29,24 @@ export default {
 
 <style scoped lang="scss">
 
-.title {
-  text-align: left;
-  padding: 5px;
-}
-
 .card {
   font-family: config('fonts.gotham-regular');
   background-color: config('colors.card-background');
   color: config('colors.card-text');
-  text-align: center;
+  padding:10px;
+}
+
+.card-header {
+  display:flex;
+  justify-content: space-between;
+}
+
+.title {
+  text-align: left;
+}
+
+.header {
+  margin-left: auto;
 }
 
 </style>

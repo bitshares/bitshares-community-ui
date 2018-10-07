@@ -4,10 +4,17 @@
     <div>
       <Card
         :title="'Test title'">
-        <div slot="header">Awesome card</div>
+        <div slot="header">
+          <Button
+            text="button test"
+            size="medium"
+          />
+        </div>
         <div slot="body">
-          <h5>Some great content</h5>
-          <p>Another great line of some content</p>
+          <Button
+            text="button test"
+            size="big"
+          />
         </div>
       </Card>
     </div>

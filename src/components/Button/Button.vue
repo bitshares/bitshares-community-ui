@@ -14,6 +14,7 @@
   >
     {{ text }} <Spinner
       v-if="loading"
+      class="spinner"
       size="small" />
   </button>
 </template>
@@ -70,6 +71,7 @@ export default {
 <style lang="scss">
 .btn {
   @apply font-bold py-2 px-4 rounded;
+  text-align: 'center';
 }
 .btn-blue {
   @apply bg-blue text-white;
@@ -84,10 +86,10 @@ export default {
   @apply pointer-events-none opacity-50 cursor-not-allowed;
 }
 .btn--small {
-  @apply py-1 pr-1 cursor-pointer text-xs;
+  @apply py-1 pr-4 cursor-pointer text-xs;
 }
 .btn--big {
-  @apply py-2 px-2 cursor-pointer text-2xl;
+  @apply py-2 px-6 cursor-pointer text-2xl;
 }
 .btn--loading {
   @apply pointer-events-none;
@@ -98,4 +100,8 @@ export default {
 .btn--round {
   @apply rounded;
 }
+.spinner {
+  margin-right: 10px;
+}
+
 </style>
