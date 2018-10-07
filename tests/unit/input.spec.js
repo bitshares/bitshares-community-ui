@@ -6,29 +6,21 @@ localVue.directive('restrict', {})
 describe('Input.vue', () => {
   it('Props.value set inputs value', () => {
     const value = 'Value placeholder'
-    const wrapper = shallowMount(Input, { propsData: { value }, localVue })
+    const wrapper = shallowMount(Input, { propsData: { value, errors: {}, inputName: 'userName' }, localVue })
 
     expect(wrapper.find('input').element.value).toMatch(value)
   })
 
   it('Props.disabled disables input', () => {
     const disabled = true
-    const wrapper = shallowMount(Input, { propsData: { disabled }, localVue })
+    const wrapper = shallowMount(Input, { propsData: { disabled, errors: {}, inputName: 'userName' }, localVue })
 
     expect(wrapper.find('input').element.disabled).toBe(disabled)
   })
 
-  it('Props.error displays error', () => {
-    const error = 'error text'
-    const wrapper = shallowMount(Input, { propsData: { error }, localVue })
-
-    expect(wrapper.find('.input__error').isVisible()).toBe(true)
-    expect(wrapper.find('.input__error').html()).toMatch(error)
-  })
-
   it('Props.title displays title', () => {
     const title = 'test title'
-    const wrapper = shallowMount(Input, { propsData: { title }, localVue })
+    const wrapper = shallowMount(Input, { propsData: { title, errors: {}, inputName: 'userName' }, localVue })
 
     expect(wrapper.find('.input__title').isVisible()).toBe(true)
     expect(wrapper.find('.input__title').html()).toMatch(title)

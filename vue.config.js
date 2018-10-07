@@ -4,7 +4,8 @@ module.exports = {
       alias: {
         '@icons': require('path').resolve(__dirname, 'src/assets/icons/')
       }
-    }
+    },
+    externals: ['crypto']
   },
   baseUrl: './'
 }

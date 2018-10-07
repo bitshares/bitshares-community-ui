@@ -1,25 +1,20 @@
 <template>
-  <div >
-    <div class="tabs-header">
-      <ul
-        :class="centered === true ? 'center' : ''"
-        class="tabs" >
-        <li
-          v-for="(tab, key) in tabs"
-          :key="key">
-          <span
-            :class="tabs[activeTabIndex] === tab ? 'active' : ''"
-            @click="activeTabIndex = key"
-          >
-            {{ tab }}
-          </span>
-        </li>
-      </ul>
+  <div class="tabs">
+    <div
+      :class="{'tab-hader--centered': centered}"
+      class="tabs-header">
+      <div
+        v-for="(tab, index) in tabs"
+        :key="index"
+        :style="{ width: tabWidth + '%' }"
+        :class="activeTabIndex === index ? 'tab--active' : ''"
+        class="tab"
+        @click="handleTabClick(index)"
+      >
+        {{ tab }}
+      </div>
     </div>
-    <div class="tab-content">
-      <slot
-        :name="tabs[activeTabIndex]" />
-    </div>
+    <slot :name="tabs[activeTabIndex]" />
   </div>
 </template>
 
@@ -39,52 +34,48 @@ export default {
     return {
       activeTabIndex: 0
     }
+  },
+  computed: {
+    tabWidth() {
+      return 100 / this.tabs.length
+    }
+  },
+  methods: {
+    handleTabClick(index) {
+      this.activeTabIndex = index
+      this.$emit('change', this.tabs[index])
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 
-/* Style the tabs */
 .tabs-header {
-  overflow: hidden;
-}
-
-.tabs-header ul {
   display: flex;
   list-style-type: none;
   padding: 0;
+  text-transform: uppercase;
+  &--centered {
+    justify-content: center;
+  }
 }
 
-.center {
-  justify-content: center;
-}
-
-.tabs-header span {
+.tabs-header .tab {
+  @apply font-gotham text-base py-3;
   @apply float-left cursor-pointer;
-  padding: 12px 24px;
-  transition: background-color 0.2s;
-  font-weight: bold;
   color: config('colors.tab-header');
-  border-bottom: 2px solid config('colors.tab-header');
-}
-
-/* Change background color of tabs on hover */
-.tabs-header span:hover {
+  border-bottom: 3px solid config('colors.tab-header');
+  text-align: center;
+  transition: color 0.2s, border-color 0.2s;
+  &--active {
+    @apply cursor-default;
+    color: config('colors.tab-active')!important;
+    border-bottom-color: config('colors.tab-active')!important;
+  }
+  &:hover {
     color:config('colors.tab-hover');;
-    border-bottom: 2px solid config('colors.tab-hover');
-}
-
-/* Styling for active tab */
-.tabs-header span.active {
-  @apply cursor-default;
-  color: config('colors.tab-active');
-  border-bottom: 2px solid config('colors.tab-active');
-}
-
-/* Style the tab content */
-.tab-content {
-  padding: 30px 30px 30px 30px;
-  color: config('colors.tab-content');
+    border-bottom-color: config('colors.tab-hover');
+  }
 }
 </style>

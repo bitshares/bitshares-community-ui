@@ -1,7 +1,8 @@
 <template>
   <div
     id="app"
-    class="app container mx-auto">
+    class="app container mx-auto"
+  >
     <router-view/>
   </div>
 </template>
@@ -12,6 +13,7 @@
 html,
 body {
   @apply h-full;
+  background-color: config('colors.bg-base');
 }
 
 .app {
