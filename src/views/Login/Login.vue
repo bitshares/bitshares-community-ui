@@ -12,15 +12,15 @@
 
           <VInput
             v-model.trim="name"
-            input-name="userName"
             :errors="$v.name"
+            input-name="userName"
             class="mb-2"
           />
 
           <VInput
             v-model.trim="password"
-            input-name="password"
             :errors="$v.password"
+            input-name="password"
             type="password"
             class="mb-2"
           />
@@ -30,24 +30,24 @@
           slot="private key"
           class="login__form">
           <VInput
-            input-name="brainkey"
             v-model.trim="brainkey"
             :errors="$v.brainkey"
+            input-name="brainkey"
             class="mb-4"
           />
 
           <VInput
-            input-name="pin"
             v-model.trim="pin"
             :errors="$v.pin"
+            input-name="pin"
             class="mb-4"
             type="number"
           />
 
           <VInput
-            input-name="confirmPin"
             v-model.trim="confirmPin"
             :errors="$v.confirmPin"
+            input-name="confirmPin"
             type="number"
           />
         </div>

@@ -47,9 +47,11 @@
     </div>
 
     <!-- error message -->
-    <div class="input__error" v-if="hasError">
-      <div 
-        v-for="(param, index) in validationParams" 
+    <div
+      v-if="hasError"
+      class="input__error">
+      <div
+        v-for="(param, index) in validationParams"
         :key="index"
       >
         <div v-if="!errors[param]">{{ validationMessages[param] }} </div>
