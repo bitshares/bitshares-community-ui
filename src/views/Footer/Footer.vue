@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ConnectionIndicator from '@/views/ConnectionIndicator'
+import ConnectionIndicator from './FooterConnectionIndicator'
 
 export default {
   name: 'Footer',

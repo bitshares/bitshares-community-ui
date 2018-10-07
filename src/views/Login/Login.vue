@@ -180,6 +180,7 @@ export default {
     },
     changeLoginType(type) {
       this.type = type
+      this.$nextTick(() => { this.$v.$reset() })
     }
   }
 }

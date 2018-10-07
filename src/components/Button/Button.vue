@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import Spinner from '../Spinner/Spinner.vue'
+import Spinner from '@/components/Spinner/Spinner.vue'
 
 export default {
   name: 'Button',

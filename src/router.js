@@ -24,7 +24,7 @@ const router = new Router({
     {
       path: '/login',
       name: 'login',
-      component: () => import(/* webpackChunkName: "auth" */ './views/Login.vue'),
+      component: () => import(/* webpackChunkName: "auth" */ './views/Login/Login.vue'),
       meta: {
         noAuth: true
       }

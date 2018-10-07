@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import UserInfo from './UserInfo'
+import UserInfo from './HeaderUserInfo'
 
 export default {
   name: 'Header',

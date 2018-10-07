@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import Header from './Header.vue'
-import Footer from './Footer.vue'
+import Footer from '@/views/Footer/Footer.vue'
+import Header from '@/views/Header/Header.vue'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
