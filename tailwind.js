@@ -126,10 +126,10 @@ let colors = {
   'pink-lighter': '#ffbbca',
   'pink-lightest': '#ffebef',
 
-  'text-primary': 'black',
+  'text-primary': '#000000',
   'input-border': '#ced2d6',
-  'card-background': 'black',
-  'card-text': 'white'
+  'card-background': '#000000',
+  'card-text': '#ffffff'
 }
 
 module.exports = {

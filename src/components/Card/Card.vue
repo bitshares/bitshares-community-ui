@@ -30,7 +30,7 @@ export default {
 .title {
   text-align: left;
   padding: 5px;
-  font-weight: 500;
+  font-weight: config('fontWeights.medium');
 }
 
 .card {
