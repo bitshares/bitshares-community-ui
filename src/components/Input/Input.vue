@@ -144,7 +144,7 @@ export default {
   },
   methods: {
     handleInput({ target: { value } }) {
-      const newValue = this.isNumber ? (parseInt(value) || null) : value
+      const newValue = this.isNumber ? (parseInt(value) || '') : value
       this.errors.$touch()
       this.$emit('input', newValue + '')
     },
