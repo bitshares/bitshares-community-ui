@@ -1,27 +1,27 @@
 Examples:
- 
- Dark Card
+
+A card with a title
 ```js
       <Card
-        :title="'Test title'"
-        :theme="'dark'">
-        <div slot="header">Special Features</div>
+        :title="'Test title'">
+        <div slot="header">Awesome features</div>
         <div slot="body">
-          <h5>Fish and Chips</h5>
-          <p>Super delicious tbh.</p>
+          <h5>Smth</h5>
+          <p>Lots of components.</p>
         </div>
       </Card>
 ```  
 
- Light Card
+A card without a title
 ```js
-      <Card
-        :title="'Test title'"
-        :theme="'light'">
-        <div slot="header">Special Features</div>
+      <Card>
+        <div slot="header">Awesome features</div>
         <div slot="body">
-          <h5>Fish and Chips</h5>
-          <p>Super delicious tbh.</p>
+          <h5>Smth</h5>
+          <p>Lots of components.</p>
         </div>
       </Card>
 ```  
+
+
+

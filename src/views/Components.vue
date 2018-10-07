@@ -3,12 +3,11 @@
     This is an components page
     <div>
       <Card
-        :title="'Test title'"
-        :theme="'dark'">
-        <div slot="header">Special Features</div>
+        :title="'Test title'">
+        <div slot="header">Awesome card</div>
         <div slot="body">
-          <h5>Fish and Chips</h5>
-          <p>Super delicious tbh.</p>
+          <h5>Some great content</h5>
+          <p>Another great line of some content</p>
         </div>
       </Card>
     </div>
