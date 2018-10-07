@@ -14,6 +14,7 @@
       :disabled="disabled"
       :type="inputType"
       class="input__input"
+      spellcheck="false"
       @paste="handlePaste"
       @input="handleInput"
       @blur="handleBlur"
@@ -100,7 +101,11 @@ export default {
     }
   },
   mounted() {
-    if (this.autofocus) this.$refs.input.focus()
+    if (this.autofocus) {
+      this.$nextTick(() => {
+        this.$refs.input.focus()
+      })
+    }
   },
   methods: {
     handleInput({ target: { value } }) {
