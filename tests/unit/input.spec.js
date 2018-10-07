@@ -1,9 +1,7 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Input from '@/components/Input/Input.vue'
-import Vuelidate from 'vuelidate'
 const localVue = createLocalVue()
 localVue.directive('restrict', {})
-localVue.use(Vuelidate)
 
 describe('Input.vue', () => {
   it('Props.value set inputs value', () => {
