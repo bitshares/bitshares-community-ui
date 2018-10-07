@@ -2,7 +2,7 @@
   <div
     :class="{
       'input--has-icon': icon,
-      'input--has-error': error,
+      'input--has-error': hasError,
       'input--disabled': disabled
     }"
     class="input">
@@ -13,11 +13,9 @@
       :value="value"
       :disabled="disabled"
       :type="inputType"
-      autocomplete="off"
       autocorrect="off"
       spellcheck="off"
       class="input__input"
-      spellcheck="false"
       @paste="handlePaste"
       @input="handleInput"
       @blur="handleBlur"
@@ -28,7 +26,7 @@
     <span
       :class="{'input_has-content': !!value }"
       class="input__title">
-      {{ title }}
+      {{ titleText }}
     </span>
 
     <svgicon
@@ -43,14 +41,19 @@
 
     <!-- tip message -->
     <div
-      v-if="tip && !error"
+      v-if="tipText && !hasError"
       class="input__tip">
-      {{ tip }}
+      {{ tipText }}
     </div>
 
     <!-- error message -->
-    <div class="input__error">
-      <slot name="error" />
+    <div class="input__error" v-if="hasError">
+      <div 
+        v-for="(param, index) in validationParams" 
+        :key="index"
+      >
+        <div v-if="!errors[param]">{{ validationMessages[param] }} </div>
+      </div>
     </div>
 
   </div>
@@ -58,9 +61,14 @@
 
 <script>
 import '@/assets/icons/'
+import messages from '@/helpers/inputMessages.js'
 
 export default {
   props: {
+    inputName: {
+      type: String,
+      required: true
+    },
     type: {
       type: String,
       default: 'text'
@@ -71,6 +79,7 @@ export default {
     },
     title: {
       type: String,
+      required: false,
       default: ''
     },
     disabled: {
@@ -86,21 +95,42 @@ export default {
       type: Boolean,
       default: false
     },
-    error: {
-      type: Boolean,
-      default: false
-    },
     tip: {
       type: String,
       default: ''
+    },
+    // vuelidate validation object
+    errors: {
+      type: Object,
+      required: true
     }
   },
   computed: {
     inputType() {
-      return this.type === 'password' ? this.type : 'text'
+      if (this.type === 'password') return this.type
+      if (this.type === 'number') return 'tel'
+      return 'text'
     },
     isNumber() {
       return this.type === 'number'
+    },
+    validationParams() {
+      return Object.keys(this.errors.$params)
+    },
+    inputMessages() {
+      return messages[this.inputName]
+    },
+    titleText() {
+      return this.title || this.inputMessages.title
+    },
+    tipText() {
+      return this.tip || this.inputMessages.tip
+    },
+    validationMessages() {
+      return this.inputMessages.validation
+    },
+    hasError() {
+      return this.errors.$dirty && this.errors.$invalid
     }
   },
   mounted() {
@@ -113,7 +143,8 @@ export default {
   methods: {
     handleInput({ target: { value } }) {
       const newValue = this.isNumber ? (parseInt(value) || null) : value
-      this.$emit('input', newValue)
+      this.errors.$touch()
+      this.$emit('input', newValue + '')
     },
     // prevent pasting non-numbers if this is a number input
     handlePaste(event) {
@@ -121,7 +152,7 @@ export default {
       event.preventDefault()
       const text = event.clipboardData.getData('text')
       const number = this.value + (parseInt(text) || null)
-      this.$emit('input', number)
+      this.$emit('input', number + '')
     },
     handleBlur() {
       this.$emit('blur', this.$refs.input.value)
@@ -166,6 +197,9 @@ export default {
   &:focus {
     outline: 0 !important;
     border-color: config('colors.text-primary');
+  }
+  &[type=tel] {
+    -webkit-text-security: disc;
   }
   .title {
     color: #a0a6ad;

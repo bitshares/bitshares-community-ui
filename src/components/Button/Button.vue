@@ -12,21 +12,23 @@
     class="btn btn-blue"
     @click="$emit('click')"
   >
-    {{ text }}
-    <Spinner
+    <Loader
       v-if="loading"
-      size="small"
+      color="black"
     />
+    <span v-else>
+      {{ text }}
+    </span>
   </button>
 </template>
 
 <script>
-import Spinner from '@/components/Spinner/Spinner.vue'
+import Loader from '@/components/Loader/'
 
 export default {
   name: 'Button',
   components: {
-    Spinner
+    Loader
   },
   props: {
     /** Sets button text
@@ -75,6 +77,10 @@ export default {
   color: config('colors.button-text');
   background-color: config('colors.button-bg');
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 51px;
   transition: background-color 0.2s, opacity 0.2s;
   &:hover {
     background-color: config('colors.button-bg-hover');
@@ -84,8 +90,9 @@ export default {
   }
 }
 .btn--disabled {
-  @apply pointer-events-none opacity-40;
+  @apply pointer-events-none;
   color: config('colors.button-text-disabled');
+  background-color: config('colors.button-bg-disabled');
 }
 .btn--small {
   @apply py-1 pr-1 cursor-pointer text-xs;
@@ -95,6 +102,7 @@ export default {
 }
 .btn--loading {
   @apply pointer-events-none;
+  background-color: config('colors.button-bg-loading');
 }
 .btn--wide {
   @apply w-full;

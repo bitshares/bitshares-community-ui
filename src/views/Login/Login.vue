@@ -5,93 +5,54 @@
       <Tabs
         :tabs="['password', 'private key']"
         @change="changeLoginType">
+
         <div
           slot="password"
           class="login__form">
 
           <VInput
             v-model.trim="name"
-            :autofocus="true"
-            :error="loginError || $v.name.$dirty && $v.name.$invalid"
-            title="account name"
+            input-name="userName"
+            :errors="$v.name"
             class="mb-2"
-            @input="$v.name.$touch"
-          >
-            <span
-              v-if="$v.name.$dirty"
-              slot="error">
-              <span v-show="!$v.name.required">Enter username</span>
-            </span>
-          </VInput>
+          />
 
           <VInput
             v-model.trim="password"
-            :error="loginError || $v.password.$dirty && $v.password.$invalid"
+            input-name="password"
+            :errors="$v.password"
             type="password"
-            title="password"
             class="mb-2"
-            @input="$v.password.$touch"
-          >
-            <span
-              v-if="loginError || $v.password.$dirty"
-              slot="error">
-              <span v-show="!$v.password.required">Enter password</span>
-              <div v-show="loginError">Incorrect account name or password, please try again</div>
-            </span>
-          </VInput>
+          />
 
         </div>
         <div
           slot="private key"
           class="login__form">
           <VInput
+            input-name="brainkey"
             v-model.trim="brainkey"
-            :autofocus="true"
-            :error="$v.brainkey.$dirty && $v.brainkey.$invalid"
+            :errors="$v.brainkey"
             class="mb-4"
-            tip="Enter 16 words backed up when account was created"
-            title="backup phrase"
-            @input="$v.brainkey.$touch"
-          >
-            <span
-              v-if="$v.brainkey.$dirty"
-              slot="error">
-              <span v-show="!$v.brainkey.required">Enter backup phrase</span>
-            </span>
-          </VInput>
+          />
 
           <VInput
+            input-name="pin"
             v-model.trim="pin"
-            :error="$v.pin.$dirty && $v.pin.$invalid"
+            :errors="$v.pin"
             class="mb-4"
-            type="password"
-            tip="PIN code encrypts the private key, stored on this device"
-            title="create pin code"
-            @input="$v.pin.$touch"
-          >
-            <span
-              v-if="$v.pin.$dirty"
-              slot="error">
-              <span v-show="!$v.pin.required">Enter PIN</span>
-              <span v-show="!$v.pin.minLength">PIN must be 6 characters or more</span>
-            </span>
-          </VInput>
+            type="number"
+          />
 
           <VInput
+            input-name="confirmPin"
             v-model.trim="confirmPin"
-            :error="$v.confirmPin.$dirty && $v.confirmPin.$invalid"
-            type="password"
-            title="confirm pin"
-            @input="$v.confirmPin.$touch"
-          >
-            <span
-              v-if="$v.confirmPin.$dirty"
-              slot="error">
-              <span v-show="!$v.confirmPin.sameAsPin">PIN codes do not match</span>
-            </span>
-          </VInput>
+            :errors="$v.confirmPin"
+            type="number"
+          />
         </div>
       </Tabs>
+
       <div class="login__form">
         <Button
           :disabled="loginDisabled"
@@ -171,21 +132,20 @@ export default {
           name: this.name,
           password: this.password
         })
-        if (error) this.loginError = true
+        if (error) this.$toast.error('Invalid username or password')
         else this.$router.push({ name: 'main' })
       } else {
         const { error } = await this.brainkeyLogin({
           brainkey: this.brainkey.toLowerCase(),
           password: this.pin
         })
-        if (error) this.loginError = true
+        if (error) this.$toast.error('Invalid brainkey')
         else this.$router.push({ name: 'main' })
       }
       this.inProgress = false
     },
     changeLoginType(type) {
       this.loginError = false
-      this.$v.$reset()
       this.type = type
       this.$nextTick(() => { this.$v.$reset() })
     }
