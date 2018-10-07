@@ -30,9 +30,11 @@ export default {
 .title {
   text-align: left;
   padding: 5px;
+  font-weight: 500;
 }
 
 .card {
+  font-family: Gotham_Pro_Regular;
   background-color: config('colors.card-background');
   color: config('colors.card-text');
   text-align: center;
