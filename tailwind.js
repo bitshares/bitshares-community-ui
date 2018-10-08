@@ -646,7 +646,8 @@ module.exports = {
     '16': '4rem',
     '20': '5rem',
     '24': '6rem',
-    '32': '8rem'
+    '32': '8rem',
+    'card-ui': '11px'
   },
 
   /*
@@ -680,7 +681,8 @@ module.exports = {
     '16': '4rem',
     '20': '5rem',
     '24': '6rem',
-    '32': '8rem'
+    '32': '8rem',
+    'card-ui-header': '27px'
   },
 
   /*

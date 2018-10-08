@@ -4,7 +4,7 @@
   >
     <div class="card-header">
       <div class="title">
-        <h2> {{ upper(title) }} </h2>
+        <div> {{ upper(title) }} </div>
       </div>
       <slot
         class="header"
@@ -39,17 +39,18 @@ export default {
   font-family: config('fonts.gotham-regular');
   background-color: config('colors.card-background');
   color: config('colors.card-text');
-  padding:15px;
+  padding:config('padding.card-ui')
 }
 
 .card-header {
   display:flex;
   justify-content: space-between;
-  margin-bottom: 45px;
+  margin-bottom: config('margin.card-ui-header');
 }
 
 .title {
   text-align: left;
+  font-size: config('textSizes.base');
 }
 
 .header {
