@@ -49,6 +49,18 @@
         name="copy"/>
     </div>
 
+    <div class="source_box white_solid_border column_cell_middle_vert">
+      <div class="file_uploaded">
+        <svgicon
+          class="binfile_icon"
+          name="binfile"/>
+        <div class="file_name">{{ fileName }}</div>
+        <svgicon
+          class="cancel_icon"
+          name="cancel"/>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -79,7 +91,7 @@ export default {
   computed: {
     fileName() {
       return (
-        (this.file && this.file.name) || 'nope'
+        (this.file && this.file.name) || 'nope.bin'
       )
     }
   },
@@ -208,11 +220,10 @@ export default {
     background-color: #fff200;
   }
   .error_box {
-    display: flex;
     display: table;
     flex-direction: row;
   }
-  .two_line{
+  .two_line {
     display: table-cell;
     vertical-align: middle;
     padding-left: 52px;
@@ -231,70 +242,18 @@ export default {
     text-align: center;
     color: #fff200;
   }
- /* .box {
-    width: 347px;
-    height: 50px;
-    background-color: black;
-    border-color: #ffffff;
-    border-width: 1px;
+  .file_uploaded {
+    margin: auto;
+    display: flex;
     flex-direction: row;
-    display: flex;
-  }
-  .upload_box {
-    width: 347px;
-    height: 50px;
-    background-color: black;
-    border-color: #ffffff;
-    border-width: 1px;
-    flex-direction: column;
-    display: flex;
-  }
-
-  .middleText {
-    height: 14px;
-    padding-top: 12px;
-    font-size: 18px;
-    font-weight: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #ffffff;
-    color: white;
-  }
-  .icon {
-    color: white;
-  }
-  .icon_wrap {
-    float: right;
-  }
-  .two_line{
-    float: center;
-    display: flex;
-    flex-direction: column;
-    width: 283px;
-  }
-  .top_white_text {
-    height: 14px;
-    font-size: 18px;
-    margin-top: 11px;
-    text-align: center;
-    color: #ffffff;
-  }
-  .bottom_yellow_text {
-    height: 10px;
-    font-size: 11px;
-    padding-top: 5px;
-    text-align: center;
-    color: #fff200;
-  }
-
-  .donefilebox {
-    display: flex;
     justify-content: center;
-    padding-top: 18px;
+
   }
-  .fileIcon {
+  .column_cell_middle_vert {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  .binfile_icon {
     color: white;
     width: 14px;
     height: 17px;
@@ -305,40 +264,9 @@ export default {
     padding-left: 9px;
     padding-right: 4px;
   }
-  .cancelIcon {
+  .cancel_icon {
+    color: white;
     width: 16px;
     height: 16px;
   }
-
-  .progress {
-    width: 307px;
-    height: 4px;
-  }
-  .loading_texts {
-    padding-top: 12px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: flex-end;
-  }
-  .loading_bars {
-    padding-top: 35px;
-  }
-  .loading {
-    font-size: 11px;
-    color: #7a7675;
-    align-self: flex-end;
-    padding-left: 21px;
-  }
-  .middle_loading {
-    font-size: 18px;
-    color: #ffffff;
-    align-self: flex-end;
-  }
-  .percent_loading {
-    color: #7a7675;
-    font-size: 18px;
-    align-self: flex-end;
-    padding-right: 21px;
-  }*/
 </style>
