@@ -4,7 +4,7 @@
   >
     <div class="card-header">
       <div class="title">
-        <h2> {{ title }} </h2>
+        <h2> {{ upper(title) }} </h2>
       </div>
       <slot
         class="header"
@@ -22,6 +22,12 @@ export default {
     title: {
       type: String,
       default: ''
+    }
+  },
+  methods: {
+    upper(text) {
+      text = text.toUpperCase()
+      return text
     }
   }
 }
