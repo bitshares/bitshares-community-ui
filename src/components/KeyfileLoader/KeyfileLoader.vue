@@ -1,75 +1,18 @@
 <template>
   <div>
-    <!-- <div
-      v-if = "!file"
-      class="box"
-      @click="selectFile">
-      <p class="middleText">SELECT FILE</p>
-      <div class="icon_wrap">
-        <svgicon
-          class="icon"
-          name="copy"
-        />
-      </div>
-      <input
-        v-show="false"
-        ref="fileInput"
-        color="blue darken-3"
-        type="file"
-        accept=".bin"
-        @change="fileSelected">
-    </div>
-
-
-    <div
-      v-if = "restoreError"
-      class="box"
-      @click="selectFile">
-      <div class="two_line">
-        <div class="top_white_text">
-          SELECT KEY FILE
-        </div>
-        <div class="bottom_yellow_text">
-          Loading error, try to select or drag again
-        </div>
-      </div>
-      <div class="icon_wrap">
-        <svgicon
-          class="icon"
-          name="copy"
-        />
-      </div>
-      <input
-        v-show="false"
-        ref="fileInput"
-        color="blue darken-3"
-        type="file"
-        accept=".bin"
-        @change="fileSelected">
-    </div> -->
-
-
-    <!-- <div class="box donefilebox" >
+    <input
+      v-show="false"
+      ref="fileInput"
+      color="blue darken-3"
+      type="file"
+      accept=".bin"
+      @change="fileSelected">
+    <div class="source_box white_solid_border horizontal_flex">
+      <div class="center_white_text">or SELECT KEY FILE</div>
       <svgicon
-        class="fileIcgkkkon icon"
-        name="binfile"/>
-      <div class="file_name">{{ fileName }}</div>
-      <svgicon
-        class="cancelIcon icon"
-        name="cancel"/>
-    </div> -->
-
-    <div class="upload_box">
-      <div class="loading_texts">
-        <div class="loading">LOADING...</div>
-        <div class="middle_loading">CANCEL</div>
-        <div class="percent_loading">42%</div>
-      </div>
-<!--       <div class="loading_bars">
-        <progress value="12" max="100"/>
-      </div>  --> 
+        class="copy_icon"
+        name="copy"/>
     </div>
-
   </div>
 </template>
 
@@ -148,13 +91,45 @@ export default {
       }
       reader.readAsBinaryString(this.file)
     }
-
   }
 }
 </script>
 
 <style type="text/css" scoped>
-  .box {
+  .source_box {
+    width: 347px;
+    height: 50px;
+    background-color: black;
+  }
+  .white_solid_border {
+    border: 2px solid white;
+  }
+  .white_dotted_border {
+    border: 2px dotted white;
+  }
+  .horizontal_flex {
+    display: table;
+/*    display: flex;
+    flex-direction: row;*/
+  }
+  .center_white_text {
+    font-size: 18px;
+    color: white;
+    /*text-align: center;*/
+    padding-left: 79px;
+    display: table-cell;
+    vertical-align: middle;
+  }
+  .copy_icon {
+    color: white;
+    width: 21px;
+    height: 24px;
+    margin-right: 14px;
+    float: right;
+    margin-top: 13px;
+  }
+
+ /* .box {
     width: 347px;
     height: 50px;
     background-color: black;
@@ -263,5 +238,5 @@ export default {
     font-size: 18px;
     align-self: flex-end;
     padding-right: 21px;
-  }
+  }*/
 </style>
