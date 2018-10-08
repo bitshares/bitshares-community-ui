@@ -3,6 +3,7 @@
     <Header/>
     <div class="main__content">
       <h3 class="bg-blue text-white">Welcome to bitshares-community-wallet</h3>
+      <KeyfileLoader/>
       <router-view/>
     </div>
     <Footer/>
@@ -12,10 +13,11 @@
 <script>
 import Header from './Header.vue'
 import Footer from './Footer.vue'
+import KeyfileLoader from '@/components/KeyfileLoader'
 
 export default {
   name: 'Main',
-  components: { Header, Footer }
+  components: { Header, Footer, KeyfileLoader }
 }
 </script>
 
