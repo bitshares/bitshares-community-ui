@@ -39,13 +39,13 @@ export default {
   font-family: config('fonts.gotham-regular');
   background-color: config('colors.card-background');
   color: config('colors.card-text');
-  padding:10px;
+  padding:15px;
 }
 
 .card-header {
   display:flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 45px;
 }
 
 .title {
