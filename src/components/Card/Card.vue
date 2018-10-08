@@ -4,7 +4,7 @@
   >
     <div class="card-header">
       <div class="title">
-        <div> {{ upper(title) }} </div>
+        <div> {{ title }} </div>
       </div>
       <slot
         class="header"
@@ -23,12 +23,6 @@ export default {
       type: String,
       default: ''
     }
-  },
-  methods: {
-    upper(text) {
-      text = text.toUpperCase()
-      return text
-    }
   }
 }
 </script>
@@ -38,7 +32,7 @@ export default {
 .card {
   font-family: config('fonts.gotham-regular');
   background-color: config('colors.card-background');
-  color: config('colors.card-text');
+  color: config('colors.text-primary');
   padding:config('padding.card-ui')
 }
 
@@ -52,6 +46,8 @@ export default {
   text-align: left;
   font-size: config('textSizes.base');
   font-family: config('fonts.gotham-medium');
+  text-transform: uppercase;
+  color: config('colors.card-text');
 }
 
 .header {

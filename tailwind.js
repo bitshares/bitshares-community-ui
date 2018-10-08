@@ -130,7 +130,6 @@ let colors = {
   'input-border': '#ced2d6',
   'card-background': '#000000',
   'card-text': '#ffffff',
-  'text-primary': 'white',
   'text-error': '#fff200',
   'button-text': 'black',
   'button-text-disabled': '#808080',
@@ -661,7 +660,7 @@ module.exports = {
     '20': '5rem',
     '24': '6rem',
     '32': '8rem',
-    'card-ui': '11px',
+    'card-ui': '0.6875rem',
     'card': '1.25rem'
   },
 
@@ -697,7 +696,7 @@ module.exports = {
     '20': '5rem',
     '24': '6rem',
     '32': '8rem',
-    'card-ui-header': '27px'
+    'card-ui-header': '1.6875rem'
   },
 
   /*
