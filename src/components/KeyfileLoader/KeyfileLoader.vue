@@ -31,8 +31,22 @@
         </div>
       </div>
       <div class="progress_base">
-        <div class="bar"></div>
+        <div class="bar"/>
       </div>
+    </div>
+
+    <div class="source_box white_solid_border error_box">
+      <div class="two_line">
+        <div class="top_white_text">
+          SELECT KEY FILE
+        </div>
+        <div class="bottom_yellow_text">
+          Loading error, try to select or drag again
+        </div>
+      </div>
+      <svgicon
+        class="copy_icon"
+        name="copy"/>
     </div>
 
   </div>
@@ -193,8 +207,30 @@ export default {
     height: 4px;
     background-color: #fff200;
   }
-
-
+  .error_box {
+    display: flex;
+    display: table;
+    flex-direction: row;
+  }
+  .two_line{
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 52px;
+    width: 283px;
+  }
+  .top_white_text {
+    height: 14px;
+    font-size: 18px;
+    text-align: center;
+    color: #ffffff;
+  }
+  .bottom_yellow_text {
+    height: 10px;
+    font-size: 11px;
+    padding-top: 5px;
+    text-align: center;
+    color: #fff200;
+  }
  /* .box {
     width: 347px;
     height: 50px;
