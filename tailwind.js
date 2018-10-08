@@ -126,8 +126,20 @@ let colors = {
   'pink-lighter': '#ffbbca',
   'pink-lightest': '#ffebef',
 
-  'text-primary': 'black',
-  'input-border': '#ced2d6'
+  'text-primary': 'white',
+  'text-error': '#fff200',
+  'button-text': 'black',
+  'button-text-disabled': '#808080',
+  'button-bg': 'white',
+  'button-bg-hover': '#cdcdcd',
+  'button-bg-disabled': '#afacac',
+  'button-bg-loading': '#afacac',
+  'input-border': 'white',
+  'input-title-active': '#7a7675',
+  'bg-base': '#3d4852',
+  'tab-header': '#7a7675',
+  'tab-hover': 'rgba(255, 255, 255, 0.6)',
+  'tab-active': '#ffffff'
 }
 
 module.exports = {
@@ -644,7 +656,9 @@ module.exports = {
     '16': '4rem',
     '20': '5rem',
     '24': '6rem',
-    '32': '8rem'
+    '32': '8rem',
+
+    'card': '1.25rem'
   },
 
   /*
@@ -778,7 +792,9 @@ module.exports = {
   opacity: {
     '0': '0',
     '25': '.25',
+    '40': '0.4',
     '50': '.5',
+    '60': '.6',
     '75': '.75',
     '100': '1'
   },

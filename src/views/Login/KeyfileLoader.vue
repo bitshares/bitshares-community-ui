@@ -7,6 +7,7 @@
       type="file"
       accept=".bin"
       @change="fileSelected">
+
     <div class="source_box white_solid_border horizontal_flex">
       <div class="center_white_text">or SELECT KEY FILE</div>
       <svgicon
