@@ -18,6 +18,23 @@
       Place in this area
     </div>
 
+    <div class="source_box white_solid_border">
+      <div class="labels">
+        <div class="loading flex">
+          <span>LOADING...</span>
+        </div>
+        <div class="cancel flex">
+          <span>CANCEL</span>
+        </div>
+        <div class="percent flex">
+          <span>41%</span>
+        </div>
+      </div>
+      <div class="progress_base">
+        <div class="bar"></div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -137,6 +154,46 @@ export default {
     font-size: 11px;
     color: #7a7675;
   }
+  .labels {
+    padding-top: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 21px;
+    margin-right: 21px;
+  }
+  .loading {
+    font-size: 11px;
+    color: #7a7675;
+  }
+  .cancel {
+    font-size: 18px;
+    color: white;
+  }
+  .percent {
+    font-size: 18px;
+    color: #7a7675;
+  }
+  .flex {
+    display: flex;
+  }
+  .flex span {
+    align-self: flex-end;
+  }
+  .progress_base {
+    margin-top: 3px;
+    height: 4px;
+    width: 307px;
+    background-color: #7a7675;
+    margin-left: 21px;
+    margin-right: 21px;
+  }
+  .bar {
+    width: 180px;
+    height: 4px;
+    background-color: #fff200;
+  }
+
 
  /* .box {
     width: 347px;
