@@ -51,6 +51,7 @@ export default {
 .title {
   text-align: left;
   font-size: config('textSizes.base');
+  font-family: config('fonts.gotham-medium');
 }
 
 .header {
