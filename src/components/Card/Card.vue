@@ -47,7 +47,6 @@ export default {
   font-size: config('textSizes.base');
   font-family: config('fonts.gotham-medium');
   text-transform: uppercase;
-  color: config('colors.card-text');
 }
 
 .header {
