@@ -8,18 +8,24 @@
       accept=".bin"
       @change="fileSelected">
 
-    <div class="source_box white_solid_border horizontal_flex">
+    <div
+      v-if = "!file"
+      class="source_box white_solid_border horizontal_flex">
       <div class="center_white_text">or SELECT KEY FILE</div>
       <svgicon
         class="copy_icon"
         name="copy"/>
     </div>
 
-    <div class="source_box white_dotted_border drag_place_holder">
+    <div
+      :class = "{ hide: !isOnDrag }"
+      class="source_box white_dotted_border drag_place_holder">
       Place in this area
     </div>
 
-    <div class="source_box white_solid_border">
+    <div
+      v-if = "loading"
+      class="source_box white_solid_border">
       <div class="labels">
         <div class="loading flex">
           <span>LOADING...</span>
@@ -36,7 +42,9 @@
       </div>
     </div>
 
-    <div class="source_box white_solid_border error_box">
+    <div
+      v-if = "loadingError"
+      class="source_box white_solid_border error_box">
       <div class="two_line">
         <div class="top_white_text">
           SELECT KEY FILE
@@ -50,7 +58,9 @@
         name="copy"/>
     </div>
 
-    <div class="source_box white_solid_border column_cell_middle_vert">
+    <div
+      v-if = "loadingSuccess"
+      class="source_box white_solid_border column_cell_middle_vert">
       <div class="file_uploaded">
         <svgicon
           class="binfile_icon"
@@ -78,14 +88,22 @@ export default {
       inProgress: false,
       restoreError: false,
       name: '',
-      password: ''
+      password: '',
+      isOnDrag: false,
+      loading: false
     }
   },
   computed: {
     fileName() {
       return (
-        (this.file && this.file.name) || 'nope.bin'
+        (this.file && this.file.name) || false
       )
+    },
+    loadingError() {
+      return this.file && !this.restoreError
+    },
+    loadingSuccess() {
+      return this.file && this.restoreError
     }
   },
   methods: {
@@ -261,5 +279,8 @@ export default {
     color: white;
     width: 16px;
     height: 16px;
+  }
+  .hide {
+    display: none;
   }
 </style>
