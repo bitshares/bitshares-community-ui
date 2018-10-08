@@ -69,7 +69,6 @@
 import '@icons/copy'
 import '@icons/binfile'
 import '@icons/cancel'
-import { required } from 'vuelidate/lib/validators'
 import { mapActions } from 'vuex'
 
 export default {
@@ -80,13 +79,6 @@ export default {
       restoreError: false,
       name: '',
       password: ''
-    }
-  },
-  validations() {
-    return {
-      file: {
-        required
-      }
     }
   },
   computed: {
