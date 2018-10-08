@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="selectFile">
     <input
       v-show="false"
       ref="fileInput"
@@ -13,6 +13,11 @@
         class="copy_icon"
         name="copy"/>
     </div>
+
+    <div class="source_box white_dotted_border drag_place_holder">
+      Place in this area
+    </div>
+
   </div>
 </template>
 
@@ -109,13 +114,10 @@ export default {
   }
   .horizontal_flex {
     display: table;
-/*    display: flex;
-    flex-direction: row;*/
   }
   .center_white_text {
     font-size: 18px;
     color: white;
-    /*text-align: center;*/
     padding-left: 79px;
     display: table-cell;
     vertical-align: middle;
@@ -127,6 +129,13 @@ export default {
     margin-right: 14px;
     float: right;
     margin-top: 13px;
+  }
+  .drag_place_holder {
+    vertical-align: middle;
+    display: table-cell;
+    text-align: center;
+    font-size: 11px;
+    color: #7a7675;
   }
 
  /* .box {
