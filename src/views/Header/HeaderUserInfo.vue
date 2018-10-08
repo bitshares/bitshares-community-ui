@@ -1,13 +1,18 @@
 <template>
   <div class="singleline">
+
+    <a
+      v-show="userName"
+      href="#"
+      @click.prevent="handleLogout">logout</a>
     <svgicon name="userIcon"/>
-    <p>{{ userName || 'default' }}</p>
+    <p>{{ userName }}</p>
     <svgicon name="arrowDown"/>
   </div>
 </template>
 
 <script type="text/javascript">
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import '@icons/userIcon'
 import '@icons/arrowDown'
 
@@ -17,6 +22,15 @@ export default {
     ...mapGetters({
       userName: 'user/getUserName'
     })
+  },
+  methods: {
+    ...mapActions({
+      logout: 'acc/logout'
+    }),
+    handleLogout() {
+      this.logout()
+      this.$router.push({ name: 'login' })
+    }
   }
 }
 </script>
