@@ -160,7 +160,7 @@ export default {
       this.$emit('blur', this.$refs.input.value)
     },
     handleIconClick() {
-      this.$emit('icon-clicked')
+      this.$emit('icon-click')
     }
   }
 }
@@ -190,6 +190,7 @@ export default {
   border: none;
   border-bottom: 1px solid config('colors.input-border');
   box-shadow: none !important;
+  text-overflow: ellipsis;
   transition: border-color ease-in-out 0.15s;
   &:disabled {
     opacity: 0.3;

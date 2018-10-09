@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
-    <Card title="Markets"></Card>
-  
+    <Card title="Markets"/>
+
   </div>
 </template>
 
@@ -9,8 +9,8 @@
 import Card from '@/components/Card'
 
 export default {
-  components: { Card },
-  name: 'Dashboard'
+  name: 'Dashboard',
+  components: { Card }
 }
 </script>
 

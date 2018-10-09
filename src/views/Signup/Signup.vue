@@ -21,14 +21,18 @@
             v-model.trim="password"
             :errors="$v.password"
             input-name="password"
+            icon="copy"
             class="mb-2"
+            @icon-click="copyPassword"
           />
 
           <VInput
             v-model.trim="confirmPassword"
             :errors="$v.confirmPassword"
             input-name="confirmPassword"
+            icon="paste"
             class="mb-2"
+            @icon-click="pastePassword"
           />
 
         </div>
@@ -94,11 +98,10 @@ import { utils, getUser } from 'vuex-bitshares/src/services/api/account.js'
 
 const isUnique = (name) => {
   if (name === '') return true
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async(resolve, reject) => {
     const resp = await getUser(name)
     resolve(!resp.success)
   })
-  
 }
 
 export default {
@@ -130,29 +133,36 @@ export default {
       pin: '',
       confirmPin: '',
       inProgress: false,
-      type: 'password',
+      type: 'password'
     }
-  },
-  mounted() {
-    this.$nextTick(() => this.password = utils.suggestPassword())
   },
   computed: {
     signupDisabled() {
       return this.$v.$dirty && this.$v.$invalid
     }
   },
+  mounted() {
+    this.$nextTick(() => {
+      this.password = utils.suggestPassword()
+    })
+  },
   methods: {
     ...mapActions({
+      signupWithPassword: 'acc/signupWithPassword',
+      signupBrainkey: 'acc/signupBrainkey'
     }),
     async handleSignup() {
       this.$v.$touch()
       if (this.$v.$invalid) return
       this.inProgress = true
       if (this.type === 'password') {
-
-        this.$router.push({ name: 'main' })
+        const resp = await this.signupWithPassword({
+          name: this.name,
+          password: this.password
+        })
+        if (resp.error) this.$toast.error(resp.message)
+        else this.$router.push({ name: 'main' })
       } else {
-
         this.$router.push({ name: 'main' })
       }
       this.inProgress = false
@@ -160,6 +170,13 @@ export default {
     changeSignupType(type) {
       this.type = type
       this.$nextTick(() => { this.$v.$reset() })
+    },
+    copyPassword() {
+      this.$copyText(this.password)
+      this.$toast.success('password copied to clipboard')
+    },
+    pastePassword() {
+      this.confirmPassword = this.password
     }
   }
 }
