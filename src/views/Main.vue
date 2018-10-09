@@ -2,11 +2,6 @@
   <div class="main">
     <Header/>
     <div class="main__content">
-      <h3
-        v-show="userName"
-        class="bg-blue text-white">
-        <b>{{ userName }}</b>, welcome to bitshares-community-wallet
-      </h3>
       <router-view/>
     </div>
     <Footer/>

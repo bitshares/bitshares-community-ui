@@ -1,14 +1,14 @@
 <template>
-  <div class="login-container sm:pt-32 sm:items-start">
-    <div class="login h-full sm:h-auto">
-      <div class="login__title">Login</div>
+  <div class="signup-container sm:pt-32 sm:items-start">
+    <div class="signup h-full sm:h-auto">
+      <div class="signup__title">Signup</div>
       <Tabs
         :tabs="['password', 'private key']"
-        @change="changeLoginType">
+        @change="changeSignupType">
 
         <div
           slot="password"
-          class="login__form">
+          class="signup__form">
 
           <VInput
             v-model.trim="name"
@@ -21,18 +21,24 @@
             v-model.trim="password"
             :errors="$v.password"
             input-name="password"
-            type="password"
+            class="mb-2"
+          />
+
+          <VInput
+            v-model.trim="confirmPassword"
+            :errors="$v.confirmPassword"
+            input-name="confirmPassword"
             class="mb-2"
           />
 
         </div>
         <div
           slot="private key"
-          class="login__form">
+          class="signup__form">
           <VInput
-            v-model.trim="brainkey"
-            :errors="$v.brainkey"
-            input-name="brainkey"
+            v-model.trim="name"
+            :errors="$v.name"
+            input-name="userName"
             class="mb-4"
           />
 
@@ -53,23 +59,23 @@
         </div>
       </Tabs>
 
-      <div class="login__form">
+      <div class="signup__form">
         <Button
-          :disabled="loginDisabled"
+          :disabled="signupDisabled"
           :loading="inProgress"
-          class="login__btn"
+          class="signup__btn"
           width="full"
-          text="log in"
-          @click="handleLogin"
+          text="sign up"
+          @click="handleSignup"
         />
       </div>
 
-      <div class="login__footer">
+      <div class="signup__footer">
         <div class="footer-link">
-          <router-link :to="{ name: 'signup' }">Sign up with new account</router-link>
+          <router-link :to="{ name: 'login' }">Log in with existing account</router-link>
         </div>
         <div class="footer-link">
-          <router-link :to="{ name: 'login' }">I accept Terms of Use</router-link>
+          <router-link :to="{ name: 'signup' }">I accept Terms of Use</router-link>
         </div>
       </div>
     </div>
@@ -83,24 +89,35 @@ import Tabs from '@/components/Tabs/'
 import { validationMixin } from 'vuelidate'
 import { required, minLength, sameAs } from 'vuelidate/lib/validators'
 import { mapActions } from 'vuex'
+import { utils, getUser } from 'vuex-bitshares/src/services/api/account.js'
+// console.log(api)
+
+const isUnique = (name) => {
+  if (name === '') return true
+  return new Promise(async (resolve, reject) => {
+    const resp = await getUser(name)
+    resolve(!resp.success)
+  })
+  
+}
 
 export default {
-  name: 'Login',
+  name: 'Signup',
   components: { VInput, Button, Tabs },
   mixins: [validationMixin],
   validations() {
     return this.type === 'password'
       ? {
-        name: { required },
+        name: { required, isUnique, minLength: minLength(4) },
         password: { required },
-        brainkey: {},
+        confirmPassword: { sameAsPassword: sameAs('password') },
         pin: {},
         confirmPin: {}
       }
       : {
-        name: {},
+        name: { required, isUnique, minLength: minLength(4) },
         password: {},
-        brainkey: { required },
+        confirmPassword: {},
         pin: { required, minLength: minLength(6) },
         confirmPin: { sameAsPin: sameAs('pin') }
       }
@@ -109,45 +126,38 @@ export default {
     return {
       name: '',
       password: '',
-      brainkey: '',
+      confirmPassword: '',
       pin: '',
       confirmPin: '',
       inProgress: false,
-      type: 'password'
+      type: 'password',
     }
   },
+  mounted() {
+    this.$nextTick(() => this.password = utils.suggestPassword())
+  },
   computed: {
-    loginDisabled() {
+    signupDisabled() {
       return this.$v.$dirty && this.$v.$invalid
     }
   },
   methods: {
     ...mapActions({
-      cloudLogin: 'acc/cloudLogin',
-      brainkeyLogin: 'acc/brainkeyLogin'
     }),
-    async handleLogin() {
+    async handleSignup() {
       this.$v.$touch()
       if (this.$v.$invalid) return
       this.inProgress = true
       if (this.type === 'password') {
-        const { error } = await this.cloudLogin({
-          name: this.name,
-          password: this.password
-        })
-        if (error) this.$toast.error('Invalid username or password')
-        else this.$router.push({ name: 'main' })
+
+        this.$router.push({ name: 'main' })
       } else {
-        const { error } = await this.brainkeyLogin({
-          brainkey: this.brainkey.toLowerCase(),
-          password: this.pin
-        })
-        if (error) this.$toast.error('Invalid brainkey')
-        else this.$router.push({ name: 'main' })
+
+        this.$router.push({ name: 'main' })
       }
       this.inProgress = false
     },
-    changeLoginType(type) {
+    changeSignupType(type) {
       this.type = type
       this.$nextTick(() => { this.$v.$reset() })
     }
@@ -156,12 +166,12 @@ export default {
 </script>
 
 <style lang="scss">
-  .login-container {
+  .signup-container {
     height: 100%;
     display: flex;
     justify-content: center;
   }
-  .login {
+  .signup {
     @apply max-w-sm w-full shadow-md;
     border-radius: 2px;
     background-color: black;

@@ -1,9 +1,15 @@
 <template>
-  <div class="dashboard">dashboard!</div>
+  <div class="dashboard">
+    <Card title="Markets"></Card>
+  
+  </div>
 </template>
 
 <script>
+import Card from '@/components/Card'
+
 export default {
+  components: { Card },
   name: 'Dashboard'
 }
 </script>

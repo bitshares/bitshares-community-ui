@@ -2,15 +2,21 @@ export default {
   userName: {
     title: 'account name',
     validation: {
-      required: 'Enter username'
-
+      required: 'Enter username',
+      minLength: 'Must be 4 characters or more',
+      isUnique: 'Username already exists'
     }
   },
   password: {
     title: 'password',
     validation: {
       required: 'Enter password'
-
+    }
+  },
+  confirmPassword: {
+    title: 'confirm password',
+    validation: {
+      sameAsPassword: 'Passwords do not match'
     }
   },
   brainkey: {
