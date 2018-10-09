@@ -65,11 +65,12 @@ export default {
   }
 
   .spinner--big:before {
-    width: 36px;
-    height: 36px;
-    margin-top: -33px;
-    margin-left: -5px;
-    margin-right: 175px;
+    width: 30px;
+    height: 30px;
+    margin-top: -30px;
+    margin-bottom:-0px;
+    margin-left: -20px;
+    margin-right: 140px;
   }
 
   .spinner--static:before {

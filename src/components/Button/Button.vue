@@ -95,10 +95,10 @@ export default {
   background-color: config('colors.button-bg-disabled');
 }
 .btn--small {
-  @apply py-1 pr-1 cursor-pointer text-xs;
+  @apply py-1 pr-4 cursor-pointer text-xs;
 }
 .btn--big {
-  @apply py-2 px-2 cursor-pointer text-2xl;
+  @apply py-2 px-6 cursor-pointer text-2xl;
 }
 .btn--loading {
   @apply pointer-events-none;
@@ -110,4 +110,8 @@ export default {
 .btn--round {
   @apply rounded;
 }
+.spinner {
+  margin-right: 10px;
+}
+
 </style>
