@@ -1,10 +1,16 @@
 <template>
-  <div class="dashboard">dashboard!</div>
+  <div class="dashboard">
+    dashboard!
+    <Portfolio />
+  </div>
 </template>
 
 <script>
+import Portfolio from '@/components/Portfolio'
+
 export default {
-  name: 'Dashboard'
+  name: 'Dashboard',
+  components: { Portfolio }
 }
 </script>
 

@@ -19,7 +19,6 @@
       </Card>
     </div>
     <div>
-
       <Tabs
         :centered="true"
         :tabs="['Tab example #1 with the responsive width', 'Tab example #2 with the responsive width', 'Tab example #3 with the responsive width']">
@@ -39,40 +38,17 @@
         text="button test"
         size="small"/>
     </div>
-    <div>
-      <VInput
-        v-model="testString"
-        title="create account name"
-        icon="copy"/>
-      <VInput
-        v-model="errorMsg"
-        type="password"
-        title="password"/>
-      <VInput
-        v-model="number"
-        type="number"
-        title="number only input"/>
-      <VInput
-        v-model="testString"
-        :disabled="true"
-        title="disabled input"/>
-      <VInput
-        v-model="testString"
-        :error="errorMsg"
-        title="username"/>
-    </div>
   </div>
 </template>
 
 <script>
 import Button from '@/components/Button/'
 import Tabs from '@/components/Tabs/'
-import VInput from '@/components/Input/'
 import Card from '@/components/Card'
 
 export default {
   name: 'Components',
-  components: { Button, VInput, Tabs, Card },
+  components: { Button, Tabs, Card },
   data() {
     return {
       testString: '',
