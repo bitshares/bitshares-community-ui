@@ -13,6 +13,7 @@
 
         <div
           v-if = "!file"
+          :class = "{ hide: isOnDrag }"
           class="source_box white_solid_border horizontal_flex">
           <div class="center_white_text">or SELECT KEY FILE</div>
           <svgicon
@@ -99,8 +100,8 @@ export default {
       inProgress: false,
       name: '',
       password: '',
-      isOnDrag: false,
-      loading: false
+      loading: false,
+      isOnDrag: false
     }
   },
   computed: {
@@ -128,6 +129,12 @@ export default {
       this.$refs.fileform.addEventListener('drop', e => {
         const file = e.dataTransfer.files[0]
         this.emitFile(file)
+      })
+      this.$refs.fileform.addEventListener('dragover', e => {
+        this.isOnDrag = true
+      })
+      this.$refs.fileform.addEventListener('dragleave', e => {
+        this.isOnDrag = false
       })
     }
   },
@@ -161,6 +168,9 @@ export default {
       return (('draggable' in div) ||
               ('ondragstart' in div && 'ondrop' in div)) &&
               'FileReader' in window
+    },
+    setHover(hover) {
+
     }
   }
 }
