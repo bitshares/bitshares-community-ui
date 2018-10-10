@@ -86,12 +86,17 @@ import '@icons/cancel'
 import { mapActions } from 'vuex'
 
 export default {
+  props: {
+    restoreError: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       dragAndDropCapable: false,
       file: null,
       inProgress: false,
-      restoreError: false,
       name: '',
       password: '',
       isOnDrag: false,
