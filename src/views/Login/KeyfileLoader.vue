@@ -98,8 +98,6 @@ export default {
       dragAndDropCapable: false,
       file: null,
       inProgress: false,
-      name: '',
-      password: '',
       loading: false,
       isOnDrag: false
     }
@@ -164,13 +162,10 @@ export default {
       this.emitFile(file)
     },
     determineDragAndDropCapable() {
-      var div = document.createElement('div')
+      const div = document.createElement('div')
       return (('draggable' in div) ||
               ('ondragstart' in div && 'ondrop' in div)) &&
               'FileReader' in window
-    },
-    setHover(hover) {
-
     }
   }
 }
