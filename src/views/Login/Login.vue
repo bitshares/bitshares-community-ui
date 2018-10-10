@@ -35,7 +35,6 @@
             input-name="brainkey"
             class="mb-4"
           />
-
           <KeyfileLoader/>
 
           <VInput

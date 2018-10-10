@@ -1,77 +1,81 @@
 <template>
-  <div @click="selectFile">
-    <input
-      v-show="false"
-      ref="fileInput"
-      color="blue darken-3"
-      type="file"
-      accept=".bin"
-      @change="fileSelected">
+  <div>
+    <form ref="fileform">
+      <div @click="selectFile">
+        <input
+          v-show="false"
+          ref="fileInput"
+          color="blue darken-3"
+          type="file"
+          enctype="multipart/form-data"
+          accept=".bin"
+          @change="fileSelected">
 
-    <div
-      v-if = "!file"
-      class="source_box white_solid_border horizontal_flex">
-      <div class="center_white_text">or SELECT KEY FILE</div>
-      <svgicon
-        class="copy_icon"
-        name="copy"/>
-    </div>
-
-    <div
-      :class = "{ hide: !isOnDrag }"
-      class="source_box white_dotted_border drag_place_holder">
-      Place in this area
-    </div>
-
-    <div
-      v-if = "loading"
-      class="source_box white_solid_border">
-      <div class="labels">
-        <div class="loading flex">
-          <span>LOADING...</span>
+        <div
+          v-if = "!file"
+          class="source_box white_solid_border horizontal_flex">
+          <div class="center_white_text">or SELECT KEY FILE</div>
+          <svgicon
+            class="copy_icon"
+            name="copy"/>
         </div>
-        <div class="cancel flex">
-          <span>CANCEL</span>
+
+        <div
+          :class = "{ hide: !isOnDrag }"
+          class="source_box white_dotted_border drag_place_holder">
+          Place in this area
         </div>
-        <div class="percent flex">
-          <span>41%</span>
+
+        <div
+          v-if = "loading"
+          class="source_box white_solid_border">
+          <div class="labels">
+            <div class="loading flex">
+              <span>LOADING...</span>
+            </div>
+            <div class="cancel flex">
+              <span>CANCEL</span>
+            </div>
+            <div class="percent flex">
+              <span>41%</span>
+            </div>
+          </div>
+          <div class="progress_base">
+            <div class="bar"/>
+          </div>
+        </div>
+
+        <div
+          v-if = "loadingError"
+          class="source_box white_solid_border error_box">
+          <div class="two_line">
+            <div class="top_white_text">
+              SELECT KEY FILE
+            </div>
+            <div class="bottom_yellow_text">
+              Loading error, try to select or drag again
+            </div>
+          </div>
+          <svgicon
+            class="copy_icon"
+            name="copy"/>
+        </div>
+
+        <div
+          v-if = "loadingSuccess"
+          class="source_box white_solid_border column_cell_middle_vert">
+          <div class="file_uploaded">
+            <svgicon
+              class="binfile_icon"
+              name="binfile"/>
+            <div class="file_name">{{ fileName }}</div>
+            <svgicon
+              class="cancel_icon"
+              name="cancel"/>
+          </div>
         </div>
       </div>
-      <div class="progress_base">
-        <div class="bar"/>
-      </div>
-    </div>
-
-    <div
-      v-if = "loadingError"
-      class="source_box white_solid_border error_box">
-      <div class="two_line">
-        <div class="top_white_text">
-          SELECT KEY FILE
-        </div>
-        <div class="bottom_yellow_text">
-          Loading error, try to select or drag again
-        </div>
-      </div>
-      <svgicon
-        class="copy_icon"
-        name="copy"/>
-    </div>
-
-    <div
-      v-if = "loadingSuccess"
-      class="source_box white_solid_border column_cell_middle_vert">
-      <div class="file_uploaded">
-        <svgicon
-          class="binfile_icon"
-          name="binfile"/>
-        <div class="file_name">{{ fileName }}</div>
-        <svgicon
-          class="cancel_icon"
-          name="cancel"/>
-      </div>
-    </div>
-
+    </form>
   </div>
 </template>
 
@@ -84,6 +88,7 @@ import { mapActions } from 'vuex'
 export default {
   data() {
     return {
+      dragAndDropCapable: false,
       file: null,
       inProgress: false,
       restoreError: false,
@@ -100,10 +105,25 @@ export default {
       )
     },
     loadingError() {
-      return this.file && !this.restoreError
+      return this.file && this.restoreError
     },
     loadingSuccess() {
-      return this.file && this.restoreError
+      return this.file && !this.restoreError
+    }
+  },
+  mounted() {
+    this.dragAndDropCapable = this.determineDragAndDropCapable()
+    if (this.dragAndDropCapable) {
+      ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach(evt => {
+        this.$refs.fileform.addEventListener(evt, e => {
+          e.preventDefault()
+          e.stopPropagation()
+        }, false)
+      })
+      this.$refs.fileform.addEventListener('drop', e => {
+        const file = e.dataTransfer.files[0]
+        this.emitFile(file)
+      })
     }
   },
   methods: {
@@ -114,41 +134,28 @@ export default {
     selectFile() {
       this.$refs.fileInput.click()
     },
-    fileSelected(e) {
-      const file = e.target.files[0]
+    emitFile(file) {
       if (file) {
         this.file = file
-        this.loginFile()
-      }
-      console.log('file: ', file)
-    },
-    loginFile() {
-      this.inProgress = true
-      let reader = new FileReader()
-      reader.onload = async evt => {
-        const result = await this.backup({
-          password: 'error password',
-          backup: evt.target.result
+        this.$emit('select', {
+          success: true,
+          file
         })
-
-        this.inProgress = false
-
-        if (!result.success) {
-          this.restoreError = result.error
-          this.$emit('message', {
-            text: result.error,
-            type: 'error'
-          })
-        }
-
-        if (result.success) {
-          console.log('file name: ', this.file.name)
-          console.log('name: ', this.name)
-          console.log('password: ', this.password)
-        }
-        console.log('this.restoreError: ', this.restoreError)
+        return
       }
-      reader.readAsBinaryString(this.file)
+      this.$emit('select', {
+        success: false
+      })
+    },
+    fileSelected(e) {
+      const file = e.target.files[0]
+      this.emitFile(file)
+    },
+    determineDragAndDropCapable() {
+      var div = document.createElement('div')
+      return (('draggable' in div) ||
+              ('ondragstart' in div && 'ondrop' in div)) &&
+              'FileReader' in window
     }
   }
 }
