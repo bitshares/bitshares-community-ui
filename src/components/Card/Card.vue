@@ -1,6 +1,7 @@
 <template>
   <div
-    class="card"
+    :class="{ 'card--disabled': disabled }"
+    class="card lg:mr-2 mb-2"
   >
     <div class="card-header">
       <div class="title">
@@ -22,6 +23,10 @@ export default {
     title: {
       type: String,
       default: ''
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -30,10 +35,19 @@ export default {
 <style scoped lang="scss">
 
 .card {
+  min-height: 25rem;
+  max-height: 30rem;
   font-family: config('fonts.gotham-regular');
   background-color: config('colors.card-background');
   color: config('colors.text-primary');
-  padding:config('padding.card-ui')
+  padding:config('padding.card-ui');
+  &--disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  &:last-child {
+    @apply mr-0;
+  }
 }
 
 .card-header {
@@ -43,7 +57,6 @@ export default {
 }
 
 .title {
-  text-align: left;
   font-size: config('textSizes.base');
   font-family: config('fonts.gotham-medium');
   text-transform: uppercase;
