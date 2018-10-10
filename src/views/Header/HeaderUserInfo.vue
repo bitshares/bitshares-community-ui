@@ -1,10 +1,10 @@
 <template>
   <div class="user-info">
     <!-- <svgicon name="userIcon"/> -->
-    <svgicon 
+    <svgicon
+      v-show="userName"
       class="mr-3 cursor-pointer"
-      v-show="userName" 
-      name="logout" 
+      name="logout"
       @click.native="handleLogout"
     />
     <p class="uppercase">{{ userName }}</p>

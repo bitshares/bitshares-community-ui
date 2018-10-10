@@ -11,7 +11,9 @@
       :disabled="true"
       class="lg:w-1/3"
       title="markets">
-      <div slot="body" class="uppercase text-grey-dark">
+      <div
+        slot="body"
+        class="uppercase text-grey-dark">
         under construction
       </div>
     </Card>
@@ -20,7 +22,9 @@
       :disabled="true"
       class="lg:w-1/3"
       title="order book">
-      <div slot="body" class="uppercase text-grey-dark">
+      <div
+        slot="body"
+        class="uppercase text-grey-dark">
         under construction
       </div>
     </Card>
