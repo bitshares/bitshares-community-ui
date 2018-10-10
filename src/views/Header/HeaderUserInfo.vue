@@ -7,7 +7,7 @@
       name="logout"
       @click.native="handleLogout"
     />
-    <p class="uppercase">{{ userName }}</p>
+    <p class="uppercase text-lg">{{ userName }}</p>
     <!-- <svgicon name="arrowDown"/> -->
   </div>
 </template>
