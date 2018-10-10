@@ -32,7 +32,7 @@
           class="source_box white_solid_border">
           <div class="labels">
             <div class="loading flex">
-              <span>LOADING...</span>
+              <span @click="cancelLoading">LOADING...</span>
             </div>
             <div class="cancel flex">
               <span>CANCEL</span>
@@ -42,7 +42,9 @@
             </div>
           </div>
           <div class="progress_base">
-            <div class="bar"/>
+            <div
+              :style="{ width: progressValue + '%'}"
+              class="bar"/>
           </div>
         </div>
 
@@ -97,9 +99,9 @@ export default {
     return {
       dragAndDropCapable: false,
       file: null,
-      inProgress: false,
       loading: false,
-      isOnDrag: false
+      isOnDrag: false,
+      progressValue: 0
     }
   },
   computed: {
@@ -147,6 +149,21 @@ export default {
     emitFile(file) {
       if (file) {
         this.file = file
+        let reader = new FileReader()
+        reader.onloadstart = () => {
+          this.loading = true
+          this.progressValue = 0
+        }
+        reader.onprogress = data => {
+          if (data.lengthComputable) {
+            this.progressValue = parseInt(((data.loaded / data.total) * 100), 10)
+          }
+        }
+        reader.onloadend = () => {
+          this.loading = false
+          this.progressValue = 100
+        }
+        reader.readAsBinaryString(this.file)
         this.$emit('select', {
           success: true,
           file
@@ -166,6 +183,11 @@ export default {
       return (('draggable' in div) ||
               ('ondragstart' in div && 'ondrop' in div)) &&
               'FileReader' in window
+    },
+    cancelLoading() {
+      this.loading = false
+      this.file = false
+      this.progressValue = 0
     }
   }
 }
@@ -243,7 +265,7 @@ export default {
     margin-right: 21px;
   }
   .bar {
-    width: 180px;
+    width: 80%;
     height: 4px;
     background-color: #fff200;
   }
