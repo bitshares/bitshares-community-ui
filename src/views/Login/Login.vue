@@ -36,7 +36,9 @@
             class="mb-4"
           />
 
-          <KeyfileLoader @select="selectFile"/>
+          <KeyfileLoader
+            @select="selectFile"
+            @remove="removeFile"/>
 
           <VInput
             v-model.trim="pin"
@@ -155,6 +157,9 @@ export default {
     },
     selectFile(file) {
       this.file = file
+    },
+    removeFile() {
+      this.file = null
     }
   }
 }

@@ -183,6 +183,7 @@ export default {
       this.loading = false
       this.file = false
       this.progressValue = 0
+      this.$emit('remove')
     },
     handleDragStart(e) {
       this.isOnDrag = true
