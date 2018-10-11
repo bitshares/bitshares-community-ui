@@ -184,6 +184,7 @@ export default {
     },
     cancelFile(e) {
       e.stopPropagation()
+      this.$refs.fileInput.value = null
       this.loading = false
       this.file = false
       this.progressValue = 0
@@ -201,6 +202,7 @@ export default {
 
 <style type="text/css" scoped>
   .source_box {
+    cursor: pointer;
     width: 347px;
     height: 50px;
     background-color: black;
