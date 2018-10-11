@@ -3,7 +3,9 @@
     dashboard!
     <Card
       :title="'portfolio'">
-      <div slot="header">BALANCE 6754 USD</div>
+      <div slot="header">
+        <PortfolioHeader />
+      </div>
       <div slot="body">
         <Tabs :tabs="['SHOW ALL ASSETS', 'SHOW BALANCES']">
           <div slot="SHOW ALL ASSETS">
@@ -19,13 +21,14 @@
 </template>
 
 <script>
-import Portfolio from '@/components/Portfolio'
+import Portfolio from './Portfolio/Portfolio.vue'
+import PortfolioHeader from './Portfolio/PortfolioHeader.vue'
 import Tabs from '@/components/Tabs'
 import Card from '@/components/Card'
 
 export default {
   name: 'Dashboard',
-  components: { Portfolio, Tabs, Card }
+  components: { Portfolio, PortfolioHeader, Tabs, Card }
 }
 </script>
 

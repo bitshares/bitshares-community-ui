@@ -661,7 +661,7 @@ module.exports = {
     '32': '8rem',
     'card-ui': '0.6875rem',
     'card': '1.25rem',
-    'grid-table': '	0.625rem'
+    'grid-table': '0.625rem'
   },
 
   /*

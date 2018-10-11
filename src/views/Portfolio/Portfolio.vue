@@ -1,7 +1,5 @@
 <template>
   <div class="portfolio">
-    <div class="dashboard">
-    dashboard!
     <div class="grid">
       <span><strong>Ticker</strong></span>
       <span><strong>$Price</strong></span>
@@ -24,7 +22,6 @@
       <span>Karianne@salvatore.biz</span>
     </div>
   </div>
-  </div>
 </template>
 
 <script>
@@ -34,7 +31,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 .portfolio {
   font-family: config("fonts.gotham");
 }
