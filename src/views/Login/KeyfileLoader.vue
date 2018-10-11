@@ -12,8 +12,7 @@
           @change="fileSelected">
 
         <div
-          v-if = "!file"
-          :class = "{ hide: dragOver }"
+          v-if = "initState"
           class="source_box white_solid_border horizontal_flex">
           <div class="center_white_text">or SELECT KEY FILE</div>
           <svgicon
@@ -110,11 +109,15 @@ export default {
         (this.file && this.file.name) || false
       )
     },
-    loadingError() {
-      return this.file && this.restoreError
+    initState() {
+      return !this.file && !this.dragOver
     },
+    loadingError() {
+      return this.file && this.restoreError && !this.dragOver
+    },
+
     loadingSuccess() {
-      return this.file && !this.restoreError
+      return this.file && !this.restoreError && !this.dragOver
     }
   },
   mounted() {
