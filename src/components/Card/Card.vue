@@ -1,6 +1,5 @@
 <template>
   <div
-    :class="{ 'card--disabled': disabled }"
     class="card lg:mr-2 mb-2"
   >
     <div class="card-header">
@@ -23,10 +22,6 @@ export default {
     title: {
       type: String,
       default: ''
-    },
-    disabled: {
-      type: Boolean,
-      default: false
     }
   }
 }
@@ -41,10 +36,6 @@ export default {
   background-color: config('colors.card-background');
   color: config('colors.text-primary');
   padding:config('padding.card-ui');
-  &--disabled {
-    opacity: 0.6;
-    pointer-events: none;
-  }
   &:last-child {
     @apply mr-0;
   }

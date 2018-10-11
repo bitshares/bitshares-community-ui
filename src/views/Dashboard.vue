@@ -3,28 +3,26 @@
 
     <Card
       class="lg:w-1/3"
-      title="portfolio">
+      title="account">
       <div slot="body"/>
     </Card>
 
     <Card
-      :disabled="true"
-      class="lg:w-1/3"
+      class="lg:w-1/3 disabled"
       title="markets">
       <div
         slot="body"
-        class="uppercase text-grey-dark">
+        class="uppercase">
         under construction
       </div>
     </Card>
 
     <Card
-      :disabled="true"
-      class="lg:w-1/3"
+      class="lg:w-1/3 disabled"
       title="order book">
       <div
         slot="body"
-        class="uppercase text-grey-dark">
+        class="uppercase">
         under construction
       </div>
     </Card>
