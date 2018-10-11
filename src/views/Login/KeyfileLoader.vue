@@ -38,7 +38,7 @@
               <span>CANCEL</span>
             </div>
             <div class="percent flex">
-              <span>{{progressValue}}</span>
+              <span>{{ progressValue }}</span>
             </div>
           </div>
           <div class="progress_base">
