@@ -16,8 +16,8 @@
           class="source_box white_solid_border horizontal_flex">
           <div class="center_white_text">or SELECT KEY FILE</div>
           <svgicon
-            class="copy_icon"
-            name="copy"/>
+            class="dragndrop_icon"
+            name="dragndrop"/>
         </div>
 
         <div
@@ -59,8 +59,8 @@
             </div>
           </div>
           <svgicon
-            class="copy_icon"
-            name="copy"/>
+            class="dragndrop_icon"
+            name="dragndrop"/>
         </div>
 
         <div
@@ -86,6 +86,7 @@
 import '@icons/copy'
 import '@icons/binfile'
 import '@icons/cancel'
+import '@icons/dragndrop'
 
 export default {
   props: {
@@ -220,7 +221,7 @@ export default {
     display: table-cell;
     vertical-align: middle;
   }
-  .copy_icon {
+  .dragndrop_icon {
     color: white;
     width: 21px;
     height: 24px;
