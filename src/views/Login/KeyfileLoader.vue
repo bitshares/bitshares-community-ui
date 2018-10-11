@@ -28,7 +28,8 @@
 
         <div
           v-if = "loading"
-          class="source_box white_solid_border">
+          class="source_box white_solid_border"
+          @click="cancelFile">
           <div class="labels">
             <div class="loading flex">
               <span @click="cancelFile">LOADING...</span>
@@ -37,7 +38,7 @@
               <span>CANCEL</span>
             </div>
             <div class="percent flex">
-              <span>41%</span>
+              <span>{{progressValue}}</span>
             </div>
           </div>
           <div class="progress_base">
@@ -118,7 +119,7 @@ export default {
     },
 
     loadingSuccess() {
-      return this.file && !this.restoreError && !this.dragOver
+      return this.file && !this.restoreError && !this.dragOver && !this.loading
     }
   },
   mounted() {
@@ -169,7 +170,7 @@ export default {
           }
         }
         reader.onloadend = () => {
-          this.loading = false
+          // this.loading = false
           this.progressValue = 100
         }
         reader.readAsBinaryString(this.file)
