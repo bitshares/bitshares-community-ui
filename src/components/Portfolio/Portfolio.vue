@@ -1,43 +1,29 @@
 <template>
   <div class="portfolio">
-    <table>
-      <tr class="headerRow">
-        <th>Asset</th>
-        <th>$Price</th>
-        <th>24h%</th>
-        <th>7d%</th>
-      </tr>
-      <tr>
-        <td>BTC</td>
-        <td>45</td>
-        <td>-1%</td>
-        <td>0%</td>
-      </tr>
-      <tr>
-        <td>BTS</td>
-        <td>7.2</td>
-        <td>-1%</td>
-        <td>0%</td>
-      </tr>
-      <tr>
-        <td>TRUSTY</td>
-        <td>45</td>
-        <td>-1%</td>
-        <td>0%</td>
-      </tr>
-      <tr>
-        <td>ETH</td>
-        <td>0</td>
-        <td>-1%</td>
-        <td>0%</td>
-      </tr>
-      <tr>
-        <td>DASH</td>
-        <td>0</td>
-        <td>-1%</td>
-        <td>0%</td>
-      </tr>
-    </table>
+    <div class="dashboard">
+    dashboard!
+    <div class="grid">
+      <span><strong>Ticker</strong></span>
+      <span><strong>$Price</strong></span>
+      <span><strong>24h%</strong></span>
+      <span><strong>7d%</strong></span>
+      <span>0</span>
+      <span>Aaron Kris</span>
+      <span>Philippines</span>
+      <span>1991-05-23T14:19:51</span>
+      <span>Ophelia_Mitchell@karley.name</span>
+      <span>1</span>
+      <span>Simeon McLaughlin</span>
+      <span>Singapore</span>
+      <span>2012-03-07T00:08:36</span>
+      <span>Sabrina_Barton@torey.net</span>
+      <span>2</span>
+      <span>Kelsie Shanahan</span>
+      <span>Brazil</span>
+      <span>1985-03-10T20:13:04</span>
+      <span>Karianne@salvatore.biz</span>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -53,31 +39,15 @@ export default {
   font-family: config("fonts.gotham");
 }
 
-table {
-  width: 100%;
-  border-right: 10px solid config('colors.table-bg');
-  border-left: 10px solid config('colors.table-bg');
-  border-bottom: 10px solid config('colors.table-bg');
-  border-radius: 3px;
-  background-color: #fff;
-
-}
-
-th {
-  background-color: config('colors.table-bg');
-  color: rgba(255,255,255,0.5);
-  text-align: justify;
-}
-
-td {
+.grid {
   background-color: config('colors.table-bg');
   color: config('colors.text-primary');
-  text-align: justify;
+  padding: config('padding.grid-table');
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }
 
-tr:first-child
-{
-    line-height:40px;
+.grid > span {
+    padding: 8px 4px;
 }
-
 </style>

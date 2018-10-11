@@ -660,7 +660,8 @@ module.exports = {
     '24': '6rem',
     '32': '8rem',
     'card-ui': '0.6875rem',
-    'card': '1.25rem'
+    'card': '1.25rem',
+    'grid-table': '	0.625rem'
   },
 
   /*
