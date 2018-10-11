@@ -35,7 +35,8 @@
             input-name="brainkey"
             class="mb-4"
           />
-          <KeyfileLoader/>
+
+          <KeyfileLoader @select="selectFile"/>
 
           <VInput
             v-model.trim="pin"
@@ -111,7 +112,8 @@ export default {
       confirmPin: '',
       inProgress: false,
       type: 'password',
-      loginError: false
+      loginError: false,
+      file: null
     }
   },
   computed: {
@@ -150,6 +152,9 @@ export default {
       this.loginError = false
       this.type = type
       this.$nextTick(() => { this.$v.$reset() })
+    },
+    selectFile(file) {
+      this.file = file
     }
   }
 }

@@ -13,7 +13,7 @@
 
         <div
           v-if = "!file"
-          :class = "{ hide: isOnDrag }"
+          :class = "{ hide: dragOver }"
           class="source_box white_solid_border horizontal_flex">
           <div class="center_white_text">or SELECT KEY FILE</div>
           <svgicon
@@ -22,7 +22,7 @@
         </div>
 
         <div
-          :class = "{ hide: !isOnDrag }"
+          :class = "{ hide: !dragOver }"
           class="source_box white_dotted_border drag_place_holder">
           Place in this area
         </div>
@@ -32,7 +32,7 @@
           class="source_box white_solid_border">
           <div class="labels">
             <div class="loading flex">
-              <span @click="cancelLoading">LOADING...</span>
+              <span @click="cancelFile">LOADING...</span>
             </div>
             <div class="cancel flex">
               <span>CANCEL</span>
@@ -74,7 +74,8 @@
             <div class="file_name">{{ fileName }}</div>
             <svgicon
               class="cancel_icon"
-              name="cancel"/>
+              name="cancel"
+              @click="cancelFile"/>
           </div>
         </div>
       </div>
@@ -86,7 +87,6 @@
 import '@icons/copy'
 import '@icons/binfile'
 import '@icons/cancel'
-import { mapActions } from 'vuex'
 
 export default {
   props: {
@@ -100,7 +100,7 @@ export default {
       dragAndDropCapable: false,
       file: null,
       loading: false,
-      isOnDrag: false,
+      dragOver: false,
       progressValue: 0
     }
   },
@@ -128,26 +128,31 @@ export default {
       })
       this.$refs.fileform.addEventListener('drop', e => {
         const file = e.dataTransfer.files[0]
-        this.emitFile(file)
+        this.dragOver = false
+        this.readFile(file)
       })
-      this.$refs.fileform.addEventListener('dragover', e => {
-        this.isOnDrag = true
+      this.$refs.fileform.addEventListener('dragenter', e => {
+        this.dragOver = true
       })
       this.$refs.fileform.addEventListener('dragleave', e => {
-        this.isOnDrag = false
+        this.dragOver = false
       })
     }
   },
   methods: {
-    ...mapActions({
-      loginPass: 'account/loginWithPassword',
-      backup: 'account/restoreBackup'
-    }),
     selectFile() {
       this.$refs.fileInput.click()
     },
-    emitFile(file) {
+    fileSelected(e) {
+      const file = e.target.files[0]
+      this.readFile(file)
+    },
+    extractFileExtension(file) {
+      return file.name.split('.').pop()
+    },
+    readFile(file) {
       if (file) {
+        if (this.extractFileExtension(file) !== 'bin') return
         this.file = file
         let reader = new FileReader()
         reader.onloadstart = () => {
@@ -164,19 +169,8 @@ export default {
           this.progressValue = 100
         }
         reader.readAsBinaryString(this.file)
-        this.$emit('select', {
-          success: true,
-          file
-        })
-        return
+        this.$emit('select', file)
       }
-      this.$emit('select', {
-        success: false
-      })
-    },
-    fileSelected(e) {
-      const file = e.target.files[0]
-      this.emitFile(file)
     },
     determineDragAndDropCapable() {
       const div = document.createElement('div')
@@ -184,10 +178,17 @@ export default {
               ('ondragstart' in div && 'ondrop' in div)) &&
               'FileReader' in window
     },
-    cancelLoading() {
+    cancelFile(e) {
+      e.stopPropagation()
       this.loading = false
       this.file = false
       this.progressValue = 0
+    },
+    handleDragStart(e) {
+      this.isOnDrag = true
+    },
+    handleDragEnd(e) {
+      this.isOnDrag = false
     }
   }
 }
@@ -228,7 +229,7 @@ export default {
     display: table-cell;
     text-align: center;
     font-size: 11px;
-    color: #7a7675;
+    color: config('colors.input-title-active');
   }
   .labels {
     padding-top: 12px;
@@ -240,7 +241,7 @@ export default {
   }
   .loading {
     font-size: 11px;
-    color: #7a7675;
+    color: config('colors.input-title-active');
   }
   .cancel {
     font-size: 18px;
@@ -248,7 +249,7 @@ export default {
   }
   .percent {
     font-size: 18px;
-    color: #7a7675;
+    color: config('colors.input-title-active');
   }
   .flex {
     display: flex;
@@ -260,14 +261,14 @@ export default {
     margin-top: 3px;
     height: 4px;
     width: 307px;
-    background-color: #7a7675;
+    background-color: config('colors.input-title-active');
     margin-left: 21px;
     margin-right: 21px;
   }
   .bar {
     width: 80%;
     height: 4px;
-    background-color: #fff200;
+    background-color: config('colors.text-error');
   }
   .error_box {
     display: table;
@@ -283,21 +284,19 @@ export default {
     height: 14px;
     font-size: 18px;
     text-align: center;
-    color: #ffffff;
+    color: white;
   }
   .bottom_yellow_text {
     height: 10px;
     font-size: 11px;
     padding-top: 5px;
     text-align: center;
-    color: #fff200;
+    color: config('colors.text-error');
   }
   .file_uploaded {
     margin: auto;
     display: flex;
-    flex-direction: row;
     justify-content: center;
-
   }
   .column_cell_middle_vert {
     display: table-cell;
@@ -310,7 +309,7 @@ export default {
   }
   .file_name {
     font-size: 16px;
-    color: #ffffff;
+    color: white;
     padding-left: 9px;
     padding-right: 4px;
   }
