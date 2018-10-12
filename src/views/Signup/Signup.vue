@@ -29,8 +29,8 @@
           <VInput
             v-model.trim="confirmPassword"
             :errors="$v.confirmPassword"
-            input-name="confirmPassword"
             :icon="!!passToCopy ? 'paste' : null"
+            input-name="confirmPassword"
             class="mb-2"
             @icon-click="pastePassword"
           />
