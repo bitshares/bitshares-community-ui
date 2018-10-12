@@ -4,7 +4,9 @@ export default {
     validation: {
       required: 'Enter username',
       minLength: 'Must be 4 characters or more',
-      isUnique: 'Username already exists'
+      isUnique: 'Username already exists',
+      hasSpecialSymbol: 'Should contain @, - or number',
+      noBadSymbolAtEnd: 'Should not end with @, - or .'
     }
   },
   password: {

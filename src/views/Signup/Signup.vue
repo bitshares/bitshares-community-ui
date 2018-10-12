@@ -94,7 +94,9 @@ import { validationMixin } from 'vuelidate'
 import { required, minLength, sameAs } from 'vuelidate/lib/validators'
 import { mapActions } from 'vuex'
 import { utils, getUser } from 'vuex-bitshares/src/services/api/account.js'
-// console.log(api)
+import dictionary from 'vuex-bitshares/test/brainkey_dictionary.js'
+import '@icons/copy'
+import '@icons/paste'
 
 const isUnique = (name) => {
   if (name === '') return true
@@ -109,27 +111,50 @@ export default {
   components: { VInput, Button, Tabs },
   mixins: [validationMixin],
   validations() {
-    return this.type === 'password'
-      ? {
-        name: { required, isUnique, minLength: minLength(4) },
+    let validations = {
+      name: {
+        required,
+        isUnique,
+        minLength: minLength(4),
+        hasSpecialSymbol(value) {
+          const hasDog = value.indexOf('@') > -1
+          const hasLine = value.indexOf('-') > -1
+          const hasNumber = /\d/.test(value)
+          return hasDog || hasLine || hasNumber
+        },
+        noBadSymbolAtEnd(value) {
+          if (value.indexOf('@') === value.length - 1) return false
+          if (value.indexOf('-') === value.length - 1) return false
+          if (value.indexOf('.') === value.length - 1) return false
+          return true
+        }
+      }
+    }
+    if (this.type === 'password') {
+      validations = {
+        ...validations,
         password: { required },
         confirmPassword: { sameAsPassword: sameAs('password') },
         pin: {},
-        confirmPin: {}
-      }
-      : {
+        confirmPin: {} }
+    } else {
+      validations = {
+        ...validations,
         name: { required, isUnique, minLength: minLength(4) },
         password: {},
         confirmPassword: {},
         pin: { required, minLength: minLength(6) },
         confirmPin: { sameAsPin: sameAs('pin') }
       }
+    }
+    return validations
   },
   data() {
     return {
       name: '',
       password: '',
       confirmPassword: '',
+      passToCopy: '',
       pin: '',
       confirmPin: '',
       inProgress: false,
@@ -151,21 +176,37 @@ export default {
       signupWithPassword: 'acc/signupWithPassword',
       signupBrainkey: 'acc/signupBrainkey'
     }),
-    async handleSignup() {
+    handleSignup() {
       this.$v.$touch()
       if (this.$v.$invalid) return
-      this.inProgress = true
       if (this.type === 'password') {
-        const resp = await this.signupWithPassword({
-          name: this.name,
-          password: this.password
-        })
-        if (resp.error) this.$toast.error(resp.message)
-        else this.$router.push({ name: 'main' })
+        this.handleSignupPassword()
       } else {
-        this.$router.push({ name: 'main' })
+        this.handleSignupBrainkey()
       }
+    },
+    async handleSignupPassword() {
+      this.inProgress = true
+      const resp = await this.signupWithPassword({
+        name: this.name,
+        password: this.password
+      })
       this.inProgress = false
+
+      if (resp.error) this.$toast.error(resp.message)
+      else this.$router.push({ name: 'main' })
+    },
+    async handleSignupBrainkey() {
+      this.inProgress = true
+      const resp = await this.signupBrainkey({
+        name: this.name,
+        password: this.pin,
+        dictionary: dictionary.en,
+        email: ''
+      })
+      this.inProgress = false
+      if (resp.error) this.$toast.error(resp.message)
+      else this.$router.push({ name: 'main' })
     },
     changeSignupType(type) {
       this.type = type
@@ -173,10 +214,11 @@ export default {
     },
     copyPassword() {
       this.$copyText(this.password)
+      this.passToCopy = this.password
       this.$toast.success('password copied to clipboard')
     },
     pastePassword() {
-      this.confirmPassword = this.password
+      this.confirmPassword = this.passToCopy
     }
   }
 }

@@ -13,8 +13,9 @@
       :value="value"
       :disabled="disabled"
       :type="inputType"
-      autocorrect="off"
-      spellcheck="off"
+      :autocorrect="false"
+      :autocomplete="false"
+      :spellcheck="false"
       class="input__input"
       @paste="handlePaste"
       @input="handleInput"
@@ -48,14 +49,9 @@
 
     <!-- error message -->
     <div
-      v-if="hasError"
+      v-if="hasError && !errors.$pending"
       class="input__error">
-      <div
-        v-for="(param, index) in validationParams"
-        :key="index"
-      >
-        <div v-if="!errors[param]">{{ validationMessages[param] }} </div>
-      </div>
+      <div>{{ erroredMessage }}</div>
     </div>
 
   </div>
@@ -63,6 +59,7 @@
 
 <script>
 import '@/assets/icons/'
+import debounce from 'lodash/debounce'
 import messages from '@/helpers/inputMessages.js'
 
 export default {
@@ -119,6 +116,10 @@ export default {
     validationParams() {
       return Object.keys(this.errors.$params)
     },
+    erroredMessage() {
+      const param = this.validationParams.find(param => !this.errors[param])
+      return this.validationMessages[param]
+    },
     inputMessages() {
       return messages[this.inputName]
     },
@@ -142,10 +143,17 @@ export default {
       })
     }
   },
+  created() {
+    this.$debouncedTouch = debounce(() => {
+      console.log('throttled')
+      this.errors.$touch()
+    }, 500)
+  },
   methods: {
     handleInput({ target: { value } }) {
       const newValue = this.isNumber ? (parseInt(value) || '') : value
-      this.errors.$touch()
+      this.errors.$reset()
+      this.$debouncedTouch()
       this.$emit('input', newValue + '')
     },
     // prevent pasting non-numbers if this is a number input
@@ -154,6 +162,7 @@ export default {
       event.preventDefault()
       const text = event.clipboardData.getData('text')
       const number = this.value + (parseInt(text) || null)
+      this.$debouncedTouch()
       this.$emit('input', number + '')
     },
     handleBlur() {
