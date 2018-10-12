@@ -145,9 +145,8 @@ export default {
   },
   created() {
     this.$debouncedTouch = debounce(() => {
-      console.log('throttled')
       this.errors.$touch()
-    }, 500)
+    }, 300)
   },
   methods: {
     handleInput({ target: { value } }) {

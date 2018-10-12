@@ -30,7 +30,7 @@
             v-model.trim="confirmPassword"
             :errors="$v.confirmPassword"
             input-name="confirmPassword"
-            icon="paste"
+            :icon="!!passToCopy ? 'paste' : null"
             class="mb-2"
             @icon-click="pastePassword"
           />
@@ -215,7 +215,7 @@ export default {
     copyPassword() {
       this.$copyText(this.password)
       this.passToCopy = this.password
-      this.$toast.success('password copied to clipboard')
+      this.$toast.info('password copied to clipboard')
     },
     pastePassword() {
       this.confirmPassword = this.passToCopy
