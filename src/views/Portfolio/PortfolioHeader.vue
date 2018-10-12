@@ -1,6 +1,6 @@
 <template>
-  <div class="portfolio">
-    <div class="textWeak">Balance</div>&nbsp; 6754 USD
+  <div class="portfolio-header">
+    <div class="text-weak">Balance</div>&nbsp; 6754 USD
   </div>
 </template>
 
@@ -11,14 +11,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.portfolio {
+.portfolio-header {
   font-family: config("fonts.gotham");
   font-size: config('textSizes.sm');
   display: flex;
   color: config('colors.text-primary');
 }
 
-.textWeak {
+.text-weak {
     opacity: 0.5;
     font-size: config('textSizes.xs-sm');
     line-height: normal;

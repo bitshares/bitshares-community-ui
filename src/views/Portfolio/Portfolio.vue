@@ -5,28 +5,65 @@
       <span><strong>$Price</strong></span>
       <span><strong>24h%</strong></span>
       <span><strong>7d%</strong></span>
-      <span>BTC</span>
-      <span>45</span>
-      <span>-1%</span>
-      <span>0%</span>
-      <span>BTS</span>
-      <span>7.2</span>
-      <span>-1%</span>
-      <span>0%</span>
-      <span>TRUSTY</span>
-      <span>45</span>
-      <span>2%</span>
-      <span>0%</span>
-      <span>ETH</span>
-      <span>156</span>
-      <span>0%</span>
-      <span>1%</span>
+    </div>
+    <div class="grid-items">
+      <div
+        v-for="(item, index) in items"
+        :key="index">
+        <span>{{ item.name }}</span>
+        <span>{{ item.token }}</span>
+        <span>{{ item.fiatValue }}</span>
+        <span>{{ item.percent }}</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      items: [{
+        name: 'BTC',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12
+      },
+      {
+        name: 'ETH',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12
+      },
+      {
+        name: 'LTC',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12
+      },
+      {
+        name: 'BTS',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12 },
+      {
+        name: 'USD',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12 },
+      {
+        name: 'XRP',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12 },
+      {
+        name: 'EOS',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12 }]
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -42,12 +79,21 @@ export default {}
   grid-template-columns: repeat(4, 1fr);
 }
 
+.grid-items div {
+  background-color: config('colors.table-bg');
+  color: config('colors.text-primary');
+  padding: config('padding.grid-table');
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  line-height: 5px;
+}
+
 .grid > span {
     padding: 8px 4px;
     font-size: config('textSizes.sm');
 }
 
-.grid > span > strong {
+.grid span strong {
     font-size: config('textSizes.xs-sm');
 }
 </style>
