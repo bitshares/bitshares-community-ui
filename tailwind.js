@@ -267,7 +267,9 @@ module.exports = {
 
   textSizes: {
     'xxs': '.65rem', // 10px
+    'xxs-xs': '0.6875rem',
     'xs': '.75rem', // 12px
+    'xs-sm': '0.8125rem', // 13px
     'sm': '.875rem', // 14px
     'base': '1rem', // 16px
     'lg': '1.125rem', // 18px
@@ -276,6 +278,7 @@ module.exports = {
     '3xl': '1.875rem', // 30px
     '4xl': '2.25rem', // 36px
     '5xl': '3rem' // 48px
+
   },
 
   /*
@@ -696,7 +699,6 @@ module.exports = {
     '20': '5rem',
     '24': '6rem',
     '32': '8rem',
-    'card-ui-header': '1.6875rem'
   },
 
   /*

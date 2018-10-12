@@ -30,16 +30,15 @@ export default {
 <style scoped lang="scss">
 
 .card {
-  font-family: config('fonts.gotham-regular');
   background-color: config('colors.card-background');
   color: config('colors.text-primary');
-  padding:config('padding.card-ui')
+  padding:config('padding.card-ui');
 }
 
 .card-header {
   display:flex;
   justify-content: space-between;
-  margin-bottom: config('margin.card-ui-header');
+  margin-bottom: config('margin.2');
 }
 
 .title {
@@ -47,6 +46,7 @@ export default {
   font-size: config('textSizes.base');
   font-family: config('fonts.gotham-medium');
   text-transform: uppercase;
+  font-size: config('textSizes.base');
 }
 
 .header {
