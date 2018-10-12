@@ -7,14 +7,8 @@
         <PortfolioHeader />
       </div>
       <div slot="body">
-        <Tabs :tabs="['SHOW ALL ASSETS', 'SHOW BALANCES']">
-          <div slot="SHOW ALL ASSETS">
-            <Portfolio />
-          </div>
-          <div slot="SHOW BALANCES">
-            <Portfolio />
-          </div>
-        </Tabs>
+        <PortfolioItem />
+        <Portfolio />
       </div>
     </Card>
   </div>
@@ -23,12 +17,12 @@
 <script>
 import Portfolio from './Portfolio/Portfolio.vue'
 import PortfolioHeader from './Portfolio/PortfolioHeader.vue'
-import Tabs from '@/components/Tabs'
+import PortfolioItem from './Portfolio/PortfolioItem.vue'
 import Card from '@/components/Card'
 
 export default {
   name: 'Dashboard',
-  components: { Portfolio, PortfolioHeader, Tabs, Card }
+  components: { Portfolio, PortfolioHeader, PortfolioItem, Card }
 }
 </script>
 
