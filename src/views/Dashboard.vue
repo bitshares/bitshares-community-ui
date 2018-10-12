@@ -1,6 +1,33 @@
 <template>
   <div class="dashboard">
     dashboard!
+  <div class="dashboard flex flex-col lg:flex-row">
+
+    <Card
+      class="lg:w-1/3"
+      title="account">
+      <div slot="body"/>
+    </Card>
+
+    <Card
+      class="lg:w-1/3 disabled"
+      title="markets">
+      <div
+        slot="body"
+        class="uppercase">
+        under construction
+      </div>
+    </Card>
+
+    <Card
+      class="lg:w-1/3 disabled"
+      title="order book">
+      <div
+        slot="body"
+        class="uppercase">
+        under construction
+      </div>
+    </Card>
     <Card
       :title="'portfolio'">
       <div slot="header">
@@ -9,8 +36,8 @@
       <div slot="body">
         <PortfolioItem />
         <Portfolio />
-      </div>
-    </Card>
+       </div>
+     </Card>
   </div>
 </template>
 
@@ -18,6 +45,7 @@
 import Portfolio from './Portfolio/Portfolio.vue'
 import PortfolioHeader from './Portfolio/PortfolioHeader.vue'
 import PortfolioItem from './Portfolio/PortfolioItem.vue'
+
 import Card from '@/components/Card'
 
 export default {

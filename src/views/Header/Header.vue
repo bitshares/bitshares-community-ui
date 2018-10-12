@@ -1,6 +1,10 @@
 <template>
   <div class="header">
-    <p>BitSharesApp</p>
+    <svgicon
+      name="bitshares"
+      color="white"
+      width="141"
+      height="33"/>
     <UserInfo/>
   </div>
 
@@ -8,6 +12,7 @@
 
 <script>
 import UserInfo from './HeaderUserInfo'
+import '@icons/bitshares'
 
 export default {
   name: 'Header',
@@ -18,9 +23,8 @@ export default {
 <style>
 .header {
   @apply px-2 py-3;
-  border: 1px solid black;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
 }
 </style>
