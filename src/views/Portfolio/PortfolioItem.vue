@@ -74,15 +74,16 @@ export default {
   color: config('colors.tab-header');
   font-size: config('textSizes.xxs-xs');
   text-align: center;
+  line-height: 0px;
   &--active {
     @apply cursor-default;
     color: config('colors.tab-active')!important;
-      border-bottom: 3px solid config('colors.tab-header');
+    border-bottom: 2px solid config('colors.tab-header');
     border-bottom-color: config('colors.tab-active')!important;
   }
   &:hover {
     color:config('colors.tab-hover');
-      border-bottom: 3px solid config('colors.tab-header');
+      border-bottom: 2px solid config('colors.tab-header');
     border-bottom-color: config('colors.tab-hover');
   }
 }

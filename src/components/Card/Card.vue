@@ -38,7 +38,7 @@ export default {
 .card-header {
   display:flex;
   justify-content: space-between;
-  margin-bottom: config('margin.2');
+  margin-bottom: config('margin.3');
 }
 
 .title {
