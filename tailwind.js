@@ -694,7 +694,7 @@ module.exports = {
     '20': '5rem',
     '24': '6rem',
     '32': '8rem',
-    'card-ui-header': '1.6875rem'
+    'card-ui-header': '1rem'
   },
 
   /*

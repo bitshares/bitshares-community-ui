@@ -1,13 +1,14 @@
 <template>
-  <div class="singleline">
-
-    <a
+  <div class="user-info">
+    <!-- <svgicon name="userIcon"/> -->
+    <svgicon
       v-show="userName"
-      href="#"
-      @click.prevent="handleLogout">logout</a>
-    <svgicon name="userIcon"/>
-    <p>{{ userName }}</p>
-    <svgicon name="arrowDown"/>
+      class="mr-3 cursor-pointer"
+      name="logout"
+      @click.native="handleLogout"
+    />
+    <p class="uppercase text-lg">{{ userName }}</p>
+    <!-- <svgicon name="arrowDown"/> -->
   </div>
 </template>
 
@@ -15,6 +16,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import '@icons/userIcon'
 import '@icons/arrowDown'
+import '@icons/logout'
 
 export default {
   name: 'UserInfo',
@@ -36,7 +38,8 @@ export default {
 </script>
 
 <style scoped>
-  .singleline {
-    @apply .inline-flex
+  .user-info {
+    @apply inline-flex text-white;
+
   }
 </style>

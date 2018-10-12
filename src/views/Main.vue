@@ -1,10 +1,10 @@
 <template>
   <div class="main">
     <Header/>
-    <div class="main__content">
+    <div class="main__content lg:p-2">
       <router-view/>
     </div>
-    <Footer/>
+    <!-- <Footer/> -->
   </div>
 </template>
 
@@ -42,9 +42,10 @@ export default {
 <style >
   .main {
     @apply h-full flex flex-col;
+    overflow: hidden;
   }
   .main__content {
-    @apply h-full flex flex-col p-2;
-    border: 1px solid black;
+    @apply h-full flex flex-col;
+    overflow: auto;
   }
 </style>

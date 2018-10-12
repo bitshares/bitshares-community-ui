@@ -18,6 +18,5 @@ export default {
     @apply p-2;
     display: flex;
     justify-content: flex-end;
-    border: 1px solid black;
   }
 </style>
