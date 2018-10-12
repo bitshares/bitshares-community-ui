@@ -1,90 +1,108 @@
 <template>
-  <div class="portfolioItem">
+  <div>
     <div
-      class="item-header">
-      <div
-        :class="active1 === true ? 'item--active' : ''"
-        class="item"
-        @click="handleClick1()"
-      >
-        {{ text1 }}
-      </div>
-    </div>
-    <div
-      class="item-header">
-      <div
-        :class="active2 === true ? 'item--active' : ''"
-        class="item"
-        @click="handleClick2()"
-      >
-        {{ text2 }}
-      </div>
+      v-for="(item, index) in items"
+      :key="index"
+      class="grid-items"
+    >
+      <span>{{ item.name }}</span>
+      <span>{{ item.token }}</span>
+      <span>{{ item.fiatValue }}</span>
+      <span>{{ item.percent }}</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: {
-    text1: {
-      default: 'SHOW ALL ASSETS',
-      type: String
-    },
-    text2: {
-      default: 'SHOW BALANCES',
-      type: String
-    }
-  },
   data() {
     return {
-      active1: false,
-      active2: false
-    }
-  },
-  methods: {
-    handleClick1() {
-      this.active1 = !this.active1
-    },
-    handleClick2() {
-      this.active2 = !this.active2
+      items: [{
+        name: 'BTC',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12
+      },
+      {
+        name: 'ETH',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12
+      },
+      {
+        name: 'LTC',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12
+      },
+      {
+        name: 'BTS',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12 },
+      {
+        name: 'USD',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12 },
+      {
+        name: 'XRP',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12 },
+      {
+        name: 'EOS',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12 }]
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.portfolioItem {
-  font-family: config("fonts.gotham");
+
+.grid-items div {
+  background-color: config('colors.table-bg');
   color: config('colors.text-primary');
-  display: flex;
-  justify-content: space-between;
+  padding: config('padding.grid-table');
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  line-height: 5px;
 }
 
-.item-header {
-  padding: 0;
-  text-transform: uppercase;
-  &--centered {
-    justify-content: center;
+.grid-items span {
+    padding: 8px 15px;
+    font-size: config('textSizes.sm');
+}
+
+@media screen and (max-width: 990px) {
+  .grid-items span {
+    padding: 8px 65px;
   }
 }
 
-.item-header .item {
-  @apply font-gotham text-base py-3;
-  @apply cursor-pointer;
-  color: config('colors.tab-header');
-  font-size: config('textSizes.xxs-xs');
-  text-align: center;
-  line-height: 0px;
-  &--active {
-    @apply cursor-default;
-    color: config('colors.tab-active')!important;
-    border-bottom: 2px solid config('colors.tab-header');
-    border-bottom-color: config('colors.tab-active')!important;
+@media screen and (max-width: 768px) {
+  .grid-items span {
+    padding: 8px 45px;
   }
-  &:hover {
-    color:config('colors.tab-hover');
-      border-bottom: 2px solid config('colors.tab-header');
-    border-bottom-color: config('colors.tab-hover');
+}
+
+@media screen and (max-width: 480px) {
+  .grid-items span {
+    padding: 8px 30px;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .grid-items span {
+    padding: 8px 20px;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .grid-items span {
+    padding: 8px 10px;
   }
 }
 

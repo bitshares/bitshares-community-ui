@@ -36,8 +36,11 @@
           <PortfolioHeader />
         </div>
         <div slot="body">
-          <PortfolioItem />
-          <Portfolio />
+          <Portfolio>
+            <div slot="item">
+              <PortfolioItem />
+            </div>
+          </Portfolio>
         </div>
       </Card>
     </div>

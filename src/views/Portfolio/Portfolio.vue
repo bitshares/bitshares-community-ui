@@ -1,66 +1,61 @@
 <template>
   <div class="portfolio">
+    <div class="portfolio-options">
+      <div
+        class="options-header">
+        <div
+          :class="active1 === true ? 'option--active' : ''"
+          class="option"
+          @click="handleClick1()"
+        >
+          {{ text1 }}
+        </div>
+      </div>
+      <div
+        class="options-header">
+        <div
+          :class="active2 === true ? 'option--active' : ''"
+          class="option"
+          @click="handleClick2()"
+        >
+          {{ text2 }}
+        </div>
+      </div>
+    </div>
     <div class="grid">
       <span><strong>Asset</strong></span>
       <span><strong>$Price</strong></span>
       <span><strong>24h%</strong></span>
       <span><strong>7d%</strong></span>
     </div>
-    <div class="grid-items">
-      <div
-        v-for="(item, index) in items"
-        :key="index">
-        <span>{{ item.name }}</span>
-        <span>{{ item.token }}</span>
-        <span>{{ item.fiatValue }}</span>
-        <span>{{ item.percent }}</span>
-      </div>
-    </div>
+    <slot name="item" />
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    text1: {
+      default: 'SHOW ALL ASSETS',
+      type: String
+    },
+    text2: {
+      default: 'SHOW BALANCES',
+      type: String
+    }
+  },
   data() {
     return {
-      items: [{
-        name: 'BTC',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12
-      },
-      {
-        name: 'ETH',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12
-      },
-      {
-        name: 'LTC',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12
-      },
-      {
-        name: 'BTS',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12 },
-      {
-        name: 'USD',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12 },
-      {
-        name: 'XRP',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12 },
-      {
-        name: 'EOS',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12 }]
+      active1: false,
+      active2: false
+    }
+  },
+  methods: {
+    handleClick1() {
+      this.active1 = !this.active1
+    },
+    handleClick2() {
+      this.active2 = !this.active2
     }
   }
 }
@@ -71,6 +66,41 @@ export default {
   font-family: config("fonts.gotham");
 }
 
+.portfolio-options {
+  font-family: config("fonts.gotham");
+  color: config('colors.text-primary');
+  display: flex;
+  justify-content: space-between;
+}
+
+.options-header {
+  padding: 0;
+  text-transform: uppercase;
+  &--centered {
+    justify-content: center;
+  }
+}
+
+.options-header .option {
+  @apply font-gotham text-base py-3;
+  @apply cursor-pointer;
+  color: config('colors.tab-header');
+  font-size: config('textSizes.xxs-xs');
+  text-align: center;
+  line-height: 0px;
+  &--active {
+    @apply cursor-default;
+    color: config('colors.tab-active')!important;
+    border-bottom: 2px solid config('colors.tab-header');
+    border-bottom-color: config('colors.tab-active')!important;
+  }
+  &:hover {
+    color:config('colors.tab-hover');
+      border-bottom: 2px solid config('colors.tab-header');
+    border-bottom-color: config('colors.tab-hover');
+  }
+}
+
 .grid {
   background-color: config('colors.table-bg');
   color: config('colors.text-primary');
@@ -79,16 +109,7 @@ export default {
   grid-template-columns: repeat(4, 1fr);
 }
 
-.grid-items div {
-  background-color: config('colors.table-bg');
-  color: config('colors.text-primary');
-  padding: config('padding.grid-table');
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  line-height: 5px;
-}
-
-.grid > span {
+.grid span {
     padding: 8px 4px;
     font-size: config('textSizes.sm');
 }
@@ -96,4 +117,5 @@ export default {
 .grid span strong {
     font-size: config('textSizes.xs-sm');
 }
+
 </style>
