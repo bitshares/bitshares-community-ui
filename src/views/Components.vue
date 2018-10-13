@@ -19,7 +19,6 @@
       </Card>
     </div>
     <div>
-
       <Tabs
         :centered="true"
         :tabs="['Tab example #1 with the responsive width', 'Tab example #2 with the responsive width', 'Tab example #3 with the responsive width']">
@@ -45,12 +44,11 @@
 <script>
 import Button from '@/components/Button/'
 import Tabs from '@/components/Tabs/'
-import VInput from '@/components/Input/'
 import Card from '@/components/Card'
 
 export default {
   name: 'Components',
-  components: { Button, VInput, Tabs, Card },
+  components: { Button, Tabs, Card },
   data() {
     return {
       testString: '',

@@ -44,13 +44,14 @@ export default {
 .card-header {
   display:flex;
   justify-content: space-between;
-  margin-bottom: config('margin.card-ui-header');
+  margin-bottom: config('margin.3');
 }
 
 .title {
   font-size: config('textSizes.base');
   font-family: config('fonts.gotham-medium');
   text-transform: uppercase;
+  font-size: config('textSizes.base');
 }
 
 .header {
