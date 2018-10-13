@@ -164,7 +164,7 @@ export default {
       this.inProgress = false
     },
     async handleLoginFile() {
-      const { success } = await this.fileLogin({ 
+      const { success } = await this.fileLogin({
         password: this.password,
         backup: this.file
       })
