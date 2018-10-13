@@ -153,6 +153,7 @@ export default {
   color: config('colors.text-primary');
   padding: config('padding.grid-table');
   display: grid;
+  grid-column-gap: 30px;
   grid-template-columns: repeat(4, 2fr);
 }
 

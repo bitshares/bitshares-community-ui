@@ -27,6 +27,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(4, 2fr);
   line-height: 5px;
+  grid-column-gap: 30px;
 }
 
 .grid-items span {
