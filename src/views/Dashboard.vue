@@ -28,7 +28,7 @@
     </Card>
 
     <Card
-      class="lg:w-2/3 scrollable"
+      class="lg:w-1/3 scrollable"
       title="Transactions">
       <div slot="body">
         <TransactionsHistory/>
