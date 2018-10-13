@@ -58,6 +58,7 @@ export default {
   font-size: config('textSizes.base');
   font-family: config('fonts.gotham-medium');
   text-transform: uppercase;
+  font-size: config('textSizes.base');
 }
 
 .header {
