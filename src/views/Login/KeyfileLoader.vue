@@ -50,7 +50,7 @@
         </div>
 
         <div
-          v-if = "loadingError"
+          v-if="loadingError"
           class="source_box white_solid_border error_box">
           <div class="two_line">
             <div class="top_white_text">
@@ -66,7 +66,7 @@
         </div>
 
         <div
-          v-if = "loadingSuccess"
+          v-if="loadingSuccess"
           class="source_box white_solid_border column_cell_middle_vert">
           <div class="file_uploaded">
             <svgicon
@@ -118,7 +118,6 @@ export default {
     loadingError() {
       return this.file && this.restoreError && !this.dragOver
     },
-
     loadingSuccess() {
       return this.file && !this.restoreError && !this.dragOver && !this.loading
     }
@@ -171,7 +170,7 @@ export default {
           }
         }
         reader.onloadend = () => {
-          // this.loading = false
+          this.loading = false
           this.progressValue = 100
         }
         reader.readAsBinaryString(this.file)
@@ -224,7 +223,6 @@ export default {
   }
   .drag_place_holder {
     vertical-align: middle;
-    display: table-cell;
     text-align: center;
     font-size: 11px;
     color: config('colors.input-title-active');
@@ -269,11 +267,9 @@ export default {
     background-color: config('colors.text-error');
   }
   .error_box {
-    display: table;
     flex-direction: row;
   }
   .two_line {
-    display: table-cell;
     vertical-align: middle;
     padding-left: 52px;
     width: 283px;
@@ -295,10 +291,6 @@ export default {
     margin: auto;
     display: flex;
     justify-content: center;
-  }
-  .column_cell_middle_vert {
-    display: table-cell;
-    vertical-align: middle;
   }
   .binfile_icon {
     color: white;
