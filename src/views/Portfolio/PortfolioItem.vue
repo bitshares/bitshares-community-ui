@@ -28,8 +28,8 @@ export default {
   grid-template-columns: repeat(4, 2fr);
   line-height: 5px;
   grid-column-gap: 30px;
-  margin-right: config('margin.grid-items');
-  margin-left: config('margin.grid-items');
+  padding-left: config('padding.0');
+  padding-right: config('padding.0');
 }
 
 .grid-items span {

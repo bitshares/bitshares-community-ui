@@ -155,8 +155,8 @@ export default {
   display: grid;
   grid-column-gap: 30px;
   grid-template-columns: repeat(4, 2fr);
-  margin-right: config('margin.grid-items');
-  margin-left: config('margin.grid-items');
+  padding-left: config('padding.0');
+  padding-right: config('padding.0');
 }
 
 .grid span {
