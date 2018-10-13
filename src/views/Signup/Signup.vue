@@ -123,10 +123,7 @@ export default {
           return hasDog || hasLine || hasNumber
         },
         noBadSymbolAtEnd(value) {
-          if (value.indexOf('@') === value.length - 1) return false
-          if (value.indexOf('-') === value.length - 1) return false
-          if (value.indexOf('.') === value.length - 1) return false
-          return true
+          return (!value.endsWith('@') && !value.endsWith('-') && !value.endsWith('.'))
         }
       }
     }
