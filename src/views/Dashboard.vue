@@ -6,7 +6,18 @@
       <Card
         class="lg:w-1/3"
         title="account">
-        <div slot="body"/>
+        <div slot="body">
+          <Card
+            :title="'portfolio'"
+          >
+            <div slot="header">
+              <PortfolioHeader />
+            </div>
+            <div slot="body">
+              <Portfolio />
+            </div>
+          </Card>
+        </div>
       </Card>
 
       <Card
@@ -28,16 +39,12 @@
           under construction
         </div>
       </Card>
-      
+
       <Card
-        :title="'portfolio'"
-        class="lg:w-1/3"
-      >
-        <div slot="header">
-          <PortfolioHeader />
-        </div>
+        class="lg:w-1/3 scrollable"
+        title="Transactions">
         <div slot="body">
-          <Portfolio />
+          <TransactionsHistory/>
         </div>
       </Card>
     </div>
@@ -53,7 +60,7 @@ import TransactionsHistory from '@/views/TransactionsHistory/'
 
 export default {
   name: 'Dashboard',
-  components: { Portfolio, PortfolioHeader, Card, TransactionHistory }
+  components: { Portfolio, PortfolioHeader, Card, TransactionsHistory }
 }
 </script>
 
