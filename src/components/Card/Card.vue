@@ -10,14 +10,18 @@
         class="header"
         name="header" />
     </div>
-    <div class="card-body">
-      <slot name="body" />
-    </div>
+    <ScrollingContainer>
+      <div class="card-body">
+        <slot name="body" />
+      </div>
+    </ScrollingContainer>
   </div>
 </template>
 
 <script>
+import ScrollingContainer from '@/components/ScrollingContainer/ScrollingContainer.vue'
 export default {
+  components: { ScrollingContainer },
   props: {
     title: {
       type: String,
@@ -44,7 +48,9 @@ export default {
 
 .card-header {
   padding:config('padding.card-ui');
+  padding-bottom: 0;
   display:flex;
+  flex-shrink: 0;
   justify-content: space-between;
 }
 
@@ -59,7 +65,7 @@ export default {
 }
 
 .card-body {
-  padding:config('padding.card-ui');
+  @apply p-card-ui pt-5;
   height: 100%;
   overflow: auto;
 }
