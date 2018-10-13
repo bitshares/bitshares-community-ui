@@ -59,9 +59,6 @@ export default {
       if (this.limit) return this.sortedOperations.slice(0, this.limit)
       return this.sortedOperations
     }
-  },
-  page: {
-    title: 'History'
   }
 }
 </script>
