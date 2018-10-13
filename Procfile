@@ -1,1 +1,0 @@
-Web: 'rpm run serve'

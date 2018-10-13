@@ -76,34 +76,4 @@ export default {
     font-size: config('textSizes.sm');
 }
 
-@media screen and (max-width: 990px) {
-  .grid-items span {
-    padding: 8px 65px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .grid-items span {
-    padding: 8px 45px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .grid-items span {
-    padding: 8px 30px;
-  }
-}
-
-@media screen and (max-width: 390px) {
-  .grid-items span {
-    padding: 8px 20px;
-  }
-}
-
-@media screen and (max-width: 280px) {
-  .grid-items span {
-    padding: 8px 10px;
-  }
-}
-
 </style>
