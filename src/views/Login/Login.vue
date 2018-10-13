@@ -69,7 +69,12 @@
       </div>
 
       <div class="login__footer">
-        <router-link :to="{ name: 'login' }">Sign up with new account</router-link>
+        <div class="footer-link">
+          <router-link :to="{ name: 'signup' }">Sign up with new account</router-link>
+        </div>
+        <div class="footer-link">
+          <router-link :to="{ name: 'login' }">I accept Terms of Use</router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -129,7 +134,6 @@ export default {
       brainkeyLogin: 'acc/brainkeyLogin'
     }),
     async handleLogin() {
-      this.loginError = false
       this.$v.$touch()
       if (this.$v.$invalid) return
       this.inProgress = true
@@ -151,7 +155,6 @@ export default {
       this.inProgress = false
     },
     changeLoginType(type) {
-      this.loginError = false
       this.type = type
       this.$nextTick(() => { this.$v.$reset() })
     },
@@ -190,6 +193,9 @@ export default {
     &__footer {
       text-align: center;
       @apply pb-card;
+      .footer-link {
+        @apply pt-1;
+      }
     }
   }
 </style>

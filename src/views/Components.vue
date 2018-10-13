@@ -39,28 +39,6 @@
         text="button test"
         size="small"/>
     </div>
-    <div>
-      <VInput
-        v-model="testString"
-        title="create account name"
-        icon="copy"/>
-      <VInput
-        v-model="errorMsg"
-        type="password"
-        title="password"/>
-      <VInput
-        v-model="number"
-        type="number"
-        title="number only input"/>
-      <VInput
-        v-model="testString"
-        :disabled="true"
-        title="disabled input"/>
-      <VInput
-        v-model="testString"
-        :error="errorMsg"
-        title="username"/>
-    </div>
   </div>
 </template>
 

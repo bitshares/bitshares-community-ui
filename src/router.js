@@ -30,6 +30,14 @@ const router = new Router({
       }
     },
     {
+      path: '/signup',
+      name: 'signup',
+      component: () => import(/* webpackChunkName: "auth" */ './views/Signup/Signup.vue'),
+      meta: {
+        noAuth: true
+      }
+    },
+    {
       path: '*',
       redirect: '/'
     }
