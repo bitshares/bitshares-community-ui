@@ -36,6 +36,10 @@
             class="mb-4"
           />
 
+          <KeyfileLoader
+            @select="selectFile"
+            @remove="removeFile"/>
+
           <VInput
             v-model.trim="pin"
             :errors="$v.pin"
@@ -80,13 +84,14 @@
 import VInput from '@/components/Input/'
 import Button from '@/components/Button/'
 import Tabs from '@/components/Tabs/'
+import KeyfileLoader from './KeyfileLoader'
 import { validationMixin } from 'vuelidate'
 import { required, minLength, sameAs } from 'vuelidate/lib/validators'
 import { mapActions } from 'vuex'
 
 export default {
   name: 'Login',
-  components: { VInput, Button, Tabs },
+  components: { VInput, Button, Tabs, KeyfileLoader },
   mixins: [validationMixin],
   validations() {
     return this.type === 'password'
@@ -113,7 +118,9 @@ export default {
       pin: '',
       confirmPin: '',
       inProgress: false,
-      type: 'password'
+      type: 'password',
+      loginError: false,
+      file: null
     }
   },
   computed: {
@@ -150,6 +157,12 @@ export default {
     changeLoginType(type) {
       this.type = type
       this.$nextTick(() => { this.$v.$reset() })
+    },
+    selectFile(file) {
+      this.file = file
+    },
+    removeFile() {
+      this.file = null
     }
   }
 }
