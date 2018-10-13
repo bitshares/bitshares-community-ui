@@ -36,11 +36,7 @@
           <PortfolioHeader />
         </div>
         <div slot="body">
-          <Portfolio>
-            <div slot="item">
-              <PortfolioItem />
-            </div>
-          </Portfolio>
+          <Portfolio />
         </div>
       </Card>
     </div>
@@ -50,13 +46,12 @@
 <script>
 import Portfolio from './Portfolio/Portfolio.vue'
 import PortfolioHeader from './Portfolio/PortfolioHeader.vue'
-import PortfolioItem from './Portfolio/PortfolioItem.vue'
 
 import Card from '@/components/Card'
 
 export default {
   name: 'Dashboard',
-  components: { Portfolio, PortfolioHeader, PortfolioItem, Card }
+  components: { Portfolio, PortfolioHeader, Card }
 }
 </script>
 

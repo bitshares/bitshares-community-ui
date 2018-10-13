@@ -15,46 +15,10 @@
 
 <script>
 export default {
-  data() {
-    return {
-      items: [{
-        name: 'BTC',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12
-      },
-      {
-        name: 'ETH',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12
-      },
-      {
-        name: 'LTC',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12
-      },
-      {
-        name: 'BTS',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12 },
-      {
-        name: 'USD',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12 },
-      {
-        name: 'XRP',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12 },
-      {
-        name: 'EOS',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12 }]
+  props: {
+    items: {
+      default: () => [],
+      type: Array
     }
   }
 }

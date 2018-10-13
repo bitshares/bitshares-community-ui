@@ -28,12 +28,15 @@
       <span><strong>24h%</strong></span>
       <span><strong>7d%</strong></span>
     </div>
-    <slot name="item" />
+    <PortfolioItem :items="items" />
   </div>
 </template>
 
 <script>
+import PortfolioItem from './PortfolioItem.vue'
+
 export default {
+  components: { PortfolioItem },
   props: {
     text1: {
       default: 'SHOW ALL ASSETS',
@@ -47,7 +50,45 @@ export default {
   data() {
     return {
       active1: false,
-      active2: false
+      active2: false,
+      items: [{
+        name: 'BTC',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12
+      },
+      {
+        name: 'ETH',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12
+      },
+      {
+        name: 'LTC',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12
+      },
+      {
+        name: 'BTS',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12 },
+      {
+        name: 'USD',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12 },
+      {
+        name: 'XRP',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12 },
+      {
+        name: 'EOS',
+        token: 0.345,
+        fiatValue: 2345,
+        percent: 12 }]
     }
   },
   methods: {
