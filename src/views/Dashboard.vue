@@ -26,20 +26,33 @@
         under construction
       </div>
     </Card>
+
+    <Card
+      class="lg:w-2/3 scrollable"
+      title="Transactions">
+      <div slot="body">
+        <TransactionsHistory/>
+      </div>
+    </Card>
   </div>
 </template>
 
 <script>
 import Card from '@/components/Card'
+import TransactionsHistory from '@/views/TransactionsHistory/'
 
 export default {
   name: 'Dashboard',
-  components: { Card }
+  components: { Card, TransactionsHistory }
 }
 </script>
 
 <style >
   .dashboard {
     @apply h-full;
+  }
+  .scrollable {
+    overflow: auto;
+    overflow-y: scroll;
   }
 </style>

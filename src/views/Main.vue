@@ -26,14 +26,16 @@ export default {
   watch: {
     connected: {
       handler(newVal) {
-        if (newVal) this.loadUserData(this.userId)
+        if (newVal) {
+          this.initUserData()
+        }
       },
       immediate: true
     }
   },
   methods: {
     ...mapActions({
-      loadUserData: 'user/fetchUser'
+      initUserData: 'app/initUserData'
     })
   }
 }
