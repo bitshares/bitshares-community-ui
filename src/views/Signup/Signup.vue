@@ -98,6 +98,10 @@ import dictionary from 'vuex-bitshares/test/brainkey_dictionary.js'
 import '@icons/copy'
 import '@icons/paste'
 
+// vuelidate lib validation for async data
+// when validation func recieves a promises it awaits for
+// promise resolution with either true or false to signal
+// if it's valid or not
 const isUnique = (name) => {
   if (name === '') return true
   return new Promise(async(resolve, reject) => {
