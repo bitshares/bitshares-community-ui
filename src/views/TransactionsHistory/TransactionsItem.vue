@@ -1,32 +1,22 @@
 <template >
   <div class="operation-item">
-    <div>
-      <div>
-        {{ typeTitle }}
-      </div>
-      <div>
-        <TransactionsItemTransferInfo
-          v-if="type === 'transfer'"
-          :user-id="userId"
-          :item="item"/>
+    <TransactionsItemTransferInfo
+      v-if="type === 'transfer'"
+      :user-id="userId"
+      :item="item"/>
 
-        <TransactionsItemPlaceOrderInfo
-          v-if="type === 'limit_order_create'"
-          :item="item"/>
+    <TransactionsItemPlaceOrderInfo
+      v-if="type === 'limit_order_create'"
+      :item="item"/>
 
-        <TransactionsItemFillOrderInfo
-          v-if="type === 'fill_order'"
-          :item="item"/>
+    <TransactionsItemFillOrderInfo
+      v-if="type === 'fill_order'"
+      :item="item"/>
 
-        <TransactionsItemCancelOrderInfo
-          v-if="type === 'limit_order_cancel'"
-          :item="item"/>
-      </div>
-    </div>
-    <div>
-      <div>{{ relativeTime }} ago </div>
-    </div>
-
+    <TransactionsItemCancelOrderInfo
+      v-if="type === 'limit_order_cancel'"
+      :item="item"/>
+    <div class="operation-item__date">{{ relativeTime }} ago </div>
   </div>
 </template>
 
@@ -104,8 +94,15 @@ export default {
 </script>
 
 <style>
-.operation-item .mobile-date {
-  float: right;
+.operation-item {
+  @apply text-sm;
+  display: flex;
+  justify-content: space-between;
+}
+.operation-item__date {
+  margin-left: 0.5rem;
+  flex-shrink: 0;
+  text-align: right;
   font-size: 12px;
   color: #9e9e9e;
 }

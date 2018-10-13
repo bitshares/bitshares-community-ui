@@ -13,10 +13,11 @@
 
         <div
           v-if = "initState"
-          class="source_box white_solid_border horizontal_flex">
+          class="source_box white_solid_border">
           <div class="center_white_text">or SELECT KEY FILE</div>
           <svgicon
-            class="dragndrop_icon"
+            class="dragndrop_icon ml-2"
+            color="white"
             name="dragndrop"/>
         </div>
 
@@ -49,7 +50,7 @@
         </div>
 
         <div
-          v-if = "loadingError"
+          v-if="loadingError"
           class="source_box white_solid_border error_box">
           <div class="two_line">
             <div class="top_white_text">
@@ -65,7 +66,7 @@
         </div>
 
         <div
-          v-if = "loadingSuccess"
+          v-if="loadingSuccess"
           class="source_box white_solid_border column_cell_middle_vert">
           <div class="file_uploaded">
             <svgicon
@@ -117,7 +118,6 @@ export default {
     loadingError() {
       return this.file && this.restoreError && !this.dragOver
     },
-
     loadingSuccess() {
       return this.file && !this.restoreError && !this.dragOver && !this.loading
     }
@@ -157,7 +157,10 @@ export default {
     },
     readFile(file) {
       if (file) {
-        if (this.extractFileExtension(file) !== 'bin') return
+        if (this.extractFileExtension(file) !== 'bin') {
+          this.$toast.error('invalid file')
+          return
+        }
         this.file = file
         let reader = new FileReader()
         reader.onloadstart = () => {
@@ -169,12 +172,12 @@ export default {
             this.progressValue = parseInt(((data.loaded / data.total) * 100), 10)
           }
         }
-        reader.onloadend = () => {
-          // this.loading = false
+        reader.onload = evt => {
+          this.loading = false
           this.progressValue = 100
+          this.$emit('select', evt.target.result)
         }
         reader.readAsBinaryString(this.file)
-        this.$emit('select', file)
       }
     },
     determineDragAndDropCapable() {
@@ -204,7 +207,9 @@ export default {
 <style type="text/css" scoped>
   .source_box {
     cursor: pointer;
-    width: 347px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 50px;
     background-color: black;
   }
@@ -214,27 +219,13 @@ export default {
   .white_dotted_border {
     border: 2px dotted white;
   }
-  .horizontal_flex {
-    display: table;
-  }
   .center_white_text {
     font-size: 18px;
     color: white;
-    padding-left: 79px;
-    display: table-cell;
     vertical-align: middle;
-  }
-  .dragndrop_icon {
-    color: white;
-    width: 21px;
-    height: 24px;
-    margin-right: 14px;
-    float: right;
-    margin-top: 13px;
   }
   .drag_place_holder {
     vertical-align: middle;
-    display: table-cell;
     text-align: center;
     font-size: 11px;
     color: config('colors.input-title-active');
@@ -279,11 +270,9 @@ export default {
     background-color: config('colors.text-error');
   }
   .error_box {
-    display: table;
     flex-direction: row;
   }
   .two_line {
-    display: table-cell;
     vertical-align: middle;
     padding-left: 52px;
     width: 283px;
@@ -305,10 +294,6 @@ export default {
     margin: auto;
     display: flex;
     justify-content: center;
-  }
-  .column_cell_middle_vert {
-    display: table-cell;
-    vertical-align: middle;
   }
   .binfile_icon {
     color: white;

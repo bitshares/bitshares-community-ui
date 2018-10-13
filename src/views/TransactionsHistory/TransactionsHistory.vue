@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="transaction-history">
     <LoadingContainer :loading="pending">
       <div
         v-show="error || !filteredOperations.length">
@@ -62,3 +62,7 @@ export default {
   }
 }
 </script>
+
+<style>
+
+</style>

@@ -43,16 +43,16 @@
           <VInput
             v-model.trim="pin"
             :errors="$v.pin"
+            :password="true"
             input-name="pin"
-            class="mb-4"
-            type="number"
+            class="mb-4 mt-1"
           />
 
           <VInput
             v-model.trim="confirmPin"
             :errors="$v.confirmPin"
+            :password="true"
             input-name="confirmPin"
-            type="number"
           />
         </div>
       </Tabs>
@@ -105,7 +105,12 @@ export default {
       : {
         name: {},
         password: {},
-        brainkey: { required },
+        brainkey: {
+          required: (value) => {
+            if (this.file) return true
+            return required(value)
+          }
+        },
         pin: { required, minLength: minLength(6) },
         confirmPin: { sameAsPin: sameAs('pin') }
       }
@@ -119,7 +124,6 @@ export default {
       confirmPin: '',
       inProgress: false,
       type: 'password',
-      loginError: false,
       file: null
     }
   },
@@ -131,7 +135,8 @@ export default {
   methods: {
     ...mapActions({
       cloudLogin: 'acc/cloudLogin',
-      brainkeyLogin: 'acc/brainkeyLogin'
+      brainkeyLogin: 'acc/brainkeyLogin',
+      fileLogin: 'acc/fileLogin'
     }),
     async handleLogin() {
       this.$v.$touch()
@@ -145,6 +150,10 @@ export default {
         if (error) this.$toast.error('Invalid username or password')
         else this.$router.push({ name: 'main' })
       } else {
+        if (this.file) {
+          this.handleLoginFile()
+          return
+        }
         const { error } = await this.brainkeyLogin({
           brainkey: this.brainkey.toLowerCase(),
           password: this.pin
@@ -154,8 +163,18 @@ export default {
       }
       this.inProgress = false
     },
+    async handleLoginFile() {
+      const { success, error } = await this.fileLogin({
+        password: this.pin,
+        backup: this.file
+      })
+      this.inProgress = false
+      if (success) this.$router.push({ name: 'main' })
+      else this.$toast.error(error)
+    },
     changeLoginType(type) {
       this.type = type
+      this.file = ''
       this.$nextTick(() => { this.$v.$reset() })
     },
     selectFile(file) {

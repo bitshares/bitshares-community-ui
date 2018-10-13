@@ -15,7 +15,7 @@ const actions = {
   initUserData: async({ state, rootGetters, dispatch }) => {
     const userId = rootGetters['acc/getAccountUserId']
     await Promise.all([
-      dispatch('user/fetchUser', userId, { root: true }),
+      dispatch('acc/fetchCurrentUser', userId, { root: true }),
       dispatch('assets/fetchDefaultAssets', null, { root: true }),
       dispatch('transactions/fetchComissions', null, { root: true }),
       dispatch(
@@ -24,7 +24,7 @@ const actions = {
         { root: true }
       )
     ])
-    const balances = { ...rootGetters['account/getCurrentUserBalances'] }
+    const balances = { ...rootGetters['acc/getCurrentUserBalances'] }
     const defaultAssetsIds = rootGetters['assets/getDefaultAssetsIds']
     defaultAssetsIds.forEach(id => {
       if (balances[id]) return
