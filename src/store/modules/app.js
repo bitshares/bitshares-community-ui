@@ -43,7 +43,6 @@ const actions = {
   },
   resetUserData({ dispatch }) {
     dispatch('operations/unsubscribeFromUserOperations', null, { root: true })
-    dispatch('account/clearCurrentUserData', null, { root: true })
     dispatch('operations/resetState', null, { root: true })
   }
 }

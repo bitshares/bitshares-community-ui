@@ -2,9 +2,9 @@
   <div>
     <LoadingContainer :loading="pending">
       <div
-        v-show="error || !filteredOperations.length && !pending">
+        v-show="error || !filteredOperations.length">
         <div
-          v-show="!filteredOperations.length && !pending">
+          v-show="!filteredOperations.length">
           No transactions yet
         </div>
         <div
