@@ -28,13 +28,12 @@
       <span><strong>24h%</strong></span>
       <span><strong>7d%</strong></span>
     </div>
-    <div
+    <PortfolioItem
       v-for="(item, index) in items"
+      :item="item"
       :key="index"
       class="grid-items"
-    >
-      <PortfolioItem :item="item" />
-    </div>
+    />
   </div>
 </template>
 
@@ -153,11 +152,11 @@ export default {
   color: config('colors.text-primary');
   padding: config('padding.grid-table');
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 2fr);
 }
 
 .grid span {
-    padding: 8px 4px;
+    padding: 0px 0px;
     font-size: config('textSizes.sm');
 }
 

@@ -25,12 +25,12 @@ export default {
   color: config('colors.text-primary');
   padding: config('padding.grid-table');
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 2fr);
   line-height: 5px;
 }
 
 .grid-items span {
-    padding: 4px 15px;
+    padding: 0px 0px;
     font-size: config('textSizes.sm');
 }
 
