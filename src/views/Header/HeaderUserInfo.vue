@@ -22,7 +22,7 @@ export default {
   name: 'UserInfo',
   computed: {
     ...mapGetters({
-      userName: 'user/getUserName'
+      userName: 'acc/getCurrentUserName'
     })
   },
   methods: {

@@ -43,16 +43,16 @@
           <VInput
             v-model.trim="pin"
             :errors="$v.pin"
+            :password="true"
             input-name="pin"
             class="mb-4 mt-1"
-            type="number"
           />
 
           <VInput
             v-model.trim="confirmPin"
             :errors="$v.confirmPin"
+            :password="true"
             input-name="confirmPin"
-            type="number"
           />
         </div>
       </Tabs>
@@ -164,16 +164,17 @@ export default {
       this.inProgress = false
     },
     async handleLoginFile() {
-      const { success } = await this.fileLogin({
-        password: this.password,
+      const { success, error } = await this.fileLogin({
+        password: this.pin,
         backup: this.file
       })
       this.inProgress = false
       if (success) this.$router.push({ name: 'main' })
-      else this.$toast.error('Invalid file')
+      else this.$toast.error(error)
     },
     changeLoginType(type) {
       this.type = type
+      this.file = ''
       this.$nextTick(() => { this.$v.$reset() })
     },
     selectFile(file) {

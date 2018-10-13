@@ -1,35 +1,12 @@
 <template>
   <div class="portfolio">
-    <div class="portfolio-options">
-      <div
-        class="options-header">
-        <div
-          :class="active1 === true ? 'option--active' : ''"
-          class="option"
-          @click="handleClick1()"
-        >
-          {{ text1 }}
-        </div>
-      </div>
-      <div
-        class="options-header">
-        <div
-          :class="active2 === true ? 'option--active' : ''"
-          class="option"
-          @click="handleClick2()"
-        >
-          {{ text2 }}
-        </div>
-      </div>
-    </div>
     <div class="grid">
       <span><strong>Asset</strong></span>
-      <span><strong>$Price</strong></span>
-      <span><strong>24h%</strong></span>
-      <span><strong>7d%</strong></span>
+      <span><strong>Tokens</strong></span>
+      <!-- <span><strong>7d%</strong></span> -->
     </div>
     <div
-      v-for="(item, index) in items"
+      v-for="(item, index) in balancesAsArray"
       :key="index"
       class="grid-items"
     >
@@ -39,71 +16,42 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import PortfolioItem from './PortfolioItem.vue'
 
 export default {
   components: { PortfolioItem },
-  props: {
-    text1: {
-      default: 'SHOW ALL ASSETS',
-      type: String
-    },
-    text2: {
-      default: 'SHOW BALANCES',
-      type: String
+  computed: {
+    ...mapGetters({
+      userBalances: 'acc/getCurrentUserBalances',
+      getAssetById: 'assets/getAssetById',
+      getHideList: 'assets/getHideList'
+    }),
+    balancesAsArray() {
+      const balances = this.userBalances
+      if (!balances) return []
+      // filter balaces that are > 0 and generate array with symbols
+      // and precised balances
+      let balancesKeys = Object.keys(balances).filter(
+        id => balances[id].balance
+      )
+      if (!this.editAssetsMode) {
+        balancesKeys = balancesKeys.filter(id => !this.getHideList.includes(id))
+      }
+
+      return balancesKeys.map(id => {
+        const asset = this.getAssetById(id)
+        const visible = !this.getHideList.includes(id)
+        return {
+          id,
+          symbol: asset.symbol,
+          tokens: balances[id].balance / 10 ** asset.precision,
+          visible
+        }
+      })
     }
-  },
-  data() {
-    return {
-      active1: false,
-      active2: false,
-      items: [{
-        name: 'BTC',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12
-      },
-      {
-        name: 'ETH',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12
-      },
-      {
-        name: 'LTC',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12
-      },
-      {
-        name: 'BTS',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12 },
-      {
-        name: 'USD',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12 },
-      {
-        name: 'XRP',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12 },
-      {
-        name: 'EOS',
-        token: 0.345,
-        fiatValue: 2345,
-        percent: 12 }]
-    }
-  },
-  methods: {
-    handleClick1() {
-      this.active1 = !this.active1
-    },
-    handleClick2() {
-      this.active2 = !this.active2
-    }
+
+
   }
 }
 </script>
@@ -154,14 +102,18 @@ export default {
   padding: config('padding.grid-table');
   display: grid;
   grid-column-gap: 30px;
-  grid-template-columns: repeat(4, 2fr);
+  grid-template-columns: repeat(2, 2fr);
   padding-left: config('padding.0');
+  padding-top: config('padding.0');
   padding-right: config('padding.0');
 }
 
 .grid span {
     padding: 0px 0px;
     font-size: config('textSizes.sm');
+    &:not(:first-child) {
+      text-align: right;
+    }
 }
 
 .grid span strong {

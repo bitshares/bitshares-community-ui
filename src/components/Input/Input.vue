@@ -11,15 +11,15 @@
       v-restrict.number="isNumber"
       ref="input"
       :value="value"
-      :disabled="disabled"
       :type="inputType"
+      :disabled="disabled"
       :autocorrect="false"
       :autocomplete="false"
       :spellcheck="false"
       class="input__input"
-      @paste="handlePaste"
       @input="handleInput"
       @blur="handleBlur"
+      @paste="handlePaste"
       @keyup.enter="$refs.input.blur"
     >
 
@@ -98,6 +98,10 @@ export default {
       type: String,
       default: ''
     },
+    password: {
+      type: Boolean,
+      default: false
+    },
     // vuelidate validation object
     errors: {
       type: Object,
@@ -107,7 +111,7 @@ export default {
   computed: {
     inputType() {
       if (this.type === 'password') return this.type
-      if (this.type === 'number') return 'tel'
+      if (this.type === 'number' || this.password) return 'tel'
       return 'text'
     },
     isNumber() {
@@ -162,7 +166,7 @@ export default {
       const text = event.clipboardData.getData('text')
       const number = this.value + (parseInt(text) || null)
       this.$debouncedTouch()
-      this.$emit('input', number + '')
+      this.$emit('input', number)
     },
     handleBlur() {
       this.$emit('blur', this.$refs.input.value)

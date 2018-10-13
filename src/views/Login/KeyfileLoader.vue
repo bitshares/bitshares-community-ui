@@ -157,7 +157,10 @@ export default {
     },
     readFile(file) {
       if (file) {
-        if (this.extractFileExtension(file) !== 'bin') return
+        if (this.extractFileExtension(file) !== 'bin') {
+          this.$toast.error('invalid file')
+          return
+        }
         this.file = file
         let reader = new FileReader()
         reader.onloadstart = () => {
@@ -169,12 +172,12 @@ export default {
             this.progressValue = parseInt(((data.loaded / data.total) * 100), 10)
           }
         }
-        reader.onloadend = () => {
+        reader.onload = evt => {
           this.loading = false
           this.progressValue = 100
+          this.$emit('select', evt.target.result)
         }
         reader.readAsBinaryString(this.file)
-        this.$emit('select', file)
       }
     },
     determineDragAndDropCapable() {

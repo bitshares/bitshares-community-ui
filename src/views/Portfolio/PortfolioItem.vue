@@ -1,9 +1,9 @@
 <template>
   <div>
-    <span>{{ item.name }}</span>
-    <span>{{ item.token }}</span>
-    <span>{{ item.fiatValue }}</span>
-    <span>{{ item.percent }}</span>
+    <span>{{ item.symbol }}</span>
+    <span>{{ item.tokens }}</span>
+    <!-- <span></span> -->
+    <!-- <span></span> -->
   </div>
 </template>
 
@@ -25,7 +25,7 @@ export default {
   color: config('colors.text-primary');
   padding: config('padding.grid-table');
   display: grid;
-  grid-template-columns: repeat(4, 2fr);
+  grid-template-columns: repeat(2, 2fr);
   line-height: 5px;
   grid-column-gap: 30px;
   padding-left: config('padding.0');
@@ -35,6 +35,9 @@ export default {
 .grid-items span {
     padding: 0px 0px;
     font-size: config('textSizes.sm');
+    &:not(:first-child) {
+      text-align: right;
+    }
 }
 
 </style>
