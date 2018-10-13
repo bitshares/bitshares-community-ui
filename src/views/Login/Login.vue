@@ -36,6 +36,10 @@
             class="mb-4"
           />
 
+          <KeyfileLoader
+            @select="selectFile"
+            @remove="removeFile"/>
+
           <VInput
             v-model.trim="pin"
             :errors="$v.pin"
@@ -65,7 +69,12 @@
       </div>
 
       <div class="login__footer">
-        <router-link :to="{ name: 'login' }">Sign up with new account</router-link>
+        <div class="footer-link">
+          <router-link :to="{ name: 'signup' }">Sign up with new account</router-link>
+        </div>
+        <div class="footer-link">
+          <router-link :to="{ name: 'login' }">I accept Terms of Use</router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -75,13 +84,14 @@
 import VInput from '@/components/Input/'
 import Button from '@/components/Button/'
 import Tabs from '@/components/Tabs/'
+import KeyfileLoader from './KeyfileLoader'
 import { validationMixin } from 'vuelidate'
 import { required, minLength, sameAs } from 'vuelidate/lib/validators'
 import { mapActions } from 'vuex'
 
 export default {
   name: 'Login',
-  components: { VInput, Button, Tabs },
+  components: { VInput, Button, Tabs, KeyfileLoader },
   mixins: [validationMixin],
   validations() {
     return this.type === 'password'
@@ -109,7 +119,8 @@ export default {
       confirmPin: '',
       inProgress: false,
       type: 'password',
-      loginError: false
+      loginError: false,
+      file: null
     }
   },
   computed: {
@@ -123,7 +134,6 @@ export default {
       brainkeyLogin: 'acc/brainkeyLogin'
     }),
     async handleLogin() {
-      this.loginError = false
       this.$v.$touch()
       if (this.$v.$invalid) return
       this.inProgress = true
@@ -145,9 +155,14 @@ export default {
       this.inProgress = false
     },
     changeLoginType(type) {
-      this.loginError = false
       this.type = type
       this.$nextTick(() => { this.$v.$reset() })
+    },
+    selectFile(file) {
+      this.file = file
+    },
+    removeFile() {
+      this.file = null
     }
   }
 }
@@ -178,6 +193,9 @@ export default {
     &__footer {
       text-align: center;
       @apply pb-card;
+      .footer-link {
+        @apply pt-1;
+      }
     }
   }
 </style>

@@ -28,6 +28,7 @@
           under construction
         </div>
       </Card>
+      
       <Card
         :title="'portfolio'"
         class="lg:w-1/3"
@@ -48,15 +49,20 @@ import Portfolio from './Portfolio/Portfolio.vue'
 import PortfolioHeader from './Portfolio/PortfolioHeader.vue'
 
 import Card from '@/components/Card'
+import TransactionsHistory from '@/views/TransactionsHistory/'
 
 export default {
   name: 'Dashboard',
-  components: { Portfolio, PortfolioHeader, Card }
+  components: { Portfolio, PortfolioHeader, Card, TransactionHistory }
 }
 </script>
 
 <style >
   .dashboard {
     @apply h-full;
+  }
+  .scrollable {
+    overflow: auto;
+    overflow-y: scroll;
   }
 </style>
