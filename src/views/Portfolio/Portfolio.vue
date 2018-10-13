@@ -28,7 +28,13 @@
       <span><strong>24h%</strong></span>
       <span><strong>7d%</strong></span>
     </div>
-    <PortfolioItem :items="items" />
+    <div
+      v-for="(item, index) in items"
+      :key="index"
+      class="grid-items"
+    >
+      <PortfolioItem :item="item" />
+    </div>
   </div>
 </template>
 

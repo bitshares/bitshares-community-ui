@@ -1,24 +1,18 @@
 <template>
   <div>
-    <div
-      v-for="(item, index) in items"
-      :key="index"
-      class="grid-items"
-    >
-      <span>{{ item.name }}</span>
-      <span>{{ item.token }}</span>
-      <span>{{ item.fiatValue }}</span>
-      <span>{{ item.percent }}</span>
-    </div>
+    <span>{{ item.name }}</span>
+    <span>{{ item.token }}</span>
+    <span>{{ item.fiatValue }}</span>
+    <span>{{ item.percent }}</span>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    items: {
-      default: () => [],
-      type: Array
+    item: {
+      default: () => {},
+      type: Object
     }
   }
 }
@@ -36,7 +30,7 @@ export default {
 }
 
 .grid-items span {
-    padding: 8px 15px;
+    padding: 4px 15px;
     font-size: config('textSizes.sm');
 }
 
