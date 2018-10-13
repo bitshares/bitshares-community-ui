@@ -1,8 +1,12 @@
 <template>
   <div class="scrollable-container">
-    <div class="scrollable-container__shadower-top" :style="{ height: shadowerHeight + 'px' }"></div>
-    <div class="scrollable-container__shadower-bottom" :style="{ height: shadowerHeight + 'px' }"></div>
-    <slot></slot>
+    <div
+      :style="{ height: shadowerHeight + 'px' }"
+      class="scrollable-container__shadower-top"/>
+    <div
+      :style="{ height: shadowerHeight + 'px' }"
+      class="scrollable-container__shadower-bottom"/>
+    <slot/>
   </div>
 </template>
 

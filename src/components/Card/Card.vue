@@ -10,7 +10,7 @@
         class="header"
         name="header" />
     </div>
-    <ScrollingContainer>
+    <ScrollingContainer :shadower-height="20">
       <div class="card-body">
         <slot name="body" />
       </div>
@@ -48,7 +48,7 @@ export default {
 
 .card-header {
   padding:config('padding.card-ui');
-  padding-bottom: 0;
+  padding-bottom: 5px;
   display:flex;
   flex-shrink: 0;
   justify-content: space-between;
