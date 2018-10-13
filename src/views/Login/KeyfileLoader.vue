@@ -13,10 +13,11 @@
 
         <div
           v-if = "initState"
-          class="source_box white_solid_border horizontal_flex">
+          class="source_box white_solid_border">
           <div class="center_white_text">or SELECT KEY FILE</div>
           <svgicon
-            class="dragndrop_icon"
+            class="dragndrop_icon ml-2"
+            color="white"
             name="dragndrop"/>
         </div>
 
@@ -204,7 +205,9 @@ export default {
 <style type="text/css" scoped>
   .source_box {
     cursor: pointer;
-    width: 347px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 50px;
     background-color: black;
   }
@@ -214,23 +217,10 @@ export default {
   .white_dotted_border {
     border: 2px dotted white;
   }
-  .horizontal_flex {
-    display: table;
-  }
   .center_white_text {
     font-size: 18px;
     color: white;
-    padding-left: 79px;
-    display: table-cell;
     vertical-align: middle;
-  }
-  .dragndrop_icon {
-    color: white;
-    width: 21px;
-    height: 24px;
-    margin-right: 14px;
-    float: right;
-    margin-top: 13px;
   }
   .drag_place_holder {
     vertical-align: middle;
