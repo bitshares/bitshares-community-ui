@@ -44,10 +44,8 @@ export default {
 <style >
   .main {
     @apply h-full flex flex-col;
-    overflow: hidden;
   }
   .main__content {
     @apply h-full flex flex-col;
-    overflow: auto;
   }
 </style>

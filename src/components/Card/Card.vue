@@ -1,6 +1,6 @@
 <template>
   <div
-    class="card lg:mr-2 mb-2"
+    class="card lg:mr-2 mb-2 lg:mb-0"
   >
     <div class="card-header">
       <div class="title">
@@ -32,19 +32,20 @@ export default {
 .card {
   min-height: 25rem;
   max-height: 30rem;
+  display: flex;
+  flex-direction: column;
   font-family: config('fonts.gotham-regular');
   background-color: config('colors.card-background');
   color: config('colors.text-primary');
-  padding:config('padding.card-ui');
   &:last-child {
     @apply mr-0;
   }
 }
 
 .card-header {
+  padding:config('padding.card-ui');
   display:flex;
   justify-content: space-between;
-  margin-bottom: config('margin.card-ui-header');
 }
 
 .title {
@@ -55,6 +56,12 @@ export default {
 
 .header {
   margin-left: auto;
+}
+
+.card-body {
+  padding:config('padding.card-ui');
+  height: 100%;
+  overflow: auto;
 }
 
 </style>
