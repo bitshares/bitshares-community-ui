@@ -10,7 +10,6 @@
 </template>
 
 <script>
-
 export default {
   props: {
     size: {
@@ -28,7 +27,6 @@ export default {
     return {}
   }
 }
-
 </script>
 
 <style lang="scss">
