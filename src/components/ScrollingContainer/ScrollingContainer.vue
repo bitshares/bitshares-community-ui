@@ -39,7 +39,7 @@ export default {
   }
   &__shadower-bottom {
     position: absolute;
-    bottom: 0; 
+    bottom: 0;
     left: 0;
     right: 0;
     height: 30px;
