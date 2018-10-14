@@ -95,7 +95,7 @@ export default {
 
 <style>
 .operation-item {
-  @apply text-sm;
+  @apply text-sm mb-1 font-gotham;
   display: flex;
   justify-content: space-between;
 }

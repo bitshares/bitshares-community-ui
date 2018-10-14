@@ -1,8 +1,8 @@
 <template>
   <div class="portfolio">
-    <div class="grid">
-      <span><strong>Asset</strong></span>
-      <span><strong>Tokens</strong></span>
+    <div class="grid-header">
+      <span>Tiker</span>
+      <span>Tokens</span>
       <!-- <span><strong>7d%</strong></span> -->
     </div>
     <div
@@ -95,28 +95,22 @@ export default {
   }
 }
 
-.grid {
+.grid-header {
   background-color: config('colors.table-bg');
   color: config('colors.text-primary');
-  padding: config('padding.grid-table');
+  padding-bottom: config('padding.2');
+  opacity: 0.5;
   display: grid;
   grid-column-gap: 30px;
   grid-template-columns: repeat(2, 2fr);
-  padding-left: config('padding.0');
-  padding-top: config('padding.0');
-  padding-right: config('padding.0');
 }
 
-.grid span {
+.grid-header span {
     padding: 0px 0px;
-    font-size: config('textSizes.sm');
+    font-size: config('textSizes.xs-sm');
     &:not(:first-child) {
       text-align: right;
     }
-}
-
-.grid span strong {
-    font-size: config('textSizes.xs-sm');
 }
 
 </style>

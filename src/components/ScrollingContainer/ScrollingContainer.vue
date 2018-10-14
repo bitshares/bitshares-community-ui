@@ -33,17 +33,17 @@ export default {
     left: 0;
     right: 0;
     height: 30px;
-    background: linear-gradient(black, rgba(255, 255, 255, 0));
+    background: linear-gradient(black, rgba(0, 0, 0, 0));
     pointer-events: none;
     z-index: 2;
   }
   &__shadower-bottom {
     position: absolute;
-    bottom: 0;
+    bottom: 0; 
     left: 0;
     right: 0;
     height: 30px;
-    background: linear-gradient(rgba(255, 255, 255, 0), black);
+    background: linear-gradient(rgba(0, 0, 0, 0), black);
     pointer-events: none;
     z-index: 2;
   }

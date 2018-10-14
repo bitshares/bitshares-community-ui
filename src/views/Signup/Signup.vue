@@ -10,6 +10,10 @@
           slot="password"
           class="signup__form">
 
+          <div class="text-xs px-3 pb-1 text-center text-text-primary">
+            Your account will be secured only with password
+          </div>
+
           <VInput
             v-model.trim="name"
             :errors="$v.name"
@@ -39,6 +43,11 @@
         <div
           slot="private key"
           class="signup__form">
+
+          <div class="text-xs px-3 pb-1 text-center text-text-primary">
+            You need to backup account after creating a PIN code
+          </div>
+
           <VInput
             v-model.trim="name"
             :errors="$v.name"
