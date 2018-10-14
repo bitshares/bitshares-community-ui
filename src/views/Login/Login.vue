@@ -1,5 +1,5 @@
 <template>
-  <div class="login-container sm:pt-32 sm:items-start">
+  <div class="login-container sm:pt-32 sm:items-start bg-card-background sm:bg-transparent">
     <div class="login h-full sm:h-auto">
       <div class="login__title">Login</div>
       <Tabs
@@ -33,7 +33,7 @@
             v-model.trim="brainkey"
             :errors="$v.brainkey"
             input-name="brainkey"
-            class="mb-4"
+            class="mb-6"
           />
 
           <KeyfileLoader
@@ -45,7 +45,7 @@
             :errors="$v.pin"
             :password="true"
             input-name="pin"
-            class="mb-4 mt-1"
+            class="mb-4 mt-2"
           />
 
           <VInput
