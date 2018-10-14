@@ -1,0 +1,62 @@
+/* recommended css code for vue-svgicon */
+.svg-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    color: inherit;
+    vertical-align: middle;
+    fill: none;
+    stroke: currentColor;
+}
+
+.svg-fill {
+    fill: currentColor;
+    stroke: none;
+}
+
+.svg-up {
+    /* default */
+    transform: rotate(0deg);
+}
+
+.svg-right {
+    transform: rotate(90deg);
+}
+
+.svg-down {
+    transform: rotate(180deg);
+}
+
+.svg-left {
+    transform: rotate(-90deg);
+}
+
+/* links */
+a {
+    @apply text-xs;
+    color: config('colors.text-primary');
+}
+
+/* prevent autocomplete background */
+input:-webkit-autofill, input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px black inset;
+}
+
+
+/* Notie toasts styles */
+.notie-container {
+  @apply font-gotham;
+  text-transform: uppercase;
+}
+.notie-background-success {
+    background-color: rgba(26, 74, 16, 0.95)!important;
+}
+.notie-background-error {
+    background-color: rgba(128, 29, 32, 0.95)!important;
+}
+.notie-background-warning {
+    background-color: rgba(130, 106, 29, 0.95)!important;
+}
+.notie-background-info {
+    background-color: rgba(28, 57, 130, 0.95)!important;
+}

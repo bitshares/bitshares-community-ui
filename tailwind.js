@@ -126,8 +126,22 @@ let colors = {
   'pink-lighter': '#ffbbca',
   'pink-lightest': '#ffebef',
 
-  'text-primary': 'black',
-  'input-border': '#ced2d6'
+  'text-primary': '#ffffff',
+  'input-border': '#ced2d6',
+  'card-background': '#000000',
+  'text-error': '#fff200',
+  'button-text': 'black',
+  'button-text-disabled': '#808080',
+  'button-bg': 'white',
+  'button-bg-hover': '#cdcdcd',
+  'button-bg-disabled': '#afacac',
+  'button-bg-loading': '#afacac',
+  'input-title-active': '#7a7675',
+  'bg-base': '#3d4852',
+  'tab-header': '#7a7675',
+  'tab-hover': 'rgba(255, 255, 255, 0.6)',
+  'tab-active': '#ffffff',
+  'table-bg': '#000000'
 }
 
 module.exports = {
@@ -253,7 +267,9 @@ module.exports = {
 
   textSizes: {
     'xxs': '.65rem', // 10px
+    'xxs-xs': '0.6875rem',
     'xs': '.75rem', // 12px
+    'xs-sm': '0.8125rem', // 13px
     'sm': '.875rem', // 14px
     'base': '1rem', // 16px
     'lg': '1.125rem', // 18px
@@ -262,6 +278,7 @@ module.exports = {
     '3xl': '1.875rem', // 30px
     '4xl': '2.25rem', // 36px
     '5xl': '3rem' // 48px
+
   },
 
   /*
@@ -644,7 +661,10 @@ module.exports = {
     '16': '4rem',
     '20': '5rem',
     '24': '6rem',
-    '32': '8rem'
+    '32': '8rem',
+    'card-ui': '0.6875rem',
+    'card': '1.25rem',
+    'grid-table': '0.625rem'
   },
 
   /*
@@ -666,6 +686,7 @@ module.exports = {
     'auto': 'auto',
     'px': '1px',
     '0': '0',
+    'small': '0.125rem',
     '1': '0.25rem',
     '2': '0.5rem',
     '3': '0.75rem',
@@ -778,7 +799,9 @@ module.exports = {
   opacity: {
     '0': '0',
     '25': '.25',
+    '40': '0.4',
     '50': '.5',
+    '60': '.6',
     '75': '.75',
     '100': '1'
   },

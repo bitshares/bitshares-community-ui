@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/views/Main.vue'
+import store from '@/store'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -21,9 +22,20 @@ export default new Router({
       }]
     },
     {
-      path: '/auth',
-      name: 'auth',
-      component: () => import(/* webpackChunkName: "auth" */ './views/Auth.vue')
+      path: '/login',
+      name: 'login',
+      component: () => import(/* webpackChunkName: "auth" */ './views/Login/Login.vue'),
+      meta: {
+        noAuth: true
+      }
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: () => import(/* webpackChunkName: "auth" */ './views/Signup/Signup.vue'),
+      meta: {
+        noAuth: true
+      }
     },
     {
       path: '*',
@@ -31,3 +43,14 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (!to.meta.noAuth) {
+    const isLoggedIn = store.getters['acc/isLoggedIn']
+    if (!isLoggedIn) next({ name: 'login' })
+  }
+
+  next()
+})
+
+export default router
