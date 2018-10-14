@@ -144,7 +144,7 @@ export default {
       this.inProgress = true
       if (this.type === 'password') {
         const { error } = await this.cloudLogin({
-          name: this.name,
+          name: this.name.toLowerCase(),
           password: this.password
         })
         if (error) this.$toast.error('Invalid username or password')

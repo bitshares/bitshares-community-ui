@@ -33,7 +33,7 @@ export default {
     left: 0;
     right: 0;
     height: 30px;
-    background: linear-gradient(black, rgba(255, 255, 255, 0.001));
+    background: linear-gradient(black, rgba(255, 255, 255, 0));
     pointer-events: none;
     z-index: 2;
   }
@@ -43,7 +43,7 @@ export default {
     left: 0;
     right: 0;
     height: 30px;
-    background: linear-gradient(rgba(255, 255, 255, 0.001), black);
+    background: linear-gradient(rgba(255, 255, 255, 0), black);
     pointer-events: none;
     z-index: 2;
   }
