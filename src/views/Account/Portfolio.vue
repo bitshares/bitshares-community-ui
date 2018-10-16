@@ -16,9 +16,9 @@
           :item="item"
           :total="totalBaseValue"/>
       </div>
-      </div>
+    </div>
   </LoadingContainer>
-  
+
 </template>
 
 <script>
