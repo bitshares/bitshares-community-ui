@@ -1,13 +1,13 @@
 Examples:
 
-Star active by default
+Star active
 ```js
     <Star :active="true" />
 ```
 
-Star inactive by default
+Star inactive
 ```js
-    <Star :active="true" />
+    <Star  />
 ```
 
 

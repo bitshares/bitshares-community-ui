@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{
-      'filled': active === true
+      'filled': active
     }"
     class="star">
     <span>☆</span>
@@ -13,7 +13,7 @@ export default {
   props: {
     active: {
       type: Boolean,
-      default: true
+      default: false
     }
   }
 }
