@@ -1,5 +1,6 @@
 
 const getters = {
+  // gets base value based on market price or history price
   getBalanceBaseValue: (state, getters, rootState, rootGetters) => ({ assetId, value }) => {
     const marketPrice = rootGetters['market/getPriceById'](assetId)
     const history24 = rootGetters['history/getByDay'](24)[assetId]
@@ -8,6 +9,12 @@ const getters = {
     const baseValue = parseInt((value * price).toFixed(0), 10)
 
     return baseValue
+  },
+
+  // gets fiat value based on market or history price
+  getBalanceFiatValue: (state, getters, rootState, rootGetters) => ({ assetId, value }) => {
+    const fiatValue = 0
+    return fiatValue
   }
 }
 

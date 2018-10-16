@@ -1,29 +1,33 @@
 <template>
-  <div class="portfolio">
-    <div class="grid-header">
-      <span>Tiker</span>
-      <span>Tokens</span>
-      <span>$Value</span>
-      <span>Share</span>
-    </div>
-    <div
-      v-for="(item, index) in balancesAsArray"
-      :key="index"
-      class="grid-items"
-    >
-      <PortfolioItem
-        :item="item"
-        :total="totalBaseValue"/>
-    </div>
-  </div>
+  <LoadingContainer :loading="!subscribedToMarket">
+    <div class="portfolio">
+      <div class="grid-header">
+        <span>Tiker</span>
+        <span>Tokens</span>
+        <span>$Value</span>
+        <span>Share</span>
+      </div>
+      <div
+        v-for="(item, index) in balancesAsArray"
+        :key="index"
+        class="grid-items"
+      >
+        <PortfolioItem
+          :item="item"
+          :total="totalBaseValue"/>
+      </div>
+      </div>
+  </LoadingContainer>
+  
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import LoadingContainer from '@/components/LoadingContainer'
 import PortfolioItem from './PortfolioItem.vue'
 
 export default {
-  components: { PortfolioItem },
+  components: { PortfolioItem, LoadingContainer },
   props: {
     fiatId: {
       type: String,
