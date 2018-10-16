@@ -10,7 +10,7 @@
 export const calcPercentChange = (prices, multiplier) => {
   return ((((prices.last * multiplier.last) /
     (prices.first * multiplier.first)) * 100) - 100)
-};
+}
 
 export const calcPortfolioItem = ({
   asset,
@@ -47,4 +47,4 @@ export const calcPortfolioItem = ({
     change7,
     price
   }
-};
+}

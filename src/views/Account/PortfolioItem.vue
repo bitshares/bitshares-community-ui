@@ -15,7 +15,7 @@ export default {
       type: Object
     },
     total: {
-      type: Number, 
+      type: Number,
       required: true
     }
   },

@@ -11,7 +11,9 @@
       :key="index"
       class="grid-items"
     >
-      <PortfolioItem :item="item" :total="totalBaseValue"/>
+      <PortfolioItem
+        :item="item"
+        :total="totalBaseValue"/>
     </div>
   </div>
 </template>
@@ -39,7 +41,7 @@ export default {
       getBaseValue: 'utility/getBalanceBaseValue'
     }),
     fiatMarketPrice() {
-      return this.getMarketPriceById(this.fiatId);
+      return this.getMarketPriceById(this.fiatId)
     },
     // fiatMultiplier() {
     //   const multiplier = { ...this.getAssetMultiplier(1, this.fiatId) };
@@ -63,12 +65,12 @@ export default {
     },
     totalBaseValue() {
       return this.balancesAsArray.reduce((result, currentBalance) => {
-        return result + currentBalance.baseValue;
-      }, 0);
+        return result + currentBalance.baseValue
+      }, 0)
     }
   },
   getFiatValue(balance) {
-    
+
   }
 }
 </script>
