@@ -1,27 +1,44 @@
 <template>
-  <div
-    :class="{
-      'filled': active
-    }"
-    class="star">
-    <span>☆</span>
+  <div class="star">
+    <svgicon v-bind:name="star" />
   </div>
 </template>
 
 <script>
+import '@icons/star'
+import '@icons/starFilled'
+
 export default {
   props: {
     active: {
       type: Boolean,
       default: false
     }
+  },
+  data: function() {
+    if (this.active) {
+      return {
+        star: 'starFilled'
+      }
+    }
+    else {
+      return {
+        star: 'star'
+      }
+    }
+  },
+  methods: {
+    fill: function() {
+      this.active = true
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.star > span:hover:before {
+.star:hover:before {
    content: "\2605";
+   padding-top:2px;
    position: absolute;
 }
 </style>

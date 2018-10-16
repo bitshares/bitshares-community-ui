@@ -15,7 +15,7 @@
             text="button test"
             size="big"
           />
-          <Star :active="true" />
+          <Star />
         </div>
       </Card>
     </div>
