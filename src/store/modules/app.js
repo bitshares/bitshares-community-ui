@@ -24,7 +24,7 @@ const actions = {
         { root: true }
       )
     ])
-    const balances = { ...rootGetters['acc/getCurrentUserBalances'] }
+    const balances = { ...rootGetters['acc/getUserBalances'] }
     const defaultAssetsIds = rootGetters['assets/getDefaultAssetsIds']
     defaultAssetsIds.forEach(id => {
       if (balances[id]) return
@@ -37,6 +37,20 @@ const actions = {
       },
       { root: true }
     )
+
+    const combinedAssetsIds = Object.keys(balances)
+    dispatch('history/fetch', {
+      baseId: '1.3.0',
+      assetsIds: combinedAssetsIds,
+      days: 1
+    }, { root: true })
+    dispatch('history/fetch', {
+      baseId: '1.3.0',
+      assetsIds: combinedAssetsIds,
+      days: 7
+    }, { root: true })
+
+    dispatch('market/subscribeToMarket', { balances }, { root: true })
   },
   unsubFromUserData({ dispatch }) {
     dispatch('operations/unsubscribeFromUserOperations', null, { root: true })

@@ -2,8 +2,8 @@
   <div>
     <span>{{ item.symbol }}</span>
     <span>{{ item.tokens }}</span>
-    <!-- <span></span> -->
-    <!-- <span></span> -->
+    <span>123</span>
+    <span>{{ percent }}</span>
   </div>
 </template>
 
@@ -13,6 +13,15 @@ export default {
     item: {
       default: () => {},
       type: Object
+    },
+    total: {
+      type: Number, 
+      required: true
+    }
+  },
+  computed: {
+    percent() {
+      return Math.round((this.item.baseValue / this.total) * 100) + '%'
     }
   }
 }
@@ -25,7 +34,7 @@ export default {
   color: config('colors.text-primary');
   padding: config('padding.grid-table');
   display: grid;
-  grid-template-columns: repeat(2, 2fr);
+  // grid-template-columns: repeat(2, 2fr);
   line-height: 5px;
   grid-column-gap: 30px;
   padding-left: config('padding.0');

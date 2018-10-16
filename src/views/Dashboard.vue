@@ -6,7 +6,7 @@
           class="lg:w-1/3"
           title="account">
           <div slot="header">
-            <!-- <PortfolioHeader /> -->
+            <!-- <AccountHeader /> -->
           </div>
           <div slot="body">
             <Portfolio />
@@ -49,15 +49,15 @@
 </template>
 
 <script>
-import Portfolio from './Portfolio/Portfolio.vue'
-import PortfolioHeader from './Portfolio/PortfolioHeader.vue'
+import Portfolio from '@/views/Account/Portfolio.vue'
+import AccountHeader from '@/views/Account/AccountHeader.vue'
 
 import Card from '@/components/Card'
 import TransactionsHistory from '@/views/TransactionsHistory/'
 
 export default {
   name: 'Dashboard',
-  components: { Portfolio, PortfolioHeader, Card, TransactionsHistory }
+  components: { Portfolio, AccountHeader, Card, TransactionsHistory }
 }
 </script>
 

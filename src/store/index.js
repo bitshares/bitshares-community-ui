@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import app from './modules/app'
+import utility from './modules/utility'
 import createPersistedState from 'vuex-persistedstate'
 import vuexBitsharesModules from 'vuex-bitshares'
 import Cookies from 'js-cookie'
@@ -14,6 +15,7 @@ const store = new Vuex.Store({
   actions: {},
   modules: {
     app,
+    utility,
     ...vuexBitsharesModules
   },
   plugins: [

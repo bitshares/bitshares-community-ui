@@ -3,14 +3,15 @@
     <div class="grid-header">
       <span>Tiker</span>
       <span>Tokens</span>
-      <!-- <span><strong>7d%</strong></span> -->
+      <span>$Value</span>
+      <span>Share</span>
     </div>
     <div
       v-for="(item, index) in balancesAsArray"
       :key="index"
       class="grid-items"
     >
-      <PortfolioItem :item="item" />
+      <PortfolioItem :item="item" :total="totalBaseValue"/>
     </div>
   </div>
 </template>
@@ -21,36 +22,53 @@ import PortfolioItem from './PortfolioItem.vue'
 
 export default {
   components: { PortfolioItem },
+  props: {
+    fiatId: {
+      type: String,
+      required: false,
+      default: '1.3.121'
+    }
+  },
   computed: {
     ...mapGetters({
-      userBalances: 'acc/getCurrentUserBalances',
+      userBalances: 'acc/getUserBalances',
       getAssetById: 'assets/getAssetById',
-      getHideList: 'assets/getHideList'
+      getMarketPriceById: 'market/getPriceById',
+      subscribedToMarket: 'market/isSubscribed',
+      getAssetMultiplier: 'history/getHistoryAssetMultiplier',
+      getBaseValue: 'utility/getBalanceBaseValue'
     }),
+    fiatMarketPrice() {
+      return this.getMarketPriceById(this.fiatId);
+    },
+    // fiatMultiplier() {
+    //   const multiplier = { ...this.getAssetMultiplier(1, this.fiatId) };
+    //   if (this.fiatMarketPrice) multiplier.last = 1 / this.fiatMarketPrice;
+    //   return multiplier;
+    // },
+
     balancesAsArray() {
       const balances = this.userBalances
-      if (!balances) return []
-      // filter balaces that are > 0 and generate array with symbols
-      // and precised balances
-      let balancesKeys = Object.keys(balances).filter(
-        id => balances[id].balance
-      )
-      if (!this.editAssetsMode) {
-        balancesKeys = balancesKeys.filter(id => !this.getHideList.includes(id))
-      }
+      if (!balances || !this.subscribedToMarket) return []
 
-      return balancesKeys.map(id => {
-        const asset = this.getAssetById(id)
-        const visible = !this.getHideList.includes(id)
+      return Object.keys(this.userBalances).map(assetId => {
+        const asset = this.getAssetById(assetId)
         return {
-          id,
+          id: assetId,
           symbol: asset.symbol,
-          tokens: balances[id].balance / 10 ** asset.precision,
-          visible
+          tokens: balances[assetId].balance / 10 ** asset.precision,
+          baseValue: this.getBaseValue({ assetId, value: balances[assetId].balance })
         }
       })
+    },
+    totalBaseValue() {
+      return this.balancesAsArray.reduce((result, currentBalance) => {
+        return result + currentBalance.baseValue;
+      }, 0);
     }
-
+  },
+  getFiatValue(balance) {
+    
   }
 }
 </script>
@@ -101,8 +119,8 @@ export default {
   padding-bottom: config('padding.2');
   opacity: 0.5;
   display: grid;
-  grid-column-gap: 30px;
-  grid-template-columns: repeat(2, 2fr);
+  // grid-column-gap: 30px;
+  // grid-template-columns: repeat(2, 2fr);
 }
 
 .grid-header span {
