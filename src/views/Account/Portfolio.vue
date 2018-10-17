@@ -1,5 +1,5 @@
 <template>
-  <LoadingContainer :loading="!subscribedToMarket">
+  <LoadingContainer :loading="!balancesItems.length">
     <div class="portfolio">
       <div class="grid-header">
         <span>Tiker</span>
@@ -8,7 +8,7 @@
         <span>Share</span>
       </div>
       <div
-        v-for="(item, index) in balancesAsArray"
+        v-for="(item, index) in balancesItems"
         :key="index"
         class="grid-items"
       >
@@ -40,35 +40,37 @@ export default {
       userBalances: 'acc/getUserBalances',
       getAssetById: 'assets/getAssetById',
       getMarketPriceById: 'market/getPriceById',
-      subscribedToMarket: 'market/isSubscribed',
       getAssetMultiplier: 'history/getHistoryAssetMultiplier',
       getBaseValue: 'utility/getBalanceBaseValue'
     }),
-    fiatMarketPrice() {
-      return this.getMarketPriceById(this.fiatId)
+    fiatAsset() {
+      return this.getAssetById(this.fiatId)
     },
-    // fiatMultiplier() {
-    //   const multiplier = { ...this.getAssetMultiplier(1, this.fiatId) };
-    //   if (this.fiatMarketPrice) multiplier.last = 1 / this.fiatMarketPrice;
-    //   return multiplier;
-    // },
-
-    balancesAsArray() {
+    fiatMultiplier() {
+      const multiplier = { ...this.getAssetMultiplier(1, this.fiatId) }
+      return multiplier.last
+    },
+    balancesItems() {
       const balances = this.userBalances
-      if (!balances || !this.subscribedToMarket) return []
+      if (!balances) return []
 
       return Object.keys(this.userBalances).map(assetId => {
         const asset = this.getAssetById(assetId)
+        const tokens = balances[assetId].balance / 10 ** asset.precision
+        const baseValue = this.getBaseValue({ assetId, value: balances[assetId].balance })
+        const fiatValue = parseInt((baseValue * this.fiatMultiplier).toFixed(0), 10)
+        const fiatPrecisedValue = fiatValue / (10 ** this.fiatAsset.precision)
         return {
           id: assetId,
           symbol: asset.symbol,
-          tokens: balances[assetId].balance / 10 ** asset.precision,
-          baseValue: this.getBaseValue({ assetId, value: balances[assetId].balance })
+          tokens,
+          baseValue,
+          fiatValue: fiatPrecisedValue
         }
       })
     },
     totalBaseValue() {
-      return this.balancesAsArray.reduce((result, currentBalance) => {
+      return this.balancesItems.reduce((result, currentBalance) => {
         return result + currentBalance.baseValue
       }, 0)
     }
@@ -125,6 +127,7 @@ export default {
   padding-bottom: config('padding.2');
   opacity: 0.5;
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
   // grid-column-gap: 30px;
   // grid-template-columns: repeat(2, 2fr);
 }

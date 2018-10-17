@@ -49,8 +49,6 @@ const actions = {
       assetsIds: combinedAssetsIds,
       days: 7
     }, { root: true })
-
-    dispatch('market/subscribeToMarket', { balances }, { root: true })
   },
   unsubFromUserData({ dispatch }) {
     dispatch('operations/unsubscribeFromUserOperations', null, { root: true })

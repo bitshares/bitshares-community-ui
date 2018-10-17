@@ -2,7 +2,7 @@
   <div>
     <span>{{ item.symbol }}</span>
     <span>{{ item.tokens }}</span>
-    <span>123</span>
+    <span>{{ item.fiatValue }}</span>
     <span>{{ percent }}</span>
   </div>
 </template>
@@ -30,15 +30,17 @@ export default {
 <style scoped lang="scss">
 
 .grid-items div {
-  background-color: config('colors.table-bg');
   color: config('colors.text-primary');
   padding: config('padding.grid-table');
   display: grid;
-  // grid-template-columns: repeat(2, 2fr);
+  grid-template-columns: repeat(4, 1fr);
   line-height: 5px;
-  grid-column-gap: 30px;
   padding-left: config('padding.0');
   padding-right: config('padding.0');
+  transition: background-color 0.15s ease;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2)
+  }
 }
 
 .grid-items span {
