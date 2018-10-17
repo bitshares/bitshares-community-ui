@@ -8,7 +8,7 @@
         <span>Share</span>
       </div>
       <div
-        v-for="(item, index) in balancesItems"
+        v-for="(item, index) in sortedItems"
         :key="index"
         class="grid-items"
       >
@@ -25,6 +25,7 @@
 import { mapGetters } from 'vuex'
 import LoadingContainer from '@/components/LoadingContainer'
 import PortfolioItem from './PortfolioItem.vue'
+import orderBy from 'lodash/orderBy'
 
 export default {
   components: { PortfolioItem, LoadingContainer },
@@ -33,6 +34,14 @@ export default {
       type: String,
       required: false,
       default: '1.3.121'
+    }
+  },
+  data() {
+    return {
+      sort: {
+        field: 'baseValue',
+        type: 'desc'
+      }
     }
   },
   computed: {
@@ -69,14 +78,14 @@ export default {
         }
       })
     },
+    sortedItems() {
+      return orderBy(this.balancesItems, this.sort.field, this.sort.type)
+    },
     totalBaseValue() {
       return this.balancesItems.reduce((result, currentBalance) => {
         return result + currentBalance.baseValue
       }, 0)
     }
-  },
-  getFiatValue(balance) {
-
   }
 }
 </script>
