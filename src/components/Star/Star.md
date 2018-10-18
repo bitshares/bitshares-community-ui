@@ -2,7 +2,7 @@ Examples:
 
 Star active
 ```js
-    <Star :active />
+    <Star active />
 ```
 
 Star inactive

@@ -1,7 +1,5 @@
 <template>
-  <div class="star">
-    <svgicon :name="star" />
-  </div>
+  <svgicon class="star" @click="isActive = !isActive" :name="isActive || active ? 'starFilled' : 'star'" />
 </template>
 
 <script>
@@ -15,29 +13,12 @@ export default {
       default: false
     }
   },
-  data: function() {
-    if (this.active) {
-      return {
-        star: 'starFilled'
-      }
-    } else {
-      return {
-        star: 'star'
-      }
-    }
-  },
-  methods: {
-    fill: function() {
-      this.active = true
-    }
-  }
+  data: () => ({ isActive: false })
 }
 </script>
 
 <style lang="scss" scoped>
-.star:hover:before {
-   content: "\2605";
-   padding-top:config('padding.2px');
-   position: absolute;
+.star {
+  cursor: pointer;
 }
 </style>
