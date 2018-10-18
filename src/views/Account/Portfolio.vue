@@ -1,5 +1,5 @@
 <template>
-  <LoadingContainer :loading="!balancesItems.length">
+  <LoadingContainer :loading="!items.length">
     <div class="portfolio">
       <div class="grid-header">
         <span>Tiker</span>
@@ -12,9 +12,7 @@
         :key="index"
         class="grid-items"
       >
-        <PortfolioItem
-          :item="item"
-          :total="totalBaseValue"/>
+        <PortfolioItem :item="item" />
       </div>
     </div>
   </LoadingContainer>
@@ -29,62 +27,20 @@ import orderBy from 'lodash/orderBy'
 
 export default {
   components: { PortfolioItem, LoadingContainer },
-  props: {
-    fiatId: {
-      type: String,
-      required: false,
-      default: '1.3.121'
-    }
-  },
   data() {
     return {
       sort: {
-        field: 'baseValue',
+        field: 'fiatValue',
         type: 'desc'
       }
     }
   },
   computed: {
     ...mapGetters({
-      userBalances: 'acc/getUserBalances',
-      getAssetById: 'assets/getAssetById',
-      getMarketPriceById: 'market/getPriceById',
-      getAssetMultiplier: 'history/getHistoryAssetMultiplier',
-      getBaseValue: 'utility/getBalanceBaseValue'
+      items: 'portfolio/getItems'
     }),
-    fiatAsset() {
-      return this.getAssetById(this.fiatId)
-    },
-    fiatMultiplier() {
-      const multiplier = { ...this.getAssetMultiplier(1, this.fiatId) }
-      return multiplier.last
-    },
-    balancesItems() {
-      const balances = this.userBalances
-      if (!balances) return []
-
-      return Object.keys(this.userBalances).map(assetId => {
-        const asset = this.getAssetById(assetId)
-        const tokens = balances[assetId].balance / 10 ** asset.precision
-        const baseValue = this.getBaseValue({ assetId, value: balances[assetId].balance })
-        const fiatValue = parseInt((baseValue * this.fiatMultiplier).toFixed(0), 10)
-        const fiatPrecisedValue = fiatValue / (10 ** this.fiatAsset.precision)
-        return {
-          id: assetId,
-          symbol: asset.symbol,
-          tokens,
-          baseValue,
-          fiatValue: fiatPrecisedValue
-        }
-      })
-    },
     sortedItems() {
-      return orderBy(this.balancesItems, this.sort.field, this.sort.type)
-    },
-    totalBaseValue() {
-      return this.balancesItems.reduce((result, currentBalance) => {
-        return result + currentBalance.baseValue
-      }, 0)
+      return orderBy(this.items, this.sort.field, this.sort.type)
     }
   }
 }

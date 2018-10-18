@@ -1,9 +1,9 @@
 <template>
   <div>
-    <span>{{ item.symbol }}</span>
+    <span>{{ item.tiker }}</span>
     <span>{{ item.tokens }}</span>
     <span>{{ item.fiatValue }}</span>
-    <span>{{ percent }}</span>
+    <span>{{ item.share }}%</span>
   </div>
 </template>
 
@@ -14,16 +14,7 @@ export default {
       default: () => {},
       type: Object
     },
-    total: {
-      type: Number,
-      required: true
-    }
   },
-  computed: {
-    percent() {
-      return Math.round((this.item.baseValue / this.total) * 100) + '%'
-    }
-  }
 }
 </script>
 
