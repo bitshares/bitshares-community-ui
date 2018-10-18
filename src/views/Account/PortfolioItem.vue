@@ -13,8 +13,8 @@ export default {
     item: {
       default: () => {},
       type: Object
-    },
-  },
+    }
+  }
 }
 </script>
 
