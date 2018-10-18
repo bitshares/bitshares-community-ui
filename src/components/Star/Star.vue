@@ -1,6 +1,6 @@
 <template>
   <div class="star">
-    <svgicon v-bind:name="star" />
+    <svgicon :name="star" />
   </div>
 </template>
 
@@ -20,8 +20,7 @@ export default {
       return {
         star: 'starFilled'
       }
-    }
-    else {
+    } else {
       return {
         star: 'star'
       }
@@ -38,7 +37,7 @@ export default {
 <style lang="scss" scoped>
 .star:hover:before {
    content: "\2605";
-   padding-top:2px;
+   padding-top:config('padding.2px');
    position: absolute;
 }
 </style>
