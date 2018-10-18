@@ -1,5 +1,8 @@
 <template>
-  <svgicon class="star" @click="isActive = !isActive" :name="isActive || active ? 'starFilled' : 'star'" />
+  <svgicon
+    :name="isActive || active ? 'starFilled' : 'star'"
+    class="star"
+    @mouseover.native="isActive = true" @mouseleave.native="isActive = false" />
 </template>
 
 <script>
