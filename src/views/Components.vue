@@ -15,7 +15,7 @@
             text="button test"
             size="big"
           />
-          <HeaderItem :sort="asc">
+          <HeaderItem sort="desc">
             <div slot="title">
               ticker
             </div>

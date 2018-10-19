@@ -2,7 +2,7 @@ Examples:
  
 Header item sorted in ascending way
 ```js
-        <HeaderItem :sort="asc">
+        <HeaderItem sort="asc">
           <div slot="title">
             example
           </div>
@@ -11,7 +11,7 @@ Header item sorted in ascending way
 
 Header item sorted in descending way
 ```js
-        <HeaderItem :sort="desc">
+        <HeaderItem sort="desc">
           <div slot="title">
             example
           </div>
