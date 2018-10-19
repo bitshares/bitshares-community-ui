@@ -87,6 +87,7 @@ export default {
     margin: 0 7px;
     border-bottom: none;
     padding-bottom: .25rem;
+    font-family: Gotham_Pro_Medium;
   }
 
   &:hover {

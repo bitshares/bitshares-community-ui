@@ -24,12 +24,16 @@
 
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
-          class="lg:w-2/3 disabled"
+          class="lg:w-2/3"
           title="markets">
           <div
             slot="body"
             class="uppercase">
-            under construction
+            <Tabs
+              :tabs="['USD', 'BTC', 'ETH', 'CNY', 'BTS']"
+              :currency-mode="true"
+              @change="changeCurrency"
+            />
           </div>
         </Card>
 
@@ -55,9 +59,22 @@ import PortfolioHeader from './Portfolio/PortfolioHeader.vue'
 import Card from '@/components/Card'
 import TransactionsHistory from '@/views/TransactionsHistory/'
 
+import Tabs from '@/components/Tabs/'
+
 export default {
   name: 'Dashboard',
-  components: { Portfolio, PortfolioHeader, Card, TransactionsHistory }
+  components: {
+    Portfolio,
+    PortfolioHeader,
+    Card,
+    TransactionsHistory,
+    Tabs
+  },
+  methods: {
+    changeCurrency() {
+      console.info('changed curr')
+    }
+  }
 }
 </script>
 
