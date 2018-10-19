@@ -1,8 +1,8 @@
 <template>
   <svgicon
-    :name="isActive || active ? 'starFilled' : 'star'"
+    :name="active ? 'starFilled' : 'star'"
     class="star"
-    @mouseover.native="isActive = true" @mouseleave.native="isActive = false" />
+  />
 </template>
 
 <script>
@@ -15,13 +15,13 @@ export default {
       type: Boolean,
       default: false
     }
-  },
-  data: () => ({ isActive: false })
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .star {
   cursor: pointer;
+  color: #a7a9ac;
 }
 </style>
