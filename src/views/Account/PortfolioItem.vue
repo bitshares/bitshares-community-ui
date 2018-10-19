@@ -23,10 +23,10 @@ export default {
       return this.preciseFiatValue(this.tokenPrice)
     },
     preciseFiatValue(value, precision = 1) {
-      if (!value) return 0;
-      if (value > 10) return Math.floor(value);
-      if (value > 0.1) return value.toFixed(precision);
-      return value.toFixed(2);
+      if (!value) return 0
+      if (value > 10) return Math.floor(value)
+      if (value > 0.1) return value.toFixed(precision)
+      return value.toFixed(2)
     }
   }
 }
