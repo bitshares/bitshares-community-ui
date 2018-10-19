@@ -7,7 +7,10 @@
         v-for="(tab, index) in tabs"
         :key="index"
         :style="{ width: tabWidth + '%' }"
-        :class="activeTabIndex === index ? 'tab--active' : ''"
+        :class="{
+          'tab--active': activeTabIndex === index,
+          'tab--currency': currencyMode
+        }"
         class="tab"
         @click="handleTabClick(index)"
       >
@@ -27,6 +30,10 @@ export default {
     },
     centered: {
       default: true,
+      type: Boolean
+    },
+    currencyMode: {
+      default: false,
       type: Boolean
     }
   },
@@ -68,14 +75,26 @@ export default {
   border-bottom: 3px solid config('colors.tab-header');
   text-align: center;
   transition: color 0.2s, border-color 0.2s;
+
   &--active {
     @apply cursor-default;
     color: config('colors.tab-active')!important;
     border-bottom-color: config('colors.tab-active')!important;
   }
+
+  &--currency {
+    width: 33px !important;
+    margin: 0 7px;
+    border-bottom: none;
+    padding-bottom: .25rem;
+  }
+
   &:hover {
-    color:config('colors.tab-hover');;
+    color:config('colors.tab-hover');
     border-bottom-color: config('colors.tab-hover');
   }
+}
+.tabs-header .tab.tab--currency.tab--active {
+  border-bottom: 1px solid #fff;
 }
 </style>
