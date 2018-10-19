@@ -15,6 +15,11 @@
             text="button test"
             size="big"
           />
+          <HeaderItem :sort="asc">
+            <div slot="title">
+              ticker
+            </div>
+          </HeaderItem>
         </div>
       </Card>
     </div>
@@ -45,10 +50,11 @@
 import Button from '@/components/Button/'
 import Tabs from '@/components/Tabs/'
 import Card from '@/components/Card'
+import HeaderItem from '@/components/HeaderItem'
 
 export default {
   name: 'Components',
-  components: { Button, Tabs, Card },
+  components: { Button, Tabs, Card, HeaderItem },
   data() {
     return {
       testString: '',
