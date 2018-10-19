@@ -37,6 +37,7 @@ export default {
   min-height: 25rem;
   max-height: 30rem;
   display: flex;
+  
   flex-direction: column;
   font-family: config('fonts.gotham-regular');
   background-color: config('colors.card-background');
@@ -53,6 +54,7 @@ export default {
   display:flex;
   flex-shrink: 0;
   justify-content: space-between;
+  align-items: baseline;
 }
 
 .title {

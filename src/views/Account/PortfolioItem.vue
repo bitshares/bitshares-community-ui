@@ -1,9 +1,12 @@
 <template>
   <div>
     <span>{{ item.tiker }}</span>
-    <span>{{ item.tokens }}</span>
-    <span>{{ item.fiatValue }}</span>
-    <span>{{ item.share }}%</span>
+    <!-- <span>{{ item.tokens }}</span> -->
+    <!-- <span>{{ item.fiatValue }}</span> -->
+    <!-- <span>{{ item.share }}%</span> -->
+    <span>{{ item.tokenPrice }}</span>
+    <span>{{ item.change1.toFixed(0).toString() }}%</span>
+    <span>{{ item.change7.toFixed(0).toString() }}%</span>
   </div>
 </template>
 
@@ -13,6 +16,17 @@ export default {
     item: {
       default: () => {},
       type: Object
+    }
+  },
+  computed: {
+    formattedTokenPrice() {
+      return this.preciseFiatValue(this.tokenPrice)
+    },
+    preciseFiatValue(value, precision = 1) {
+      if (!value) return 0;
+      if (value > 10) return Math.floor(value);
+      if (value > 0.1) return value.toFixed(precision);
+      return value.toFixed(2);
     }
   }
 }

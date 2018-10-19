@@ -1,12 +1,18 @@
 <template>
   <div class="portfolio-header">
-    <div class="text-weak">Balance</div>&nbsp; 6754 USD
+    <div class="text-weak">Balance</div>&nbsp; {{ totalFiatValue }} USD
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
-
+  name: 'AccountHeader',
+  computed: {
+    ...mapGetters({
+      totalFiatValue: 'portfolio/getTotalFiatValue'
+    })
+  }
 }
 </script>
 
@@ -19,8 +25,8 @@ export default {
 }
 
 .text-weak {
-    opacity: 0.5;
-    font-size: config('textSizes.xs-sm');
-    line-height: normal;
+  opacity: 0.5;
+  font-size: config('textSizes.xs-sm');
+  line-height: normal;
 }
 </style>

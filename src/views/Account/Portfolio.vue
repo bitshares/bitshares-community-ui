@@ -93,8 +93,6 @@ export default {
   opacity: 0.5;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  // grid-column-gap: 30px;
-  // grid-template-columns: repeat(2, 2fr);
 }
 
 .grid-header span {

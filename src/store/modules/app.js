@@ -17,7 +17,7 @@ const actions = {
     await Promise.all([
       dispatch('acc/fetchCurrentUser', userId, { root: true }),
       dispatch('assets/fetchDefaultAssets', null, { root: true }),
-      dispatch('transactions/fetchComissions', null, { root: true }),
+      // dispatch('transactions/fetchComissions', null, { root: true }),
       dispatch(
         'operations/fetchAndSubscribe',
         { userId, limit: 50 },

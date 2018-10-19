@@ -17,11 +17,23 @@ const getters = {
     }, 0)
   },
 
+  getTotalFiatValue: (state, getters) => {
+    return getters.getBalanceFiatValue(getters.getTotalBaseValue)
+  },
+
   getBalanceFiatValue: (state, getters, rootState, rootGetters) => (baseValue) => {
     const multiplier = rootGetters['history/getHistoryAssetMultiplier'](1, state.fiatId).last
     const fiatValue = parseInt((baseValue * multiplier).toFixed(0), 10)
     const fiatAsset = rootGetters['assets/getAssetById'](state.fiatId)
     return fiatValue / (10 ** fiatAsset.precision)
+  },
+
+  getPriceChangeById: (state, getters, rootState, rootGetters) => ({ days, assetId }) => {
+    const multiplier = rootGetters['history/getHistoryAssetMultiplier'](1, state.fiatId)
+    const prices = rootGetters['history/getByDay'](days)[assetId]
+    if (!multiplier || !prices) return 0
+    return ((((prices.last * multiplier.last) /
+      (prices.first * multiplier.first)) * 100) - 100)
   },
 
   getItems: (state, getters, rootState, rootGetters) => {
@@ -34,12 +46,18 @@ const getters = {
       const tokens = balance / 10 ** asset.precision
       const baseValue = getters.getBalanceBaseValue({ assetId, value: balance })
       const fiatValue = getters.getBalanceFiatValue(baseValue)
+      const tokenPrice = fiatValue / tokens
+      const change7 = getters.getPriceChangeById({ assetId, days: 7 })
+      const change1 = getters.getPriceChangeById({ assetId, days: 1 })
       const share = Math.round((baseValue / getters.getTotalBaseValue) * 100)
       return {
         tiker: asset.symbol,
         tokens,
         fiatValue,
-        share
+        share,
+        tokenPrice,
+        change7,
+        change1
       }
     })
 
