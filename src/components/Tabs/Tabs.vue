@@ -87,7 +87,7 @@ export default {
     margin: 0 7px;
     border-bottom: none;
     padding-bottom: .25rem;
-    font-family: Gotham_Pro_Medium;
+    font-family: config('fonts.gotham-medium');
   }
 
   &:hover {
@@ -96,6 +96,7 @@ export default {
   }
 }
 .tabs-header .tab.tab--currency.tab--active {
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid;
+  border-bottom-color: config('colors.tab-active');
 }
 </style>
