@@ -37,26 +37,25 @@ export default {
 }
 
 .sort-arrow-up {
+  @apply mb-2;
   height: 3px;
-  margin-bottom: 5px;
 }
 
-.sort-arrow-up:hover {
+.sort-arrow-up:not(.active):hover {
   color: config('colors.sort-arrow-hover');
 }
 
-.sort-arrow-down:hover {
+.sort-arrow-down:not(.active):hover {
   color: config('colors.sort-arrow-hover');
 }
 
 .active {
-  color: white;
+  color: config('colors.text-primary');
 }
 
 .sort-arrow-down {
+  @apply -ml-4 mt-1;
   height: 3px;
   transform: rotate(-180deg);
-  margin-left: -16px;
-  margin-top: 5px;
 }
 </style>
