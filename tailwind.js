@@ -141,7 +141,8 @@ let colors = {
   'tab-header': '#7a7675',
   'tab-hover': 'rgba(255, 255, 255, 0.6)',
   'tab-active': '#ffffff',
-  'table-bg': '#000000'
+  'table-bg': '#000000',
+  'star': '#a7a9ac'
 }
 
 module.exports = {

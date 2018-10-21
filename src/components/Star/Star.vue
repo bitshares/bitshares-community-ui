@@ -2,7 +2,6 @@
   <div class="star">
     <svgicon
       :name="active ? 'starFilled' : 'star'"
-      class="star"
     />
   </div>
 </template>
@@ -24,12 +23,11 @@ export default {
 <style lang="scss" scoped>
 .star {
   cursor: pointer;
-  color: #a7a9ac;
+  color: config('colors.star');
 }
 
-.star:hover:before {
+.star:hover {
   content: '★';
-  padding-top: 2px;
   position: absolute;
 }
 </style>
