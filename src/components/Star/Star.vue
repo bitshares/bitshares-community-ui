@@ -1,7 +1,8 @@
 <template>
   <div class="star">
     <svgicon
-      :name="active ? 'starFilled' : 'star'"
+      :name="(active || hoverState) ? 'starFilled' : 'star'"
+      @mouseover.native="hoverState=true" @mouseleave.native="hoverState=false"
     />
   </div>
 </template>
@@ -16,7 +17,8 @@ export default {
       type: Boolean,
       default: false
     }
-  }
+  },
+  data: () => ({ hoverState: false })
 }
 </script>
 
@@ -24,10 +26,5 @@ export default {
 .star {
   cursor: pointer;
   color: config('colors.star');
-}
-
-.star:hover {
-  content: '★';
-  position: absolute;
 }
 </style>
