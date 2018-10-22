@@ -8,24 +8,26 @@
         />
       </div>
       <div class="ticker-search">
-        <input type="text" placeholder="Search">
+        <SearchInput
+          :hint="'Search'"
+          :on-change="onSearch"
+        />
       </div>
     </div>
   </div>
 </template>
 <script>
 import Tabs from '@/components/Tabs'
-import SearchInput from '@/components/Input/'
+import SearchInput from '@/components/SearchInput/'
 
 export default {
   components: {
     Tabs,
     SearchInput
   },
-  data() {
-    return {
-      searchValue: '',
-      searchErrors: {}
+  methods: {
+    onSearch({ value }) {
+      console.info(value)
     }
   }
 }
@@ -37,13 +39,10 @@ export default {
     justify-content: space-between;
 
     .ticker-search {
-      input {
-        border: none;
-        outline: none;
-        background: config('colors.card-background');
-        color: config('colors.white');
-        border-bottom: 1px solid #7a7675;
-      }
+      margin-top: -20px;
+      position: absolute;
+      right: 10px;
+      z-index: 10;
     }
   }
 </style>
