@@ -29,11 +29,7 @@
           <div
             slot="body"
             class="uppercase">
-            <Tabs
-              :tabs="['USD', 'BTC', 'ETH', 'CNY', 'BTS']"
-              :currency-mode="true"
-              @change="changeCurrency"
-            />
+            <TheMarkets />
           </div>
         </Card>
 
@@ -58,8 +54,7 @@ import PortfolioHeader from './Portfolio/PortfolioHeader.vue'
 
 import Card from '@/components/Card'
 import TransactionsHistory from '@/views/TransactionsHistory/'
-
-import Tabs from '@/components/Tabs/'
+import TheMarkets from '@/views/TheMarkets/'
 
 export default {
   name: 'Dashboard',
@@ -68,12 +63,7 @@ export default {
     PortfolioHeader,
     Card,
     TransactionsHistory,
-    Tabs
-  },
-  methods: {
-    changeCurrency() {
-      console.info('changed curr')
-    }
+    TheMarkets
   }
 }
 </script>
