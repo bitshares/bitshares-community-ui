@@ -41,10 +41,6 @@ export default {
     flex-direction: row;
     justify-content: space-between;
 
-    .tickers-sidebar {
-      margin-left: -6px;
-    }
-
     .tickers-search {
       margin-top: -20px;
       position: absolute;

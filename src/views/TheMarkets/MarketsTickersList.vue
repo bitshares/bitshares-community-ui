@@ -5,47 +5,19 @@
       <div class="tickers-list__field _flex05">{{ priceTitle }}</div>
       <div class="tickers-list__field _alignRight">{{ changeTitle }}</div>
     </div>
-    <!--test row increase-->
-    <div class="tickers-list-row">
-      <div class="tickers-list__item">
-        <div class="tickers-list__itemPair">
-          <span class="_currencyTitle">ZIL</span>
-          <span class="_tickerTitle"> /{{currentTicker}}</span>
-        </div>
-        <div class="tickers-list__itemVolume">10 764 160</div>
-      </div>
-      <div class="tickers-list__item _flex05">
-        <div class="_currencyTitle">0.034810</div>
-        <div class="tickers-list__itemVolume">$0.04</div>
-      </div>
-      <div class="tickers-list__item _alignRight">
-        <div class="_currencyTitle _increase">+37.77%</div>
-        <div class="tickers-list__itemVolume _increase">+12%</div>
-      </div>
-    </div>
-    <!--test row drop-->
-    <div class="tickers-list-row">
-      <div class="tickers-list__item">
-        <div class="tickers-list__itemPair">
-          <span class="_currencyTitle">ZCN</span>
-          <span class="_tickerTitle"> /{{currentTicker}}</span>
-        </div>
-        <div class="tickers-list__itemVolume">934 230</div>
-      </div>
-      <div class="tickers-list__item _flex05">
-        <div class="_currencyTitle">9.29</div>
-        <div class="tickers-list__itemVolume">$0.03</div>
-      </div>
-      <div class="tickers-list__item _alignRight">
-        <div class="_currencyTitle _drop">-0.12%</div>
-        <div class="tickers-list__itemVolume _drop">-17%</div>
-      </div>
-    </div>
+    <MarketsTickersListItem />
+    <MarketsTickersListItem />
+    <MarketsTickersListItem />
   </div>
 </template>
 
 <script>
+import MarketsTickersListItem from './MarketsTickersListItem'
+
 export default {
+  components: {
+    MarketsTickersListItem
+  },
   props: {
     currentTicker: {
       type: String,
@@ -67,9 +39,8 @@ export default {
 </script>
 
 <style lang="scss">
-
   .tickers-list {
-    margin-top: 15px;
+    margin-top: 8px;
     font-weight: 600;
 
     ._alignRight {
@@ -77,6 +48,8 @@ export default {
     }
     .tickers-list-head {
       display: flex;
+      box-sizing: border-box;
+      padding: 7px;
 
       .tickers-list__field {
         font-size: 13px;
@@ -90,8 +63,15 @@ export default {
       }
     }
     .tickers-list-row {
-      margin-top: 12px;
       display: flex;
+      box-sizing: border-box;
+      padding: 7px;
+      transition: all 0.6s ease;
+
+      &:hover {
+        cursor: pointer;
+        background: #131313;
+      }
 
       .tickers-list__item {
         flex: 1;
