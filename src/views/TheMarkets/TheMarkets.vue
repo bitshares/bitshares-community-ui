@@ -5,6 +5,7 @@
         <Tabs
           :tabs="['USD', 'BTC', 'ETH', 'CNY', 'BTS']"
           :currency-mode="true"
+          @change="onTickerChange"
         />
       </div>
       <div class="tickers-search">
@@ -14,7 +15,10 @@
         />
       </div>
     </div>
-    <MarketsTickersList/>
+    <MarketsTickersList
+      :items="tickerItems"
+      :current-ticker="currentTicker"
+    />
   </div>
 </template>
 <script>
@@ -22,15 +26,31 @@ import Tabs from '@/components/Tabs'
 import SearchInput from '@/components/SearchInput/'
 import MarketsTickersList from './MarketsTickersList'
 
+import { mapGetters } from 'vuex'
+
 export default {
   components: {
     Tabs,
     SearchInput,
     MarketsTickersList
   },
+  data() {
+    return {
+      currentTicker: 'USD'
+    }
+  },
+  computed: {
+    ...mapGetters('markets', ['markets']),
+
+    tickerItems() {
+      return this.markets[this.currentTicker] ? this.markets[this.currentTicker] : []
+    }
+  },
   methods: {
     onSearch({ value }) {
-      console.info(value)
+    },
+    onTickerChange(tickerValue) {
+      this.currentTicker = tickerValue
     }
   }
 }

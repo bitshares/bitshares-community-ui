@@ -5,9 +5,12 @@
       <div class="tickers-list__field _flex05">{{ priceTitle }}</div>
       <div class="tickers-list__field _alignRight">{{ changeTitle }}</div>
     </div>
-    <MarketsTickersListItem />
-    <MarketsTickersListItem />
-    <MarketsTickersListItem />
+    <MarketsTickersListItem
+      v-for="(ticker, index) in items"
+      :key="index"
+      :item="ticker"
+      :current-ticker="currentTicker"
+    />
   </div>
 </template>
 
@@ -22,6 +25,12 @@ export default {
     currentTicker: {
       type: String,
       default: 'USD'
+    },
+    items: {
+      type: Array,
+      default() {
+        return () => []
+      }
     }
   },
   computed: {
