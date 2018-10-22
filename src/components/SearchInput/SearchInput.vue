@@ -1,20 +1,14 @@
 <template>
   <input
-    class="search-input"
     v-model.trim="searchValue"
     :placeholder="hint || placeholder"
+    class="search-input"
     @input="onChange({ value: searchValue })"
   >
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      searchValue: '',
-      placeholder: 'Search'
-    }
-  },
   props: {
     hint: {
       type: String,
@@ -26,6 +20,12 @@ export default {
         return () => {}
       },
       required: true
+    }
+  },
+  data() {
+    return {
+      searchValue: '',
+      placeholder: 'Search'
     }
   }
 }

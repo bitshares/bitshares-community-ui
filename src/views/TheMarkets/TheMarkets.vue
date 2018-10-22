@@ -1,29 +1,32 @@
 <template>
   <div class="markets">
     <div class="markets__header">
-      <div class="ticker-sidebar">
+      <div class="tickers-sidebar">
         <Tabs
           :tabs="['USD', 'BTC', 'ETH', 'CNY', 'BTS']"
           :currency-mode="true"
         />
       </div>
-      <div class="ticker-search">
+      <div class="tickers-search">
         <SearchInput
           :hint="'Search'"
           :on-change="onSearch"
         />
       </div>
     </div>
+    <MarketsTickersList/>
   </div>
 </template>
 <script>
 import Tabs from '@/components/Tabs'
 import SearchInput from '@/components/SearchInput/'
+import MarketsTickersList from './MarketsTickersList'
 
 export default {
   components: {
     Tabs,
-    SearchInput
+    SearchInput,
+    MarketsTickersList
   },
   methods: {
     onSearch({ value }) {
@@ -38,7 +41,11 @@ export default {
     flex-direction: row;
     justify-content: space-between;
 
-    .ticker-search {
+    .tickers-sidebar {
+      margin-left: -6px;
+    }
+
+    .tickers-search {
       margin-top: -20px;
       position: absolute;
       right: 10px;
