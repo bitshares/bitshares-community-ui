@@ -23,14 +23,13 @@
             input-name="password"
             type="password"
             class="mb-2"
-          />
+          />x
 
         </div>
         <div
           slot="private key"
           class="login__form">
           <VInput
-            v-show="!file"
             v-model.trim="brainkey"
             :errors="$v.brainkey"
             input-name="brainkey"
@@ -38,10 +37,11 @@
           />
 
           <KeyfileLoader
+            v-if="!brainkey"
             @select="selectFile"
             @remove="removeFile"/>
 
-          <template v-if="!file">
+          <template v-if="brainkey">
             <VInput
               v-model.trim="pin"
               :errors="$v.pin"
@@ -57,7 +57,7 @@
               input-name="confirmPin"
             />
           </template>
-          <template v-else>
+          <template v-if="file">
             <VInput
               v-model.trim="pin"
               :errors="$v.pin"
