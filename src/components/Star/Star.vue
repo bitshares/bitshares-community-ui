@@ -1,8 +1,11 @@
 <template>
-  <div class="star">
+  <div
+    :class="active ? 'defaultActive' : ''"
+    class="star">
     <svgicon
       :name="(active || hoverState) ? 'starFilled' : 'star'"
-      @mouseover.native="hoverState=true" @mouseleave.native="hoverState=false"
+      @mouseover.native="hoverState=true"
+      @mouseleave.native="hoverState=false"
     />
   </div>
 </template>
@@ -26,5 +29,9 @@ export default {
 .star {
   cursor: pointer;
   color: config('colors.star');
+}
+
+.defaultActive {
+  color: config('colors.white');
 }
 </style>
