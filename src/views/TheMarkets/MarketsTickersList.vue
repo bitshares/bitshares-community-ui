@@ -85,7 +85,7 @@ export default {
 
       .tickers-list__field {
         font-size: 13px;
-        flex: 1;
+        width: 130px;
         text-transform: none;
         color: config('colors.tab-header');
         font-family: config('fonts.gotham');
@@ -95,7 +95,7 @@ export default {
         }
       }
       ._flex05 {
-        flex: .6;
+        width: 85px;
       }
     }
     .tickers-list-row {
@@ -110,7 +110,7 @@ export default {
       }
 
       .tickers-list__item {
-        flex: 1;
+        width: 130px;
         font-size: 13px;
         text-transform: none;
         color: config('colors.tab-header');
@@ -137,7 +137,7 @@ export default {
         opacity: 1;
       }
       ._flex05 {
-        flex: .6;
+        width: 85px;
       }
     }
   }

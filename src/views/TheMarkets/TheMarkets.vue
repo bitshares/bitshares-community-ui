@@ -63,6 +63,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+  .markets {
+    width: 330px;
+  }
   .markets__header {
     display: flex;
     flex-direction: row;
@@ -72,7 +75,7 @@ export default {
     .tickers-search {
       margin-top: -22px;
       position: absolute;
-      right: 10px;
+      left: 190px;
       z-index: 10;
     }
   }
