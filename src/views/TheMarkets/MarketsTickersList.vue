@@ -1,12 +1,21 @@
 <template>
   <div class="tickers-list">
     <div class="tickers-list-head">
-      <div class="tickers-list__field">{{ pairTitle }}</div>
-      <div class="tickers-list__field _flex05">{{ priceTitle }}</div>
-      <div class="tickers-list__field _alignRight">{{ changeTitle }}</div>
+      <div
+        class="tickers-list__field"
+        @click="changeSortField({ field: 'ticker' })"
+      >{{ pairTitle }}</div>
+      <div
+        class="tickers-list__field _flex05"
+        @click="changeSortField({ field: 'priceUsd1' })"
+        >{{ priceTitle }}</div>
+      <div
+        class="tickers-list__field _alignRight"
+        @click="changeSortField({ field: 'change1' })"
+      >{{ changeTitle }}</div>
     </div>
     <MarketsTickersListItem
-      v-for="(ticker, index) in items"
+      v-for="(ticker, index) in markets"
       :key="index"
       :item="ticker"
       :current-ticker="currentTicker"
@@ -15,6 +24,7 @@
 </template>
 
 <script>
+import { sortByField } from '@/helpers/utils'
 import MarketsTickersListItem from './MarketsTickersListItem'
 
 export default {
@@ -33,7 +43,15 @@ export default {
       }
     }
   },
+  data() {
+    return {
+      sortField: 'ticker'
+    }
+  },
   computed: {
+    markets() {
+      return this.items.slice().sort(sortByField(this.sortField))
+    },
     pairTitle() {
       return `Name/Vol, ${this.currentTicker}`
     },
@@ -42,6 +60,11 @@ export default {
     },
     changeTitle() {
       return '24h%/7d%'
+    }
+  },
+  methods: {
+    changeSortField({ field }) {
+      this.sortField = field
     }
   }
 }
@@ -66,6 +89,10 @@ export default {
         text-transform: none;
         color: config('colors.tab-header');
         font-family: config('fonts.gotham');
+
+        &:hover {
+          cursor: pointer;
+        }
       }
       ._flex05 {
         flex: .6;
