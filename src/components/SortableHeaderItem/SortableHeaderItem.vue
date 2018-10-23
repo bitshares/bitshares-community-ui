@@ -12,7 +12,9 @@
         name="sortArrow"
       />
     </div>
-    <slot name="title" />
+    <div :class="sort ? 'title-active' : ''">
+      {{ title }}
+    </div>
   </div>
 </template>
 
@@ -22,7 +24,11 @@ import '@icons/sortArrow'
 export default {
   props: {
     sort: {
-      default: () => null,
+      default: () => '',
+      type: String
+    },
+    title: {
+      default: () => '',
       type: String
     }
   }
@@ -33,20 +39,20 @@ export default {
 .header-item {
   font-size: config('textSizes.xs-sm');
   display: flex;
-  color: config('colors.sort-arrow');
+  color: config('colors.tab-header');
 }
 
 .sort-arrow-up {
   @apply mb-2;
-  height: 3px;
+  height: 0.1875rem;
 }
 
 .sort-arrow-up:not(.active):hover {
-  color: config('colors.sort-arrow-hover');
+  color: config('colors.tab-hover');
 }
 
 .sort-arrow-down:not(.active):hover {
-  color: config('colors.sort-arrow-hover');
+  color: config('colors.tab-hover');
 }
 
 .active {
@@ -55,7 +61,11 @@ export default {
 
 .sort-arrow-down {
   @apply -ml-4 mt-1;
-  height: 3px;
+  height: 0.1875rem;
   transform: rotate(-180deg);
+}
+
+.title-active {
+  color: config('colors.text-primary');
 }
 </style>

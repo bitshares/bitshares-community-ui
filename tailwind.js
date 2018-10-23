@@ -140,8 +140,6 @@ let colors = {
   'bg-base': '#3d4852',
   'tab-header': '#7a7675',
   'tab-hover': 'rgba(255, 255, 255, 0.6)',
-  'sort-arrow': 'rgba(255, 255, 255, 0.3)',
-  'sort-arrow-hover': 'rgba(255, 255, 255, 0.7)',
   'tab-active': '#ffffff',
   'table-bg': '#000000'
 }

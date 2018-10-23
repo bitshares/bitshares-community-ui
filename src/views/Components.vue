@@ -15,11 +15,10 @@
             text="button test"
             size="big"
           />
-          <HeaderItem sort="desc">
-            <div slot="title">
-              ticker
-            </div>
-          </HeaderItem>
+          <SortableHeaderItem
+            title="ticker"
+            sort="desc"
+          />
         </div>
       </Card>
     </div>
@@ -50,11 +49,11 @@
 import Button from '@/components/Button/'
 import Tabs from '@/components/Tabs/'
 import Card from '@/components/Card'
-import HeaderItem from '@/components/HeaderItem'
+import SortableHeaderItem from '@/components/SortableHeaderItem'
 
 export default {
   name: 'Components',
-  components: { Button, Tabs, Card, HeaderItem },
+  components: { Button, Tabs, Card, SortableHeaderItem },
   data() {
     return {
       testString: '',
