@@ -16,7 +16,7 @@
       </div>
     </div>
     <MarketsTickersList
-      :items="tickerItems"
+      :items="foundItems"
       :current-ticker="currentTicker"
     />
   </div>
@@ -36,7 +36,8 @@ export default {
   },
   data() {
     return {
-      currentTicker: 'USD'
+      currentTicker: 'USD',
+      searchValue: ''
     }
   },
   computed: {
@@ -44,10 +45,15 @@ export default {
 
     tickerItems() {
       return this.markets[this.currentTicker] ? this.markets[this.currentTicker] : []
+    },
+    foundItems() {
+      if (!this.searchValue) return this.tickerItems
+      return this.tickerItems.filter(item => item.ticker.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1)
     }
   },
   methods: {
     onSearch({ value }) {
+      this.searchValue = value
     },
     onTickerChange(tickerValue) {
       this.currentTicker = tickerValue
