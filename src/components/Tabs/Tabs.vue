@@ -85,6 +85,7 @@ export default {
   &--currency {
     width: 33px !important;
     margin: 0 7px;
+    margin-top: -7px;
     border-bottom: none;
     padding-bottom: .25rem;
     font-family: config('fonts.gotham-medium');

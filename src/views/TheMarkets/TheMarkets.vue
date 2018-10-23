@@ -67,9 +67,10 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    background: #0A0A0A;
 
     .tickers-search {
-      margin-top: -20px;
+      margin-top: -22px;
       position: absolute;
       right: 10px;
       z-index: 10;
