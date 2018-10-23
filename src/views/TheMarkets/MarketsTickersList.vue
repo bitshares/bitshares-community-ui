@@ -8,14 +8,14 @@
       <div
         class="tickers-list__field _flex05"
         @click="changeSortField({ field: 'priceUsd1' })"
-        >{{ priceTitle }}</div>
+      >{{ priceTitle }}</div>
       <div
         class="tickers-list__field _alignRight"
         @click="changeSortField({ field: 'change1' })"
       >{{ changeTitle }}</div>
     </div>
     <MarketsTickersListItem
-      v-for="(ticker, index) in markets"
+      v-for="(ticker, index) in sortedList"
       :key="index"
       :item="ticker"
       :current-ticker="currentTicker"
@@ -49,7 +49,7 @@ export default {
     }
   },
   computed: {
-    markets() {
+    sortedList() {
       return this.items.slice().sort(sortByField(this.sortField))
     },
     pairTitle() {
@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     changeSortField({ field }) {
-      this.sortField = field
+      this.sortField = (this.sortField[0] === '-') ? field : `-${field}`
     }
   }
 }
