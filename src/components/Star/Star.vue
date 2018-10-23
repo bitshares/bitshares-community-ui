@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="active ? 'defaultActive' : ''"
+    :class="active ? 'is-active' : ''"
     class="star">
     <svgicon
       :name="(active || hoverState) ? 'starFilled' : 'star'"
@@ -31,7 +31,7 @@ export default {
   color: config('colors.star');
 }
 
-.defaultActive {
+.is-active {
   color: config('colors.white');
 }
 </style>
