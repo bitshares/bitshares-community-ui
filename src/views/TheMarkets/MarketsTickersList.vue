@@ -1,6 +1,10 @@
 <template>
   <div class="tickers-list">
-    <div class="tickers-list-head">
+    <!--small-->
+    <div
+      v-if="!expandMode"
+      class="tickers-list-head"
+    >
       <div
         class="tickers-list__field"
         @click="changeSortField({ field: 'ticker' })"
@@ -14,11 +18,24 @@
         @click="changeSortField({ field: 'change1' })"
       >{{ changeTitle }}</div>
     </div>
+    <!--expand-->
+    <div
+      v-if="expandMode"
+      class="tickers-list-head"
+    >
+      <div class="tickers-list__field">Name</div>
+      <div class="tickers-list__field">Volume, USD</div>
+      <div class="tickers-list__field _flex05">Price, USD</div>
+      <div class="tickers-list__field _flex05 _alignRight">24h%</div>
+      <div class="tickers-list__field _flex05 _alignRight">7d%</div>
+      <div class="tickers-list__field _alignRight">Market Cap, USD</div>
+    </div>
     <MarketsTickersListItem
       v-for="(ticker, index) in sortedList"
       :key="index"
       :item="ticker"
       :current-ticker="currentTicker"
+      :expand-mode="expandMode"
     />
   </div>
 </template>
@@ -40,6 +57,12 @@ export default {
       type: Array,
       default() {
         return () => []
+      }
+    },
+    expandMode: {
+      type: Boolean,
+      default() {
+        return false
       }
     }
   },
@@ -85,7 +108,7 @@ export default {
 
       .tickers-list__field {
         font-size: 13px;
-        width: 130px;
+        flex: 1;
         text-transform: none;
         color: config('colors.tab-header');
         font-family: config('fonts.gotham');
@@ -95,7 +118,7 @@ export default {
         }
       }
       ._flex05 {
-        width: 85px;
+        flex: .6;
       }
     }
     .tickers-list-row {
@@ -110,7 +133,7 @@ export default {
       }
 
       .tickers-list__item {
-        width: 130px;
+        flex: 1;
         font-size: 13px;
         text-transform: none;
         color: config('colors.tab-header');
@@ -137,7 +160,7 @@ export default {
         opacity: 1;
       }
       ._flex05 {
-        width: 85px;
+        flex: .6;
       }
     }
   }

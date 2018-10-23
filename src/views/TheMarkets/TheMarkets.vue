@@ -17,6 +17,7 @@
     </div>
     <MarketsTickersList
       :items="foundItems"
+      :expand-mode="expandMode"
       :current-ticker="currentTicker"
     />
   </div>
@@ -37,6 +38,7 @@ export default {
   },
   data() {
     return {
+      expandMode: false,
       currentTicker: 'USD',
       searchValue: ''
     }
@@ -63,9 +65,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  .markets {
-    width: 330px;
-  }
   .markets__header {
     display: flex;
     flex-direction: row;
@@ -75,7 +74,7 @@ export default {
     .tickers-search {
       margin-top: -22px;
       position: absolute;
-      left: 190px;
+      right: 10px;
       z-index: 10;
     }
   }

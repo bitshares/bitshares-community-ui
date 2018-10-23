@@ -1,26 +1,66 @@
 <template>
-  <div class="tickers-list-row">
-    <div class="tickers-list__item">
-      <div class="tickers-list__itemPair">
-        <span class="_currencyTitle">{{ item.ticker }}</span>
-        <span class="_tickerTitle"> /{{ currentTicker }}</span>
+  <div>
+    <div
+      v-if="!expandMode"
+      class="tickers-list-row"
+    >
+      <div class="tickers-list__item">
+        <div class="tickers-list__itemPair">
+          <span class="_currencyTitle">{{ item.ticker }}</span>
+          <span class="_tickerTitle"> /{{ currentTicker }}</span>
+        </div>
+        <div class="tickers-list__itemVolume">{{ volUsd }}</div>
       </div>
-      <div class="tickers-list__itemVolume">{{ volUsd }}</div>
-    </div>
-    <div class="tickers-list__item _flex05">
-      <div class="_currencyTitle">{{ item.priceUsd1 }}</div>
-      <div class="tickers-list__itemVolume">${{ item.priceUsd2 }}</div>
-    </div>
-    <div class="tickers-list__item _alignRight">
-      <div
-        :class="getClassesOfDynamic({ price: item.change1 })"
-        class="_currencyTitle">
-        {{ changeValue1 }}
+      <div class="tickers-list__item _flex05">
+        <div class="_currencyTitle">{{ item.priceUsd1 }}</div>
+        <div class="tickers-list__itemVolume">${{ item.priceUsd2 }}</div>
       </div>
-      <div
-        :class="getClassesOfDynamic({ price: item.change2 })"
-        class="tickers-list__itemVolume">
-        {{ changeValue2 }}
+      <div class="tickers-list__item _alignRight">
+        <div
+          :class="getClassesOfDynamic({ price: item.change1 })"
+          class="_currencyTitle">
+          {{ changeValue1 }}
+        </div>
+        <div
+          :class="getClassesOfDynamic({ price: item.change2 })"
+          class="tickers-list__itemVolume">
+          {{ changeValue2 }}
+        </div>
+      </div>
+    </div>
+    <!--expand-->
+    <div
+      v-if="expandMode"
+      class="tickers-list-row"
+    >
+      <div class="tickers-list__item">
+        <div class="tickers-list__itemPair">
+          <span class="_currencyTitle">{{ item.ticker }}</span>
+          <span class="_tickerTitle"> /{{ currentTicker }}</span>
+        </div>
+      </div>
+      <div class="tickers-list__item">
+        <div class="tickers-list__itemVolume">{{ volUsd }}</div>
+      </div>
+      <div class="tickers-list__item _flex05">
+        <div class="tickers-list__itemVolume">{{ item.priceUsd1 }}</div>
+      </div>
+      <div class="tickers-list__item _flex05 _alignRight">
+        <div
+          :class="getClassesOfDynamic({ price: item.change1 })"
+          class="_currencyTitle">
+          {{ changeValue1 }}
+        </div>
+      </div>
+      <div class="tickers-list__item _flex05 _alignRight">
+        <div
+          :class="getClassesOfDynamic({ price: item.change2 })"
+          class="_currencyTitle">
+          {{ changeValue2 }}
+        </div>
+      </div>
+      <div class="tickers-list__item _alignRight">
+        <div class="tickers-list__itemVolume">{{ marketCap }}</div>
       </div>
     </div>
   </div>
@@ -39,6 +79,12 @@ export default {
     currentTicker: {
       type: String,
       default: 'USD'
+    },
+    expandMode: {
+      type: Boolean,
+      default() {
+        return false
+      }
     }
   },
   data() {
@@ -49,6 +95,9 @@ export default {
   computed: {
     volUsd() {
       return this.getVolumeFormat(this.item.volUsd)
+    },
+    marketCap() {
+      return this.getVolumeFormat(this.item.marketcap)
     },
     changeValue1() {
       return this.getChangeValue({ price: this.item.change1 })
