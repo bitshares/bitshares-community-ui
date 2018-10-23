@@ -22,6 +22,7 @@
   </div>
 </template>
 <script>
+import { sortByField } from '@/helpers/utils'
 import Tabs from '@/components/Tabs'
 import SearchInput from '@/components/SearchInput/'
 import MarketsTickersList from './MarketsTickersList'
@@ -44,7 +45,7 @@ export default {
     ...mapGetters('markets', ['markets']),
 
     tickerItems() {
-      return this.markets[this.currentTicker] ? this.markets[this.currentTicker] : []
+      return this.markets[this.currentTicker].slice().sort(sortByField('ticker'))
     },
     foundItems() {
       if (!this.searchValue) return this.tickerItems
