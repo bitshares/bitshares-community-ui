@@ -39,7 +39,7 @@
         size="small"/>
     </div>
     <MobileFooter
-      :items="['Test #1', 'Test #2', 'Test #3']"
+      :items="[{name: 'test1', title: 'Test #1', icon:'cancel'}, {name: 'test1', title: 'Test #2', icon:'userIcon'}, {name: 'test1', title: 'Test #3', icon:'paste'}]"
     />
   </div>
 </template>

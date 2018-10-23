@@ -6,14 +6,15 @@
       :style="{ width: itemWidth + '%' }"
       :class="activeIndex === index ? 'active' : ''"
       class="footer-item"
-      @click="$emit('itemClick')"
-      @itemClick="handleClick(index)"
+      @click="$emit('click')"
     >
       <svgicon
+        :name="item.icon"
+        height="33"
+        width="33"
         class="icon"
-        name="paste"
       /><br>
-      <div class="text">{{ item }}</div>
+      <div class="text">{{ item.title }}</div>
     </div>
   </div>
 </template>
@@ -38,18 +39,12 @@ export default {
     itemWidth() {
       return (100 / this.items.length)
     }
-  },
-  methods: {
-    handleClick(index) {
-      this.activeIndex = index
-      this.$emit('change', this.items[index])
-    }
   }
 }
 </script>
 
 <style>
-@media (min-width: config('screens.sm')) {
+@screen sm {
     .mobile-footer {
         display: none;
     }
@@ -66,7 +61,7 @@ export default {
 }
 
 .footer-item {
-    @apply pt-3 px-10 pb-0 mx-1;
+    @apply pt-1 px-10 pb-0 mx-1;
     background-color: config('colors.mobile-footer');
     opacity: 0.7;
 }
@@ -84,13 +79,8 @@ export default {
      opacity: 1;
 }
 
-.icon {
-  width:33px;
-  height: 33px;
-}
-
 .text {
-  @apply pt-2 pb-1;
+  @apply pt-1 pb-1;
   font-size: config('textSizes.xs-sm');
 }
 }
