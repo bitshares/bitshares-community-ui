@@ -19,6 +19,7 @@
             title="ticker"
             sort="desc"
           />
+          <Star />
         </div>
       </Card>
     </div>
@@ -50,10 +51,12 @@ import Button from '@/components/Button/'
 import Tabs from '@/components/Tabs/'
 import Card from '@/components/Card'
 import SortableHeaderItem from '@/components/SortableHeaderItem'
+import Star from '@/components/Star'
 
 export default {
   name: 'Components',
-  components: { Button, Tabs, Card, SortableHeaderItem },
+  components: { Button, Tabs, Card, Star, SortableHeaderItem },
+
   data() {
     return {
       testString: '',
