@@ -29,7 +29,9 @@
           <div
             slot="body"
             class="uppercase">
-            <TheMarkets />
+            <TheMarkets
+              :expand-mode="false"
+            />
           </div>
         </Card>
 

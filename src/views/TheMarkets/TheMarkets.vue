@@ -4,6 +4,18 @@
     class="markets"
   >
     <div class="markets__header">
+      <div
+        class="markets__expanded"
+        @click="showModal = true"
+      />
+      <MarketsModal
+        v-if="showModal"
+        @close="showModal = false"
+      >
+        <div slot="body">
+          <TheMarkets :expand-mode="true"/>
+        </div>
+      </MarketsModal>
       <div class="tickers-sidebar">
         <Tabs
           :tabs="['USD', 'BTC', 'ETH', 'CNY', 'BTS']"
@@ -29,21 +41,34 @@
 import { sortByField } from '@/helpers/utils'
 import Tabs from '@/components/Tabs'
 import SearchInput from '@/components/SearchInput/'
+import MarketsModal from '@/components/Modal'
+import TheMarkets from '@/views/TheMarkets'
 import MarketsTickersList from './MarketsTickersList'
 
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'TheMarkets',
   components: {
     Tabs,
     SearchInput,
-    MarketsTickersList
+    MarketsModal,
+    MarketsTickersList,
+    TheMarkets
+  },
+  props: {
+    expandMode: {
+      type: Boolean,
+      default() {
+        return false
+      }
+    }
   },
   data() {
     return {
-      expandMode: true,
       currentTicker: 'USD',
-      searchValue: ''
+      searchValue: '',
+      showModal: false
     }
   },
   computed: {
@@ -74,6 +99,17 @@ export default {
     justify-content: space-between;
     background: #0A0A0A;
 
+    .markets__expanded {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1px solid #7a7675;
+      position: absolute;
+      left: 18px;
+      top: 5px;
+      z-index: 100;
+    }
     .tickers-search {
       margin-top: -22px;
       position: absolute;
