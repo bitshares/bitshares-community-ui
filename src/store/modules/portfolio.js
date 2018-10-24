@@ -1,3 +1,4 @@
+import config from '@/config'
 
 const getters = {
   // gets base value based on last history price
@@ -19,7 +20,7 @@ const getters = {
 
   getBalanceFiatValue: (state, getters, rootState, rootGetters) => (baseValue) => {
     const multiplier = rootGetters['history/getHistoryAssetMultiplier'](1, state.fiatId).last
-    const fiatValue = parseInt((baseValue * multiplier).toFixed(0), 10)
+    const fiatValue = parseFloat((baseValue * multiplier).toFixed(0), 10)
     const fiatAsset = rootGetters['assets/getAssetById'](state.fiatId)
     return fiatValue / (10 ** fiatAsset.precision)
   },
@@ -52,7 +53,7 @@ const getters = {
 export default {
   namespaced: true,
   state: {
-    fiatId: '1.3.121'
+    fiatId: config.fiatId
   },
   mutations: {},
   actions: {},
