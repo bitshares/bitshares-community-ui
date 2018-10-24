@@ -30,6 +30,7 @@
           slot="private key"
           class="login__form">
           <VInput
+            v-show="!file"
             v-model.trim="brainkey"
             :errors="$v.brainkey"
             input-name="brainkey"
@@ -40,20 +41,31 @@
             @select="selectFile"
             @remove="removeFile"/>
 
-          <VInput
-            v-model.trim="pin"
-            :errors="$v.pin"
-            :password="true"
-            input-name="pin"
-            class="mb-4 mt-2"
-          />
+          <template v-if="!file">
+            <VInput
+              v-model.trim="pin"
+              :errors="$v.pin"
+              :password="true"
+              input-name="pin"
+              class="mb-4 mt-2"
+            />
 
-          <VInput
-            v-model.trim="confirmPin"
-            :errors="$v.confirmPin"
-            :password="true"
-            input-name="confirmPin"
-          />
+            <VInput
+              v-model.trim="confirmPin"
+              :errors="$v.confirmPin"
+              :password="true"
+              input-name="confirmPin"
+            />
+          </template>
+          <template v-else>
+            <VInput
+              v-model.trim="pin"
+              :errors="$v.pin"
+              type="password"
+              input-name="password"
+              class="mb-4 mt-2"
+            />
+          </template>
         </div>
       </Tabs>
 
@@ -94,26 +106,38 @@ export default {
   components: { VInput, Button, Tabs, KeyfileLoader },
   mixins: [validationMixin],
   validations() {
-    return this.type === 'password'
-      ? {
+    if (this.type === 'password') {
+      return {
         name: { required },
         password: { required },
         brainkey: {},
         pin: {},
         confirmPin: {}
       }
-      : {
-        name: {},
-        password: {},
-        brainkey: {
-          required: (value) => {
-            if (this.file) return true
-            return required(value)
-          }
-        },
-        pin: { required, minLength: minLength(6) },
-        confirmPin: { sameAsPin: sameAs('pin') }
+    } else {
+      if (this.file) {
+        return {
+          name: {},
+          password: {},
+          brainkey: {},
+          pin: { required, minLength: minLength(6) },
+          confirmPin: {}
+        }
+      } else {
+        return {
+          name: {},
+          password: {},
+          brainkey: {
+            required: (value) => {
+              if (this.file) return true
+              return required(value)
+            }
+          },
+          pin: { required, minLength: minLength(6) },
+          confirmPin: { sameAsPin: sameAs('pin') }
+        }
       }
+    }
   },
   data() {
     return {
@@ -168,6 +192,7 @@ export default {
         password: this.pin,
         backup: this.file
       })
+      console.log('Result', success, error, this.pin)
       this.inProgress = false
       if (success) this.$router.push({ name: 'main' })
       else this.$toast.error(error)
