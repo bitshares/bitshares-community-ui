@@ -164,4 +164,29 @@ export default {
       }
     }
   }
+  .markets--expanded {
+    .tickers-list {
+      .tickers-list-head {
+        .tickers-list__field {
+          font-size: 16px;
+        }
+      }
+      .tickers-list-row {
+        .tickers-list__item {
+          .tickers-list__itemVolume {
+            font-size: 16px;
+          }
+          ._currencyTitle {
+            font-size: 16px;
+          }
+          ._drop {
+            font-size: 14px;
+          }
+          ._increase {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
 </style>

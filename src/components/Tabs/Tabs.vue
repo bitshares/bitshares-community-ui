@@ -100,4 +100,9 @@ export default {
   border-bottom: 1px solid;
   border-bottom-color: config('colors.tab-active');
 }
+.markets--expanded {
+  .tabs-header .tab.tab--currency {
+    margin-right: 25px;
+  }
+}
 </style>

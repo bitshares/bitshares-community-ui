@@ -1,5 +1,8 @@
 <template>
-  <div class="markets">
+  <div
+    class="markets"
+    :class="{'markets--expanded': expandMode}"
+  >
     <div class="markets__header">
       <div class="tickers-sidebar">
         <Tabs
@@ -38,7 +41,7 @@ export default {
   },
   data() {
     return {
-      expandMode: false,
+      expandMode: true,
       currentTicker: 'USD',
       searchValue: ''
     }
@@ -76,6 +79,11 @@ export default {
       position: absolute;
       right: 10px;
       z-index: 10;
+    }
+  }
+  .markets--expanded {
+    .tickers-search {
+      margin-top: 8px;
     }
   }
 </style>
