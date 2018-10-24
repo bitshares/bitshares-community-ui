@@ -198,7 +198,7 @@ export default {
     async handleSignupPassword() {
       this.inProgress = true
       const resp = await this.signupWithPassword({
-        name: this.name,
+        name: this.name.toLowerCase(),
         password: this.password
       })
       this.inProgress = false
@@ -209,7 +209,7 @@ export default {
     async handleSignupBrainkey() {
       this.inProgress = true
       const resp = await this.signupBrainkey({
-        name: this.name,
+        name: this.name.toLowerCase(),
         password: this.pin,
         dictionary: dictionary.en,
         email: ''
