@@ -1,56 +1,47 @@
 <template>
-  <div class="portfolio">
-    <div class="grid-header">
-      <span>Tiker</span>
-      <span>Tokens</span>
-      <!-- <span><strong>7d%</strong></span> -->
+  <LoadingContainer :loading="!items.length">
+    <div class="portfolio">
+      <div class="grid-header">
+        <span>Tiker</span>
+        <span>Tokens</span>
+        <span>$Value</span>
+        <span>Share</span>
+      </div>
+      <div
+        v-for="(item, index) in sortedItems"
+        :key="index"
+        class="grid-items"
+      >
+        <PortfolioItem :item="item" />
+      </div>
     </div>
-    <div
-      v-for="(item, index) in balancesAsArray"
-      :key="index"
-      class="grid-items"
-    >
-      <PortfolioItem :item="item" />
-    </div>
-  </div>
+  </LoadingContainer>
+
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import LoadingContainer from '@/components/LoadingContainer'
 import PortfolioItem from './PortfolioItem.vue'
+import orderBy from 'lodash/orderBy'
 
 export default {
-  components: { PortfolioItem },
+  components: { PortfolioItem, LoadingContainer },
+  data() {
+    return {
+      sort: {
+        field: 'fiatValue',
+        type: 'desc'
+      }
+    }
+  },
   computed: {
     ...mapGetters({
-      userBalances: 'acc/getCurrentUserBalances',
-      getAssetById: 'assets/getAssetById',
-      getHideList: 'assets/getHideList'
+      items: 'portfolio/getItems'
     }),
-    balancesAsArray() {
-      const balances = this.userBalances
-      if (!balances) return []
-      // filter balaces that are > 0 and generate array with symbols
-      // and precised balances
-      let balancesKeys = Object.keys(balances).filter(
-        id => balances[id].balance
-      )
-      if (!this.editAssetsMode) {
-        balancesKeys = balancesKeys.filter(id => !this.getHideList.includes(id))
-      }
-
-      return balancesKeys.map(id => {
-        const asset = this.getAssetById(id)
-        const visible = !this.getHideList.includes(id)
-        return {
-          id,
-          symbol: asset.symbol,
-          tokens: balances[id].balance / 10 ** asset.precision,
-          visible
-        }
-      })
+    sortedItems() {
+      return orderBy(this.items, this.sort.field, this.sort.type)
     }
-
   }
 }
 </script>
@@ -101,8 +92,9 @@ export default {
   padding-bottom: config('padding.2');
   opacity: 0.5;
   display: grid;
-  grid-column-gap: 30px;
-  grid-template-columns: repeat(2, 2fr);
+  grid-template-columns: repeat(4, 1fr);
+  // grid-column-gap: 30px;
+  // grid-template-columns: repeat(2, 2fr);
 }
 
 .grid-header span {
