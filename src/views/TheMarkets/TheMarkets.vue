@@ -108,11 +108,12 @@ export default {
       border: 1px solid #7a7675;
       position: absolute;
       right: 10px;
-      top: 5px;
+      top: 0;
       z-index: 100;
 
       &:hover {
         cursor: pointer;
+        background: #7a7675;
       }
     }
     .tickers-search {

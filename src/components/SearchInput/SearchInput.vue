@@ -10,11 +10,19 @@
       v-if="searchValue.length"
       class="search-cleaner"
       @click="clear"
-    >×</div>
+    >
+      <svgicon :name="'cancel'"/>
+    </div>
+    <div class="search-icon">
+      <svgicon :name="'search'"/>
+    </div>
   </div>
 </template>
 
 <script>
+import '@icons/search'
+import '@icons/cancel'
+
 export default {
   props: {
     hint: {
@@ -58,12 +66,22 @@ export default {
     width: 13px;
     height: 13px;
     position: absolute;
-    top: 2px;
-    right: -4px;
+    top: 1px;
+    right: 20px;
+    transform: scale(.7, .7);
 
     &:hover {
       cursor: pointer;
       color: #7a7675;
     }
+  }
+  .search-icon {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    transform: scale(.8, .8);
+    position: absolute;
+    top: 1px;
+    right: 4px;
   }
 </style>
