@@ -24,11 +24,11 @@ import '@icons/sortArrow'
 export default {
   props: {
     sort: {
-      default: () => '',
+      default: '',
       type: String
     },
     title: {
-      default: () => '',
+      default: '',
       type: String
     }
   }
