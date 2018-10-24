@@ -5,6 +5,7 @@
   >
     <div class="markets__header">
       <div
+        v-if="!expandMode"
         class="markets__expanded"
         @click="showModal = true"
       />
@@ -106,20 +107,28 @@ export default {
       border-radius: 50%;
       border: 1px solid #7a7675;
       position: absolute;
-      left: 18px;
+      right: 10px;
       top: 5px;
       z-index: 100;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
     .tickers-search {
       margin-top: -22px;
       position: absolute;
-      right: 10px;
+      left: 212px;
       z-index: 10;
     }
   }
   .markets--expanded {
-    .tickers-search {
-      margin-top: 8px;
+    .markets__header {
+      .tickers-search {
+        margin-top: 8px;
+        left: initial;
+        right: 10px;
+      }
     }
   }
 </style>

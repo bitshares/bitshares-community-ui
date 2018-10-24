@@ -24,7 +24,7 @@
 
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
-          class="lg:w-2/3"
+          class="lg:w-1/3"
           title="markets">
           <div
             slot="body"

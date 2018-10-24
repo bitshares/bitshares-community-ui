@@ -7,9 +7,7 @@
           <div
             class="modal-close"
             @click="$emit('close')">
-            <svgicon
-              :name="'cancel'"
-            />
+            <svgicon :name="'cancel'"/>
           </div>
         </div>
       </div>
@@ -45,8 +43,8 @@ export default {
 
 .modal-close {
   position: absolute;
-  right: 9px;
-  top: -20px;
+  right: -10px;
+  top: -35px;
   opacity: .7;
 
   &:hover {
