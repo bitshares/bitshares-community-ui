@@ -49,7 +49,7 @@ export default {
     width: 150px;
     border: none;
     outline: none;
-    background: config('colors.card-background');
+    background: transparent;
     color: config('colors.white');
     border-bottom: 1px solid #7a7675;
   }

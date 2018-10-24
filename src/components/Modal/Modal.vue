@@ -3,18 +3,22 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <slot name="body"></slot>
-          <button
-            class="modal-default-button"
-            @click="$emit('close')"
-          >ok
-          </button>
+          <slot name="body"/>
+          <div
+            class="modal-close"
+            @click="$emit('close')">
+            <svgicon
+              :name="'cancel'"
+            />
+          </div>
         </div>
       </div>
     </div>
   </transition>
 </template>
 <script>
+import '@icons/cancel'
+
 export default {
 }
 </script>
@@ -37,6 +41,18 @@ export default {
   justify-content: center;
   align-items: center;
   transition: opacity .3s ease;
+}
+
+.modal-close {
+  position: absolute;
+  right: 9px;
+  top: -20px;
+  opacity: .7;
+
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
 }
 
 .modal-container {
