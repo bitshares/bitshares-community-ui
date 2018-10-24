@@ -1,7 +1,7 @@
 <template>
   <div
-    class="markets"
     :class="{'markets--expanded': expandMode}"
+    class="markets"
   >
     <div class="markets__header">
       <div class="tickers-sidebar">

@@ -107,7 +107,7 @@ export default {
       padding: 7px;
 
       .tickers-list__field {
-        font-size: 13px;
+        font-size: config('textSizes.xs-sm');
         flex: 1;
         text-transform: none;
         color: config('colors.tab-header');
@@ -134,22 +134,22 @@ export default {
 
       .tickers-list__item {
         flex: 1;
-        font-size: 13px;
+        font-size: config('textSizes.xs-sm');
         text-transform: none;
         color: config('colors.tab-header');
         font-family: config('fonts.gotham');
       }
       .tickers-list__itemVolume {
-        font-size: 12px;
+        font-size: config('textSizes.xs');
         color: config('colors.white');
         opacity: .8;
       }
       ._tickerTitle {
-        font-size: 12px;
+        font-size: config('textSizes.xs');
       }
       ._currencyTitle {
         color: config('colors.white');
-        font-size: 14px;
+        font-size: config('textSizes.sm');
       }
       ._increase {
         color: config('colors.increase');
@@ -168,22 +168,22 @@ export default {
     .tickers-list {
       .tickers-list-head {
         .tickers-list__field {
-          font-size: 16px;
+          font-size: config('textSizes.base')
         }
       }
       .tickers-list-row {
         .tickers-list__item {
           .tickers-list__itemVolume {
-            font-size: 16px;
+            font-size: config('textSizes.base')
           }
           ._currencyTitle {
-            font-size: 16px;
+            font-size: config('textSizes.base')
           }
           ._drop {
-            font-size: 14px;
+            font-size: config('textSizes.sm');
           }
           ._increase {
-            font-size: 14px;
+            font-size: config('textSizes.sm');
           }
         }
       }
