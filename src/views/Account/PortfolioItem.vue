@@ -1,12 +1,12 @@
 <template>
   <div>
     <span>{{ item.tiker }}</span>
-    <!-- <span>{{ item.tokens }}</span> -->
-    <!-- <span>{{ item.fiatValue }}</span> -->
-    <!-- <span>{{ item.share }}%</span> -->
-    <span>{{ item.tokenPrice }}</span>
-    <span>{{ item.change1.toFixed(0).toString() }}%</span>
-    <span>{{ item.change7.toFixed(0).toString() }}%</span>
+    <span>{{ item.tokens }}</span>
+    <span>{{ item.fiatValue }}</span>
+    <span>{{ item.share }}%</span>
+    <!-- <span>{{ item.tokenPrice }}</span> -->
+    <!-- <span>{{ item.change1.toFixed(0).toString() }}%</span> -->
+    <!-- <span>{{ item.change7.toFixed(0).toString() }}%</span> -->
   </div>
 </template>
 
