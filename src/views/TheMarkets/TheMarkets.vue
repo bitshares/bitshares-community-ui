@@ -27,7 +27,7 @@
       <div class="tickers-search">
         <SearchInput
           :hint="'Search'"
-          :on-change="onSearch"
+          @change="onSearch"
         />
       </div>
     </div>
@@ -60,9 +60,7 @@ export default {
   props: {
     expandMode: {
       type: Boolean,
-      default() {
-        return false
-      }
+      default: false
     }
   },
   data() {
@@ -73,7 +71,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('markets', ['markets']),
+    ...mapGetters({
+      markets: 'markets/getMarketsList'
+    }),
 
     tickerItems() {
       if (this.currentTicker === 'favourites') {

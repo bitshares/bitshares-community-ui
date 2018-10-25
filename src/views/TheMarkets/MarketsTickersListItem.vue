@@ -116,15 +116,14 @@ export default {
   },
   data() {
     return {
-      getVolumeFormat
     }
   },
   computed: {
     volUsd() {
-      return this.getVolumeFormat(this.item.volUsd)
+      return getVolumeFormat(this.item.volUsd)
     },
     marketCap() {
-      return this.getVolumeFormat(this.item.marketcap)
+      return getVolumeFormat(this.item.marketcap)
     },
     changeValue1() {
       return this.getChangeValue({ price: this.item.change1 })
@@ -147,3 +146,36 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+  .tickers-list__item {
+    flex: 1;
+    font-size: config('textSizes.xs-sm');
+    text-transform: none;
+    color: config('colors.tab-header');
+    font-family: config('fonts.gotham');
+  }
+  .tickers-list__itemVolume {
+    font-size: config('textSizes.xs');
+    color: config('colors.white');
+    opacity: .8;
+  }
+
+  .markets--expanded {
+    .tickers-list-row {
+      .tickers-list__item {
+        .tickers-list__itemVolume {
+          font-size: config('textSizes.base')
+        }
+        ._currencyTitle {
+          font-size: config('textSizes.base')
+        }
+        ._drop {
+          font-size: config('textSizes.sm');
+        }
+        ._increase {
+          font-size: config('textSizes.sm');
+        }
+      }
+    }
+  }
+</style>

@@ -152,25 +152,13 @@ export default {
       display: flex;
       box-sizing: border-box;
       padding: 7px;
-      transition: all 0.6s ease;
+      transition: ease-in-out 0.6s ease;
 
       &:hover {
         cursor: pointer;
         background: #131313;
       }
 
-      .tickers-list__item {
-        flex: 1;
-        font-size: config('textSizes.xs-sm');
-        text-transform: none;
-        color: config('colors.tab-header');
-        font-family: config('fonts.gotham');
-      }
-      .tickers-list__itemVolume {
-        font-size: config('textSizes.xs');
-        color: config('colors.white');
-        opacity: .8;
-      }
       ._tickerTitle {
         font-size: config('textSizes.xs');
       }
@@ -213,22 +201,6 @@ export default {
       .tickers-list-head {
         .tickers-list__field {
           font-size: config('textSizes.base')
-        }
-      }
-      .tickers-list-row {
-        .tickers-list__item {
-          .tickers-list__itemVolume {
-            font-size: config('textSizes.base')
-          }
-          ._currencyTitle {
-            font-size: config('textSizes.base')
-          }
-          ._drop {
-            font-size: config('textSizes.sm');
-          }
-          ._increase {
-            font-size: config('textSizes.sm');
-          }
         }
       }
     }

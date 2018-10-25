@@ -212,7 +212,7 @@ const state = {
 }
 
 const getters = {
-  markets(state) {
+  getMarketsList(state) {
     return state.markets
   }
 }

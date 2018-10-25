@@ -4,7 +4,7 @@
       v-model.trim="searchValue"
       :placeholder="hint || placeholder"
       class="search-input"
-      @input="onChange({ value: searchValue })"
+      @input="$emit('change', { value: searchValue })"
     >
     <div
       v-if="searchValue.length"
@@ -28,13 +28,6 @@ export default {
     hint: {
       type: String,
       default: ''
-    },
-    onChange: {
-      type: Function,
-      default() {
-        return () => {}
-      },
-      required: true
     }
   },
   data() {
@@ -46,7 +39,7 @@ export default {
   methods: {
     clear() {
       this.searchValue = ''
-      this.onChange({ value: '' })
+      this.$emit('change', { value: '' })
     }
   }
 }
