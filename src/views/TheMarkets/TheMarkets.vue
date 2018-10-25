@@ -76,6 +76,24 @@ export default {
     ...mapGetters('markets', ['markets']),
 
     tickerItems() {
+      if (!this.currentTicker) {
+        let allTickers = []
+        const favouritesFromCache = JSON.parse(localStorage.getItem('favourites')) || {}
+        const favourites = []
+
+        Object.keys(this.markets).forEach((ticker) => {
+          allTickers = allTickers.concat(this.markets[ticker])
+        })
+        Object.keys(favouritesFromCache).forEach((tickerId) => {
+          if (!favouritesFromCache[tickerId]) return
+          allTickers.forEach((ticker) => {
+            if (ticker.id === +tickerId) {
+              favourites.push(ticker)
+            }
+          })
+        })
+        return favourites.sort(sortByField('ticker'))
+      }
       return this.markets[this.currentTicker].slice().sort(sortByField('ticker'))
     },
     foundItems() {
