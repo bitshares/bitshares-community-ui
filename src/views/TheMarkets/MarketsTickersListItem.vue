@@ -5,11 +5,14 @@
       class="tickers-list-row"
     >
       <div class="tickers-list__item">
+        <Star
+          class="tickers__favourite"
+        />
         <div class="tickers-list__itemPair">
           <span class="_currencyTitle">{{ item.ticker }}</span>
           <span class="_tickerTitle"> /{{ currentTicker }}</span>
         </div>
-        <div class="tickers-list__itemVolume">{{ volUsd }}</div>
+        <div class="tickers-list__itemVolume _ml-21">{{ volUsd }}</div>
       </div>
       <div class="tickers-list__item _flex05">
         <div class="_currencyTitle">{{ item.priceUsd1 }}</div>
@@ -33,6 +36,9 @@
       v-if="expandMode"
       class="tickers-list-row"
     >
+      <Star
+        class="tickers__favourite"
+      />
       <div class="tickers-list__item">
         <div class="tickers-list__itemPair">
           <span class="_currencyTitle">{{ item.ticker }}</span>
@@ -66,9 +72,14 @@
   </div>
 </template>
 <script>
+
+import Star from '@/components/Star'
 import { getVolumeFormat } from '@/helpers/utils'
 
 export default {
+  components: {
+    Star
+  },
   props: {
     item: {
       type: Object,

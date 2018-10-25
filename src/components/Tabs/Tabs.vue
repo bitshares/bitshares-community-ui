@@ -3,6 +3,10 @@
     <div
       :class="{'tab-hader--centered': centered}"
       class="tabs-header">
+      <Star
+        v-if="currencyMode"
+        class="tabs__favourite"
+      />
       <div
         v-for="(tab, index) in tabs"
         :key="index"
@@ -22,7 +26,12 @@
 </template>
 
 <script>
+import Star from '@/components/Star'
+
 export default {
+  components: {
+    Star
+  },
   props: {
     tabs: {
       default: () => [],
@@ -65,6 +74,11 @@ export default {
   text-transform: uppercase;
   &--centered {
     justify-content: center;
+  }
+
+  .tabs__favourite {
+    margin: 0 8px;
+    line-height: 28px;
   }
 }
 

@@ -24,7 +24,7 @@
       class="tickers-list-head"
     >
       <div
-        class="tickers-list__field"
+        class="tickers-list__field pl-31"
         @click="changeSortField({ field: 'ticker' })">Name</div>
       <div
         class="tickers-list__field"
@@ -175,9 +175,26 @@ export default {
         flex: .6;
       }
     }
+    .tickers__favourite {
+      display: inline-block;
+      float: left;
+      margin-right: 8px;
+      margin-top: 5px;
+    }
+    ._ml-21 {
+      margin-left: 21px;
+    }
   }
   .markets--expanded {
     .tickers-list {
+      .tickers__favourite {
+        margin-top: -2px;
+        margin-right: 15px;
+      }
+      .pl-31 {
+        box-sizing: border-box;
+        padding-left: 31px;
+      }
       .tickers-list-head {
         .tickers-list__field {
           font-size: config('textSizes.base')
