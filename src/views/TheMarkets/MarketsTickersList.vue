@@ -48,6 +48,8 @@
       :item="ticker"
       :current-ticker="currentTicker"
       :expand-mode="expandMode"
+      :on-change-favourite="changeFavourite"
+      :is-favourite="!!favourites[ticker.id]"
     />
   </div>
 </template>
@@ -80,7 +82,8 @@ export default {
   },
   data() {
     return {
-      sortField: 'ticker'
+      sortField: 'ticker',
+      favourites: JSON.parse(localStorage.getItem('favourites')) || {}
     }
   },
   computed: {
@@ -100,6 +103,12 @@ export default {
   methods: {
     changeSortField({ field }) {
       this.sortField = (this.sortField[0] === '-') ? field : `-${field}`
+    },
+    changeFavourite({ id }) {
+      this.favourites[id] ? this.favourites[id] = false : this.favourites[id] = true
+
+      localStorage.setItem('favourites', JSON.stringify(Object.assign({}, this.favourites)))
+      this.favourites = JSON.parse(localStorage.getItem('favourites')) || {}
     }
   }
 }

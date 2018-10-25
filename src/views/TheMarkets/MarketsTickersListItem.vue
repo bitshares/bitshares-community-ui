@@ -3,9 +3,11 @@
     <div
       v-if="!expandMode"
       class="tickers-list-row"
+      @click="onChangeFavourite({ id: item.id })"
     >
       <div class="tickers-list__item">
         <Star
+          :active="isFavourite"
           class="tickers__favourite"
         />
         <div class="tickers-list__itemPair">
@@ -35,8 +37,10 @@
     <div
       v-if="expandMode"
       class="tickers-list-row"
+      @click="onChangeFavourite({ id: item.id })"
     >
       <Star
+        :active="isFavourite"
         class="tickers__favourite"
       />
       <div class="tickers-list__item">
@@ -95,6 +99,18 @@ export default {
       type: Boolean,
       default() {
         return false
+      }
+    },
+    isFavourite: {
+      type: Boolean,
+      default() {
+        return false
+      }
+    },
+    onChangeFavourite: {
+      type: Function,
+      default() {
+        return function() {}
       }
     }
   },

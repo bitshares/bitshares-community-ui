@@ -2,6 +2,7 @@ const state = {
   markets: {
     USD: [
       {
+        id: 1,
         ticker: 'ZIL',
         volUsd: 10764160,
         priceUsd1: 0.034810,
@@ -11,6 +12,7 @@ const state = {
         marketcap: 270832369
       },
       {
+        id: 2,
         ticker: 'ONT',
         volUsd: 46950092,
         priceUsd1: 1.93,
@@ -20,6 +22,7 @@ const state = {
         marketcap: 2708323
       },
       {
+        id: 3,
         ticker: 'ZCN',
         volUsd: 934230,
         priceUsd1: 9.29,
@@ -29,6 +32,7 @@ const state = {
         marketcap: 130532
       },
       {
+        id: 4,
         ticker: 'CFI',
         volUsd: 36235,
         priceUsd1: 0.023335,
@@ -38,6 +42,7 @@ const state = {
         marketcap: 58371323
       },
       {
+        id: 5,
         ticker: 'AIO',
         volUsd: 1888236,
         priceUsd1: 0.445555,
@@ -47,6 +52,7 @@ const state = {
         marketcap: 923832362
       },
       {
+        id: 6,
         ticker: 'POE',
         volUsd: 325688,
         priceUsd1: 0.0058,
@@ -58,6 +64,7 @@ const state = {
     ],
     BTC: [
       {
+        id: 7,
         ticker: 'ZCN',
         volUsd: 934230,
         priceUsd1: 9.29,
@@ -67,6 +74,7 @@ const state = {
         marketcap: 2373838
       },
       {
+        id: 8,
         ticker: 'CFI',
         volUsd: 36235,
         priceUsd1: 0.023335,
@@ -76,6 +84,7 @@ const state = {
         marketcap: 29392392
       },
       {
+        id: 9,
         ticker: 'AIO',
         volUsd: 1888236,
         priceUsd1: 0.445555,
@@ -85,6 +94,7 @@ const state = {
         marketcap: 2828471
       },
       {
+        id: 10,
         ticker: 'POE',
         volUsd: 325688,
         priceUsd1: 0.0058,
@@ -96,6 +106,7 @@ const state = {
     ],
     ETH: [
       {
+        id: 11,
         ticker: 'AIO',
         volUsd: 1888236,
         priceUsd1: 0.445555,
@@ -105,6 +116,7 @@ const state = {
         marketcap: 270832369
       },
       {
+        id: 12,
         ticker: 'POE',
         volUsd: 325688,
         priceUsd1: 0.0058,
@@ -116,6 +128,7 @@ const state = {
     ],
     CNY: [
       {
+        id: 13,
         ticker: 'ZIL',
         volUsd: 10764160,
         priceUsd1: 0.034810,
@@ -125,6 +138,7 @@ const state = {
         marketcap: 118238
       },
       {
+        id: 14,
         ticker: 'ONT',
         volUsd: 46950092,
         priceUsd1: 1.93,
@@ -134,6 +148,7 @@ const state = {
         marketcap: 9129319
       },
       {
+        id: 15,
         ticker: 'ZCN',
         volUsd: 934230,
         priceUsd1: 9.29,
@@ -145,6 +160,7 @@ const state = {
     ],
     BTS: [
       {
+        id: 16,
         ticker: 'ZCN',
         volUsd: 934230,
         priceUsd1: 9.29,
@@ -154,6 +170,7 @@ const state = {
         marketcap: 381923
       },
       {
+        id: 17,
         ticker: 'ZIL',
         volUsd: 10764160,
         priceUsd1: 0.034810,
@@ -163,6 +180,7 @@ const state = {
         marketcap: 56361723
       },
       {
+        id: 18,
         ticker: 'ONT',
         volUsd: 46950092,
         priceUsd1: 1.93,
