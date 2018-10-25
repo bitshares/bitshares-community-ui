@@ -3,10 +3,13 @@
     <div
       :class="{'tab-hader--centered': centered}"
       class="tabs-header">
-      <Star
-        v-if="currencyMode"
-        class="tabs__favourite"
-      />
+      <div @click="handleTabClick()">
+        <Star
+          v-if="currencyMode"
+          :active="activeFavourite"
+          class="tabs__favourite"
+        />
+      </div>
       <div
         v-for="(tab, index) in tabs"
         :key="index"
@@ -48,7 +51,8 @@ export default {
   },
   data() {
     return {
-      activeTabIndex: 0
+      activeTabIndex: 0,
+      activeFavourite: false
     }
   },
   computed: {
@@ -60,6 +64,8 @@ export default {
     handleTabClick(index) {
       this.activeTabIndex = index
       this.$emit('change', this.tabs[index])
+
+      index || index === 0 ? this.activeFavourite = false : this.activeFavourite = true
     }
   }
 }
