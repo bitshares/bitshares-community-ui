@@ -28,10 +28,10 @@
         @click="changeSortField({ field: 'ticker' })">Name</div>
       <div
         class="tickers-list__field"
-        @click="changeSortField({ field: 'volUsd' })">Volume, {{ currentTicker }}</div>
+        @click="changeSortField({ field: 'volUsd' })">Volume, {{ currentOfTicker }}</div>
       <div
         class="tickers-list__field _flex05"
-        @click="changeSortField({ field: 'priceUsd1' })">Price, {{ currentTicker }}</div>
+        @click="changeSortField({ field: 'priceUsd1' })">Price, {{ currentOfTicker }}</div>
       <div
         class="tickers-list__field _flex05 _alignRight"
         @click="changeSortField({ field: 'change1' })">24h%</div>
@@ -40,7 +40,7 @@
         @click="changeSortField({ field: 'change2' })">7d%</div>
       <div
         class="tickers-list__field _alignRight"
-        @click="changeSortField({ field: 'marketcap' })">Market Cap, {{ currentTicker }}</div>
+        @click="changeSortField({ field: 'marketcap' })">Market Cap, {{ currentOfTicker }}</div>
     </div>
     <MarketsTickersListItem
       v-for="(ticker, index) in sortedList"
@@ -88,16 +88,22 @@ export default {
   },
   computed: {
     sortedList() {
+      if (this.currentTicker === 'favourites') {
+        return this.items.filter(item => this.favourites[item.id]).sort(sortByField(this.sortField))
+      }
       return this.items.slice().sort(sortByField(this.sortField))
     },
     pairTitle() {
-      return `Name/Vol, ${this.currentTicker}`
+      return `Name/Vol, ${this.currentOfTicker}`
     },
     priceTitle() {
-      return `Price, ${this.currentTicker}`
+      return `Price, ${this.currentOfTicker}`
     },
     changeTitle() {
       return '24h%/7d%'
+    },
+    currentOfTicker() {
+      return this.currentTicker === 'favourites' ? 'USD' : this.currentTicker
     }
   },
   methods: {
@@ -105,9 +111,9 @@ export default {
       this.sortField = (this.sortField[0] === '-') ? field : `-${field}`
     },
     changeFavourite({ id }) {
-      this.favourites[id] ? this.favourites[id] = false : this.favourites[id] = true
+      this.favourites[id] ? delete this.favourites[id] : this.favourites[id] = true
 
-      localStorage.setItem('favourites', JSON.stringify(Object.assign({}, this.favourites)))
+      localStorage.setItem('favourites', JSON.stringify(this.favourites))
       this.favourites = JSON.parse(localStorage.getItem('favourites')) || {}
     }
   }

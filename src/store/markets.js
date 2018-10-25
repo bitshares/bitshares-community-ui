@@ -142,7 +142,7 @@ const state = {
       {
         id: 13,
         ticker: 'ZIL',
-        curr: 'ETH',
+        curr: 'CNY',
         volUsd: 10764160,
         priceUsd1: 0.034810,
         priceUsd2: 0.04,
@@ -153,7 +153,7 @@ const state = {
       {
         id: 14,
         ticker: 'ONT',
-        curr: 'ETH',
+        curr: 'CNY',
         volUsd: 46950092,
         priceUsd1: 1.93,
         priceUsd2: 0.03,
@@ -164,7 +164,7 @@ const state = {
       {
         id: 15,
         ticker: 'ZCN',
-        curr: 'ETH',
+        curr: 'CNY',
         volUsd: 934230,
         priceUsd1: 9.29,
         priceUsd2: 0.01,

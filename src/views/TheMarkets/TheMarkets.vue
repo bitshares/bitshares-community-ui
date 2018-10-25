@@ -76,7 +76,7 @@ export default {
     ...mapGetters('markets', ['markets']),
 
     tickerItems() {
-      if (!this.currentTicker) {
+      if (this.currentTicker === 'favourites') {
         let allTickers = []
         const favouritesFromCache = JSON.parse(localStorage.getItem('favourites')) || {}
         const favourites = []

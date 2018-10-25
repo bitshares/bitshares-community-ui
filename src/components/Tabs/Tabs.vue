@@ -3,7 +3,7 @@
     <div
       :class="{'tab-hader--centered': centered}"
       class="tabs-header">
-      <div @click="handleTabClick()">
+      <div @click="handleTabClick('favourites')">
         <Star
           v-if="currencyMode"
           :active="activeFavourite"
@@ -63,9 +63,9 @@ export default {
   methods: {
     handleTabClick(index) {
       this.activeTabIndex = index
-      this.$emit('change', this.tabs[index])
+      this.$emit('change', this.tabs[index] || 'favourites')
 
-      index || index === 0 ? this.activeFavourite = false : this.activeFavourite = true
+      this.tabs[index] ? this.activeFavourite = false : this.activeFavourite = true
     }
   }
 }
