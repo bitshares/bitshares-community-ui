@@ -12,7 +12,7 @@
         />
         <div class="tickers-list__itemPair">
           <span class="_currencyTitle">{{ item.ticker }}</span>
-          <span class="_tickerTitle"> /{{ currentTicker }}</span>
+          <span class="_tickerTitle"> /{{ item.curr }}</span>
         </div>
         <div class="tickers-list__itemVolume _ml-21">{{ volUsd }}</div>
       </div>
@@ -46,7 +46,7 @@
       <div class="tickers-list__item">
         <div class="tickers-list__itemPair">
           <span class="_currencyTitle">{{ item.ticker }}</span>
-          <span class="_tickerTitle"> /{{ currentTicker }}</span>
+          <span class="_tickerTitle"> /{{ item.curr }}</span>
         </div>
       </div>
       <div class="tickers-list__item">

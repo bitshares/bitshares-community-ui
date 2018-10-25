@@ -4,6 +4,7 @@ const state = {
       {
         id: 1,
         ticker: 'ZIL',
+        curr: 'USD',
         volUsd: 10764160,
         priceUsd1: 0.034810,
         priceUsd2: 0.04,
@@ -14,6 +15,7 @@ const state = {
       {
         id: 2,
         ticker: 'ONT',
+        curr: 'USD',
         volUsd: 46950092,
         priceUsd1: 1.93,
         priceUsd2: 0.03,
@@ -24,6 +26,7 @@ const state = {
       {
         id: 3,
         ticker: 'ZCN',
+        curr: 'USD',
         volUsd: 934230,
         priceUsd1: 9.29,
         priceUsd2: 0.01,
@@ -34,6 +37,7 @@ const state = {
       {
         id: 4,
         ticker: 'CFI',
+        curr: 'USD',
         volUsd: 36235,
         priceUsd1: 0.023335,
         priceUsd2: 0.02,
@@ -44,6 +48,7 @@ const state = {
       {
         id: 5,
         ticker: 'AIO',
+        curr: 'USD',
         volUsd: 1888236,
         priceUsd1: 0.445555,
         priceUsd2: 0.03,
@@ -54,6 +59,7 @@ const state = {
       {
         id: 6,
         ticker: 'POE',
+        curr: 'USD',
         volUsd: 325688,
         priceUsd1: 0.0058,
         priceUsd2: 0.04,
@@ -66,6 +72,7 @@ const state = {
       {
         id: 7,
         ticker: 'ZCN',
+        curr: 'BTC',
         volUsd: 934230,
         priceUsd1: 9.29,
         priceUsd2: 0.01,
@@ -76,6 +83,7 @@ const state = {
       {
         id: 8,
         ticker: 'CFI',
+        curr: 'BTC',
         volUsd: 36235,
         priceUsd1: 0.023335,
         priceUsd2: 0.02,
@@ -86,6 +94,7 @@ const state = {
       {
         id: 9,
         ticker: 'AIO',
+        curr: 'BTC',
         volUsd: 1888236,
         priceUsd1: 0.445555,
         priceUsd2: 0.03,
@@ -96,6 +105,7 @@ const state = {
       {
         id: 10,
         ticker: 'POE',
+        curr: 'BTC',
         volUsd: 325688,
         priceUsd1: 0.0058,
         priceUsd2: 0.04,
@@ -108,6 +118,7 @@ const state = {
       {
         id: 11,
         ticker: 'AIO',
+        curr: 'ETH',
         volUsd: 1888236,
         priceUsd1: 0.445555,
         priceUsd2: 0.03,
@@ -118,6 +129,7 @@ const state = {
       {
         id: 12,
         ticker: 'POE',
+        curr: 'ETH',
         volUsd: 325688,
         priceUsd1: 0.0058,
         priceUsd2: 0.04,
@@ -130,6 +142,7 @@ const state = {
       {
         id: 13,
         ticker: 'ZIL',
+        curr: 'ETH',
         volUsd: 10764160,
         priceUsd1: 0.034810,
         priceUsd2: 0.04,
@@ -140,6 +153,7 @@ const state = {
       {
         id: 14,
         ticker: 'ONT',
+        curr: 'ETH',
         volUsd: 46950092,
         priceUsd1: 1.93,
         priceUsd2: 0.03,
@@ -150,6 +164,7 @@ const state = {
       {
         id: 15,
         ticker: 'ZCN',
+        curr: 'ETH',
         volUsd: 934230,
         priceUsd1: 9.29,
         priceUsd2: 0.01,
@@ -162,6 +177,7 @@ const state = {
       {
         id: 16,
         ticker: 'ZCN',
+        curr: 'BTS',
         volUsd: 934230,
         priceUsd1: 9.29,
         priceUsd2: 0.01,
@@ -172,6 +188,7 @@ const state = {
       {
         id: 17,
         ticker: 'ZIL',
+        curr: 'BTS',
         volUsd: 10764160,
         priceUsd1: 0.034810,
         priceUsd2: 0.04,
@@ -182,6 +199,7 @@ const state = {
       {
         id: 18,
         ticker: 'ONT',
+        curr: 'BTS',
         volUsd: 46950092,
         priceUsd1: 1.93,
         priceUsd2: 0.03,

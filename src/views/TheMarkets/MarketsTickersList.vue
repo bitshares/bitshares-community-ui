@@ -28,10 +28,10 @@
         @click="changeSortField({ field: 'ticker' })">Name</div>
       <div
         class="tickers-list__field"
-        @click="changeSortField({ field: 'volUsd' })">Volume, USD</div>
+        @click="changeSortField({ field: 'volUsd' })">Volume, {{ currentTicker }}</div>
       <div
         class="tickers-list__field _flex05"
-        @click="changeSortField({ field: 'priceUsd1' })">Price, USD</div>
+        @click="changeSortField({ field: 'priceUsd1' })">Price, {{ currentTicker }}</div>
       <div
         class="tickers-list__field _flex05 _alignRight"
         @click="changeSortField({ field: 'change1' })">24h%</div>
@@ -40,7 +40,7 @@
         @click="changeSortField({ field: 'change2' })">7d%</div>
       <div
         class="tickers-list__field _alignRight"
-        @click="changeSortField({ field: 'marketcap' })">Market Cap, USD</div>
+        @click="changeSortField({ field: 'marketcap' })">Market Cap, {{ currentTicker }}</div>
     </div>
     <MarketsTickersListItem
       v-for="(ticker, index) in sortedList"
