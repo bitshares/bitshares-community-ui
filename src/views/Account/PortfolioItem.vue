@@ -1,12 +1,12 @@
 <template>
   <div>
     <span>{{ item.tiker }}</span>
-    <span>{{ item.tokens }}</span>
-    <span>{{ item.fiatValue }}</span>
-    <span>{{ item.share }}%</span>
-    <!-- <span>{{ item.tokenPrice }}</span> -->
-    <!-- <span>{{ item.change1.toFixed(0).toString() }}%</span> -->
-    <!-- <span>{{ item.change7.toFixed(0).toString() }}%</span> -->
+    <span v-show="isBalancesMode">{{ item.tokens }}</span>
+    <span v-show="isBalancesMode">{{ item.fiatValue }}</span>
+    <span v-show="isBalancesMode">{{ item.share }}%</span>
+    <span v-show="isPricesMode">{{ item.tokenPrice }}</span>
+    <span v-show="isPricesMode">{{ item.change1.toFixed(0).toString() }}%</span>
+    <span v-show="isPricesMode">{{ item.change7.toFixed(0).toString() }}%</span>
   </div>
 </template>
 
@@ -14,11 +14,21 @@
 export default {
   props: {
     item: {
-      default: () => {},
-      type: Object
+      type: Object,
+      required: true
+    },
+    mode: {
+      type: String,
+      required: true
     }
   },
   computed: {
+    isBalancesMode() {
+      return this.mode === 'balances'
+    },
+    isPricesMode() {
+      return this.mode === 'prices'
+    },
     formattedTokenPrice() {
       return this.preciseFiatValue(this.tokenPrice)
     },
