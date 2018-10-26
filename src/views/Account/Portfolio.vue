@@ -59,8 +59,6 @@ export default {
   methods: {
     toggleMode() {
       this.mode = this.inactiveMode
-      const fieldToSort = this.mode === 'balances' ? 'share' : 'tokenPrice'
-      this.changeSort(fieldToSort)
     },
     changeSort(field) {
       if (this.sort.field === field) {

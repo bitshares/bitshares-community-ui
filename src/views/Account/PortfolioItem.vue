@@ -2,9 +2,9 @@
   <div>
     <span>{{ item.tiker }}</span>
     <span v-show="isBalancesMode">{{ item.tokens }}</span>
-    <span v-show="isBalancesMode">{{ item.fiatValue }}</span>
+    <span v-show="isBalancesMode">{{ formattedFiatValue }}</span>
     <span v-show="isBalancesMode">{{ item.share }}%</span>
-    <span v-show="isPricesMode">{{ item.tokenPrice }}</span>
+    <span v-show="isPricesMode">{{ formattedTokenPrice }}</span>
     <span v-show="isPricesMode">{{ item.change1.toFixed(0).toString() }}%</span>
     <span v-show="isPricesMode">{{ item.change7.toFixed(0).toString() }}%</span>
   </div>
@@ -30,8 +30,13 @@ export default {
       return this.mode === 'prices'
     },
     formattedTokenPrice() {
-      return this.preciseFiatValue(this.tokenPrice)
+      return this.preciseFiatValue(this.item.tokenPrice || 0)
     },
+    formattedFiatValue() {
+      return this.preciseFiatValue(this.item.fiatValue || 0)
+    }
+  },
+  methods: {
     preciseFiatValue(value, precision = 1) {
       if (!value) return 0
       if (value > 10) return Math.floor(value)
