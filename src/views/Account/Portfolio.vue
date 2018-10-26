@@ -77,6 +77,7 @@ export default {
 <style scoped lang="scss">
 .portfolio {
   font-family: config("fonts.gotham");
+  padding-right: 5px;
 }
 
 .portfolio-header {

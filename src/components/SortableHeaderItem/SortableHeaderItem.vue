@@ -1,6 +1,6 @@
 <template>
   <div class="header-item">
-    <div>
+    <div class="header-item__arrows" v-show="sort">
       <svgicon
         :class="sort === 'asc' ? 'active' : ''"
         class="sort-arrow-up"
@@ -43,7 +43,14 @@ export default {
   color: config('colors.tab-header');
   cursor: pointer;
   user-select: none;
+  position: relative;
 }
+
+.header-item__arrows {
+  position: absolute;
+  left: 100%;
+}
+
 
 .sort-arrow-up {
   @apply mb-2;
