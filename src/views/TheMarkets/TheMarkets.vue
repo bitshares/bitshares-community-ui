@@ -104,18 +104,18 @@ export default {
     justify-content: space-between;
     background: #0A0A0A;
     .tickers-search {
-      margin-top: -22px;
+      margin-top: -1.375rem;
       position: absolute;
-      left: 212px;
+      left: 13.25rem;
       z-index: 10;
     }
   }
   .markets--expanded {
     .markets__header {
       .tickers-search {
-        margin-top: 8px;
+        margin-top: 0.5rem;
         left: initial;
-        right: 10px;
+        right: 0.625rem;
       }
     }
   }

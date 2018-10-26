@@ -127,7 +127,7 @@ export default {
 
 <style lang="scss">
   .tickers-list {
-    margin-top: 8px;
+    margin-top: 0.5rem;
     font-weight: 600;
 
     ._alignRight {
@@ -136,7 +136,7 @@ export default {
     .tickers-list-head {
       display: flex;
       box-sizing: border-box;
-      padding: 7px;
+      padding: 0.4375rem;
 
       .tickers-list__field {
         font-size: config('textSizes.xs-sm');
@@ -156,7 +156,7 @@ export default {
     .tickers-list-row {
       display: flex;
       box-sizing: border-box;
-      padding: 7px;
+      padding: 0.4375rem;
       transition: ease-in-out 0.6s ease;
 
       &:hover {
@@ -186,22 +186,22 @@ export default {
     .tickers__favourite {
       display: inline-block;
       float: left;
-      margin-right: 8px;
-      margin-top: 5px;
+      margin-right: 0.5rem;
+      margin-top: 0.3125rem;
     }
     ._ml-21 {
-      margin-left: 21px;
+      margin-left: 1.3125rem;
     }
   }
   .markets--expanded {
     .tickers-list {
       .tickers__favourite {
-        margin-top: -2px;
-        margin-right: 15px;
+        margin-top: -0.125rem;
+        margin-right: 0.9375rem;
       }
       .pl-31 {
         box-sizing: border-box;
-        padding-left: 31px;
+        padding-left: 1.9375rem;
       }
       .tickers-list-head {
         .tickers-list__field {
