@@ -39,20 +39,15 @@ export default {
 .header-item {
   font-size: config('textSizes.xs-sm');
   display: flex;
+  justify-content: flex-end;
   color: config('colors.tab-header');
+  cursor: pointer;
+  user-select: none;
 }
 
 .sort-arrow-up {
   @apply mb-2;
   height: 0.1875rem;
-}
-
-.sort-arrow-up:not(.active):hover {
-  color: config('colors.tab-hover');
-}
-
-.sort-arrow-down:not(.active):hover {
-  color: config('colors.tab-hover');
 }
 
 .active {

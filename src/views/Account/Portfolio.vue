@@ -3,11 +3,11 @@
     <div class="portfolio-header">
       <LinkButton title="hide small assets"/>
       <LinkButton
-        :title="`show ${mode}`"
+        :title="`show ${inactiveMode}`"
         @click.native="toggleMode"/>
     </div>
     <div class="portfolio">
-      <PortfolioTableHeader :mode="mode"/>
+      <PortfolioTableHeader :sort="sort" :mode="mode" @toggle-sort="changeSort"/>
       <div
         v-for="(item, index) in sortedItems"
         :key="index"
@@ -15,7 +15,8 @@
       >
         <PortfolioItem
           :mode="mode"
-          :item="item" />
+          :item="item" 
+        />
       </div>
     </div>
   </LoadingContainer>
@@ -47,11 +48,24 @@ export default {
     }),
     sortedItems() {
       return orderBy(this.items, this.sort.field, this.sort.type)
-    }
+    },
+    inactiveMode() {
+      return this.mode === 'balances' ? 'prices' : 'balances'
+    },
   },
   methods: {
     toggleMode() {
-      this.mode = this.mode === 'balances' ? 'prices' : 'balances'
+      this.mode = this.inactiveMode
+      const fieldToSort = this.mode === 'balances' ? 'share' : 'tokenPrice'
+      this.changeSort(fieldToSort)
+    },
+    changeSort(field) {
+      if (this.sort.field === field) {
+        this.sort.type = this.sort.type === 'asc' ? 'desc' : 'asc'
+        return
+      }
+      this.sort.field = field
+      this.sort.type = 'desc'
     }
   }
 }

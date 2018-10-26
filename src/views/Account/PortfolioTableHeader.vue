@@ -1,22 +1,26 @@
 <template>
   <div class="portfolio-table-header">
     <span>Tiker</span>
-    <span v-if="isBalancesMode">Tokens</span>
-    <span v-if="isBalancesMode">$Value</span>
-    <span v-if="isBalancesMode">Share</span>
-    <span v-if="isPricesMode">$Price</span>
-    <span v-if="isPricesMode">24h%</span>
-    <span v-if="isPricesMode">7d%</span>
+    <SortableHeaderItem 
+      v-for="(header, index) in tableHeaders"
+      :key="index"
+      :title="header.title" 
+      :sort="sort.field === header.field && sort.type || ''"
+      @click.native="$emit('toggle-sort', header.field)"
+    />
+    
   </div>
 </template>
 
 <script>
+import SortableHeaderItem from '@/components/SortableHeaderItem'
+
 export default {
+  components: { SortableHeaderItem },
   props: {
-    activeSort: {
+    sort: {
       type: Object,
-      required: false,
-      default: () => {}
+      required: true
     },
     mode: {
       type: String,
@@ -24,33 +28,31 @@ export default {
     }
   },
   computed: {
-    isBalancesMode() {
-      return this.mode === 'balances'
-    },
-    isPricesMode() {
-      return this.mode === 'prices'
+    tableHeaders() {
+      return this.mode === 'balances' ? [
+        { title: 'Tokens', field: 'tokens' },
+        { title: '$Value', field: 'fiatValue' },
+        { title: 'Share', field: 'share' }
+      ] : [
+        { title: '$Price', field: 'tokenPrice' },
+        { title: '24h%', field: 'change1' },
+        { title: '7d%', field: 'change7' }
+      ]
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-
 .portfolio-table-header {
   background-color: config('colors.table-bg');
   color: config('colors.text-primary');
   padding-bottom: config('padding.2');
-  opacity: 0.5;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-}
-
-.portfolio-table-header span {
-    padding: 0px 0px;
+  > span {
+    opacity: 0.5;
     font-size: config('textSizes.xs-sm');
-    &:not(:first-child) {
-      text-align: right;
-    }
+  }
 }
-
 </style>
