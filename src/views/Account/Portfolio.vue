@@ -7,7 +7,10 @@
         @click.native="toggleMode"/>
     </div>
     <div class="portfolio">
-      <PortfolioTableHeader :sort="sort" :mode="mode" @toggle-sort="changeSort"/>
+      <PortfolioTableHeader
+        :sort="sort"
+        :mode="mode"
+        @toggle-sort="changeSort"/>
       <div
         v-for="(item, index) in sortedItems"
         :key="index"
@@ -15,7 +18,7 @@
       >
         <PortfolioItem
           :mode="mode"
-          :item="item" 
+          :item="item"
         />
       </div>
     </div>
@@ -51,7 +54,7 @@ export default {
     },
     inactiveMode() {
       return this.mode === 'balances' ? 'prices' : 'balances'
-    },
+    }
   },
   methods: {
     toggleMode() {

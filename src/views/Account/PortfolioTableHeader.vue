@@ -1,14 +1,14 @@
 <template>
   <div class="portfolio-table-header">
     <span>Tiker</span>
-    <SortableHeaderItem 
+    <SortableHeaderItem
       v-for="(header, index) in tableHeaders"
       :key="index"
-      :title="header.title" 
+      :title="header.title"
       :sort="sort.field === header.field && sort.type || ''"
       @click.native="$emit('toggle-sort', header.field)"
     />
-    
+
   </div>
 </template>
 
