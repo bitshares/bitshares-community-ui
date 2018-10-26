@@ -4,19 +4,6 @@
     class="markets"
   >
     <div class="markets__header">
-      <div
-        v-if="!expandMode"
-        class="markets__expanded"
-        @click="showModal = true"
-      />
-      <MarketsModal
-        v-if="showModal"
-        @close="showModal = false"
-      >
-        <div slot="body">
-          <TheMarkets :expand-mode="true"/>
-        </div>
-      </MarketsModal>
       <div class="tickers-sidebar">
         <Tabs
           :tabs="['USD', 'BTC', 'ETH', 'CNY', 'BTS']"
@@ -42,7 +29,6 @@
 import { sortByField } from '@/helpers/utils'
 import Tabs from '@/components/Tabs'
 import SearchInput from '@/components/SearchInput/'
-import MarketsModal from '@/components/Modal'
 import TheMarkets from '@/views/TheMarkets'
 import MarketsTickersList from './MarketsTickersList'
 
@@ -53,7 +39,6 @@ export default {
   components: {
     Tabs,
     SearchInput,
-    MarketsModal,
     MarketsTickersList,
     TheMarkets
   },
@@ -117,23 +102,6 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     background: #0A0A0A;
-
-    .markets__expanded {
-      display: inline-block;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      border: 1px solid #7a7675;
-      position: absolute;
-      right: 10px;
-      top: 0;
-      z-index: 100;
-
-      &:hover {
-        cursor: pointer;
-        background: #7a7675;
-      }
-    }
     .tickers-search {
       margin-top: -22px;
       position: absolute;

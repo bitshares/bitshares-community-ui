@@ -23,7 +23,8 @@
       </div>
 
       <div class="flex flex-col lg:flex-row mb-2">
-        <Card
+        <card
+          :expanded="true"
           class="lg:w-1/3"
           title="markets">
           <div
@@ -36,7 +37,7 @@
         </Card>
 
         <Card
-          class="lg:w-1/3 disabled"
+          class="lg:w-2/3 disabled"
           title="order book">
           <div
             slot="body"
