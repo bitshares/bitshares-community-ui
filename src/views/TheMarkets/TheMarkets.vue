@@ -22,6 +22,7 @@
       :items="foundItems"
       :expand-mode="expandMode"
       :current-ticker="currentTicker"
+      :favourites="favourites"
     />
   </div>
 </template>
@@ -57,20 +58,20 @@ export default {
   },
   computed: {
     ...mapGetters({
-      markets: 'markets/getMarketsList'
+      markets: 'markets/getMarketsList',
+      favourites: 'markets/getFavouritesList'
     }),
 
     tickerItems() {
       if (this.currentTicker === 'favourites') {
         let allTickers = []
-        const favouritesFromCache = JSON.parse(localStorage.getItem('favourites')) || {}
         const favourites = []
 
         Object.keys(this.markets).forEach((ticker) => {
           allTickers = allTickers.concat(this.markets[ticker])
         })
-        Object.keys(favouritesFromCache).forEach((tickerId) => {
-          if (!favouritesFromCache[tickerId]) return
+        Object.keys(this.favourites).forEach((tickerId) => {
+          if (!this.favourites[tickerId]) return
           allTickers.forEach((ticker) => {
             if (ticker.id === +tickerId) {
               favourites.push(ticker)

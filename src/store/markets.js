@@ -1,4 +1,14 @@
+const a = {
+  UPDATE_FAVOURITES: 'UPDATE_FAVOURITES'
+}
+
 const state = {
+  favourites: {
+    1: true,
+    2: true,
+    7: true,
+    8: true
+  },
   markets: {
     USD: [
       {
@@ -214,13 +224,26 @@ const state = {
 const getters = {
   getMarketsList(state) {
     return state.markets
+  },
+  getFavouritesList(state) {
+    return state.favourites
   }
 }
 
 const mutations = {
+  [a.UPDATE_FAVOURITES](state, { favourites }) {
+    state.favourites = favourites
+  }
 }
 
 const actions = {
+  toggleFavourite({ state, commit }, { id }) {
+    commit(a.UPDATE_FAVOURITES, {
+      favourites: Object.assign(
+        {}, state.favourites, { [id]: !state.favourites[id] }
+      )
+    })
+  }
 }
 
 export default {

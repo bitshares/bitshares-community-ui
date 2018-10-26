@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { sortByField } from '@/helpers/utils'
 import MarketsTickersListItem from './MarketsTickersListItem'
 
@@ -73,6 +74,12 @@ export default {
         return () => []
       }
     },
+    favourites: {
+      type: Object,
+      default() {
+        return () => {}
+      }
+    },
     expandMode: {
       type: Boolean,
       default() {
@@ -82,8 +89,7 @@ export default {
   },
   data() {
     return {
-      sortField: 'ticker',
-      favourites: JSON.parse(localStorage.getItem('favourites')) || {}
+      sortField: 'ticker'
     }
   },
   computed: {
@@ -107,14 +113,13 @@ export default {
     }
   },
   methods: {
+    ...mapActions('markets', ['toggleFavourite']),
+
     changeSortField({ field }) {
       this.sortField = (this.sortField[0] === '-') ? field : `-${field}`
     },
     changeFavourite({ id }) {
-      this.favourites[id] ? delete this.favourites[id] : this.favourites[id] = true
-
-      localStorage.setItem('favourites', JSON.stringify(this.favourites))
-      this.favourites = JSON.parse(localStorage.getItem('favourites')) || {}
+      this.toggleFavourite({ id })
     }
   }
 }
