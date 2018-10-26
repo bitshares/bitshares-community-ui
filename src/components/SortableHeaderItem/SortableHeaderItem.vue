@@ -1,6 +1,8 @@
 <template>
   <div class="header-item">
-    <div class="header-item__arrows" v-show="sort">
+    <div
+      v-show="sort"
+      class="header-item__arrows">
       <svgicon
         :class="sort === 'asc' ? 'active' : ''"
         class="sort-arrow-up"
@@ -50,7 +52,6 @@ export default {
   position: absolute;
   left: 100%;
 }
-
 
 .sort-arrow-up {
   @apply mb-2;
