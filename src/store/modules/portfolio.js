@@ -5,7 +5,8 @@ const getters = {
   getBalanceBaseValue: (state, getters, rootState, rootGetters) => ({ assetId, value }) => {
     const history24 = rootGetters['history/getByDay'](1)[assetId]
     const history7 = rootGetters['history/getByDay'](7)[assetId]
-    let price = (history24 && history24.last) || (history7 && history7.last)
+    if (!history24 || !history7) return
+    let price = history24.last || history7.last
     if (assetId === state.baseId) price = 1
     const baseValue = parseInt((value * price).toFixed(0), 10)
 
@@ -76,7 +77,7 @@ export default {
   namespaced: true,
   state: {
     fiatId: config.fiatId,
-    baseId: '1.3.0'
+    baseId: config.baseId
   },
   mutations: {},
   actions: {},

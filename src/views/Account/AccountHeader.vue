@@ -1,11 +1,11 @@
 <template>
-  <div 
-    class="portfolio-header"
+  <div
     v-if="historyLoaded"
+    class="portfolio-header"
   >
     <div class="text-weak">
-      Balance</div>&nbsp; {{ totalFiatValue }} USD
-    </div>
+    Balance</div>&nbsp; {{ totalFiatValue }} USD
+  </div>
 </template>
 
 <script>
@@ -26,6 +26,7 @@ export default {
   font-family: config("fonts.gotham");
   font-size: config('textSizes.sm');
   display: flex;
+  padding-right: 0.3rem;
   align-items: baseline;
   color: config('colors.text-primary');
 }

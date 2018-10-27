@@ -1,12 +1,12 @@
 <template>
-  <LoadingContainer :loading="!historyLoaded">
+  <LoadingContainer :loading="!historyLoaded" class="portfolio-container">
     <div class="portfolio-header">
       <!-- <LinkButton title="hide small assets"/> -->
       <LinkButton
         :title="`show ${inactiveMode}`"
         @click.native="toggleMode"/>
     </div>
-    <div class="portfolio">
+    <div class="portfolio-table">
       <PortfolioTableHeader
         :sort="sort"
         :mode="mode"
@@ -74,9 +74,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.portfolio {
+.portfolio-container {
+  padding-right: 0.3rem;
+}
+
+.portfolio-table {
   font-family: config("fonts.gotham");
-  padding-right: 5px;
 }
 
 .portfolio-header {

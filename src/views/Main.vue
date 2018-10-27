@@ -20,22 +20,25 @@ export default {
     ...mapGetters({
       connected: 'connection/isReady',
       userId: 'acc/getAccountUserId',
-      userName: 'user/getUserName'
     })
   },
   watch: {
     connected: {
-      handler(newVal) {
-        if (newVal) {
-          this.initUserData()
-        }
+      handler(connected) {
+        if (!this.userId) return;
+        connected ? this.initUserData() : this.unsubFromUserData()
       },
       immediate: true
+    },
+    userId(newVal) {
+      if (!newVal) this.resetUserData()
     }
   },
   methods: {
     ...mapActions({
-      initUserData: 'app/initUserData'
+      initUserData: 'app/initUserData',
+      resetUserData: 'app/resetUserData',
+      unsubFromUserData: 'app/unsubFromUserData'
     })
   }
 }

@@ -39,8 +39,6 @@ const actions = {
     )
 
     const combinedAssetsIds = Object.keys(balances)
-
-
     dispatch('history/fetchAll', {
       baseId: '1.3.0',
       assetsIds: combinedAssetsIds,
