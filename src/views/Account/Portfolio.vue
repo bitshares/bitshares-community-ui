@@ -1,5 +1,7 @@
 <template>
-  <LoadingContainer :loading="!historyLoaded" class="portfolio-container">
+  <LoadingContainer
+    :loading="!historyLoaded"
+    class="portfolio-container">
     <div class="portfolio-header">
       <!-- <LinkButton title="hide small assets"/> -->
       <LinkButton

@@ -19,13 +19,13 @@ export default {
   computed: {
     ...mapGetters({
       connected: 'connection/isReady',
-      userId: 'acc/getAccountUserId',
+      userId: 'acc/getAccountUserId'
     })
   },
   watch: {
     connected: {
       handler(connected) {
-        if (!this.userId) return;
+        if (!this.userId) return
         connected ? this.initUserData() : this.unsubFromUserData()
       },
       immediate: true
