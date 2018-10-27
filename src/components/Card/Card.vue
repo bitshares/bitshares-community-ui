@@ -37,10 +37,12 @@ export default {
   min-height: 25rem;
   max-height: 30rem;
   display: flex;
+
   flex-direction: column;
   font-family: config('fonts.gotham-regular');
   background-color: config('colors.card-background');
   color: config('colors.text-primary');
+  border: 1px solid config('colors.card-border');
   transition: max-height 0.2s;
   &:last-child {
     @apply mr-0;
@@ -53,6 +55,7 @@ export default {
   display:flex;
   flex-shrink: 0;
   justify-content: space-between;
+  align-items: baseline;
 }
 
 .title {

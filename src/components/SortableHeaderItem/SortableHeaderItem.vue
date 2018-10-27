@@ -1,13 +1,15 @@
 <template>
   <div class="header-item">
-    <div>
+    <div
+      v-show="sort"
+      class="header-item__arrows">
       <svgicon
-        :class="sort === 'asc' ? 'active' : ''"
+        :class="sort === 'desc' ? 'active' : ''"
         class="sort-arrow-up"
         name="sortArrow"
       />
       <svgicon
-        :class="sort === 'desc' ? 'active' : ''"
+        :class="sort === 'asc' ? 'active' : ''"
         class="sort-arrow-down"
         name="sortArrow"
       />
@@ -39,20 +41,21 @@ export default {
 .header-item {
   font-size: config('textSizes.xs-sm');
   display: flex;
+  justify-content: flex-end;
   color: config('colors.tab-header');
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.header-item__arrows {
+  position: absolute;
+  left: 100%;
 }
 
 .sort-arrow-up {
   @apply mb-2;
   height: 0.1875rem;
-}
-
-.sort-arrow-up:not(.active):hover {
-  color: config('colors.tab-hover');
-}
-
-.sort-arrow-down:not(.active):hover {
-  color: config('colors.tab-hover');
 }
 
 .active {
