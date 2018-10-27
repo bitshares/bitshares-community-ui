@@ -34,7 +34,7 @@ const getters = {
     const multiplier = rootGetters['history/getHistoryAssetMultiplier'](1, state.fiatId)
     const prices = rootGetters['history/getByDay'](days)[assetId]
     if (!multiplier || !prices) return 0
-    if (prices.first === prices.last && assetId !== state.baseId) return 0
+    if (prices.first === prices.last) return 0
     return ((((prices.last * multiplier.last) /
       (prices.first * multiplier.first)) * 100) - 100)
   },

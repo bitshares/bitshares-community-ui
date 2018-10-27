@@ -1,7 +1,11 @@
 <template>
-  <div class="portfolio-header">
-    <div class="text-weak">Balance</div>&nbsp; {{ totalFiatValue }} USD
-  </div>
+  <div 
+    class="portfolio-header"
+    v-if="historyLoaded"
+  >
+    <div class="text-weak">
+      Balance</div>&nbsp; {{ totalFiatValue }} USD
+    </div>
 </template>
 
 <script>
@@ -10,6 +14,7 @@ export default {
   name: 'AccountHeader',
   computed: {
     ...mapGetters({
+      historyLoaded: 'history/initialLoaded',
       totalFiatValue: 'portfolio/getTotalFiatValue'
     })
   }
@@ -21,6 +26,7 @@ export default {
   font-family: config("fonts.gotham");
   font-size: config('textSizes.sm');
   display: flex;
+  align-items: baseline;
   color: config('colors.text-primary');
 }
 

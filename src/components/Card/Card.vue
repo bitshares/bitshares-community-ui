@@ -42,6 +42,7 @@ export default {
   font-family: config('fonts.gotham-regular');
   background-color: config('colors.card-background');
   color: config('colors.text-primary');
+  border: 1px solid config('colors.card-border');
   transition: max-height 0.2s;
   &:last-child {
     @apply mr-0;

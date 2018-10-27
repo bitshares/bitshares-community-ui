@@ -39,15 +39,12 @@ const actions = {
     )
 
     const combinedAssetsIds = Object.keys(balances)
-    dispatch('history/fetch', {
+
+
+    dispatch('history/fetchAll', {
       baseId: '1.3.0',
       assetsIds: combinedAssetsIds,
-      days: 1
-    }, { root: true })
-    dispatch('history/fetch', {
-      baseId: '1.3.0',
-      assetsIds: combinedAssetsIds,
-      days: 7
+      daysArr: [1, 7]
     }, { root: true })
   },
   unsubFromUserData({ dispatch }) {

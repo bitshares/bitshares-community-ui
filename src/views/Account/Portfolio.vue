@@ -1,7 +1,7 @@
 <template>
-  <LoadingContainer :loading="!items.length">
+  <LoadingContainer :loading="!historyLoaded">
     <div class="portfolio-header">
-      <LinkButton title="hide small assets"/>
+      <!-- <LinkButton title="hide small assets"/> -->
       <LinkButton
         :title="`show ${inactiveMode}`"
         @click.native="toggleMode"/>
@@ -47,7 +47,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      items: 'portfolio/getItems'
+      items: 'portfolio/getItems',
+      historyLoaded: 'history/initialLoaded'
     }),
     sortedItems() {
       return orderBy(this.items, this.sort.field, this.sort.type)
@@ -80,7 +81,7 @@ export default {
 
 .portfolio-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-bottom: 1rem;
 }
 </style>
