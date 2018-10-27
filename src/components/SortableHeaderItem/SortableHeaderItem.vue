@@ -4,12 +4,12 @@
       v-show="sort"
       class="header-item__arrows">
       <svgicon
-        :class="sort === 'asc' ? 'active' : ''"
+        :class="sort === 'desc' ? 'active' : ''"
         class="sort-arrow-up"
         name="sortArrow"
       />
       <svgicon
-        :class="sort === 'desc' ? 'active' : ''"
+        :class="sort === 'asc' ? 'active' : ''"
         class="sort-arrow-down"
         name="sortArrow"
       />
