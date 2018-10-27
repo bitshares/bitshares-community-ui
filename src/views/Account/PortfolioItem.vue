@@ -1,7 +1,7 @@
 <template>
   <div>
     <span>{{ item.tiker }}</span>
-    <span v-show="isBalancesMode">{{ item.tokens }}</span>
+    <span v-show="isBalancesMode">{{ formattedTokens }}</span>
     <span v-show="isBalancesMode">{{ formattedFiatValue }}</span>
     <span v-show="isBalancesMode">{{ item.share }}%</span>
     <span v-show="isPricesMode">{{ formattedTokenPrice }}</span>
@@ -28,6 +28,9 @@ export default {
     },
     isPricesMode() {
       return this.mode === 'prices'
+    },
+    formattedTokens() {
+      return this.item.tokens.toFixed(3)
     },
     formattedTokenPrice() {
       return this.preciseFiatValue(this.item.tokenPrice || 0)

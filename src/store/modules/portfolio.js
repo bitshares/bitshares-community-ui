@@ -5,7 +5,8 @@ const getters = {
   getBalanceBaseValue: (state, getters, rootState, rootGetters) => ({ assetId, value }) => {
     const history24 = rootGetters['history/getByDay'](1)[assetId]
     const history7 = rootGetters['history/getByDay'](7)[assetId]
-    const price = (history24 && history24.last) || (history7 && history7.last)
+    let price = (history24 && history24.last) || (history7 && history7.last)
+    if (assetId === state.baseId) price = 1
     const baseValue = parseInt((value * price).toFixed(0), 10)
 
     return baseValue
@@ -33,6 +34,7 @@ const getters = {
     const multiplier = rootGetters['history/getHistoryAssetMultiplier'](1, state.fiatId)
     const prices = rootGetters['history/getByDay'](days)[assetId]
     if (!multiplier || !prices) return 0
+    if (prices.first === prices.last && assetId !== state.baseId) return 0
     return ((((prices.last * multiplier.last) /
       (prices.first * multiplier.first)) * 100) - 100)
   },
@@ -50,8 +52,10 @@ const getters = {
       const tokenPrice = fiatValue / tokens
       const change7 = getters.getPriceChangeById({ assetId, days: 7 })
       const change1 = getters.getPriceChangeById({ assetId, days: 1 })
+
       const share = Math.round((baseValue / getters.getTotalBaseValue) * 100)
       return {
+        assetId,
         tiker: asset.symbol,
         tokens,
         fiatValue,
@@ -71,7 +75,8 @@ const getters = {
 export default {
   namespaced: true,
   state: {
-    fiatId: config.fiatId
+    fiatId: config.fiatId,
+    baseId: '1.3.0'
   },
   mutations: {},
   actions: {},
