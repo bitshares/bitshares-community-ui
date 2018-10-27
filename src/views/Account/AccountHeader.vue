@@ -4,7 +4,7 @@
     class="portfolio-header"
   >
     <div class="text-weak">
-    Balance</div>&nbsp; {{ totalFiatValue }} USD
+    Balance</div>&nbsp; $ {{ totalFiatValue }}
   </div>
 </template>
 
