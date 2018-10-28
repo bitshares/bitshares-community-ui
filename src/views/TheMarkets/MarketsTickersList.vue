@@ -117,7 +117,7 @@ export default {
       this.toggleFavourite({ id })
     },
     getFieldTitle(tmpl) {
-      return tmpl.replace('{currentTicker}', this.currentTicker)
+      return tmpl.replace('{currentTicker}', this.currentOfTicker)
     }
   }
 }
