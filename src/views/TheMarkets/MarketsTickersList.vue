@@ -224,7 +224,7 @@ export default {
       }
       .tickers-list-head {
         .tickers-list__field {
-          font-size: config('textSizes.base')
+          font-size: config('textSizes.sm')
         }
       }
     }
