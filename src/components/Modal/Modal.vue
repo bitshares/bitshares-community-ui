@@ -1,6 +1,9 @@
 <template>
   <transition name="modal">
-    <div class="modal-mask">
+    <div
+      class="modal-mask"
+      @click.self.stop="$emit('close')"
+    >
       <div class="modal-wrapper">
         <div class="modal-container">
           <slot name="body"/>
