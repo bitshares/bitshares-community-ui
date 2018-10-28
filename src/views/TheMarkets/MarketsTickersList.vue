@@ -16,7 +16,12 @@
       <div
         class="tickers-list__field _alignRight"
         @click="changeSortField({ field: 'change1' })"
-      >{{ changeTitle }}</div>
+      >{{ changeTitle }}
+      </div>
+      <SortableHeaderItem
+        :sort="sortType"
+        class="_custom-positions"
+      />
     </div>
     <!--expand-->
     <div
@@ -34,7 +39,12 @@
         @click="changeSortField({ field: 'priceUsd1' })">Price, {{ currentOfTicker }}</div>
       <div
         class="tickers-list__field _flex05 _alignRight"
-        @click="changeSortField({ field: 'change1' })">24h%</div>
+        @click="changeSortField({ field: 'change1' })">24h%
+      </div>
+      <SortableHeaderItem
+        :sort="sortType"
+        class="_mt-2"
+      />
       <div
         class="tickers-list__field _flex05 _alignRight"
         @click="changeSortField({ field: 'change2' })">7d%</div>
@@ -58,10 +68,12 @@
 import { mapActions } from 'vuex'
 import { sortByField } from '@/helpers/utils'
 import MarketsTickersListItem from './MarketsTickersListItem'
+import SortableHeaderItem from '@/components/SortableHeaderItem'
 
 export default {
   components: {
-    MarketsTickersListItem
+    MarketsTickersListItem,
+    SortableHeaderItem
   },
   props: {
     currentTicker: {
@@ -93,6 +105,9 @@ export default {
     }
   },
   computed: {
+    sortType() {
+      return this.sortField[0] === '-' ? 'desc' : 'asc'
+    },
     sortedList() {
       if (this.currentTicker === 'favourites') {
         return this.items.filter(item => this.favourites[item.id]).sort(sortByField(this.sortField))
@@ -133,6 +148,12 @@ export default {
     ._alignRight {
       text-align: right;
     }
+
+    ._custom-positions {
+      top: 0.0625rem;
+      right: 0.25rem;
+    }
+
     .tickers-list-head {
       display: flex;
       box-sizing: border-box;
@@ -151,6 +172,9 @@ export default {
       }
       ._flex05 {
         flex: .6;
+      }
+      ._mt-2 {
+        margin-top: 0.125rem;
       }
     }
     .tickers-list-row {
