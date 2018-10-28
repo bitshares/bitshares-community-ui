@@ -26,7 +26,7 @@ export default {
 <style lang="scss">
 .modal-wrapper {
   width: 800px;
-  height: 300px;
+  height: auto;
   position: relative;
   backround-color: config('colors.black');
 

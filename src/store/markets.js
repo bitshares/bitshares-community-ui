@@ -122,6 +122,28 @@ const state = {
         change1: -0.29,
         change2: -14,
         marketcap: 123738
+      },
+      {
+        id: 67,
+        ticker: 'RPL',
+        curr: 'USD',
+        volUsd: 325688,
+        priceUsd1: 0.0058,
+        priceUsd2: 0.04,
+        change1: -0.29,
+        change2: -14,
+        marketcap: 123738
+      },
+      {
+        id: 68,
+        ticker: 'OMNI',
+        curr: 'USD',
+        volUsd: 325688,
+        priceUsd1: 0.0058,
+        priceUsd2: 0.04,
+        change1: -0.29,
+        change2: -14,
+        marketcap: 123738
       }
     ],
     BTC: [
