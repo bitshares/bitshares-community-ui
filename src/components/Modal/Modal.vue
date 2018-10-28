@@ -28,7 +28,7 @@ export default {
   width: 800px;
   height: auto;
   position: relative;
-  backround-color: config('colors.black');
+  background-color: config('colors.black');
 
 }
 .modal-mask {
