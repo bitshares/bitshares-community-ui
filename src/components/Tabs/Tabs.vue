@@ -63,7 +63,7 @@ export default {
   methods: {
     handleTabClick(index) {
       this.activeTabIndex = index
-      this.$emit('change', this.tabs[index] || 'favourites')
+      this.$emit('change', { ticker: this.tabs[index] || 'favourites' })
 
       this.tabs[index] ? this.activeFavourite = false : this.activeFavourite = true
     }

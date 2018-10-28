@@ -1,8 +1,10 @@
 const a = {
-  UPDATE_FAVOURITES: 'UPDATE_FAVOURITES'
+  UPDATE_FAVOURITES: 'UPDATE_FAVOURITES',
+  UPDATE_CURRENT_TICKER: 'UPDATE_CURRENT_TICKER'
 }
 
 const state = {
+  currentTicker: 'USD',
   favourites: {
     1: true,
     2: true,
@@ -271,12 +273,18 @@ const getters = {
   },
   getFavouritesList(state) {
     return state.favourites
+  },
+  getCurrentTicker(state) {
+    return state.currentTicker
   }
 }
 
 const mutations = {
   [a.UPDATE_FAVOURITES](state, { favourites }) {
     state.favourites = favourites
+  },
+  [a.UPDATE_CURRENT_TICKER](state, { ticker }) {
+    state.currentTicker = ticker
   }
 }
 
@@ -287,6 +295,9 @@ const actions = {
         {}, state.favourites, { [id]: !state.favourites[id] }
       )
     })
+  },
+  setCurrentTicker({ commit }, { ticker }) {
+    commit(a.UPDATE_CURRENT_TICKER, { ticker })
   }
 }
 

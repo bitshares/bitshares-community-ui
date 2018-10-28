@@ -33,7 +33,7 @@ import SearchInput from '@/components/SearchInput/'
 import TheMarkets from '@/views/TheMarkets'
 import MarketsTickersList from './MarketsTickersList'
 
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'TheMarkets',
@@ -51,13 +51,12 @@ export default {
   },
   data() {
     return {
-      currentTicker: 'USD',
-      searchValue: '',
-      showModal: false
+      searchValue: ''
     }
   },
   computed: {
     ...mapGetters({
+      currentTicker: 'markets/getCurrentTicker',
       markets: 'markets/getMarketsList',
       favourites: 'markets/getFavouritesList'
     }),
@@ -88,11 +87,13 @@ export default {
     }
   },
   methods: {
+    ...mapActions('markets', ['setCurrentTicker']),
+
     onSearch({ value }) {
       this.searchValue = value
     },
-    onTickerChange(tickerValue) {
-      this.currentTicker = tickerValue
+    onTickerChange({ ticker }) {
+      this.setCurrentTicker({ ticker })
     }
   }
 }
