@@ -104,10 +104,15 @@ export default {
     justify-content: space-between;
     background: #0A0A0A;
     .tickers-search {
+      display: flex;
+      justify-content: flex-end;
+
       margin-top: -1.375rem;
       position: absolute;
-      left: 13.25rem;
+      right: 0.625rem;
       z-index: 10;
+      background: config('colors.bg-base');
+      width: 95%;
     }
   }
   .markets--expanded {
@@ -116,6 +121,8 @@ export default {
         margin-top: 0.5rem;
         left: initial;
         right: 0.625rem;
+        background: transparent;
+        width: auto;
       }
     }
   }

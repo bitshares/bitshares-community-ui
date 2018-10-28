@@ -76,6 +76,50 @@ const state = {
         change1: -0.29,
         change2: -14,
         marketcap: 123738
+      },
+      {
+        id: 33,
+        ticker: 'DASH',
+        curr: 'USD',
+        volUsd: 36235,
+        priceUsd1: 0.023335,
+        priceUsd2: 0.02,
+        change1: -1.77,
+        change2: -11,
+        marketcap: 58371323
+      },
+      {
+        id: 44,
+        ticker: 'ETC',
+        curr: 'USD',
+        volUsd: 1888236,
+        priceUsd1: 0.445555,
+        priceUsd2: 0.03,
+        change1: -0.14,
+        change2: -10,
+        marketcap: 923832362
+      },
+      {
+        id: 55,
+        ticker: 'BTG',
+        curr: 'USD',
+        volUsd: 325688,
+        priceUsd1: 0.0058,
+        priceUsd2: 0.04,
+        change1: -0.29,
+        change2: -14,
+        marketcap: 123738
+      },
+      {
+        id: 66,
+        ticker: 'BCH',
+        curr: 'USD',
+        volUsd: 325688,
+        priceUsd1: 0.0058,
+        priceUsd2: 0.04,
+        change1: -0.29,
+        change2: -14,
+        marketcap: 123738
       }
     ],
     BTC: [
