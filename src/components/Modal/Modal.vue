@@ -29,6 +29,7 @@ export default {
   height: 300px;
   position: relative;
   backround-color: config('colors.black');
+
 }
 .modal-mask {
   position: fixed;
@@ -37,7 +38,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, .8);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,6 +61,9 @@ export default {
   margin: 0px auto;
   padding: 5px;
   transition: all .3s ease;
+  background: config('colors.bg-base');
+  opacity: 1;
+  z-index: 1000;
 }
 
 .modal-enter {
