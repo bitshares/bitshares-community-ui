@@ -242,6 +242,7 @@ export default {
   }
   .signup {
     @apply max-w-sm w-full shadow-md;
+    border: 1px solid config('colors.card-border');
     border-radius: 2px;
     background-color: black;
     &__title {

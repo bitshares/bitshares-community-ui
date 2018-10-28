@@ -30,8 +30,8 @@ export default {
       logout: 'acc/logout'
     }),
     handleLogout() {
-      this.logout()
       this.$router.push({ name: 'login' })
+      this.logout()
     }
   }
 }

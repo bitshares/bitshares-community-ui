@@ -6,7 +6,7 @@
           class="lg:w-1/2"
           title="account">
           <div slot="header">
-            <!-- <AccountHeader /> -->
+            <AccountHeader />
           </div>
           <div slot="body">
             <Portfolio />

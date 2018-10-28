@@ -1,9 +1,12 @@
 <template>
   <div>
     <span>{{ item.tiker }}</span>
-    <span>{{ item.tokens }}</span>
-    <span>{{ item.fiatValue }}</span>
-    <span>{{ item.share }}%</span>
+    <span v-show="isBalancesMode">{{ formattedTokens }}</span>
+    <span v-show="isBalancesMode">{{ formattedFiatValue }}</span>
+    <span v-show="isBalancesMode">{{ item.share }}%</span>
+    <span v-show="isPricesMode">{{ formattedTokenPrice }}</span>
+    <span v-show="isPricesMode">{{ item.change1.toFixed(0).toString() }}%</span>
+    <span v-show="isPricesMode">{{ item.change7.toFixed(0).toString() }}%</span>
   </div>
 </template>
 
@@ -11,8 +14,37 @@
 export default {
   props: {
     item: {
-      default: () => {},
-      type: Object
+      type: Object,
+      required: true
+    },
+    mode: {
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    isBalancesMode() {
+      return this.mode === 'balances'
+    },
+    isPricesMode() {
+      return this.mode === 'prices'
+    },
+    formattedTokens() {
+      return this.item.tokens.toFixed(3)
+    },
+    formattedTokenPrice() {
+      return this.preciseFiatValue(this.item.tokenPrice || 0)
+    },
+    formattedFiatValue() {
+      return this.preciseFiatValue(this.item.fiatValue || 0)
+    }
+  },
+  methods: {
+    preciseFiatValue(value, precision = 1) {
+      if (!value) return 0
+      if (value > 10) return Math.floor(value)
+      if (value > 0.1) return value.toFixed(precision)
+      return value.toFixed(2)
     }
   }
 }

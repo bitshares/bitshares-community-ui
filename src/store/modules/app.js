@@ -17,7 +17,7 @@ const actions = {
     await Promise.all([
       dispatch('acc/fetchCurrentUser', userId, { root: true }),
       dispatch('assets/fetchDefaultAssets', null, { root: true }),
-      dispatch('transactions/fetchComissions', null, { root: true }),
+      // dispatch('transactions/fetchComissions', null, { root: true }),
       dispatch(
         'operations/fetchAndSubscribe',
         { userId, limit: 50 },
@@ -39,15 +39,10 @@ const actions = {
     )
 
     const combinedAssetsIds = Object.keys(balances)
-    dispatch('history/fetch', {
+    dispatch('history/fetchAll', {
       baseId: '1.3.0',
       assetsIds: combinedAssetsIds,
-      days: 1
-    }, { root: true })
-    dispatch('history/fetch', {
-      baseId: '1.3.0',
-      assetsIds: combinedAssetsIds,
-      days: 7
+      daysArr: [1, 7]
     }, { root: true })
   },
   unsubFromUserData({ dispatch }) {
