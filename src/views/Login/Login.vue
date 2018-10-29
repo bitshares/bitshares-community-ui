@@ -34,15 +34,18 @@
             :errors="$v.brainkey"
             input-name="brainkey"
             class="mb-6"
+            @focus="onFocus"
+            @blur="onBlur"
+            @input="validateBrainkey"
           />
 
           <KeyfileLoader
-            v-if="!brainkey"
+            v-if="showFileField"
             @select="selectFile"
             @remove="removeFile"
           />
 
-          <template v-if="validateBrainkey">
+          <template v-if="brainkeyCompleted">
             <VInput
               v-model.trim="pin"
               :errors="$v.pin"
@@ -101,6 +104,8 @@ import { validationMixin } from 'vuelidate'
 import { required, minLength, sameAs } from 'vuelidate/lib/validators'
 import { mapActions } from 'vuex'
 
+// const alpha = helpers.regex('alpha', /^\s{0,1}/)[0].length // counts words in a string
+
 export default {
   name: 'Login',
   components: { VInput, Button, Tabs, KeyfileLoader },
@@ -148,17 +153,14 @@ export default {
       confirmPin: '',
       inProgress: false,
       type: 'password',
-      file: null
+      file: null,
+      brainkeyCompleted: false,
+      showFileField: true
     }
   },
   computed: {
     loginDisabled() {
       return this.$v.$dirty && this.$v.$invalid
-    },
-    validateBrainkey() {
-      if (this.brainkey.split(' ').length - 1 === 15) {
-        return true
-      }
     }
   },
   methods: {
@@ -212,6 +214,23 @@ export default {
     },
     removeFile() {
       this.file = null
+    },
+    validateBrainkey() {
+      if (this.brainkey.split(' ').length - 1 === 15) {
+        this.brainkeyCompleted = true
+      } else {
+        this.brainkeyCompleted = false
+      }
+    },
+    onFocus() {
+      if (!this.brainkeyCompleted && !this.file) {
+        this.showFileField = false
+      }
+    },
+    onBlur() {
+      if (!this.brainkeyCompleted) {
+        this.showFileField = true
+      }
     }
   }
 }
