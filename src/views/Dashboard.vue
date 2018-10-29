@@ -34,12 +34,10 @@
         </Card>
 
         <Card
-          class="lg:w-1/3 disabled"
+          class="lg:w-1/3"
           title="order book">
-          <div
-            slot="body"
-            class="uppercase">
-            under construction
+          <div slot="body">
+            <OrderBook/>
           </div>
         </Card>
       </div>
@@ -51,13 +49,14 @@
 <script>
 import Portfolio from '@/views/Account/Portfolio.vue'
 import AccountHeader from '@/views/Account/AccountHeader.vue'
+import OrderBook from '@/views/OrderBook/OrderBook'
 
 import Card from '@/components/Card'
 import TransactionsHistory from '@/views/TransactionsHistory/'
 
 export default {
   name: 'Dashboard',
-  components: { Portfolio, AccountHeader, Card, TransactionsHistory }
+  components: { Portfolio, AccountHeader, Card, TransactionsHistory, OrderBook }
 }
 </script>
 
