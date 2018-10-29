@@ -1,0 +1,186 @@
+<template>
+  <div>
+    <div
+      v-if="!expandMode"
+      class="tickers-list-row"
+    >
+      <div class="tickers-list__item">
+        <Star
+          :active="isFavourite"
+          class="tickers__favourite"
+        />
+        <div class="tickers-list__itemPair">
+          <span class="_currencyTitle">{{ item.ticker }}</span>
+          <span class="_tickerTitle"> /{{ item.curr }}</span>
+        </div>
+        <div class="tickers-list__itemVolume _ml-21">{{ volUsd }}</div>
+      </div>
+      <div class="tickers-list__item _flex05">
+        <div class="_currencyTitle">{{ item.priceUsd1 }}</div>
+        <div class="tickers-list__itemVolume">${{ item.priceUsd2 }}</div>
+      </div>
+      <div class="tickers-list__item _alignRight">
+        <div
+          :class="getClassesOfDynamic({ price: item.change1 })"
+          class="_currencyTitle">
+          {{ changeValue7 }}
+        </div>
+        <div
+          :class="getClassesOfDynamic({ price: item.change2 })"
+          class="tickers-list__itemVolume">
+          {{ changeValue24 }}
+        </div>
+      </div>
+    </div>
+    <!--expand mode-->
+    <div
+      v-if="expandMode"
+      class="tickers-list-row"
+    >
+    <Star
+      :active="isFavourite"
+      class="tickers__favourite"
+    />
+      <div class="tickers-list__item">
+        <div class="tickers-list__itemPair">
+          <span class="_currencyTitle">{{ item.ticker }}</span>
+          <span class="_tickerTitle"> /{{ item.curr }}</span>
+        </div>
+      </div>
+      <div class="tickers-list__item">
+        <div class="tickers-list__itemVolume">{{ volUsd }}</div>
+      </div>
+      <div class="tickers-list__item _flex05">
+        <div class="tickers-list__itemVolume">{{ item.priceUsd1 }}</div>
+      </div>
+      <div class="tickers-list__item _flex05 _alignRight">
+        <div
+          :class="getClassesOfDynamic({ price: item.change1 })"
+          class="_currencyTitle">
+          {{ changeValue7 }}
+        </div>
+      </div>
+      <div class="tickers-list__item _flex05 _alignRight">
+        <div
+          :class="getClassesOfDynamic({ price: item.change2 })"
+          class="_currencyTitle">
+          {{ changeValue24 }}
+        </div>
+      </div>
+      <div class="tickers-list__item _alignRight">
+        <div class="tickers-list__itemVolume">{{ marketCap }}</div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import Star from '@/components/Star'
+
+export default {
+  components: {
+    Star
+  },
+  props: {
+    isFavourite: {
+      type: Boolean,
+      default: false
+    },
+    item: {
+      type: Object,
+      default() {
+        return {}
+      }
+    },
+    volUsd: {
+      type: String,
+      default: ''
+    },
+    changeValue7: {
+      type: String,
+      default: ''
+    },
+    changeValue24: {
+      type: String,
+      default: ''
+    },
+    marketCap: {
+      type: String,
+      default: ''
+    },
+    expandMode: {
+      type: Boolean,
+      default: false
+    }
+  },
+  methods: {
+    getClassesOfDynamic({ price }) {
+      return {
+        _increase: price >= 0,
+        _drop: price < 0
+      }
+    }
+  }
+}
+</script>
+<style lang="scss">
+  .tickers-list__item {
+    flex: 1;
+    font-size: config('textSizes.xs-sm');
+    text-transform: none;
+    color: config('colors.tab-header');
+    font-family: config('fonts.gotham');
+  }
+  .tickers-list__itemVolume {
+    font-size: config('textSizes.xs');
+    color: config('colors.white');
+    opacity: .8;
+  }
+  .tickers-list-row {
+    display: flex;
+    box-sizing: border-box;
+    padding: 0.4375rem;
+    transition: ease-in-out 0.6s ease;
+
+    &:hover {
+      cursor: pointer;
+      background: #131313;
+    }
+
+    ._tickerTitle {
+      font-size: config('textSizes.xs');
+    }
+    ._currencyTitle {
+      color: config('colors.white');
+      font-size: config('textSizes.sm');
+    }
+    ._increase {
+      color: config('colors.increase');
+      opacity: 1;
+    }
+    ._drop {
+      color: config('colors.drop');
+      opacity: 1;
+    }
+    ._flex05 {
+      flex: .7;
+    }
+  }
+  .markets--expanded {
+    .tickers-list-row {
+      .tickers-list__item {
+        .tickers-list__itemVolume {
+          font-size: config('textSizes.base')
+        }
+        ._currencyTitle {
+          font-size: config('textSizes.base')
+        }
+        ._drop {
+          font-size: config('textSizes.sm');
+        }
+        ._increase {
+          font-size: config('textSizes.sm');
+        }
+      }
+    }
+  }
+</style>
