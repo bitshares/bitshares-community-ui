@@ -39,9 +39,10 @@
           <KeyfileLoader
             v-if="!brainkey"
             @select="selectFile"
-            @remove="removeFile"/>
+            @remove="removeFile"
+          />
 
-          <template v-if="brainkey">
+          <template v-if="validateBrainkey">
             <VInput
               v-model.trim="pin"
               :errors="$v.pin"
@@ -153,6 +154,11 @@ export default {
   computed: {
     loginDisabled() {
       return this.$v.$dirty && this.$v.$invalid
+    },
+    validateBrainkey() {
+      if (this.brainkey.split(' ').length - 1 === 15) {
+        return true
+      }
     }
   },
   methods: {
