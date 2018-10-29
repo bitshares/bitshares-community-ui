@@ -11,7 +11,7 @@
           class="signup__form">
 
           <div class="text-xs px-3 pb-1 text-center text-text-primary">
-            Your account will be secured only with password
+            Faster, but less secure way to Signup. Your account will be secured only with password. Slower way to signup will better protect you
           </div>
 
           <VInput
@@ -38,14 +38,13 @@
             class="mb-2"
             @icon-click="pastePassword"
           />
-
         </div>
         <div
           slot="private key"
           class="signup__form">
 
           <div class="text-xs px-3 pb-1 text-center text-text-primary">
-            You need to backup account after creating a PIN code
+            Slower, but more secure way to Signup protects your account with a combination of PIN and Backup phrase. You need to backup account after creating a PIN code
           </div>
 
           <VInput

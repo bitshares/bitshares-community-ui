@@ -49,7 +49,6 @@
               input-name="pin"
               class="mb-4 mt-2"
             />
-
             <VInput
               v-model.trim="confirmPin"
               :errors="$v.confirmPin"
