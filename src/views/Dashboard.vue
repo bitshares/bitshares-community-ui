@@ -28,6 +28,24 @@
           class="lg:w-1/3"
           title="markets">
           <div
+            slot="modal"
+          >
+            <div v-if="expanded">
+              <div
+                class="card-expanded"
+                @click="showModal = true"
+              />
+              <MarketsModal
+                v-if="showModal"
+                @close="showModal = false"
+              >
+                <div slot="body">
+                  <TheMarkets :expand-mode="true"/>
+                </div>
+              </MarketsModal>
+            </div>
+          </div>
+          <div
             slot="body"
             class="uppercase">
             <TheMarkets
@@ -55,13 +73,21 @@
 import Portfolio from '@/views/Account/Portfolio.vue'
 import AccountHeader from '@/views/Account/AccountHeader.vue'
 
+import MarketsModal from '@/components/Modal'
+
 import Card from '@/components/Card'
 import TransactionsHistory from '@/views/TransactionsHistory/'
 import TheMarkets from '@/views/TheMarkets/'
 
 export default {
   name: 'Dashboard',
-  components: { Portfolio, AccountHeader, Card, TransactionsHistory, TheMarkets }
+  components: { Portfolio, AccountHeader, Card, TransactionsHistory, TheMarkets, MarketsModal },
+  data() {
+    return {
+      expanded: true,
+      showModal: false
+    }
+  }
 }
 </script>
 

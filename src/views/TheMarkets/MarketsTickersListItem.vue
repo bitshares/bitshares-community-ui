@@ -37,7 +37,7 @@
     <div
       v-if="expandMode"
       class="tickers-list-row"
-      @click="onChangeFavourite({ id: item.id })"
+      @click="$emit('change', { id: item.id })"
     >
       <Star
         :active="isFavourite"

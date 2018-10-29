@@ -6,25 +6,7 @@
       <div class="title">
         <div> {{ title }} </div>
       </div>
-      <div v-if="expanded">
-        <div
-          class="card-expanded"
-          @click="showModal = true"
-        />
-        <MarketsModal
-          v-if="showModal"
-          @close="showModal = false"
-        >
-          <div slot="body">
-            <TheMarkets :expand-mode="true"/>
-          </div>
-        </MarketsModal>
-      </div>
-      <slot
-        class="card-expanded"
-        name="modal"
-        @close="showModal = false"
-      />
+      <slot name="modal"/>
       <slot
         class="header"
         name="header" />
@@ -39,24 +21,13 @@
 
 <script>
 import ScrollingContainer from '@/components/ScrollingContainer/ScrollingContainer.vue'
-import MarketsModal from '@/components/Modal'
-import TheMarkets from '@/views/TheMarkets'
 
 export default {
-  components: { ScrollingContainer, MarketsModal, TheMarkets },
+  components: { ScrollingContainer },
   props: {
     title: {
       type: String,
       default: ''
-    },
-    expanded: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data() {
-    return {
-      showModal: false
     }
   }
 }
