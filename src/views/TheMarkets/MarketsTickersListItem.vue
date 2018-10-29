@@ -3,7 +3,7 @@
     <div
       v-if="!expandMode"
       class="tickers-list-row"
-      @click="onChangeFavourite({ id: item.id })"
+      @click="$emit('change', { id: item.id })"
     >
       <div class="tickers-list__item">
         <Star
@@ -106,12 +106,6 @@ export default {
       default() {
         return false
       }
-    },
-    onChangeFavourite: {
-      type: Function,
-      default() {
-        return function() {}
-      }
     }
   },
   data() {
@@ -159,7 +153,36 @@ export default {
     color: config('colors.white');
     opacity: .8;
   }
+  .tickers-list-row {
+    display: flex;
+    box-sizing: border-box;
+    padding: 0.4375rem;
+    transition: ease-in-out 0.6s ease;
 
+    &:hover {
+      cursor: pointer;
+      background: #131313;
+    }
+
+    ._tickerTitle {
+      font-size: config('textSizes.xs');
+    }
+    ._currencyTitle {
+      color: config('colors.white');
+      font-size: config('textSizes.sm');
+    }
+    ._increase {
+      color: config('colors.increase');
+      opacity: 1;
+    }
+    ._drop {
+      color: config('colors.drop');
+      opacity: 1;
+    }
+    ._flex05 {
+      flex: .7;
+    }
+  }
   .markets--expanded {
     .tickers-list-row {
       .tickers-list__item {

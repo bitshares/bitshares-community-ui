@@ -25,7 +25,7 @@ export default {
 </script>
 <style lang="scss">
 .modal-wrapper {
-  width: 800px;
+  width: config('screens.md');
   height: auto;
   position: relative;
   background-color: config('colors.black');

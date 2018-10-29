@@ -21,6 +21,11 @@
         </MarketsModal>
       </div>
       <slot
+        class="card-expanded"
+        name="modal"
+        @close="showModal = false"
+      />
+      <slot
         class="header"
         name="header" />
     </div>

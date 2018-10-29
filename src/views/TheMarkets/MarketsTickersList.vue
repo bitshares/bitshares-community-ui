@@ -8,7 +8,7 @@
       <div
         v-for="(field, index) in marketsField.small"
         :key="index"
-        :class="[field.classes.concat({'_field-active': activeFieldIndex === index})]"
+        :class="getFieldClasses({ classes: field.classes, fieldIndex: index })"
         @click="changeSortField({ field: field.sortField, index })"
       >{{ getFieldTitle(field.title) }}
         <SortableHeaderItem
@@ -25,7 +25,7 @@
       <div
         v-for="(field, index) in marketsField.large"
         :key="index"
-        :class="[field.classes.concat({'_field-active': activeFieldIndex === index})]"
+        :class="getFieldClasses({ classes: field.classes, fieldIndex: index })"
         @click="changeSortField({ field: field.sortField, index })"
       >{{ getFieldTitle(field.title) }}
         <SortableHeaderItem
@@ -41,8 +41,8 @@
       :item="ticker"
       :current-ticker="currentTicker"
       :expand-mode="expandMode"
-      :on-change-favourite="changeFavourite"
       :is-favourite="!!favourites[ticker.id]"
+      @change="changeFavourite"
     />
   </div>
 </template>
@@ -118,6 +118,13 @@ export default {
     },
     getFieldTitle(tmpl) {
       return tmpl.replace('{currentTicker}', this.currentOfTicker)
+    },
+    getFieldClasses({ classes, fieldIndex }) {
+      return [
+        classes.concat({
+          '_field-active': this.activeFieldIndex === fieldIndex
+        })
+      ]
     }
   }
 }
@@ -170,36 +177,6 @@ export default {
       }
       ._mt-2 {
         margin-top: 0.125rem;
-      }
-    }
-    .tickers-list-row {
-      display: flex;
-      box-sizing: border-box;
-      padding: 0.4375rem;
-      transition: ease-in-out 0.6s ease;
-
-      &:hover {
-        cursor: pointer;
-        background: #131313;
-      }
-
-      ._tickerTitle {
-        font-size: config('textSizes.xs');
-      }
-      ._currencyTitle {
-        color: config('colors.white');
-        font-size: config('textSizes.sm');
-      }
-      ._increase {
-        color: config('colors.increase');
-        opacity: 1;
-      }
-      ._drop {
-        color: config('colors.drop');
-        opacity: 1;
-      }
-      ._flex05 {
-        flex: .7;
       }
     }
     .tickers__favourite {

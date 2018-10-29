@@ -14,7 +14,7 @@
       <div class="tickers-search">
         <SearchInput
           :hint="'Search'"
-          @change="onSearch"
+          v-model="searchValue"
         />
       </div>
     </div>
@@ -89,9 +89,6 @@ export default {
   methods: {
     ...mapActions('markets', ['setCurrentTicker']),
 
-    onSearch({ value }) {
-      this.searchValue = value
-    },
     onTickerChange({ ticker }) {
       this.setCurrentTicker({ ticker })
     }

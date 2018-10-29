@@ -1,20 +1,20 @@
 <template>
   <div class="input-wrapper">
     <input
-      v-model.trim="searchValue"
       :placeholder="hint || placeholder"
+      :value="value"
       class="search-input"
-      @input="$emit('change', { value: searchValue })"
+      @input="$emit('input', $event.target.value)"
     >
     <div
-      v-if="searchValue.length"
+      v-if="value.length"
       class="search-cleaner"
       @click="clear"
     >
-      <svgicon :name="'cancel'"/>
+      <svgicon name="cancel"/>
     </div>
     <div class="search-icon">
-      <svgicon :name="'search'"/>
+      <svgicon name="search"/>
     </div>
   </div>
 </template>
@@ -28,18 +28,20 @@ export default {
     hint: {
       type: String,
       default: ''
+    },
+    value: {
+      type: String,
+      default: ''
     }
   },
   data() {
     return {
-      searchValue: '',
       placeholder: 'Search'
     }
   },
   methods: {
     clear() {
-      this.searchValue = ''
-      this.$emit('change', { value: '' })
+      this.$emit('input', '')
     }
   }
 }
