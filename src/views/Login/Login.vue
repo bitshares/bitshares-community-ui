@@ -36,7 +36,6 @@
             class="mb-6"
             @focus="onFocus"
             @blur="onBlur"
-            @input="validateBrainkey"
           />
 
           <KeyfileLoader
@@ -104,8 +103,6 @@ import { validationMixin } from 'vuelidate'
 import { required, minLength, sameAs } from 'vuelidate/lib/validators'
 import { mapActions } from 'vuex'
 
-// const alpha = helpers.regex('alpha', /^\s{0,1}/)[0].length // counts words in a string
-
 export default {
   name: 'Login',
   components: { VInput, Button, Tabs, KeyfileLoader },
@@ -136,6 +133,15 @@ export default {
             required: (value) => {
               if (this.file) return true
               return required(value)
+            },
+            brainkeyValidator: (value) => {
+              if (value.split(' ').length - 1 === 15) {
+                this.brainkeyCompleted = true
+                return this.brainkeyCompleted
+              } else {
+                this.brainkeyCompleted = false
+                return this.brainkeyCompleted
+              }
             }
           },
           pin: { required, minLength: minLength(6) },
@@ -214,13 +220,6 @@ export default {
     },
     removeFile() {
       this.file = null
-    },
-    validateBrainkey() {
-      if (this.brainkey.split(' ').length - 1 === 15) {
-        this.brainkeyCompleted = true
-      } else {
-        this.brainkeyCompleted = false
-      }
     },
     onFocus() {
       if (!this.brainkeyCompleted && !this.file) {
