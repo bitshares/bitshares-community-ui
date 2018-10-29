@@ -37,10 +37,10 @@
       v-if="expandMode"
       class="tickers-list-row"
     >
-    <Star
-      :active="isFavourite"
-      class="tickers__favourite"
-    />
+      <Star
+        :active="isFavourite"
+        class="tickers__favourite"
+      />
       <div class="tickers-list__item">
         <div class="tickers-list__itemPair">
           <span class="_currencyTitle">{{ item.ticker }}</span>

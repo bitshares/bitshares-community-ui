@@ -55,6 +55,8 @@ export default {
     background: transparent;
     color: config('colors.white');
     border-bottom: 1px solid #7a7675;
+    visibility: hidden;
+    transition: 1ss
   }
   .search-cleaner {
     display: inline-block;
@@ -74,9 +76,22 @@ export default {
     display: inline-block;
     width: 12px;
     height: 12px;
-    transform: scale(.8, .8);
     position: absolute;
     top: 1px;
+    opacity: .5;
     right: 4px;
+  }
+  .input-wrapper {
+    &:hover {
+      cursor: pointer;
+
+      .search-icon {
+        opacity: 1;
+      }
+
+      .search-input {
+        visibility: visible;
+      }
+    }
   }
 </style>

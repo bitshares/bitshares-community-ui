@@ -46,10 +46,6 @@ export default {
       }
     }
   },
-  data() {
-    return {
-    }
-  },
   computed: {
     volUsd() {
       return getVolumeFormat(this.item.volUsd)
