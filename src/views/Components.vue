@@ -15,6 +15,11 @@
             text="button test"
             size="big"
           />
+          <SortableHeaderItem
+            title="ticker"
+            sort="desc"
+          />
+          <Star />
         </div>
       </Card>
     </div>
@@ -49,10 +54,12 @@ import Button from '@/components/Button/'
 import Tabs from '@/components/Tabs/'
 import Card from '@/components/Card'
 import MobileFooter from '@/components/MobileFooter'
+import SortableHeaderItem from '@/components/SortableHeaderItem'
+import Star from '@/components/Star'
 
 export default {
   name: 'Components',
-  components: { Button, Tabs, Card, MobileFooter },
+  components: { Button, Tabs, Card, Star, SortableHeaderItem, MobileFooter },
   data() {
     return {
       testString: '',
