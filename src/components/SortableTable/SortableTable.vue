@@ -3,7 +3,8 @@
 
     <div
       :style="headerStyle"
-      class="sortable-table__header">
+      class="sortable-table__header"
+    >
       <SortableHeaderItem
         v-for="(header, index) in headers"
         :key="index"
@@ -85,6 +86,5 @@ export default {
     color: config('colors.text-primary');
     padding-bottom: config('padding.2');
     display: grid;
-    // grid-template-columns: repeat(4, 1fr);
   }
 </style>

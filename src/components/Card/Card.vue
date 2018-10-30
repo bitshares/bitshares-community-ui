@@ -34,8 +34,7 @@ export default {
 <style scoped lang="scss">
 
 .card {
-  min-height: 20rem;
-  max-height: 20rem;
+  height: 25rem;
   display: flex;
 
   flex-direction: column;
