@@ -44,13 +44,6 @@ export default {
 </script>
 
 <style>
-@screen sm {
-    .mobile-footer {
-        display: none;
-    }
-}
-
-@media (max-width: config('screens.sm')) {
 .mobile-footer {
     display: flex;
     position: fixed;
@@ -58,6 +51,12 @@ export default {
     width:100%;
     text-align: center;
     color:config('colors.text-primary');
+}
+
+@screen sm {
+    .mobile-footer {
+        display: none;
+    }
 }
 
 .footer-item {
@@ -76,6 +75,5 @@ export default {
   font-size: config('textSizes.xs-sm');
   text-overflow: hidden;
   white-space: nowrap;
-}
 }
 </style>
