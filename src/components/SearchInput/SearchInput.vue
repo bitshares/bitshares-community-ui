@@ -49,22 +49,22 @@ export default {
 
 <style scoped lang="scss">
   .search-input {
-    width: 150px;
+    width: 9.375rem;
     border: none;
     outline: none;
     background: transparent;
-    color: config('colors.white');
-    border-bottom: 1px solid #7a7675;
+    color: config('colors.text-primary');
+    border-bottom: 0.0625rem solid #7a7675;
     visibility: hidden;
     transition: 1ss
   }
   .search-cleaner {
     display: inline-block;
-    width: 13px;
-    height: 13px;
+    width: 0.8125rem;
+    height: 0.8125rem;
     position: absolute;
-    top: 1px;
-    right: 20px;
+    top: 0.0625rem;
+    right: 1.25rem;
     transform: scale(.7, .7);
 
     &:hover {
@@ -74,12 +74,12 @@ export default {
   }
   .search-icon {
     display: inline-block;
-    width: 12px;
-    height: 12px;
+    width: 0.75rem;
+    height: 0.75rem;
     position: absolute;
-    top: 1px;
+    top: 0.0625rem;
     opacity: .5;
-    right: 4px;
+    right: 0.25rem;
   }
   .input-wrapper {
     &:hover {

@@ -1,4 +1,4 @@
-const a = {
+const types = {
   UPDATE_FAVOURITES: 'UPDATE_FAVOURITES',
   UPDATE_CURRENT_TICKER: 'UPDATE_CURRENT_TICKER'
 }
@@ -356,24 +356,24 @@ const getters = {
 }
 
 const mutations = {
-  [a.UPDATE_FAVOURITES](state, { favourites }) {
+  [types.UPDATE_FAVOURITES](state, { favourites }) {
     state.favourites = favourites
   },
-  [a.UPDATE_CURRENT_TICKER](state, { ticker }) {
+  [types.UPDATE_CURRENT_TICKER](state, { ticker }) {
     state.currentTicker = ticker
   }
 }
 
 const actions = {
   toggleFavourite({ state, commit }, { id }) {
-    commit(a.UPDATE_FAVOURITES, {
+    commit(types.UPDATE_FAVOURITES, {
       favourites: Object.assign(
         {}, state.favourites, { [id]: !state.favourites[id] }
       )
     })
   },
   setCurrentTicker({ commit }, { ticker }) {
-    commit(a.UPDATE_CURRENT_TICKER, { ticker })
+    commit(types.UPDATE_CURRENT_TICKER, { ticker })
   }
 }
 

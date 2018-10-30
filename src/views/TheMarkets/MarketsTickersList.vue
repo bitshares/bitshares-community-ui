@@ -1,12 +1,8 @@
 <template>
   <div class="tickers-list">
-    <!--small-->
-    <div
-      v-if="!expandMode"
-      class="tickers-list-head"
-    >
+    <div class="tickers-list-head">
       <div
-        v-for="(field, index) in marketsField.small"
+        v-for="(field, index) in fields"
         :key="index"
         :class="getFieldClasses({ classes: field.classes, fieldIndex: index })"
         @click="changeSortField({ field: field.sortField, index })"
@@ -14,27 +10,11 @@
         <SortableHeaderItem
           v-if="activeFieldIndex === index"
           :sort="sortType"
+          :class="{'_mt-2': expandMode }"
         />
       </div>
     </div>
-    <!--expand-->
-    <div
-      v-if="expandMode"
-      class="tickers-list-head"
-    >
-      <div
-        v-for="(field, index) in marketsField.large"
-        :key="index"
-        :class="getFieldClasses({ classes: field.classes, fieldIndex: index })"
-        @click="changeSortField({ field: field.sortField, index })"
-      >{{ getFieldTitle(field.title) }}
-        <SortableHeaderItem
-          v-if="activeFieldIndex === index"
-          :sort="sortType"
-          class="_mt-2"
-        />
-      </div>
-    </div>
+
     <MarketsTickersListItem
       v-for="(ticker, index) in sortedList"
       :key="index"
@@ -77,9 +57,7 @@ export default {
     },
     expandMode: {
       type: Boolean,
-      default() {
-        return false
-      }
+      default: false
     }
   },
   data() {
@@ -93,6 +71,9 @@ export default {
     ...mapGetters({
       marketsField: 'markets/getMarketsField'
     }),
+    fields() {
+      return this.expandMode ? this.marketsField.large : this.marketsField.small
+    },
     sortedList() {
       if (this.currentTicker === 'favourites') {
         return orderBy(
@@ -133,7 +114,7 @@ export default {
 <style lang="scss">
   .tickers-list {
     margin-top: 0.5rem;
-    font-weight: 600;
+    font-weight: config('fontWeights.semibold');
 
     .header-item {
       position: initial;
@@ -164,7 +145,6 @@ export default {
       .tickers-list__field {
         font-size: config('textSizes.xs-sm');
         flex: 1;
-        text-transform: none;
         color: config('colors.tab-header');
         font-family: config('fonts.gotham');
 

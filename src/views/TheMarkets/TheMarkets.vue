@@ -106,11 +106,10 @@ export default {
       justify-content: flex-end;
 
       margin-top: -1.375rem;
-      position: absolute;
+      position: relative;
       right: 0.625rem;
       z-index: 10;
       background: config('colors.bg-base');
-      width: 95%;
     }
   }
   .markets--expanded {

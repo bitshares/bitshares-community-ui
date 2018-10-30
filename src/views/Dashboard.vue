@@ -45,9 +45,7 @@
               </MarketsModal>
             </div>
           </div>
-          <div
-            slot="body"
-            class="uppercase">
+          <div slot="body">
             <TheMarkets
               :expand-mode="false"
             />

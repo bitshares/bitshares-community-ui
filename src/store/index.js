@@ -6,7 +6,7 @@ import createPersistedState from 'vuex-persistedstate'
 import vuexBitsharesModules from 'vuex-bitshares'
 import Cookies from 'js-cookie'
 import paths from './cachedPaths'
-import markets from './markets'
+import markets from './modules/markets'
 
 Vue.use(Vuex)
 
