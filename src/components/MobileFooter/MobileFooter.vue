@@ -61,27 +61,22 @@ export default {
 }
 
 .footer-item {
-    @apply pt-1 px-10 pb-0 mx-1;
+    @apply pt-1 px-10;
     background-color: config('colors.mobile-footer');
-    opacity: 0.7;
-}
-
-.footer-item:last-child {
-  @apply m-0;
-}
-
-.footer-item:first-child {
-  @apply m-0;
 }
 
 .footer-item:hover {
      background-color: config('colors.mobile-footer-hover');
-     opacity: 1;
 }
 
 .text {
   @apply pt-1 pb-1;
+  opacity: 0.7;
   font-size: config('textSizes.xs-sm');
+}
+
+.icon {
+  opacity: 0.7;
 }
 }
 </style>
