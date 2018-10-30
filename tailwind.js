@@ -129,6 +129,9 @@ let colors = {
   'pink-lightest': '#ffebef',
 
   'text-primary': '#ffffff',
+  'inactive': 'rgba(255, 255, 255, 0.5)',
+  'bg-base': '#000000',
+
   'input-border': '#ced2d6',
   'card-background': '#000000',
   'card-border': 'rgba(255, 255, 255, 0.5)',
@@ -140,7 +143,6 @@ let colors = {
   'button-bg-disabled': '#afacac',
   'button-bg-loading': '#afacac',
   'input-title-active': '#7a7675',
-  'bg-base': '#000000',
   'tab-header': '#7a7675',
   'tab-hover': 'rgba(255, 255, 255, 0.6)',
   'tab-active': '#ffffff',

@@ -3,7 +3,7 @@
     <div class="dashboard">
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
-          class="lg:w-1/2"
+          class="lg:w-1/3"
           title="account">
           <div slot="header">
             <AccountHeader />
@@ -14,7 +14,7 @@
         </Card>
 
         <Card
-          class="lg:w-1/2 scrollable"
+          class="lg:w-2/3 scrollable"
           title="Transactions">
           <div slot="body">
             <TransactionsHistory/>
