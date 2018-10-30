@@ -4,7 +4,7 @@
       v-for="(item, index) in items"
       :key="index"
       :style="{ width: itemWidth + '%' }"
-      :class="activeIndex === index ? 'active' : ''"
+      :class="{'active': activeIndex === index }"
       class="footer-item"
       @click="$emit('click')"
     >
@@ -61,22 +61,21 @@ export default {
 }
 
 .footer-item {
-    @apply pt-1 px-10;
+    @apply pt-1 px-6;
     background-color: config('colors.mobile-footer');
+    color: config('colors.grey');
 }
 
 .footer-item:hover {
      background-color: config('colors.mobile-footer-hover');
+     color: config('colors.text-primary');
 }
 
 .text {
   @apply pt-1 pb-1;
-  opacity: 0.7;
   font-size: config('textSizes.xs-sm');
-}
-
-.icon {
-  opacity: 0.7;
+  text-overflow: hidden;
+  white-space: nowrap;
 }
 }
 </style>
