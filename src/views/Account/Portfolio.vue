@@ -3,7 +3,10 @@
     :loading="!historyLoaded"
     class="portfolio-container">
     <div class="portfolio-header">
-      <!-- <LinkButton title="hide small assets"/> -->
+      <LinkButton 
+        :title="hideSmallAssetsBtnText"
+        @click.native="showSmallAssets = !showSmallAssets"
+      />
       <LinkButton
         :title="`show ${inactiveMode}`"
         @click.native="toggleMode"/>
@@ -44,7 +47,8 @@ export default {
         field: 'fiatValue',
         type: 'desc'
       },
-      mode: 'balances'
+      mode: 'balances',
+      showSmallAssets: true
     }
   },
   computed: {
@@ -52,11 +56,18 @@ export default {
       items: 'portfolio/getItems',
       historyLoaded: 'history/initialLoaded'
     }),
+    filteredItems() {
+      if (this.showSmallAssets) return this.items
+      return this.items.filter(item => item.fiatValue >= 5)
+    },
     sortedItems() {
-      return orderBy(this.items, this.sort.field, this.sort.type)
+      return orderBy(this.filteredItems, this.sort.field, this.sort.type)
     },
     inactiveMode() {
       return this.mode === 'balances' ? 'prices' : 'balances'
+    },
+    hideSmallAssetsBtnText() {
+      return this.showSmallAssets ? 'hide small assets' : 'show all assets'
     }
   },
   methods: {
@@ -86,7 +97,7 @@ export default {
 
 .portfolio-header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-bottom: 1rem;
 }
 </style>
