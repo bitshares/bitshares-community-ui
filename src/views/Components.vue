@@ -44,7 +44,7 @@
         size="small"/>
     </div>
     <MobileFooter
-      :items="[{name: 'test1', title: 'Markets', icon:'cancel'}, {name: 'test1', title: 'Orders', icon:'userIcon'}, {name: 'test1', title: 'Account', icon:'paste'}]"
+      :items="[{name: 'markets', title: 'Markets', icon:'markets'}, {name: 'orders', title: 'Orders', icon:'orders'}, {name: 'account', title: 'Account', icon:'account'}]"
     />
   </div>
 </template>
