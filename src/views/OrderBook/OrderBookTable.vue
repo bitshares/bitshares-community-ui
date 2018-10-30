@@ -1,5 +1,5 @@
 <template>
-  <div class="order-book__column">
+  <div class="order-book__table">
     <div class="order-book__column-title">{{ title }}</div>
     <OrderBookTableItem
       v-for="(item, index) in items"
@@ -33,12 +33,12 @@ export default {
 }
 </script>
 <style lang="scss">
-  .order-book__column-title {
-    margin-bottom: 15px;
-  }
-  .order-book__column {
+  .order-book__table {
     flex: 1;
     font-family: config('fonts.gotham');
     text-align: center;
+  }
+  .order-book__column-title {
+    margin-bottom: 0.9375rem;
   }
 </style>
