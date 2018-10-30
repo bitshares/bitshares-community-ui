@@ -6,10 +6,10 @@ const types = {
 const state = {
   currentTicker: 'USD',
   favourites: {
-    1: true,
-    2: true,
-    7: true,
-    8: true
+    BTCUSD: true,
+    USDZCN: true,
+    USDRPL: true,
+    USDPOE: true
   },
   marketsField: {
     small: [
@@ -65,7 +65,7 @@ const state = {
   markets: {
     USD: [
       {
-        id: 1,
+        id: 'USDZIL',
         ticker: 'ZIL',
         curr: 'USD',
         volUsd: 10764160,
@@ -76,7 +76,7 @@ const state = {
         marketcap: 270832369
       },
       {
-        id: 2,
+        id: 'USDONT',
         ticker: 'ONT',
         curr: 'USD',
         volUsd: 46950092,
@@ -87,7 +87,7 @@ const state = {
         marketcap: 2708323
       },
       {
-        id: 3,
+        id: 'USDZCN',
         ticker: 'ZCN',
         curr: 'USD',
         volUsd: 934230,
@@ -98,7 +98,7 @@ const state = {
         marketcap: 130532
       },
       {
-        id: 4,
+        id: 'USDCFI',
         ticker: 'CFI',
         curr: 'USD',
         volUsd: 36235,
@@ -109,7 +109,7 @@ const state = {
         marketcap: 58371323
       },
       {
-        id: 5,
+        id: 'USDAIO',
         ticker: 'AIO',
         curr: 'USD',
         volUsd: 1888236,
@@ -120,7 +120,7 @@ const state = {
         marketcap: 923832362
       },
       {
-        id: 6,
+        id: 'USDPOE',
         ticker: 'POE',
         curr: 'USD',
         volUsd: 325688,
@@ -131,7 +131,7 @@ const state = {
         marketcap: 123738
       },
       {
-        id: 33,
+        id: 'USDDASH',
         ticker: 'DASH',
         curr: 'USD',
         volUsd: 36235,
@@ -142,7 +142,7 @@ const state = {
         marketcap: 58371323
       },
       {
-        id: 44,
+        id: 'USDETC',
         ticker: 'ETC',
         curr: 'USD',
         volUsd: 1888236,
@@ -153,7 +153,7 @@ const state = {
         marketcap: 923832362
       },
       {
-        id: 55,
+        id: 'USDBTG',
         ticker: 'BTG',
         curr: 'USD',
         volUsd: 325688,
@@ -164,7 +164,7 @@ const state = {
         marketcap: 123738
       },
       {
-        id: 66,
+        id: 'USDBCH',
         ticker: 'BCH',
         curr: 'USD',
         volUsd: 325688,
@@ -175,7 +175,7 @@ const state = {
         marketcap: 123738
       },
       {
-        id: 67,
+        id: 'USDRPL',
         ticker: 'RPL',
         curr: 'USD',
         volUsd: 325688,
@@ -186,7 +186,7 @@ const state = {
         marketcap: 123738
       },
       {
-        id: 68,
+        id: 'USDOMNI',
         ticker: 'OMNI',
         curr: 'USD',
         volUsd: 325688,
@@ -199,7 +199,7 @@ const state = {
     ],
     BTC: [
       {
-        id: 7,
+        id: 'BTCZCN',
         ticker: 'ZCN',
         curr: 'BTC',
         volUsd: 934230,
@@ -210,7 +210,7 @@ const state = {
         marketcap: 2373838
       },
       {
-        id: 8,
+        id: 'BTCCFI',
         ticker: 'CFI',
         curr: 'BTC',
         volUsd: 36235,
@@ -221,7 +221,7 @@ const state = {
         marketcap: 29392392
       },
       {
-        id: 9,
+        id: 'BTCAIO',
         ticker: 'AIO',
         curr: 'BTC',
         volUsd: 1888236,
@@ -232,7 +232,7 @@ const state = {
         marketcap: 2828471
       },
       {
-        id: 10,
+        id: 'BTCPOE',
         ticker: 'POE',
         curr: 'BTC',
         volUsd: 325688,
@@ -245,7 +245,7 @@ const state = {
     ],
     ETH: [
       {
-        id: 11,
+        id: 'ETHAIO',
         ticker: 'AIO',
         curr: 'ETH',
         volUsd: 1888236,
@@ -256,7 +256,7 @@ const state = {
         marketcap: 270832369
       },
       {
-        id: 12,
+        id: 'ETHPOE',
         ticker: 'POE',
         curr: 'ETH',
         volUsd: 325688,
@@ -269,7 +269,7 @@ const state = {
     ],
     CNY: [
       {
-        id: 13,
+        id: 'CNYZIL:',
         ticker: 'ZIL',
         curr: 'CNY',
         volUsd: 10764160,
@@ -280,7 +280,7 @@ const state = {
         marketcap: 118238
       },
       {
-        id: 14,
+        id: 'CNYONT',
         ticker: 'ONT',
         curr: 'CNY',
         volUsd: 46950092,
@@ -291,7 +291,7 @@ const state = {
         marketcap: 9129319
       },
       {
-        id: 15,
+        id: 'CNYZCN',
         ticker: 'ZCN',
         curr: 'CNY',
         volUsd: 934230,
@@ -304,7 +304,7 @@ const state = {
     ],
     BTS: [
       {
-        id: 16,
+        id: 'BTSZCN',
         ticker: 'ZCN',
         curr: 'BTS',
         volUsd: 934230,
@@ -315,7 +315,7 @@ const state = {
         marketcap: 381923
       },
       {
-        id: 17,
+        id: 'BTSZIL',
         ticker: 'ZIL',
         curr: 'BTS',
         volUsd: 10764160,
@@ -326,7 +326,7 @@ const state = {
         marketcap: 56361723
       },
       {
-        id: 18,
+        id: 'BTSONT',
         ticker: 'ONT',
         curr: 'BTS',
         volUsd: 46950092,

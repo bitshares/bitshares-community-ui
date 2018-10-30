@@ -74,7 +74,7 @@ export default {
         Object.keys(this.favourites).forEach((tickerId) => {
           if (!this.favourites[tickerId]) return
           allTickers.forEach((ticker) => {
-            if (ticker.id === +tickerId) {
+            if (ticker.id === tickerId) {
               favourites.push(ticker)
             }
           })
