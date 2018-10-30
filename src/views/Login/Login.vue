@@ -73,7 +73,7 @@
 
       <div class="login__form">
         <Button
-          :disabled="loginDisabled"
+          :disabled="loginDisabled || (!file && !brainkeyCompleted && !password)"
           :loading="inProgress"
           class="login__btn"
           width="full"
@@ -134,8 +134,8 @@ export default {
               if (this.file) return true
               return required(value)
             },
-            brainkeyValidator: (value) => {
-              if (value.split(' ').length - 1 === 15) {
+            minLength: (value) => {
+              if (value.split(' ').length - 1 >= 15) {
                 this.brainkeyCompleted = true
                 return this.brainkeyCompleted
               } else {
