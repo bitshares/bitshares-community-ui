@@ -29,7 +29,7 @@
   </div>
 </template>
 <script>
-import { sortByField } from '@/helpers/utils'
+import orderBy from 'lodash/orderBy'
 import Tabs from '@/components/Tabs'
 import SearchInput from '@/components/SearchInput/'
 import TheMarkets from '@/views/TheMarkets'
@@ -79,9 +79,10 @@ export default {
             }
           })
         })
-        return favourites.sort(sortByField('ticker'))
+
+        return orderBy(favourites, 'ticker', 'asc')
       }
-      return this.markets[this.currentTicker].slice().sort(sortByField('ticker'))
+      return orderBy(this.markets[this.currentTicker], 'ticker', 'asc')
     },
     foundItems() {
       if (!this.searchValue) return this.tickerItems
