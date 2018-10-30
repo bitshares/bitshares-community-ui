@@ -1,7 +1,9 @@
 <template>
   <div class="sortable-table">
 
-    <div class="sortable-table__header" :style="headerStyle">
+    <div
+      :style="headerStyle"
+      class="sortable-table__header">
       <SortableHeaderItem
         v-for="(header, index) in headers"
         :key="index"
