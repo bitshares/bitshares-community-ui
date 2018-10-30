@@ -6,10 +6,11 @@
         :key="index"
         :class="getFieldClasses({ classes: field.classes, fieldIndex: index })"
         @click="changeSortField({ field: field.sortField, index })"
-      >{{ getFieldTitle(field.title) }}
+      >
         <SortableHeaderItem
-          v-if="activeFieldIndex === index"
+          :show-icon="activeFieldIndex === index"
           :sort="sortType"
+          :title="getFieldTitle(field.title)"
           :class="{'_mt-2': expandMode }"
         />
       </div>

@@ -151,7 +151,6 @@ export default {
     }
     ._currencyTitle {
       color: config('colors.white');
-      font-size: config('textSizes.sm');
     }
     ._increase {
       color: config('colors.increase');

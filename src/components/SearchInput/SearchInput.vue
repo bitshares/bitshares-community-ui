@@ -45,7 +45,7 @@ export default {
     color: config('colors.text-primary');
     border-bottom: 0.0625rem solid #7a7675;
     visibility: hidden;
-    transition: 1ss;
+    font-size: .875rem;
 
     &--active {
       visibility: visible;
