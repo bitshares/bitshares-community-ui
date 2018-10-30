@@ -11,57 +11,6 @@ const state = {
     USDRPL: true,
     USDPOE: true
   },
-  marketsField: {
-    small: [
-      {
-        title: 'Name/Vol, {currentTicker}',
-        sortField: 'ticker',
-        classes: ['tickers-list__field']
-      },
-      {
-        title: 'Price, {currentTicker}',
-        sortField: 'priceUsd1',
-        classes: ['tickers-list__field _flex05']
-      },
-      {
-        title: '24h%/7d%',
-        sortField: 'change1',
-        classes: ['tickers-list__field _alignRight']
-      }
-    ],
-    large: [
-      {
-        title: 'Name',
-        sortField: 'ticker',
-        classes: ['tickers-list__field pl-31']
-      },
-      {
-        title: 'Volume, {currentTicker}',
-        sortField: 'volUsd',
-        classes: ['tickers-list__field']
-      },
-      {
-        title: 'Price',
-        sortField: 'priceUsd1',
-        classes: ['tickers-list__field _flex05']
-      },
-      {
-        title: '24h%',
-        sortField: 'change1',
-        classes: ['tickers-list__field _flex05 _alignRight']
-      },
-      {
-        title: '7d%',
-        sortField: 'change2',
-        classes: ['tickers-list__field _flex05 _alignRight']
-      },
-      {
-        title: 'Market Cap, {currentTicker}',
-        sortField: 'marketcap',
-        classes: ['tickers-list__field _alignRight']
-      }
-    ]
-  },
   markets: {
     USD: [
       {
@@ -341,9 +290,6 @@ const state = {
 }
 
 const getters = {
-  getMarketsField(state) {
-    return state.marketsField
-  },
   getMarketsList(state) {
     return state.markets
   },
