@@ -1,5 +1,8 @@
 <template>
-  <div class="tickers-list">
+  <div
+    class="tickers-list"
+    :class="{'tickers-list_expanded': expandMode}"
+  >
     <div class="tickers-list-head">
       <div
         v-for="(field, index) in fields"
@@ -182,8 +185,8 @@ export default {
       margin-left: 1.3125rem;
     }
   }
-  .markets--expanded {
-    .tickers-list {
+  .tickers-list_expanded {
+    &.tickers-list {
       .tickers__favourite {
         margin-top: -0.125rem;
         margin-right: 0.9375rem;

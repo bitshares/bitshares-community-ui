@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{'ticker-list-row_expanded': expandMode}">
     <div
       v-if="!expandMode"
       class="tickers-list-row"
@@ -126,7 +126,6 @@ export default {
   .tickers-list__item {
     flex: 1;
     font-size: config('textSizes.xs-sm');
-    text-transform: none;
     color: config('colors.tab-header');
     font-family: config('fonts.gotham');
   }
@@ -164,7 +163,7 @@ export default {
       flex: .7;
     }
   }
-  .markets--expanded {
+  .ticker-list-row_expanded {
     .tickers-list-row {
       .tickers-list__item {
         .tickers-list__itemVolume {

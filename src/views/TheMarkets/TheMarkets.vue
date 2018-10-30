@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="{'markets--expanded': expandMode}"
+    :class="{'markets_expanded': expandMode}"
     class="markets"
   >
     <div class="markets__header">
@@ -116,7 +116,7 @@ export default {
       background: config('colors.bg-base');
     }
   }
-  .markets--expanded {
+  .markets_expanded {
     .markets__header {
       .tickers-search {
         margin-top: 0.5rem;

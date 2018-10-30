@@ -51,20 +51,6 @@ export default {
       visibility: visible;
     }
   }
-  .search-cleaner {
-    display: inline-block;
-    width: 0.8125rem;
-    height: 0.8125rem;
-    position: absolute;
-    top: 0.0625rem;
-    right: 1.25rem;
-    transform: scale(.7, .7);
-
-    &:hover {
-      cursor: pointer;
-      color: #7a7675;
-    }
-  }
   .search-icon {
     display: inline-block;
     width: 0.75rem;
