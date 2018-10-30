@@ -10,11 +10,11 @@
         class="header"
         name="header" />
     </div>
-    <ScrollingContainer :shadower-height="20">
-      <div class="card-body">
-        <slot name="body" />
-      </div>
-    </ScrollingContainer>
+    <!-- <ScrollingContainer :shadower-height="20"> -->
+    <div class="card-body">
+      <slot name="body" />
+    </div>
+    <!-- </ScrollingContainer> -->
   </div>
 </template>
 
@@ -34,8 +34,8 @@ export default {
 <style scoped lang="scss">
 
 .card {
-  min-height: 25rem;
-  max-height: 30rem;
+  min-height: 20rem;
+  max-height: 20rem;
   display: flex;
 
   flex-direction: column;
@@ -70,7 +70,7 @@ export default {
 }
 
 .card-body {
-  @apply p-card-ui pt-5;
+  @apply p-card-ui pt-3;
   height: 100%;
   overflow: auto;
 }

@@ -4,7 +4,7 @@
     class="portfolio-header"
   >
     <div class="text-weak">
-    Balance</div>&nbsp; $ {{ totalFiatValue }}
+    Balance</div>&nbsp; $ {{ totalFiatValue.toFixed(2) }}
   </div>
 </template>
 

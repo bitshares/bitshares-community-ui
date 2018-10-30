@@ -1,21 +1,25 @@
 <template>
-  <div class="header-item">
+  <div
+    :class="{'header-item--left-aligned': align === 'left'}"
+    class="header-item">
     <div
-      v-show="sort"
-      class="header-item__arrows">
-      <svgicon
-        :class="sort === 'desc' ? 'active' : ''"
-        class="sort-arrow-up"
-        name="sortArrow"
-      />
-      <svgicon
-        :class="sort === 'asc' ? 'active' : ''"
-        class="sort-arrow-down"
-        name="sortArrow"
-      />
-    </div>
-    <div :class="sort ? 'title-active' : ''">
+      :class="sort ? 'header-item__title--title-active' : ''"
+      class="header-item__title">
       {{ title }}
+      <div
+        v-show="sort"
+        class="header-item__arrows">
+        <svgicon
+          :class="sort === 'desc' ? 'active' : ''"
+          class="sort-arrow-up"
+          name="sortArrow"
+        />
+        <svgicon
+          :class="sort === 'asc' ? 'active' : ''"
+          class="sort-arrow-down"
+          name="sortArrow"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -32,6 +36,10 @@ export default {
     title: {
       default: '',
       type: String
+    },
+    align: {
+      type: String,
+      default: 'right'
     }
   }
 }
@@ -42,33 +50,43 @@ export default {
   font-size: config('textSizes.xs-sm');
   display: flex;
   justify-content: flex-end;
-  color: config('colors.tab-header');
+  color: config('colors.inactive');
   cursor: pointer;
   user-select: none;
+  position: relative;
+  &--left-aligned {
+    justify-content: flex-start;
+  }
+}
+
+.header-item__title {
   position: relative;
 }
 
 .header-item__arrows {
   position: absolute;
+  top: 0;
   left: 100%;
 }
 
 .sort-arrow-up {
   @apply mb-2;
   height: 0.1875rem;
-}
-
-.active {
-  color: config('colors.text-primary');
+  color: config('colors.inactive');
 }
 
 .sort-arrow-down {
   @apply -ml-4 mt-1;
   height: 0.1875rem;
   transform: rotate(-180deg);
+  color: config('colors.inactive');
 }
 
-.title-active {
+.active {
+  color: config('colors.text-primary');
+}
+
+.header-item__title--title-active {
   color: config('colors.text-primary');
 }
 </style>

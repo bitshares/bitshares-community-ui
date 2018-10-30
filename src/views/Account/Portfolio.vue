@@ -2,8 +2,9 @@
   <LoadingContainer
     :loading="!historyLoaded"
     class="portfolio-container">
+
     <div class="portfolio-header">
-      <LinkButton 
+      <LinkButton
         :title="hideSmallAssetsBtnText"
         @click.native="showSmallAssets = !showSmallAssets"
       />
@@ -11,22 +12,24 @@
         :title="`show ${inactiveMode}`"
         @click.native="toggleMode"/>
     </div>
+
     <div class="portfolio-table">
-      <PortfolioTableHeader
-        :sort="sort"
-        :mode="mode"
-        @toggle-sort="changeSort"/>
-      <div
-        v-for="(item, index) in sortedItems"
-        :key="index"
-        class="grid-items"
+      <SortableTable
+        :items="filteredItems"
+        :headers="tableHeaders"
+        :default-sort="defaultSort"
       >
-        <PortfolioItem
-          :mode="mode"
-          :item="item"
-        />
-      </div>
+        <template slot-scope="{ sortedItems }">
+          <PortfolioItem
+            v-for="(item, index) in sortedItems"
+            :key="index"
+            :mode="mode"
+            :item="item"
+          />
+        </template>
+      </SortableTable>
     </div>
+
   </LoadingContainer>
 
 </template>
@@ -35,20 +38,20 @@
 import { mapGetters } from 'vuex'
 import LoadingContainer from '@/components/LoadingContainer'
 import LinkButton from '@/components/LinkButton'
-import PortfolioTableHeader from './PortfolioTableHeader.vue'
 import PortfolioItem from './PortfolioItem.vue'
-import orderBy from 'lodash/orderBy'
+
+import SortableTable from '@/components/SortableTable'
 
 export default {
-  components: { PortfolioItem, LoadingContainer, LinkButton, PortfolioTableHeader },
+  components: { PortfolioItem, LoadingContainer, LinkButton, SortableTable },
   data() {
     return {
-      sort: {
+      mode: 'balances',
+      showSmallAssets: true,
+      defaultSort: {
         field: 'fiatValue',
         type: 'desc'
-      },
-      mode: 'balances',
-      showSmallAssets: true
+      }
     }
   },
   computed: {
@@ -56,12 +59,22 @@ export default {
       items: 'portfolio/getItems',
       historyLoaded: 'history/initialLoaded'
     }),
+    tableHeaders() {
+      return this.mode === 'balances' ? [
+        { title: 'Tiker', field: 'tiker', align: 'left' },
+        { title: 'Tokens', field: 'tokens' },
+        { title: '$Value', field: 'fiatValue' },
+        { title: 'Share', field: 'share' }
+      ] : [
+        { title: 'Tiker', field: 'tiker', align: 'left' },
+        { title: '$Price', field: 'tokenPrice' },
+        { title: '24h%', field: 'change1' },
+        { title: '7d%', field: 'change7' }
+      ]
+    },
     filteredItems() {
       if (this.showSmallAssets) return this.items
       return this.items.filter(item => item.fiatValue >= 5)
-    },
-    sortedItems() {
-      return orderBy(this.filteredItems, this.sort.field, this.sort.type)
     },
     inactiveMode() {
       return this.mode === 'balances' ? 'prices' : 'balances'
@@ -73,14 +86,6 @@ export default {
   methods: {
     toggleMode() {
       this.mode = this.inactiveMode
-    },
-    changeSort(field) {
-      if (this.sort.field === field) {
-        this.sort.type = this.sort.type === 'asc' ? 'desc' : 'asc'
-        return
-      }
-      this.sort.field = field
-      this.sort.type = 'desc'
     }
   }
 }
@@ -98,6 +103,6 @@ export default {
 .portfolio-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 </style>
