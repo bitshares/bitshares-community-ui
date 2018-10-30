@@ -3,16 +3,10 @@
     <input
       :placeholder="hint || placeholder"
       :value="value"
+      :class="{'search-input--active': value.length }"
       class="search-input"
       @input="$emit('input', $event.target.value)"
     >
-    <div
-      v-if="value.length"
-      class="search-cleaner"
-      @click="clear"
-    >
-      <svgicon name="cancel"/>
-    </div>
     <div class="search-icon">
       <svgicon name="search"/>
     </div>
@@ -38,11 +32,6 @@ export default {
     return {
       placeholder: 'Search'
     }
-  },
-  methods: {
-    clear() {
-      this.$emit('input', '')
-    }
   }
 }
 </script>
@@ -56,7 +45,11 @@ export default {
     color: config('colors.text-primary');
     border-bottom: 0.0625rem solid #7a7675;
     visibility: hidden;
-    transition: 1ss
+    transition: 1ss;
+
+    &--active {
+      visibility: visible;
+    }
   }
   .search-cleaner {
     display: inline-block;
@@ -76,10 +69,10 @@ export default {
     display: inline-block;
     width: 0.75rem;
     height: 0.75rem;
-    position: absolute;
+    position: relative;
     top: 0.0625rem;
     opacity: .5;
-    right: 0.25rem;
+    right: .95rem;
   }
   .input-wrapper {
     &:hover {
