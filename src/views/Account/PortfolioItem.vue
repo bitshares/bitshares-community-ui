@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="portfolio-item">
     <span>{{ item.tiker }}</span>
     <span v-show="isBalancesMode">{{ formattedTokens }}</span>
     <span v-show="isBalancesMode">{{ formattedFiatValue }}</span>
@@ -30,7 +30,7 @@ export default {
       return this.mode === 'prices'
     },
     formattedTokens() {
-      return this.item.tokens.toFixed(3)
+      return this.item.tokens.toFixed(2)
     },
     formattedTokenPrice() {
       return this.preciseFiatValue(this.item.tokenPrice || 0)
@@ -52,23 +52,24 @@ export default {
 
 <style scoped lang="scss">
 
-.grid-items div {
+.portfolio-item {
   color: config('colors.text-primary');
   padding: config('padding.grid-table');
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  line-height: 5px;
-  padding-left: config('padding.0');
-  padding-right: config('padding.0');
+  padding-left: 0;
+  padding-right: 0;
   transition: background-color 0.15s ease;
   &:hover {
     background-color: rgba(255, 255, 255, 0.2)
   }
 }
 
-.grid-items span {
+.portfolio-item span {
     padding: 0px 0px;
     font-size: config('textSizes.sm');
+    overflow: hidden;
+    text-overflow: ellipsis;
     &:not(:first-child) {
       text-align: right;
     }
