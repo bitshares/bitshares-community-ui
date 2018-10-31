@@ -6,10 +6,8 @@ const types = {
 const state = {
   currentTicker: 'USD',
   favourites: {
-    BTCUSD: true,
-    USDZCN: true,
-    USDRPL: true,
-    USDPOE: true
+    USD: ['ZIL', 'ONT'],
+    ETH: ['POE']
   },
   markets: {
     USD: [
@@ -311,11 +309,9 @@ const mutations = {
 }
 
 const actions = {
-  toggleFavourite({ state, commit }, { id }) {
+  toggleFavourite({ state, commit }, { newFavourites }) {
     commit(types.UPDATE_FAVOURITES, {
-      favourites: Object.assign(
-        {}, state.favourites, { [id]: !state.favourites[id] }
-      )
+      favourites: newFavourites
     })
   },
   setCurrentTicker({ commit }, { ticker }) {

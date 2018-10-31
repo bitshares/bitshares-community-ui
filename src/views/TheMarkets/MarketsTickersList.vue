@@ -16,7 +16,7 @@
           :item="ticker"
           :current-ticker="currentTicker"
           :expand-mode="expandMode"
-          :is-favourite="!!favourites[ticker.id]"
+          :is-favourite="isFavourite(ticker)"
           @change="changeFavourite"
         />
       </template>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import MarketsTickersListItem from './MarketsTickersListItem'
 import SortableTable from '@/components/SortableTable'
 import SortableHeaderItem from '@/components/SortableHeaderItem'
@@ -46,12 +46,6 @@ export default {
       type: Array,
       default() {
         return () => []
-      }
-    },
-    favourites: {
-      type: Object,
-      default() {
-        return () => {}
       }
     },
     expandMode: {
@@ -85,23 +79,34 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      favouritesItems: 'markets/getFavouritesList'
+    }),
+
     fields() {
       return this.expandMode ? this.marketsField.large : this.marketsField.small
     },
     sortedItems() {
-      if (this.currentTicker === 'favourites') {
-        return orderBy(
-          this.items.filter(item => this.favourites[item.id]), this.sortField.field, this.sortField.type
-        )
-      }
       return orderBy(this.items.slice(0), this.sortField.field, this.sortField.type)
     }
   },
   methods: {
     ...mapActions('markets', ['toggleFavourite']),
 
-    changeFavourite({ id }) {
-      this.toggleFavourite({ id })
+    changeFavourite({ item }) {
+      const cacheItems = Object.assign({}, this.favouritesItems)
+
+      if (cacheItems[item.curr] && cacheItems[item.curr].includes(item.ticker)) {
+        cacheItems[item.curr] = cacheItems[item.curr].filter(elem => elem !== item.ticker)
+      } else {
+        if (!cacheItems[item.curr]) cacheItems[item.curr] = []
+        cacheItems[item.curr].push(item.ticker)
+      }
+      this.toggleFavourite({ newFavourites: cacheItems })
+    },
+    isFavourite(item) {
+      if (this.currentTicker === 'favourites') return true
+      return this.favouritesItems[this.currentTicker] && this.favouritesItems[this.currentTicker].includes(item.ticker)
     }
   }
 }

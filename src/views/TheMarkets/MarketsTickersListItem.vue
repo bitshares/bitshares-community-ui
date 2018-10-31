@@ -1,5 +1,5 @@
 <template>
-  <div @click="$emit('change', { id: item.id })">
+  <div @click="$emit('change', { item })">
     <MarketsTickersListItemPrices
       :item="item"
       :change-value7="changeValue7"

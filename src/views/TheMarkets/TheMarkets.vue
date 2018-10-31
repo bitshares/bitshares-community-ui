@@ -24,7 +24,6 @@
       :items="foundItems"
       :expand-mode="expandMode"
       :current-ticker="currentTicker"
-      :favourites="favourites"
     />
   </div>
 </template>
@@ -65,21 +64,16 @@ export default {
 
     tickerItems() {
       if (this.currentTicker === 'favourites') {
-        let allTickers = []
         const favourites = []
 
-        Object.keys(this.markets).forEach((ticker) => {
-          allTickers = allTickers.concat(this.markets[ticker])
-        })
-        Object.keys(this.favourites).forEach((tickerId) => {
-          if (!this.favourites[tickerId]) return
-          allTickers.forEach((ticker) => {
-            if (ticker.id === tickerId) {
-              favourites.push(ticker)
-            }
+        Object.keys(this.favourites).forEach((ticker) => {
+          this.favourites[ticker].forEach((subTicker) => {
+            const favouriteItem = this.markets[ticker].filter(item => {
+              return subTicker === item.ticker
+            })[0]
+            favourites.push(favouriteItem)
           })
         })
-
         return orderBy(favourites, 'ticker', 'asc')
       }
       return orderBy(this.markets[this.currentTicker], 'ticker', 'asc')
