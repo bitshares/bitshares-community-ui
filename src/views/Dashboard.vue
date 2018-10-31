@@ -53,12 +53,13 @@
         </Card>
 
         <Card
-          class="lg:w-2/3 disabled"
+          class="lg:w-2/3"
           title="order book">
-          <div
-            slot="body"
-            class="uppercase">
-            under construction
+          <div slot="header">
+            <OrderBookLastPrice/>
+          </div>
+          <div slot="body">
+            <OrderBook/>
           </div>
         </Card>
       </div>
@@ -70,6 +71,8 @@
 <script>
 import Portfolio from '@/views/Account/Portfolio.vue'
 import AccountHeader from '@/views/Account/AccountHeader.vue'
+import OrderBook from '@/views/OrderBook/OrderBook'
+import OrderBookLastPrice from '@/views/OrderBook/OrderBookLastPrice'
 
 import MarketsModal from '@/components/Modal'
 
@@ -79,7 +82,16 @@ import TheMarkets from '@/views/TheMarkets/'
 
 export default {
   name: 'Dashboard',
-  components: { Portfolio, AccountHeader, Card, TransactionsHistory, TheMarkets, MarketsModal },
+  components: {
+    Portfolio,
+    AccountHeader,
+    Card,
+    TransactionsHistory,
+    TheMarkets,
+    MarketsModal,
+    OrderBook,
+    OrderBookLastPrice
+  },
   data() {
     return {
       expanded: true,
