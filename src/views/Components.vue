@@ -8,12 +8,14 @@
           <Button
             text="button test"
             size="medium"
+            type="primary"
           />
         </div>
         <div slot="body">
           <Button
             text="button test"
             size="big"
+            type="secondary"
           />
           <SortableHeaderItem
             title="ticker"

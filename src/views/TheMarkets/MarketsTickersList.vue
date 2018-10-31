@@ -1,7 +1,7 @@
 <template>
   <div
-    class="tickers-list"
     :class="{'tickers-list_expanded': expandMode}"
+    class="tickers-list"
   >
     <div class="tickers-list-head">
       <div
