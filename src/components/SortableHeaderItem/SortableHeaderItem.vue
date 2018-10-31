@@ -7,7 +7,7 @@
       class="header-item__title">
       {{ title }}
       <div
-        v-show="sort"
+        v-if="showIcon && sort"
         class="header-item__arrows">
         <svgicon
           :class="sort === 'desc' ? 'active' : ''"
@@ -40,6 +40,10 @@ export default {
     align: {
       type: String,
       default: 'right'
+    },
+    showIcon: {
+      type: Boolean,
+      default: true
     }
   }
 }

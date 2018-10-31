@@ -23,18 +23,37 @@
       </div>
 
       <div class="flex flex-col lg:flex-row mb-2">
-        <Card
-          class="lg:w-2/3 disabled"
+        <card
+          :expanded="true"
+          class="lg:w-1/3"
           title="markets">
           <div
-            slot="body"
-            class="uppercase">
-            under construction
+            slot="modal"
+          >
+            <div v-if="expanded">
+              <div
+                class="card-expanded"
+                @click="showModal = true"
+              />
+              <MarketsModal
+                v-if="showModal"
+                @close="showModal = false"
+              >
+                <div slot="body">
+                  <TheMarkets :expand-mode="true"/>
+                </div>
+              </MarketsModal>
+            </div>
+          </div>
+          <div slot="body">
+            <TheMarkets
+              :expand-mode="false"
+            />
           </div>
         </Card>
 
         <Card
-          class="lg:w-1/3"
+          class="lg:w-2/3"
           title="order book">
           <div slot="header">
             <OrderBookLastPrice/>
@@ -55,12 +74,30 @@ import AccountHeader from '@/views/Account/AccountHeader.vue'
 import OrderBook from '@/views/OrderBook/OrderBook'
 import OrderBookLastPrice from '@/views/OrderBook/OrderBookLastPrice'
 
+import MarketsModal from '@/components/Modal'
+
 import Card from '@/components/Card'
 import TransactionsHistory from '@/views/TransactionsHistory/'
+import TheMarkets from '@/views/TheMarkets/'
 
 export default {
   name: 'Dashboard',
-  components: { Portfolio, AccountHeader, Card, TransactionsHistory, OrderBook, OrderBookLastPrice }
+  components: {
+    Portfolio,
+    AccountHeader,
+    Card,
+    TransactionsHistory,
+    TheMarkets,
+    MarketsModal,
+    OrderBook,
+    OrderBookLastPrice
+  },
+  data() {
+    return {
+      expanded: true,
+      showModal: false
+    }
+  }
 }
 </script>
 

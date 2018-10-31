@@ -6,6 +6,7 @@
       <div class="title">
         <div> {{ title }} </div>
       </div>
+      <slot name="modal"/>
       <slot
         class="header"
         name="header" />
@@ -20,6 +21,7 @@
 
 <script>
 import ScrollingContainer from '@/components/ScrollingContainer/ScrollingContainer.vue'
+
 export default {
   components: { ScrollingContainer },
   props: {
@@ -45,6 +47,19 @@ export default {
   transition: max-height 0.2s;
   &:last-child {
     @apply mr-0;
+  }
+}
+
+.card-expanded {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid #7a7675;
+
+  &:hover {
+    cursor: pointer;
+    background: #7a7675;
   }
 }
 

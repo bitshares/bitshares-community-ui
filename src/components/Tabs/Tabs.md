@@ -17,28 +17,32 @@ Examples:
       </Tabs>
 ```
 
-4 tabs example
+5 tabs of currency type. Using in markets.
 ```js
-      <Tabs :tabs="['Tab example #1', 'Tab example #2', 'Tab example #3', 'Tab example #4']">
-      <div slot="Tab example #1">
+      <Tabs :tabs="['USD', 'BTC', 'ETH', 'CNY', 'BTS']" :currency-mode="true">
+      <div slot="USD">
         <!-- Stuff. -->1
       </div>
 
-      <div slot="Tab example #2">
+      <div slot="BTC">
         <!-- Stuff. -->2
       </div>
 
-      <div slot="Tab example #3">
+      <div slot="ETH">
         <!-- Stuff.-->3
       </div>
 
-      <div slot="Tab example #4">
+      <div slot="CNY">
         <!-- Stuff.-->4
+      </div>
+
+      <div slot="BTS">
+        <!-- Stuff.-->5
       </div>
       </Tabs>
 ```
 
-4 centered tabs example 
+4 centered tabs example
 ```js
       <Tabs :centered=true :tabs="['Tab example #1', 'Tab example #2', 'Tab example #3', 'Tab example #4']">
       <div slot="Tab example #1">
@@ -59,7 +63,7 @@ Examples:
       </Tabs>
 ```
 
-4 centered tabs example 
+4 centered tabs example
 ```js
       <Tabs :centered=true :tabs="['Tab example #1', 'Tab example #2', 'Tab example #3', 'Tab example #4']">
       <div slot="Tab example #1">
