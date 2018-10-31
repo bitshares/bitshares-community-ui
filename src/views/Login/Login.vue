@@ -30,7 +30,7 @@
           slot="private key"
           class="login__form">
           <VInput
-            v-model.trim="brainkey"
+            v-model="brainkey"
             :errors="$v.brainkey"
             input-name="brainkey"
             class="mb-6"
@@ -73,7 +73,7 @@
 
       <div class="login__form">
         <Button
-          :disabled="loginDisabled || (!file && !brainkeyCompleted && !password)"
+          :disabled="loginDisabled"
           :loading="inProgress"
           class="login__btn"
           width="full"
@@ -132,9 +132,6 @@ export default {
           brainkey: {
             required: (value) => {
               if (this.file) return true
-              return required(value)
-            },
-            minLength: (value) => {
               if (value.split(' ').length - 1 >= 15) {
                 this.brainkeyCompleted = true
                 return this.brainkeyCompleted
@@ -166,7 +163,7 @@ export default {
   },
   computed: {
     loginDisabled() {
-      return this.$v.$dirty && this.$v.$invalid
+      return (this.$v.$dirty && this.$v.$invalid) || (!this.file && !this.brainkeyCompleted && !this.password)
     }
   },
   methods: {

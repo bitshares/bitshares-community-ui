@@ -26,8 +26,7 @@ export default {
     title: 'backup phrase',
     tip: 'Enter 16 words backed up when account was created',
     validation: {
-      required: 'Enter backup phrase',
-      minLength: 'Must contain 16 words'
+      required: 'Must contain 16 words'
     }
   },
   pin: {
