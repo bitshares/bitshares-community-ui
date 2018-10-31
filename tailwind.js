@@ -147,6 +147,8 @@ let colors = {
   'tab-hover': 'rgba(255, 255, 255, 0.6)',
   'tab-active': '#ffffff',
   'table-bg': '#000000',
+  'mobile-footer': '#1a1a1a',
+  'mobile-footer-hover': '#121212',
   'star': '#a7a9ac'
 }
 

@@ -43,6 +43,9 @@
         text="button test"
         size="small"/>
     </div>
+    <MobileFooter
+      :items="[{name: 'markets', title: 'Markets', icon:'markets'}, {name: 'orders', title: 'Orders', icon:'orders'}, {name: 'account', title: 'Account', icon:'account'}]"
+    />
   </div>
 </template>
 
@@ -50,13 +53,13 @@
 import Button from '@/components/Button/'
 import Tabs from '@/components/Tabs/'
 import Card from '@/components/Card'
+import MobileFooter from '@/components/MobileFooter'
 import SortableHeaderItem from '@/components/SortableHeaderItem'
 import Star from '@/components/Star'
 
 export default {
   name: 'Components',
-  components: { Button, Tabs, Card, Star, SortableHeaderItem },
-
+  components: { Button, Tabs, Card, Star, SortableHeaderItem, MobileFooter },
   data() {
     return {
       testString: '',
