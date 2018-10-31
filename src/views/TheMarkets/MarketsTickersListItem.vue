@@ -2,8 +2,8 @@
   <div @click="$emit('change', { id: item.id })">
     <MarketsTickersListItemPrices
       :item="item"
-      :change-value7="changeValue1"
-      :change-value24="changeValue2"
+      :change-value7="changeValue7"
+      :change-value24="changeValue24"
       :vol-usd="volUsd"
       :is-favourite="isFavourite"
       :market-cap="marketCap"
@@ -53,10 +53,10 @@ export default {
     marketCap() {
       return getVolumeFormat(this.item.marketcap)
     },
-    changeValue1() {
+    changeValue7() {
       return this.getChangeValue({ price: this.item.change1 })
     },
-    changeValue2() {
+    changeValue24() {
       return this.getChangeValue({ price: this.item.change2 })
     }
   },
