@@ -36,6 +36,9 @@
         <Card
           class="lg:w-1/3"
           title="order book">
+          <div slot="header">
+            <OrderBookLastPrice/>
+          </div>
           <div slot="body">
             <OrderBook/>
           </div>
@@ -50,13 +53,14 @@
 import Portfolio from '@/views/Account/Portfolio.vue'
 import AccountHeader from '@/views/Account/AccountHeader.vue'
 import OrderBook from '@/views/OrderBook/OrderBook'
+import OrderBookLastPrice from '@/views/OrderBook/OrderBookLastPrice'
 
 import Card from '@/components/Card'
 import TransactionsHistory from '@/views/TransactionsHistory/'
 
 export default {
   name: 'Dashboard',
-  components: { Portfolio, AccountHeader, Card, TransactionsHistory, OrderBook }
+  components: { Portfolio, AccountHeader, Card, TransactionsHistory, OrderBook, OrderBookLastPrice }
 }
 </script>
 
