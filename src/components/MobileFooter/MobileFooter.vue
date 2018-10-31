@@ -1,20 +1,22 @@
 <template>
-  <div class="mobile-footer">
-    <div
-      v-for="(item, index) in items"
-      :key="index"
-      :style="{ width: itemWidth + '%' }"
-      :class="{'active': activeIndex === index }"
-      class="footer-item"
-      @click="$emit('click')"
-    >
-      <svgicon
-        :name="item.icon"
-        height="33"
-        width="33"
-        class="icon"
-      /><br>
-      <div class="text">{{ item.title }}</div>
+  <div class="sm:hidden">
+    <div class="mobile-footer">
+      <div
+        v-for="(item, index) in items"
+        :key="index"
+        :style="{ width: itemWidth + '%' }"
+        :class="{'active': activeIndex === index }"
+        class="footer-item"
+        @click="$emit('click')"
+      >
+        <svgicon
+          :name="item.icon"
+          height="33"
+          width="33"
+          class="icon"
+        /><br>
+        <div class="text">{{ item.title }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -51,12 +53,6 @@ export default {
     width:100%;
     text-align: center;
     color:config('colors.text-primary');
-}
-
-@screen sm {
-    .mobile-footer {
-        display: none;
-    }
 }
 
 .footer-item {
