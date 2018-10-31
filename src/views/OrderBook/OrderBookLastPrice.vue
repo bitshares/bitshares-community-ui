@@ -5,18 +5,15 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  props: {
-    price: {
-      type: String,
-      default: ''
-    },
-    currentTicker: {
-      type: String,
-      default: 'USD'
-    }
-  },
   computed: {
+    ...mapGetters({
+      price: 'books/getLastPrice',
+      currentTicker: 'books/getCurrentTicker'
+    }),
+
     lastPrice() {
       return `${this.price} ${this.currentTicker}`
     }

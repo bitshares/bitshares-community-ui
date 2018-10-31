@@ -1,5 +1,6 @@
 const state = {
   lastPrice: '6 745',
+  currentTicker: 'USD',
   orderBook: {
     buying: [
       { sum: 98.23, price: 0.25069 },
@@ -33,6 +34,9 @@ const state = {
 const getters = {
   getLastPrice(state) {
     return state.lastPrice
+  },
+  getCurrentTicker(state) {
+    return state.currentTicker
   },
   getOrderBook(state) {
     return state.orderBook
