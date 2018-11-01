@@ -15,6 +15,7 @@
 
     <div class="portfolio-table">
       <SortableTable
+        class="portfolio-table__header"
         :items="filteredItems"
         :headers="tableHeaders"
         :default-sort="defaultSort"
@@ -91,19 +92,22 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-.portfolio-container {
-  padding-right: 0.3rem;
-}
-
+<style lang="scss">
 .portfolio-table {
   font-family: config("fonts.gotham");
   height: 100%;
+  .sortable-table__header {
+    padding: 0 1rem 0 0.6rem;
+  }
+  .sortable-table__body {
+    padding: 0 1rem 0 0.6rem;
+  }
 }
 
 .portfolio-header {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.25rem;
+  padding: 0 1rem 0 0.6rem;
 }
 </style>
