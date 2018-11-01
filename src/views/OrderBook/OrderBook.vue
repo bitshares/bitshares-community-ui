@@ -3,15 +3,15 @@
     <div class="order-books__layout">
       <OrderBookTable
         :items="orderBook.buying"
+        :table-headers="tableHeaders.buy"
         title="Byuing"
         align="left"
-        :table-headers="tableHeaders.buy"
       />
       <OrderBookTable
         :items="orderBook.selling"
+        :table-headers="tableHeaders.sell"
         title="Selling"
         align="right"
-        :table-headers="tableHeaders.sell"
       />
     </div>
   </div>
