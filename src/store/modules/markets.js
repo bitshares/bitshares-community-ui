@@ -241,7 +241,7 @@ const state = {
 
 const getters = {
   getMarketsList(state) {
-    const markets = Object.assign({}, state.markets)
+    const markets = state.markets
 
     Object.keys(markets).forEach((market) => {
       markets[market] = markets[market].map(item => Object.assign({}, item, { curr: market }))

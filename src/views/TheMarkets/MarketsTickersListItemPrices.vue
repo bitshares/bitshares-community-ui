@@ -4,14 +4,13 @@
       v-if="!expandMode"
       class="tickers-list-row"
     >
-      <div
-        class="tickers-list__item"
-        @click="$emit('change', { item })"
-      >
-        <Star
-          :active="isFavourite"
-          class="tickers__favourite"
-        />
+      <div class="tickers-list__item">
+        <div @click="$emit('change', { item })">
+          <Star
+            :active="isFavourite"
+            class="tickers__favourite"
+          />
+        </div>
         <div class="tickers-list__itemPair">
           <span class="_currencyTitle">{{ item.ticker }}</span>
         </div>
