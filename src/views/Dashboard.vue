@@ -53,7 +53,7 @@
         </Card>
 
         <Card
-          class="lg:w-2/3"
+          class="lg:w-1/3"
           title="order book">
           <div slot="header">
             <OrderBookLastPrice/>

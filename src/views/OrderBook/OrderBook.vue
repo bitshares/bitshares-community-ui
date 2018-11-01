@@ -4,10 +4,12 @@
       <OrderBookTable
         :items="orderBook.buying"
         title="Byuing"
+        align="left"
       />
       <OrderBookTable
         :items="orderBook.selling"
         title="Selling"
+        align="center"
       />
     </div>
   </div>

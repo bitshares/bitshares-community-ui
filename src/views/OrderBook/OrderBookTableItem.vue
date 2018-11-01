@@ -9,6 +9,10 @@ export default {
       default() {
         return {}
       }
+    },
+    align: {
+      type: String,
+      default: 'left'
     }
   }
 }
