@@ -15,7 +15,7 @@
 
 import Star from '@/components/Star'
 import MarketsTickersListItemPrices from './MarketsTickersListItemPrices'
-import { getVolumeFormat } from '@/helpers/utils'
+import { getVolumeFormat, amountValueShortener } from '@/helpers/utils'
 
 export default {
   components: {
@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     volUsd() {
-      return getVolumeFormat(this.item.volUsd)
+      return amountValueShortener(this.item.volUsd)
     },
     marketCap() {
       return getVolumeFormat(this.item.marketcap)
