@@ -16,9 +16,9 @@
         <OrderBookTableItem
           v-for="(item, index) in sortedItems"
           :key="index"
-          :mode="mode"
           :item="item"
           :align="align"
+          :type="tableType"
         />
       </template>
     </SortableTable>
@@ -47,15 +47,16 @@ export default {
       default() {
         return []
       }
+    },
+    tableHeaders: {
+      type: Array,
+      default() {
+        return []
+      }
     }
   },
   data() {
-    return {
-      tableHeaders: [
-        { title: 'Sum, BTC', field: 'sum', align: this.align },
-        { title: '', field: 'price', align: this.align }
-      ]
-    }
+    return {}
   },
   computed: {
     tableType() {
@@ -69,11 +70,10 @@ export default {
     flex: 1;
     font-family: config('fonts.gotham');
 
-    &--buy {
-      color: green;
-    }
     &--sell {
-      color: red;
+      .order-book__column-title {
+        text-align: right;
+      }
     }
   }
   .order-book__column-title {

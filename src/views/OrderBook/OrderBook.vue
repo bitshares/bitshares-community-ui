@@ -5,11 +5,13 @@
         :items="orderBook.buying"
         title="Byuing"
         align="left"
+        :table-headers="tableHeaders.buy"
       />
       <OrderBookTable
         :items="orderBook.selling"
         title="Selling"
-        align="center"
+        align="right"
+        :table-headers="tableHeaders.sell"
       />
     </div>
   </div>
@@ -21,6 +23,20 @@ import OrderBookTable from './OrderBookTable'
 export default {
   components: {
     OrderBookTable
+  },
+  data() {
+    return {
+      tableHeaders: {
+        buy: [
+          { title: 'Sum, BTC', field: 'sum', align: 'left' },
+          { title: '', field: 'price', align: this.align }
+        ],
+        sell: [
+          { title: '', field: 'price', align: 'right' },
+          { title: 'Sum, BTC', field: 'sum', align: this.align }
+        ]
+      }
+    }
   },
   computed: {
     ...mapGetters({
