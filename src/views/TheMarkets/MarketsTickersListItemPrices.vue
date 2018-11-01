@@ -4,7 +4,10 @@
       v-if="!expandMode"
       class="tickers-list-row"
     >
-      <div class="tickers-list__item">
+      <div
+        class="tickers-list__item"
+        @click="$emit('change', { item })"
+      >
         <Star
           :active="isFavourite"
           class="tickers__favourite"

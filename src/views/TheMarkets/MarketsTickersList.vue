@@ -17,7 +17,6 @@
           :current-ticker="currentTicker"
           :expand-mode="expandMode"
           :is-favourite="isFavourite(ticker)"
-          @change="changeFavourite"
         />
       </template>
     </SortableTable>
@@ -25,7 +24,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import MarketsTickersListItem from './MarketsTickersListItem'
 import SortableTable from '@/components/SortableTable'
 import orderBy from 'lodash/orderBy'
@@ -89,11 +88,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions('markets', ['toggleFavourite']),
-
-    changeFavourite({ item }) {
-      this.toggleFavourite({ item })
-    },
     isFavourite(item) {
       if (this.currentTicker === 'favourites') return true
       return this.favouritesItems[this.currentTicker] && this.favouritesItems[this.currentTicker].includes(item.ticker)

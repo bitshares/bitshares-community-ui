@@ -1,19 +1,18 @@
 <template>
-  <div @click="$emit('change', { item })">
-    <MarketsTickersListItemPrices
-      :item="item"
-      :current-ticker="currentTicker"
-      :change-value7="changeValue7"
-      :change-value24="changeValue24"
-      :vol-usd="volUsd"
-      :is-favourite="isFavourite"
-      :market-cap="marketCap"
-      :expand-mode="expandMode"
-    />
-  </div>
+  <MarketsTickersListItemPrices
+    :item="item"
+    :current-ticker="currentTicker"
+    :change-value7="changeValue7"
+    :change-value24="changeValue24"
+    :vol-usd="volUsd"
+    :is-favourite="isFavourite"
+    :market-cap="marketCap"
+    :expand-mode="expandMode"
+    @change="changeFavourite"
+  />
 </template>
 <script>
-
+import { mapActions } from 'vuex'
 import Star from '@/components/Star'
 import MarketsTickersListItemPrices from './MarketsTickersListItemPrices'
 import { getVolumeFormat } from '@/helpers/utils'
@@ -62,9 +61,14 @@ export default {
     }
   },
   methods: {
+    ...mapActions('markets', ['toggleFavourite']),
+
     getChangeValue({ price }) {
       const chr = '%'
       return (+price >= 0) ? `+${price}${chr}` : `${price}${chr}`
+    },
+    changeFavourite({ item }) {
+      this.toggleFavourite({ item })
     }
   }
 }
