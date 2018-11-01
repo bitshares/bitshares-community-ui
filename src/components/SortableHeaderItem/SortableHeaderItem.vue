@@ -66,10 +66,10 @@ export default {
     justify-content: flex-start;
   }
   &--center-aligned {
-    text-align: center;
+    justify-content: center;
   }
   &--right-aligned {
-    text-align: right;
+    justify-content: flex-end;
   }
 }
 

@@ -155,7 +155,7 @@ export default {
     }
     ._tickerTitle {
       font-size: config('textSizes.xs');
-      color: config('colors.grey-ticker');
+      color: config('colors.inactive');
     }
     ._currencyTitle {
       color: config('colors.white');
