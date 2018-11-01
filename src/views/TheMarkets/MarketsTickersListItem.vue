@@ -1,49 +1,38 @@
 <template>
-  <div @click="$emit('change', { id: item.id })">
-    <MarketsTickersListItemPrices
-      :item="item"
-      :change-value7="changeValue7"
-      :change-value24="changeValue24"
-      :vol-usd="volUsd"
-      :is-favourite="isFavourite"
-      :market-cap="marketCap"
-      :expand-mode="expandMode"
-    />
-  </div>
+  <MarketsTickersListItemPrices
+    :item="item"
+    :change-value7="changeValue7"
+    :change-value24="changeValue24"
+    :vol-usd="volUsd"
+    :is-favourite="isFavourite"
+    :market-cap="marketCap"
+    :expand-mode="expandMode"
+    @change="changeFavourite"
+  />
 </template>
 <script>
-
-import Star from '@/components/Star'
+import { mapActions } from 'vuex'
 import MarketsTickersListItemPrices from './MarketsTickersListItemPrices'
 import { getVolumeFormat } from '@/helpers/utils'
 
 export default {
-  components: {
-    Star,
-    MarketsTickersListItemPrices
-  },
+  components: { MarketsTickersListItemPrices },
   props: {
     item: {
       type: Object,
-      default() {
-        return {}
-      }
+      required: true
     },
-    currentTicker: {
+    currentBase: {
       type: String,
-      default: 'USD'
+      required: true
     },
     expandMode: {
       type: Boolean,
-      default() {
-        return false
-      }
+      default: false
     },
     isFavourite: {
       type: Boolean,
-      default() {
-        return false
-      }
+      default: false
     }
   },
   computed: {
@@ -61,9 +50,13 @@ export default {
     }
   },
   methods: {
+    ...mapActions('markets', ['toggleFavourite']),
+
     getChangeValue({ price }) {
-      const chr = '%'
-      return (+price >= 0) ? `+${price}${chr}` : `${price}${chr}`
+      return (+price >= 0) ? `+${price}%` : `${price}%`
+    },
+    changeFavourite({ item }) {
+      this.toggleFavourite({ base: item.base, quote: item.ticker })
     }
   }
 }

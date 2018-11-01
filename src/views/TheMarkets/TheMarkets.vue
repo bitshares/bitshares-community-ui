@@ -23,13 +23,11 @@
     <MarketsTickersList
       :items="foundItems"
       :expand-mode="expandMode"
-      :current-ticker="currentTicker"
-      :favourites="favourites"
+      :current-base="currentBase"
     />
   </div>
 </template>
 <script>
-import orderBy from 'lodash/orderBy'
 import Tabs from '@/components/Tabs'
 import SearchInput from '@/components/SearchInput/'
 import TheMarkets from '@/views/TheMarkets'
@@ -58,31 +56,13 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentTicker: 'markets/getCurrentTicker',
+      currentBase: 'markets/getCurrentBase',
       markets: 'markets/getMarketsList',
       favourites: 'markets/getFavouritesList'
     }),
 
     tickerItems() {
-      if (this.currentTicker === 'favourites') {
-        let allTickers = []
-        const favourites = []
-
-        Object.keys(this.markets).forEach((ticker) => {
-          allTickers = allTickers.concat(this.markets[ticker])
-        })
-        Object.keys(this.favourites).forEach((tickerId) => {
-          if (!this.favourites[tickerId]) return
-          allTickers.forEach((ticker) => {
-            if (ticker.id === tickerId) {
-              favourites.push(ticker)
-            }
-          })
-        })
-
-        return orderBy(favourites, 'ticker', 'asc')
-      }
-      return orderBy(this.markets[this.currentTicker], 'ticker', 'asc')
+      return this.currentBase === 'favourites' ? this.favourites : this.markets[this.currentBase]
     },
     foundItems() {
       if (!this.searchValue) return this.tickerItems
@@ -90,10 +70,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions('markets', ['setCurrentTicker']),
+    ...mapActions('markets', ['setCurrentBase']),
 
-    onTickerChange({ ticker }) {
-      this.setCurrentTicker({ ticker })
+    onTickerChange(base) {
+      this.setCurrentBase(base)
     }
   }
 }
