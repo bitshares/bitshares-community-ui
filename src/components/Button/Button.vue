@@ -7,6 +7,7 @@
       'btn--big': size === 'big',
       'btn--wide': width === 'full',
       'btn--round': type === 'round',
+      'btn--secondary': type === 'secondary'
     }"
     :disabled="disabled"
     class="btn btn-blue"
@@ -65,7 +66,7 @@ export default {
      */
     type: {
       type: String,
-      default: 'standard'
+      default: 'primary'
     }
   }
 }
@@ -109,6 +110,17 @@ export default {
 }
 .btn--round {
   @apply rounded;
+}
+.btn--secondary {
+  background-color:config('colors.bg-base');
+  color: config('colors.primary');
+  border: solid;
+  border-width: 1px;
+  border-color:config('colors.primary');
+}
+.btn--secondary:hover {
+  background-color:config('colors.primary');
+  color:config('colors.bg-base');
 }
 .spinner {
   margin-right: 10px;
