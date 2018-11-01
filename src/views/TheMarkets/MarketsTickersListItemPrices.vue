@@ -174,9 +174,6 @@ export default {
   }
   .ticker-list-row_expanded {
     .tickers-list-row {
-      ._ml32 {
-        margin-left: 2rem;
-      }
       .tickers__favourite {
         margin-top: -0.125rem;
         margin-right: 0.9375rem;
