@@ -1,6 +1,10 @@
 <template>
   <div
-    :class="{'header-item--left-aligned': align === 'left'}"
+    :class="{
+      'header-item--left-aligned': align === 'left',
+      'header-item--center-aligned': align === 'center',
+      'header-item--right-aligned': align === 'right',
+    }"
     class="header-item">
     <div
       :class="sort ? 'header-item__title--title-active' : ''"
@@ -60,6 +64,12 @@ export default {
   position: relative;
   &--left-aligned {
     justify-content: flex-start;
+  }
+  &--center-aligned {
+    justify-content: center;
+  }
+  &--right-aligned {
+    justify-content: flex-end;
   }
 }
 
