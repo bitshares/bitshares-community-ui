@@ -34,8 +34,8 @@
             :errors="$v.brainkey"
             input-name="brainkey"
             class="mb-6"
-            @focus="onFocus"
-            @blur="onBlur"
+            @focus="onBrainkeyInputFocus"
+            @blur="onBrainkeyInputBlur"
           />
 
           <KeyfileLoader
@@ -212,12 +212,12 @@ export default {
     removeFile() {
       this.file = null
     },
-    onFocus() {
+    onBrainkeyInputFocus() {
       if (!this.$v.brainkey.validator && !this.file) {
         this.showFileField = false
       }
     },
-    onBlur() {
+    onBrainkeyInputBlur() {
       if (!this.$v.brainkey.validator) {
         this.showFileField = true
       }
