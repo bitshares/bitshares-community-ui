@@ -15,10 +15,10 @@
 
     <div class="portfolio-table">
       <SortableTable
-        class="portfolio-table__header"
         :items="filteredItems"
         :headers="tableHeaders"
         :default-sort="defaultSort"
+        class="portfolio-table__header"
       >
         <template slot-scope="{ sortedItems }">
           <PortfolioItem
