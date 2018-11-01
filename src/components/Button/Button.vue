@@ -113,13 +113,13 @@ export default {
 }
 .btn--secondary {
   background-color:config('colors.bg-base');
-  color: config('colors.white');
+  color: config('colors.primary');
   border: solid;
   border-width: 1px;
-  border-color:config('colors.white');
+  border-color:config('colors.primary');
 }
 .btn--secondary:hover {
-  background-color:config('colors.white');
+  background-color:config('colors.primary');
   color:config('colors.bg-base');
 }
 .spinner {
