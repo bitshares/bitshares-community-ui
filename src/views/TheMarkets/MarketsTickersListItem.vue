@@ -2,6 +2,7 @@
   <div @click="$emit('change', { item })">
     <MarketsTickersListItemPrices
       :item="item"
+      :current-ticker="currentTicker"
       :change-value7="changeValue7"
       :change-value24="changeValue24"
       :vol-usd="volUsd"

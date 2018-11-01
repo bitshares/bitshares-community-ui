@@ -78,7 +78,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      favouritesItems: 'markets/getFavouritesList'
+      favouritesItems: 'markets/getDefaultFavouritesList'
     }),
 
     fields() {
@@ -92,15 +92,7 @@ export default {
     ...mapActions('markets', ['toggleFavourite']),
 
     changeFavourite({ item }) {
-      const cacheItems = Object.assign({}, this.favouritesItems)
-
-      if (cacheItems[item.curr] && cacheItems[item.curr].includes(item.ticker)) {
-        cacheItems[item.curr] = cacheItems[item.curr].filter(elem => elem !== item.ticker)
-      } else {
-        if (!cacheItems[item.curr]) cacheItems[item.curr] = []
-        cacheItems[item.curr].push(item.ticker)
-      }
-      this.toggleFavourite({ newFavourites: cacheItems })
+      this.toggleFavourite({ item })
     },
     isFavourite(item) {
       if (this.currentTicker === 'favourites') return true

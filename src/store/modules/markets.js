@@ -12,9 +12,7 @@ const state = {
   markets: {
     USD: [
       {
-        id: 'USDZIL',
         ticker: 'ZIL',
-        curr: 'USD',
         volUsd: 10764160,
         priceUsd1: 0.034810,
         priceUsd2: 0.04,
@@ -23,9 +21,7 @@ const state = {
         marketcap: 270832369
       },
       {
-        id: 'USDONT',
         ticker: 'ONT',
-        curr: 'USD',
         volUsd: 46950092,
         priceUsd1: 1.93,
         priceUsd2: 0.03,
@@ -34,9 +30,7 @@ const state = {
         marketcap: 2708323
       },
       {
-        id: 'USDZCN',
         ticker: 'ZCN',
-        curr: 'USD',
         volUsd: 934230,
         priceUsd1: 9.29,
         priceUsd2: 0.01,
@@ -45,9 +39,7 @@ const state = {
         marketcap: 130532
       },
       {
-        id: 'USDCFI',
         ticker: 'CFI',
-        curr: 'USD',
         volUsd: 36235,
         priceUsd1: 0.023335,
         priceUsd2: 0.02,
@@ -56,9 +48,7 @@ const state = {
         marketcap: 58371323
       },
       {
-        id: 'USDAIO',
         ticker: 'AIO',
-        curr: 'USD',
         volUsd: 1888236,
         priceUsd1: 0.445555,
         priceUsd2: 0.03,
@@ -67,9 +57,7 @@ const state = {
         marketcap: 923832362
       },
       {
-        id: 'USDPOE',
         ticker: 'POE',
-        curr: 'USD',
         volUsd: 325688,
         priceUsd1: 0.0058,
         priceUsd2: 0.04,
@@ -78,9 +66,7 @@ const state = {
         marketcap: 123738
       },
       {
-        id: 'USDDASH',
         ticker: 'DASH',
-        curr: 'USD',
         volUsd: 36235,
         priceUsd1: 0.023335,
         priceUsd2: 0.02,
@@ -89,9 +75,7 @@ const state = {
         marketcap: 58371323
       },
       {
-        id: 'USDETC',
         ticker: 'ETC',
-        curr: 'USD',
         volUsd: 1888236,
         priceUsd1: 0.445555,
         priceUsd2: 0.03,
@@ -100,9 +84,7 @@ const state = {
         marketcap: 923832362
       },
       {
-        id: 'USDBTG',
         ticker: 'BTG',
-        curr: 'USD',
         volUsd: 325688,
         priceUsd1: 0.0058,
         priceUsd2: 0.04,
@@ -111,9 +93,7 @@ const state = {
         marketcap: 123738
       },
       {
-        id: 'USDBCH',
         ticker: 'BCH',
-        curr: 'USD',
         volUsd: 325688,
         priceUsd1: 0.0058,
         priceUsd2: 0.04,
@@ -122,9 +102,7 @@ const state = {
         marketcap: 123738
       },
       {
-        id: 'USDRPL',
         ticker: 'RPL',
-        curr: 'USD',
         volUsd: 325688,
         priceUsd1: 0.0058,
         priceUsd2: 0.04,
@@ -133,9 +111,7 @@ const state = {
         marketcap: 123738
       },
       {
-        id: 'USDOMNI',
         ticker: 'OMNI',
-        curr: 'USD',
         volUsd: 325688,
         priceUsd1: 0.0058,
         priceUsd2: 0.04,
@@ -146,9 +122,7 @@ const state = {
     ],
     BTC: [
       {
-        id: 'BTCZCN',
         ticker: 'ZCN',
-        curr: 'BTC',
         volUsd: 934230,
         priceUsd1: 9.29,
         priceUsd2: 0.01,
@@ -157,9 +131,7 @@ const state = {
         marketcap: 2373838
       },
       {
-        id: 'BTCCFI',
         ticker: 'CFI',
-        curr: 'BTC',
         volUsd: 36235,
         priceUsd1: 0.023335,
         priceUsd2: 0.02,
@@ -168,9 +140,7 @@ const state = {
         marketcap: 29392392
       },
       {
-        id: 'BTCAIO',
         ticker: 'AIO',
-        curr: 'BTC',
         volUsd: 1888236,
         priceUsd1: 0.445555,
         priceUsd2: 0.03,
@@ -179,9 +149,7 @@ const state = {
         marketcap: 2828471
       },
       {
-        id: 'BTCPOE',
         ticker: 'POE',
-        curr: 'BTC',
         volUsd: 325688,
         priceUsd1: 0.0058,
         priceUsd2: 0.04,
@@ -192,9 +160,7 @@ const state = {
     ],
     ETH: [
       {
-        id: 'ETHAIO',
         ticker: 'AIO',
-        curr: 'ETH',
         volUsd: 1888236,
         priceUsd1: 0.445555,
         priceUsd2: 0.03,
@@ -203,9 +169,7 @@ const state = {
         marketcap: 270832369
       },
       {
-        id: 'ETHPOE',
         ticker: 'POE',
-        curr: 'ETH',
         volUsd: 325688,
         priceUsd1: 0.0058,
         priceUsd2: 0.04,
@@ -216,9 +180,7 @@ const state = {
     ],
     CNY: [
       {
-        id: 'CNYZIL:',
         ticker: 'ZIL',
-        curr: 'CNY',
         volUsd: 10764160,
         priceUsd1: 0.034810,
         priceUsd2: 0.04,
@@ -227,9 +189,7 @@ const state = {
         marketcap: 118238
       },
       {
-        id: 'CNYONT',
         ticker: 'ONT',
-        curr: 'CNY',
         volUsd: 46950092,
         priceUsd1: 1.93,
         priceUsd2: 0.03,
@@ -238,9 +198,7 @@ const state = {
         marketcap: 9129319
       },
       {
-        id: 'CNYZCN',
         ticker: 'ZCN',
-        curr: 'CNY',
         volUsd: 934230,
         priceUsd1: 9.29,
         priceUsd2: 0.01,
@@ -251,9 +209,7 @@ const state = {
     ],
     BTS: [
       {
-        id: 'BTSZCN',
         ticker: 'ZCN',
-        curr: 'BTS',
         volUsd: 934230,
         priceUsd1: 9.29,
         priceUsd2: 0.01,
@@ -262,9 +218,7 @@ const state = {
         marketcap: 381923
       },
       {
-        id: 'BTSZIL',
         ticker: 'ZIL',
-        curr: 'BTS',
         volUsd: 10764160,
         priceUsd1: 0.034810,
         priceUsd2: 0.04,
@@ -273,9 +227,7 @@ const state = {
         marketcap: 56361723
       },
       {
-        id: 'BTSONT',
         ticker: 'ONT',
-        curr: 'BTS',
         volUsd: 46950092,
         priceUsd1: 1.93,
         priceUsd2: 0.03,
@@ -289,10 +241,29 @@ const state = {
 
 const getters = {
   getMarketsList(state) {
-    return state.markets
+    const markets = Object.assign({}, state.markets)
+
+    Object.keys(markets).forEach((market) => {
+      markets[market] = markets[market].map(item => Object.assign({}, item, { curr: market }))
+    })
+    return markets
+  },
+  getDefaultFavouritesList(state) {
+    return state.favourites
   },
   getFavouritesList(state) {
-    return state.favourites
+    const favourites = []
+
+    Object.keys(state.favourites).forEach((ticker) => {
+      state.favourites[ticker] && state.favourites[ticker].forEach((subTicker) => {
+        const favouriteItem = state.markets[ticker].filter(item => {
+          return subTicker === item.ticker
+        })[0]
+        favouriteItem.curr = ticker
+        favourites.push(favouriteItem)
+      })
+    })
+    return favourites
   },
   getCurrentTicker(state) {
     return state.currentTicker
@@ -309,7 +280,16 @@ const mutations = {
 }
 
 const actions = {
-  toggleFavourite({ state, commit }, { newFavourites }) {
+  toggleFavourite({ state, commit, getters }, { item }) {
+    const newFavourites = Object.assign({}, state.favourites)
+
+    if (newFavourites[item.curr] && newFavourites[item.curr].includes(item.ticker)) {
+      newFavourites[item.curr] = newFavourites[item.curr].filter(elem => elem !== item.ticker)
+    } else {
+      if (!newFavourites[item.curr]) newFavourites[item.curr] = []
+      newFavourites[item.curr].push(item.ticker)
+    }
+
     commit(types.UPDATE_FAVOURITES, {
       favourites: newFavourites
     })

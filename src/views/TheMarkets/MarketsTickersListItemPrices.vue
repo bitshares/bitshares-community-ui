@@ -78,6 +78,10 @@ export default {
     Star
   },
   props: {
+    currentTicker: {
+      type: String,
+      default: 'USD'
+    },
     isFavourite: {
       type: Boolean,
       default: false

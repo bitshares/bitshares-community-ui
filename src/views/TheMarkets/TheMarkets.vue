@@ -28,7 +28,6 @@
   </div>
 </template>
 <script>
-import orderBy from 'lodash/orderBy'
 import Tabs from '@/components/Tabs'
 import SearchInput from '@/components/SearchInput/'
 import TheMarkets from '@/views/TheMarkets'
@@ -63,20 +62,7 @@ export default {
     }),
 
     tickerItems() {
-      if (this.currentTicker === 'favourites') {
-        const favourites = []
-
-        Object.keys(this.favourites).forEach((ticker) => {
-          this.favourites[ticker].forEach((subTicker) => {
-            const favouriteItem = this.markets[ticker].filter(item => {
-              return subTicker === item.ticker
-            })[0]
-            favourites.push(favouriteItem)
-          })
-        })
-        return orderBy(favourites, 'ticker', 'asc')
-      }
-      return orderBy(this.markets[this.currentTicker], 'ticker', 'asc')
+      return this.currentTicker === 'favourites' ? this.favourites : this.markets[this.currentTicker]
     },
     foundItems() {
       if (!this.searchValue) return this.tickerItems
