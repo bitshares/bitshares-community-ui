@@ -4,7 +4,7 @@ const types = {
 }
 
 const state = {
-  currentTicker: 'USD',
+  currentBase: 'USD',
   favourites: {
     USD: ['ZIL', 'ONT'],
     ETH: ['POE']
@@ -241,32 +241,30 @@ const state = {
 
 const getters = {
   getMarketsList(state) {
-    const markets = state.markets
+    const markets = {}
 
-    Object.keys(markets).forEach((market) => {
-      markets[market] = markets[market].map(item => Object.assign({}, item, { curr: market }))
+    Object.keys(state.markets).forEach(base => {
+      markets[base] = state.markets[base].map(item => Object.assign({}, item, { base }))
     })
     return markets
   },
-  getDefaultFavouritesList(state) {
-    return state.favourites
+  isTickerFavourite: (state) => (base, quote) => {
+    return state.favourites[base] && state.favourites[base].includes(quote)
   },
   getFavouritesList(state) {
     const favourites = []
 
-    Object.keys(state.favourites).forEach((ticker) => {
-      state.favourites[ticker] && state.favourites[ticker].forEach((subTicker) => {
-        const favouriteItem = state.markets[ticker].filter(item => {
-          return subTicker === item.ticker
-        })[0]
-        favouriteItem.curr = ticker
+    Object.keys(state.favourites).forEach(base => {
+      state.favourites[base].length && state.favourites[base].forEach(quote => {
+        const favouriteItem = state.markets[base].filter(item => quote === item.ticker)[0]
+        favouriteItem.base = base
         favourites.push(favouriteItem)
       })
     })
     return favourites
   },
-  getCurrentTicker(state) {
-    return state.currentTicker
+  getCurrentBase(state) {
+    return state.currentBase
   }
 }
 
@@ -274,28 +272,28 @@ const mutations = {
   [types.UPDATE_FAVOURITES](state, { favourites }) {
     state.favourites = favourites
   },
-  [types.UPDATE_CURRENT_TICKER](state, { ticker }) {
-    state.currentTicker = ticker
+  [types.UPDATE_CURRENT_TICKER](state, base) {
+    state.currentBase = base
   }
 }
 
 const actions = {
-  toggleFavourite({ state, commit, getters }, { item }) {
+  toggleFavourite({ state, commit, getters }, { base, quote }) {
     const newFavourites = Object.assign({}, state.favourites)
 
-    if (newFavourites[item.curr] && newFavourites[item.curr].includes(item.ticker)) {
-      newFavourites[item.curr] = newFavourites[item.curr].filter(elem => elem !== item.ticker)
+    if (getters.isTickerFavourite(base, quote)) {
+      newFavourites[base] = newFavourites[base].filter(elem => elem !== quote)
     } else {
-      if (!newFavourites[item.curr]) newFavourites[item.curr] = []
-      newFavourites[item.curr].push(item.ticker)
+      if (!newFavourites[base]) newFavourites[base] = []
+      newFavourites[base].push(quote)
     }
 
     commit(types.UPDATE_FAVOURITES, {
       favourites: newFavourites
     })
   },
-  setCurrentTicker({ commit }, { ticker }) {
-    commit(types.UPDATE_CURRENT_TICKER, { ticker })
+  setCurrentBase({ commit }, base) {
+    commit(types.UPDATE_CURRENT_TICKER, base)
   }
 }
 

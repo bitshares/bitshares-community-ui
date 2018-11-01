@@ -14,7 +14,7 @@
         <div class="tickers-list__itemPair">
           <span class="_currencyTitle">{{ item.ticker }}</span>
         </div>
-        <div class="_tickerTitle tickers-list__itemVolume"> /{{ item.curr }}</div>
+        <div class="_tickerTitle tickers-list__itemVolume"> /{{ item.base }}</div>
       </div>
       <div class="tickers-list__item _alignRight">
         <div class="_currencyTitle">{{ item.priceUsd1 }}</div>
@@ -43,7 +43,7 @@
       <div class="tickers-list__item _alignCenter">
         <div class="tickers-list__itemPair">
           <span class="_currencyTitle">{{ item.ticker }}</span>
-          <span class="_tickerTitle"> /{{ item.curr }}</span>
+          <span class="_tickerTitle"> /{{ item.base }}</span>
         </div>
       </div>
       <div class="tickers-list__item _alignRight">
@@ -86,9 +86,7 @@ export default {
     },
     item: {
       type: Object,
-      default() {
-        return {}
-      }
+      default: () => {}
     },
     volUsd: {
       type: String,
@@ -123,7 +121,6 @@ export default {
 </script>
 <style lang="scss">
   .tickers__favourite {
-    display: inline-block;
     float: left;
     margin-right: 1rem;
     margin-top: 0.1875rem;

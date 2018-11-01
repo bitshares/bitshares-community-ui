@@ -23,7 +23,7 @@
     <MarketsTickersList
       :items="foundItems"
       :expand-mode="expandMode"
-      :current-ticker="currentTicker"
+      :current-base="currentBase"
     />
   </div>
 </template>
@@ -56,13 +56,13 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentTicker: 'markets/getCurrentTicker',
+      currentBase: 'markets/getCurrentBase',
       markets: 'markets/getMarketsList',
       favourites: 'markets/getFavouritesList'
     }),
 
     tickerItems() {
-      return this.currentTicker === 'favourites' ? this.favourites : this.markets[this.currentTicker]
+      return this.currentBase === 'favourites' ? this.favourites : this.markets[this.currentBase]
     },
     foundItems() {
       if (!this.searchValue) return this.tickerItems
@@ -70,10 +70,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions('markets', ['setCurrentTicker']),
+    ...mapActions('markets', ['setCurrentBase']),
 
-    onTickerChange({ ticker }) {
-      this.setCurrentTicker({ ticker })
+    onTickerChange(base) {
+      this.setCurrentBase(base)
     }
   }
 }

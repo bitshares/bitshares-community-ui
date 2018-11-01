@@ -14,7 +14,7 @@
           v-for="(ticker, index) in sortedItems"
           :key="index"
           :item="ticker"
-          :current-ticker="currentTicker"
+          :current-base="currentBase"
           :expand-mode="expandMode"
           :is-favourite="isFavourite(ticker)"
         />
@@ -35,9 +35,9 @@ export default {
     SortableTable
   },
   props: {
-    currentTicker: {
+    currentBase: {
       type: String,
-      default: 'USD'
+      required: true
     },
     items: {
       type: Array,
@@ -77,7 +77,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      favouritesItems: 'markets/getDefaultFavouritesList'
+      isTickerFavourite: 'markets/isTickerFavourite'
     }),
 
     fields() {
@@ -89,8 +89,7 @@ export default {
   },
   methods: {
     isFavourite(item) {
-      if (this.currentTicker === 'favourites') return true
-      return this.favouritesItems[this.currentTicker] && this.favouritesItems[this.currentTicker].includes(item.ticker)
+      return this.isTickerFavourite(item.base, item.ticker)
     }
   }
 }

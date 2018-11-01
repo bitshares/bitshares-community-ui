@@ -1,7 +1,6 @@
 <template>
   <MarketsTickersListItemPrices
     :item="item"
-    :current-ticker="currentTicker"
     :change-value7="changeValue7"
     :change-value24="changeValue24"
     :vol-usd="volUsd"
@@ -13,37 +12,27 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
-import Star from '@/components/Star'
 import MarketsTickersListItemPrices from './MarketsTickersListItemPrices'
 import { getVolumeFormat } from '@/helpers/utils'
 
 export default {
-  components: {
-    Star,
-    MarketsTickersListItemPrices
-  },
+  components: { MarketsTickersListItemPrices },
   props: {
     item: {
       type: Object,
-      default() {
-        return {}
-      }
+      required: true
     },
-    currentTicker: {
+    currentBase: {
       type: String,
-      default: 'USD'
+      required: true
     },
     expandMode: {
       type: Boolean,
-      default() {
-        return false
-      }
+      default: false
     },
     isFavourite: {
       type: Boolean,
-      default() {
-        return false
-      }
+      default: false
     }
   },
   computed: {
@@ -64,11 +53,10 @@ export default {
     ...mapActions('markets', ['toggleFavourite']),
 
     getChangeValue({ price }) {
-      const chr = '%'
-      return (+price >= 0) ? `+${price}${chr}` : `${price}${chr}`
+      return (+price >= 0) ? `+${price}%` : `${price}%`
     },
     changeFavourite({ item }) {
-      this.toggleFavourite({ item })
+      this.toggleFavourite({ base: item.base, quote: item.ticker })
     }
   }
 }
