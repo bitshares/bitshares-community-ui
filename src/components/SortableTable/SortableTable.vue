@@ -82,9 +82,16 @@ export default {
 </script>
 
 <style lang="scss">
+  .sortable-table {
+    height: 100%;
+  }
   .sortable-table__header {
     color: config('colors.text-primary');
     padding-bottom: config('padding.2');
     display: grid;
+  }
+  .sortable-table__body {
+    height: 100%;
+    overflow: auto;
   }
 </style>

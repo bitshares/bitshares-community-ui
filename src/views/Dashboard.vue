@@ -2,15 +2,9 @@
   <div class="dashboard">
     <div class="dashboard">
       <div class="flex flex-col lg:flex-row mb-2">
-        <Card
-          class="lg:w-1/3"
-          title="account">
-          <div slot="header">
-            <AccountHeader />
-          </div>
-          <div slot="body">
-            <Portfolio />
-          </div>
+        <Card class="lg:w-1/3" title="account">
+          <AccountHeader slot="header"/>
+          <Portfolio slot="body"/>
         </Card>
 
         <Card
@@ -39,17 +33,14 @@
                 v-if="showModal"
                 @close="showModal = false"
               >
-                <div slot="body">
-                  <TheMarkets :expand-mode="true"/>
-                </div>
+                <TheMarkets slot="body" :expand-mode="true"/>
               </MarketsModal>
             </div>
           </div>
-          <div slot="body">
-            <TheMarkets
-              :expand-mode="false"
-            />
-          </div>
+          <TheMarkets
+            slot="body"
+            :expand-mode="false"
+          />
         </Card>
 
         <Card

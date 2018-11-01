@@ -1,7 +1,7 @@
 <template>
   <LoadingContainer
     :loading="!historyLoaded"
-    class="portfolio-container">
+    class="portfolio-container h-full">
 
     <div class="portfolio-header">
       <LinkButton
@@ -98,6 +98,7 @@ export default {
 
 .portfolio-table {
   font-family: config("fonts.gotham");
+  height: 100%;
 }
 
 .portfolio-header {
