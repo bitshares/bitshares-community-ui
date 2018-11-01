@@ -28,14 +28,12 @@
 import { mapActions } from 'vuex'
 import MarketsTickersListItem from './MarketsTickersListItem'
 import SortableTable from '@/components/SortableTable'
-import SortableHeaderItem from '@/components/SortableHeaderItem'
 import orderBy from 'lodash/orderBy'
 
 export default {
   components: {
     MarketsTickersListItem,
-    SortableTable,
-    SortableHeaderItem
+    SortableTable
   },
   props: {
     currentTicker: {
@@ -112,16 +110,7 @@ export default {
     margin-top: 0.8rem;
     margin-left: 0.4375rem;
     font-weight: config('fontWeights.semibold');
-    //fix for table view
-    .header-item {
-      position: initial;
-      display: inline;
-    }
-    //fix for table view
-    .header-item__arrows {
-      position: initial;
-      display: inline-block;
-    }
+
     .tickers-list-head {
       display: flex;
       box-sizing: border-box;
