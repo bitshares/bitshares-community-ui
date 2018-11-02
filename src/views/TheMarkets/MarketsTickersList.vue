@@ -14,10 +14,9 @@
           v-for="(ticker, index) in sortedItems"
           :key="index"
           :item="ticker"
-          :current-ticker="currentTicker"
+          :current-base="currentBase"
           :expand-mode="expandMode"
-          :is-favourite="!!favourites[ticker.id]"
-          @change="changeFavourite"
+          :is-favourite="isFavourite(ticker)"
         />
       </template>
     </SortableTable>
@@ -25,7 +24,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import MarketsTickersListItem from './MarketsTickersListItem'
 import SortableTable from '@/components/SortableTable'
 import orderBy from 'lodash/orderBy'
@@ -36,20 +35,14 @@ export default {
     SortableTable
   },
   props: {
-    currentTicker: {
+    currentBase: {
       type: String,
-      default: 'USD'
+      required: true
     },
     items: {
       type: Array,
       default() {
         return () => []
-      }
-    },
-    favourites: {
-      type: Object,
-      default() {
-        return () => {}
       }
     },
     expandMode: {
@@ -83,23 +76,20 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      isTickerFavourite: 'markets/isTickerFavourite'
+    }),
+
     fields() {
       return this.expandMode ? this.marketsField.large : this.marketsField.small
     },
     sortedItems() {
-      if (this.currentTicker === 'favourites') {
-        return orderBy(
-          this.items.filter(item => this.favourites[item.id]), this.sortField.field, this.sortField.type
-        )
-      }
       return orderBy(this.items.slice(0), this.sortField.field, this.sortField.type)
     }
   },
   methods: {
-    ...mapActions('markets', ['toggleFavourite']),
-
-    changeFavourite({ id }) {
-      this.toggleFavourite({ id })
+    isFavourite(item) {
+      return this.isTickerFavourite(item.base, item.ticker)
     }
   }
 }
