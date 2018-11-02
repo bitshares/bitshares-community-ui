@@ -55,9 +55,6 @@
         <Card
           class="lg:w-1/3"
           title="order book">
-          <div slot="header">
-            <OrderBookLastPrice/>
-          </div>
           <div slot="body">
             <OrderBook/>
           </div>
@@ -72,7 +69,6 @@
 import Portfolio from '@/views/Account/Portfolio.vue'
 import AccountHeader from '@/views/Account/AccountHeader.vue'
 import OrderBook from '@/views/OrderBook/OrderBook'
-import OrderBookLastPrice from '@/views/OrderBook/OrderBookLastPrice'
 
 import MarketsModal from '@/components/Modal'
 
@@ -89,8 +85,7 @@ export default {
     TransactionsHistory,
     TheMarkets,
     MarketsModal,
-    OrderBook,
-    OrderBookLastPrice
+    OrderBook
   },
   data() {
     return {

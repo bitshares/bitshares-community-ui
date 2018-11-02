@@ -1,5 +1,6 @@
 <template>
   <div class="order-books">
+    <OrderBookLastPrice/>
     <div class="order-books__layout">
       <OrderBookTable
         :items="orderBook.buying"
@@ -19,10 +20,12 @@
 <script>
 import { mapGetters } from 'vuex'
 import OrderBookTable from './OrderBookTable'
+import OrderBookLastPrice from './OrderBookLastPrice'
 
 export default {
   components: {
-    OrderBookTable
+    OrderBookTable,
+    OrderBookLastPrice
   },
   data() {
     return {
