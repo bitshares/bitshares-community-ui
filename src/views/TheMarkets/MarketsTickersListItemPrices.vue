@@ -5,29 +5,28 @@
       class="tickers-list-row"
     >
       <div class="tickers-list__item">
-        <Star
-          :active="isFavourite"
-          class="tickers__favourite"
-        />
+        <div @click="$emit('change', { item })">
+          <Star
+            :active="isFavourite"
+            class="tickers__favourite"
+          />
+        </div>
         <div class="tickers-list__itemPair">
           <span class="_currencyTitle">{{ item.ticker }}</span>
-          <span class="_tickerTitle"> /{{ item.curr }}</span>
         </div>
-        <div class="tickers-list__itemVolume _ml-21">{{ volUsd }}</div>
-      </div>
-      <div class="tickers-list__item _flex05">
-        <div class="_currencyTitle">{{ item.priceUsd1 }}</div>
-        <div class="tickers-list__itemVolume">${{ item.priceUsd2 }}</div>
+        <div class="_tickerTitle tickers-list__itemVolume"> /{{ item.base }}</div>
       </div>
       <div class="tickers-list__item _alignRight">
-        <div
-          :class="getClassesOfDynamic({ price: item.change1 })"
-          class="_currencyTitle">
-          {{ changeValue7 }}
-        </div>
+        <div class="_currencyTitle">{{ item.priceUsd1 }}</div>
+        <div class="_tickerTitle tickers-list__itemVolume">${{ item.priceUsd2 }}</div>
+      </div>
+      <div class="tickers-list__item _alignRight">
+        <div class="tickers-list__itemVolume">{{ volUsd }}</div>
+      </div>
+      <div class="tickers-list__item _alignCenter">
         <div
           :class="getClassesOfDynamic({ price: item.change2 })"
-          class="tickers-list__itemVolume">
+          class="_currencyTitle">
           {{ changeValue24 }}
         </div>
       </div>
@@ -41,33 +40,33 @@
         :active="isFavourite"
         class="tickers__favourite"
       />
-      <div class="tickers-list__item">
+      <div class="tickers-list__item _alignCenter">
         <div class="tickers-list__itemPair">
           <span class="_currencyTitle">{{ item.ticker }}</span>
-          <span class="_tickerTitle"> /{{ item.curr }}</span>
+          <span class="_tickerTitle"> /{{ item.base }}</span>
         </div>
       </div>
-      <div class="tickers-list__item">
+      <div class="tickers-list__item _alignRight">
         <div class="tickers-list__itemVolume">{{ volUsd }}</div>
       </div>
-      <div class="tickers-list__item _flex05">
+      <div class="tickers-list__item _alignRight">
         <div class="tickers-list__itemVolume">{{ item.priceUsd1 }}</div>
       </div>
-      <div class="tickers-list__item _flex05 _alignRight">
+      <div class="tickers-list__item _alignCenter">
         <div
           :class="getClassesOfDynamic({ price: item.change1 })"
           class="_currencyTitle">
           {{ changeValue7 }}
         </div>
       </div>
-      <div class="tickers-list__item _flex05 _alignRight">
+      <div class="tickers-list__item _alignCenter">
         <div
           :class="getClassesOfDynamic({ price: item.change2 })"
           class="_currencyTitle">
           {{ changeValue24 }}
         </div>
       </div>
-      <div class="tickers-list__item _alignRight">
+      <div class="tickers-list__item">
         <div class="tickers-list__itemVolume">{{ marketCap }}</div>
       </div>
     </div>
@@ -87,9 +86,7 @@ export default {
     },
     item: {
       type: Object,
-      default() {
-        return {}
-      }
+      default: () => {}
     },
     volUsd: {
       type: String,
@@ -123,6 +120,11 @@ export default {
 }
 </script>
 <style lang="scss">
+  .tickers__favourite {
+    float: left;
+    margin-right: 1rem;
+    margin-top: 0.1875rem;
+  }
   .tickers-list__item {
     flex: 1;
     font-size: config('textSizes.xs-sm');
@@ -137,16 +139,22 @@ export default {
   .tickers-list-row {
     display: flex;
     box-sizing: border-box;
-    padding: 0.4375rem;
+    padding: 0.4375rem 0;
     transition: ease-in-out 0.6s ease;
 
     &:hover {
       cursor: pointer;
       background: #131313;
     }
-
+    ._alignRight {
+      text-align: right;
+    }
+    ._alignCenter {
+      text-align: center;
+    }
     ._tickerTitle {
       font-size: config('textSizes.xs');
+      color: config('colors.inactive');
     }
     ._currencyTitle {
       color: config('colors.white');
@@ -165,12 +173,17 @@ export default {
   }
   .ticker-list-row_expanded {
     .tickers-list-row {
+      .tickers__favourite {
+        margin-top: -0.125rem;
+        margin-right: 0.9375rem;
+        position: absolute;
+      }
       .tickers-list__item {
         .tickers-list__itemVolume {
-          font-size: config('textSizes.base')
+          font-size: config('textSizes.xs')
         }
         ._currencyTitle {
-          font-size: config('textSizes.base')
+          font-size: config('textSizes.xs')
         }
         ._drop {
           font-size: config('textSizes.sm');
