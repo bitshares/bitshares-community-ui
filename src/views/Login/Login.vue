@@ -86,9 +86,6 @@
         <div class="footer-link">
           <router-link :to="{ name: 'signup' }">Sign up with new account</router-link>
         </div>
-        <div class="footer-link">
-          <router-link :to="{ name: 'login' }">I accept Terms of Use</router-link>
-        </div>
       </div>
     </div>
   </div>
