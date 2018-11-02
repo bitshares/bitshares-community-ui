@@ -139,7 +139,8 @@ export default {
   .tickers-list-row {
     display: flex;
     box-sizing: border-box;
-    padding: 0.4375rem 0;
+    padding: 0.4375rem;
+    padding-right: 0;
     transition: ease-in-out 0.6s ease;
 
     &:hover {

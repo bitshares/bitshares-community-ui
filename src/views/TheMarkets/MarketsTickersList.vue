@@ -7,6 +7,7 @@
       :items="sortedItems"
       :headers="fields"
       :default-sort="sortField"
+      :header-left-padding="0.437"
       class="tickers-list-header"
     >
       <template slot-scope="{ sortedItems }">
@@ -98,8 +99,10 @@ export default {
 <style lang="scss">
   .tickers-list {
     margin-top: 0.8rem;
-    margin-left: 0.4375rem;
+    // margin-left: 0.4375rem;
     font-weight: config('fontWeights.semibold');
+    height: 100%;
+    overflow: hidden;
 
     .tickers-list-head {
       display: flex;

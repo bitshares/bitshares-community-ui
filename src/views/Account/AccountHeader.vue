@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="historyLoaded"
-    class="portfolio-header"
+    class="account-header"
   >
     <div class="text-weak">
     Balance</div>&nbsp; $ {{ totalFiatValue.toFixed(2) }}
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.portfolio-header {
+.account-header {
   font-family: config("fonts.gotham");
   font-size: config('textSizes.sm');
   display: flex;

@@ -38,7 +38,7 @@ export default {
 .card {
   height: 25rem;
   display: flex;
-
+  overflow: hidden;
   flex-direction: column;
   font-family: config('fonts.gotham-regular');
   background-color: config('colors.card-background');
@@ -84,9 +84,9 @@ export default {
 }
 
 .card-body {
-  @apply p-card-ui pt-3;
+  @apply pt-3;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
 }
 
 </style>
