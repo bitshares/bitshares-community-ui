@@ -98,8 +98,13 @@ export default {
 <style lang="scss">
   .tickers-list {
     margin-top: 0.8rem;
-    margin-left: 0.4375rem;
+    // margin-left: 0.4375rem;
     font-weight: config('fontWeights.semibold');
+    height: 100%;
+    overflow: hidden;
+    .sortable-table__header {
+      padding-left: 0.4375rem;
+    }
 
     .tickers-list-head {
       display: flex;

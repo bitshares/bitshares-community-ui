@@ -11,14 +11,14 @@
           @change="onTickerChange"
         />
       </div>
-      <div class="search-wrapper">
+      <!-- <div class="search-wrapper">
         <div class="tickers-search">
           <SearchInput
-            :hint="'Search'"
+            hint="Search"
             v-model="searchValue"
           />
         </div>
-      </div>
+      </div> -->
     </div>
     <MarketsTickersList
       :items="foundItems"
@@ -79,10 +79,18 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+  .markets {
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
   .markets__header {
     margin-top: 0.625rem;
     display: flex;
     flex-direction: row;
+    flex-shrink: 0;
     justify-content: space-between;
     background: #0A0A0A;
 
