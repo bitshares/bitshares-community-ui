@@ -96,16 +96,15 @@ export default {
 .portfolio-table {
   font-family: config("fonts.gotham");
   height: 100%;
+  overflow: hidden;
   .sortable-table__header {
-    padding: 0 1rem 0 0.6rem;
-  }
-  .sortable-table__body {
     padding: 0 1rem 0 0.6rem;
   }
 }
 
 .portfolio-header {
   display: flex;
+  flex-shrink: 0;
   justify-content: space-between;
   margin-bottom: 1.25rem;
   padding: 0 1rem 0 0.6rem;

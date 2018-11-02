@@ -84,6 +84,8 @@ export default {
 <style lang="scss">
   .sortable-table {
     height: 100%;
+    display: flex;
+    flex-direction: column;
   }
   .sortable-table__header {
     color: config('colors.text-primary');

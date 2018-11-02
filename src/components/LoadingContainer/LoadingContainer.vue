@@ -55,5 +55,7 @@ export default ({
 }
 .loading-container__content {
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 </style>
