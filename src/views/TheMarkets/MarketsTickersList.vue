@@ -7,6 +7,7 @@
       :items="sortedItems"
       :headers="fields"
       :default-sort="sortField"
+      :header-left-padding="0.437"
       class="tickers-list-header"
     >
       <template slot-scope="{ sortedItems }">
@@ -102,9 +103,6 @@ export default {
     font-weight: config('fontWeights.semibold');
     height: 100%;
     overflow: hidden;
-    .sortable-table__header {
-      padding-left: 0.4375rem;
-    }
 
     .tickers-list-head {
       display: flex;

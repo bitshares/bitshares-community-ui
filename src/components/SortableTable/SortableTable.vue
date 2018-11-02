@@ -14,11 +14,11 @@
         @click.native="toggleSort(header.field)"
       />
     </div>
-    <ScrollingContainer :shadower-height="15">
+    <!-- <ScrollingContainer :shadower-height="15"> -->
       <div class="sortable-table__body">
         <slot :sorted-items="sortedItems"/>
       </div>
-    </ScrollingContainer>
+    <!-- </ScrollingContainer> -->
   </div>
 </template>
 
@@ -33,6 +33,16 @@ export default {
     headers: {
       type: Array,
       required: true
+    },
+    headerLeftPadding: {
+      type: Number,
+      required: false,
+      default: 0
+    },
+    headerRightPadding: {
+      type: Number,
+      required: false,
+      default: 0
     },
     defaultSort: {
       type: Object,
@@ -62,7 +72,9 @@ export default {
     },
     headerStyle() {
       return {
-        'grid-template-columns': `repeat(${this.headers.length}, 1fr)`
+        'grid-template-columns': `repeat(${this.headers.length}, 1fr)`,
+        'padding-left': `${this.headerLeftPadding}rem`,
+        'padding-right': `${this.headerRightPadding}rem`
       }
     }
   },

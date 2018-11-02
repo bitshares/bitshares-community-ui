@@ -18,6 +18,8 @@
         :items="filteredItems"
         :headers="tableHeaders"
         :default-sort="defaultSort"
+        :header-left-padding="0.6"
+        :header-right-padding="1"
         class="portfolio-table__header"
       >
         <template slot-scope="{ sortedItems }">
@@ -97,9 +99,6 @@ export default {
   font-family: config("fonts.gotham");
   height: 100%;
   overflow: hidden;
-  .sortable-table__header {
-    padding: 0 1rem 0 0.6rem;
-  }
 }
 
 .portfolio-header {
