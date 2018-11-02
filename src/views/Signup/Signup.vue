@@ -38,6 +38,7 @@
             class="mb-2"
             @icon-click="pastePassword"
           />
+          <div class="text-xs px-0 pb-1 text-text-error">This password can't be recovered, write it on paper</div>
         </div>
         <div
           slot="private key"

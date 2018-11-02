@@ -17,9 +17,8 @@ export default {
   },
   confirmPassword: {
     title: 'confirm password',
-    tip: 'This password can\'t be recovered, write it on paper',
     validation: {
-      sameAsPassword: 'Passwords do not match'
+      sameAsPassword: 'Passwords do not match \n '
     }
   },
   brainkey: {
