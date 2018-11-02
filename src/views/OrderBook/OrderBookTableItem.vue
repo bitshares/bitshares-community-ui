@@ -11,6 +11,7 @@
         'order-book__tableItem--buy': type === 'buy',
         'order-book__tableItem--sell': type === 'sell'
       }"
+      :style="styleBackground"
       class="order-book__tableItem"
     >
       {{ item.price }}
@@ -33,6 +34,29 @@ export default {
     type: {
       type: String,
       default: 'buy'
+    },
+    maxSum: {
+      type: Number,
+      default: 0
+    }
+  },
+  computed: {
+    gradientDirection() {
+      return this.type === 'sell' ? 'to right' : 'to left'
+    },
+    gradientColor() {
+      return this.type === 'sell' ? '30, 3, 2, 1' : '13, 23, 2, 1'
+    },
+    styleBackground() {
+      const percent = Math.round(100 / this.maxSum * this.item.sum)
+      return {
+        'background': `
+          linear-gradient(${this.gradientDirection},
+          rgba(${this.gradientColor}) ${percent}%,
+          rgba(0,0,0,1) ${percent}%,
+          rgba(0,0,0,1) ${percent}%
+        )`
+      }
     }
   }
 }
@@ -51,14 +75,14 @@ export default {
     flex: 1;
 
     &--buy {
-      color: green;
+      color: config('colors.buy');
       text-align: right;
-      margin-right: 8px;
+      //margin-right: 8px;
     }
     &--sell {
-      color: red;
+      color: config('colors.sell');
       text-align: left;
-      margin-left: 8px;
+      //margin-left: 8px;
     }
   }
 </style>

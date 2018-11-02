@@ -5,12 +5,14 @@
       <OrderBookTable
         :items="orderBook.buying"
         :table-headers="tableHeaders.buy"
+        :max-sum="getMaxSum(orderBook.buying)"
         title="Byuing"
         align="left"
       />
       <OrderBookTable
         :items="orderBook.selling"
         :table-headers="tableHeaders.sell"
+        :max-sum="getMaxSum(orderBook.selling)"
         title="Selling"
         align="right"
       />
@@ -19,6 +21,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import orderBy from 'lodash/orderBy'
 import OrderBookTable from './OrderBookTable'
 import OrderBookLastPrice from './OrderBookLastPrice'
 
@@ -45,6 +48,11 @@ export default {
     ...mapGetters({
       orderBook: 'books/getOrderBook'
     })
+  },
+  methods: {
+    getMaxSum(items) {
+      return orderBy(items, 'sum', 'desc')[0].sum
+    }
   }
 }
 </script>

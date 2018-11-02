@@ -19,6 +19,7 @@
           :item="item"
           :align="align"
           :type="tableType"
+          :max-sum="maxSum"
         />
       </template>
     </SortableTable>
@@ -47,6 +48,10 @@ export default {
       default() {
         return []
       }
+    },
+    maxSum: {
+      type: Number,
+      default: 0
     },
     tableHeaders: {
       type: Array,
