@@ -27,7 +27,7 @@ export default {
     tip: 'Enter 16 words backed up when account was created',
     validation: {
       required: 'Enter backup phrase',
-      validator: 'Must contain 16 words'
+      brainkeyValidator: 'Must contain 16 words'
     }
   },
   pin: {

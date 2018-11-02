@@ -23,7 +23,7 @@
             input-name="password"
             type="password"
             class="mb-2"
-          />x
+          />
 
         </div>
         <div
@@ -44,7 +44,7 @@
             @remove="removeFile"
           />
 
-          <template v-if="$v.brainkey.validator">
+          <template v-if="$v.brainkey.brainkeyValidator">
             <VInput
               v-model.trim="pin"
               :errors="$v.pin"
@@ -134,7 +134,7 @@ export default {
               if (this.file) return true
               return required(value)
             },
-            validator: (value) => (value.split(' ').length - 1 >= 15)
+            brainkeyValidator: (value) => (value.split(' ').length - 1 >= 15)
           },
           pin: { required, minLength: minLength(6) },
           confirmPin: { sameAsPin: sameAs('pin') }
@@ -157,7 +157,7 @@ export default {
   },
   computed: {
     loginDisabled() {
-      return (this.$v.$dirty && this.$v.$invalid) || (!this.file && !this.$v.brainkey.validator && !this.password)
+      return (this.$v.$dirty && this.$v.$invalid) || (!this.file && !this.$v.brainkey.brainkeyValidator && !this.password)
     }
   },
   methods: {
@@ -213,12 +213,12 @@ export default {
       this.file = null
     },
     onBrainkeyInputFocus() {
-      if (!this.$v.brainkey.validator && !this.file) {
+      if (!this.$v.brainkey.brainkeyValidator && !this.file) {
         this.showFileField = false
       }
     },
     onBrainkeyInputBlur() {
-      if (!this.$v.brainkey.validator) {
+      if (!this.$v.brainkey.brainkeyValidator) {
         this.showFileField = true
       }
     }
