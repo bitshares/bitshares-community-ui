@@ -1,11 +1,14 @@
 <template>
   <div
     :class="{
+      'order-book__tableRow--buy': type === 'buy',
       'order-book__tableRow--sell': type === 'sell'
     }"
     class="order-book__tableRow"
   >
-    <div class="order-book__tableItem">{{ item.sum }}</div>
+    <div class="order-book__tableItem">
+      {{ item.sum }}
+    </div>
     <div
       :class="{
         'order-book__tableItem--buy': type === 'buy',
@@ -53,7 +56,6 @@ export default {
         'background': `
           linear-gradient(${this.gradientDirection},
           rgba(${this.gradientColor}) ${percent}%,
-          rgba(0,0,0,1) ${percent}%,
           rgba(0,0,0,1) ${percent}%
         )`
       }
@@ -64,25 +66,51 @@ export default {
 <style lang="scss">
   .order-book__tableRow {
     display: flex;
-    margin-bottom: 10px;
-
+    height: 26px;
+    line-height: 26px;
+    &--buy {
+      text-align: left;
+      flex-direction: row;
+      &:hover {
+        background: config('colors.buy');
+        .order-book__tableItem {
+          color: config('colors.button-text');
+          font-weight: config('fontWeights.semibold');
+          &--buy {
+            background: linear-gradient(to left, config('colors.buy') 100%, config('colors.card-background') 0%) !important;
+          }
+        }
+      }
+    }
     &--sell {
       text-align: right;
       flex-direction: row-reverse;
+      &:hover {
+        background: config('colors.sell');
+        .order-book__tableItem {
+          color: config('colors.button-text');
+          font-weight: config('fontWeights.semibold');
+          &--sell {
+            background: linear-gradient(to right, config('colors.sell') 100%, config('colors.card-background') 0%) !important;
+          }
+        }
+      }
     }
   }
   .order-book__tableItem {
+    cursor: pointer;
     flex: 1;
-
     &--buy {
       color: config('colors.buy');
       text-align: right;
-      //margin-right: 8px;
+      margin-right: 0.0325rem;
+      padding-right: 0.625rem;
     }
     &--sell {
       color: config('colors.sell');
       text-align: left;
-      //margin-left: 8px;
+      margin-left: 0.0325rem;
+      padding-left: 0.625rem;
     }
   }
 </style>

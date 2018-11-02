@@ -74,7 +74,6 @@ export default {
   .order-book__table {
     flex: 1;
     font-family: config('fonts.gotham');
-
     &--sell {
       .order-book__column-title {
         text-align: right;

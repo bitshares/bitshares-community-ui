@@ -25,6 +25,7 @@ export default {
     position: absolute;
     width: 150px;//fixed for centred
     left: calc(50% - 75px);
+    background: config('colors.card-background');
   }
   .order-book__priceTitle {
     color: config('colors.button-text-disabled');
