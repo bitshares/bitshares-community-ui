@@ -213,14 +213,10 @@ export default {
       this.file = null
     },
     onBrainkeyInputFocus() {
-      if (!this.$v.brainkey.brainkeyValidator && !this.file) {
-        this.showFileField = false
-      }
+      this.showFileField = false
     },
     onBrainkeyInputBlur() {
-      if (!this.$v.brainkey.brainkeyValidator) {
-        this.showFileField = true
-      }
+      this.showFileField = true
     }
   }
 }
