@@ -14,20 +14,21 @@
         @click.native="toggleSort(header.field)"
       />
     </div>
-
-    <div class="sortable-table__body">
-      <slot :sorted-items="sortedItems"/>
-    </div>
-
+    <ScrollingContainer :shadower-height="15">
+      <div class="sortable-table__body">
+        <slot :sorted-items="sortedItems"/>
+      </div>
+    </ScrollingContainer>
   </div>
 </template>
 
 <script>
 import SortableHeaderItem from '@/components/SortableHeaderItem'
+import ScrollingContainer from '@/components/ScrollingContainer'
 import orderBy from 'lodash/orderBy'
 
 export default {
-  components: { SortableHeaderItem },
+  components: { SortableHeaderItem, ScrollingContainer },
   props: {
     headers: {
       type: Array,
