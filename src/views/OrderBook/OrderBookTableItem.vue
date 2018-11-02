@@ -6,9 +6,6 @@
     }"
     class="order-book__tableRow"
   >
-    <div class="order-book__tableItem">
-      {{ item.sum }}
-    </div>
     <div
       :class="{
         'order-book__tableItem--buy': type === 'buy',
@@ -17,6 +14,9 @@
       :style="styleBackground"
       class="order-book__tableItem"
     >
+      <span class="order-book__itemSum">
+        {{ item.sum }}
+      </span>
       {{ item.price }}
     </div>
   </div>
@@ -68,6 +68,17 @@ export default {
     display: flex;
     height: 26px;
     line-height: 26px;
+
+    .order-book__tableItem {
+      .order-book__itemSum {
+        color: config('colors.text-primary');
+      }
+      &:hover {
+        .order-book__itemSum {
+          color: config('colors.button-text');
+        }
+      }
+    }
     &--buy {
       text-align: left;
       flex-direction: row;
@@ -99,18 +110,25 @@ export default {
   }
   .order-book__tableItem {
     cursor: pointer;
-    flex: 1;
     &--buy {
+      flex: 1;
       color: config('colors.buy');
       text-align: right;
       margin-right: 0.0325rem;
       padding-right: 0.625rem;
+      .order-book__itemSum {
+        float: left;
+      }
     }
     &--sell {
+      flex: 1;
       color: config('colors.sell');
       text-align: left;
       margin-left: 0.0325rem;
       padding-left: 0.625rem;
+      .order-book__itemSum {
+        float: right;
+      }
     }
   }
 </style>
