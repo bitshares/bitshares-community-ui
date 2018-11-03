@@ -122,7 +122,7 @@ export default {
 <style lang="scss">
   .tickers__favourite {
     position: absolute;
-    left: 0px;
+    left: -1px;
   }
   .tickers-list__item {
     flex: 1;
@@ -145,13 +145,13 @@ export default {
     opacity: .8;
   }
   .tickers-list-row {
-    display: flex;
-    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     padding: 0.4375rem 1rem 0.4375rem 0.6rem;
-    transition: ease-in-out 0.6s ease;
+    transition: background 0.2s ease;
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
       background: #131313;
     }
     ._alignRight {

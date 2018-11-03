@@ -13,7 +13,7 @@
       <div
         v-for="(tab, index) in tabs"
         :key="index"
-        :style="{ width: tabWidth + '%' }"
+        :style="{ width: currencyMode ? 'auto' : tabWidth + '%' }"
         :class="{
           'tab--active': activeTabIndex === index,
           'tab--currency': currencyMode
