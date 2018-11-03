@@ -80,6 +80,7 @@ export default {
       }
     }
     &--buy {
+      padding-left: 5px;
       text-align: left;
       flex-direction: row;
       &:hover {
@@ -94,6 +95,7 @@ export default {
       }
     }
     &--sell {
+      padding-right: 5px;
       text-align: right;
       flex-direction: row-reverse;
       &:hover {

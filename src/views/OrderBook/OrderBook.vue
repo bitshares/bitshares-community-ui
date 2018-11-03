@@ -35,11 +35,11 @@ export default {
       tableHeaders: {
         buy: [
           { title: 'Sum, BTC', field: 'sum', align: 'left' },
-          { title: '', field: 'price', align: this.align }
+          { title: '', field: 'price' }
         ],
         sell: [
           { title: '', field: 'price', align: 'right' },
-          { title: 'Sum, BTC', field: 'sum', align: this.align }
+          { title: 'Sum, BTC', field: 'sum' }
         ]
       }
     }
@@ -57,6 +57,9 @@ export default {
 }
 </script>
 <style lang="scss">
+  .order-books {
+    position: relative;
+  }
   .order-books__layout {
     display: flex;
     justify-content: center;
