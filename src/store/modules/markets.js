@@ -300,7 +300,8 @@ const actions = {
       favourites: newFavourites
     })
   },
-  setCurrentBase({ commit }, base) {
+  setCurrentBase({ commit, dispatch }, base) {
+    dispatch('market/fetchMarketStats', base, { root: true })
     commit(types.UPDATE_CURRENT_TICKER, base)
   }
 }

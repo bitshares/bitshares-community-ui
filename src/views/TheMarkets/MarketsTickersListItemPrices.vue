@@ -17,7 +17,7 @@
         <div class="_tickerTitle tickers-list__itemVolume"> /{{ item.base }}</div>
       </div>
       <div class="tickers-list__item _alignRight">
-        <div class="_currencyTitle">{{ item.price.toFixed(4) }}</div>
+        <div class="_currencyTitle">{{ item.price.toFixed(0) }}</div>
         <div class="_tickerTitle tickers-list__itemVolume">${{ item.usdPrice.toFixed(2) }}</div>
       </div>
       <div class="tickers-list__item _alignRight">
@@ -127,9 +127,15 @@ export default {
   }
   .tickers-list__item {
     flex: 1;
+    overflow: hidden;
     font-size: config('textSizes.xs-sm');
     color: config('colors.tab-header');
     font-family: config('fonts.gotham');
+  }
+  .tickers-list__itemPair {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   .tickers-list__itemVolume {
     font-size: config('textSizes.xs');

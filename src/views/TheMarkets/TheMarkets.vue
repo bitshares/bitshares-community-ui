@@ -6,7 +6,7 @@
     <div class="markets__header">
       <div class="tickers-sidebar">
         <Tabs
-          :tabs="['USD', 'BTC', 'ETH', 'CNY', 'BTS']"
+          :tabs="['USD', 'OPEN.BTC', 'OPEN.ETH', 'CNY', 'BTS']"
           :currency-mode="true"
           @change="onTickerChange"
         />
