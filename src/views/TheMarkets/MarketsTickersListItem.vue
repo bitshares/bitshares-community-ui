@@ -13,7 +13,7 @@
 <script>
 import { mapActions } from 'vuex'
 import MarketsTickersListItemPrices from './MarketsTickersListItemPrices'
-import { getVolumeFormat } from '@/helpers/utils'
+import { amountValueShortener } from '@/helpers/utils'
 
 export default {
   components: { MarketsTickersListItemPrices },
@@ -37,10 +37,10 @@ export default {
   },
   computed: {
     volUsd() {
-      return getVolumeFormat(this.item.usdVolume)
+      return amountValueShortener(this.item.usdVolume.toFixed(0))
     },
     marketCap() {
-      // return getVolumeFormat(this.item.marketcap)
+      // return amountValueShortener(this.item.marketcap)
       return 0
     },
     changeValue7() {
