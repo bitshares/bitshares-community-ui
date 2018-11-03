@@ -65,7 +65,7 @@ export default {
   },
   computed: {
     tableType() {
-      return this.title === 'Byuing' ? 'buy' : 'sell'
+      return this.title === 'Buying' ? 'buy' : 'sell'
     }
   }
 }

@@ -6,7 +6,7 @@
         :items="orderBook.buying"
         :table-headers="tableHeaders.buy"
         :max-sum="getMaxSum(orderBook.buying)"
-        title="Byuing"
+        title="Buying"
         align="left"
       />
       <OrderBookTable
