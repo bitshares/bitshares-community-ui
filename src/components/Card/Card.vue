@@ -11,11 +11,9 @@
         class="header"
         name="header"/>
     </div>
-    <!-- <ScrollingContainer :shadower-height="20"> -->
     <div class="card-body">
       <slot name="body" />
     </div>
-    <!-- </ScrollingContainer> -->
   </div>
 </template>
 

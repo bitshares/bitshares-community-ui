@@ -152,6 +152,8 @@ export default {
     cursor: pointer;
 
     &:hover {
+      position: relative;
+      z-index: 2;
       background: #131313;
     }
     ._alignRight {
