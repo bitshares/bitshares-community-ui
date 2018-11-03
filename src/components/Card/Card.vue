@@ -9,7 +9,7 @@
       <slot name="modal"/>
       <slot
         class="header"
-        name="header" />
+        name="header"/>
     </div>
     <!-- <ScrollingContainer :shadower-height="20"> -->
     <div class="card-body">
