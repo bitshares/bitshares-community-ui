@@ -1,3 +1,6 @@
+import API from 'vuex-bitshares/src/services/api.js'
+console.log(API)
+
 const initialState = {
   theme: 'dark'
 }
@@ -11,6 +14,9 @@ const mutations = {
 const actions = {
   init(store) {
     store.dispatch('connection/initConnection', null, { root: true })
+  },
+  async loadMarketsData({ state, rootGetters, dispatch }) {
+    dispatch('market/fetchMarketStats', 'BTS', { root: true })
   },
   initUserData: async({ state, rootGetters, dispatch }) => {
     const userId = rootGetters['acc/getAccountUserId']
@@ -38,10 +44,12 @@ const actions = {
       { root: true }
     )
 
-    const combinedAssetsIds = Object.keys(balances)
+    dispatch('loadMarketsData')
+
+    const balancesIds = Object.keys(balances)
     dispatch('history/fetchAll', {
       baseId: '1.3.0',
-      assetsIds: combinedAssetsIds,
+      assetsIds: balancesIds,
       daysArr: [1, 7]
     }, { root: true })
   },

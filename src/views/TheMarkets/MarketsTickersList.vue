@@ -61,9 +61,9 @@ export default {
       marketsField: {
         small: [
           { title: 'Pair', field: 'ticker', align: 'center' },
-          { title: 'Price, USD', field: 'priceUsd1', align: 'right' },
-          { title: 'Vol, USD', field: 'volUsd', align: 'right' },
-          { title: '24h', field: 'change2', align: 'center' }
+          { title: 'Price, USD', field: 'usdPrice', align: 'right' },
+          { title: 'Vol, USD', field: 'usdVolume', align: 'right' },
+          { title: '24h', field: 'change24h', align: 'center' }
         ],
         large: [
           { title: 'Name', field: 'ticker', align: 'center' },

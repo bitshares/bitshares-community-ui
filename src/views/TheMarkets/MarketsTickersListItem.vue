@@ -37,22 +37,24 @@ export default {
   },
   computed: {
     volUsd() {
-      return getVolumeFormat(this.item.volUsd)
+      return getVolumeFormat(this.item.usdVolume)
     },
     marketCap() {
-      return getVolumeFormat(this.item.marketcap)
+      // return getVolumeFormat(this.item.marketcap)
+      return 0
     },
     changeValue7() {
-      return this.getChangeValue({ price: this.item.change1 })
+      return this.getChangeValue({ price: this.item.change7d || 0 })
     },
     changeValue24() {
-      return this.getChangeValue({ price: this.item.change2 })
+      return this.getChangeValue({ price: this.item.change24h })
     }
   },
   methods: {
     ...mapActions('markets', ['toggleFavourite']),
 
     getChangeValue({ price }) {
+      if (!price) return '0%'
       return (+price >= 0) ? `+${price}%` : `${price}%`
     },
     changeFavourite({ item }) {

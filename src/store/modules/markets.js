@@ -4,7 +4,7 @@ const types = {
 }
 
 const state = {
-  currentBase: 'USD',
+  currentBase: 'BTS',
   favourites: {
     USD: ['ZIL', 'ONT'],
     ETH: ['POE']
@@ -240,6 +240,14 @@ const state = {
 }
 
 const getters = {
+  getCurrentList: (state, getters, rootState, rootGetters) => {
+    const stats = rootGetters['market/getMarketStats']
+    const base = getters.getCurrentBase
+    console.log(stats, base)
+    if (!stats || !stats[base]) return []
+    const baseStats = stats[base]
+    return Object.keys(baseStats).filter(ticker => !!baseStats[ticker]).map(ticker => baseStats[ticker])
+  },
   getMarketsList(state) {
     const markets = {}
 

@@ -58,11 +58,13 @@ export default {
     ...mapGetters({
       currentBase: 'markets/getCurrentBase',
       markets: 'markets/getMarketsList',
-      favourites: 'markets/getFavouritesList'
+      favourites: 'markets/getFavouritesList',
+      list: 'markets/getCurrentList'
     }),
 
     tickerItems() {
-      return this.currentBase === 'favourites' ? this.favourites : this.markets[this.currentBase]
+      return this.list
+      // return this.currentBase === 'favourites' ? this.favourites : this.markets[this.currentBase]
     },
     foundItems() {
       if (!this.searchValue) return this.tickerItems
