@@ -4,9 +4,9 @@
     class="tickers-list"
   >
     <SortableTable
-      :items="sortedItems"
+      :items="items"
       :headers="fields"
-      :default-sort="sortField"
+      :default-sort="defaultSort"
       :header-left-padding="0.6"
       :header-right-padding="1"
       class="tickers-list-header"
@@ -29,7 +29,6 @@
 import { mapGetters } from 'vuex'
 import MarketsTickersListItem from './MarketsTickersListItem'
 import SortableTable from '@/components/SortableTable'
-import orderBy from 'lodash/orderBy'
 
 export default {
   components: {
@@ -43,9 +42,7 @@ export default {
     },
     items: {
       type: Array,
-      default() {
-        return () => []
-      }
+      required: true
     },
     expandMode: {
       type: Boolean,
@@ -54,14 +51,13 @@ export default {
   },
   data() {
     return {
-      sortField: {
-        field: 'ticker',
-        type: 'asc'
+      defaultSort: {
+        field: 'usdVolume',
+        type: 'desc'
       },
-      activeFieldIndex: 0,
       marketsField: {
         small: [
-          { title: 'Pair', field: 'ticker', align: 'left' },
+          { title: 'Pair', field: 'ticker', align: 'left', paddingLeft: 1.5 },
           { title: 'Price, USD', field: 'usdPrice', align: 'right' },
           { title: 'Vol, USD', field: 'usdVolume', align: 'right' },
           { title: '24h', field: 'change24h', align: 'right' }
@@ -84,9 +80,6 @@ export default {
 
     fields() {
       return this.expandMode ? this.marketsField.large : this.marketsField.small
-    },
-    sortedItems() {
-      return orderBy(this.items.slice(0), this.sortField.field, this.sortField.type)
     }
   },
   methods: {
@@ -100,7 +93,6 @@ export default {
 <style lang="scss">
   .tickers-list {
     margin-top: 0.8rem;
-    // margin-left: 0.4375rem;
     font-weight: config('fontWeights.semibold');
     height: 100%;
     overflow: hidden;

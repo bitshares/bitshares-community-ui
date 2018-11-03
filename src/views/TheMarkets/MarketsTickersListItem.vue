@@ -44,7 +44,7 @@ export default {
       return 0
     },
     changeValue7() {
-      return this.getChangeValue({ price: this.item.change7d || 0 })
+      return this.getChangeValue({ price: this.item.change7d })
     },
     changeValue24() {
       return this.getChangeValue({ price: this.item.change24h })

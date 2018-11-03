@@ -5,19 +5,19 @@
       class="tickers-list-row"
     >
       <div class="tickers-list__item">
-        <!-- <div @click="$emit('change', { item })">
+        <div @click="$emit('change', { item })">
           <Star
             :active="isFavourite"
             class="tickers__favourite"
           />
-        </div> -->
+        </div>
         <div class="tickers-list__itemPair">
           <span class="_currencyTitle">{{ item.ticker }}</span>
         </div>
         <div class="_tickerTitle tickers-list__itemVolume"> /{{ item.base }}</div>
       </div>
       <div class="tickers-list__item _alignRight">
-        <div class="_currencyTitle">{{ item.price }}</div>
+        <div class="_currencyTitle">{{ +item.price.toFixed(4) }}</div>
         <div class="_tickerTitle tickers-list__itemVolume">${{ item.usdPrice.toFixed(2) }}</div>
       </div>
       <div class="tickers-list__item _alignRight">
@@ -54,16 +54,16 @@
       </div>
       <div class="tickers-list__item _alignCenter">
         <div
-          :class="getClassesOfDynamic({ price: item.change7d })"
+          :class="getClassesOfDynamic({ price: item.change24h })"
           class="_currencyTitle">
-          {{ changeValue7 }}
+          {{ changeValue24 }}
         </div>
       </div>
       <div class="tickers-list__item _alignCenter">
         <div
-          :class="getClassesOfDynamic({ price: item.change24h })"
+          :class="getClassesOfDynamic({ price: item.change7d })"
           class="_currencyTitle">
-          {{ changeValue24 }}
+          {{ changeValue7 }}
         </div>
       </div>
       <div class="tickers-list__item">
@@ -121,23 +121,25 @@ export default {
 </script>
 <style lang="scss">
   .tickers__favourite {
-    float: left;
-    margin-right: 1rem;
-    margin-top: 0.1875rem;
+    position: absolute;
+    left: 0px;
   }
   .tickers-list__item {
     flex: 1;
-    overflow: hidden;
     font-size: config('textSizes.xs-sm');
     color: config('colors.tab-header');
     font-family: config('fonts.gotham');
-  }
-  .tickers-list__itemPair {
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    position: relative;
     overflow: hidden;
   }
+  .tickers-list__itemPair {
+    padding-left: 1.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   .tickers-list__itemVolume {
+    padding-left: 1.5rem;
     font-size: config('textSizes.xs');
     color: config('colors.white');
     opacity: .8;
@@ -164,6 +166,8 @@ export default {
     }
     ._currencyTitle {
       color: config('colors.white');
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     ._increase {
       color: config('colors.increase');

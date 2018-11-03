@@ -30,7 +30,6 @@
 <script>
 import Tabs from '@/components/Tabs'
 import SearchInput from '@/components/SearchInput/'
-import TheMarkets from '@/views/TheMarkets'
 import MarketsTickersList from './MarketsTickersList'
 
 import { mapGetters, mapActions } from 'vuex'
@@ -40,8 +39,7 @@ export default {
   components: {
     Tabs,
     SearchInput,
-    MarketsTickersList,
-    TheMarkets
+    MarketsTickersList
   },
   props: {
     expandMode: {
@@ -61,8 +59,14 @@ export default {
       favourites: 'markets/getFavouritesList',
       list: 'markets/getCurrentList'
     }),
+    favouritesMode() {
+      return this.currentBase === 'favourites'
+    },
+    itemsList() {
+      return this.favouritesMode ? this.favourites : this.list
+    },
     filteredItems() {
-      return this.list.filter(item => item.ticker.toLowerCase().includes(this.searchValue.toLowerCase()))
+      return this.itemsList.filter(item => item.ticker.toLowerCase().includes(this.searchValue.toLowerCase()))
     }
   },
   methods: {

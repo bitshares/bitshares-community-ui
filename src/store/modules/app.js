@@ -15,9 +15,6 @@ const actions = {
   init(store) {
     store.dispatch('connection/initConnection', null, { root: true })
   },
-  async loadMarketsData({ state, rootGetters, dispatch }) {
-    dispatch('market/fetchMarketStats', 'BTS', { root: true })
-  },
   initUserData: async({ state, rootGetters, dispatch }) => {
     const userId = rootGetters['acc/getAccountUserId']
     await Promise.all([
@@ -30,6 +27,7 @@ const actions = {
         { root: true }
       )
     ])
+    dispatch('market/fetchMarketStats', 'USD', { root: true })
     const balances = { ...rootGetters['acc/getUserBalances'] }
     const defaultAssetsIds = rootGetters['assets/getDefaultAssetsIds']
     defaultAssetsIds.forEach(id => {
@@ -43,8 +41,6 @@ const actions = {
       },
       { root: true }
     )
-
-    dispatch('loadMarketsData')
 
     const balancesIds = Object.keys(balances)
     dispatch('history/fetchAll', {

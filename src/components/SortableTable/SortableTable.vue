@@ -11,6 +11,7 @@
         :title="header.title"
         :sort="sort.field === header.field && sort.type || ''"
         :align="header.align"
+        :padding-left="header.paddingLeft"
         @click.native="toggleSort(header.field)"
       />
     </div>
