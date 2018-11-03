@@ -47,7 +47,6 @@
       </div>
 
       <!-- <div class="flex flex-col lg:flex-row mb-2">
-  
 
         <Card
           class="lg:w-2/3"
