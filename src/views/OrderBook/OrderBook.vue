@@ -5,14 +5,14 @@
       <OrderBookTable
         :items="orderBook.buying"
         :table-headers="tableHeaders.buy"
-        :max-sum="getMaxSum(orderBook.buying)"
+        :max-sum="maxSum"
         title="Buying"
         align="left"
       />
       <OrderBookTable
         :items="orderBook.selling"
         :table-headers="tableHeaders.sell"
-        :max-sum="getMaxSum(orderBook.selling)"
+        :max-sum="maxSum"
         title="Selling"
         align="right"
       />
@@ -47,11 +47,12 @@ export default {
   computed: {
     ...mapGetters({
       orderBook: 'books/getOrderBook'
-    })
-  },
-  methods: {
-    getMaxSum(items) {
-      return orderBy(items, 'sum', 'desc')[0].sum
+    }),
+    maxSum() {
+      const maxFromBuy = orderBy(this.orderBook.buying, 'sum', 'desc')[0].sum
+      const maxFromSell = orderBy(this.orderBook.selling, 'sum', 'desc')[0].sum
+
+      return maxFromBuy > maxFromSell ? maxFromBuy : maxFromSell
     }
   }
 }
