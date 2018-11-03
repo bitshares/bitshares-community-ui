@@ -16,9 +16,9 @@
       />
     </div>
     <ScrollingContainer :shadower-height="15">
-    <div class="sortable-table__body">
-      <slot :sorted-items="sortedItems"/>
-    </div>
+      <div class="sortable-table__body">
+        <slot :sorted-items="sortedItems"/>
+      </div>
     </ScrollingContainer>
   </div>
 </template>
