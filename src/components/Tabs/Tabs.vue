@@ -3,13 +3,13 @@
     <div
       :class="{'tab-hader--centered': centered}"
       class="tabs-header">
-      <div @click="handleTabClick('favourites')">
+      <!-- <div @click="handleTabClick('favourites')">
         <Star
           v-if="currencyMode"
           :active="activeFavourite"
           class="tabs__favourite"
         />
-      </div>
+      </div> -->
       <div
         v-for="(tab, index) in tabs"
         :key="index"

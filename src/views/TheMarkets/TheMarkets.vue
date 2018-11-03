@@ -6,9 +6,9 @@
     <div class="markets__header">
       <div class="tickers-sidebar">
         <Tabs
-          :tabs="['USD', 'OPEN.BTC', 'OPEN.ETH', 'CNY', 'BTS']"
+          :tabs="['USD', 'OPEN.BTC', 'CNY', 'BTS']"
           :currency-mode="true"
-          @change="onTickerChange"
+          @change="handleBaseChange"
         />
       </div>
       <!-- <div class="search-wrapper">
@@ -21,7 +21,7 @@
       </div> -->
     </div>
     <MarketsTickersList
-      :items="foundItems"
+      :items="filteredItems"
       :expand-mode="expandMode"
       :current-base="currentBase"
     />
@@ -61,20 +61,14 @@ export default {
       favourites: 'markets/getFavouritesList',
       list: 'markets/getCurrentList'
     }),
-
-    tickerItems() {
-      return this.list
-      // return this.currentBase === 'favourites' ? this.favourites : this.markets[this.currentBase]
-    },
-    foundItems() {
-      if (!this.searchValue) return this.tickerItems
-      return this.tickerItems.filter(item => item.ticker.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1)
+    filteredItems() {
+      return this.list.filter(item => item.ticker.toLowerCase().includes(this.searchValue.toLowerCase()))
     }
   },
   methods: {
     ...mapActions('markets', ['setCurrentBase']),
 
-    onTickerChange(base) {
+    handleBaseChange(base) {
       this.setCurrentBase(base)
     }
   }

@@ -5,19 +5,19 @@
       class="tickers-list-row"
     >
       <div class="tickers-list__item">
-        <div @click="$emit('change', { item })">
+        <!-- <div @click="$emit('change', { item })">
           <Star
             :active="isFavourite"
             class="tickers__favourite"
           />
-        </div>
+        </div> -->
         <div class="tickers-list__itemPair">
           <span class="_currencyTitle">{{ item.ticker }}</span>
         </div>
         <div class="_tickerTitle tickers-list__itemVolume"> /{{ item.base }}</div>
       </div>
       <div class="tickers-list__item _alignRight">
-        <div class="_currencyTitle">{{ item.price.toFixed(0) }}</div>
+        <div class="_currencyTitle">{{ item.price }}</div>
         <div class="_tickerTitle tickers-list__itemVolume">${{ item.usdPrice.toFixed(2) }}</div>
       </div>
       <div class="tickers-list__item _alignRight">
