@@ -7,7 +7,7 @@ describe('amountValueShortener function', () => {
     const result = amountValueShortener(amount)
     expect(result).toBe(finalAmount)
   })
-      
+
   it('Test amount shortener with thousands', () => {
     const amount = '12000'
     const finalAmount = '12k'
@@ -21,6 +21,4 @@ describe('amountValueShortener function', () => {
     const result = amountValueShortener(amount)
     expect(result).toBe(finalAmount)
   })
-
-
 })

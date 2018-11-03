@@ -3,25 +3,23 @@
     <div class="dashboard">
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
-          class="lg:w-1/3"
+          class="lg:w-1/2"
           title="account">
           <AccountHeader slot="header"/>
           <Portfolio slot="body"/>
         </Card>
 
-        <Card
+        <!-- <Card
           class="lg:w-2/3 scrollable"
           title="Transactions">
           <div slot="body">
             <TransactionsHistory/>
           </div>
-        </Card>
-      </div>
+        </Card> -->
 
-      <div class="flex flex-col lg:flex-row mb-2">
-        <card
+        <Card
           :expanded="true"
-          class="lg:w-1/3"
+          class="lg:w-1/2"
           title="markets">
           <div
             slot="modal"
@@ -46,6 +44,10 @@
             :expand-mode="false"
           />
         </Card>
+      </div>
+
+      <!-- <div class="flex flex-col lg:flex-row mb-2">
+  
 
         <Card
           class="lg:w-2/3"
@@ -57,7 +59,7 @@
             <OrderBook/>
           </div>
         </Card>
-      </div>
+      </div> -->
 
     </div>
   </div>

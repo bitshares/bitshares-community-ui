@@ -7,7 +7,8 @@
       :items="sortedItems"
       :headers="fields"
       :default-sort="sortField"
-      :header-left-padding="0.437"
+      :header-left-padding="0.6"
+      :header-right-padding="1"
       class="tickers-list-header"
     >
       <template slot-scope="{ sortedItems }">
@@ -60,10 +61,10 @@ export default {
       activeFieldIndex: 0,
       marketsField: {
         small: [
-          { title: 'Pair', field: 'ticker', align: 'center' },
+          { title: 'Pair', field: 'ticker', align: 'left' },
           { title: 'Price, USD', field: 'usdPrice', align: 'right' },
           { title: 'Vol, USD', field: 'usdVolume', align: 'right' },
-          { title: '24h', field: 'change24h', align: 'center' }
+          { title: '24h', field: 'change24h', align: 'right' }
         ],
         large: [
           { title: 'Name', field: 'ticker', align: 'center' },

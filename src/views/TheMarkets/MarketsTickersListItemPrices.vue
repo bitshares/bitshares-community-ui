@@ -23,7 +23,7 @@
       <div class="tickers-list__item _alignRight">
         <div class="tickers-list__itemVolume">{{ volUsd }}</div>
       </div>
-      <div class="tickers-list__item _alignCenter">
+      <div class="tickers-list__item _alignRight">
         <div
           :class="getClassesOfDynamic({ price: item.change24h })"
           class="_currencyTitle">
@@ -145,8 +145,7 @@ export default {
   .tickers-list-row {
     display: flex;
     box-sizing: border-box;
-    padding: 0.4375rem;
-    padding-right: 0;
+    padding: 0.4375rem 1rem 0.4375rem 0.6rem;
     transition: ease-in-out 0.6s ease;
 
     &:hover {
