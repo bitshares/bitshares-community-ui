@@ -73,7 +73,7 @@
 
       <div class="login__form">
         <Button
-          :disabled="this.$v.brainkey.isLoginDisabled"
+          :disabled="loginDisabled"
           :loading="inProgress"
           class="login__btn"
           width="full"
@@ -109,9 +109,7 @@ export default {
       return {
         name: { required },
         password: { required },
-        brainkey: {
-          isLoginDisabled: () => ((this.$v.$dirty && this.$v.$invalid) || (!this.file && !this.$v.brainkey.brainkeyValidator && !this.password))
-        },
+        brainkey: {},
         pin: {},
         confirmPin: {}
       }
@@ -120,9 +118,7 @@ export default {
         return {
           name: {},
           password: {},
-          brainkey: {
-            isLoginDisabled: () => ((this.$v.$dirty && this.$v.$invalid) || (!this.file && !this.$v.brainkey.brainkeyValidator && !this.password))
-          },
+          brainkey: {},
           pin: { required, minLength: minLength(6) },
           confirmPin: {}
         }
@@ -135,8 +131,7 @@ export default {
               if (this.file) return true
               return required(value)
             },
-            brainkeyValidator: value => (value.split(' ').length - 1 >= 15),
-            isLoginDisabled: () => ((this.$v.$dirty && this.$v.$invalid) || (!this.file && !this.$v.brainkey.brainkeyValidator && !this.password))
+            brainkeyValidator: value => (value.split(' ').length - 1 >= 15)
           },
           pin: { required, minLength: minLength(6) },
           confirmPin: { sameAsPin: sameAs('pin') }
@@ -155,6 +150,11 @@ export default {
       type: 'password',
       file: null,
       showFileField: true
+    }
+  },
+  computed: {
+    loginDisabled() {
+      return (!this.file && !this.$v.brainkey.brainkeyValidator && !(this.password && this.name))
     }
   },
   methods: {
@@ -227,7 +227,6 @@ export default {
   }
   .login {
     @apply max-w-sm w-full shadow-md;
-    border: 1px solid config('colors.card-border');
     border-radius: 2px;
     background-color: black;
     &__title {
