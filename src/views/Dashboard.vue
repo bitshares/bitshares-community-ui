@@ -21,7 +21,7 @@
           :expanded="true"
           class="lg:w-1/2"
           title="markets">
-          <div
+          <!-- <div
             slot="modal"
           >
             <div v-if="expanded">
@@ -38,7 +38,7 @@
                   :expand-mode="true"/>
               </MarketsModal>
             </div>
-          </div>
+          </div> -->
           <TheMarkets
             slot="body"
             :expand-mode="false"

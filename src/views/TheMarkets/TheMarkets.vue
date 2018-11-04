@@ -20,16 +20,19 @@
         </div>
       </div> -->
     </div>
-    <MarketsTickersList
-      :items="filteredItems"
-      :expand-mode="expandMode"
-      :current-base="currentBase"
-    />
+    <LoadingContainer :loading="isFetching && !list.length">
+      <MarketsTickersList
+        :items="filteredItems"
+        :expand-mode="expandMode"
+        :current-base="currentBase"
+      />
+    </LoadingContainer>
   </div>
 </template>
 <script>
 import Tabs from '@/components/Tabs'
-import SearchInput from '@/components/SearchInput/'
+import SearchInput from '@/components/SearchInput'
+import LoadingContainer from '@/components/LoadingContainer'
 import MarketsTickersList from './MarketsTickersList'
 
 import { mapGetters, mapActions } from 'vuex'
@@ -39,7 +42,8 @@ export default {
   components: {
     Tabs,
     SearchInput,
-    MarketsTickersList
+    MarketsTickersList,
+    LoadingContainer
   },
   props: {
     expandMode: {
@@ -57,7 +61,8 @@ export default {
       currentBase: 'markets/getCurrentBase',
       markets: 'markets/getMarketsList',
       favourites: 'markets/getFavouritesList',
-      list: 'markets/getCurrentList'
+      list: 'markets/getCurrentList',
+      isFetching: 'markets/isListFetching'
     }),
     favouritesMode() {
       return this.currentBase === 'favourites'

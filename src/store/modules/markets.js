@@ -12,18 +12,24 @@ const getters = {
   getCurrentList: (state, getters, rootState, rootGetters) => {
     const base = getters.getCurrentBase
     const stats = rootGetters['market/getMarketStats']
-    if (!stats || !stats[base]) return []
-    const baseStats = stats[base]
-    return Object.keys(baseStats)
-      .filter(quote => !!baseStats[quote])
-      .map(quote => baseStats[quote])
+    if (!stats[base] || !stats[base].list) return []
+    const baseStats = stats[base].list
+    return Object.keys(baseStats).map(quote => baseStats[quote])
+  },
+  isListFetching: (state, getters, rootState, rootGetters) => {
+    const base = getters.getCurrentBase
+    const stats = rootGetters['market/getMarketStats']
+    if (base === 'favourites') {
+      return Object.keys(state.favourites).map(base => stats[base].fetching).find(isfetching => !!isfetching)
+    }
+    return (stats[base] && stats[base].fetching) || false
   },
   getFavouritesList: (state, getters, rootState, rootGetters) => {
     const stats = rootGetters['market/getMarketStats']
     const favourites = getters.getFavourites
 
     return Object.keys(favourites).reduce((result, base) => {
-      const baseStats = stats[base]
+      const baseStats = stats[base] && stats[base].list
       if (!baseStats) return result
       const favouriteItems = Object.keys(baseStats)
         .filter(quote => favourites[base].includes(quote))
