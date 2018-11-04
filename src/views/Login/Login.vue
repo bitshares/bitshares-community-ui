@@ -73,7 +73,7 @@
 
       <div class="login__form">
         <Button
-          :disabled="loginDisabled"
+          :disabled="this.$v.brainkey.isLoginDisabled"
           :loading="inProgress"
           class="login__btn"
           width="full"
@@ -109,7 +109,9 @@ export default {
       return {
         name: { required },
         password: { required },
-        brainkey: {},
+        brainkey: {
+          isLoginDisabled: () => ((this.$v.$dirty && this.$v.$invalid) || (!this.file && !this.$v.brainkey.brainkeyValidator && !this.password))
+        },
         pin: {},
         confirmPin: {}
       }
@@ -118,7 +120,9 @@ export default {
         return {
           name: {},
           password: {},
-          brainkey: {},
+          brainkey: {
+            isLoginDisabled: () => ((this.$v.$dirty && this.$v.$invalid) || (!this.file && !this.$v.brainkey.brainkeyValidator && !this.password))
+          },
           pin: { required, minLength: minLength(6) },
           confirmPin: {}
         }
@@ -127,11 +131,12 @@ export default {
           name: {},
           password: {},
           brainkey: {
-            required: (value) => {
+            required: value => {
               if (this.file) return true
               return required(value)
             },
-            brainkeyValidator: (value) => (value.split(' ').length - 1 >= 15)
+            brainkeyValidator: value => (value.split(' ').length - 1 >= 15),
+            isLoginDisabled: () => ((this.$v.$dirty && this.$v.$invalid) || (!this.file && !this.$v.brainkey.brainkeyValidator && !this.password))
           },
           pin: { required, minLength: minLength(6) },
           confirmPin: { sameAsPin: sameAs('pin') }
@@ -150,11 +155,6 @@ export default {
       type: 'password',
       file: null,
       showFileField: true
-    }
-  },
-  computed: {
-    loginDisabled() {
-      return (this.$v.$dirty && this.$v.$invalid) || (!this.file && !this.$v.brainkey.brainkeyValidator && !this.password)
     }
   },
   methods: {

@@ -18,7 +18,7 @@ export default {
   confirmPassword: {
     title: 'confirm password',
     validation: {
-      sameAsPassword: 'Passwords do not match \n '
+      sameAsPassword: 'Passwords do not match'
     }
   },
   brainkey: {
