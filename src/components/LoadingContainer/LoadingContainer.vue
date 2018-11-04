@@ -37,6 +37,17 @@ export default ({
   }
 }
 
+.loading-container {
+  height: 100%;
+  overflow: hidden;
+}
+
+.loading-container__content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .spinner-container {
   display: flex;
   justify-content: center;
@@ -52,10 +63,5 @@ export default ({
   border: 3px solid rgba(0, 0, 0, 0.1);
   border-top: 3px solid #555;
   animation: rotating 1s infinite linear;
-}
-.loading-container__content {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 </style>

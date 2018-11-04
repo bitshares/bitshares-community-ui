@@ -13,7 +13,7 @@
       <div
         v-for="(tab, index) in tabs"
         :key="index"
-        :style="{ width: tabWidth + '%' }"
+        :style="{ width: currencyMode ? 'auto' : tabWidth + '%' }"
         :class="{
           'tab--active': activeTabIndex === index,
           'tab--currency': currencyMode
@@ -21,7 +21,7 @@
         class="tab"
         @click="handleTabClick(index)"
       >
-        {{ tab }}
+        {{ format(tab) }}
       </div>
     </div>
     <slot :name="tabs[activeTabIndex]" />
@@ -30,6 +30,7 @@
 
 <script>
 import Star from '@/components/Star'
+import { removePrefix } from '@/helpers/utils'
 
 export default {
   components: {
@@ -66,6 +67,10 @@ export default {
       this.$emit('change', this.tabs[index] || 'favourites')
 
       this.tabs[index] ? this.activeFavourite = false : this.activeFavourite = true
+    },
+    format(value) {
+      if (!this.currencyMode) return value
+      return removePrefix(value, 'OPEN.')
     }
   }
 }
@@ -86,7 +91,7 @@ export default {
   }
 
   .tabs__favourite {
-    margin: 0 8px;
+    margin: 0 1px 0 8px;
     line-height: 28px;
   }
 }

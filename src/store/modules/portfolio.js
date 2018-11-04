@@ -5,8 +5,8 @@ const getters = {
   getBalanceBaseValue: (state, getters, rootState, rootGetters) => ({ assetId, value }) => {
     const history24 = rootGetters['history/getByDay'](1)[assetId]
     const history7 = rootGetters['history/getByDay'](7)[assetId]
-    if (!history24 || !history7) return
-    let price = history24.last || history7.last
+    if (!history24 || !history7) return 0
+    let price = history24.last || history7.last || 0
     if (assetId === state.baseId) price = 1
     const baseValue = parseInt((value * price).toFixed(0), 10)
 
@@ -26,6 +26,7 @@ const getters = {
 
   getBalanceFiatValue: (state, getters, rootState, rootGetters) => (baseValue) => {
     const multiplier = rootGetters['history/getHistoryAssetMultiplier'](1, state.fiatId).last
+    // const multiplier7 = rootGetters['history/getHistoryAssetMultiplier'](7, state.fiatId).last
     const fiatValue = parseFloat((baseValue * multiplier).toFixed(0), 10)
     const fiatAsset = rootGetters['assets/getAssetById'](state.fiatId)
     return fiatValue / (10 ** fiatAsset.precision)
@@ -60,6 +61,7 @@ const getters = {
         tiker: asset.symbol,
         tokens,
         fiatValue,
+        baseValue,
         share,
         tokenPrice,
         change7,

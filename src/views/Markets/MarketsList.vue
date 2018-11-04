@@ -4,14 +4,15 @@
     class="tickers-list"
   >
     <SortableTable
-      :items="sortedItems"
+      :items="items"
       :headers="fields"
-      :default-sort="sortField"
-      :header-left-padding="0.437"
+      :default-sort="defaultSort"
+      :header-left-padding="0.6"
+      :header-right-padding="1"
       class="tickers-list-header"
     >
       <template slot-scope="{ sortedItems }">
-        <MarketsTickersListItem
+        <MarketsListItem
           v-for="(ticker, index) in sortedItems"
           :key="index"
           :item="ticker"
@@ -26,13 +27,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import MarketsTickersListItem from './MarketsTickersListItem'
+import MarketsListItem from './MarketsListItem'
 import SortableTable from '@/components/SortableTable'
-import orderBy from 'lodash/orderBy'
 
 export default {
   components: {
-    MarketsTickersListItem,
+    MarketsListItem,
     SortableTable
   },
   props: {
@@ -42,9 +42,7 @@ export default {
     },
     items: {
       type: Array,
-      default() {
-        return () => []
-      }
+      required: true
     },
     expandMode: {
       type: Boolean,
@@ -53,17 +51,16 @@ export default {
   },
   data() {
     return {
-      sortField: {
-        field: 'ticker',
-        type: 'asc'
+      defaultSort: {
+        field: 'usdVolume',
+        type: 'desc'
       },
-      activeFieldIndex: 0,
       marketsField: {
         small: [
-          { title: 'Pair', field: 'ticker', align: 'center' },
-          { title: 'Price, USD', field: 'priceUsd1', align: 'right' },
-          { title: 'Vol, USD', field: 'volUsd', align: 'right' },
-          { title: '24h', field: 'change2', align: 'center' }
+          { title: 'Pair', field: 'ticker', align: 'left', paddingLeft: 1.5 },
+          { title: 'Price, USD', field: 'usdPrice', align: 'right' },
+          { title: 'Vol, USD', field: 'usdVolume', align: 'right' },
+          { title: '24h', field: 'change24h', align: 'right' }
         ],
         large: [
           { title: 'Name', field: 'ticker', align: 'center' },
@@ -78,14 +75,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      isTickerFavourite: 'markets/isTickerFavourite'
+      isTickerFavourite: 'marketsMonitor/isTickerFavourite'
     }),
 
     fields() {
       return this.expandMode ? this.marketsField.large : this.marketsField.small
-    },
-    sortedItems() {
-      return orderBy(this.items.slice(0), this.sortField.field, this.sortField.type)
     }
   },
   methods: {
@@ -99,7 +93,6 @@ export default {
 <style lang="scss">
   .tickers-list {
     margin-top: 0.8rem;
-    // margin-left: 0.4375rem;
     font-weight: config('fontWeights.semibold');
     height: 100%;
     overflow: hidden;

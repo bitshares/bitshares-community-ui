@@ -1,5 +1,5 @@
 <template>
-  <MarketsTickersListItemPrices
+  <MarketsListItemPrices
     :item="item"
     :change-value7="changeValue7"
     :change-value24="changeValue24"
@@ -12,11 +12,11 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
-import MarketsTickersListItemPrices from './MarketsTickersListItemPrices'
-import { getVolumeFormat, amountValueShortener } from '@/helpers/utils'
+import MarketsListItemPrices from './MarketsListItemPrices'
+import { amountValueShortener } from '@/helpers/utils'
 
 export default {
-  components: { MarketsTickersListItemPrices },
+  components: { MarketsListItemPrices },
   props: {
     item: {
       type: Object,
@@ -37,22 +37,24 @@ export default {
   },
   computed: {
     volUsd() {
-      return amountValueShortener(this.item.volUsd)
+      return amountValueShortener(this.item.usdVolume.toFixed(0))
     },
     marketCap() {
-      return getVolumeFormat(this.item.marketcap)
+      // return amountValueShortener(this.item.marketcap)
+      return 0
     },
     changeValue7() {
-      return this.getChangeValue({ price: this.item.change1 })
+      return this.getChangeValue({ price: this.item.change7d })
     },
     changeValue24() {
-      return this.getChangeValue({ price: this.item.change2 })
+      return this.getChangeValue({ price: this.item.change24h })
     }
   },
   methods: {
-    ...mapActions('markets', ['toggleFavourite']),
+    ...mapActions('marketsMonitor', ['toggleFavourite']),
 
     getChangeValue({ price }) {
+      if (!price) return '0%'
       return (+price >= 0) ? `+${price}%` : `${price}%`
     },
     changeFavourite({ item }) {

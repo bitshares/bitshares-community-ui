@@ -11,14 +11,15 @@
         :title="header.title"
         :sort="sort.field === header.field && sort.type || ''"
         :align="header.align"
+        :padding-left="header.paddingLeft"
         @click.native="toggleSort(header.field)"
       />
     </div>
-    <!-- <ScrollingContainer :shadower-height="15"> -->
-    <div class="sortable-table__body">
-      <slot :sorted-items="sortedItems"/>
-    </div>
-    <!-- </ScrollingContainer> -->
+    <ScrollingContainer :shadower-height="15">
+      <div class="sortable-table__body">
+        <slot :sorted-items="sortedItems"/>
+      </div>
+    </ScrollingContainer>
   </div>
 </template>
 
@@ -102,10 +103,10 @@ export default {
   }
   .sortable-table__header {
     color: config('colors.text-primary');
-    padding-bottom: config('padding.2');
     display: grid;
   }
   .sortable-table__body {
+    padding-top: config('padding.2');
     height: 100%;
     overflow: auto;
   }

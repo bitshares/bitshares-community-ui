@@ -62,8 +62,9 @@ export default {
   transition: background-color 0.15s ease;
   padding: config('padding.grid-table') 1rem config('padding.grid-table') 0.6rem;
   &:hover {
+    position: relative;
+    z-index: 2;
     background-color: rgba(255, 255, 255, 0.2);
-    z-index: 3;
   }
 }
 
