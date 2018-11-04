@@ -33,13 +33,13 @@
                 v-if="showModal"
                 @close="showModal = false"
               >
-                <TheMarkets
+                <Markets
                   slot="body"
                   :expand-mode="true"/>
               </MarketsModal>
             </div>
           </div> -->
-          <TheMarkets
+          <Markets
             slot="body"
             :expand-mode="false"
           />
@@ -70,11 +70,11 @@ import AccountHeader from '@/views/Account/AccountHeader.vue'
 import OrderBook from '@/views/OrderBook/OrderBook'
 import OrderBookLastPrice from '@/views/OrderBook/OrderBookLastPrice'
 
-import MarketsModal from '@/components/Modal'
+// import MarketsModal from '@/components/Modal'
 
 import Card from '@/components/Card'
 import TransactionsHistory from '@/views/TransactionsHistory/'
-import TheMarkets from '@/views/TheMarkets/'
+import Markets from '@/views/Markets/Markets'
 
 export default {
   name: 'Dashboard',
@@ -83,8 +83,8 @@ export default {
     AccountHeader,
     Card,
     TransactionsHistory,
-    TheMarkets,
-    MarketsModal,
+    Markets,
+    // MarketsModal,
     OrderBook,
     OrderBookLastPrice
   },

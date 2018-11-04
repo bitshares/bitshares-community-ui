@@ -7,7 +7,7 @@ import createPersistedState from 'vuex-persistedstate'
 import vuexBitsharesModules from 'vuex-bitshares'
 import Cookies from 'js-cookie'
 import paths from './cachedPaths'
-import markets from './modules/markets'
+import marketsMonitor from './modules/marketsMonitor'
 
 Vue.use(Vuex)
 
@@ -17,7 +17,7 @@ const store = new Vuex.Store({
   actions: {},
   modules: {
     app,
-    markets,
+    marketsMonitor,
     portfolio,
     books,
     ...vuexBitsharesModules

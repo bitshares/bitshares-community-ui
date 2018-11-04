@@ -12,7 +12,7 @@
       class="tickers-list-header"
     >
       <template slot-scope="{ sortedItems }">
-        <MarketsTickersListItem
+        <MarketsListItem
           v-for="(ticker, index) in sortedItems"
           :key="index"
           :item="ticker"
@@ -27,12 +27,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import MarketsTickersListItem from './MarketsTickersListItem'
+import MarketsListItem from './MarketsListItem'
 import SortableTable from '@/components/SortableTable'
 
 export default {
   components: {
-    MarketsTickersListItem,
+    MarketsListItem,
     SortableTable
   },
   props: {
@@ -75,7 +75,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      isTickerFavourite: 'markets/isTickerFavourite'
+      isTickerFavourite: 'marketsMonitor/isTickerFavourite'
     }),
 
     fields() {

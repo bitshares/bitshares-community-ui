@@ -20,8 +20,8 @@
         </div>
       </div> -->
     </div>
-    <LoadingContainer :loading="isFetching && !list.length">
-      <MarketsTickersList
+    <LoadingContainer :loading="showLoader">
+      <MarketsList
         :items="filteredItems"
         :expand-mode="expandMode"
         :current-base="currentBase"
@@ -33,7 +33,7 @@
 import Tabs from '@/components/Tabs'
 import SearchInput from '@/components/SearchInput'
 import LoadingContainer from '@/components/LoadingContainer'
-import MarketsTickersList from './MarketsTickersList'
+import MarketsList from './MarketsList'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -42,7 +42,7 @@ export default {
   components: {
     Tabs,
     SearchInput,
-    MarketsTickersList,
+    MarketsList,
     LoadingContainer
   },
   props: {
@@ -58,12 +58,15 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentBase: 'markets/getCurrentBase',
-      markets: 'markets/getMarketsList',
-      favourites: 'markets/getFavouritesList',
-      list: 'markets/getCurrentList',
-      isFetching: 'markets/isListFetching'
+      currentBase: 'marketsMonitor/getCurrentBase',
+      list: 'marketsMonitor/getCurrentList',
+      favourites: 'marketsMonitor/getFavouritesList',
+      isFetching: 'marketsMonitor/isListFetching'
     }),
+    showLoader() {
+      if (this.favouritesMode) return this.isFetching
+      return this.isFetching && !this.itemsList.length
+    },
     favouritesMode() {
       return this.currentBase === 'favourites'
     },
@@ -75,7 +78,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('markets', ['setCurrentBase']),
+    ...mapActions('marketsMonitor', ['setCurrentBase']),
 
     handleBaseChange(base) {
       this.setCurrentBase(base)

@@ -1,5 +1,5 @@
 <template>
-  <MarketsTickersListItemPrices
+  <MarketsListItemPrices
     :item="item"
     :change-value7="changeValue7"
     :change-value24="changeValue24"
@@ -12,11 +12,11 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
-import MarketsTickersListItemPrices from './MarketsTickersListItemPrices'
+import MarketsListItemPrices from './MarketsListItemPrices'
 import { amountValueShortener } from '@/helpers/utils'
 
 export default {
-  components: { MarketsTickersListItemPrices },
+  components: { MarketsListItemPrices },
   props: {
     item: {
       type: Object,
@@ -51,7 +51,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('markets', ['toggleFavourite']),
+    ...mapActions('marketsMonitor', ['toggleFavourite']),
 
     getChangeValue({ price }) {
       if (!price) return '0%'

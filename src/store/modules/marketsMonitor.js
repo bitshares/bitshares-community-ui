@@ -20,7 +20,8 @@ const getters = {
     const base = getters.getCurrentBase
     const stats = rootGetters['market/getMarketStats']
     if (base === 'favourites') {
-      return Object.keys(state.favourites).map(base => stats[base].fetching).find(isfetching => !!isfetching)
+      const favFetching = Object.keys(state.favourites).map(base => stats[base].fetching).find(isFetching => !!isFetching)
+      return !!favFetching
     }
     return (stats[base] && stats[base].fetching) || false
   },
@@ -41,8 +42,12 @@ const getters = {
     return state.favourites[base] && state.favourites[base].includes(quote)
   },
   getFavourites: state => state.favourites,
-  getCurrentBase: state => {
-    return state.currentBase
+  getCurrentBase: state => state.currentBase,
+  favouritesCount: state => {
+    const favs = state.favourites
+    return Object.keys(favs).reduce((result, base) => {
+      return favs[base].length
+    }, 0)
   }
 }
 
