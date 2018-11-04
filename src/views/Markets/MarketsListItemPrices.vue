@@ -11,10 +11,10 @@
             class="tickers__favourite"
           />
         </div>
-        <div class="tickers-list__itemPair">
+        <div class="tickers-list__itemPair pl-6">
           <span class="_currencyTitle">{{ item.ticker }}</span>
         </div>
-        <div class="_tickerTitle tickers-list__itemVolume"> /{{ item.base }}</div>
+        <div class="_tickerTitle tickers-list__itemVolume pl-6"> /{{ item.base }}</div>
       </div>
       <div class="tickers-list__item _alignRight">
         <div class="_currencyTitle">{{ +item.price.toFixed(4) }}</div>
@@ -133,13 +133,11 @@ export default {
     overflow: hidden;
   }
   .tickers-list__itemPair {
-    padding-left: 1.5rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .tickers-list__itemVolume {
-    padding-left: 1.5rem;
     font-size: config('textSizes.xs');
     color: config('colors.white');
     opacity: .8;
