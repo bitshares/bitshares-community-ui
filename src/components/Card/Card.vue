@@ -1,25 +1,25 @@
 <template>
   <div
-    class="card lg:mr-2 mb-2 lg:mb-0"
+    class="card lg:mr-2 mb-2 lg:mb-0 border-transparent sm:border-card-border"
   >
     <div class="card-header">
       <div class="title">
         <div> {{ title }} </div>
       </div>
+      <slot name="modal"/>
       <slot
         class="header"
-        name="header" />
+        name="header"/>
     </div>
-    <ScrollingContainer :shadower-height="20">
-      <div class="card-body">
-        <slot name="body" />
-      </div>
-    </ScrollingContainer>
+    <div class="card-body">
+      <slot name="body" />
+    </div>
   </div>
 </template>
 
 <script>
 import ScrollingContainer from '@/components/ScrollingContainer/ScrollingContainer.vue'
+
 export default {
   components: { ScrollingContainer },
   props: {
@@ -34,25 +34,40 @@ export default {
 <style scoped lang="scss">
 
 .card {
-  min-height: 25rem;
-  max-height: 30rem;
+  height: 25rem;
   display: flex;
+  overflow: hidden;
   flex-direction: column;
   font-family: config('fonts.gotham-regular');
   background-color: config('colors.card-background');
-  color: config('colors.text-primary');
+  border-width: 1px;
   transition: max-height 0.2s;
   &:last-child {
     @apply mr-0;
   }
 }
 
+.card-expanded {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid #7a7675;
+
+  &:hover {
+    cursor: pointer;
+    background: #7a7675;
+  }
+}
+
 .card-header {
   padding:config('padding.card-ui');
   padding-bottom: 5px;
+  color: config('colors.text-primary');
   display:flex;
   flex-shrink: 0;
   justify-content: space-between;
+  align-items: baseline;
 }
 
 .title {
@@ -67,9 +82,9 @@ export default {
 }
 
 .card-body {
-  @apply p-card-ui pt-5;
+  @apply pt-3;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
 }
 
 </style>

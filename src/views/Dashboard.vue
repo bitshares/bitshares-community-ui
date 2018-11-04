@@ -3,61 +3,97 @@
     <div class="dashboard">
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
-          class="lg:w-1/3"
+          class="lg:w-1/2"
           title="account">
-          <div slot="header">
-            <!-- <PortfolioHeader /> -->
-          </div>
-          <div slot="body">
-            <Portfolio />
-          </div>
+          <AccountHeader slot="header"/>
+          <Portfolio slot="body"/>
         </Card>
 
-        <Card
+        <!-- <Card
           class="lg:w-2/3 scrollable"
           title="Transactions">
           <div slot="body">
             <TransactionsHistory/>
           </div>
-        </Card>
-      </div>
+        </Card> -->
 
-      <div class="flex flex-col lg:flex-row mb-2">
         <Card
-          class="lg:w-2/3 disabled"
+          :expanded="true"
+          class="lg:w-1/2"
           title="markets">
-          <div
+          <!-- <div
+            slot="modal"
+          >
+            <div v-if="expanded">
+              <div
+                class="card-expanded"
+                @click="showModal = true"
+              />
+              <MarketsModal
+                v-if="showModal"
+                @close="showModal = false"
+              >
+                <Markets
+                  slot="body"
+                  :expand-mode="true"/>
+              </MarketsModal>
+            </div>
+          </div> -->
+          <Markets
             slot="body"
-            class="uppercase">
-            under construction
-          </div>
-        </Card>
-
-        <Card
-          class="lg:w-1/3 disabled"
-          title="order book">
-          <div
-            slot="body"
-            class="uppercase">
-            under construction
-          </div>
+            :expand-mode="false"
+          />
         </Card>
       </div>
+
+      <!-- <div class="flex flex-col lg:flex-row mb-2">
+
+        <Card
+          class="lg:w-2/3"
+          title="order book">
+          <div slot="header">
+            <OrderBookLastPrice/>
+          </div>
+          <div slot="body">
+            <OrderBook/>
+          </div>
+        </Card>
+      </div> -->
 
     </div>
   </div>
 </template>
 
 <script>
-import Portfolio from './Portfolio/Portfolio.vue'
-import PortfolioHeader from './Portfolio/PortfolioHeader.vue'
+import Portfolio from '@/views/Account/Portfolio.vue'
+import AccountHeader from '@/views/Account/AccountHeader.vue'
+import OrderBook from '@/views/OrderBook/OrderBook'
+import OrderBookLastPrice from '@/views/OrderBook/OrderBookLastPrice'
+
+// import MarketsModal from '@/components/Modal'
 
 import Card from '@/components/Card'
 import TransactionsHistory from '@/views/TransactionsHistory/'
+import Markets from '@/views/Markets/Markets'
 
 export default {
   name: 'Dashboard',
-  components: { Portfolio, PortfolioHeader, Card, TransactionsHistory }
+  components: {
+    Portfolio,
+    AccountHeader,
+    Card,
+    TransactionsHistory,
+    Markets,
+    // MarketsModal,
+    OrderBook,
+    OrderBookLastPrice
+  },
+  data() {
+    return {
+      expanded: true,
+      showModal: false
+    }
+  }
 }
 </script>
 

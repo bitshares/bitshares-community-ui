@@ -53,6 +53,8 @@ let colors = {
   'grey-lighter': '#f1f5f8',
   'grey-lightest': '#f8fafc',
   'white': '#ffffff',
+  'increase': '#79c610',
+  'drop': '#ff3030',
 
   'red-darkest': '#3b0d0c',
   'red-darker': '#621b18',
@@ -127,8 +129,12 @@ let colors = {
   'pink-lightest': '#ffebef',
 
   'text-primary': '#ffffff',
+  'inactive': 'rgba(255, 255, 255, 0.5)',
+  'bg-base': '#000000',
+
   'input-border': '#ced2d6',
   'card-background': '#000000',
+  'card-border': 'rgba(255, 255, 255, 0.5)',
   'text-error': '#fff200',
   'button-text': 'black',
   'button-text-disabled': '#808080',
@@ -137,11 +143,14 @@ let colors = {
   'button-bg-disabled': '#afacac',
   'button-bg-loading': '#afacac',
   'input-title-active': '#7a7675',
-  'bg-base': '#3d4852',
   'tab-header': '#7a7675',
   'tab-hover': 'rgba(255, 255, 255, 0.6)',
   'tab-active': '#ffffff',
-  'table-bg': '#000000'
+  'table-bg': '#000000',
+  'mobile-footer': '#1a1a1a',
+  'mobile-footer-hover': '#121212',
+  'star': '#a7a9ac',
+  'primary': '#ffffff'
 }
 
 module.exports = {
