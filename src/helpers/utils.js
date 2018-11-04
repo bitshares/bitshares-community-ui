@@ -2,6 +2,13 @@
 
 // convert sum to currency format, exapmle: 1 000 000 (use in markets)
 export const getVolumeFormat = sum => sum.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+
+export const removePrefix = (string, prefix) => {
+  let trimmed = string
+  if (string.substring(0, prefix.length) === prefix) trimmed = string.slice(prefix.length)
+  return trimmed
+}
+
 // converts amount to shortened format
 export const amountValueShortener = amount => {
   let valuesToSymbols = [

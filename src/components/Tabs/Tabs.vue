@@ -21,7 +21,7 @@
         class="tab"
         @click="handleTabClick(index)"
       >
-        {{ tab }}
+        {{ format(tab) }}
       </div>
     </div>
     <slot :name="tabs[activeTabIndex]" />
@@ -30,6 +30,7 @@
 
 <script>
 import Star from '@/components/Star'
+import { removePrefix } from '@/helpers/utils'
 
 export default {
   components: {
@@ -66,6 +67,10 @@ export default {
       this.$emit('change', this.tabs[index] || 'favourites')
 
       this.tabs[index] ? this.activeFavourite = false : this.activeFavourite = true
+    },
+    format(value) {
+      if (!this.currencyMode) return value
+      return removePrefix(value, 'OPEN.')
     }
   }
 }
