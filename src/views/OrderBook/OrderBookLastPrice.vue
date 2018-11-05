@@ -10,8 +10,7 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      price: 'books/getLastPrice',
-      currentTicker: 'books/getCurrentTicker'
+      price: 'books/getLastPrice'
     })
   }
 }
@@ -23,9 +22,8 @@ export default {
     align-items: center;
     margin-top: 0.125rem;
     position: absolute;
-    width: 150px;//fixed for centred
-    left: calc(50% - 75px);
-    background: config('colors.card-background');
+    width: 9.375rem;
+    left: calc(50% - 4.6875rem);
   }
   .order-book__priceTitle {
     color: config('colors.button-text-disabled');

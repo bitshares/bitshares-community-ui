@@ -152,7 +152,8 @@ let colors = {
   'mobile-footer': '#1a1a1a',
   'mobile-footer-hover': '#121212',
   'star': '#a7a9ac',
-  'primary': '#ffffff'
+  'primary': '#ffffff',
+  'book-item-hover': '#000'
 }
 
 module.exports = {
@@ -673,6 +674,8 @@ module.exports = {
     '20': '5rem',
     '24': '6rem',
     '32': '8rem',
+
+    'book-item-p': '0.625rem',
     'card-ui': '0.6875rem',
     'card': '1.25rem',
     'grid-table': '0.625rem'
@@ -710,7 +713,9 @@ module.exports = {
     '16': '4rem',
     '20': '5rem',
     '24': '6rem',
-    '32': '8rem'
+    '32': '8rem',
+
+    'book-item-m': '0.0325rem'
   },
 
   /*

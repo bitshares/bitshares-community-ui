@@ -1,10 +1,10 @@
 <template>
   <div
     :class="{
-      'order-book__table--buy': tableType === 'buy',
-      'order-book__table--sell': tableType === 'sell'
+      'order-book-table--buy': tableType === 'buy',
+      'order-book-table--sell': tableType === 'sell'
     }"
-    class="order-book__table"
+    class="order-book-table"
   >
     <div class="order-book__column-title">{{ title }}</div>
 
@@ -71,7 +71,7 @@ export default {
 }
 </script>
 <style lang="scss">
-  .order-book__table {
+  .order-book-table {
     flex: 1;
     font-family: config('fonts.gotham');
     &--sell {

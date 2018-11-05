@@ -21,7 +21,6 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import orderBy from 'lodash/orderBy'
 import OrderBookTable from './OrderBookTable'
 import OrderBookLastPrice from './OrderBookLastPrice'
 
@@ -46,14 +45,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      orderBook: 'books/getOrderBook'
-    }),
-    maxSum() {
-      const maxFromBuy = orderBy(this.orderBook.buying, 'sum', 'desc')[0].sum
-      const maxFromSell = orderBy(this.orderBook.selling, 'sum', 'desc')[0].sum
-
-      return maxFromBuy > maxFromSell ? maxFromBuy : maxFromSell
-    }
+      orderBook: 'books/getOrderBook',
+      maxSum: 'books/getMaxOrderAmount'
+    })
   }
 }
 </script>

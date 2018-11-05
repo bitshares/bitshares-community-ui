@@ -1,6 +1,5 @@
 const state = {
   lastPrice: '6 745',
-  currentTicker: 'USD',
   orderBook: {
     buying: [
       { sum: 98.23, price: 0.25069 },
@@ -35,8 +34,11 @@ const getters = {
   getLastPrice(state) {
     return state.lastPrice
   },
-  getCurrentTicker(state) {
-    return state.currentTicker
+  getMaxOrderAmount(state) {
+    const maxFromBuy = state.orderBook.buying.slice(0).pop().sum
+    const maxFromSell = state.orderBook.selling.slice(0).pop().sum
+
+    return maxFromBuy > maxFromSell ? maxFromBuy : maxFromSell
   },
   getOrderBook(state) {
     return state.orderBook

@@ -1,20 +1,20 @@
 <template>
   <div
     :class="{
-      'order-book__tableRow--buy': type === 'buy',
-      'order-book__tableRow--sell': type === 'sell'
+      'order-book-table-row--buy': type === 'buy',
+      'order-book-table-row--sell': type === 'sell'
     }"
-    class="order-book__tableRow"
+    class="order-book-table-row"
   >
     <div
       :class="{
-        'order-book__tableItem--buy': type === 'buy',
-        'order-book__tableItem--sell': type === 'sell'
+        'order-book-table-item--buy': type === 'buy',
+        'order-book-table-item--sell': type === 'sell'
       }"
       :style="styleBackground"
-      class="order-book__tableItem"
+      class="order-book-table-item"
     >
-      <span class="order-book__itemSum">
+      <span class="order-book-item-sum">
         {{ item.sum }}
       </span>
       {{ item.price }}
@@ -64,29 +64,28 @@ export default {
 }
 </script>
 <style lang="scss">
-  .order-book__tableRow {
+  .order-book-table-row {
     display: flex;
     height: 26px;
     line-height: 26px;
 
-    .order-book__tableItem {
-      .order-book__itemSum {
+    .order-book-table-item {
+      .order-book-item-sum {
         color: config('colors.text-primary');
       }
       &:hover {
-        .order-book__itemSum {
-          color: config('colors.button-text');
+        .order-book-item-sum {
+          color: config('colors.book-item-hover');
         }
       }
     }
     &--buy {
-      padding-left: 5px;
       text-align: left;
       flex-direction: row;
       &:hover {
         background: config('colors.buy');
-        .order-book__tableItem {
-          color: config('colors.button-text');
+        .order-book-table-item {
+          color: config('colors.book-item-hover');
           font-weight: config('fontWeights.semibold');
           &--buy {
             background: linear-gradient(to left, config('colors.buy') 100%, config('colors.card-background') 0%) !important;
@@ -95,13 +94,12 @@ export default {
       }
     }
     &--sell {
-      padding-right: 5px;
       text-align: right;
       flex-direction: row-reverse;
       &:hover {
         background: config('colors.sell');
-        .order-book__tableItem {
-          color: config('colors.button-text');
+        .order-book-table-item {
+          color: config('colors.book-item-hover');
           font-weight: config('fontWeights.semibold');
           &--sell {
             background: linear-gradient(to right, config('colors.sell') 100%, config('colors.card-background') 0%) !important;
@@ -110,15 +108,15 @@ export default {
       }
     }
   }
-  .order-book__tableItem {
+  .order-book-table-item {
     cursor: pointer;
     &--buy {
       flex: 1;
       color: config('colors.buy');
       text-align: right;
-      margin-right: 0.0325rem;
-      padding-right: 0.625rem;
-      .order-book__itemSum {
+      margin-right: config('margin.book-item-m');
+      padding-right: config('padding.book-item-p');
+      .order-book-item-sum {
         float: left;
       }
     }
@@ -126,9 +124,9 @@ export default {
       flex: 1;
       color: config('colors.sell');
       text-align: left;
-      margin-left: 0.0325rem;
-      padding-left: 0.625rem;
-      .order-book__itemSum {
+      margin-left: config('margin.book-item-m');
+      padding-left:config('padding.book-item-p');
+      .order-book-item-sum {
         float: right;
       }
     }
