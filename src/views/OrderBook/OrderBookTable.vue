@@ -11,6 +11,7 @@
     <SortableTable
       :items="items"
       :headers="tableHeaders"
+      :type="tableType"
     >
       <template slot-scope="{ sortedItems }">
         <OrderBookTableItem

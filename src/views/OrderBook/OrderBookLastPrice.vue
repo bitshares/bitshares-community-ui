@@ -31,6 +31,7 @@ export default {
     margin-bottom: 0.8125rem;
   }
   .order-book__priceValue {
-    font-weight: config('fontWeights.bold')
+    font-weight: config('fontWeights.bold');
+    color: config('colors.white');
   }
 </style>

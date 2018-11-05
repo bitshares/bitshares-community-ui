@@ -117,6 +117,7 @@ export default {
       margin-right: config('margin.book-item-m');
       padding-right: config('padding.book-item-p');
       .order-book-item-sum {
+        margin-left: config('margin.book-item-m10');
         float: left;
       }
     }
@@ -127,6 +128,7 @@ export default {
       margin-left: config('margin.book-item-m');
       padding-left:config('padding.book-item-p');
       .order-book-item-sum {
+        margin-right: config('margin.book-item-m10');
         float: right;
       }
     }

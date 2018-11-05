@@ -714,7 +714,7 @@ module.exports = {
     '20': '5rem',
     '24': '6rem',
     '32': '8rem',
-
+    'book-item-m10': '0.625rem',
     'book-item-m': '0.0325rem'
   },
 
