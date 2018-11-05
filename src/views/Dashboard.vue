@@ -50,7 +50,9 @@
         <Card
           class="lg:w-1/2"
           title="order book">
-          <div slot="body" :style="{'height': '100%'}">
+          <div
+            slot="body"
+            :style="{'height': '100%'}">
             <OrderBook/>
           </div>
         </Card>
