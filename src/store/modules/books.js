@@ -1,3 +1,5 @@
+import orderBy from 'lodash/orderBy'
+
 const state = {
   lastPrice: '6 745',
   orderBook: {
@@ -12,6 +14,10 @@ const state = {
       { sum: 1622.27, price: 0.12859 },
       { sum: 1719.73, price: 0.12765 },
       { sum: 1856.20, price: 0.12523 },
+      { sum: 1939.99, price: 0.11477 },
+      { sum: 1939.99, price: 0.11477 },
+      { sum: 1939.99, price: 0.11477 },
+      { sum: 1939.99, price: 0.11477 },
       { sum: 1939.99, price: 0.11477 }
     ],
     selling: [
@@ -25,6 +31,10 @@ const state = {
       { sum: 1821.69, price: 0.14365 },
       { sum: 2597.05, price: 0.15370 },
       { sum: 3199.98, price: 0.15377 },
+      { sum: 3487.02, price: 0.15412 },
+      { sum: 3487.02, price: 0.15412 },
+      { sum: 3487.02, price: 0.15412 },
+      { sum: 3487.02, price: 0.15412 },
       { sum: 3487.02, price: 0.15412 }
     ]
   }
@@ -35,8 +45,8 @@ const getters = {
     return state.lastPrice
   },
   getMaxOrderAmount(state) {
-    const maxFromBuy = state.orderBook.buying.slice(0).pop().sum
-    const maxFromSell = state.orderBook.selling.slice(0).pop().sum
+    const maxFromBuy = orderBy(state.orderBook.buying, 'sum', 'desc')[0].sum
+    const maxFromSell = orderBy(state.orderBook.selling, 'sum', 'desc')[0].sum
 
     return maxFromBuy > maxFromSell ? maxFromBuy : maxFromSell
   },
