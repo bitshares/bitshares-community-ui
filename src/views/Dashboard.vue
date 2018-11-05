@@ -21,6 +21,17 @@
           :expanded="true"
           class="lg:w-1/2"
           title="markets">
+          <div
+            slot="header"
+            class="search-wrapper"
+          >
+            <div class="tickers-search">
+              <SearchInput
+                hint="Search"
+                @input="changeSearchStr"
+              />
+            </div>
+          </div>
           <!-- <div
             slot="modal"
           >
@@ -65,6 +76,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Portfolio from '@/views/Account/Portfolio.vue'
 import AccountHeader from '@/views/Account/AccountHeader.vue'
 import OrderBook from '@/views/OrderBook/OrderBook'
@@ -75,6 +87,7 @@ import OrderBookLastPrice from '@/views/OrderBook/OrderBookLastPrice'
 import Card from '@/components/Card'
 import TransactionsHistory from '@/views/TransactionsHistory/'
 import Markets from '@/views/Markets/Markets'
+import SearchInput from '@/components/SearchInput'
 
 export default {
   name: 'Dashboard',
@@ -86,13 +99,17 @@ export default {
     Markets,
     // MarketsModal,
     OrderBook,
-    OrderBookLastPrice
+    OrderBookLastPrice,
+    SearchInput
   },
   data() {
     return {
       expanded: true,
       showModal: false
     }
+  },
+  methods: {
+    ...mapActions('marketsMonitor', ['changeSearchStr'])
   }
 }
 </script>
