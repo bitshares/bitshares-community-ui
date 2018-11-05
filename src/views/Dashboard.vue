@@ -48,7 +48,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 import Portfolio from '@/views/Account/Portfolio.vue'
 import AccountHeader from '@/views/Account/AccountHeader.vue'
 import OrderBook from '@/views/OrderBook/OrderBook'
@@ -73,15 +72,6 @@ export default {
     // MarketsModal,
     OrderBook,
     OrderBookLastPrice
-  },
-  data() {
-    return {
-      expanded: true,
-      showModal: false
-    }
-  },
-  methods: {
-    ...mapActions('marketsMonitor', ['changeSearchStr'])
   }
 }
 </script>
