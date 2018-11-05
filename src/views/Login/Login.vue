@@ -154,7 +154,7 @@ export default {
   },
   computed: {
     loginDisabled() {
-      return this.$v.$dirty || this.$v.$invalid
+      return this.$v.$dirty && this.$v.$invalid
     }
   },
   methods: {
