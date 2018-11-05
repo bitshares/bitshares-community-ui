@@ -16,7 +16,7 @@
         @click.native="toggleSort(header.field)"
       />
     </div>
-    <ScrollingContainer :shadower-height="15">
+    <ScrollingContainer :shadower-height="shadowerHeight || 15">
       <div class="sortable-table__body">
         <slot :sorted-items="sortedItems"/>
       </div>
@@ -61,6 +61,10 @@ export default {
     type: {
       type: String,
       default: ''
+    },
+    shadowerHeight: {
+      type: Number,
+      default: 0
     }
   },
   data() {

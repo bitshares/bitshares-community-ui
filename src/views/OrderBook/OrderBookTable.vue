@@ -12,6 +12,7 @@
       :items="items"
       :headers="tableHeaders"
       :type="tableType"
+      :shadower-height="shadowerHeight"
     >
       <template slot-scope="{ sortedItems }">
         <OrderBookTableItem
@@ -62,7 +63,9 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      shadowerHeight: 2
+    }
   },
   computed: {
     tableType() {
