@@ -13,7 +13,7 @@
       :headers="tableHeaders"
       :type="tableType"
       :header-left-padding="tableType === 'buy' ? 0.6 : 0"
-      :header-right-padding="tableType === 'sell' ? 0.6 : 0"
+      :header-right-padding="tableType === 'sell' ? 1 : 0"
     >
       <template slot-scope="{ sortedItems }">
         <OrderBookTableItem
