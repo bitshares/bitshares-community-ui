@@ -154,7 +154,7 @@ export default {
   },
   computed: {
     loginDisabled() {
-      return (!this.file && !this.$v.brainkey.brainkeyValidator && !(this.password && this.name))
+      return this.$v.$dirty || this.$v.$invalid
     }
   },
   methods: {
