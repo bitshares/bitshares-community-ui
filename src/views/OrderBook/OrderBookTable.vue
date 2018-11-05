@@ -82,6 +82,6 @@ export default {
     }
   }
   .order-book__column-title {
-    margin-bottom: 0.9375rem;
+    margin-bottom: -0.9375rem;
   }
 </style>
