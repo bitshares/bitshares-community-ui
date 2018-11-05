@@ -6,32 +6,34 @@
     <div class="markets__header">
       <div class="tickers-sidebar">
         <Tabs
-          :tabs="['USD', 'BTC', 'ETH', 'CNY', 'BTS']"
+          :tabs="['USD', 'OPEN.BTC', 'CNY', 'BTS']"
           :currency-mode="true"
-          @change="onTickerChange"
+          @change="handleBaseChange"
         />
       </div>
-      <div class="search-wrapper">
+      <!-- <div class="search-wrapper">
         <div class="tickers-search">
           <SearchInput
-            :hint="'Search'"
+            hint="Search"
             v-model="searchValue"
           />
         </div>
-      </div>
+      </div> -->
     </div>
-    <MarketsTickersList
-      :items="foundItems"
-      :expand-mode="expandMode"
-      :current-base="currentBase"
-    />
+    <LoadingContainer :loading="showLoader">
+      <MarketsList
+        :items="filteredItems"
+        :expand-mode="expandMode"
+        :current-base="currentBase"
+      />
+    </LoadingContainer>
   </div>
 </template>
 <script>
 import Tabs from '@/components/Tabs'
-import SearchInput from '@/components/SearchInput/'
-import TheMarkets from '@/views/TheMarkets'
-import MarketsTickersList from './MarketsTickersList'
+import SearchInput from '@/components/SearchInput'
+import LoadingContainer from '@/components/LoadingContainer'
+import MarketsList from './MarketsList'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -40,8 +42,8 @@ export default {
   components: {
     Tabs,
     SearchInput,
-    MarketsTickersList,
-    TheMarkets
+    MarketsList,
+    LoadingContainer
   },
   props: {
     expandMode: {
@@ -56,33 +58,47 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentBase: 'markets/getCurrentBase',
-      markets: 'markets/getMarketsList',
-      favourites: 'markets/getFavouritesList'
+      currentBase: 'marketsMonitor/getCurrentBase',
+      list: 'marketsMonitor/getCurrentList',
+      favourites: 'marketsMonitor/getFavouritesList',
+      isFetching: 'marketsMonitor/isListFetching'
     }),
-
-    tickerItems() {
-      return this.currentBase === 'favourites' ? this.favourites : this.markets[this.currentBase]
+    showLoader() {
+      if (this.favouritesMode) return this.isFetching
+      return this.isFetching && !this.itemsList.length
     },
-    foundItems() {
-      if (!this.searchValue) return this.tickerItems
-      return this.tickerItems.filter(item => item.ticker.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1)
+    favouritesMode() {
+      return this.currentBase === 'favourites'
+    },
+    itemsList() {
+      return this.favouritesMode ? this.favourites : this.list
+    },
+    filteredItems() {
+      return this.itemsList.filter(item => item.ticker.toLowerCase().includes(this.searchValue.toLowerCase()))
     }
   },
   methods: {
-    ...mapActions('markets', ['setCurrentBase']),
+    ...mapActions('marketsMonitor', ['setCurrentBase']),
 
-    onTickerChange(base) {
+    handleBaseChange(base) {
       this.setCurrentBase(base)
     }
   }
 }
 </script>
 <style lang="scss" scoped>
+  .markets {
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
   .markets__header {
     margin-top: 0.625rem;
     display: flex;
     flex-direction: row;
+    flex-shrink: 0;
     justify-content: space-between;
     background: #0A0A0A;
 

@@ -1,7 +1,7 @@
 <template>
   <LoadingContainer
     :loading="!historyLoaded"
-    class="portfolio-container">
+    class="portfolio-container h-full">
 
     <div class="portfolio-header">
       <LinkButton
@@ -18,6 +18,9 @@
         :items="filteredItems"
         :headers="tableHeaders"
         :default-sort="defaultSort"
+        :header-left-padding="0.6"
+        :header-right-padding="1"
+        class="portfolio-table__header"
       >
         <template slot-scope="{ sortedItems }">
           <PortfolioItem
@@ -91,18 +94,18 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-.portfolio-container {
-  padding-right: 0.3rem;
-}
-
+<style lang="scss">
 .portfolio-table {
   font-family: config("fonts.gotham");
+  height: 100%;
+  overflow: hidden;
 }
 
 .portfolio-header {
   display: flex;
+  flex-shrink: 0;
   justify-content: space-between;
   margin-bottom: 1.25rem;
+  padding: 0 1rem 0 0.6rem;
 }
 </style>

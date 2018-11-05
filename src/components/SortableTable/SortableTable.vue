@@ -11,27 +11,39 @@
         :title="header.title"
         :sort="sort.field === header.field && sort.type || ''"
         :align="header.align"
+        :padding-left="header.paddingLeft"
         @click.native="toggleSort(header.field)"
       />
     </div>
-
-    <div class="sortable-table__body">
-      <slot :sorted-items="sortedItems"/>
-    </div>
-
+    <ScrollingContainer :shadower-height="15">
+      <div class="sortable-table__body">
+        <slot :sorted-items="sortedItems"/>
+      </div>
+    </ScrollingContainer>
   </div>
 </template>
 
 <script>
 import SortableHeaderItem from '@/components/SortableHeaderItem'
+import ScrollingContainer from '@/components/ScrollingContainer'
 import orderBy from 'lodash/orderBy'
 
 export default {
-  components: { SortableHeaderItem },
+  components: { SortableHeaderItem, ScrollingContainer },
   props: {
     headers: {
       type: Array,
       required: true
+    },
+    headerLeftPadding: {
+      type: Number,
+      required: false,
+      default: 0
+    },
+    headerRightPadding: {
+      type: Number,
+      required: false,
+      default: 0
     },
     defaultSort: {
       type: Object,
@@ -61,7 +73,9 @@ export default {
     },
     headerStyle() {
       return {
-        'grid-template-columns': `repeat(${this.headers.length}, 1fr)`
+        'grid-template-columns': `repeat(${this.headers.length}, 1fr)`,
+        'padding-left': `${this.headerLeftPadding}rem`,
+        'padding-right': `${this.headerRightPadding}rem`
       }
     }
   },
@@ -82,9 +96,18 @@ export default {
 </script>
 
 <style lang="scss">
+  .sortable-table {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
   .sortable-table__header {
     color: config('colors.text-primary');
-    padding-bottom: config('padding.2');
     display: grid;
+  }
+  .sortable-table__body {
+    padding-top: config('padding.2');
+    height: 100%;
+    overflow: auto;
   }
 </style>

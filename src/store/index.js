@@ -2,12 +2,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import app from './modules/app'
 import portfolio from './modules/portfolio'
+import books from './modules/books'
 import createPersistedState from 'vuex-persistedstate'
 import vuexBitsharesModules from 'vuex-bitshares'
 import Cookies from 'js-cookie'
 import paths from './cachedPaths'
-import markets from './modules/markets'
-import books from './modules/books'
+import marketsMonitor from './modules/marketsMonitor'
 
 Vue.use(Vuex)
 
@@ -17,7 +17,7 @@ const store = new Vuex.Store({
   actions: {},
   modules: {
     app,
-    markets,
+    marketsMonitor,
     portfolio,
     books,
     ...vuexBitsharesModules

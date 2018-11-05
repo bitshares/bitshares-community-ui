@@ -5,6 +5,7 @@
       'header-item--center-aligned': align === 'center',
       'header-item--right-aligned': align === 'right',
     }"
+    :style="styleObject"
     class="header-item">
     <div
       :class="sort ? 'header-item__title--title-active' : ''"
@@ -48,6 +49,18 @@ export default {
     showIcon: {
       type: Boolean,
       default: true
+    },
+    paddingLeft: {
+      type: Number,
+      required: false,
+      default: 0
+    }
+  },
+  computed: {
+    styleObject() {
+      return {
+        'padding-left': `${this.paddingLeft}rem`
+      }
     }
   }
 }
@@ -75,6 +88,7 @@ export default {
 
 .header-item__title {
   position: relative;
+  white-space: nowrap;
 }
 
 .header-item__arrows {

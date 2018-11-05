@@ -11,21 +11,21 @@
             class="tickers__favourite"
           />
         </div>
-        <div class="tickers-list__itemPair">
+        <div class="tickers-list__itemPair pl-6">
           <span class="_currencyTitle">{{ item.ticker }}</span>
         </div>
-        <div class="_tickerTitle tickers-list__itemVolume"> /{{ item.base }}</div>
+        <div class="_tickerTitle tickers-list__itemVolume pl-6"> /{{ item.base }}</div>
       </div>
       <div class="tickers-list__item _alignRight">
-        <div class="_currencyTitle">{{ item.priceUsd1 }}</div>
-        <div class="_tickerTitle tickers-list__itemVolume">${{ item.priceUsd2 }}</div>
+        <div class="_currencyTitle">{{ +item.price.toFixed(4) }}</div>
+        <div class="_tickerTitle tickers-list__itemVolume">${{ item.usdPrice.toFixed(2) }}</div>
       </div>
       <div class="tickers-list__item _alignRight">
         <div class="tickers-list__itemVolume">{{ volUsd }}</div>
       </div>
-      <div class="tickers-list__item _alignCenter">
+      <div class="tickers-list__item _alignRight">
         <div
-          :class="getClassesOfDynamic({ price: item.change2 })"
+          :class="getClassesOfDynamic({ price: item.change24h })"
           class="_currencyTitle">
           {{ changeValue24 }}
         </div>
@@ -54,16 +54,16 @@
       </div>
       <div class="tickers-list__item _alignCenter">
         <div
-          :class="getClassesOfDynamic({ price: item.change1 })"
+          :class="getClassesOfDynamic({ price: item.change24h })"
           class="_currencyTitle">
-          {{ changeValue7 }}
+          {{ changeValue24 }}
         </div>
       </div>
       <div class="tickers-list__item _alignCenter">
         <div
-          :class="getClassesOfDynamic({ price: item.change2 })"
+          :class="getClassesOfDynamic({ price: item.change7d })"
           class="_currencyTitle">
-          {{ changeValue24 }}
+          {{ changeValue7 }}
         </div>
       </div>
       <div class="tickers-list__item">
@@ -101,8 +101,8 @@ export default {
       default: ''
     },
     marketCap: {
-      type: String,
-      default: ''
+      type: Number,
+      default: 0
     },
     expandMode: {
       type: Boolean,
@@ -112,7 +112,7 @@ export default {
   methods: {
     getClassesOfDynamic({ price }) {
       return {
-        _increase: price >= 0,
+        _increase: price > 0,
         _drop: price < 0
       }
     }
@@ -121,15 +121,21 @@ export default {
 </script>
 <style lang="scss">
   .tickers__favourite {
-    float: left;
-    margin-right: 1rem;
-    margin-top: 0.1875rem;
+    position: absolute;
+    left: -1px;
   }
   .tickers-list__item {
     flex: 1;
     font-size: config('textSizes.xs-sm');
     color: config('colors.tab-header');
     font-family: config('fonts.gotham');
+    position: relative;
+    overflow: hidden;
+  }
+  .tickers-list__itemPair {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .tickers-list__itemVolume {
     font-size: config('textSizes.xs');
@@ -137,13 +143,15 @@ export default {
     opacity: .8;
   }
   .tickers-list-row {
-    display: flex;
-    box-sizing: border-box;
-    padding: 0.4375rem 0;
-    transition: ease-in-out 0.6s ease;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 0.4375rem 1rem 0.4375rem 0.6rem;
+    transition: background 0.2s ease;
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
+      position: relative;
+      z-index: 2;
       background: #131313;
     }
     ._alignRight {
@@ -158,6 +166,8 @@ export default {
     }
     ._currencyTitle {
       color: config('colors.white');
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     ._increase {
       color: config('colors.increase');

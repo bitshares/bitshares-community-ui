@@ -3,31 +3,25 @@
     <div class="dashboard">
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
-          class="lg:w-1/3"
+          class="lg:w-1/2"
           title="account">
-          <div slot="header">
-            <AccountHeader />
-          </div>
-          <div slot="body">
-            <Portfolio />
-          </div>
+          <AccountHeader slot="header"/>
+          <Portfolio slot="body"/>
         </Card>
 
-        <Card
+        <!-- <Card
           class="lg:w-2/3 scrollable"
           title="Transactions">
           <div slot="body">
             <TransactionsHistory/>
           </div>
-        </Card>
-      </div>
+        </Card> -->
 
-      <div class="flex flex-col lg:flex-row mb-2">
-        <card
+        <Card
           :expanded="true"
-          class="lg:w-1/3"
+          class="lg:w-1/2"
           title="markets">
-          <div
+          <!-- <div
             slot="modal"
           >
             <div v-if="expanded">
@@ -39,19 +33,20 @@
                 v-if="showModal"
                 @close="showModal = false"
               >
-                <div slot="body">
-                  <TheMarkets :expand-mode="true"/>
-                </div>
+                <Markets
+                  slot="body"
+                  :expand-mode="true"/>
               </MarketsModal>
             </div>
-          </div>
-          <div slot="body">
-            <TheMarkets
-              :expand-mode="false"
-            />
-          </div>
+          </div> -->
+          <Markets
+            slot="body"
+            :expand-mode="false"
+          />
         </Card>
+      </div>
 
+      <div class="flex flex-col lg:flex-row mb-2">
         <Card
           class="lg:w-1/3"
           title="order book">
@@ -70,11 +65,11 @@ import Portfolio from '@/views/Account/Portfolio.vue'
 import AccountHeader from '@/views/Account/AccountHeader.vue'
 import OrderBook from '@/views/OrderBook/OrderBook'
 
-import MarketsModal from '@/components/Modal'
+// import MarketsModal from '@/components/Modal'
 
 import Card from '@/components/Card'
 import TransactionsHistory from '@/views/TransactionsHistory/'
-import TheMarkets from '@/views/TheMarkets/'
+import Markets from '@/views/Markets/Markets'
 
 export default {
   name: 'Dashboard',
@@ -83,8 +78,8 @@ export default {
     AccountHeader,
     Card,
     TransactionsHistory,
-    TheMarkets,
-    MarketsModal,
+    Markets,
+    // MarketsModal,
     OrderBook
   },
   data() {
