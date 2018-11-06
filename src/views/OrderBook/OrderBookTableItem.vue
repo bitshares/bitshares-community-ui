@@ -88,7 +88,7 @@ export default {
           color: config('colors.book-item-hover');
           font-weight: config('fontWeights.semibold');
           &--buy {
-            background: linear-gradient(to left, config('colors.buy') 100%, config('colors.card-background') 0%) !important;
+            background: config('colors.buy') !important;
           }
         }
       }
@@ -102,7 +102,7 @@ export default {
           color: config('colors.book-item-hover');
           font-weight: config('fontWeights.semibold');
           &--sell {
-            background: linear-gradient(to right, config('colors.sell') 100%, config('colors.card-background') 0%) !important;
+            background: config('colors.sell') !important;
           }
         }
       }

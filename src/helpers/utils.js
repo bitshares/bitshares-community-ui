@@ -25,3 +25,8 @@ export const amountValueShortener = amount => {
   }
   return (amount / valuesToSymbols[i].value).toFixed(1).replace(regex, '$1') + valuesToSymbols[i].symbol
 }
+
+// get max value from array[{}, {}, {}]
+export const getMaxSum = (items, field) => {
+  return Math.max.apply(null, items.map(item => item[field]))
+}

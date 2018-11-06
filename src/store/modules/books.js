@@ -1,4 +1,4 @@
-import orderBy from 'lodash/orderBy'
+import { getMaxSum } from '@/helpers/utils'
 
 const state = {
   lastPrice: '6 745',
@@ -45,8 +45,8 @@ const getters = {
     return state.lastPrice
   },
   getMaxOrderAmount(state) {
-    const maxFromBuy = orderBy(state.orderBook.buying, 'sum', 'desc')[0].sum
-    const maxFromSell = orderBy(state.orderBook.selling, 'sum', 'desc')[0].sum
+    const maxFromBuy = getMaxSum(state.orderBook.buying, 'sum')
+    const maxFromSell = getMaxSum(state.orderBook.selling, 'sum')
 
     return maxFromBuy > maxFromSell ? maxFromBuy : maxFromSell
   },
