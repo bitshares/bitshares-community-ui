@@ -125,6 +125,7 @@ export default {
     left: -1px;
   }
   .tickers-list__item {
+    font-weight: config('fontWeights.semibold');
     flex: 1;
     font-size: config('textSizes.xs-sm');
     color: config('colors.tab-header');

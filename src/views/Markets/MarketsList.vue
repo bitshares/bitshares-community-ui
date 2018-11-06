@@ -93,7 +93,6 @@ export default {
 <style lang="scss">
   .tickers-list {
     margin-top: 0.8rem;
-    font-weight: config('fontWeights.semibold');
     height: 100%;
     overflow: hidden;
 
