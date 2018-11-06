@@ -24,7 +24,9 @@
           class="lg:w-1/2"
           title="markets">
           <Markets slot="body"/>
-          <Markets slot="modal" :expand-mode="true"/>
+          <Markets
+            slot="modal"
+            :expand-mode="true"/>
         </Card>
       </div>
 

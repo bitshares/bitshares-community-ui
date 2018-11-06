@@ -2,18 +2,23 @@
   <div class="card-container lg:mr-2 mb-2 lg:mb-0">
     <div
       class="card border-transparent sm:border-card-border"
-    > 
+    >
 
-      <div class="card-container--expanded" @click="expanded = false" v-if="expanded">
+      <div
+        v-if="expanded"
+        class="card-container--expanded"
+        @click="expanded = false">
         <div
-          @click.stop
           class="card border-transparent sm:border-card-border"
+          @click.stop
         >
           <div class="card-header">
             <div class="title">
               <div> {{ title }} </div>
             </div>
-            <div class="expand-btn" @click="expanded = !expanded">></div>
+            <div
+              class="expand-btn"
+              @click="expanded = !expanded">></div>
             <slot
               class="header"
               name="modal-header"/>
@@ -21,14 +26,16 @@
           <div class="card-body">
             <slot name="modal" />
           </div>
-        </div> 
+        </div>
       </div>
 
       <div class="card-header">
         <div class="title">
           <div> {{ title }} </div>
         </div>
-        <div class="expand-btn" @click="expanded = !expanded">></div>
+        <div
+          class="expand-btn"
+          @click="expanded = !expanded">></div>
         <slot
           class="header"
           name="header"/>
@@ -45,15 +52,15 @@ import ScrollingContainer from '@/components/ScrollingContainer/ScrollingContain
 
 export default {
   components: { ScrollingContainer },
-  data() {
-    return {
-      expanded: false
-    }
-  },
   props: {
     title: {
       type: String,
       default: ''
+    }
+  },
+  data() {
+    return {
+      expanded: false
     }
   }
 }
@@ -73,7 +80,6 @@ export default {
   align-items: center;
   transition: opacity .3s ease;
 }
-
 
 .card {
   height: 25rem;
