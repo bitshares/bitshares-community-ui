@@ -18,6 +18,7 @@
       :spellcheck="false"
       class="input__input"
       @input="handleInput"
+      @focus="handleFocus"
       @blur="handleBlur"
       @paste="handlePaste"
       @keyup.enter="$refs.input.blur"
@@ -167,6 +168,9 @@ export default {
       const number = this.value + (parseInt(text) || null)
       this.$debouncedTouch()
       this.$emit('input', number)
+    },
+    handleFocus() {
+      this.$emit('focus')
     },
     handleBlur() {
       this.$emit('blur', this.$refs.input.value)

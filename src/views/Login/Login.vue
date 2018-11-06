@@ -30,18 +30,21 @@
           slot="private key"
           class="login__form">
           <VInput
-            v-show="!file"
-            v-model.trim="brainkey"
+            v-model="brainkey"
             :errors="$v.brainkey"
             input-name="brainkey"
             class="mb-6"
+            @focus="onBrainkeyInputFocus"
+            @blur="onBrainkeyInputBlur"
           />
 
           <KeyfileLoader
+            v-if="showFileField"
             @select="selectFile"
-            @remove="removeFile"/>
+            @remove="removeFile"
+          />
 
-          <template v-if="!file">
+          <template v-if="$v.brainkey.brainkeyValidator">
             <VInput
               v-model.trim="pin"
               :errors="$v.pin"
@@ -49,7 +52,6 @@
               input-name="pin"
               class="mb-4 mt-2"
             />
-
             <VInput
               v-model.trim="confirmPin"
               :errors="$v.confirmPin"
@@ -57,7 +59,7 @@
               input-name="confirmPin"
             />
           </template>
-          <template v-else>
+          <template v-if="file">
             <VInput
               v-model.trim="pin"
               :errors="$v.pin"
@@ -83,9 +85,6 @@
       <div class="login__footer">
         <div class="footer-link">
           <router-link :to="{ name: 'signup' }">Sign up with new account</router-link>
-        </div>
-        <div class="footer-link">
-          <router-link :to="{ name: 'login' }">I accept Terms of Use</router-link>
         </div>
       </div>
     </div>
@@ -128,10 +127,11 @@ export default {
           name: {},
           password: {},
           brainkey: {
-            required: (value) => {
+            required: value => {
               if (this.file) return true
               return required(value)
-            }
+            },
+            brainkeyValidator: value => (value.split(' ').length - 1 >= 15)
           },
           pin: { required, minLength: minLength(6) },
           confirmPin: { sameAsPin: sameAs('pin') }
@@ -148,7 +148,8 @@ export default {
       confirmPin: '',
       inProgress: false,
       type: 'password',
-      file: null
+      file: null,
+      showFileField: true
     }
   },
   computed: {
@@ -207,6 +208,12 @@ export default {
     },
     removeFile() {
       this.file = null
+    },
+    onBrainkeyInputFocus() {
+      this.showFileField = false
+    },
+    onBrainkeyInputBlur() {
+      this.showFileField = true
     }
   }
 }
