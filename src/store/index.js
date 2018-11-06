@@ -4,11 +4,12 @@ import app from './modules/app'
 import portfolio from './modules/portfolio'
 import books from './books'
 import createPersistedState from 'vuex-persistedstate'
-import vuexBitsharesModules from 'vuex-bitshares'
+import vuexBitshares from 'vuex-bitshares'
 import Cookies from 'js-cookie'
 import paths from './cachedPaths'
 import marketsMonitor from './modules/marketsMonitor'
 
+const { modules, plugins } = vuexBitshares
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -20,7 +21,7 @@ const store = new Vuex.Store({
     marketsMonitor,
     portfolio,
     books,
-    ...vuexBitsharesModules
+    ...modules
   },
   plugins: [
     createPersistedState({
@@ -30,7 +31,8 @@ const store = new Vuex.Store({
         removeItem: key => Cookies.remove(key)
       },
       paths: [...paths]
-    })
+    }),
+    plugins.fetchingAssets
   ]
 })
 
