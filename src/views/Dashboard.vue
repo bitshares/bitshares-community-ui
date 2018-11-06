@@ -21,24 +21,7 @@
           :expanded="true"
           class="lg:w-1/2"
           title="markets">
-          <!-- <div
-            slot="modal"
-          >
-            <div v-if="expanded">
-              <div
-                class="card-expanded"
-                @click="showModal = true"
-              />
-              <MarketsModal
-                v-if="showModal"
-                @close="showModal = false"
-              >
-                <Markets
-                  slot="body"
-                  :expand-mode="true"/>
-              </MarketsModal>
-            </div>
-          </div> -->
+          <MarketsSearch slot="header"/>
           <Markets
             slot="body"
             :expand-mode="false"
@@ -75,6 +58,7 @@ import OrderBookLastPrice from '@/views/OrderBook/OrderBookLastPrice'
 import Card from '@/components/Card'
 import TransactionsHistory from '@/views/TransactionsHistory/'
 import Markets from '@/views/Markets/Markets'
+import MarketsSearch from '@/views/Markets/MarketsSearch'
 
 export default {
   name: 'Dashboard',
@@ -84,15 +68,10 @@ export default {
     Card,
     TransactionsHistory,
     Markets,
+    MarketsSearch,
     // MarketsModal,
     OrderBook,
     OrderBookLastPrice
-  },
-  data() {
-    return {
-      expanded: true,
-      showModal: false
-    }
   }
 }
 </script>
