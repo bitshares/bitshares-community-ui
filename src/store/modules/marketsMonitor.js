@@ -1,14 +1,19 @@
 const types = {
   UPDATE_FAVOURITES: 'UPDATE_FAVOURITES',
-  UPDATE_CURRENT_BASE: 'UPDATE_CURRENT_BASE'
+  UPDATE_CURRENT_BASE: 'UPDATE_CURRENT_BASE',
+  UPDATE_SEARCH_STR: 'UPDATE_SEARCH_STR'
 }
 
 const state = {
   currentBase: 'USD',
-  favourites: {}
+  favourites: {},
+  searchStr: ''
 }
 
 const getters = {
+  getSearchStr(state) {
+    return state.searchStr
+  },
   getCurrentList: (state, getters, rootState, rootGetters) => {
     const base = getters.getCurrentBase
     const stats = rootGetters['market/getMarketStats']
@@ -57,6 +62,9 @@ const mutations = {
   },
   [types.UPDATE_CURRENT_BASE](state, base) {
     state.currentBase = base
+  },
+  [types.UPDATE_SEARCH_STR](state, value) {
+    state.searchStr = value
   }
 }
 
@@ -86,6 +94,9 @@ const actions = {
     }
 
     commit(types.UPDATE_CURRENT_BASE, base)
+  },
+  changeSearchStr({ commit }, value) {
+    commit(types.UPDATE_SEARCH_STR, value)
   }
 }
 
