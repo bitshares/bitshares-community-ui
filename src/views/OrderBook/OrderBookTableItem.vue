@@ -7,10 +7,6 @@
     class="order-book-table-row"
   >
     <div
-      :class="{
-        'order-book-table-item--buy': type === 'buy',
-        'order-book-table-item--sell': type === 'sell'
-      }"
       :style="styleBackground"
       class="order-book-table-item"
     >
@@ -68,8 +64,9 @@ export default {
     display: flex;
     height: 26px;
     line-height: 26px;
-
     .order-book-table-item {
+      flex: 1;
+      cursor: pointer;
       .order-book-item-sum {
         color: config('colors.text-primary');
       }
@@ -82,54 +79,45 @@ export default {
     &--buy {
       text-align: left;
       flex-direction: row;
+      .order-book-table-item {
+        color: config('colors.buy');
+        text-align: right;
+        margin-right: config('margin.book-item-m');
+        padding-right: config('padding.book-item-p');
+        .order-book-item-sum {
+          margin-left: config('margin.book-item-m10');
+          float: left;
+        }
+      }
       &:hover {
         background: config('colors.buy');
         .order-book-table-item {
           color: config('colors.book-item-hover');
           font-weight: config('fontWeights.semibold');
-          &--buy {
-            background: config('colors.buy') !important;
-          }
+          background: config('colors.buy') !important;
         }
       }
     }
     &--sell {
       text-align: right;
       flex-direction: row-reverse;
+      .order-book-table-item {
+        color: config('colors.sell');
+        text-align: left;
+        margin-left: config('margin.book-item-m');
+        padding-left:config('padding.book-item-p');
+        .order-book-item-sum {
+          margin-right: 1rem;
+          float: right;
+        }
+      }
       &:hover {
         background: config('colors.sell');
         .order-book-table-item {
           color: config('colors.book-item-hover');
           font-weight: config('fontWeights.semibold');
-          &--sell {
-            background: config('colors.sell') !important;
-          }
+          background: config('colors.sell') !important;
         }
-      }
-    }
-  }
-  .order-book-table-item {
-    cursor: pointer;
-    &--buy {
-      flex: 1;
-      color: config('colors.buy');
-      text-align: right;
-      margin-right: config('margin.book-item-m');
-      padding-right: config('padding.book-item-p');
-      .order-book-item-sum {
-        margin-left: config('margin.book-item-m10');
-        float: left;
-      }
-    }
-    &--sell {
-      flex: 1;
-      color: config('colors.sell');
-      text-align: left;
-      margin-left: config('margin.book-item-m');
-      padding-left:config('padding.book-item-p');
-      .order-book-item-sum {
-        margin-right: 1rem;
-        float: right;
       }
     }
   }
