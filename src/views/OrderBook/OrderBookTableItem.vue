@@ -9,7 +9,8 @@
     <div
       :class="{
         'order-book-table-item--buy': type === 'buy',
-        'order-book-table-item--sell': type === 'sell'
+        'order-book-table-item--sell': type === 'sell',
+        'order-book-table-item--last': isLast
       }"
       :style="styleBackground"
       class="order-book-table-item"
@@ -41,6 +42,10 @@ export default {
     maxSum: {
       type: Number,
       default: 0
+    },
+    isLast: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -72,6 +77,9 @@ export default {
     .order-book-table-item {
       .order-book-item-sum {
         color: config('colors.text-primary');
+      }
+      &--last {
+        z-index: 100;
       }
       &:hover {
         .order-book-item-sum {

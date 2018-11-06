@@ -12,7 +12,6 @@
       :items="items"
       :headers="tableHeaders"
       :type="tableType"
-      :shadower-height="shadowerHeight"
     >
       <template slot-scope="{ sortedItems }">
         <OrderBookTableItem
@@ -22,6 +21,7 @@
           :align="align"
           :type="tableType"
           :max-sum="maxSum"
+          :is-last="sortedItems.length - 1 === index"
         />
       </template>
     </SortableTable>
@@ -63,9 +63,7 @@ export default {
     }
   },
   data() {
-    return {
-      shadowerHeight: 2
-    }
+    return {}
   },
   computed: {
     tableType() {
