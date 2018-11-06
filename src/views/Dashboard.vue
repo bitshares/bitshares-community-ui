@@ -6,7 +6,9 @@
           class="lg:w-1/2"
           title="account">
           <AccountHeader slot="header"/>
+          <AccountHeader slot="modal-header"/>
           <Portfolio slot="body"/>
+          <Portfolio slot="modal"/>
         </Card>
 
         <!-- <Card
@@ -21,28 +23,8 @@
           :expanded="true"
           class="lg:w-1/2"
           title="markets">
-          <!-- <div
-            slot="modal"
-          >
-            <div v-if="expanded">
-              <div
-                class="card-expanded"
-                @click="showModal = true"
-              />
-              <MarketsModal
-                v-if="showModal"
-                @close="showModal = false"
-              >
-                <Markets
-                  slot="body"
-                  :expand-mode="true"/>
-              </MarketsModal>
-            </div>
-          </div> -->
-          <Markets
-            slot="body"
-            :expand-mode="false"
-          />
+          <Markets slot="body"/>
+          <Markets slot="modal" :expand-mode="true"/>
         </Card>
       </div>
 

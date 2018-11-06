@@ -1,18 +1,41 @@
 <template>
-  <div
-    class="card lg:mr-2 mb-2 lg:mb-0 border-transparent sm:border-card-border"
-  >
-    <div class="card-header">
-      <div class="title">
-        <div> {{ title }} </div>
+  <div class="card-container lg:mr-2 mb-2 lg:mb-0">
+    <div
+      class="card border-transparent sm:border-card-border"
+    > 
+
+      <div class="card-container--expanded" @click="expanded = false" v-if="expanded">
+        <div
+          @click.stop
+          class="card border-transparent sm:border-card-border"
+        >
+          <div class="card-header">
+            <div class="title">
+              <div> {{ title }} </div>
+            </div>
+            <div class="expand-btn" @click="expanded = !expanded">></div>
+            <slot
+              class="header"
+              name="modal-header"/>
+          </div>
+          <div class="card-body">
+            <slot name="modal" />
+          </div>
+        </div> 
       </div>
-      <slot name="modal"/>
-      <slot
-        class="header"
-        name="header"/>
-    </div>
-    <div class="card-body">
-      <slot name="body" />
+
+      <div class="card-header">
+        <div class="title">
+          <div> {{ title }} </div>
+        </div>
+        <div class="expand-btn" @click="expanded = !expanded">></div>
+        <slot
+          class="header"
+          name="header"/>
+      </div>
+      <div class="card-body">
+        <slot name="body" />
+      </div>
     </div>
   </div>
 </template>
@@ -22,6 +45,11 @@ import ScrollingContainer from '@/components/ScrollingContainer/ScrollingContain
 
 export default {
   components: { ScrollingContainer },
+  data() {
+    return {
+      expanded: false
+    }
+  },
   props: {
     title: {
       type: String,
@@ -32,6 +60,20 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.card-container--expanded {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity .3s ease;
+}
+
 
 .card {
   height: 25rem;
@@ -68,6 +110,12 @@ export default {
   flex-shrink: 0;
   justify-content: space-between;
   align-items: baseline;
+  position: relative;
+  .expand-btn {
+    top: 5px;
+    right: 5px;
+    position: absolute;
+  }
 }
 
 .title {
