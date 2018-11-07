@@ -7,6 +7,7 @@
     class="order-book-table-row"
   >
     <div
+      :class="{'order-book-table-item--last': isLast}"
       :style="styleBackground"
       class="order-book-table-item"
     >
@@ -75,6 +76,7 @@ export default {
         color: config('colors.text-primary');
       }
       &--last {
+        position: relative;
         z-index: 100;
       }
       &:hover {
