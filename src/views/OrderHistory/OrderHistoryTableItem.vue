@@ -1,6 +1,9 @@
 <template>
   <div class="order-history-table-item">
-    <div class="order-history-table-row">
+    <div
+      :class="{'order-history-table-row--last': isLast }"
+      class="order-history-table-row"
+    >
       <div class="order-history-table-item">{{ item.base }}</div>
       <div class="order-history-table-item">{{ item.price }}</div>
       <div class="order-history-table-item">{{ item.ticker }}</div>
@@ -20,6 +23,10 @@ export default {
       default() {
         return {}
       }
+    },
+    isLast: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -28,6 +35,11 @@ export default {
   .order-history-table-row {
     display: flex;
     color: config('colors.white');
+
+    &--last {
+      position: relative;
+      z-index: 10;
+    }
   }
   .order-history-table-item {
     flex: 1;
