@@ -6,12 +6,12 @@
     >
       <div class="modal-wrapper">
         <div class="modal-container">
-          <slot name="body"/>
-          <div
+          <slot/>
+          <!-- <div
             class="modal-close"
             @click="$emit('close')">
             <svgicon name="cancel"/>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

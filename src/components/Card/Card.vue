@@ -4,12 +4,9 @@
       class="card border-transparent sm:border-card-border"
     >
 
-      <div
-        v-if="expanded"
-        class="card-container--expanded"
-        @click="expanded = false">
+      <Modal v-if="expanded" @close="expanded = false">
         <div
-          class="card border-transparent sm:border-card-border"
+          class="card border-card-border"
           @click.stop
         >
           <div class="card-header">
@@ -27,7 +24,7 @@
             <slot name="modal" />
           </div>
         </div>
-      </div>
+      </Modal>
 
       <div class="card-header">
         <div class="title">
@@ -48,10 +45,10 @@
 </template>
 
 <script>
-import ScrollingContainer from '@/components/ScrollingContainer/ScrollingContainer.vue'
+import Modal from '@/components/Modal'
 
 export default {
-  components: { ScrollingContainer },
+  components: { Modal },
   props: {
     title: {
       type: String,
