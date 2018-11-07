@@ -29,19 +29,15 @@
         </Card>
       </div>
 
-      <!-- <div class="flex flex-col lg:flex-row mb-2">
-
+      <div class="flex flex-col lg:flex-row mb-2">
         <Card
-          class="lg:w-2/3"
+          class="lg:w-1/2"
           title="order book">
-          <div slot="header">
-            <OrderBookLastPrice/>
-          </div>
           <div slot="body">
             <OrderBook/>
           </div>
         </Card>
-      </div> -->
+      </div>
 
     </div>
   </div>
@@ -69,7 +65,6 @@ export default {
     TransactionsHistory,
     Markets,
     MarketsSearch,
-    // MarketsModal,
     OrderBook,
     OrderBookLastPrice
   }
