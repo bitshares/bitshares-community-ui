@@ -4,7 +4,9 @@
       class="card border-transparent sm:border-card-border"
     >
 
-      <Modal v-if="expanded" @close="expanded = false">
+      <Modal
+        v-if="expanded"
+        @close="expanded = false">
         <div
           class="card border-card-border"
           @click.stop
