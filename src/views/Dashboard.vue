@@ -33,7 +33,7 @@
           <OrderBook slot="body"/>
         </Card>
         <Card
-          class="lg:w-1/2 uppercase"
+          class="lg:w-1/2"
           title="My orders history">
           <OrderHistory slot="body"/>
         </Card>
