@@ -12,7 +12,6 @@
         :sort="sort.field === header.field && sort.type || ''"
         :align="header.align"
         :padding-left="header.paddingLeft"
-        :type="type"
         @click.native="toggleSort(header.field)"
       />
     </div>
@@ -57,10 +56,6 @@ export default {
     items: {
       required: true,
       type: Array
-    },
-    type: {
-      type: String,
-      default: ''
     },
     shadowerHeight: {
       type: Number,

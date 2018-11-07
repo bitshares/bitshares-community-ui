@@ -1,3 +1,5 @@
+import { getMaxSum } from '@/helpers/utils'
+
 const state = {
   lastPrice: '6 745',
   orderBook: {
@@ -43,8 +45,8 @@ const getters = {
     return state.lastPrice
   },
   getMaxOrderAmount(state) {
-    const maxFromBuy = state.orderBook.buying.slice(0).pop().sum
-    const maxFromSell = state.orderBook.selling.slice(0).pop().sum
+    const maxFromBuy = getMaxSum(state.orderBook.buying, 'sum')
+    const maxFromSell = getMaxSum(state.orderBook.selling, 'sum')
 
     return maxFromBuy > maxFromSell ? maxFromBuy : maxFromSell
   },

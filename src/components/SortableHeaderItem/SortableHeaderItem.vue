@@ -8,11 +8,7 @@
     :style="styleObject"
     class="header-item">
     <div
-      :class="{
-        'header-item__title--title-active': sort,
-        'header-item__title--sell': type === 'sell',
-        'header-item__title--buy': type === 'buy'
-      }"
+      :class="{'header-item__title--title-active': sort}"
       class="header-item__title">
       {{ title }}
       <div
@@ -58,10 +54,6 @@ export default {
       type: Number,
       required: false,
       default: 0
-    },
-    type: {
-      type: String,
-      default: ''
     }
   },
   computed: {
@@ -97,12 +89,6 @@ export default {
 .header-item__title {
   position: relative;
   white-space: nowrap;
-  &--buy {
-    margin-left: config('margin.book-item-m10');
-  }
-  &--sell {
-    margin-right: config('margin.book-item-m10');
-  }
 }
 
 .header-item__arrows {
