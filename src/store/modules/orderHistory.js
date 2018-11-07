@@ -1,4 +1,9 @@
+const types = {
+  UPDATE_SEARCH_STR: 'UPDATE_SEARCH_STR'
+}
+
 const state = {
+  searchStr: '',
   history: [
     {
       base: 'BTC',
@@ -55,6 +60,9 @@ const state = {
 }
 
 const getters = {
+  getSearchStr(state) {
+    return state.searchStr
+  },
   getHistory(state) {
     // more data, for scroll test
     return state.history
@@ -66,9 +74,15 @@ const getters = {
 }
 
 const mutations = {
+  [types.UPDATE_SEARCH_STR](state, value) {
+    state.searchStr = value
+  }
 }
 
 const actions = {
+  changeSearchStr({ commit }, value) {
+    commit(types.UPDATE_SEARCH_STR, value)
+  }
 }
 
 export default {

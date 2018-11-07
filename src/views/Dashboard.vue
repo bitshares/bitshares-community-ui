@@ -35,6 +35,7 @@
         <Card
           class="lg:w-1/2"
           title="My orders history">
+          <OrderHistorySearch slot="header"/>
           <OrderHistory slot="body"/>
         </Card>
       </div>
@@ -55,6 +56,7 @@ import TransactionsHistory from '@/views/TransactionsHistory/'
 import Markets from '@/views/Markets/Markets'
 import MarketsSearch from '@/views/Markets/MarketsSearch'
 import OrderHistory from '@/views/OrderHistory/OrderHistory'
+import OrderHistorySearch from '@/views/OrderHistory/OrderHistorySearch'
 
 export default {
   name: 'Dashboard',
@@ -67,7 +69,8 @@ export default {
     MarketsSearch,
     OrderBook,
     OrderBookLastPrice,
-    OrderHistory
+    OrderHistory,
+    OrderHistorySearch
   }
 }
 </script>

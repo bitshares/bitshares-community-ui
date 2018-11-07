@@ -2,7 +2,7 @@
   <div class="order-history">
     <OrderHistoryTable
       :table-headers="tableHeaders"
-      :items="historyItems"
+      :items="history"
     />
   </div>
 </template>
@@ -29,8 +29,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      historyItems: 'orderHistory/getHistory'
-    })
+      historyItems: 'orderHistory/getHistory',
+      searchStr: 'orderHistory/getSearchStr'
+    }),
+    history() {
+      if (!this.searchStr) return this.historyItems
+
+      return this.historyItems.filter(item => item.base.toLowerCase().includes(this.searchStr.toLowerCase()))
+    }
   }
 }
 </script>
