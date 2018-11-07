@@ -2,6 +2,7 @@
   <div class="order-history">
     <OrderHistoryTable
       :table-headers="tableHeaders"
+      :items="historyItems"
     />
   </div>
 </template>
