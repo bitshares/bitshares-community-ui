@@ -34,3 +34,9 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+  .order-history {
+    position: relative;
+    height: 100%;
+  }
+</style>

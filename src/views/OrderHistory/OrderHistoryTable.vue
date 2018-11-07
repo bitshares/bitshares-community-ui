@@ -44,3 +44,8 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+  .order-history-table {
+    height: 100%;
+  }
+</style>
