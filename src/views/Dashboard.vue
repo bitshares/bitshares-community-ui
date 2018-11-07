@@ -8,7 +8,6 @@
           <AccountHeader slot="header"/>
           <Portfolio slot="body"/>
         </Card>
-
         <!-- <Card
           class="lg:w-2/3 scrollable"
           title="Transactions">
@@ -16,7 +15,6 @@
             <TransactionsHistory/>
           </div>
         </Card> -->
-
         <Card
           :expanded="true"
           class="lg:w-1/2"
@@ -28,15 +26,18 @@
           />
         </Card>
       </div>
-
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
           class="lg:w-1/2"
           title="order book">
           <OrderBook slot="body"/>
         </Card>
+        <Card
+          class="lg:w-1/2 uppercase"
+          title="My orders history">
+          <OrderHistory slot="body"/>
+        </Card>
       </div>
-
     </div>
   </div>
 </template>
@@ -53,6 +54,7 @@ import Card from '@/components/Card'
 import TransactionsHistory from '@/views/TransactionsHistory/'
 import Markets from '@/views/Markets/Markets'
 import MarketsSearch from '@/views/Markets/MarketsSearch'
+import OrderHistory from '@/views/OrderHistory/OrderHistory'
 
 export default {
   name: 'Dashboard',
@@ -64,7 +66,8 @@ export default {
     Markets,
     MarketsSearch,
     OrderBook,
-    OrderBookLastPrice
+    OrderBookLastPrice,
+    OrderHistory
   }
 }
 </script>
