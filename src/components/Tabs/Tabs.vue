@@ -48,6 +48,11 @@ export default {
     currencyMode: {
       default: false,
       type: Boolean
+    },
+    active: {
+      type: String,
+      required: false,
+      default: ''
     }
   },
   data() {

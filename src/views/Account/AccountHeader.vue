@@ -26,7 +26,6 @@ export default {
   font-family: config("fonts.gotham");
   font-size: config('textSizes.sm');
   display: flex;
-  padding-right: 0.3rem;
   align-items: baseline;
   color: config('colors.text-primary');
 }

@@ -5,32 +5,18 @@
       @click.self.stop="$emit('close')"
     >
       <div class="modal-wrapper">
-        <div class="modal-container">
-          <slot name="body"/>
-          <div
-            class="modal-close"
-            @click="$emit('close')">
-            <svgicon name="cancel"/>
-          </div>
-        </div>
+        <slot/>
       </div>
     </div>
   </transition>
 </template>
+
 <script>
-import '@icons/cancel'
 
-export default {
-}
+export default {}
 </script>
-<style lang="scss">
-.modal-wrapper {
-  width: config('screens.md');
-  height: auto;
-  position: relative;
-  background-color: config('colors.black');
 
-}
+<style lang="scss">
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -45,25 +31,9 @@ export default {
   transition: opacity .3s ease;
 }
 
-.modal-close {
-  position: absolute;
-  right: -0.625rem;
-  top: -2.1875rem;
-  opacity: .7;
-
-  &:hover {
-    opacity: 1;
-    cursor: pointer;
-  }
-}
-
-.modal-container {
-  margin: 0 auto;
-  padding: 0.3125rem;
+.modal-wrapper {
+  width: config('screens.md');
   transition: all .3s ease;
-  background: config('colors.bg-base');
-  opacity: 1;
-  z-index: 1000;
 }
 
 .modal-enter {
@@ -74,8 +44,8 @@ export default {
   opacity: 0;
 }
 
-.modal-enter .modal-container,
-.modal-leave-active .modal-container {
+.modal-enter .modal-wrapper,
+.modal-leave-active .modal-wrapper {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
