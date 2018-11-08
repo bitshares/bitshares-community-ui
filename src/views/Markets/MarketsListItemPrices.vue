@@ -6,8 +6,8 @@
     >
       <div class="tickers-list__item">
         <Star
-          class="tickers__favourite"
           :active="isFavourite"
+          class="tickers__favourite"
           @click.native="$emit('change', { item })"
         />
         <div class="tickers-list__itemPair pl-6">
@@ -134,7 +134,7 @@ export default {
     position: relative;
     overflow: hidden;
   }
-  
+
   .tickers-list__itemVolume {
     font-size: config('textSizes.xs');
     color: config('colors.white');

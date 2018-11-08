@@ -51,7 +51,8 @@ export default {
     },
     active: {
       type: String,
-      required: false
+      required: false,
+      default: ''
     }
   },
   data() {

@@ -3,9 +3,9 @@
     <div class="dashboard">
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
+          :expandable="true"
           class="lg:w-1/2"
           title="account"
-          :expandable="true"
         >
           <AccountHeader slot="header"/>
           <AccountHeader slot="modal-header"/>
@@ -22,8 +22,8 @@
         </Card> -->
 
         <Card
-          class="lg:w-1/2"
           :expandable="true"
+          class="lg:w-1/2"
           title="markets"
         >
           <MarketsSearch slot="header"/>

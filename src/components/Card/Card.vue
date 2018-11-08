@@ -38,8 +38,8 @@
           <div> {{ title }} </div>
         </div>
         <div
-          class="expand-btn hidden"
           v-if="expandable"
+          class="expand-btn hidden"
           @click="expanded = !expanded">
           <svgicon
             class="expand-icon"
@@ -104,7 +104,6 @@ export default {
     padding-right: 2rem;
   }
 }
-
 
 .card-header {
   padding:config('padding.card-ui');
