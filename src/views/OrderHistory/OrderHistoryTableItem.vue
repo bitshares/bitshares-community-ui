@@ -8,7 +8,7 @@
       <div class="order-history-table-item">{{ item.price }}</div>
       <div class="order-history-table-item">{{ item.ticker }}</div>
       <div class="order-history-table-item">{{ item.dateOpen }}</div>
-      <div class="order-history-table-item">{{ item.dateTime }}</div>
+      <div class="order-history-table-item">{{ item.dateClose }}</div>
       <div class="order-history-table-item">{{ item.get }}</div>
       <div class="order-history-table-item">{{ item.spend }}</div>
     </div>
