@@ -8,7 +8,7 @@
     :style="styleObject"
     class="header-item">
     <div
-      :class="sort ? 'header-item__title--title-active' : ''"
+      :class="{'header-item__title--title-active': sort}"
       class="header-item__title">
       {{ title }}
       <div

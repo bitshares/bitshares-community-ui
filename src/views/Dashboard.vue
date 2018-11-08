@@ -12,7 +12,6 @@
           <Portfolio slot="body"/>
           <Portfolio slot="modal"/>
         </Card>
-
         <!-- <Card
           class="lg:w-2/3 scrollable"
           title="Transactions">
@@ -20,7 +19,6 @@
             <TransactionsHistory/>
           </div>
         </Card> -->
-
         <Card
           :expandable="true"
           class="lg:w-1/2"
@@ -34,21 +32,19 @@
             :expand-mode="true"/>
         </Card>
       </div>
-
-      <!-- <div class="flex flex-col lg:flex-row mb-2">
-
+      <div class="flex flex-col lg:flex-row mb-2">
         <Card
-          class="lg:w-2/3"
+          class="lg:w-1/2"
           title="order book">
-          <div slot="header">
-            <OrderBookLastPrice/>
-          </div>
-          <div slot="body">
-            <OrderBook/>
-          </div>
+          <OrderBook slot="body"/>
         </Card>
-      </div> -->
-
+        <Card
+          class="lg:w-1/2"
+          title="My orders history">
+          <OrderHistorySearch slot="header"/>
+          <OrderHistory slot="body"/>
+        </Card>
+      </div>
     </div>
   </div>
 </template>
@@ -63,6 +59,8 @@ import Card from '@/components/Card'
 import TransactionsHistory from '@/views/TransactionsHistory/'
 import Markets from '@/views/Markets/Markets'
 import MarketsSearch from '@/views/Markets/MarketsSearch'
+import OrderHistory from '@/views/OrderHistory/OrderHistory'
+import OrderHistorySearch from '@/views/OrderHistory/OrderHistorySearch'
 
 export default {
   name: 'Dashboard',
@@ -74,7 +72,9 @@ export default {
     Markets,
     MarketsSearch,
     OrderBook,
-    OrderBookLastPrice
+    OrderBookLastPrice,
+    OrderHistory,
+    OrderHistorySearch
   }
 }
 </script>
