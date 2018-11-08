@@ -4,7 +4,9 @@
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
           class="lg:w-1/2"
-          title="account">
+          title="account"
+          :expandable="true"
+        >
           <AccountHeader slot="header"/>
           <AccountHeader slot="modal-header"/>
           <Portfolio slot="body"/>
@@ -20,10 +22,13 @@
         </Card> -->
 
         <Card
-          :expanded="true"
           class="lg:w-1/2"
-          title="markets">
+          :expandable="true"
+          title="markets"
+        >
+          <MarketsSearch slot="header"/>
           <Markets slot="body"/>
+          <MarketsSearch slot="modal-header"/>
           <Markets
             slot="modal"
             :expand-mode="true"/>
@@ -54,11 +59,10 @@ import AccountHeader from '@/views/Account/AccountHeader.vue'
 import OrderBook from '@/views/OrderBook/OrderBook'
 import OrderBookLastPrice from '@/views/OrderBook/OrderBookLastPrice'
 
-// import MarketsModal from '@/components/Modal'
-
 import Card from '@/components/Card'
 import TransactionsHistory from '@/views/TransactionsHistory/'
 import Markets from '@/views/Markets/Markets'
+import MarketsSearch from '@/views/Markets/MarketsSearch'
 
 export default {
   name: 'Dashboard',
@@ -68,15 +72,9 @@ export default {
     Card,
     TransactionsHistory,
     Markets,
-    // MarketsModal,
+    MarketsSearch,
     OrderBook,
     OrderBookLastPrice
-  },
-  data() {
-    return {
-      expanded: true,
-      showModal: false
-    }
   }
 }
 </script>

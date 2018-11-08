@@ -60,7 +60,7 @@ export default {
   padding-left: 0;
   padding-right: 0;
   transition: background-color 0.15s ease;
-  padding: config('padding.grid-table') 1rem config('padding.grid-table') 0.6rem;
+  padding: config('padding.grid-table') 1.5rem config('padding.grid-table') 1rem;
   &:hover {
     position: relative;
     z-index: 2;

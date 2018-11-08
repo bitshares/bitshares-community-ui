@@ -31,7 +31,6 @@
 </template>
 <script>
 import Tabs from '@/components/Tabs'
-import SearchInput from '@/components/SearchInput'
 import LoadingContainer from '@/components/LoadingContainer'
 import MarketsList from './MarketsList'
 
@@ -41,7 +40,6 @@ export default {
   name: 'TheMarkets',
   components: {
     Tabs,
-    SearchInput,
     MarketsList,
     LoadingContainer
   },
@@ -52,16 +50,15 @@ export default {
     }
   },
   data() {
-    return {
-      searchValue: ''
-    }
+    return {}
   },
   computed: {
     ...mapGetters({
       currentBase: 'marketsMonitor/getCurrentBase',
       list: 'marketsMonitor/getCurrentList',
       favourites: 'marketsMonitor/getFavouritesList',
-      isFetching: 'marketsMonitor/isListFetching'
+      isFetching: 'marketsMonitor/isListFetching',
+      searchStr: 'marketsMonitor/getSearchStr'
     }),
     showLoader() {
       if (this.favouritesMode) return this.isFetching
@@ -74,7 +71,7 @@ export default {
       return this.favouritesMode ? this.favourites : this.list
     },
     filteredItems() {
-      return this.itemsList.filter(item => item.ticker.toLowerCase().includes(this.searchValue.toLowerCase()))
+      return this.itemsList.filter(item => item.ticker.toLowerCase().includes(this.searchStr.toLowerCase()))
     }
   },
   methods: {
@@ -100,29 +97,5 @@ export default {
     flex-direction: row;
     flex-shrink: 0;
     justify-content: space-between;
-    background: #0A0A0A;
-
-    .search-wrapper {
-      margin-left: -5.9375rem;
-    }
-    .tickers-search {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: -1.375rem;
-      background: config('colors.bg-base');
-    }
-  }
-  .markets_expanded {
-    .markets__header {
-      .tickers-search {
-        margin-top: 0.5rem;
-        left: initial;
-        right: 0.625rem;
-        position: relative;
-        background: transparent;
-        z-index: 10;
-        width: auto;
-      }
-    }
   }
 </style>

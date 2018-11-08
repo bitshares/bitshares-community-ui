@@ -8,16 +8,21 @@
         v-if="expanded"
         @close="expanded = false">
         <div
-          class="card border-card-border"
+          class="card card--expanded border-card-border"
           @click.stop
         >
           <div class="card-header">
             <div class="title">
               <div> {{ title }} </div>
             </div>
-            <div
-              class="expand-btn"
-              @click="expanded = !expanded">></div>
+            <svgicon
+              class="close-btn"
+              width="12"
+              height="12"
+              color="rgba(255,255,255,0.5)"
+              name="cancel"
+              @click.native="expanded = false"
+            />
             <slot
               class="header"
               name="modal-header"/>
@@ -33,8 +38,17 @@
           <div> {{ title }} </div>
         </div>
         <div
-          class="expand-btn"
-          @click="expanded = !expanded">></div>
+          class="expand-btn hidden"
+          v-if="expandable"
+          @click="expanded = !expanded">
+          <svgicon
+            class="expand-icon"
+            width="13"
+            height="13"
+            color="black white white"
+            name="expand"
+          />
+        </div>
         <slot
           class="header"
           name="header"/>
@@ -48,6 +62,7 @@
 
 <script>
 import Modal from '@/components/Modal'
+import '@/assets/icons/expand'
 
 export default {
   components: { Modal },
@@ -55,6 +70,10 @@ export default {
     title: {
       type: String,
       default: ''
+    },
+    expandable: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -66,20 +85,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.card-container--expanded {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: opacity .3s ease;
-}
-
 .card {
   height: 25rem;
   display: flex;
@@ -94,22 +99,18 @@ export default {
   }
 }
 
-.card-expanded {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 1px solid #7a7675;
-
-  &:hover {
-    cursor: pointer;
-    background: #7a7675;
+.card--expanded {
+  .card-header {
+    padding-right: 2rem;
   }
 }
 
+
 .card-header {
   padding:config('padding.card-ui');
-  padding-bottom: 5px;
+  padding-left: 1rem;
+  padding-right: 1.5rem;
+  padding-bottom: 0.3rem;
   color: config('colors.text-primary');
   display:flex;
   flex-shrink: 0;
@@ -117,9 +118,33 @@ export default {
   align-items: baseline;
   position: relative;
   .expand-btn {
-    top: 5px;
-    right: 5px;
+    top: 0.4rem;
+    right: 0.4rem;
     position: absolute;
+    height: 0.8rem;
+    width: 0.8rem;
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 30rem;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    .expand-icon {
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    &:hover {
+      .expand-icon {
+        opacity: 1;
+      }
+    }
+  }
+  .close-btn {
+    top: 0.6rem;
+    right: 0.6rem;
+    position: absolute;
+    cursor: pointer;
   }
 }
 

@@ -63,12 +63,12 @@ export default {
           { title: '24h', field: 'change24h', align: 'right' }
         ],
         large: [
-          { title: 'Name', field: 'ticker', align: 'center' },
-          { title: 'Volume, USD', field: 'volUsd', align: 'right' },
-          { title: 'Price', field: 'priceUsd1', align: 'right' },
-          { title: '24h', field: 'change1', align: 'center' },
-          { title: '7d', field: 'change2', align: 'center' },
-          { title: 'Market, USD', field: 'marketcap', align: 'left' }
+          { title: 'Name', field: 'ticker', align: 'left', paddingLeft: 1.5 },
+          { title: 'Volume, USD', field: 'usdVolume', align: 'left' },
+          { title: 'Price, USD', field: 'usdPrice', align: 'left' },
+          { title: '24h', field: 'change24h', align: 'center' },
+          { title: '7d', field: 'change7d', align: 'center' },
+          { title: 'Market, USD', field: 'marketcap', align: 'right' }
         ]
       }
     }

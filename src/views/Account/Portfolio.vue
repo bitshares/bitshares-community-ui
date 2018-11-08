@@ -18,8 +18,8 @@
         :items="filteredItems"
         :headers="tableHeaders"
         :default-sort="defaultSort"
-        :header-left-padding="0.6"
-        :header-right-padding="1"
+        :header-left-padding="1"
+        :header-right-padding="1.5"
         class="portfolio-table__header"
       >
         <template slot-scope="{ sortedItems }">
@@ -106,6 +106,6 @@ export default {
   flex-shrink: 0;
   justify-content: space-between;
   margin-bottom: 1.25rem;
-  padding: 0 1rem 0 0.6rem;
+  padding: 0 1.5rem 0 1rem;
 }
 </style>

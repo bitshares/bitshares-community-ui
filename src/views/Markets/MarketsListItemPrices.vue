@@ -5,12 +5,11 @@
       class="tickers-list-row"
     >
       <div class="tickers-list__item">
-        <div @click="$emit('change', { item })">
-          <Star
-            :active="isFavourite"
-            class="tickers__favourite"
-          />
-        </div>
+        <Star
+          class="tickers__favourite"
+          :active="isFavourite"
+          @click.native="$emit('change', { item })"
+        />
         <div class="tickers-list__itemPair pl-6">
           <span class="_currencyTitle">{{ item.ticker }}</span>
         </div>
@@ -36,21 +35,22 @@
       v-if="expandMode"
       class="tickers-list-row"
     >
-      <Star
-        :active="isFavourite"
-        class="tickers__favourite"
-      />
-      <div class="tickers-list__item _alignCenter">
+      <div class="tickers-list__item">
+        <Star
+          :active="isFavourite"
+          class="tickers__favourite"
+          @click.native="$emit('change', { item })"
+        />
         <div class="tickers-list__itemPair">
-          <span class="_currencyTitle">{{ item.ticker }}</span>
-          <span class="_tickerTitle"> /{{ item.base }}</span>
+          <span class="_currencyTitle pl-6">{{ item.ticker }}</span>
+          <span class="_tickerTitle">/{{ item.base }}</span>
         </div>
       </div>
-      <div class="tickers-list__item _alignRight">
+      <div class="tickers-list__item">
         <div class="tickers-list__itemVolume">{{ volUsd }}</div>
       </div>
-      <div class="tickers-list__item _alignRight">
-        <div class="tickers-list__itemVolume">{{ item.priceUsd1 }}</div>
+      <div class="tickers-list__item">
+        <div class="tickers-list__itemVolume">${{ item.usdPrice.toFixed(2) }}</div>
       </div>
       <div class="tickers-list__item _alignCenter">
         <div
@@ -66,7 +66,7 @@
           {{ changeValue7 }}
         </div>
       </div>
-      <div class="tickers-list__item">
+      <div class="tickers-list__item _alignRight">
         <div class="tickers-list__itemVolume">{{ marketCap }}</div>
       </div>
     </div>
@@ -122,7 +122,8 @@ export default {
 <style lang="scss">
   .tickers__favourite {
     position: absolute;
-    left: -1px;
+    left: 0;
+    top: 4px;
   }
   .tickers-list__item {
     font-weight: config('fontWeights.semibold');
@@ -133,20 +134,21 @@ export default {
     position: relative;
     overflow: hidden;
   }
-  .tickers-list__itemPair {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+  
   .tickers-list__itemVolume {
     font-size: config('textSizes.xs');
     color: config('colors.white');
     opacity: .8;
   }
+
+  .tickers-list__itemPair {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
   .tickers-list-row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    padding: 0.4375rem 1rem 0.4375rem 0.6rem;
+    padding: 0.4375rem 1rem .4375rem .54rem;
     transition: background 0.2s ease;
     cursor: pointer;
 
@@ -184,12 +186,16 @@ export default {
   }
   .ticker-list-row_expanded {
     .tickers-list-row {
-      .tickers__favourite {
-        margin-top: -0.125rem;
-        margin-right: 0.9375rem;
-        position: absolute;
-      }
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
       .tickers-list__item {
+        .tickers-list__itemPair {
+          padding-right: .3rem;
+        }
+        .tickers__favourite {
+          position: absolute;
+          left: 0;
+          top: -1px;
+        }
         .tickers-list__itemVolume {
           font-size: config('textSizes.xs')
         }
