@@ -40,6 +40,15 @@
       height="24"
       @click.stop.native="handleIconClick"
     />
+    <svgicon
+      v-if="value && !icon"
+      name="cross"
+      class="input__icon"
+      width="16"
+      height="16"
+      color="white"
+      @click.stop.native="handleDeleteClick"
+    />
 
     <!-- tip message -->
     <div
@@ -177,6 +186,9 @@ export default {
     },
     handleIconClick() {
       this.$emit('icon-click')
+    },
+    handleDeleteClick() {
+      this.value = ''
     }
   }
 }
