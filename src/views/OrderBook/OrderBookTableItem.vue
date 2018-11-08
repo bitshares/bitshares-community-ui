@@ -7,6 +7,7 @@
     class="order-book-table-row"
   >
     <div
+      :class="{'order-book-table-item--last': isLast}"
       :style="styleBackground"
       class="order-book-table-item"
     >
@@ -37,6 +38,10 @@ export default {
     maxSum: {
       type: Number,
       default: 0
+    },
+    isLast: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -69,6 +74,10 @@ export default {
       cursor: pointer;
       .order-book-item-sum {
         color: config('colors.text-primary');
+      }
+      &--last {
+        position: relative;
+        z-index: 100;
       }
       &:hover {
         .order-book-item-sum {

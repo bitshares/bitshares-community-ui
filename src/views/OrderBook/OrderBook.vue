@@ -54,9 +54,11 @@ export default {
 <style lang="scss">
   .order-books {
     position: relative;
+    height: 100%;
   }
   .order-books__layout {
     display: flex;
     justify-content: center;
+    height: 100%;
   }
 </style>

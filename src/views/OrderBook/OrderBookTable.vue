@@ -23,6 +23,7 @@
           :align="align"
           :type="tableType"
           :max-sum="maxSum"
+          :is-last="sortedItems.length - 1 === index"
         />
       </template>
     </SortableTable>
@@ -84,6 +85,6 @@ export default {
     }
   }
   .order-book__column-title {
-    margin-bottom: 0.9375rem;
+    margin-bottom: -0.9375rem;
   }
 </style>

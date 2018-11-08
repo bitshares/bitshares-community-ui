@@ -22,8 +22,10 @@ export default {
     align-items: center;
     margin-top: 0.125rem;
     position: absolute;
-    width: 9.375rem;
-    left: calc(50% - 4.6875rem);
+    width: 10.625rem;
+    left: calc(50% - 5.3125rem);
+    background: config('colors.card-background');
+    z-index: 100;
   }
   .order-book__priceTitle {
     color: config('colors.button-text-disabled');
