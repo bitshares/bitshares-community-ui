@@ -5,7 +5,7 @@
       @click.self.stop="$emit('close')"
     >
       <div class="modal-wrapper">
-          <slot/>
+        <slot/>
       </div>
     </div>
   </transition>
