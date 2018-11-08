@@ -39,7 +39,7 @@
         </div>
         <div
           v-if="expandable"
-          class="expand-btn hidden"
+          class="expand-btn hidden lg:flex"
           @click="expanded = !expanded">
           <svgicon
             class="expand-icon"
@@ -124,7 +124,6 @@ export default {
     width: 0.8rem;
     border: 1px solid rgba(255,255,255,0.5);
     border-radius: 30rem;
-    display: flex;
     overflow: hidden;
     align-items: center;
     justify-content: center;
