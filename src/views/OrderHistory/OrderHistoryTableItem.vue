@@ -21,17 +21,18 @@
         <div class="table-item--ticker">{{ item.base }}</div>
       </div>
       <div class="table-item--dates">
-        <div class="table-item-date">{{ '27/10' }}</div>
-        <div class="table-item-date">{{ '10:12' }}</div>
+        <div class="table-item-date">{{ dateOpen }}</div>
+        <div class="table-item-date">{{ timeOpen }}</div>
       </div>
       <div class="table-item--dates">
-        <div class="table-item-date">{{ '28/10' }}</div>
-        <div class="table-item-date">{{ '11:08' }}</div>
+        <div class="table-item-date">{{ dateClose }}</div>
+        <div class="table-item-date">{{ timeClose }}</div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { format } from 'date-fns'
 
 export default {
   props: {
@@ -44,6 +45,25 @@ export default {
     isLast: {
       type: Boolean,
       default: false
+    }
+  },
+  data() {
+    return {
+      format
+    }
+  },
+  computed: {
+    dateOpen() {
+      return this.format(this.item.dateOpen, 'DD/MM')
+    },
+    dateClose() {
+      return this.format(this.item.dateClose, 'DD/MM')
+    },
+    timeOpen() {
+      return this.format(this.item.dateOpen, 'HH:mm')
+    },
+    timeClose() {
+      return this.format(this.item.dateClose, 'HH:mm')
     }
   }
 }
@@ -65,7 +85,6 @@ export default {
     grid-auto-flow: column;
     grid-column: 1 / 2;
     grid-row: 1;
-    align-content: center;
 
     height: 5.9375rem;
     padding-left: 0;
@@ -74,12 +93,14 @@ export default {
     padding: config('padding.grid-table') 1.5rem config('padding.grid-table') 1rem;
   }
   .table-item {
+    align-self: center;
     font-size: config('textSizes.lg');
     &--ticker {
       color: config('colors.inactive');
       font-size: config('textSizes.base');
     }
     &--dates {
+      align-self: center;
       font-size: config('textSizes.sm');
     }
   }

@@ -56,12 +56,7 @@ const getters = {
     return state.searchStr
   },
   getHistory(state) {
-    // more data, for scroll test
     return state.history
-      .concat(state.history)
-      .concat(state.history)
-      .concat(state.history)
-      .concat(state.history)
   }
 }
 
