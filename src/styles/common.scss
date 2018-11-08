@@ -100,6 +100,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
     right: 0;
     /* please don't change 'position' */
     position: absolute;
+    z-index: 1000;
     }
     .ps--active-x > .ps__rail-x,
     .ps--active-y > .ps__rail-y {
@@ -131,20 +132,21 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
     border-radius: 6px;
     transition: background-color .2s linear, height .2s ease-in-out;
     -webkit-transition: background-color .2s linear, height .2s ease-in-out;
-    height: 6px;
+    height: 3px;
     /* there must be 'bottom' for ps__thumb-x */
     bottom: 2px;
     /* please don't change 'position' */
     position: absolute;
+    z-index: 1000;
     }
     .ps__thumb-y {
-    background-color: #aaa;
+    background-color: #b3b3b3;
     border-radius: 6px;
     transition: background-color .2s linear, width .2s ease-in-out;
     -webkit-transition: background-color .2s linear, width .2s ease-in-out;
-    width: 6px;
+    width: 4px;
     /* there must be 'right' for ps__thumb-y */
-    right: 2px;
+    right: 4px;
     /* please don't change 'position' */
     position: absolute;
     }

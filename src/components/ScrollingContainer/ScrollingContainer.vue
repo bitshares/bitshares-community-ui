@@ -1,5 +1,5 @@
 <template>
-  <perfect-scrollbar>
+  <perfect-scrollbar :options="{ wheelPropagation: true }">
     <div class="scrollable-container">
       <div
         :style="{ height: shadowerHeight + 'px' }"
@@ -48,6 +48,9 @@ export default {
     background: linear-gradient(rgba(0, 0, 0, 0), black);
     pointer-events: none;
     z-index: 2;
+  }
+  .ps {
+    height: 100%;
   }
 }
 </style>
