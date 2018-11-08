@@ -5,7 +5,7 @@
       'input--has-error': hasError,
       'input--disabled': disabled
     }"
-    class="input">
+    class="input input--delete-icon">
 
     <input
       v-restrict.number="isNumber"
@@ -43,9 +43,9 @@
     <svgicon
       v-if="value && !icon"
       name="cross"
-      class="input__icon"
-      width="16"
-      height="16"
+      class="delete__icon"
+      width="12"
+      height="12"
       color="white"
       @click.stop.native="handleDeleteClick"
     />
@@ -188,7 +188,7 @@ export default {
       this.$emit('icon-click')
     },
     handleDeleteClick() {
-      this.value = ''
+      // handle delete
     }
   }
 }
@@ -204,6 +204,13 @@ export default {
 .input__icon {
   position: absolute;
   top: 16px;
+  right: 0;
+  cursor: pointer;
+}
+
+.delete__icon {
+  position: absolute;
+  top: 22px;
   right: 0;
   cursor: pointer;
 }
@@ -237,9 +244,15 @@ export default {
     letter-spacing: 0.3px;
   }
 }
+
+.input--delete-icon .input__input {
+  @apply pr-4;
+}
+
 .input--has-icon .input__input {
   @apply pr-8;
 }
+
 .input--has-error .input__input {
   border-color: config('colors.text-error');
 }
