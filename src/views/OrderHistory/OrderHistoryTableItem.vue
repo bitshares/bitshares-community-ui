@@ -15,15 +15,15 @@
         <div class="table-item--ticker">/{{ item.ticker }}</div>
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ item.price }}</div>
+        <div class="table-item-base">{{ price }}</div>
         <div class="table-item--ticker">{{ item.ticker }}</div>
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ item.get }}</div>
+        <div class="table-item-base">{{ get }}</div>
         <div class="table-item--ticker">{{ item.ticker }}</div>
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ item.spend }}</div>
+        <div class="table-item-base">{{ spend }}</div>
         <div class="table-item--ticker">{{ item.base }}</div>
       </div>
       <div class="table-item--dates">
@@ -39,6 +39,7 @@
 </template>
 <script>
 import { format } from 'date-fns'
+import { getVolumeFormat } from '@/helpers/utils'
 
 export default {
   props: {
@@ -54,22 +55,29 @@ export default {
     }
   },
   data() {
-    return {
-      format
-    }
+    return {}
   },
   computed: {
     dateOpen() {
-      return this.format(this.item.dateOpen, 'DD/MM')
+      return format(this.item.dateOpen, 'DD/MM')
     },
     dateClose() {
-      return this.format(this.item.dateClose, 'DD/MM')
+      return format(this.item.dateClose, 'DD/MM')
     },
     timeOpen() {
-      return this.format(this.item.dateOpen, 'HH:mm')
+      return format(this.item.dateOpen, 'HH:mm')
     },
     timeClose() {
-      return this.format(this.item.dateClose, 'HH:mm')
+      return format(this.item.dateClose, 'HH:mm')
+    },
+    price() {
+      return getVolumeFormat(this.item.price)
+    },
+    get() {
+      return getVolumeFormat(this.item.get)
+    },
+    spend() {
+      return getVolumeFormat(this.item.spend)
     }
   }
 }
@@ -94,8 +102,6 @@ export default {
     grid-column: 1 / 2;
     grid-row: 1;
 
-    padding-left: 0;
-    padding-right: 0;
     transition: background-color 0.15s ease;
     padding: 0 1.5rem 0 1rem;
 

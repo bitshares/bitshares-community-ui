@@ -1,7 +1,7 @@
 // util functions should go here
 
 // convert sum to currency format, exapmle: 1 000 000 (use in markets)
-export const getVolumeFormat = sum => sum.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+export const getVolumeFormat = sum => sum < 1 ? sum : sum.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
 
 export const removePrefix = (string, prefix) => {
   let trimmed = string
