@@ -1,5 +1,11 @@
 <template>
-  <div class="order-history-table-item">
+  <div
+    :class="{
+      'order-history-table-item--buy': item.order === 'buy',
+      'order-history-table-item--sell': item.order === 'sell'
+    }"
+    class="order-history-table-item"
+  >
     <div
       :class="{'order-history-table-row--last': isLast }"
       class="order-history-table-row"
@@ -73,6 +79,7 @@ export default {
     color: config('colors.white');
     display: grid;
     grid-template-columns: repeat(6, 1fr);
+    height: 5.9375rem;
 
     &--last {
       position: relative;
@@ -81,16 +88,23 @@ export default {
   }
   .order-history-table-item {
     color: config('colors.text-primary');
+    margin: 0.1250rem 0 0.1250rem 0.1250rem;
 
     grid-auto-flow: column;
     grid-column: 1 / 2;
     grid-row: 1;
 
-    height: 5.9375rem;
     padding-left: 0;
     padding-right: 0;
     transition: background-color 0.15s ease;
-    padding: config('padding.grid-table') 1.5rem config('padding.grid-table') 1rem;
+    padding: 0 1.5rem 0 1rem;
+
+    &--buy {
+      border-left: 7px solid config('colors.buy');
+    }
+    &--sell {
+      border-left: 7px solid config('colors.sell');
+    }
   }
   .table-item {
     align-self: center;

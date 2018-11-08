@@ -12,7 +12,8 @@ const state = {
       dateClose: 1541703771000,
       price: 6480,
       get: 312,
-      spend: 0.048
+      spend: 0.048,
+      order: 'sell'
     },
     {
       base: 'BTS',
@@ -24,7 +25,8 @@ const state = {
       get: 20.5010,
       getVol: 4832,
       spend: 0.00997,
-      spendVol: 4589675
+      spendVol: 4589675,
+      order: 'buy'
     },
     {
       base: 'LTC',
@@ -35,7 +37,8 @@ const state = {
       priceVol: 0.48378,
       get: 1.23520,
       getVol: 0.48378,
-      spend: 2.24
+      spend: 2.24,
+      order: 'buy'
     },
     {
       base: 'LTC',
@@ -46,7 +49,8 @@ const state = {
       priceVol: 0.48378,
       get: 1.23520,
       getVol: 0.48378,
-      spend: 2.24
+      spend: 2.24,
+      order: 'sell'
     }
   ]
 }
