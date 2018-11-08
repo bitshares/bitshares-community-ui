@@ -1,13 +1,15 @@
 <template>
-  <div class="scrollable-container">
-    <div
-      :style="{ height: shadowerHeight + 'px' }"
-      class="scrollable-container__shadower-top"/>
-    <div
-      :style="{ height: shadowerHeight + 'px' }"
-      class="scrollable-container__shadower-bottom"/>
-    <slot/>
-  </div>
+  <perfect-scrollbar>
+    <div class="scrollable-container">
+      <div
+        :style="{ height: shadowerHeight + 'px' }"
+        class="scrollable-container__shadower-top"/>
+      <div
+        :style="{ height: shadowerHeight + 'px' }"
+        class="scrollable-container__shadower-bottom"/>
+        <slot/>
+    </div>
+  </perfect-scrollbar>
 </template>
 
 <script>
