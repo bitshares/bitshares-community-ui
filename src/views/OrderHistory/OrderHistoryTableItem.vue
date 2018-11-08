@@ -4,9 +4,29 @@
       :class="{'order-history-table-row--last': isLast }"
       class="order-history-table-row"
     >
-      <div class="order-history-table-item--column">
+      <div class="table-item">
         <div class="table-item-base">{{ item.base }}</div>
-        <div class="table-item">/{{ item.ticker }}</div>
+        <div class="table-item--ticker">/{{ item.ticker }}</div>
+      </div>
+      <div class="table-item">
+        <div class="table-item-base">{{ item.price }}</div>
+        <div class="table-item--ticker">{{ item.ticker }}</div>
+      </div>
+      <div class="table-item">
+        <div class="table-item-base">{{ item.get }}</div>
+        <div class="table-item--ticker">{{ item.ticker }}</div>
+      </div>
+      <div class="table-item">
+        <div class="table-item-base">{{ item.spend }}</div>
+        <div class="table-item--ticker">{{ item.base }}</div>
+      </div>
+      <div class="table-item--dates">
+        <div class="table-item-date">{{ '27/10' }}</div>
+        <div class="table-item-date">{{ '10:12' }}</div>
+      </div>
+      <div class="table-item--dates">
+        <div class="table-item-date">{{ '28/10' }}</div>
+        <div class="table-item-date">{{ '11:08' }}</div>
       </div>
     </div>
   </div>
@@ -30,8 +50,9 @@ export default {
 </script>
 <style lang="scss">
   .order-history-table-row {
-    display: flex;
     color: config('colors.white');
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
 
     &--last {
       position: relative;
@@ -41,8 +62,6 @@ export default {
   .order-history-table-item {
     color: config('colors.text-primary');
 
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
     grid-auto-flow: column;
     grid-column: 1 / 2;
     grid-row: 1;
@@ -55,6 +74,13 @@ export default {
     padding: config('padding.grid-table') 1.5rem config('padding.grid-table') 1rem;
   }
   .table-item {
-    color: config('colors.inactive');
+    font-size: config('textSizes.lg');
+    &--ticker {
+      color: config('colors.inactive');
+      font-size: config('textSizes.base');
+    }
+    &--dates {
+      font-size: config('textSizes.sm');
+    }
   }
 </style>
