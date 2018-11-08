@@ -7,7 +7,7 @@
       <div
         :style="{ height: shadowerHeight + 'px' }"
         class="scrollable-container__shadower-bottom"/>
-        <slot/>
+      <slot/>
     </div>
   </perfect-scrollbar>
 </template>
