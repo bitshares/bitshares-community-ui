@@ -7,7 +7,7 @@
         :style="{ width: itemWidth + '%' }"
         :class="{'active': activeIndex === index }"
         class="footer-item"
-        @click="$emit('click')"
+        @click="$emit('click', item.name)"
       >
         <svgicon
           :name="item.icon"
@@ -28,14 +28,17 @@ export default {
   name: 'MobileFooter',
   props: {
     items: {
-      default: () => [],
-      type: Array
+      type: Array,
+      required: true
     }
   },
   data() {
     return {
       activeIndex: 0
     }
+  },
+  created() {
+    this.$emit('click', this.items[0].name)
   },
   computed: {
     itemWidth() {
@@ -47,9 +50,9 @@ export default {
 
 <style>
 .mobile-footer {
+    flex-grow: 0;
+    flex-shrink: 0;
     display: flex;
-    position: fixed;
-    bottom: 0;
     width:100%;
     text-align: center;
     color:config('colors.text-primary');

@@ -1,10 +1,10 @@
 <template>
   <div class="dashboard">
-    <div class="dashboard">
+    <!-- <div class="dashboard">
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
           :expandable="true"
-          class="lg:w-1/2"
+          class="lg:w-1/3"
           title="account"
         >
           <AccountHeader slot="header"/>
@@ -12,16 +12,15 @@
           <Portfolio slot="body"/>
           <Portfolio slot="modal"/>
         </Card>
-        <!-- <Card
-          class="lg:w-2/3 scrollable"
-          title="Transactions">
-          <div slot="body">
-            <TransactionsHistory/>
-          </div>
-        </Card> -->
+        <Card
+          class="lg:w-2/3"
+          title="Graph">
+        </Card>
+      </div>
+      <div class="flex flex-col lg:flex-row mb-2">
         <Card
           :expandable="true"
-          class="lg:w-1/2"
+          class="lg:w-1/3"
           title="markets"
         >
           <MarketsSearch slot="header"/>
@@ -31,36 +30,35 @@
             slot="modal"
             :expand-mode="true"/>
         </Card>
-      </div>
-      <div class="flex flex-col lg:flex-row mb-2">
         <Card
-          class="lg:w-1/2"
+          class="lg:w-1/3"
           title="order book">
           <OrderBook slot="body"/>
         </Card>
         <Card
-          class="lg:w-1/2"
+          class="lg:w-1/3"
           title="My orders history">
           <OrderHistorySearch slot="header"/>
           <OrderHistory slot="body"/>
         </Card>
       </div>
-    </div>
+    </div> -->
+    <Mobile/>
   </div>
 </template>
 
 <script>
+import Card from '@/components/Card'
 import Portfolio from '@/views/Account/Portfolio.vue'
 import AccountHeader from '@/views/Account/AccountHeader.vue'
 import OrderBook from '@/views/OrderBook/OrderBook'
 import OrderBookLastPrice from '@/views/OrderBook/OrderBookLastPrice'
-
-import Card from '@/components/Card'
 import TransactionsHistory from '@/views/TransactionsHistory/'
 import Markets from '@/views/Markets/Markets'
 import MarketsSearch from '@/views/Markets/MarketsSearch'
 import OrderHistory from '@/views/OrderHistory/OrderHistory'
 import OrderHistorySearch from '@/views/OrderHistory/OrderHistorySearch'
+import Mobile from '@/views/Mobile/Mobile'
 
 export default {
   name: 'Dashboard',
@@ -74,7 +72,8 @@ export default {
     OrderBook,
     OrderBookLastPrice,
     OrderHistory,
-    OrderHistorySearch
+    OrderHistorySearch,
+    Mobile
   }
 }
 </script>

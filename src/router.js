@@ -24,7 +24,7 @@ const router = new Router({
     {
       path: '/login',
       name: 'login',
-      component: () => import(/* webpackChunkName: "auth" */ './views/Login/Login.vue'),
+      component: () => import(/* webpackChunkName: "login" */ './views/Login/Login.vue'),
       meta: {
         noAuth: true
       }
@@ -32,7 +32,7 @@ const router = new Router({
     {
       path: '/signup',
       name: 'signup',
-      component: () => import(/* webpackChunkName: "auth" */ './views/Signup/Signup.vue'),
+      component: () => import(/* webpackChunkName: "signup" */ './views/Signup/Signup.vue'),
       meta: {
         noAuth: true
       }
