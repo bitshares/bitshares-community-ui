@@ -1,14 +1,14 @@
 <template>
   <div class="backup">
-    <BackupStep1 />
+    <BackupStep2 />
   </div>
 </template>
 <script>
-import BackupStep1 from './BackupStep1'
+import BackupStep2 from './BackupStep2'
 
 export default {
   components: {
-    BackupStep1
+    BackupStep2
   },
   data() {
     return {}

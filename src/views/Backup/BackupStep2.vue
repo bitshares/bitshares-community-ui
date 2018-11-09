@@ -3,12 +3,13 @@
     <div class="backup-step-title">backup</div>
     <div class="backup-step-subtitle">You need to backup account before using it</div>
     <div class="backup-step-content">
-      <div class="backup-step-content-item">Are you being watched?</div>
-      <div class="backup-step-content-item">Nearby windows?</div>
-      <div class="backup-step-content-item">Hidden cameras?</div>
-      <div class="backup-step-content-item">Shoulder-spies?</div>
+      <div class="backup-step-content-confirm">SCREENSHOTS ARE NOT SECURE</div>
+      <div class="backup-step-content-item">Never make a digital copy of your</div>
+      <div class="backup-step-content-item">backup phrase and never upload it</div>
+      <div class="backup-step-content-item">online. You can make a safe backup</div>
+      <div class="backup-step-content-item">only with physical paper and a pen</div>
     </div>
-    <div class="backup-step-button">Continue to backup</div>
+    <div class="backup-step-button">I understand</div>
   </div>
 </template>
 
@@ -39,15 +40,26 @@ export default {
     text-align: center;
   }
   .backup-step-content {
-    margin-top: 11.25rem;
-    font-weight: config('fontWeights.semibold');
+    padding-top: 18px;
+    padding-bottom: 18px;
+    box-sizing: border-box;
+    margin-top: 11rem;
+    background-color: #6d6e70;
+    font-size: 1.125rem;
+    box-sizing: border-box;
   }
   .backup-step-content-item {
-    line-height: 1.3;
-    font-size: 1.55rem;
+    font-weight: config('fontWeights.semibold');
+    line-height: 1.2;
+  }
+  .backup-step-content-confirm {
+    text-transform: uppercase;
+    font-family: config('fonts.gotham-medium');
+    color: config('colors.bg-base');
+    font-weight: config('fontWeights.medium');
+    margin-bottom: 10px;
   }
   .backup-step-button {
-    margin-top: 1.25rem;
     box-sizing: border-box;
     width: 27.5rem;
     height: 3rem;
@@ -55,6 +67,7 @@ export default {
     background-color: config('colors.white');
     text-align: center;
     color: config('colors.button-text');
+    font-size: 1.25rem;
     font-family: config('fonts.gotham-medium');
     text-transform: uppercase;
     cursor: pointer;
