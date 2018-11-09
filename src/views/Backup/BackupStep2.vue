@@ -40,8 +40,8 @@ export default {
     text-align: center;
   }
   .backup-step-content {
-    padding-top: 18px;
-    padding-bottom: 18px;
+    padding-top: 1.125rem;
+    padding-bottom: 1.125rem;
     box-sizing: border-box;
     margin-top: 11.05rem;
     background-color: #6d6e70;
@@ -57,7 +57,7 @@ export default {
     font-family: config('fonts.gotham-medium');
     color: config('colors.bg-base');
     font-weight: config('fontWeights.medium');
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
   }
   .backup-step-button {
     box-sizing: border-box;

@@ -1,5 +1,13 @@
 <template>
   <div class="backup">
+    <svgicon
+      class="backup-close"
+      width="12"
+      height="12"
+      color="rgba(255,255,255,0.5)"
+      name="cancel"
+      @click.native="expanded = false"
+    />
     <BackupStep1
       v-if="currentStep === 1"
       @change="onChangeStep"
@@ -33,6 +41,7 @@ export default {
 </script>
 <style lang="scss">
   .backup {
+    position: relative;
     color: config('colors.white');
     display: flex;
     justify-content: center;
@@ -41,5 +50,10 @@ export default {
     width: 30rem;
     height: 30.4375rem;
     border: 0.0625rem solid config('colors.white')
+  }
+  .backup-close {
+    position: absolute;
+    right: 0.625rem;
+    top: 0.625rem
   }
 </style>
