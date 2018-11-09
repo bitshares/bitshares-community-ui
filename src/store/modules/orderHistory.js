@@ -63,6 +63,11 @@ const getters = {
   getSearchStr(state) {
     return state.searchStr
   },
+  getHistoryList: (state, getters, rootState, rootGetters) => {
+    const operations = rootGetters['operations/getOperations']
+    const fillOrders = operations.filter(operation => operation.type === 'fill_order')
+    return fillOrders
+  },
   getHistory(state) {
     // more data, for scroll test
     return state.history

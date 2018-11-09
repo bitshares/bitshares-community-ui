@@ -18,14 +18,14 @@ const actions = {
     dispatch('market/fetchMarketStats', 'USD', { root: true })
     dispatch('assets/fetchDefaultAssets', null, { root: true })
     await dispatch('acc/fetchCurrentUser', userId, { root: true })
-    // await Promise.all([
+    await Promise.all([
     // dispatch('transactions/fetchComissions', null, { root: true }),
-    // dispatch(
-    //   'operations/fetchAndSubscribe',
-    //   { userId, limit: 50 },
-    //   { root: true }
-    // )
-    // ])
+      dispatch(
+        'operations/fetchAndSubscribe',
+        { userId, limit: 50 },
+        { root: true }
+      )
+    ])
     // const defaultAssetsIds = rootGetters['assets/getDefaultAssetsIds']
     // defaultAssetsIds.forEach(id => {
     //   if (balances[id]) return
@@ -50,12 +50,12 @@ const actions = {
     }, { root: true })
   },
   unsubFromUserData({ dispatch }) {
-    // dispatch('operations/unsubscribeFromUserOperations', null, { root: true })
+    dispatch('operations/unsubscribeFromUserOperations', null, { root: true })
   },
   resetUserData({ dispatch }) {
     dispatch('history/resetHistory', null, { root: true })
-    // dispatch('operations/unsubscribeFromUserOperations', null, { root: true })
-    // dispatch('operations/resetState', null, { root: true })
+    dispatch('operations/unsubscribeFromUserOperations', null, { root: true })
+    dispatch('operations/resetState', null, { root: true })
   }
 }
 
