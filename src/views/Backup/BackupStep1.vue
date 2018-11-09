@@ -4,7 +4,7 @@
     <div class="backup-step-subtitle">You need to backup account before using it</div>
     <div class="backup-step-content">
       <div class="backup-step-content-item">Are you being watched?</div>
-      <div class="backup-step-content-item">Nearby windows?</div>
+      <div class="backup-step-content-item">Nearby windows?</div>
       <div class="backup-step-content-item">Hidden cameras?</div>
       <div class="backup-step-content-item">Shoulder-spies?</div>
     </div>
