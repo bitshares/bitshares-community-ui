@@ -1,12 +1,12 @@
 <template>
   <div class="dashboard">
     <div
-      style="color:#fff;text-align:center;margin-bottom:15px;color:green;"
+      style="color: #fff; cursor:pointer; text-align:center; color:green; margin-bottom:15px;"
       @click="backupShow = !backupShow"
     >Backup
-    <Modal v-if="backupShow">
-      <Backup />
-    </Modal>
+      <Modal v-if="backupShow">
+        <Backup/>
+      </Modal>
     </div>
     <div class="dashboard">
       <div class="flex flex-col lg:flex-row mb-2">
