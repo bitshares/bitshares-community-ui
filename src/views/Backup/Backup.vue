@@ -1,17 +1,33 @@
 <template>
   <div class="backup">
-    <BackupStep2 />
+    <BackupStep1
+      v-if="currentStep === 1"
+      @change="onChangeStep"
+    />
+    <BackupStep2
+      v-if="currentStep === 2"
+      @change="onChangeStep"
+    />
   </div>
 </template>
 <script>
+import BackupStep1 from './BackupStep1'
 import BackupStep2 from './BackupStep2'
 
 export default {
   components: {
+    BackupStep1,
     BackupStep2
   },
   data() {
-    return {}
+    return {
+      currentStep: 1
+    }
+  },
+  methods: {
+    onChangeStep(step) {
+      this.currentStep = step
+    }
   }
 }
 </script>

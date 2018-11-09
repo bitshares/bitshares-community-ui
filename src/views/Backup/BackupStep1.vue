@@ -8,7 +8,10 @@
       <div class="backup-step-content-item">Hidden cameras?</div>
       <div class="backup-step-content-item">Shoulder-spies?</div>
     </div>
-    <div class="backup-step-button">Continue to backup</div>
+    <div
+      class="backup-step-button"
+      @click.stop="$emit('change', 2)"
+    >Continue to backup</div>
   </div>
 </template>
 
@@ -20,7 +23,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   .backup-step {
     text-align: center;
     font-family: config('fonts.gotham');

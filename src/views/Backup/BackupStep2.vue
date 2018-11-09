@@ -21,7 +21,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   .backup-step {
     text-align: center;
     font-family: config('fonts.gotham');
@@ -43,7 +43,7 @@ export default {
     padding-top: 18px;
     padding-bottom: 18px;
     box-sizing: border-box;
-    margin-top: 11rem;
+    margin-top: 11.05rem;
     background-color: #6d6e70;
     font-size: 1.125rem;
     box-sizing: border-box;
@@ -67,7 +67,6 @@ export default {
     background-color: config('colors.white');
     text-align: center;
     color: config('colors.button-text');
-    font-size: 1.25rem;
     font-family: config('fonts.gotham-medium');
     text-transform: uppercase;
     cursor: pointer;
