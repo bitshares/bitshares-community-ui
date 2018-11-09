@@ -16,16 +16,22 @@
       v-if="currentStep === 2"
       @change="onChangeStep"
     />
+    <BackupPhrase
+      v-if="currentStep === 3"
+      @change="onChangeStep"
+    />
   </div>
 </template>
 <script>
 import BackupStep1 from './BackupStep1'
 import BackupStep2 from './BackupStep2'
+import BackupPhrase from './BackupPhrase'
 
 export default {
   components: {
     BackupStep1,
-    BackupStep2
+    BackupStep2,
+    BackupPhrase
   },
   data() {
     return {

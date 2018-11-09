@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import '@icons/accountBackupIcoSafe'
 export default {
   data() {
     return {}

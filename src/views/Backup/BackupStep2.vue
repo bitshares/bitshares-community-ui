@@ -9,12 +9,15 @@
       <div class="backup-step-content-item">online. You can make a safe backup</div>
       <div class="backup-step-content-item">only with physical paper and a pen</div>
     </div>
-    <div class="backup-step-button">I understand</div>
+    <div
+      class="backup-step-button"
+      @click.stop="$emit('change', 3)"
+    >I understand
+    </div>
   </div>
 </template>
 
 <script>
-import '@icons/accountBackupIcoSafe'
 export default {
   data() {
     return {}
@@ -43,7 +46,7 @@ export default {
     padding-top: 1.125rem;
     padding-bottom: 1.125rem;
     box-sizing: border-box;
-    margin-top: 11.05rem;
+    margin-top: 11.07rem;
     background-color: #6d6e70;
     font-size: 1.125rem;
     box-sizing: border-box;
