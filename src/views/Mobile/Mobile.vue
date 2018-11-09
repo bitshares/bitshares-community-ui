@@ -25,12 +25,12 @@ export default {
   data() {
     return {
       activeComponentName: 'Markets',
-      menuItems: [{ 
-        name: 'Markets', title: 'Markets', icon:'markets' 
-      }, { 
-        name: 'Orders', title: 'Orders', icon:'orders' 
-      }, { 
-        name: 'Account', title: 'Account', icon:'account'
+      menuItems: [{
+        name: 'Markets', title: 'Markets', icon: 'markets'
+      }, {
+        name: 'Orders', title: 'Orders', icon: 'orders'
+      }, {
+        name: 'Account', title: 'Account', icon: 'account'
       }]
     }
   },

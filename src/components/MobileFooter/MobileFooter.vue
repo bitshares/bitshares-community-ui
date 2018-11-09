@@ -37,13 +37,13 @@ export default {
       activeIndex: 0
     }
   },
-  created() {
-    this.$emit('click', this.items[0].name)
-  },
   computed: {
     itemWidth() {
       return (100 / this.items.length)
     }
+  },
+  created() {
+    this.$emit('click', this.items[0].name)
   }
 }
 </script>
