@@ -1,5 +1,13 @@
 <template>
   <div class="dashboard">
+    <div
+      style="color:#fff;text-align:center;margin-bottom:15px;color:green;"
+      @click="backupShow = !backupShow"
+    >Backup
+    <Modal v-if="backupShow">
+      <Backup />
+    </Modal>
+    </div>
     <div class="dashboard">
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
@@ -61,6 +69,8 @@ import Markets from '@/views/Markets/Markets'
 import MarketsSearch from '@/views/Markets/MarketsSearch'
 import OrderHistory from '@/views/OrderHistory/OrderHistory'
 import OrderHistorySearch from '@/views/OrderHistory/OrderHistorySearch'
+import Backup from '@/views/Backup/Backup'
+import Modal from '@/components/Modal/Modal'
 
 export default {
   name: 'Dashboard',
@@ -74,7 +84,14 @@ export default {
     OrderBook,
     OrderBookLastPrice,
     OrderHistory,
-    OrderHistorySearch
+    OrderHistorySearch,
+    Backup,
+    Modal
+  },
+  data() {
+    return {
+      backupShow: false
+    }
   }
 }
 </script>
