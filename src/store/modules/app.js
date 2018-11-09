@@ -18,14 +18,14 @@ const actions = {
     dispatch('market/fetchMarketStats', 'USD', { root: true })
     dispatch('assets/fetchDefaultAssets', null, { root: true })
     await dispatch('acc/fetchCurrentUser', userId, { root: true })
-    await Promise.all([
+    // await Promise.all([
     // dispatch('transactions/fetchComissions', null, { root: true }),
-      dispatch(
-        'operations/fetchAndSubscribe',
-        { userId, limit: 50 },
-        { root: true }
-      )
-    ])
+    dispatch(
+      'operations/fetchAndSubscribe',
+      { userId, limit: 100 },
+      { root: true }
+    )
+    // ])
     // const defaultAssetsIds = rootGetters['assets/getDefaultAssetsIds']
     // defaultAssetsIds.forEach(id => {
     //   if (balances[id]) return

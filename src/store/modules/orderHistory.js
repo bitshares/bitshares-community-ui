@@ -66,6 +66,9 @@ const getters = {
   getHistoryList: (state, getters, rootState, rootGetters) => {
     const operations = rootGetters['operations/getOperations']
     const fillOrders = operations.filter(operation => operation.type === 'fill_order')
+
+    // calc needed data here
+
     return fillOrders
   },
   getHistory(state) {
