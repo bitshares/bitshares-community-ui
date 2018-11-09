@@ -2,14 +2,12 @@
   <div
     :class="{
       'order-history-table-item--buy': item.order === 'buy',
-      'order-history-table-item--sell': item.order === 'sell'
+      'order-history-table-item--sell': item.order === 'sell',
+      'order-history-table-item--last': isLast
     }"
     class="order-history-table-item"
   >
-    <div
-      :class="{'order-history-table-row--last': isLast }"
-      class="order-history-table-row"
-    >
+    <div class="order-history-table-row">
       <div class="table-item">
         <div class="table-item-base">{{ item.base }}</div>
         <div class="table-item--ticker">/{{ item.ticker }}</div>
@@ -88,11 +86,6 @@ export default {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     height: 5.9375rem;
-
-    &--last {
-      position: relative;
-      z-index: 10;
-    }
   }
   .order-history-table-item {
     color: config('colors.text-primary');
@@ -111,6 +104,10 @@ export default {
     &--sell {
       border-left: 7px solid config('colors.sell');
     }
+    &--last {
+      position: relative;
+      z-index: 100;
+    }
   }
   .table-item {
     align-self: center;
@@ -123,5 +120,10 @@ export default {
       align-self: center;
       font-size: config('textSizes.sm');
     }
+  }
+  .table-item-base {
+    max-width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 </style>
