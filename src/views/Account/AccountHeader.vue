@@ -34,9 +34,9 @@ export default {
   font-family: config("fonts.gotham");
   font-size: config('textSizes.sm');
   align-items: baseline;
+  flex-direction: row;
   padding-top: 1rem;
   color: config('colors.text-primary');
-  margin-bottom: 2rem;
 }
 
 .title {
@@ -50,6 +50,7 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 2rem;
   font-size: config('textSizes.lg');
   .title {
     font-size: config('textSizes.lg');
