@@ -154,6 +154,7 @@ export default {
   font-family: config('fonts.gotham-medium');
   text-transform: uppercase;
   font-size: config('textSizes.base');
+  white-space: nowrap;
 }
 
 .header {

@@ -90,13 +90,19 @@ export default {
   .order-history-table-item {
     color: config('colors.text-primary');
     margin: 0.1250rem 0 0.1250rem 0.1250rem;
-    
+
     grid-auto-flow: column;
     grid-column: 1 / 2;
     grid-row: 1;
 
     transition: background-color 0.15s ease;
     padding: 0 1.5rem 0 1rem;
+
+    &:hover {
+      position: relative;
+      z-index: 2;
+      background: #131313;
+    }
 
     &--buy {
       border-left: 7px solid config('colors.buy');
