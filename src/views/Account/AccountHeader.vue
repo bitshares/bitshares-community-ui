@@ -6,7 +6,7 @@
   >
     <div class="title">Balance</div>
     <div class="amount">$ {{ totalFiatValue.toFixed(2) }}</div>
-    
+
   </div>
 </template>
 
