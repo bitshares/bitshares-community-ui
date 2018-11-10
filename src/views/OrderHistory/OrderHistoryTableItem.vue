@@ -85,12 +85,12 @@ export default {
     color: config('colors.white');
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    height: 5.9375rem;
+    height: 3.9375rem;
   }
   .order-history-table-item {
     color: config('colors.text-primary');
     margin: 0.1250rem 0 0.1250rem 0.1250rem;
-
+    
     grid-auto-flow: column;
     grid-column: 1 / 2;
     grid-row: 1;
@@ -110,6 +110,7 @@ export default {
     }
   }
   .order-history-table-row .table-item {
+    padding-right: 0.15rem;
     align-self: center;
     overflow: hidden;
     text-overflow: ellipsis;
