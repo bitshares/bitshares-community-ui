@@ -1,7 +1,7 @@
 <template>
-  <div class="card-container mb-2 lg:mb-0">
+  <div class="card-container mb-2 lg:mb-0 h-full">
     <div
-      class="card border-transparent sm:border-card-border lg:mr-2"
+      class="card border-transparent sm:border-card-border lg:mr-2 h-full lg:h-card-height"
     >
 
       <Modal
@@ -92,7 +92,6 @@ export default {
 }
 
 .card {
-  height: 25rem;
   display: flex;
   overflow: hidden;
   flex-direction: column;

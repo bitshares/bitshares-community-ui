@@ -1,7 +1,12 @@
 <template>
   <div class="mobile-mode">
     <div class="mobile-mode-main">
-      <component :is="activeComponentName"/>
+      <Card :title="activeComponentName">
+        <component
+          slot="body"
+          :is="activeComponentName"
+        />
+      </Card>
     </div>
     <MobileFooter
       :items="menuItems"
@@ -12,6 +17,7 @@
 
 <script>
 import MobileFooter from '@/components/MobileFooter'
+import Card from '@/components/Card'
 import Markets from '@/views/Markets/Markets.vue'
 import Account from '@/views/Account/Portfolio.vue'
 import Orders from '@/views/OrderHistory/OrderHistory.vue'
@@ -21,7 +27,7 @@ import '@icons/account'
 
 export default {
   name: 'Mobile',
-  components: { MobileFooter, Markets, Account, Orders },
+  components: { MobileFooter, Markets, Account, Orders, Card },
   data() {
     return {
       activeComponentName: 'Markets',
