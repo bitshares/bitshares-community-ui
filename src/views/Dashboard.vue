@@ -37,7 +37,7 @@
         </Card>
         <Card
           class="lg:w-1/3"
-          title="My orders history">
+          title="Orders history">
           <OrderHistorySearch slot="header"/>
           <OrderHistory slot="body"/>
         </Card>
