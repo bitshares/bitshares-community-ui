@@ -13,9 +13,9 @@
           <Portfolio slot="modal"/>
         </Card>
         <Card
-          class="lg:w-2/3"
-          title="Graph">
-        </Card>
+          class="lg:w-2/3 disabled"
+          title="Graph"
+        />
       </div>
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
