@@ -1,5 +1,5 @@
 <template>
-  <div class="mobile-mode">
+  <div class="mobile-mode flex lg:hidden">
     <div class="mobile-mode-main">
       <Card :title="title">
         <component
@@ -62,7 +62,6 @@ export default {
   .mobile-mode {
     height: 100%;
     overflow: hidden;
-    display: flex;
     flex-direction: column;
     .mobile-mode-main {
       flex-grow: 1;

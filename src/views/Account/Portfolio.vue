@@ -5,7 +5,7 @@
 
     <AccountHeader
       :large-mode="true"
-      class="md:hidden"
+      class="flex md:hidden"
     />
 
     <div class="portfolio-header">

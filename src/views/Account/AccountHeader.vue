@@ -33,7 +33,6 @@ export default {
 .account-header {
   font-family: config("fonts.gotham");
   font-size: config('textSizes.sm');
-  display: flex;
   align-items: baseline;
   padding-top: 1rem;
   color: config('colors.text-primary');
