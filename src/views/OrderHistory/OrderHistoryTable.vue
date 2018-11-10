@@ -3,8 +3,9 @@
     <SortableTable
       :items="items"
       :headers="tableHeaders"
-      :header-left-padding="0.7"
-      :header-right-padding="1">
+      :header-left-padding="1.6"
+      :header-right-padding="1.9"
+      :default-sort="defaultSort">
 
       <template slot-scope="{ sortedItems }">
         <OrderHistoryTableItem
@@ -41,7 +42,12 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      defaultSort: {
+        field: 'dateClose',
+        type: 'desc'
+      }
+    }
   }
 }
 </script>
