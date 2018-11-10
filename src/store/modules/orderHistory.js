@@ -3,49 +3,7 @@ const types = {
 }
 
 const state = {
-  searchStr: '',
-  history: [
-    {
-      base: 'BTC',
-      ticker: 'USD',
-      dateOpen: 1541696933000,
-      dateClose: 1541703771000,
-      price: 6480,
-      get: 312,
-      spend: 0.048,
-      order: 'sell'
-    },
-    {
-      base: 'BTS',
-      ticker: 'ETH',
-      dateOpen: 1541667771000,
-      dateClose: 1541668071000,
-      price: 0.00048,
-      get: 20.5010,
-      spend: 0.00997,
-      order: 'buy'
-    },
-    {
-      base: 'LTC',
-      ticker: 'ETH',
-      dateOpen: 1541578071000,
-      dateClose: 1541584971000,
-      price: 0.06891,
-      get: 1.23520,
-      spend: 2.24,
-      order: 'buy'
-    },
-    {
-      base: 'LTC',
-      ticker: 'ETH',
-      dateOpen: 1541527371000,
-      dateClose: 1541527551000,
-      price: 0.01255,
-      get: 1.23520,
-      spend: 2.24,
-      order: 'sell'
-    }
-  ]
+  searchStr: ''
 }
 
 const getters = {
@@ -63,8 +21,8 @@ const getters = {
     return {
       base: assetPays.symbol,
       ticker: assetReceives.symbol,
-      get: amountReceives,
-      spend: amountPays,
+      get: amountReceives.toFixed(8).replace(/\.?0+$/, ''),
+      spend: amountPays.toFixed(8).replace(/\.?0+$/, ''),
       price: price.toFixed(5),
       order: type,
       dateClose: date,
@@ -74,14 +32,9 @@ const getters = {
   getHistoryList: (state, getters, rootState, rootGetters) => {
     const operations = rootGetters['operations/getOperations']
     const fillOrders = operations.filter(operation => operation.type === 'fill_order')
-
     const list = fillOrders.map(order => getters.getFillOrderInfo(order))
-    // calc needed data here
 
     return list
-  },
-  getHistory(state) {
-    return state.history
   }
 }
 

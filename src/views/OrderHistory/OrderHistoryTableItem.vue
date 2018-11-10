@@ -115,13 +115,14 @@ export default {
     text-overflow: ellipsis;
     font-size: config('textSizes.sm');
     &--ticker {
+      margin-top: 0.1rem;
       color: config('colors.inactive');
-      font-size: config('textSizes.sm');
+      font-size: config('textSizes.xs-sm');
     }
     &--dates {
       align-self: center;
       text-align: right;
-      font-size: config('textSizes.sm');
+      font-size: config('textSizes.xs-sm');
     }
   }
   .table-item > .table-item-base {

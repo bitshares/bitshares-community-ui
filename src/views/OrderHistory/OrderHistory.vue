@@ -1,19 +1,23 @@
 <template>
   <div class="order-history">
-    <OrderHistoryTable
-      :table-headers="tableHeaders"
-      :items="history"
-    />
+    <LoadingContainer :loading="isFetching || !items.length">
+      <OrderHistoryTable
+        :table-headers="tableHeaders"
+        :items="filteredItems"
+      />
+    </LoadingContainer>
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import LoadingContainer from '@/components/LoadingContainer'
 import OrderHistoryTable from './OrderHistoryTable'
 
 export default {
   name: 'OrderHistory',
   components: {
-    OrderHistoryTable
+    OrderHistoryTable,
+    LoadingContainer
   },
   data() {
     return {
@@ -29,13 +33,12 @@ export default {
   },
   computed: {
     ...mapGetters({
-      historyItems: 'orderHistory/getHistoryList',
-      searchStr: 'orderHistory/getSearchStr'
+      items: 'orderHistory/getHistoryList',
+      searchStr: 'orderHistory/getSearchStr',
+      isFetching: 'operations/isFetching'
     }),
-    history() {
-      if (!this.searchStr) return this.historyItems
-
-      return this.historyItems.filter(item => item.base.toLowerCase().includes(this.searchStr.toLowerCase()))
+    filteredItems() {
+      return this.items.filter(item => item.base.toLowerCase().includes(this.searchStr.toLowerCase()))
     }
   }
 }

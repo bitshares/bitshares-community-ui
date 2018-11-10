@@ -13,11 +13,9 @@
           <Portfolio slot="modal"/>
         </Card>
         <Card
-          class="lg:w-1/3"
-          title="My orders history">
-          <OrderHistorySearch slot="header"/>
-          <OrderHistory slot="body"/>
-        </Card>
+          class="lg:w-2/3 disabled"
+          title="Graph"
+        />
       </div>
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
@@ -37,7 +35,12 @@
           title="order book">
           <OrderBook slot="body"/>
         </Card>
-
+        <Card
+          class="lg:w-1/3"
+          title="My orders history">
+          <OrderHistorySearch slot="header"/>
+          <OrderHistory slot="body"/>
+        </Card>
       </div>
     </div>
   </div>
