@@ -52,13 +52,33 @@ const getters = {
   getSearchStr(state) {
     return state.searchStr
   },
+  getFillOrderInfo: (state, getters, rootState, rootGetters) => (order) => {
+    const { payload, buyer, date } = order
+    const type = buyer ? 'buy' : 'sell'
+    const assetPays = rootGetters['assets/getAssetById'](payload.pays.asset_id)
+    const assetReceives = rootGetters['assets/getAssetById'](payload.receives.asset_id)
+    const amountPays = payload.pays.amount / 10 ** assetPays.precision
+    const amountReceives = payload.receives.amount / 10 ** assetReceives.precision
+    const price = buyer ? amountPays / amountReceives : amountReceives / amountPays
+    return {
+      base: assetPays.symbol,
+      ticker: assetReceives.symbol,
+      get: amountReceives,
+      spend: amountPays,
+      price: price.toFixed(5),
+      order: type,
+      dateClose: date,
+      dateOpen: date
+    }
+  },
   getHistoryList: (state, getters, rootState, rootGetters) => {
     const operations = rootGetters['operations/getOperations']
     const fillOrders = operations.filter(operation => operation.type === 'fill_order')
 
+    const list = fillOrders.map(order => getters.getFillOrderInfo(order))
     // calc needed data here
 
-    return fillOrders
+    return list
   },
   getHistory(state) {
     return state.history

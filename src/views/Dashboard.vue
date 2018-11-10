@@ -4,7 +4,7 @@
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
           :expandable="true"
-          class="lg:w-1/2"
+          class="lg:w-1/3"
           title="account"
         >
           <AccountHeader slot="header"/>
@@ -12,16 +12,17 @@
           <Portfolio slot="body"/>
           <Portfolio slot="modal"/>
         </Card>
-        <!-- <Card
-          class="lg:w-2/3 scrollable"
-          title="Transactions">
-          <div slot="body">
-            <TransactionsHistory/>
-          </div>
-        </Card> -->
+        <Card
+          class="lg:w-1/3"
+          title="My orders history">
+          <OrderHistorySearch slot="header"/>
+          <OrderHistory slot="body"/>
+        </Card>
+      </div>
+      <div class="flex flex-col lg:flex-row mb-2">
         <Card
           :expandable="true"
-          class="lg:w-1/2"
+          class="lg:w-1/3"
           title="markets"
         >
           <MarketsSearch slot="header"/>
@@ -31,19 +32,12 @@
             slot="modal"
             :expand-mode="true"/>
         </Card>
-      </div>
-      <div class="flex flex-col lg:flex-row mb-2">
         <Card
-          class="lg:w-1/2"
+          class="lg:w-1/3"
           title="order book">
           <OrderBook slot="body"/>
         </Card>
-        <Card
-          class="lg:w-1/2"
-          title="My orders history">
-          <OrderHistorySearch slot="header"/>
-          <OrderHistory slot="body"/>
-        </Card>
+
       </div>
     </div>
   </div>

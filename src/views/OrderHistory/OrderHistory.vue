@@ -22,14 +22,14 @@ export default {
         { title: 'Price', field: 'price', align: 'left' },
         { title: 'Get', field: 'get', align: 'left' },
         { title: 'Spend', field: 'spend', align: 'left' },
-        { title: 'Open', field: 'dateOpen', align: 'left' },
-        { title: 'Closed', field: 'dateClose', align: 'left' }
+        // { title: 'Open', field: 'dateOpen', align: 'left' },
+        { title: 'Closed', field: 'dateClose', align: 'right' }
       ]
     }
   },
   computed: {
     ...mapGetters({
-      historyItems: 'orderHistory/getHistory',
+      historyItems: 'orderHistory/getHistoryList',
       searchStr: 'orderHistory/getSearchStr'
     }),
     history() {

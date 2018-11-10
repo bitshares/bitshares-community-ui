@@ -24,10 +24,10 @@
         <div class="table-item-base">{{ spend }}</div>
         <div class="table-item--ticker">{{ item.base }}</div>
       </div>
-      <div class="table-item--dates">
+      <!-- <div class="table-item--dates">
         <div class="table-item-date">{{ dateOpen }}</div>
         <div class="table-item-date">{{ timeOpen }}</div>
-      </div>
+      </div> -->
       <div class="table-item--dates">
         <div class="table-item-date">{{ dateClose }}</div>
         <div class="table-item-date">{{ timeClose }}</div>
@@ -37,7 +37,7 @@
 </template>
 <script>
 import { format } from 'date-fns'
-import { getVolumeFormat } from '@/helpers/utils'
+// import { getVolumeFormat } from '@/helpers/utils'
 
 export default {
   props: {
@@ -69,13 +69,13 @@ export default {
       return format(this.item.dateClose, 'HH:mm')
     },
     price() {
-      return getVolumeFormat(this.item.price)
+      return this.item.price
     },
     get() {
-      return getVolumeFormat(this.item.get)
+      return this.item.get
     },
     spend() {
-      return getVolumeFormat(this.item.spend)
+      return this.item.spend
     }
   }
 }
@@ -84,7 +84,7 @@ export default {
   .order-history-table-row {
     color: config('colors.white');
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     height: 5.9375rem;
   }
   .order-history-table-item {
@@ -109,20 +109,23 @@ export default {
       z-index: 100;
     }
   }
-  .table-item {
+  .order-history-table-row .table-item {
     align-self: center;
-    font-size: config('textSizes.lg');
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: config('textSizes.sm');
     &--ticker {
       color: config('colors.inactive');
-      font-size: config('textSizes.base');
+      font-size: config('textSizes.sm');
     }
     &--dates {
       align-self: center;
+      text-align: right;
       font-size: config('textSizes.sm');
     }
   }
-  .table-item-base {
-    max-width: 90px;
+  .table-item > .table-item-base {
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
