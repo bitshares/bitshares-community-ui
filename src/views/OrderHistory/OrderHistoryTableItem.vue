@@ -9,25 +9,25 @@
   >
     <div class="order-history-table-row">
       <div class="table-item">
-        <div class="table-item-base">{{ item.base }}</div>
-        <div class="table-item--ticker">/{{ item.ticker }}</div>
+        <div class="table-item-base">{{ item.payAssetSymbol }}</div>
+        <div class="table-item--ticker">/{{ item.receiveAssetSymbol }}</div>
       </div>
       <div class="table-item">
         <div class="table-item-base">{{ price }}</div>
-        <div class="table-item--ticker">{{ item.ticker }}</div>
+        <div class="table-item--ticker">{{ item.receiveAssetSymbol }}</div>
       </div>
       <div class="table-item">
         <div class="table-item-base">{{ get }}</div>
-        <div class="table-item--ticker">{{ item.ticker }}</div>
+        <div class="table-item--ticker">{{ item.receiveAssetSymbol }}</div>
       </div>
       <div class="table-item">
         <div class="table-item-base">{{ spend }}</div>
-        <div class="table-item--ticker">{{ item.base }}</div>
+        <div class="table-item--ticker">{{ item.payAssetSymbol }}</div>
       </div>
-      <div class="table-item--dates">
+      <!-- <div class="table-item--dates">
         <div class="table-item-date">{{ dateOpen }}</div>
         <div class="table-item-date">{{ timeOpen }}</div>
-      </div>
+      </div> -->
       <div class="table-item--dates">
         <div class="table-item-date">{{ dateClose }}</div>
         <div class="table-item-date">{{ timeClose }}</div>
@@ -37,7 +37,7 @@
 </template>
 <script>
 import { format } from 'date-fns'
-import { getVolumeFormat } from '@/helpers/utils'
+// import { getVolumeFormat } from '@/helpers/utils'
 
 export default {
   props: {
@@ -69,13 +69,13 @@ export default {
       return format(this.item.dateClose, 'HH:mm')
     },
     price() {
-      return getVolumeFormat(this.item.price)
+      return this.item.price
     },
     get() {
-      return getVolumeFormat(this.item.get)
+      return this.item.get
     },
     spend() {
-      return getVolumeFormat(this.item.spend)
+      return this.item.spend
     }
   }
 }
@@ -84,8 +84,8 @@ export default {
   .order-history-table-row {
     color: config('colors.white');
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    height: 5.9375rem;
+    grid-template-columns: repeat(5, 1fr);
+    height: 3.9375rem;
   }
   .order-history-table-item {
     color: config('colors.text-primary');
@@ -98,6 +98,12 @@ export default {
     transition: background-color 0.15s ease;
     padding: 0 1.5rem 0 1rem;
 
+    &:hover {
+      position: relative;
+      z-index: 2;
+      background: #131313;
+    }
+
     &--buy {
       border-left: 7px solid config('colors.buy');
     }
@@ -109,20 +115,25 @@ export default {
       z-index: 100;
     }
   }
-  .table-item {
+  .order-history-table-row .table-item {
+    padding-right: 0.15rem;
     align-self: center;
-    font-size: config('textSizes.lg');
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: config('textSizes.sm');
     &--ticker {
+      margin-top: 0.1rem;
       color: config('colors.inactive');
-      font-size: config('textSizes.base');
+      font-size: config('textSizes.xs-sm');
     }
     &--dates {
       align-self: center;
-      font-size: config('textSizes.sm');
+      text-align: right;
+      font-size: config('textSizes.xs-sm');
     }
   }
-  .table-item-base {
-    max-width: 90px;
+  .table-item > .table-item-base {
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
