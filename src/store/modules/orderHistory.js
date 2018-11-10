@@ -19,8 +19,8 @@ const getters = {
     const amountReceives = payload.receives.amount / 10 ** assetReceives.precision
     const price = buyer ? amountPays / amountReceives : amountReceives / amountPays
     return {
-      base: assetPays.symbol,
-      ticker: assetReceives.symbol,
+      payAssetSymbol: assetPays.symbol,
+      receiveAssetSymbol: assetReceives.symbol,
       get: amountReceives.toFixed(8).replace(/\.?0+$/, ''),
       spend: amountPays.toFixed(8).replace(/\.?0+$/, ''),
       price: price.toFixed(5),

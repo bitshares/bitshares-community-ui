@@ -38,7 +38,7 @@ export default {
       isFetching: 'operations/isFetching'
     }),
     filteredItems() {
-      return this.items.filter(item => item.base.toLowerCase().includes(this.searchStr.toLowerCase()))
+      return this.items.filter(item => item.payAssetSymbol.toLowerCase().includes(this.searchStr.toLowerCase()))
     }
   }
 }
