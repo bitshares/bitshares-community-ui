@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       tableHeaders: [
-        { title: 'Pair', field: 'base', align: 'left' },
+        { title: 'Pair', field: 'payAssetSymbol', align: 'left' },
         { title: 'Price', field: 'price', align: 'left' },
         { title: 'Get', field: 'get', align: 'left' },
         { title: 'Spend', field: 'spend', align: 'left' },
@@ -38,7 +38,11 @@ export default {
       isFetching: 'operations/isFetching'
     }),
     filteredItems() {
-      return this.items.filter(item => item.payAssetSymbol.toLowerCase().includes(this.searchStr.toLowerCase()))
+      const search = this.searchStr.toLowerCase()
+      return this.items.filter(item => {
+        return item.payAssetSymbol.toLowerCase().includes(search) || 
+          item.receiveAssetSymbol.toLowerCase().includes(search)
+      })
     }
   }
 }
