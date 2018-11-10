@@ -1,7 +1,7 @@
 <template>
-  <div class="card-container lg:mr-2 mb-2 lg:mb-0">
+  <div class="card-container mb-2 lg:mb-0">
     <div
-      class="card border-transparent sm:border-card-border"
+      class="card border-transparent sm:border-card-border lg:mr-2"
     >
 
       <Modal
@@ -85,6 +85,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.card-container:last-child {
+  .card {
+    margin-right: 0;
+  }
+}
+
 .card {
   height: 25rem;
   display: flex;
@@ -94,9 +100,6 @@ export default {
   background-color: config('colors.card-background');
   border-width: 1px;
   transition: max-height 0.2s;
-  &:last-child {
-    @apply mr-0;
-  }
 }
 
 .card--expanded {
