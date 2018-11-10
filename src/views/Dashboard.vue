@@ -4,6 +4,7 @@
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
           :expandable="true"
+          collapsible
           class="lg:w-1/3"
           title="account"
         >
@@ -13,6 +14,7 @@
           <Portfolio slot="modal"/>
         </Card>
         <Card
+          collapsible
           class="lg:w-2/3 disabled"
           title="Graph"
         />
@@ -20,6 +22,7 @@
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
           :expandable="true"
+          collapsible
           class="lg:w-1/3"
           title="markets"
         >
@@ -31,13 +34,14 @@
             :expand-mode="true"/>
         </Card>
         <Card
+          collapsible
           class="lg:w-1/3"
           title="order book">
           <OrderBook slot="body"/>
         </Card>
         <Card
           class="lg:w-1/3"
-          title="Orders history">
+          title="My orders history">
           <OrderHistorySearch slot="header"/>
           <OrderHistory slot="body"/>
         </Card>

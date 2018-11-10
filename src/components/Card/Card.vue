@@ -1,7 +1,7 @@
 <template>
   <div class="card-container mb-2 lg:mb-0">
     <div
-      :class="{'card-collapsed': collapsible}"
+      :class="{'card-collapsed': collapsed}"
       class="card border-transparent sm:border-card-border lg:mr-2"
     >
 
@@ -39,10 +39,12 @@
           <div> {{ title }} </div>
         </div>
         <svgicon
-          :class="collapsible ? 'collapse-btn--active' : 'collapse-btn'"
+          v-if="collapsible"
+          :class="collapsed ? 'collapse-btn--active' : 'collapse-btn'"
           width="11"
           height="11"
           name="arrowDown"
+          @click="handleCollapseClick"
         />
         <div
           v-if="expandable"
@@ -61,7 +63,7 @@
           name="header"/>
       </div>
       <div
-        v-if="!collapsible"
+        v-if="!collapsed"
         class="card-body"
       >
         <slot name="body" />
@@ -92,7 +94,13 @@ export default {
   },
   data() {
     return {
-      expanded: false
+      expanded: false,
+      collapsed: false
+    }
+  },
+  methods: {
+    handleCollapseClick() {
+      this.collapsed = !this.collapsed
     }
   }
 }
@@ -192,6 +200,6 @@ export default {
 }
 
 .card-collapsed {
-  height: 4.6875rem;
+  height: 2.8rem;
 }
 </style>
