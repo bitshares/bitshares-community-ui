@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <Header v-show="false"/>
+    <Header/>
     <div class="main__content lg:p-2">
       <router-view/>
     </div>
