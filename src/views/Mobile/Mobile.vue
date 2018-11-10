@@ -51,6 +51,7 @@ export default {
     .mobile-mode-main {
       flex-grow: 1;
       overflow: hidden;
+      height: 100%;
     }
   }
 </style>
