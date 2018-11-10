@@ -4,19 +4,22 @@
       name="bitshares"
       color="white"
       width="141"
-      height="33"/>
-    <UserInfo/>
+      height="33" />
+    <div>
+      <UserInfo />
+      <Dropdown :menuItems="['SWITCH ACCOUNTS', 'SETTINGS', 'FAQ', 'LOG OUT']"/>
+    </div>
   </div>
-
 </template>
 
 <script>
 import UserInfo from './HeaderUserInfo'
+import Dropdown from '@/components/Dropdown'
 import '@icons/bitshares'
 
 export default {
   name: 'Header',
-  components: { UserInfo }
+  components: { UserInfo, Dropdown }
 }
 </script>
 

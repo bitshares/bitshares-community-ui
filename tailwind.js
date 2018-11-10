@@ -153,7 +153,8 @@ let colors = {
   'mobile-footer-hover': '#121212',
   'star': '#a7a9ac',
   'primary': '#ffffff',
-  'book-item-hover': '#000'
+  'book-item-hover': '#000',
+  'divider': 'rgba(255, 255, 255, 0.1)'
 }
 
 module.exports = {
