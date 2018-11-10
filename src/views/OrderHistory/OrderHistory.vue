@@ -40,7 +40,7 @@ export default {
     filteredItems() {
       const search = this.searchStr.toLowerCase()
       return this.items.filter(item => {
-        return item.payAssetSymbol.toLowerCase().includes(search) || 
+        return item.payAssetSymbol.toLowerCase().includes(search) ||
           item.receiveAssetSymbol.toLowerCase().includes(search)
       })
     }
