@@ -10,7 +10,7 @@
     <input
       v-restrict.number="isNumber"
       ref="input"
-      :value="value"
+      :value="getValue"
       :type="inputType"
       :disabled="disabled"
       :autocorrect="false"
@@ -26,7 +26,7 @@
 
     <!-- floating title = placeholder -->
     <span
-      :class="{'input_has-content': !!value }"
+      :class="{'input_has-content': !! getValue }"
       class="input__title">
       {{ titleText }}
     </span>
@@ -41,7 +41,7 @@
       @click.stop.native="handleIconClick"
     />
     <svgicon
-      v-if="value && !icon"
+      v-if="getValue && !icon"
       name="cross"
       class="delete__icon"
       width="12"
@@ -118,7 +118,19 @@ export default {
       required: true
     }
   },
+  data: () => {
+    return {
+      clearInput: false
+    }
+  },
   computed: {
+    getValue() {
+      if (this.clearInput) {
+        return ''
+      } else {
+        return this.value
+      }
+    },
     inputType() {
       if (this.type === 'password') return this.type
       if (this.type === 'number' || this.password) return 'tel'
@@ -164,6 +176,7 @@ export default {
   },
   methods: {
     handleInput({ target: { value } }) {
+      this.clearInput = false
       const newValue = this.isNumber ? (parseInt(value) || '') : value
       this.errors.$reset()
       this.$debouncedTouch()
@@ -174,7 +187,7 @@ export default {
       if (!this.isNumber) return
       event.preventDefault()
       const text = event.clipboardData.getData('text')
-      const number = this.value + (parseInt(text) || null)
+      const number = this.getValue + (parseInt(text) || null)
       this.$debouncedTouch()
       this.$emit('input', number)
     },
@@ -188,7 +201,7 @@ export default {
       this.$emit('icon-click')
     },
     handleDeleteClick() {
-      // handle delete
+      this.clearInput = true
     }
   }
 }
