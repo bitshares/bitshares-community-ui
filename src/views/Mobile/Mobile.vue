@@ -1,7 +1,7 @@
 <template>
   <div class="mobile-mode">
     <div class="mobile-mode-main">
-      <Card :title="activeComponentName">
+      <Card :title="title">
         <component
           slot="body"
           :is="activeComponentName"
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import MobileFooter from '@/components/MobileFooter'
 import Card from '@/components/Card'
 import Markets from '@/views/Markets/Markets.vue'
@@ -39,6 +40,15 @@ export default {
         name: 'Account', title: 'Account', icon: 'account'
       }]
     }
+  },
+  computed: {
+    title() {
+      if (this.activeComponentName === 'Account') return this.userName
+      return this.activeComponentName
+    },
+    ...mapGetters({
+      userName: 'acc/getCurrentUserName'
+    })
   },
   methods: {
     switchActiveComponent(name) {

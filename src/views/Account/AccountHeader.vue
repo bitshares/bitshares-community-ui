@@ -1,10 +1,12 @@
 <template>
   <div
     v-if="historyLoaded"
+    :class="{'account-header--large': largeMode}"
     class="account-header"
   >
-    <div class="text-weak">
-    Balance</div>&nbsp; $ {{ totalFiatValue.toFixed(2) }}
+    <div class="title">Balance</div>
+    <div class="amount">$ {{ totalFiatValue.toFixed(2) }}</div>
+    
   </div>
 </template>
 
@@ -12,6 +14,12 @@
 import { mapGetters } from 'vuex'
 export default {
   name: 'AccountHeader',
+  props: {
+    largeMode: {
+      type: Boolean,
+      default: false
+    }
+  },
   computed: {
     ...mapGetters({
       historyLoaded: 'history/initialLoaded',
@@ -27,12 +35,29 @@ export default {
   font-size: config('textSizes.sm');
   display: flex;
   align-items: baseline;
+  padding-top: 1rem;
   color: config('colors.text-primary');
+  margin-bottom: 2rem;
 }
 
-.text-weak {
+.title {
   opacity: 0.5;
   font-size: config('textSizes.xs-sm');
   line-height: normal;
+}
+
+.account-header--large {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: config('textSizes.lg');
+  .title {
+    font-size: config('textSizes.lg');
+    margin-bottom: 0.2rem;
+  }
+  .amount {
+    font-size: config('textSizes.5xl')
+  }
 }
 </style>
