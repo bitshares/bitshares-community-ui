@@ -64,7 +64,7 @@ export default {
   &:hover {
     position: relative;
     z-index: 2;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: #131313;
   }
 }
 
