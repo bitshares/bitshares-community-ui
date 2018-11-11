@@ -23,8 +23,8 @@
         <div class="item-name">{{ item }}</div>
         <svgicon
           name="arrowDown"
-          width="15"
-          height="15"
+          width="12"
+          height="12"
           class="submenu-icon"
         />
       </div>
@@ -86,9 +86,8 @@ export default {
 
 <style lang="scss">
 .submenu-icon {
-  transform: rotate(-90deg);
+  transform: translate(0, 0.1875rem) rotate(-90deg);
   color: config('colors.mobile-footer');
-  text-align: right;
 }
 
 .dropdown-icon {
@@ -107,7 +106,7 @@ export default {
   z-index: 2;
   transform: translate(-92%, 10%);
   background-color: config('colors.mobile-footer');
-  padding: 15px 0 15px 0;
+  padding: 0.9375rem 0 0.9375rem 0;
 }
 
 .dropdown--inactive {
@@ -116,11 +115,11 @@ export default {
 
 .triangle {
   width: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid config('colors.mobile-footer');
-  margin: 0px 0 0 auto;
-  transform: translate(-15px, -25px)
+  border-left: 0.625rem solid transparent;
+  border-right: 0.625rem solid transparent;
+  border-bottom: 0.625rem solid config('colors.mobile-footer');
+  margin: 0 0 0 auto;
+  transform: translate(-0.9375rem, -1.5625rem)
 }
 
 .dropdown-item {
@@ -129,7 +128,7 @@ export default {
   height: 3rem;
   font-size: 1.125rem;
   font-weight: 500;
-  padding: 1.063rem;
+  padding: 1.063rem 0.4rem 1.063rem 1.063rem;
   border-bottom: solid;
   border-bottom-width: 0.063rem;
   border-bottom-color: config('colors.divider');
@@ -143,7 +142,6 @@ export default {
 
 .item-name {
   margin: 0 auto;
-  transform: translate(0.4837rem); /* translates text to 7.5px (half the icon width) to right */
 }
 
 </style>
