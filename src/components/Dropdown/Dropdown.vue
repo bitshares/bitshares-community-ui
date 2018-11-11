@@ -18,6 +18,7 @@
         v-for="item in menuItems"
         :key="item"
         class="dropdown-item"
+        @click="$emit(item)"
       >
         {{ item }}
       </div>
