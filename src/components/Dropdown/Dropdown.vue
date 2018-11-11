@@ -22,8 +22,8 @@
         <div class="item-name">{{ item }}</div>
         <svgicon
           name="arrowDown"
-          width="12"
-          height="12"
+          width="15"
+          height="15"
           class="submenu-icon"
         />
       </div>
@@ -71,9 +71,6 @@ export default {
     return {
       dropdownActive: false
     }
-  },
-  computed: {
-
   },
   methods: {
     handleDropdownClick() {
@@ -136,6 +133,6 @@ export default {
 
 .item-name {
   margin: 0 auto;
-  transform:translate(0.75rem);
+  transform: translate(0.4837rem); /* translates text to 7.5px (half the icon width) to right */
 }
 </style>
