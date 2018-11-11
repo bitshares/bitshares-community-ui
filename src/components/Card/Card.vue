@@ -62,12 +62,14 @@
           class="header"
           name="header"/>
       </div>
-      <div
-        v-if="!collapsed"
-        class="card-body"
-      >
-        <slot name="body" />
-      </div>
+      <transition name="fade">
+        <div
+          v-if="!collapsed"
+          class="card-body"
+        >
+          <slot name="body" />
+        </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -121,7 +123,7 @@ export default {
   font-family: config('fonts.gotham-regular');
   background-color: config('colors.card-background');
   border-width: 1px;
-  transition: max-height 0.2s;
+  transition: 0.2s;
 }
 
 .card--expanded {
@@ -191,15 +193,20 @@ export default {
 
 .collapse-btn {
   transform: rotate(-90deg);
+  transition: 0.2s;
   margin: 0 auto 0 0.1875em;
   opacity: 0.8;
+  cursor: pointer;
 }
 
 .collapse-btn--active {
   margin: 0 auto 0 0.1875em;
+  transition: 0.2s;
+  cursor: pointer;
 }
 
 .card-collapsed {
   height: 2.8rem;
+  transition: 0.2s;
 }
 </style>
