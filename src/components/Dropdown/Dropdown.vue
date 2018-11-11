@@ -13,6 +13,7 @@
       :class="dropdownActive ? 'dropdown--active' : 'dropdown--inactive'"
       class="dropdown-block "
     >
+      <div class="triangle" />
       <div
         v-for="item in menuItems"
         :key="item"
@@ -91,7 +92,7 @@ export default {
 }
 
 .dropdown-icon {
-  color: white;
+  color: config('colors.text-primary');
 }
 
 .dropdown-icon:hover {
@@ -106,10 +107,20 @@ export default {
   z-index: 2;
   transform: translate(-92%, 10%);
   background-color: config('colors.mobile-footer');
+  padding: 15px 0 15px 0;
 }
 
 .dropdown--inactive {
   display: none;
+}
+
+.triangle {
+  width: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid config('colors.mobile-footer');
+  margin: 0px 0 0 auto;
+  transform: translate(-15px, -25px)
 }
 
 .dropdown-item {
