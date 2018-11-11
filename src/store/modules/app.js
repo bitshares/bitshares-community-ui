@@ -31,7 +31,6 @@ const actions = {
     //   if (balances[id]) return
     //   balances[id] = { balance: 0 }
     // })
-
     const balances = { ...rootGetters['acc/getUserBalances'] }
     await dispatch(
       'assets/fetchAssets',
