@@ -5,12 +5,12 @@
       'input--has-error': hasError,
       'input--disabled': disabled
     }"
-    class="input input--delete-icon">
+    class="input">
 
     <input
       v-restrict.number="isNumber"
       ref="input"
-      :value="getValue"
+      :value="value"
       :type="inputType"
       :disabled="disabled"
       :autocorrect="false"
@@ -26,7 +26,7 @@
 
     <!-- floating title = placeholder -->
     <span
-      :class="{'input_has-content': !! getValue }"
+      :class="{'input_has-content': !! value }"
       class="input__title">
       {{ titleText }}
     </span>
@@ -41,13 +41,12 @@
       @click.stop.native="handleIconClick"
     />
     <svgicon
-      v-if="getValue && !icon"
+      v-if="value && !icon"
       name="cross"
       class="delete__icon"
       width="12"
       height="12"
-      color="white"
-      @click.stop.native="handleDeleteClick"
+      @click.stop.native="$emit('input', '')"
     />
 
     <!-- tip message -->
@@ -118,19 +117,7 @@ export default {
       required: true
     }
   },
-  data: () => {
-    return {
-      clearInput: false
-    }
-  },
   computed: {
-    getValue() {
-      if (this.clearInput) {
-        return ''
-      } else {
-        return this.value
-      }
-    },
     inputType() {
       if (this.type === 'password') return this.type
       if (this.type === 'number' || this.password) return 'tel'
@@ -176,7 +163,6 @@ export default {
   },
   methods: {
     handleInput({ target: { value } }) {
-      this.clearInput = false
       const newValue = this.isNumber ? (parseInt(value) || '') : value
       this.errors.$reset()
       this.$debouncedTouch()
@@ -187,7 +173,7 @@ export default {
       if (!this.isNumber) return
       event.preventDefault()
       const text = event.clipboardData.getData('text')
-      const number = this.getValue + (parseInt(text) || null)
+      const number = this.value + (parseInt(text) || null)
       this.$debouncedTouch()
       this.$emit('input', number)
     },
@@ -199,9 +185,6 @@ export default {
     },
     handleIconClick() {
       this.$emit('icon-click')
-    },
-    handleDeleteClick() {
-      this.clearInput = true
     }
   }
 }
@@ -222,6 +205,7 @@ export default {
 }
 
 .delete__icon {
+  color: config('colors.text-primary');
   position: absolute;
   top: 22px;
   right: 0;
@@ -258,7 +242,7 @@ export default {
   }
 }
 
-.input--delete-icon .input__input {
+.input__input {
   @apply pr-4;
 }
 
