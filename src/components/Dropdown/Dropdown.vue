@@ -1,18 +1,17 @@
 <template>
   <div
     v-click-outside="handleDropdownClose"
-    class="dropdown sm:w-100 sm:h-100"
     @click="handleDropdownClick"
   >
     <svgicon
-      name=""
+      name="expand"
       width="24"
       height="24"
-      class="dropdown"
+      class="dropdown-icon"
     />
     <div
       :class="dropdownActive ? 'dropdown--active' : 'dropdown--inactive'"
-      class="dropdown-block"
+      class="dropdown-block sm:w-100 sm:h-100"
     >
       <div
         v-for="item in menuItems"
@@ -82,8 +81,14 @@ export default {
 </script>
 
 <style lang="scss">
-.dropdown {
-  color: color;
+
+.dropdown-icon {
+  color: white;
+}
+
+.dropdown-icon:hover {
+  cursor: pointer;
+  opacity: 0.8
 }
 
 .dropdown--active {

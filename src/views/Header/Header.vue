@@ -7,7 +7,7 @@
       height="33" />
     <div>
       <UserInfo />
-      <Dropdown :menuItems="['SWITCH ACCOUNTS', 'SETTINGS', 'FAQ', 'LOG OUT']"/>
+      <Dropdown :menu-items="['SWITCH ACCOUNTS', 'SETTINGS', 'FAQ', 'LOG OUT']"/>
     </div>
   </div>
 </template>
