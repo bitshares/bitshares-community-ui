@@ -16,7 +16,7 @@
       <div
         v-for="item in menuItems"
         :key="item"
-        class="dropdown-item sm:w-100 fadeOut"
+        class="dropdown-item"
         @click="$emit(item)"
       >
         <div class="item-name">{{ item }}</div>
