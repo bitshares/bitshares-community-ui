@@ -11,15 +11,21 @@
     />
     <div
       :class="dropdownActive ? 'dropdown--active' : 'dropdown--inactive'"
-      class="dropdown-block sm:w-100 sm:h-100"
+      class="dropdown-block"
     >
       <div
         v-for="item in menuItems"
         :key="item"
-        class="dropdown-item"
+        class="dropdown-item sm:w-100 fadeOut"
         @click="$emit(item)"
       >
-        {{ item }}
+        <div class="item-name">{{ item }}</div>
+        <svgicon
+          name="arrowDown"
+          width="12"
+          height="12"
+          class="submenu-icon"
+        />
       </div>
     </div>
   </div>
@@ -81,6 +87,11 @@ export default {
 </script>
 
 <style lang="scss">
+.submenu-icon {
+  transform: rotate(-90deg);
+  color: config('colors.mobile-footer');
+  text-align: right;
+}
 
 .dropdown-icon {
   color: white;
@@ -95,7 +106,7 @@ export default {
   display: block;
   color: config('colors.text-primary');
   position:fixed;
-  z-index: 99;
+  z-index: 2;
   transform: translate(-92%, 10%);
   background-color: config('colors.mobile-footer');
 }
@@ -105,12 +116,13 @@ export default {
 }
 
 .dropdown-item {
+  display:flex;
+  justify-content: space-between;
   height: 3rem;
   font-size: 1.125rem;
   font-weight: 500;
   padding: 1.063rem;
   width: 18.750rem;
-  text-align: center;
   border-bottom: solid;
   border-bottom-width: 0.063rem;
   border-bottom-color: config('colors.divider');
@@ -120,5 +132,10 @@ export default {
   cursor:pointer;
   color: config('colors.table-bg');
   background-color: config('colors.text-primary');
+}
+
+.item-name {
+  margin: 0 auto;
+  transform:translate(0.75rem);
 }
 </style>
