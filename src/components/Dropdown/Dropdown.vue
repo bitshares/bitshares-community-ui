@@ -11,12 +11,12 @@
     />
     <div
       :class="dropdownActive ? 'dropdown--active' : 'dropdown--inactive'"
-      class="dropdown-block"
+      class="dropdown-block "
     >
       <div
         v-for="item in menuItems"
         :key="item"
-        class="dropdown-item"
+        class="dropdown-item w-screen sm:w-64"
         @click="$emit(item)"
       >
         <div class="item-name">{{ item }}</div>
@@ -119,7 +119,6 @@ export default {
   font-size: 1.125rem;
   font-weight: 500;
   padding: 1.063rem;
-  width: 18.750rem;
   border-bottom: solid;
   border-bottom-width: 0.063rem;
   border-bottom-color: config('colors.divider');
@@ -135,4 +134,5 @@ export default {
   margin: 0 auto;
   transform: translate(0.4837rem); /* translates text to 7.5px (half the icon width) to right */
 }
+
 </style>
