@@ -40,6 +40,11 @@ const actions = {
       },
       { root: true }
     )
+    dispatch(
+      'books/initialize',
+      { baseSymbol: 'BTS', quoteSymbol: 'USD' },
+      { root: true }
+    )
 
     const balancesIds = Object.keys(balances)
     balancesIds.push('1.3.121')

@@ -1,42 +1,19 @@
 import { getMaxSum } from '@/helpers/utils'
+import API from 'vuex-bitshares/src/services/api'
+import orderBy from 'lodash/orderBy'
+// import debounce from 'lodash/debounce'
+
+const types = {
+  SET_ORDER_BOOK: 'SET_ORDER_BOOK'
+}
 
 const state = {
   lastPrice: '6 745',
+  baseAsset: '',
+  quoteAsset: '',
   orderBook: {
-    buying: [
-      { sum: 98.23, price: 0.25069 },
-      { sum: 129.00, price: 0.014261 },
-      { sum: 650.23, price: 0.13246 },
-      { sum: 1220.85, price: 0.13224 },
-      { sum: 1318.99, price: 0.13124 },
-      { sum: 1412.11, price: 0.13102 },
-      { sum: 1439.08, price: 0.12987 },
-      { sum: 1622.27, price: 0.12859 },
-      { sum: 1719.73, price: 0.12765 },
-      { sum: 1856.20, price: 0.12523 },
-      { sum: 1939.99, price: 0.11477 },
-      { sum: 1939.99, price: 0.11477 },
-      { sum: 1939.99, price: 0.11477 },
-      { sum: 1939.99, price: 0.11477 },
-      { sum: 1939.99, price: 0.11477 }
-    ],
-    selling: [
-      { sum: 129.61, price: 0.10391 },
-      { sum: 131.23, price: 0.11985 },
-      { sum: 145.01, price: 0.12069 },
-      { sum: 368.22, price: 0.12145 },
-      { sum: 565.74, price: 0.13885 },
-      { sum: 1235.14, price: 0.13987 },
-      { sum: 1632.05, price: 0.14333 },
-      { sum: 1821.69, price: 0.14365 },
-      { sum: 2597.05, price: 0.15370 },
-      { sum: 3199.98, price: 0.15377 },
-      { sum: 3487.02, price: 0.15412 },
-      { sum: 3487.02, price: 0.15412 },
-      { sum: 3487.02, price: 0.15412 },
-      { sum: 3487.02, price: 0.15412 },
-      { sum: 3487.02, price: 0.15412 }
-    ]
+    buying: [],
+    selling: []
   }
 }
 
@@ -44,6 +21,8 @@ const getters = {
   getLastPrice(state) {
     return state.lastPrice
   },
+  getBaseSymbol: state => state.baseAsset,
+  getQuoteSymbol: state => state.quoteAsset,
   getMaxOrderAmount(state) {
     const maxFromBuy = getMaxSum(state.orderBook.buying, 'sum')
     const maxFromSell = getMaxSum(state.orderBook.selling, 'sum')
@@ -55,10 +34,55 @@ const getters = {
   }
 }
 
+const ordersConverted = (orders, type, baseAsset, quoteAsset) => {
+  const processedOrders = orders.map(order => {
+    const sum = order.for_sale / 10 ** baseAsset.precision
+    const sellField = type === 'buy' ? 'base' : 'quote'
+    const buyField = type === 'buy' ? 'quote' : 'base'
+    const sellAmount = order.sell_price[sellField].amount / 10 ** baseAsset.precision
+    const buyAmount = order.sell_price[buyField].amount / 10 ** quoteAsset.precision
+    const price = sellAmount / buyAmount
+
+    return {
+      price,
+      sum
+    }
+  })
+
+  const sortType = type === 'buy' ? 'desc' : 'asc'
+  return orderBy(processedOrders, 'price', sortType).slice(0, 20)
+}
+
 const mutations = {
+  [types.SET_ORDER_BOOK](state, { orders, baseAsset, quoteAsset }) {
+    state.baseAsset = baseAsset.symbol
+    state.quoteAsset = quoteAsset.symbol
+    state.orderBook.buying = ordersConverted(orders.buy, 'buy', baseAsset, quoteAsset)
+    state.orderBook.selling = ordersConverted(orders.sell, 'sell', baseAsset, quoteAsset)
+  }
 }
 
 const actions = {
+  initialize(store, { baseSymbol, quoteSymbol }) {
+    const { commit, rootGetters } = store
+    const baseAsset = rootGetters['assets/getAssetBySymbol'](baseSymbol)
+    const quoteAsset = rootGetters['assets/getAssetBySymbol'](quoteSymbol)
+    const market = API.Market(baseAsset)
+    if (market) {
+      market.subscribeToMarket(quoteAsset.id, update => {
+        console.log('Order book updated')
+        console.log(API.Market(baseAsset).getBook(quoteAsset))
+        const orders = API.Market(baseAsset).getBook(quoteAsset)
+
+        commit(types.SET_ORDER_BOOK, { orders, baseAsset, quoteAsset })
+      })
+    } else {
+      console.warn(`MARKET ERROR: No such market - ${baseSymbol}/${quoteSymbol}`)
+    }
+  },
+  updateOrderBook(store, orders) {
+
+  }
 }
 
 export default {

@@ -12,8 +12,9 @@
       :items="items"
       :headers="tableHeaders"
       :type="tableType"
-      :header-left-padding="tableType === 'buy' ? 0.6 : 0"
-      :header-right-padding="tableType === 'sell' ? 1 : 0"
+      :header-left-padding="tableType === 'buy' ? 0.6 : 0.6"
+      :header-right-padding="tableType === 'sell' ? 1 : 0.6"
+      :default-sort="defaultSort"
     >
       <template slot-scope="{ sortedItems }">
         <OrderBookTableItem
@@ -49,9 +50,7 @@ export default {
     },
     items: {
       type: Array,
-      default() {
-        return []
-      }
+      required: true
     },
     maxSum: {
       type: Number,
@@ -59,9 +58,7 @@ export default {
     },
     tableHeaders: {
       type: Array,
-      default() {
-        return []
-      }
+      required: true
     }
   },
   data() {
@@ -70,6 +67,12 @@ export default {
   computed: {
     tableType() {
       return this.title === 'Buying' ? 'buy' : 'sell'
+    },
+    defaultSort() {
+      return {
+        field: 'price',
+        type: this.tableType === 'buy' ? 'desc' : 'asc'
+      }
     }
   }
 }

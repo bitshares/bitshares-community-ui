@@ -1,6 +1,6 @@
 <template>
   <div class="order-books">
-    <OrderBookLastPrice/>
+    <!-- <OrderBookLastPrice/> -->
     <div class="order-books__layout">
       <OrderBookTable
         :items="orderBook.buying"
@@ -29,24 +29,24 @@ export default {
     OrderBookTable,
     OrderBookLastPrice
   },
-  data() {
-    return {
-      tableHeaders: {
+  computed: {
+    tableHeaders() {
+      return {
         buy: [
-          { title: 'Sum, BTC', field: 'sum', align: 'left' },
-          { title: '', field: 'price' }
+          { title: `Sum, ${this.baseSymbol}`, field: 'sum', align: 'left' },
+          { title: 'Price', field: 'price' }
         ],
         sell: [
-          { title: '', field: 'price', align: 'right' },
-          { title: 'Sum, BTC', field: 'sum' }
+          { title: 'Price', field: 'price', align: 'left' },
+          { title: `Sum, ${this.baseSymbol}`, field: 'sum' }
         ]
       }
-    }
-  },
-  computed: {
+    },
     ...mapGetters({
       orderBook: 'books/getOrderBook',
-      maxSum: 'books/getMaxOrderAmount'
+      maxSum: 'books/getMaxOrderAmount',
+      baseSymbol: 'books/getBaseSymbol'
+
     })
   }
 }

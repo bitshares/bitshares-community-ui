@@ -12,9 +12,11 @@
       class="order-book-table-item"
     >
       <span class="order-book-item-sum">
-        {{ item.sum }}
+        {{ item.sum.toFixed(3) }}
       </span>
-      {{ item.price }}
+      <span class="order-book-item-price">
+        {{ item.price.toFixed(3) }}
+      </span>
     </div>
   </div>
 </template>
