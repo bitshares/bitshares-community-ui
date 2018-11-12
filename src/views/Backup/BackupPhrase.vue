@@ -3,16 +3,12 @@
     <div class="backup-step-title">backup</div>
     <div class="backup-step-subtitle">Please carefully write down this phrase</div>
     <div class="backup-step-content">
-      <div class="backup-step-word">electric</div>
-      <div class="backup-step-word">animal</div>
-      <div class="backup-step-word">breakfast</div>
-      <div class="backup-step-word">checken</div>
-      <div class="backup-step-word">bitcoin</div>
-      <div class="backup-step-word">money</div>
-      <div class="backup-step-word">car</div>
-      <div class="backup-step-word">city</div>
-      <div class="backup-step-word">children</div>
-      <div class="backup-step-word">carrot</div>
+      <div
+        v-for="(word, index) in phrase"
+        :key="index"
+        class="backup-step-word">
+        {{ word }}
+      </div>
     </div>
     <div class="backup-step-content-item">We’ll confirm on the next screen</div>
     <div class="backup-step-button">i’ve written it down</div>
@@ -21,6 +17,14 @@
 
 <script>
 export default {
+  props: {
+    phrase: {
+      type: Array,
+      default() {
+        return []
+      }
+    }
+  },
   data() {
     return {}
   }
@@ -53,7 +57,7 @@ export default {
     flex-wrap: wrap;
     justify-content: center;
     height: 11.25rem;
-    padding: 6.25rem 0;
+    padding: 4.25rem 0;
     font-weight: config('fontWeights.semibold');
   }
   .backup-step-word {

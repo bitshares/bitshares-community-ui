@@ -18,6 +18,7 @@
     />
     <BackupPhrase
       v-if="currentStep === 3"
+      :phrase="phrase"
       @change="onChangeStep"
     />
   </div>
@@ -35,7 +36,18 @@ export default {
   },
   data() {
     return {
-      currentStep: 1
+      currentStep: 1,
+      backupPhrase: 'electric animal breakfast chicken kid cat dog js tag world word girl boy car machine'
+    }
+  },
+  computed: {
+    phrase() {
+      return this.backupPhrase.split(' ')
+    },
+    randomPhrase() {
+      return this.backupPhrase.split(' ').sort(() => {
+        return Math.random() - 0.5
+      })
     }
   },
   methods: {
