@@ -24,7 +24,12 @@
     </div>
     <div class="backup-step-footer">
       <div class="backup-step-content-item">Is this correct?</div>
-      <div class="backup-step-button _clear">Clear</div>
+      <div
+        class="backup-step-button _clear"
+        @click="$emit('clear')"
+      >
+        Clear
+      </div>
       <div class="backup-step-button _confirm">Confirm</div>
     </div>
   </div>
@@ -65,11 +70,6 @@ export default {
   },
   data() {
     return {}
-  },
-  methods: {
-    gets() {
-      console.log(123)
-    }
   }
 }
 </script>

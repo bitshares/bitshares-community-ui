@@ -33,6 +33,7 @@
       :user-phrase="userPhrase"
       :on-select-phrase-from-random-list="onSelectPhraseFromRandomList"
       :on-remove-phrase="onRemovePhrase"
+      @clear="onClear"
     />
   </div>
 </template>
@@ -84,6 +85,10 @@ export default {
     },
     goBack() {
       this.currentStep--
+    },
+    onClear() {
+      this.randomPhrase = this.randomPhrase.concat(this.userPhrase)
+      this.userPhrase = []
     }
   }
 }
