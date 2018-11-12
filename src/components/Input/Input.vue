@@ -26,7 +26,7 @@
 
     <!-- floating title = placeholder -->
     <span
-      :class="{'input_has-content': !!value }"
+      :class="{'input_has-content': !! value }"
       class="input__title">
       {{ titleText }}
     </span>
@@ -39,6 +39,14 @@
       width="24"
       height="24"
       @click.stop.native="handleIconClick"
+    />
+    <svgicon
+      v-if="value && !icon"
+      name="cross"
+      class="delete__icon"
+      width="12"
+      height="12"
+      @click.stop.native="$emit('input', '')"
     />
 
     <!-- tip message -->
@@ -196,6 +204,14 @@ export default {
   cursor: pointer;
 }
 
+.delete__icon {
+  color: config('colors.text-primary');
+  position: absolute;
+  top: 22px;
+  right: 0;
+  cursor: pointer;
+}
+
 .input__input {
   @apply text-2xl;
   @apply pt-1 px-0 pb-0;
@@ -225,9 +241,15 @@ export default {
     letter-spacing: 0.3px;
   }
 }
+
+.input__input {
+  @apply pr-4;
+}
+
 .input--has-icon .input__input {
   @apply pr-8;
 }
+
 .input--has-error .input__input {
   border-color: config('colors.text-error');
 }
