@@ -3,12 +3,11 @@
     <div class="backup-step-title">backup</div>
     <div class="backup-step-subtitle">Please carefully write down this phrase</div>
     <div class="backup-step-content">
-      <div
+      <BackupPhraseItem
         v-for="(word, index) in phrase"
         :key="index"
-        class="backup-step-word">
-        {{ word }}
-      </div>
+        :word="word"
+      />
     </div>
     <div class="backup-step-content-item">We’ll confirm on the next screen</div>
     <div class="backup-step-button">i’ve written it down</div>
@@ -16,7 +15,12 @@
 </template>
 
 <script>
+import BackupPhraseItem from './BackupPhraseItem'
+
 export default {
+  components: {
+    BackupPhraseItem
+  },
   props: {
     phrase: {
       type: Array,
@@ -59,11 +63,6 @@ export default {
     height: 11.25rem;
     padding: 4.25rem 0;
     font-weight: config('fontWeights.semibold');
-  }
-  .backup-step-word {
-    font-size: 1.5625rem;
-    margin-right: 1.25rem;
-    margin-bottom: 0.4375rem;
   }
   .backup-step-content-item {
     font-weight: config('fontWeights.semibold');
