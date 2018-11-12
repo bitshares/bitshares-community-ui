@@ -21,18 +21,23 @@
       :phrase="phrase"
       @change="onChangeStep"
     />
+    <BackupVerify
+      v-if="currentStep === 4"
+    />
   </div>
 </template>
 <script>
 import BackupStep1 from './BackupStep1'
 import BackupStep2 from './BackupStep2'
 import BackupPhrase from './BackupPhrase'
+import BackupVerify from './BackupVerify'
 
 export default {
   components: {
     BackupStep1,
     BackupStep2,
-    BackupPhrase
+    BackupPhrase,
+    BackupVerify
   },
   data() {
     return {

@@ -1,7 +1,7 @@
 <template>
   <div class="backup-step">
-    <div class="backup-step-title">backup</div>
-    <div class="backup-step-subtitle">Please carefully write down this phrase</div>
+    <div class="backup-step-title">Verify backup</div>
+    <div class="backup-step-subtitle">Please tap each word in the correct order</div>
     <div class="backup-step-content">
       <BackupPhraseItem
         v-for="(word, index) in phrase"
@@ -9,11 +9,9 @@
         :word="word"
       />
     </div>
-    <div class="backup-step-content-item">We’ll confirm on the next screen</div>
-    <div
-      class="backup-step-button"
-      @click.stop="$emit('change', 4)"
-    >i’ve written it down</div>
+    <div class="backup-step-content-item">Is this correct?</div>
+    <div class="backup-step-button _clear">Clear</div>
+    <div class="backup-step-button _confirm">Confirm</div>
   </div>
 </template>
 
@@ -50,7 +48,7 @@ export default {
   }
   .backup-step-subtitle {
     margin: 0.9375rem auto 0;
-    width: 21.875rem;
+    width: 23.875rem;
     font-weight: config('fontWeights.semibold');
     font-size: config('textSizes.lg');
     text-align: center;
@@ -72,8 +70,9 @@ export default {
   }
   .backup-step-button {
     box-sizing: border-box;
+    display: inline-block;
     margin-top: 1rem;
-    width: 27.5rem;
+    width: 13rem;
     height: 3rem;
     line-height: 3rem;
     background-color: config('colors.white');
@@ -82,5 +81,12 @@ export default {
     font-family: config('fonts.gotham-medium');
     text-transform: uppercase;
     cursor: pointer;
+
+    &._clear {
+      margin-right: 0.3rem;
+    }
+    &._confirm {
+      margin-left: 1rem;
+    }
   }
 </style>
