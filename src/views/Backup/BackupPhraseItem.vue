@@ -2,6 +2,7 @@
   <div
     :class="{'backup-step-word--border': border}"
     class="backup-step-word"
+    @click="onClick({ index })"
   >
     {{ word }}
   </div>
@@ -17,6 +18,16 @@ export default {
     border: {
       type: Boolean,
       default: false
+    },
+    index: {
+      type: Number,
+      default: 0
+    },
+    onClick: {
+      type: Function,
+      default() {
+        return () => {}
+      }
     }
   },
   data() {
@@ -33,7 +44,7 @@ export default {
     &--border {
       font-size: config('textSizes.lg');
       box-sizing: border-box;
-      border: 1px solid config('colors.white');
+      border: 1px dashed config('colors.grey-darkest');
       height: 2rem;
       line-height: 1.5rem;
       padding: 2px 8px 4px;

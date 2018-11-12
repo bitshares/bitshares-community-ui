@@ -2,13 +2,24 @@
   <div class="backup-step">
     <div class="backup-step-title">Verify backup</div>
     <div class="backup-step-subtitle">Please tap each word in the correct order</div>
-    <div class="backup-step-content-item">Let’s verify your backup phrase</div>
+    <div class="backup-step-content">
+      <BackupPhraseItem
+        v-for="(word, index) in userPhrase"
+        :key="index"
+        :index="index"
+        :word="word"
+        :border="true"
+        :on-click="onRemovePhrase"
+      />
+    </div>
+    <div class="backup-step-content-item _verify">Let’s verify your backup phrase</div>
     <div class="backup-step-content">
       <BackupPhraseItem
         v-for="(word, index) in phrase"
         :key="index"
+        :index="index"
         :word="word"
-        :border="true"
+        :on-click="onSelectPhraseFromRandomList"
       />
     </div>
     <div class="backup-step-content-item">Is this correct?</div>
@@ -30,10 +41,33 @@ export default {
       default() {
         return []
       }
+    },
+    userPhrase: {
+      type: Array,
+      default() {
+        return []
+      }
+    },
+    onSelectPhraseFromRandomList: {
+      type: Function,
+      default() {
+        return () => {}
+      }
+    },
+    onRemovePhrase: {
+      type: Function,
+      default() {
+        return () => {}
+      }
     }
   },
   data() {
     return {}
+  },
+  methods: {
+    gets() {
+      console.log(123)
+    }
   }
 }
 </script>
@@ -49,7 +83,7 @@ export default {
     font-size: config('textSizes.lg');
   }
   .backup-step-subtitle {
-    margin: 0.9375rem auto 0;
+    margin: 0.9375rem auto 3rem;
     width: 23.875rem;
     font-weight: config('fontWeights.semibold');
     font-size: config('textSizes.lg');
@@ -58,13 +92,10 @@ export default {
   .backup-step-content {
     margin: 0 auto;
     width: 21.875rem;
-    height: 19.55rem !important;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    height: 5.25rem;
-    padding: 4.25rem 0;
     font-weight: config('fontWeights.semibold');
   }
   .backup-step-content-item {
@@ -90,5 +121,8 @@ export default {
     &._confirm {
       margin-left: 1rem;
     }
+  }
+  ._verify {
+    margin: 25px auto;
   }
 </style>

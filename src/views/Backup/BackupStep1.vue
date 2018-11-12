@@ -10,7 +10,7 @@
     </div>
     <div
       class="backup-step-button"
-      @click.stop="$emit('change', 2)"
+      @click="$emit('change', 2)"
     >Continue to backup</div>
   </div>
 </template>

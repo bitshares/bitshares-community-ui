@@ -2,7 +2,7 @@
   <div class="dashboard">
     <div
       style="color: #fff; cursor:pointer; text-align:center; color:green; margin-bottom:15px;"
-      @click="backupShow = !backupShow"
+      @click="backupShow = true"
     >Backup
       <Modal v-if="backupShow">
         <Backup/>

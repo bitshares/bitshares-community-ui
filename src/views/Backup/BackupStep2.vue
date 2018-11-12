@@ -11,7 +11,7 @@
     </div>
     <div
       class="backup-step-button"
-      @click.stop="$emit('change', 3)"
+      @click="$emit('change', 3)"
     >I understand
     </div>
   </div>

@@ -12,7 +12,7 @@
     <div class="backup-step-content-item">We’ll confirm on the next screen</div>
     <div
       class="backup-step-button"
-      @click.stop="$emit('change', 4)"
+      @click="$emit('change', 4)"
     >i’ve written it down</div>
   </div>
 </template>

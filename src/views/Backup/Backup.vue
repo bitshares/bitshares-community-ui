@@ -24,6 +24,9 @@
     <BackupVerify
       v-if="currentStep === 4"
       :phrase="randomPhrase"
+      :user-phrase="userPhrase"
+      :on-select-phrase-from-random-list="onSelectPhraseFromRandomList"
+      :on-remove-phrase="onRemovePhrase"
     />
   </div>
 </template>
@@ -40,25 +43,38 @@ export default {
     BackupPhrase,
     BackupVerify
   },
+  mounted() {
+    this.randomPhrase = this.generatePhrase()
+  },
   data() {
     return {
       currentStep: 1,
-      backupPhrase: 'electric animal breakfast chicken kid cat dog js tag world word girl boy car machine'
+      backupPhrase: 'electric animal breakfast chicken kid cat dog js tag world word girl boy car machine',
+      randomPhrase: [],
+      userPhrase: []
     }
   },
   computed: {
     phrase() {
       return this.backupPhrase.split(' ')
-    },
-    randomPhrase() {
-      return this.backupPhrase.split(' ').sort(() => {
-        return Math.random() - 0.5
-      })
     }
   },
   methods: {
     onChangeStep(step) {
       this.currentStep = step
+    },
+    onSelectPhraseFromRandomList({ index }) {
+      this.userPhrase.push(this.randomPhrase[index])
+      this.randomPhrase = this.randomPhrase.filter((item, ndx) => ndx !== index)
+    },
+    onRemovePhrase({ index }) {
+      this.randomPhrase.push(this.userPhrase[index])
+      this.userPhrase = this.userPhrase.filter((item, ndx) => ndx !== index)
+    },
+    generatePhrase() {
+      return this.backupPhrase.split(' ').sort(() => {
+        return Math.random() - 0.5
+      })
     }
   }
 }
