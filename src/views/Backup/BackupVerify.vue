@@ -22,9 +22,11 @@
         :on-click="onSelectPhraseFromRandomList"
       />
     </div>
-    <div class="backup-step-content-item">Is this correct?</div>
-    <div class="backup-step-button _clear">Clear</div>
-    <div class="backup-step-button _confirm">Confirm</div>
+    <div class="backup-step-footer">
+      <div class="backup-step-content-item">Is this correct?</div>
+      <div class="backup-step-button _clear">Clear</div>
+      <div class="backup-step-button _confirm">Confirm</div>
+    </div>
   </div>
 </template>
 
@@ -73,6 +75,8 @@ export default {
 </script>
 <style lang="scss" scoped>
   .backup-step {
+    width: 100%;
+    position: relative;
     text-align: center;
     font-family: config('fonts.gotham');
   }
@@ -100,6 +104,11 @@ export default {
   }
   .backup-step-content-item {
     font-weight: config('fontWeights.semibold');
+  }
+  .backup-step-footer {
+    position: absolute;
+    width: 100%;
+    bottom: 20px;
   }
   .backup-step-button {
     box-sizing: border-box;

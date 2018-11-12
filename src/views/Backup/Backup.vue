@@ -43,9 +43,6 @@ export default {
     BackupPhrase,
     BackupVerify
   },
-  mounted() {
-    this.randomPhrase = this.generatePhrase()
-  },
   data() {
     return {
       currentStep: 1,
@@ -58,6 +55,9 @@ export default {
     phrase() {
       return this.backupPhrase.split(' ')
     }
+  },
+  mounted() {
+    this.randomPhrase = this.generatePhrase()
   },
   methods: {
     onChangeStep(step) {

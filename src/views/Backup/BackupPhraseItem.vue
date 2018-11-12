@@ -37,7 +37,7 @@ export default {
 </script>
 <style lang="scss" scoped>
   .backup-step-word {
-    font-size: 1.5625rem;
+    font-size: 1.4625rem;
     margin-right: 1.25rem;
     margin-bottom: 0.4375rem;
 
