@@ -1,6 +1,12 @@
 <template>
   <div class="backup">
     <svgicon
+      v-if="currentStep > 1"
+      class="backup-paginator"
+      name="arrowDown"
+      @click="goBack"
+    />
+    <svgicon
       class="backup-close"
       width="12"
       height="12"
@@ -75,6 +81,9 @@ export default {
       return this.backupPhrase.split(' ').sort(() => {
         return Math.random() - 0.5
       })
+    },
+    goBack() {
+      this.currentStep--
     }
   }
 }
@@ -95,5 +104,12 @@ export default {
     position: absolute;
     right: 0.625rem;
     top: 0.625rem
+  }
+  .backup-paginator {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    transform: rotate(90deg);
+    z-index: 10;
   }
 </style>
