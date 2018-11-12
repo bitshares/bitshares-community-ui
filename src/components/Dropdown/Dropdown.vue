@@ -4,7 +4,7 @@
     @click="handleDropdownClick"
   >
     <svgicon
-      name="expand"
+      name="burger"
       width="24"
       height="24"
       class="dropdown-icon"
@@ -34,6 +34,7 @@
 
 <script>
 import '@icons/arrowDown'
+import '@icons/burger'
 
 export default {
   directives: {
