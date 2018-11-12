@@ -2,11 +2,13 @@
   <div class="backup-step">
     <div class="backup-step-title">Verify backup</div>
     <div class="backup-step-subtitle">Please tap each word in the correct order</div>
+    <div class="backup-step-content-item">Let’s verify your backup phrase</div>
     <div class="backup-step-content">
       <BackupPhraseItem
         v-for="(word, index) in phrase"
         :key="index"
         :word="word"
+        :border="true"
       />
     </div>
     <div class="backup-step-content-item">Is this correct?</div>
@@ -61,7 +63,7 @@ export default {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    height: 11.25rem;
+    height: 5.25rem;
     padding: 4.25rem 0;
     font-weight: config('fontWeights.semibold');
   }

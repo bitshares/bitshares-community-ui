@@ -23,6 +23,7 @@
     />
     <BackupVerify
       v-if="currentStep === 4"
+      :phrase="randomPhrase"
     />
   </div>
 </template>
