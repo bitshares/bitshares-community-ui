@@ -2,6 +2,13 @@
   <div class="backup-step">
     <div class="backup-step-title">backup</div>
     <div class="backup-step-subtitle">You need to backup account before using it</div>
+    <svgicon
+      class="backup-step-icon"
+      name="photo"
+      width="100"
+      height="100"
+      color="rgba(255,255,255,0.8)"
+    />
     <div class="backup-step-content">
       <div class="backup-step-content-confirm">SCREENSHOTS ARE NOT SECURE</div>
       <div class="backup-step-content-item">Never make a digital copy of your</div>
@@ -18,6 +25,8 @@
 </template>
 
 <script>
+import '@icons/photo'
+
 export default {
   data() {
     return {}
@@ -46,7 +55,7 @@ export default {
     padding-top: 1.125rem;
     padding-bottom: 1.125rem;
     box-sizing: border-box;
-    margin-top: 11.07rem;
+    margin-top: 3.07rem;
     background-color: #6d6e70;
     font-size: 1.125rem;
     box-sizing: border-box;
@@ -73,5 +82,8 @@ export default {
     font-family: config('fonts.gotham-medium');
     text-transform: uppercase;
     cursor: pointer;
+  }
+  .backup-step-icon {
+    margin-top: 30px;
   }
 </style>

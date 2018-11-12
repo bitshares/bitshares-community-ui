@@ -2,6 +2,13 @@
   <div class="backup-step">
     <div class="backup-step-title">backup</div>
     <div class="backup-step-subtitle">You need to backup account before using it</div>
+    <svgicon
+      class="backup-step-icon"
+      name="safe"
+      width="100"
+      height="100"
+      color="rgba(255,255,255,0.5)"
+    />
     <div class="backup-step-content">
       <div class="backup-step-content-item">Are you being watched?</div>
       <div class="backup-step-content-item">Nearby windows?</div>
@@ -16,6 +23,8 @@
 </template>
 
 <script>
+import '@icons/safe'
+
 export default {
   data() {
     return {}
@@ -41,7 +50,7 @@ export default {
     text-align: center;
   }
   .backup-step-content {
-    margin-top: 11.25rem;
+    margin-top: 3.25rem;
     font-weight: config('fontWeights.semibold');
   }
   .backup-step-content-item {
@@ -60,5 +69,8 @@ export default {
     font-family: config('fonts.gotham-medium');
     text-transform: uppercase;
     cursor: pointer;
+  }
+  .backup-step-icon {
+    margin-top: 30px;
   }
 </style>
