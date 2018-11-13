@@ -67,7 +67,7 @@ const mutations = {
     state.quoteAsset = quoteAsset
   },
   [types.ORDER_BOOK_RESET](state) {
-    Object.assign(state, getDefaultState());
+    Object.assign(state, getDefaultState())
   }
 }
 
