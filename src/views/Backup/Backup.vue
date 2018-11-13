@@ -1,7 +1,7 @@
 <template>
   <div class="backup">
     <svgicon
-      v-if="currentStep > 1 && currentStep < 5"
+      v-if="currentStep > 1"
       class="backup-paginator"
       name="arrowDown"
       @click="goBack"
