@@ -1,7 +1,7 @@
 <template>
   <div class="backup">
     <svgicon
-      v-if="currentStep > 1"
+      v-if="currentStep > 1 && currentStep < 5"
       class="backup-paginator"
       name="arrowDown"
       @click="goBack"
@@ -34,6 +34,10 @@
       :on-select-phrase-from-random-list="onSelectPhraseFromRandomList"
       :on-remove-phrase="onRemovePhrase"
       @clear="onClear"
+      @change="onChangeStep"
+    />
+    <BackupFinish
+      v-if="currentStep === 5"
     />
   </div>
 </template>
@@ -42,13 +46,15 @@ import BackupStep1 from './BackupStep1'
 import BackupStep2 from './BackupStep2'
 import BackupPhrase from './BackupPhrase'
 import BackupVerify from './BackupVerify'
+import BackupFinish from './BackupFinish'
 
 export default {
   components: {
     BackupStep1,
     BackupStep2,
     BackupPhrase,
-    BackupVerify
+    BackupVerify,
+    BackupFinish
   },
   data() {
     return {
