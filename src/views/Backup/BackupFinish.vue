@@ -2,7 +2,11 @@
   <div class="backup-step">
     <div class="backup-step-title">almost done! let’s review</div>
     <div class="backup-step-subtitle">Please tap each word in the correct order</div>
-    <div class="backup-step-content">
+    <div
+      v-for="(text, index) in paragraphs"
+      :key="index"
+      class="backup-step-content"
+    >
       <div class="backup-step-finish-icon">
         <svgicon
           width="33"
@@ -11,31 +15,8 @@
           name="verified"
         />
       </div>
-      <div class="backup-step-finish-text">I understand that my funds are held securely on this device, not by a company, and nobody can recover my backup phrase and password</div>
+      <div class="backup-step-finish-text">{{ text }}</div>
     </div>
-    <div class="backup-step-content">
-      <div class="backup-step-finish-icon">
-        <svgicon
-          width="33"
-          height="33"
-          color="rgba(251,231,9)"
-          name="verified"
-        />
-      </div>
-      <div class="backup-step-finish-text">I understand, that if I open BitShares on a new device or clear browser cache, my funds can only be accessed with the backup phrase</div>
-    </div>
-    <div class="backup-step-content">
-      <div class="backup-step-finish-icon">
-        <svgicon
-          width="33"
-          height="33"
-          color="rgba(251,231,9)"
-          name="verified"
-        />
-      </div>
-      <div class="backup-step-finish-text">I understand, that I need to confirm every transaction with the password</div>
-    </div>
-
     <div class="backup-step-footer">
       <div
         class="backup-step-button _password"
@@ -69,7 +50,13 @@ import { mapActions } from 'vuex'
 
 export default {
   data() {
-    return {}
+    return {
+      paragraphs: [
+        'I understand that my funds are held securely on this device, not by a company, and nobody can recover my backup phrase and password',
+        'I understand, that if I open BitShares on a new device or clear browser cache, my funds can only be accessed with the backup phrase',
+        'I understand, that I need to confirm every transaction with the password'
+      ]
+    }
   },
   methods: {
     ...mapActions('backup', ['setBackupFlag']),

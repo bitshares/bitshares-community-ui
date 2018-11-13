@@ -84,6 +84,6 @@ export default {
     cursor: pointer;
   }
   .backup-step-icon {
-    margin-top: 30px;
+    margin-top: 1.875rem;
   }
 </style>
