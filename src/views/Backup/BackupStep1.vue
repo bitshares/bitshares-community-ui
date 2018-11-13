@@ -58,7 +58,7 @@ export default {
     font-size: 1.55rem;
   }
   .backup-step-button {
-    margin-top: 1.25rem;
+    margin-top: 1.2rem;
     box-sizing: border-box;
     width: 27.5rem;
     height: 3rem;

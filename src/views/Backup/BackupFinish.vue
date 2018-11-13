@@ -126,7 +126,7 @@ export default {
   .backup-step-footer {
     position: absolute;
     width: 100%;
-    bottom: 1.1875rem;
+    bottom: 1.0975rem;
   }
   .backup-step-button {
     box-sizing: border-box;

@@ -72,7 +72,7 @@ export default {
   }
   .backup-step-button {
     box-sizing: border-box;
-    margin-top: 1rem;
+    margin-top: 1.12rem;
     width: 27.5rem;
     height: 3rem;
     line-height: 3rem;
