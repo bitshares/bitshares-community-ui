@@ -24,7 +24,7 @@ const getters = {
   getLastPrice: state => state.lastPrice,
   getBaseAsset: state => state.baseAsset,
   getQuoteAsset: state => state.quoteAsset,
-  getMaxOrderAmount(state) {
+  getMaxOrderAmount: state => {
     const maxFromBuy = getMaxSum(state.orderBook.buying, 'sum')
     const maxFromSell = getMaxSum(state.orderBook.selling, 'sum')
 
