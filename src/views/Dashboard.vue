@@ -34,9 +34,9 @@
             :expand-mode="true"/>
         </Card>
         <Card
+          v-if="orderBookIsActive"
           collapsible
           class="lg:w-1/3"
-          v-if="orderBookIsActive"
           title="order book">
           <OrderBook slot="body"/>
         </Card>
