@@ -5,24 +5,23 @@ import debounce from 'lodash/debounce'
 
 const types = {
   SET_ORDER_BOOK: 'SET_ORDER_BOOK',
-  ORDER_BOOK_INIT_START: 'ORDER_BOOK_INIT_START'
+  ORDER_BOOK_INIT_START: 'ORDER_BOOK_INIT_START',
+  ORDER_BOOK_RESET: 'ORDER_BOOK_RESET'
 }
 
-const state = {
-  lastPrice: '6 745',
-  baseAsset: '',
-  quoteAsset: '',
+const getDefaultState = () => ({
+  lastPrice: null,
+  baseAsset: null,
+  quoteAsset: null,
   fetching: false,
   orderBook: {
     buying: [],
     selling: []
   }
-}
+})
 
 const getters = {
   getLastPrice: state => state.lastPrice,
-  getBaseSymbol: state => state.baseAsset.symbol,
-  getQuoteSymbol: state => state.quoteAsset.symbol,
   getBaseAsset: state => state.baseAsset,
   getQuoteAsset: state => state.quoteAsset,
   getMaxOrderAmount(state) {
@@ -57,31 +56,34 @@ const processOrders = (orders, type, baseAsset, quoteAsset) => {
 }
 
 const mutations = {
-  [types.SET_ORDER_BOOK](state, { orders, baseAsset, quoteAsset }) {
+  [types.SET_ORDER_BOOK](state, { orders }) {
     state.fetching = false
+    state.orderBook.buying = processOrders(orders.buy, 'buy', state.baseAsset, state.quoteAsset)
+    state.orderBook.selling = processOrders(orders.sell, 'sell', state.baseAsset, state.quoteAsset)
+  },
+  [types.ORDER_BOOK_INIT_START](state, { baseAsset, quoteAsset }) {
+    state.fetching = true
     state.baseAsset = baseAsset
     state.quoteAsset = quoteAsset
-    state.orderBook.buying = processOrders(orders.buy, 'buy', baseAsset, quoteAsset)
-    state.orderBook.selling = processOrders(orders.sell, 'sell', baseAsset, quoteAsset)
   },
-  [types.ORDER_BOOK_INIT_START](state) {
-    state.fetching = true
+  [types.ORDER_BOOK_RESET](state) {
+    Object.assign(state, getDefaultState());
   }
 }
 
 const actions = {
   initialize(store, { baseSymbol, quoteSymbol }) {
     const { commit, rootGetters } = store
-    commit(types.ORDER_BOOK_INIT_START)
     actions.deinit(store)
 
     const baseAsset = rootGetters['assets/getAssetBySymbol'](baseSymbol)
     const quoteAsset = rootGetters['assets/getAssetBySymbol'](quoteSymbol)
+    commit(types.ORDER_BOOK_INIT_START, { baseAsset, quoteAsset })
     const market = API.Market(baseAsset)
     if (market) {
       market.subscribeToMarket(quoteAsset.id, update => {
         const orders = API.Market(baseAsset).getBook(quoteAsset)
-        debouncedUpdate(store, { orders, baseAsset, quoteAsset })
+        debouncedUpdate(store, { orders })
       })
     } else {
       console.warn(`MARKET ERROR: No such market - ${baseSymbol}/${quoteSymbol}`)
@@ -94,10 +96,10 @@ const actions = {
       const market = API.Market(baseAsset)
       market.unsubscribeFromMarket(quoteAsset.id)
     }
+    commit(types.ORDER_BOOK_RESET)
   },
-  updateOrderBook({ commit }, { orders, baseAsset, quoteAsset }) {
-    console.log('debounced update')
-    commit(types.SET_ORDER_BOOK, { orders, baseAsset, quoteAsset })
+  updateOrderBook({ commit }, { orders }) {
+    commit(types.SET_ORDER_BOOK, { orders })
   }
 }
 
@@ -105,7 +107,7 @@ const debouncedUpdate = debounce(actions.updateOrderBook, 800)
 
 export default {
   namespaced: true,
-  state,
+  state: getDefaultState(),
   mutations,
   actions,
   getters

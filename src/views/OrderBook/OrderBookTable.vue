@@ -81,6 +81,8 @@ export default {
   .order-book-table {
     flex: 1;
     width: 50%;
+    display: flex;
+    flex-direction: column;
     &--sell {
       .order-book__column-title {
         text-align: right;

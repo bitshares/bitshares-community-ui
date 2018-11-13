@@ -1,7 +1,7 @@
 <template>
   <div class="order-books">
     <LoadingContainer :loading="fetching">
-      <OrderBookLastPrice :quote-symbol="quoteSymbol"/>
+      <OrderBookLastPrice :quote-symbol="quoteAssetSymbol"/>
       <div class="order-books__layout">
         <OrderBookTable
           :items="orderBook.buying"
@@ -37,22 +37,28 @@ export default {
     tableHeaders() {
       return {
         buy: [
-          { title: `Sum, ${this.baseSymbol}`, field: 'sum', align: 'left' },
+          { title: `Sum, ${this.baseAssetSymbol}`, field: 'sum', align: 'left' },
           { title: ``, field: 'price' }
         ],
         sell: [
           { title: ``, field: 'price', align: 'left' },
-          { title: `Sum, ${this.baseSymbol}`, field: 'sum' }
+          { title: `Sum, ${this.baseAssetSymbol}`, field: 'sum' }
         ]
       }
     },
     ...mapGetters({
       orderBook: 'orderBook/getOrderBook',
       maxSum: 'orderBook/getMaxOrderAmount',
-      baseSymbol: 'orderBook/getBaseSymbol',
-      quoteSymbol: 'orderBook/getQuoteSymbol',
+      baseAsset: 'orderBook/getBaseAsset',
+      quoteAsset: 'orderBook/getQuoteAsset',
       fetching: 'orderBook/isFetching'
-    })
+    }),
+    baseAssetSymbol() {
+      return this.baseAsset && this.baseAsset.symbol
+    },
+    quoteAssetSymbol() {
+      return this.quoteAsset && this.quoteAsset.symbol
+    }
   }
 }
 </script>
