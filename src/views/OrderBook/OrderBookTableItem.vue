@@ -67,10 +67,10 @@ export default {
 <style lang="scss">
   .order-book-table-row {
     display: flex;
-    padding: 0.3rem 0;
     font-size: config('textSizes.sm');
     font-family: config('fonts.gotham');
     .order-book-table-item {
+      padding: 0.3rem 0;
       flex: 1;
       cursor: pointer;
       .order-book-item-sum {
