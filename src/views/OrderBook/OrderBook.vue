@@ -1,6 +1,6 @@
 <template>
   <div class="order-books">
-    <!-- <OrderBookLastPrice/> -->
+    <OrderBookLastPrice :quote-symbol="quoteSymbol"/>
     <div class="order-books__layout">
       <OrderBookTable
         :items="orderBook.buying"
@@ -34,10 +34,10 @@ export default {
       return {
         buy: [
           { title: `Sum, ${this.baseSymbol}`, field: 'sum', align: 'left' },
-          { title: 'Price', field: 'price' }
+          { title: ``, field: 'price' }
         ],
         sell: [
-          { title: 'Price', field: 'price', align: 'left' },
+          { title: ``, field: 'price', align: 'left' },
           { title: `Sum, ${this.baseSymbol}`, field: 'sum' }
         ]
       }
@@ -45,8 +45,8 @@ export default {
     ...mapGetters({
       orderBook: 'books/getOrderBook',
       maxSum: 'books/getMaxOrderAmount',
-      baseSymbol: 'books/getBaseSymbol'
-
+      baseSymbol: 'books/getBaseSymbol',
+      quoteSymbol: 'books/getQuoteSymbol'
     })
   }
 }

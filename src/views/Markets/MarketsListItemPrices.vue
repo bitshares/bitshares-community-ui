@@ -8,7 +8,7 @@
         <Star
           :active="isFavourite"
           class="tickers__favourite"
-          @click.native="$emit('change', { item })"
+          @click.stop.native="$emit('change', { item })"
         />
         <div class="tickers-list__itemPair pl-6">
           <span class="_currencyTitle">{{ item.ticker }}</span>

@@ -36,6 +36,7 @@
         <Card
           collapsible
           class="lg:w-1/3"
+          v-if="orderBookIsActive"
           title="order book">
           <OrderBook slot="body"/>
         </Card>
@@ -51,6 +52,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Portfolio from '@/views/Account/Portfolio.vue'
 import AccountHeader from '@/views/Account/AccountHeader.vue'
 import OrderBook from '@/views/OrderBook/OrderBook'
@@ -76,6 +78,11 @@ export default {
     OrderBookLastPrice,
     OrderHistory,
     OrderHistorySearch
+  },
+  computed: {
+    ...mapGetters({
+      orderBookIsActive: 'books/isActive'
+    })
   }
 }
 </script>

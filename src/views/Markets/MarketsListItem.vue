@@ -8,6 +8,7 @@
     :market-cap="marketCap"
     :expand-mode="expandMode"
     @change="changeFavourite"
+    @click.native="handleClick"
   />
 </template>
 <script>
@@ -51,8 +52,16 @@ export default {
     }
   },
   methods: {
-    ...mapActions('marketsMonitor', ['toggleFavourite']),
-
+    ...mapActions({
+      toggleFavourite: 'marketsMonitor/toggleFavourite',
+      activateOrderBook: 'books/initialize'
+    }),
+    handleClick() {
+      this.activateOrderBook({
+        baseSymbol: this.item.base,
+        quoteSymbol: this.item.ticker
+      })
+    },
     getChangeValue({ price }) {
       if (!price) return '0%'
       return (+price >= 0) ? `+${price}%` : `${price}%`
