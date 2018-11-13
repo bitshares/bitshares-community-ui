@@ -2,13 +2,7 @@
   <div class="backup-step">
     <div class="backup-step-title">backup</div>
     <div class="backup-step-subtitle">You need to backup account before using it</div>
-    <svgicon
-      class="backup-step-icon"
-      name="photo"
-      width="100"
-      height="100"
-      color="rgba(255,255,255,0.8)"
-    />
+    <div class="backup-step-icon"/>
     <div class="backup-step-content">
       <div class="backup-step-content-confirm">SCREENSHOTS ARE NOT SECURE</div>
       <div class="backup-step-content-item">Never make a digital copy of your</div>
@@ -84,6 +78,12 @@ export default {
     cursor: pointer;
   }
   .backup-step-icon {
-    margin-top: 1.875rem;
-  }
+    margin: 1.875rem auto;
+    width: 100px;
+    height: 100px;
+    transform: scale(1, 1);
+    background-repeat: no-repeat;
+    background-position: 50% 55%;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTYwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6IzZkNmU3MDt9LmNscy0ye2ZpbGw6I2ZmZjt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPtCg0LXRgdGD0YDRgSAzPC90aXRsZT48ZyBpZD0i0KHQu9C+0LlfMiIgZGF0YS1uYW1lPSLQodC70L7QuSAyIj48ZyBpZD0icG9wLXVwcyI+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTI0LjU1LDU4Ljk0aC0xNGE1LjM0LDUuMzQsMCwwLDEtNS0zLjk1bC0yLjM3LTEwLjMzYTUuMzUsNS4zNSwwLDAsMC01LTMuOTVINjEuNzhhNS4zNCw1LjM0LDAsMCwwLTUsMy45NUw1NC40NCw1NWE1LjM1LDUuMzUsMCwwLDEtNSwzLjk1aC0xNGE0LjA2LDQuMDYsMCwwLDAtNCw0LjA1djQzLjg4YTQuMDYsNC4wNiwwLDAsMCw0LDQuMDVoODkuMWE0LjA2LDQuMDYsMCwwLDAsNC00LjA1VjYzQTQuMDYsNC4wNiwwLDAsMCwxMjQuNTUsNTguOTRaTTgwLDEwNC44YTI1Ljk1LDI1Ljk1LDAsMSwxLDI1Ljk1LTI1Ljk1QTI1Ljk1LDI1Ljk1LDAsMCwxLDgwLDEwNC44Wk02Mi4xNSw3OC44NWg0QTEzLjgxLDEzLjgxLDAsMCwxLDgwLDY1LjA2VjYxQTE3Ljg3LDE3Ljg3LDAsMCwwLDYyLjE1LDc4Ljg1WiIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTIzLjQsMTM2LjZhODAsODAsMCwxLDEsMTEzLjE5LDBBODAuMTMsODAuMTMsMCwwLDEsMjMuNCwxMzYuNlptMTA4LTEwOGE3Mi43MSw3Mi43MSwwLDEsMCwwLDEwMi44M0E3Mi44LDcyLjgsMCwwLDAsMTMxLjQyLDI4LjU4WiIvPjxyZWN0IGNsYXNzPSJjbHMtMiIgeD0iMy42MiIgeT0iNzYuMzQiIHdpZHRoPSIxNTIuNzUiIGhlaWdodD0iNy4zMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMzLjE0IDgwLjAxKSByb3RhdGUoLTQ1KSIvPjwvZz48L2c+PC9zdmc+);
+}
 </style>
