@@ -67,7 +67,7 @@ export default {
           { title: 'Volume, USD', field: 'usdVolume', align: 'left' },
           { title: 'Price, USD', field: 'usdPrice', align: 'left' },
           { title: '24h', field: 'change24h', align: 'center' },
-          { title: '7d', field: 'change7d', align: 'center' },
+          { title: '7d', field: 'change7d', align: 'center' }
           // { title: 'Market, USD', field: 'marketcap', align: 'right' }
         ]
       }
