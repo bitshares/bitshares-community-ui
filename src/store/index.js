@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import app from './modules/app'
 import portfolio from './modules/portfolio'
 import books from './modules/books'
+import backup from './modules/backup'
 import orderHistory from './modules/orderHistory'
 import createPersistedState from 'vuex-persistedstate'
 import vuexBitshares from 'vuex-bitshares'
@@ -22,6 +23,7 @@ const store = new Vuex.Store({
     marketsMonitor,
     portfolio,
     books,
+    backup,
     orderHistory,
     ...modules
   },

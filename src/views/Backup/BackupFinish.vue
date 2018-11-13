@@ -52,17 +52,30 @@
           <span class="_terms">theTerms of Use</span>
         </div>
       </div>
-      <div class="backup-step-button">Finish backup</div>
+      <div
+        class="backup-step-button"
+        @click="updateBackupFlag"
+      >Finish backup</div>
     </div>
   </div>
 </template>
 
 <script>
 import '@icons/verified'
+import { mapActions } from 'vuex'
 
 export default {
   data() {
     return {}
+  },
+  methods: {
+    ...mapActions('backup', ['setBackupFlag']),
+
+    updateBackupFlag() {
+      this.$nextTick(() => {
+        this.setBackupFlag(false)
+      })
+    }
   }
 }
 </script>

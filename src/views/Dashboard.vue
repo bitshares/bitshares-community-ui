@@ -2,9 +2,12 @@
   <div class="dashboard">
     <div
       style="color: #fff; cursor:pointer; text-align:center; color:green; margin-bottom:15px;"
-      @click="backupShow = true"
+      @click="setBackupFlag(true)"
     >Backup
-      <Modal v-if="backupShow">
+      <Modal
+        v-if="backupFlag"
+        @close="setBackupFlag(false)"
+      >
         <Backup/>
       </Modal>
     </div>
@@ -73,6 +76,8 @@ import OrderHistorySearch from '@/views/OrderHistory/OrderHistorySearch'
 import Backup from '@/views/Backup/Backup'
 import Modal from '@/components/Modal/Modal'
 
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   name: 'Dashboard',
   components: {
@@ -90,13 +95,18 @@ export default {
     Modal
   },
   data() {
-    return {
-      backupShow: false
-    }
+    return {}
+  },
+  computed: {
+    ...mapGetters({
+      backupFlag: 'backup/getBackupFlag'
+    })
+  },
+  methods: {
+    ...mapActions('backup', ['setBackupFlag'])
   }
 }
 </script>
-
 <style >
   .dashboard {
     @apply h-full;

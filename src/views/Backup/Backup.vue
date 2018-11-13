@@ -6,14 +6,17 @@
       name="arrowDown"
       @click="goBack"
     />
-    <svgicon
+    <div
       class="backup-close"
-      width="12"
-      height="12"
-      color="rgba(255,255,255,0.5)"
-      name="cancel"
-      @click.native="expanded = false"
-    />
+      @click="updateBackupFlag"
+    >
+      <svgicon
+        width="12"
+        height="12"
+        color="rgba(255,255,255,0.5)"
+        name="cancel"
+      />
+    </div>
     <BackupStep1
       v-if="currentStep === 1"
       @change="onChangeStep"
@@ -36,12 +39,11 @@
       @clear="onClear"
       @change="onChangeStep"
     />
-    <BackupFinish
-      v-if="currentStep === 5"
-    />
+    <BackupFinish v-if="currentStep === 5"/>
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 import BackupStep1 from './BackupStep1'
 import BackupStep2 from './BackupStep2'
 import BackupPhrase from './BackupPhrase'
@@ -73,6 +75,13 @@ export default {
     this.randomPhrase = this.generatePhrase()
   },
   methods: {
+    ...mapActions('backup', ['setBackupFlag']),
+
+    updateBackupFlag() {
+      this.$nextTick(() => {
+        this.setBackupFlag(false)
+      })
+    },
     onChangeStep(step) {
       this.currentStep = step
     },
@@ -101,6 +110,7 @@ export default {
 </script>
 <style lang="scss">
   .backup {
+    cursor: default;
     position: relative;
     color: config('colors.white');
     display: flex;
@@ -114,7 +124,9 @@ export default {
   .backup-close {
     position: absolute;
     right: 0.625rem;
-    top: 0.625rem
+    top: 0.625rem;
+    z-index: 11;
+    cursor: pointer;
   }
   .backup-paginator {
     position: absolute;
@@ -122,5 +134,6 @@ export default {
     top: 15px;
     transform: rotate(90deg);
     z-index: 10;
+    cursor: pointer;
   }
 </style>
