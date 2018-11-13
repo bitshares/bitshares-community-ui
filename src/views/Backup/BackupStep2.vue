@@ -19,8 +19,6 @@
 </template>
 
 <script>
-import '@icons/photo'
-
 export default {
   data() {
     return {}

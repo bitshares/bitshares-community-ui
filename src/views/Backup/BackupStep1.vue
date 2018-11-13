@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import '@icons/safe'
-
 export default {
   data() {
     return {}
