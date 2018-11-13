@@ -37,7 +37,10 @@
     </div>
 
     <div class="backup-step-footer">
-      <div class="backup-step-button _password">Copy password</div>
+      <div
+        class="backup-step-button _password"
+        @click="copyUserPhrase"
+      >Copy password</div>
       <div class="backup-step-content _footer-content">
         <div class="backup-step-finish-icon">
           <svgicon
@@ -75,6 +78,12 @@ export default {
       this.$nextTick(() => {
         this.setBackupFlag(false)
       })
+    },
+    copyUserPhrase() {
+      // later this phrase will be copy from vuex getter
+      const phrase = 'electric animal breakfast chicken kid cat dog js tag world word girl boy car machine'
+      window.navigator.clipboard.writeText(phrase)
+      this.updateBackupFlag()
     }
   }
 }
