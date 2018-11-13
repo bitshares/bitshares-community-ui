@@ -21,7 +21,13 @@
       <div
         class="backup-step-button _password"
         @click="copyUserPhrase"
-      >Copy password</div>
+      >
+        <Button
+          type="secondary"
+          text="Copy password"
+          width="full"
+        />
+      </div>
       <div class="backup-step-content _footer-content">
         <div class="backup-step-finish-icon">
           <svgicon
@@ -39,16 +45,25 @@
       <div
         class="backup-step-button"
         @click="updateBackupFlag"
-      >Finish backup</div>
+      >
+        <Button
+          text="Finish backup"
+          width="full"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import '@icons/verified'
+import Button from '@/components/Button/Button'
 import { mapActions } from 'vuex'
 
 export default {
+  components: {
+    Button
+  },
   data() {
     return {
       paragraphs: [
@@ -119,14 +134,6 @@ export default {
     box-sizing: border-box;
     display: inline-block;
     width: 27.5rem;
-    height: 3rem;
-    line-height: 3rem;
-    background-color: config('colors.white');
-    text-align: center;
-    color: config('colors.button-text');
-    font-family: config('fonts.gotham-medium');
-    text-transform: uppercase;
-    cursor: pointer;
   }
   .backup-step-finish-icon {
     width: 2.0625rem;

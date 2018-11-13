@@ -12,12 +12,21 @@
     <div
       class="backup-step-button"
       @click="$emit('change', 2)"
-    >Continue to backup</div>
+    >
+      <Button
+        text="Continue to backup"
+        width="full"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import Button from '@/components/Button/Button'
 export default {
+  components: {
+    Button
+  },
   data() {
     return {}
   }
@@ -53,14 +62,7 @@ export default {
     margin-top: 1.2rem;
     box-sizing: border-box;
     width: 27.5rem;
-    height: 3rem;
-    line-height: 3rem;
-    background-color: config('colors.white');
-    text-align: center;
-    color: config('colors.button-text');
     font-family: config('fonts.gotham-medium');
-    text-transform: uppercase;
-    cursor: pointer;
   }
   .backup-step-icon {
     margin: 1.875rem auto;

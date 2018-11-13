@@ -13,16 +13,23 @@
     <div
       class="backup-step-button"
       @click="$emit('change', 4)"
-    >i’ve written it down</div>
+    >
+      <Button
+        text="i’ve written it down"
+        width="full"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import BackupPhraseItem from './BackupPhraseItem'
+import Button from '@/components/Button/Button'
 
 export default {
   components: {
-    BackupPhraseItem
+    BackupPhraseItem,
+    Button
   },
   props: {
     phrase: {
@@ -74,13 +81,5 @@ export default {
     box-sizing: border-box;
     margin-top: 1.12rem;
     width: 27.5rem;
-    height: 3rem;
-    line-height: 3rem;
-    background-color: config('colors.white');
-    text-align: center;
-    color: config('colors.button-text');
-    font-family: config('fonts.gotham-medium');
-    text-transform: uppercase;
-    cursor: pointer;
   }
 </style>

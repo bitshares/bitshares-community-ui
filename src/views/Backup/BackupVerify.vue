@@ -28,13 +28,19 @@
         class="backup-step-button _clear"
         @click="$emit('clear')"
       >
-        Clear
+        <Button
+          text="Clear"
+          width="full"
+        />
       </div>
       <div
         class="backup-step-button _confirm"
         @click="$emit('change', 5)"
       >
-        Confirm
+        <Button
+          text="Confirm"
+          width="full"
+        />
       </div>
     </div>
   </div>
@@ -42,10 +48,12 @@
 
 <script>
 import BackupPhraseItem from './BackupPhraseItem'
+import Button from '@/components/Button/Button'
 
 export default {
   components: {
-    BackupPhraseItem
+    BackupPhraseItem,
+    Button
   },
   props: {
     phrase: {
@@ -120,14 +128,6 @@ export default {
     display: inline-block;
     margin-top: 1rem;
     width: 13rem;
-    height: 3rem;
-    line-height: 3rem;
-    background-color: config('colors.white');
-    text-align: center;
-    color: config('colors.button-text');
-    font-family: config('fonts.gotham-medium');
-    text-transform: uppercase;
-    cursor: pointer;
 
     &._clear {
       margin-right: 0.3rem;
