@@ -56,6 +56,7 @@ const actions = {
     dispatch('history/resetHistory', null, { root: true })
     dispatch('operations/unsubscribeFromUserOperations', null, { root: true })
     dispatch('operations/resetState', null, { root: true })
+    dispatch('orderBook/deinit', null, { root: true })
   }
 }
 

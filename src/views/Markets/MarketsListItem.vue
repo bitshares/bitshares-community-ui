@@ -54,7 +54,7 @@ export default {
   methods: {
     ...mapActions({
       toggleFavourite: 'marketsMonitor/toggleFavourite',
-      activateOrderBook: 'books/initialize'
+      activateOrderBook: 'orderBook/initialize'
     }),
     handleClick() {
       this.activateOrderBook({

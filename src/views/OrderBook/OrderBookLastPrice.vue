@@ -16,7 +16,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      price: 'books/getLastPrice'
+      price: 'orderBook/getLastPrice'
     })
   }
 }
@@ -31,14 +31,13 @@ export default {
     z-index: 100;
     width: 7.625rem;
     left: calc(50% - 3.8125rem);
-    background: config('colors.card-background');
     z-index: 100;
-    top: 2px;
-    height: 13px;
+    top: 1.73rem;
+    height: 0.7rem;
   }
   .order-book__priceTitle {
-    color: config('colors.button-text-disabled');
-    font-size: config('textSizes.sm');
+    color: config('colors.inactive');
+    font-size: config('textSizes.xs-sm');
     margin-bottom: 0.8125rem;
   }
   .order-book__priceValue {

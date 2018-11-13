@@ -1,33 +1,37 @@
 <template>
   <div class="order-books">
-    <OrderBookLastPrice :quote-symbol="quoteSymbol"/>
-    <div class="order-books__layout">
-      <OrderBookTable
-        :items="orderBook.buying"
-        :table-headers="tableHeaders.buy"
-        :max-sum="maxSum"
-        title="Buying"
-        align="left"
-      />
-      <OrderBookTable
-        :items="orderBook.selling"
-        :table-headers="tableHeaders.sell"
-        :max-sum="maxSum"
-        title="Selling"
-        align="right"
-      />
-    </div>
+    <LoadingContainer :loading="fetching">
+      <OrderBookLastPrice :quote-symbol="quoteSymbol"/>
+      <div class="order-books__layout">
+        <OrderBookTable
+          :items="orderBook.buying"
+          :table-headers="tableHeaders.buy"
+          :max-sum="maxSum"
+          title="Buying"
+          align="left"
+        />
+        <OrderBookTable
+          :items="orderBook.selling"
+          :table-headers="tableHeaders.sell"
+          :max-sum="maxSum"
+          title="Selling"
+          align="right"
+        />
+      </div>
+    </LoadingContainer>
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
 import OrderBookTable from './OrderBookTable'
 import OrderBookLastPrice from './OrderBookLastPrice'
+import LoadingContainer from '@/components/LoadingContainer'
 
 export default {
   components: {
     OrderBookTable,
-    OrderBookLastPrice
+    OrderBookLastPrice,
+    LoadingContainer
   },
   computed: {
     tableHeaders() {
@@ -43,10 +47,11 @@ export default {
       }
     },
     ...mapGetters({
-      orderBook: 'books/getOrderBook',
-      maxSum: 'books/getMaxOrderAmount',
-      baseSymbol: 'books/getBaseSymbol',
-      quoteSymbol: 'books/getQuoteSymbol'
+      orderBook: 'orderBook/getOrderBook',
+      maxSum: 'orderBook/getMaxOrderAmount',
+      baseSymbol: 'orderBook/getBaseSymbol',
+      quoteSymbol: 'orderBook/getQuoteSymbol',
+      fetching: 'orderBook/isFetching'
     })
   }
 }

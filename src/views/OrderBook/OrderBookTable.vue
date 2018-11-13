@@ -80,7 +80,6 @@ export default {
 <style lang="scss">
   .order-book-table {
     flex: 1;
-    font-family: config('fonts.gotham');
     width: 50%;
     &--sell {
       .order-book__column-title {
@@ -89,6 +88,9 @@ export default {
     }
   }
   .order-book__column-title {
-    margin-bottom: -0.9375rem;
+    padding: 0 1rem 0 0.6rem;
+    margin-bottom: 0.6rem;
+    color: config('colors.text-primary');
+    // margin-bottom: -0.9375rem;
   }
 </style>

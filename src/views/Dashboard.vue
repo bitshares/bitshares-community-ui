@@ -43,7 +43,7 @@
         <Card
           class="lg:w-1/3"
           title="My orders history">
-          <OrderHistorySearch slot="header"/>
+          <!-- <OrderHistorySearch slot="header"/> -->
           <OrderHistory slot="body"/>
         </Card>
       </div>
@@ -81,7 +81,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      orderBookIsActive: 'books/isActive'
+      orderBookIsActive: 'orderBook/isActive'
     })
   }
 }

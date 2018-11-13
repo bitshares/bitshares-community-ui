@@ -1,16 +1,18 @@
 import { getMaxSum } from '@/helpers/utils'
 import API from 'vuex-bitshares/src/services/api'
 import orderBy from 'lodash/orderBy'
-// import debounce from 'lodash/debounce'
+import debounce from 'lodash/debounce'
 
 const types = {
-  SET_ORDER_BOOK: 'SET_ORDER_BOOK'
+  SET_ORDER_BOOK: 'SET_ORDER_BOOK',
+  ORDER_BOOK_INIT_START: 'ORDER_BOOK_INIT_START'
 }
 
 const state = {
   lastPrice: '6 745',
   baseAsset: '',
   quoteAsset: '',
+  fetching: false,
   orderBook: {
     buying: [],
     selling: []
@@ -18,9 +20,7 @@ const state = {
 }
 
 const getters = {
-  getLastPrice(state) {
-    return state.lastPrice
-  },
+  getLastPrice: state => state.lastPrice,
   getBaseSymbol: state => state.baseAsset.symbol,
   getQuoteSymbol: state => state.quoteAsset.symbol,
   getBaseAsset: state => state.baseAsset,
@@ -31,15 +31,12 @@ const getters = {
 
     return maxFromBuy > maxFromSell ? maxFromBuy : maxFromSell
   },
-  getOrderBook(state) {
-    return state.orderBook
-  },
-  isActive() {
-    return !!(state.baseAsset && state.quoteAsset)
-  }
+  getOrderBook: state => state.orderBook,
+  isActive: state => !!(state.baseAsset && state.quoteAsset),
+  isFetching: state => state.fetching
 }
 
-const ordersConverted = (orders, type, baseAsset, quoteAsset) => {
+const processOrders = (orders, type, baseAsset, quoteAsset) => {
   const processedOrders = orders.map(order => {
     let sum = order.for_sale / 10 ** baseAsset.precision
     const sellField = type === 'buy' ? 'base' : 'quote'
@@ -61,28 +58,30 @@ const ordersConverted = (orders, type, baseAsset, quoteAsset) => {
 
 const mutations = {
   [types.SET_ORDER_BOOK](state, { orders, baseAsset, quoteAsset }) {
+    state.fetching = false
     state.baseAsset = baseAsset
     state.quoteAsset = quoteAsset
-    state.orderBook.buying = ordersConverted(orders.buy, 'buy', baseAsset, quoteAsset)
-    state.orderBook.selling = ordersConverted(orders.sell, 'sell', baseAsset, quoteAsset)
+    state.orderBook.buying = processOrders(orders.buy, 'buy', baseAsset, quoteAsset)
+    state.orderBook.selling = processOrders(orders.sell, 'sell', baseAsset, quoteAsset)
+  },
+  [types.ORDER_BOOK_INIT_START](state) {
+    state.fetching = true
   }
 }
 
 const actions = {
   initialize(store, { baseSymbol, quoteSymbol }) {
-    actions.deinit(store)
     const { commit, rootGetters } = store
+    commit(types.ORDER_BOOK_INIT_START)
+    actions.deinit(store)
 
     const baseAsset = rootGetters['assets/getAssetBySymbol'](baseSymbol)
     const quoteAsset = rootGetters['assets/getAssetBySymbol'](quoteSymbol)
     const market = API.Market(baseAsset)
     if (market) {
       market.subscribeToMarket(quoteAsset.id, update => {
-        console.log('Order book updated')
-        console.log(API.Market(baseAsset).getBook(quoteAsset))
         const orders = API.Market(baseAsset).getBook(quoteAsset)
-
-        commit(types.SET_ORDER_BOOK, { orders, baseAsset, quoteAsset })
+        debouncedUpdate(store, { orders, baseAsset, quoteAsset })
       })
     } else {
       console.warn(`MARKET ERROR: No such market - ${baseSymbol}/${quoteSymbol}`)
@@ -96,10 +95,13 @@ const actions = {
       market.unsubscribeFromMarket(quoteAsset.id)
     }
   },
-  updateOrderBook(store, orders) {
-
+  updateOrderBook({ commit }, { orders, baseAsset, quoteAsset }) {
+    console.log('debounced update')
+    commit(types.SET_ORDER_BOOK, { orders, baseAsset, quoteAsset })
   }
 }
+
+const debouncedUpdate = debounce(actions.updateOrderBook, 800)
 
 export default {
   namespaced: true,
