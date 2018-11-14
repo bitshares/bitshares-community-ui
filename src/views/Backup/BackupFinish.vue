@@ -1,7 +1,6 @@
 <template>
   <div class="backup-step">
     <div class="backup-step-title">almost done! let’s review</div>
-    <div class="backup-step-subtitle">Please tap each word in the correct order</div>
     <div
       v-for="(text, index) in paragraphs"
       :key="index"
@@ -96,17 +95,10 @@ export default {
 
     .backup-step-title {
       margin-top: 0.9375rem;
+      margin-bottom: 2.5rem;
       text-transform: uppercase;
       font-family: config('fonts.gotham-medium');
       font-size: config('textSizes.lg');
-    }
-
-    .backup-step-subtitle {
-      margin: 1.2rem auto 1rem;
-      width: 23.875rem;
-      font-weight: config('fontWeights.semibold');
-      font-size: config('textSizes.lg');
-      text-align: center;
     }
 
     .backup-step-content {
