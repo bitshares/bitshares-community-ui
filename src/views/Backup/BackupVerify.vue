@@ -40,6 +40,7 @@
         @click="$emit('change', 5)"
       >
         <Button
+          :disabled="isIncorrectKey"
           text="Confirm"
           width="full"
         />
@@ -69,6 +70,12 @@ export default {
     return {
       userPhrase: [],
       randomPhrase: []
+    }
+  },
+  computed: {
+    isIncorrectKey() {
+      console.info(this.backupPhrase, this.userPhrase)
+      return this.backupPhrase.join(' ') !== this.userPhrase.join(' ')
     }
   },
   mounted() {
