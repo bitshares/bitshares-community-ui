@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header hidden lg:flex">
     <svgicon
       name="bitshares"
       color="white"
@@ -23,7 +23,6 @@ export default {
 <style>
 .header {
   @apply px-2 py-3;
-  display: flex;
   justify-content: space-between;
   align-items: flex-end;
 }

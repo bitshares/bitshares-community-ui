@@ -1,7 +1,12 @@
 <template>
-  <div class="mobile-mode">
+  <div class="mobile-mode flex lg:hidden">
     <div class="mobile-mode-main">
-      <component :is="activeComponentName"/>
+      <Card :title="title">
+        <component
+          slot="body"
+          :is="activeComponentName"
+        />
+      </Card>
     </div>
     <MobileFooter
       :items="menuItems"
@@ -11,7 +16,9 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import MobileFooter from '@/components/MobileFooter'
+import Card from '@/components/Card'
 import Markets from '@/views/Markets/Markets.vue'
 import Account from '@/views/Account/Portfolio.vue'
 import Orders from '@/views/OrderHistory/OrderHistory.vue'
@@ -21,7 +28,7 @@ import '@icons/account'
 
 export default {
   name: 'Mobile',
-  components: { MobileFooter, Markets, Account, Orders },
+  components: { MobileFooter, Markets, Account, Orders, Card },
   data() {
     return {
       activeComponentName: 'Markets',
@@ -33,6 +40,22 @@ export default {
         name: 'Account', title: 'Account', icon: 'account'
       }]
     }
+  },
+  computed: {
+    title() {
+      const tabName = this.activeComponentName
+      switch (tabName) {
+        case 'Account':
+          return this.userName
+        case 'Orders':
+          return 'My orders history'
+        default:
+          return tabName
+      }
+    },
+    ...mapGetters({
+      userName: 'acc/getCurrentUserName'
+    })
   },
   methods: {
     switchActiveComponent(name) {
@@ -46,11 +69,11 @@ export default {
   .mobile-mode {
     height: 100%;
     overflow: hidden;
-    display: flex;
     flex-direction: column;
     .mobile-mode-main {
       flex-grow: 1;
       overflow: hidden;
+      height: 100%;
     }
   }
 </style>

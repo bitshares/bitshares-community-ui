@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard">
-    <div class="dashboard">
+    <div class="dashboard hidden lg:block">
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
           :expandable="true"
