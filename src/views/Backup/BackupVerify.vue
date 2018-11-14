@@ -104,51 +104,58 @@ export default {
     position: relative;
     text-align: center;
     font-family: config('fonts.gotham');
-  }
-  .backup-step-title {
-    margin-top: 0.9375rem;
-    text-transform: uppercase;
-    font-family: config('fonts.gotham-medium');
-    font-size: config('textSizes.lg');
-  }
-  .backup-step-subtitle {
-    margin: 0.9375rem auto 3rem;
-    width: 23.875rem;
-    font-weight: config('fontWeights.semibold');
-    font-size: config('textSizes.lg');
-    text-align: center;
-  }
-  .backup-step-content {
-    margin: 0 auto;
-    width: 21.875rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    font-weight: config('fontWeights.semibold');
-  }
-  .backup-step-content-item {
-    font-weight: config('fontWeights.semibold');
-  }
-  .backup-step-footer {
-    position: absolute;
-    width: 100%;
-    bottom: 1.15rem;
-  }
-  .backup-step-button {
-    box-sizing: border-box;
-    display: inline-block;
-    margin-top: 1rem;
-    width: 13rem;
 
-    &._clear {
-      margin-right: 0.3rem;
+    .backup-step-title {
+      margin-top: 0.9375rem;
+      text-transform: uppercase;
+      font-family: config('fonts.gotham-medium');
+      font-size: config('textSizes.lg');
     }
-    &._confirm {
-      margin-left: 1rem;
+
+    .backup-step-subtitle {
+      margin: 0.9375rem auto 3rem;
+      width: 23.875rem;
+      font-weight: config('fontWeights.semibold');
+      font-size: config('textSizes.lg');
+      text-align: center;
     }
-  }
-  ._verify {
-    margin: 1.5625rem auto;
+
+    .backup-step-content {
+      margin: 0 auto;
+      width: 21.875rem;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      font-weight: config('fontWeights.semibold');
+
+      .backup-step-content-item {
+        font-weight: config('fontWeights.semibold');
+      }
+    }
+
+    .backup-step-footer {
+      position: absolute;
+      width: 100%;
+      bottom: 1.15rem;
+    }
+
+    .backup-step-button {
+      box-sizing: border-box;
+      display: inline-block;
+      margin-top: 1rem;
+      width: 13rem;
+
+      &._clear {
+        margin-right: 0.3rem;
+      }
+      &._confirm {
+        margin-left: 1rem;
+      }
+    }
+
+    ._verify {
+      margin: 1.5625rem auto;
+    }
   }
 </style>

@@ -94,21 +94,23 @@ export default {
     background: config('colors.bg-base');
     width: 30rem;
     height: 30.4375rem;
-    border: 0.0625rem solid config('colors.white')
-  }
-  .backup-close {
-    position: absolute;
-    right: 0.625rem;
-    top: 0.625rem;
-    z-index: 11;
-    cursor: pointer;
-  }
-  .backup-paginator {
-    position: absolute;
-    left: 15px;
-    top: 15px;
-    transform: rotate(90deg);
-    z-index: 10;
-    cursor: pointer;
+    border: 0.0625rem solid config('colors.white');
+
+    .backup-close {
+      position: absolute;
+      right: 0.625rem;
+      top: 0.625rem;
+      z-index: 11;
+      cursor: pointer;
+    }
+
+    .backup-paginator {
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      transform: rotate(90deg);
+      z-index: 10;
+      cursor: pointer;
+    }
   }
 </style>

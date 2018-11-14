@@ -47,38 +47,43 @@ export default {
   .backup-step {
     text-align: center;
     font-family: config('fonts.gotham');
-  }
-  .backup-step-title {
-    margin-top: 0.9375rem;
-    text-transform: uppercase;
-    font-family: config('fonts.gotham-medium');
-    font-size: config('textSizes.lg');
-  }
-  .backup-step-subtitle {
-    margin: 0.9375rem auto 0;
-    width: 21.875rem;
-    font-weight: config('fontWeights.semibold');
-    font-size: config('textSizes.lg');
-    text-align: center;
-  }
-  .backup-step-content {
-    margin: 0 auto;
-    width: 21.875rem;
-    height: 19.55rem !important;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    height: 11.25rem;
-    padding: 4.25rem 0;
-    font-weight: config('fontWeights.semibold');
-  }
-  .backup-step-content-item {
-    font-weight: config('fontWeights.semibold');
-  }
-  .backup-step-button {
-    box-sizing: border-box;
-    margin-top: 1.12rem;
-    width: 27.5rem;
+
+    .backup-step-title {
+      margin-top: 0.9375rem;
+      text-transform: uppercase;
+      font-family: config('fonts.gotham-medium');
+      font-size: config('textSizes.lg');
+    }
+
+    .backup-step-subtitle {
+      margin: 0.9375rem auto 0;
+      width: 21.875rem;
+      font-weight: config('fontWeights.semibold');
+      font-size: config('textSizes.lg');
+      text-align: center;
+    }
+
+    .backup-step-content {
+      margin: 0 auto;
+      width: 21.875rem;
+      height: 19.55rem !important;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      height: 11.25rem;
+      padding: 4.25rem 0;
+      font-weight: config('fontWeights.semibold');
+
+      .backup-step-content-item {
+        font-weight: config('fontWeights.semibold');
+      }
+    }
+
+    .backup-step-button {
+      box-sizing: border-box;
+      margin-top: 1.12rem;
+      width: 27.5rem;
+    }
   }
 </style>
