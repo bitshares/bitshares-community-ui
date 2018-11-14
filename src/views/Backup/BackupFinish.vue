@@ -19,13 +19,12 @@
     </div>
     <div class="backup-step-footer">
       <div
-        class="backup-step-button _password"
-        @click="copyUserPhrase"
-      >
+        class="backup-step-button _password">
         <Button
           type="secondary"
           text="Copy password"
           width="full"
+          @click="copyUserPhrase"
         />
       </div>
       <div class="backup-step-content _footer-content">
@@ -42,13 +41,11 @@
           <span class="_terms">theTerms of Use</span>
         </div>
       </div>
-      <div
-        class="backup-step-button"
-        @click="updateBackupFlag"
-      >
+      <div class="backup-step-button">
         <Button
           text="Finish backup"
           width="full"
+          @click="updateBackupFlag"
         />
       </div>
     </div>

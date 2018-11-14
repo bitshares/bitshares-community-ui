@@ -10,13 +10,11 @@
       <div class="backup-step-content-item">online. You can make a safe backup</div>
       <div class="backup-step-content-item">only with physical paper and a pen</div>
     </div>
-    <div
-      class="backup-step-button"
-      @click="$emit('change', 3)"
-    >
+    <div class="backup-step-button">
       <Button
         text="I understand"
         width="full"
+        @click="$emit('change', 3)"
       />
     </div>
   </div>

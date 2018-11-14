@@ -10,12 +10,11 @@
       <div class="backup-step-content-item">Shoulder-spies?</div>
     </div>
     <div
-      class="backup-step-button"
-      @click="$emit('change', 2)"
-    >
+      class="backup-step-button">
       <Button
         text="Continue to backup"
         width="full"
+        @click="$emit('change', 2)"
       />
     </div>
   </div>

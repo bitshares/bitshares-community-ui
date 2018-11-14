@@ -11,12 +11,11 @@
     </div>
     <div class="backup-step-content-item">We’ll confirm on the next screen</div>
     <div
-      class="backup-step-button"
-      @click="$emit('change', 4)"
-    >
+      class="backup-step-button">
       <Button
         text="i’ve written it down"
         width="full"
+        @click="$emit('change', 4)"
       />
     </div>
   </div>

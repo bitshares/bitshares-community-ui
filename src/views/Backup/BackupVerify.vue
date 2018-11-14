@@ -26,23 +26,19 @@
     </div>
     <div class="backup-step-footer">
       <div class="backup-step-content-item">Is this correct?</div>
-      <div
-        class="backup-step-button _clear"
-        @click="onClear"
-      >
+      <div class="backup-step-button _clear">
         <Button
           text="Clear"
           width="full"
+          @click="onClear"
         />
       </div>
-      <div
-        class="backup-step-button _confirm"
-        @click="$emit('change', 5)"
-      >
+      <div class="backup-step-button _confirm">
         <Button
           :disabled="isIncorrectKey"
           text="Confirm"
           width="full"
+          @click="!isIncorrectKey && $emit('change', 5)"
         />
       </div>
     </div>
