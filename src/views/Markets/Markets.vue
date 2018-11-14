@@ -7,6 +7,7 @@
       <div class="tickers-sidebar">
         <Tabs
           :tabs="['USD', 'OPEN.BTC', 'CNY', 'BTS']"
+          :active="currentBase"
           :currency-mode="true"
           @change="handleBaseChange"
         />
