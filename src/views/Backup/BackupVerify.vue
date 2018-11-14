@@ -9,6 +9,7 @@
         :index="index"
         :word="word"
         :border="true"
+        :is-cursor="true"
         :on-click="onRemovePhrase"
       />
     </div>
@@ -19,6 +20,7 @@
         :key="index"
         :index="index"
         :word="word"
+        :is-cursor="true"
         :on-click="onSelectPhraseFromRandomList"
       />
     </div>

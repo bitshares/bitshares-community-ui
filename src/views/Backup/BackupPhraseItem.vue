@@ -1,6 +1,9 @@
 <template>
   <div
-    :class="{'backup-step-word--border': border}"
+    :class="{
+      'backup-step-word--border': border,
+      'backup-step-word--cursor': isCursor
+    }"
     class="backup-step-word"
     @click="onClick({ index })"
   >
@@ -16,6 +19,10 @@ export default {
       default: ''
     },
     border: {
+      type: Boolean,
+      default: false
+    },
+    isCursor: {
       type: Boolean,
       default: false
     },
@@ -48,6 +55,9 @@ export default {
       height: 2rem;
       line-height: 1.5rem;
       padding: 2px 8px 4px;
+    }
+    &--cursor {
+      cursor: pointer;
     }
   }
 </style>
