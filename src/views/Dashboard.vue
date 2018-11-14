@@ -9,7 +9,9 @@
           title="account"
         >
           <AccountHeader slot="header"/>
-          <AccountHeader slot="modal-header" :large="true"/>
+          <AccountHeader
+            slot="modal-header"
+            :large="true"/>
           <Portfolio slot="body"/>
           <Portfolio
             slot="modal"

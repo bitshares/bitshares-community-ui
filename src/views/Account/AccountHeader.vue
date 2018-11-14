@@ -1,8 +1,8 @@
 <template>
   <div
     v-if="historyLoaded"
-    class="account-header"
     :class="{ 'account-header--large' : large }"
+    class="account-header"
   >
     <div class="text-weak">
     Balance</div>&nbsp; $ {{ totalFiatValue.toFixed(2) }}
@@ -12,13 +12,13 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
+  name: 'AccountHeader',
   props: {
     large: {
       type: Boolean,
       default: false
     }
   },
-  name: 'AccountHeader',
   computed: {
     ...mapGetters({
       historyLoaded: 'history/initialLoaded',
