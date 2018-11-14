@@ -86,4 +86,11 @@ export default {
       width: 27.5rem;
     }
   }
+  @media (max-width: 800px) {
+    .backup-step {
+      .backup-step-button {
+        width: 100%;
+      }
+    }
+  }
 </style>

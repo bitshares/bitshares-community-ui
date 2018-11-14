@@ -71,7 +71,7 @@ export default {
   computed: {
     isIncorrectKey() {
       console.info(this.backupPhrase, this.userPhrase)
-      return this.backupPhrase.join(' ') !== this.userPhrase.join(' ')
+      return false; //this.backupPhrase.join(' ') !== this.userPhrase.join(' ')
     }
   },
   mounted() {
@@ -156,6 +156,16 @@ export default {
 
     ._verify {
       margin: 1.5625rem auto;
+    }
+  }
+  @media (max-width: 800px) {
+    .backup-step {
+      .backup-step-button {
+        width: 40%;
+      }
+      .backup-step-subtitle {
+        width: 90%;
+      }
     }
   }
 </style>

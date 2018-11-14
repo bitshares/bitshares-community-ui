@@ -167,5 +167,25 @@ export default {
       }
     }
   }
+  @media (max-width: 800px) {
+    .backup-step {
+      width: 90%;
+      .backup-step-subtitle {
+        font-size: 0.8125rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .backup-step-content {
+        width: 100%;
+        font-size: config('textSizes.sm');
+      }
+      .backup-step-button {
+        width: 100%;
+      }
+      .backup-step-footer {
+        bottom: .1rem;
+      }
+    }
+  }
 
 </style>

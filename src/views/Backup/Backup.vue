@@ -119,4 +119,11 @@ export default {
       cursor: pointer;
     }
   }
+
+  @media (max-width: 800px) {
+    .backup {
+      border: none;
+      width: auto;
+    }
+  }
 </style>
