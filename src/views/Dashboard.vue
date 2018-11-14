@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard">
-    <div class="dashboard">
+    <div class="dashboard hidden lg:block">
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
           :expandable="true"
@@ -52,22 +52,25 @@
         </Card>
       </div>
     </div>
+
+    <!-- TODO: use some vue plugin to disable when not on mobile -->
+    <Mobile/>
   </div>
 </template>
 
 <script>
+import Card from '@/components/Card'
 import { mapGetters } from 'vuex'
 import Portfolio from '@/views/Account/Portfolio.vue'
 import AccountHeader from '@/views/Account/AccountHeader.vue'
 import OrderBook from '@/views/OrderBook/OrderBook'
 import OrderBookLastPrice from '@/views/OrderBook/OrderBookLastPrice'
-
-import Card from '@/components/Card'
 import TransactionsHistory from '@/views/TransactionsHistory/'
 import Markets from '@/views/Markets/Markets'
 import MarketsSearch from '@/views/Markets/MarketsSearch'
 import OrderHistory from '@/views/OrderHistory/OrderHistory'
 import OrderHistorySearch from '@/views/OrderHistory/OrderHistorySearch'
+import Mobile from '@/views/Mobile/Mobile'
 
 export default {
   name: 'Dashboard',
@@ -81,7 +84,8 @@ export default {
     OrderBook,
     OrderBookLastPrice,
     OrderHistory,
-    OrderHistorySearch
+    OrderHistorySearch,
+    Mobile
   },
   computed: {
     ...mapGetters({

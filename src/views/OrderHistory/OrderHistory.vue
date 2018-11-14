@@ -1,5 +1,5 @@
 <template>
-  <div class="order-history">
+  <div class="order-history pt-3 lg:pt-0">
     <LoadingContainer :loading="isFetching || !items.length">
       <OrderHistoryTable
         :table-headers="tableHeaders"

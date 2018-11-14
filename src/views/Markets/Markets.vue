@@ -93,7 +93,7 @@ export default {
   }
 
   .markets__header {
-    margin-top: 0.625rem;
+    // margin-top: 0.625rem;
     display: flex;
     flex-direction: row;
     flex-shrink: 0;
