@@ -103,7 +103,7 @@ const actions = {
   }
 }
 
-const debouncedUpdate = debounce(actions.updateOrderBook, 800)
+const debouncedUpdate = debounce(actions.updateOrderBook, 500)
 
 export default {
   namespaced: true,
