@@ -12,9 +12,11 @@
       class="order-book-table-item"
     >
       <span class="order-book-item-sum">
-        {{ item.sum }}
+        {{ item.sum.toFixed(4) }}
       </span>
-      {{ item.price }}
+      <span class="order-book-item-price">
+        {{ item.price.toFixed(4) }}
+      </span>
     </div>
   </div>
 </template>
@@ -23,9 +25,7 @@ export default {
   props: {
     item: {
       type: Object,
-      default() {
-        return {}
-      }
+      required: true
     },
     align: {
       type: String,
@@ -67,9 +67,10 @@ export default {
 <style lang="scss">
   .order-book-table-row {
     display: flex;
-    height: 26px;
-    line-height: 26px;
+    font-size: config('textSizes.sm');
+    font-family: config('fonts.gotham');
     .order-book-table-item {
+      padding: 0.3rem 0;
       flex: 1;
       cursor: pointer;
       .order-book-item-sum {

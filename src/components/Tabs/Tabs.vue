@@ -15,7 +15,7 @@
         :key="index"
         :style="{ width: currencyMode ? 'auto' : tabWidth + '%' }"
         :class="{
-          'tab--active': activeTabIndex === index,
+          'tab--active': active === tab,
           'tab--currency': currencyMode
         }"
         class="tab"

@@ -1,7 +1,8 @@
 <template>
-  <div class="card-container lg:mr-2 mb-2 lg:mb-0">
+  <div class="card-container mb-2 lg:mb-0">
     <div
-      class="card border-transparent sm:border-card-border"
+      :class="{'card-collapsed': collapsed}"
+      class="card border-transparent sm:border-card-border lg:mr-2"
     >
 
       <Modal
@@ -37,6 +38,14 @@
         <div class="title">
           <div> {{ title }} </div>
         </div>
+        <svgicon
+          v-if="collapsible"
+          :class="collapsed ? 'collapse-btn--active' : 'collapse-btn'"
+          width="11"
+          height="11"
+          name="arrowDown"
+          @click="handleCollapseClick"
+        />
         <div
           v-if="expandable"
           class="expand-btn hidden lg:flex"
@@ -53,9 +62,14 @@
           class="header"
           name="header"/>
       </div>
-      <div class="card-body">
-        <slot name="body" />
-      </div>
+      <transition name="fade">
+        <div
+          v-if="!collapsed"
+          class="card-body"
+        >
+          <slot name="body" />
+        </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -74,17 +88,33 @@ export default {
     expandable: {
       type: Boolean,
       default: false
+    },
+    collapsible: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
     return {
-      expanded: false
+      expanded: false,
+      collapsed: false
+    }
+  },
+  methods: {
+    handleCollapseClick() {
+      this.collapsed = !this.collapsed
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
+.card-container:last-child {
+  .card {
+    margin-right: 0;
+  }
+}
+
 .card {
   height: 25rem;
   display: flex;
@@ -93,15 +123,16 @@ export default {
   font-family: config('fonts.gotham-regular');
   background-color: config('colors.card-background');
   border-width: 1px;
-  transition: max-height 0.2s;
-  &:last-child {
-    @apply mr-0;
-  }
+  transition: 0.2s;
 }
 
 .card--expanded {
   .card-header {
     padding-right: 2rem;
+    padding-top: 1rem;
+    .title {
+      font-size: config('textSizes.lg')
+    }
   }
 }
 
@@ -151,6 +182,7 @@ export default {
   font-family: config('fonts.gotham-medium');
   text-transform: uppercase;
   font-size: config('textSizes.base');
+  white-space: nowrap;
 }
 
 .header {
@@ -163,4 +195,22 @@ export default {
   overflow: hidden;
 }
 
+.collapse-btn {
+  transform: rotate(-90deg);
+  transition: 0.2s;
+  margin: 0 auto 0 0.1875em;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.collapse-btn--active {
+  margin: 0 auto 0 0.1875em;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.card-collapsed {
+  height: 2.8rem;
+  transition: 0.2s;
+}
 </style>

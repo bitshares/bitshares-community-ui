@@ -1,6 +1,7 @@
 <template>
   <div
     v-if="historyLoaded"
+    :class="{ 'account-header--large' : large }"
     class="account-header"
   >
     <div class="text-weak">
@@ -12,6 +13,12 @@
 import { mapGetters } from 'vuex'
 export default {
   name: 'AccountHeader',
+  props: {
+    large: {
+      type: Boolean,
+      default: false
+    }
+  },
   computed: {
     ...mapGetters({
       historyLoaded: 'history/initialLoaded',
@@ -28,6 +35,13 @@ export default {
   display: flex;
   align-items: baseline;
   color: config('colors.text-primary');
+  &--large {
+    .text-weak {
+      font-size: config('textSizes.lg');
+      text-transform: uppercase;
+    }
+    font-size: config('textSizes.lg');
+  }
 }
 
 .text-weak {

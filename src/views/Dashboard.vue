@@ -1,25 +1,32 @@
 <template>
   <div class="dashboard">
-    <!-- <div class="dashboard">
+    <div class="dashboard">
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
           :expandable="true"
+          collapsible
           class="lg:w-1/3"
           title="account"
         >
           <AccountHeader slot="header"/>
-          <AccountHeader slot="modal-header"/>
+          <AccountHeader
+            slot="modal-header"
+            :large="true"/>
           <Portfolio slot="body"/>
-          <Portfolio slot="modal"/>
+          <Portfolio
+            slot="modal"
+            :expanded="true"/>
         </Card>
         <Card
-          class="lg:w-2/3"
-          title="Graph">
-        </Card>
+          collapsible
+          class="lg:w-2/3 disabled"
+          title="Graph"
+        />
       </div>
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
           :expandable="true"
+          collapsible
           class="lg:w-1/3"
           title="markets"
         >
@@ -31,6 +38,8 @@
             :expand-mode="true"/>
         </Card>
         <Card
+          v-if="orderBookIsActive"
+          collapsible
           class="lg:w-1/3"
           title="order book">
           <OrderBook slot="body"/>
@@ -42,13 +51,14 @@
           <OrderHistory slot="body"/>
         </Card>
       </div>
-    </div> -->
+    </div>
     <Mobile/>
   </div>
 </template>
 
 <script>
 import Card from '@/components/Card'
+import { mapGetters } from 'vuex'
 import Portfolio from '@/views/Account/Portfolio.vue'
 import AccountHeader from '@/views/Account/AccountHeader.vue'
 import OrderBook from '@/views/OrderBook/OrderBook'
@@ -74,6 +84,11 @@ export default {
     OrderHistory,
     OrderHistorySearch,
     Mobile
+  },
+  computed: {
+    ...mapGetters({
+      orderBookIsActive: 'orderBook/isActive'
+    })
   }
 }
 </script>

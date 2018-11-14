@@ -3,7 +3,8 @@
     This is an components page
     <div>
       <Card
-        :title="'Test Title'">
+        :title="'Test Title'"
+      >
         <div slot="header">
           <Button
             text="button test"
