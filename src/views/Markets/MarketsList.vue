@@ -9,6 +9,7 @@
       :default-sort="defaultSort"
       :header-left-padding="0.6"
       :header-right-padding="1"
+      :large="expandMode"
       class="tickers-list-header"
     >
       <template slot-scope="{ sortedItems }">

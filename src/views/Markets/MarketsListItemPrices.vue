@@ -197,16 +197,16 @@ export default {
           top: -1px;
         }
         .tickers-list__itemVolume {
-          font-size: config('textSizes.xs')
+          font-size: config('textSizes.xl')
         }
         ._currencyTitle {
-          font-size: config('textSizes.xs')
+          font-size: config('textSizes.xl')
         }
         ._drop {
-          font-size: config('textSizes.sm');
+          font-size: config('textSizes.xl');
         }
         ._increase {
-          font-size: config('textSizes.sm');
+          font-size: config('textSizes.xl');
         }
       }
     }
