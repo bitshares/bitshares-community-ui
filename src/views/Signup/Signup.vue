@@ -4,8 +4,8 @@
       <div class="signup__title">Signup</div>
       <Tabs
         :tabs="['password', 'private key']"
+        :active="type"
         @change="changeSignupType">
-
         <div
           slot="password"
           class="signup__form">
