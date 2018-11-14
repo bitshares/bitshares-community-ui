@@ -1,5 +1,7 @@
 <template>
-  <div class="link-button" :class="{ 'link-button--large': large }">
+  <div
+    :class="{ 'link-button--large': large }"
+    class="link-button">
     {{ title }}
   </div>
 </template>

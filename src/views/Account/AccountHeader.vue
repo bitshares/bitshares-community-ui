@@ -2,6 +2,7 @@
   <div
     v-if="historyLoaded"
     class="account-header"
+    :class="{ 'account-header--large' : large }"
   >
     <div class="text-weak">
     Balance</div>&nbsp; $ {{ totalFiatValue.toFixed(2) }}
@@ -11,6 +12,12 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
+  props: {
+    large: {
+      type: Boolean,
+      default: false
+    }
+  },
   name: 'AccountHeader',
   computed: {
     ...mapGetters({
@@ -28,6 +35,13 @@ export default {
   display: flex;
   align-items: baseline;
   color: config('colors.text-primary');
+  &--large {
+    .text-weak {
+      font-size: config('textSizes.lg');
+      text-transform: uppercase;
+    }
+    font-size: config('textSizes.lg');
+  }
 }
 
 .text-weak {
