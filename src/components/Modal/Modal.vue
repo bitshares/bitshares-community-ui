@@ -32,7 +32,7 @@ export default {}
 }
 
 .modal-wrapper {
-  width: config('screens.md');
+  width: 56rem;
   transition: all .3s ease;
 }
 

@@ -3,23 +3,31 @@
     :loading="!historyLoaded"
     class="portfolio-container h-full">
 
+    <AccountHeader
+      :large-mode="true"
+      class="flex md:hidden"
+    />
+
     <div class="portfolio-header">
       <LinkButton
         :title="hideSmallAssetsBtnText"
+        :large="expanded"
         @click.native="showSmallAssets = !showSmallAssets"
       />
       <LinkButton
         :title="`show ${inactiveMode}`"
+        :large="expanded"
         @click.native="toggleMode"/>
     </div>
 
     <div class="portfolio-table">
       <SortableTable
         :items="filteredItems"
-        :headers="tableHeaders"
+        :headers="expanded ? tableHeadersExpanded : tableHeaders"
         :default-sort="defaultSort"
         :header-left-padding="1"
         :header-right-padding="1.5"
+        :large="expanded"
         class="portfolio-table__header"
       >
         <template slot-scope="{ sortedItems }">
@@ -28,6 +36,7 @@
             :key="index"
             :mode="mode"
             :item="item"
+            :expanded="expanded"
           />
         </template>
       </SortableTable>
@@ -42,11 +51,18 @@ import { mapGetters } from 'vuex'
 import LoadingContainer from '@/components/LoadingContainer'
 import LinkButton from '@/components/LinkButton'
 import PortfolioItem from './PortfolioItem.vue'
+import AccountHeader from './AccountHeader'
 
 import SortableTable from '@/components/SortableTable'
 
 export default {
-  components: { PortfolioItem, LoadingContainer, LinkButton, SortableTable },
+  components: { PortfolioItem, LoadingContainer, LinkButton, SortableTable, AccountHeader },
+  props: {
+    expanded: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       mode: 'balances',
@@ -74,6 +90,14 @@ export default {
         { title: '24h%', field: 'change1' },
         { title: '7d%', field: 'change7' }
       ]
+    },
+    tableHeadersExpanded() {
+      const headers = this.tableHeaders.slice()
+      headers.splice(1, 0, {
+        title: '', field: '', align: 'center'
+      }, { title: '', field: '', align: 'center' })
+
+      return headers
     },
     filteredItems() {
       if (this.showSmallAssets) return this.items

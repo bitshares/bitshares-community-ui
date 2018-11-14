@@ -7,6 +7,7 @@
       <div class="tickers-sidebar">
         <Tabs
           :tabs="['USD', 'OPEN.BTC', 'CNY', 'BTS']"
+          :active="currentBase"
           :currency-mode="true"
           @change="handleBaseChange"
         />
@@ -92,7 +93,7 @@ export default {
   }
 
   .markets__header {
-    margin-top: 0.625rem;
+    // margin-top: 0.625rem;
     display: flex;
     flex-direction: row;
     flex-shrink: 0;

@@ -8,7 +8,7 @@
         <Star
           :active="isFavourite"
           class="tickers__favourite"
-          @click.native="$emit('change', { item })"
+          @click.stop.native="$emit('change', { item })"
         />
         <div class="tickers-list__itemPair pl-6">
           <span class="_currencyTitle">{{ item.ticker }}</span>
@@ -66,9 +66,9 @@
           {{ changeValue7 }}
         </div>
       </div>
-      <div class="tickers-list__item _alignRight">
+      <!-- <div class="tickers-list__item _alignRight">
         <div class="tickers-list__itemVolume">{{ marketCap }}</div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -186,7 +186,7 @@ export default {
   }
   .ticker-list-row_expanded {
     .tickers-list-row {
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
       .tickers-list__item {
         .tickers-list__itemPair {
           padding-right: .3rem;
@@ -197,16 +197,16 @@ export default {
           top: -1px;
         }
         .tickers-list__itemVolume {
-          font-size: config('textSizes.xs')
+          font-size: config('textSizes.xl')
         }
         ._currencyTitle {
-          font-size: config('textSizes.xs')
+          font-size: config('textSizes.xl')
         }
         ._drop {
-          font-size: config('textSizes.sm');
+          font-size: config('textSizes.xl');
         }
         ._increase {
-          font-size: config('textSizes.sm');
+          font-size: config('textSizes.xl');
         }
       }
     }

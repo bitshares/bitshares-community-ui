@@ -1,10 +1,9 @@
 <template>
-  <div class="card-container mb-2 lg:mb-0">
+  <div class="card-container mb-2 lg:mb-0 h-full">
     <div
       :class="{'card-collapsed': collapsed}"
-      class="card border-transparent sm:border-card-border lg:mr-2"
+      class="card border-transparent sm:border-card-border lg:mr-2 h-full lg:h-card-height"
     >
-
       <Modal
         v-if="expanded"
         @close="expanded = false">
@@ -116,7 +115,6 @@ export default {
 }
 
 .card {
-  height: 25rem;
   display: flex;
   overflow: hidden;
   flex-direction: column;
@@ -129,6 +127,10 @@ export default {
 .card--expanded {
   .card-header {
     padding-right: 2rem;
+    padding-top: 1rem;
+    .title {
+      font-size: config('textSizes.lg')
+    }
   }
 }
 
