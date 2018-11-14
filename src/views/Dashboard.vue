@@ -11,7 +11,7 @@
         <Backup/>
       </Modal>
     </div>
-    <div class="dashboard">
+    <div class="dashboard hidden lg:block">
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
           :expandable="true"
@@ -20,9 +20,13 @@
           title="account"
         >
           <AccountHeader slot="header"/>
-          <AccountHeader slot="modal-header"/>
+          <AccountHeader
+            slot="modal-header"
+            :large="true"/>
           <Portfolio slot="body"/>
-          <Portfolio slot="modal"/>
+          <Portfolio
+            slot="modal"
+            :expanded="true"/>
         </Card>
         <Card
           collapsible
@@ -45,6 +49,7 @@
             :expand-mode="true"/>
         </Card>
         <Card
+          v-if="orderBookIsActive"
           collapsible
           class="lg:w-1/3"
           title="order book">
@@ -53,21 +58,23 @@
         <Card
           class="lg:w-1/3"
           title="My orders history">
-          <OrderHistorySearch slot="header"/>
+          <!-- <OrderHistorySearch slot="header"/> -->
           <OrderHistory slot="body"/>
         </Card>
       </div>
     </div>
+
+    <!-- TODO: use some vue plugin to disable when not on mobile -->
+    <Mobile/>
   </div>
 </template>
 
 <script>
+import Card from '@/components/Card'
 import Portfolio from '@/views/Account/Portfolio.vue'
 import AccountHeader from '@/views/Account/AccountHeader.vue'
 import OrderBook from '@/views/OrderBook/OrderBook'
 import OrderBookLastPrice from '@/views/OrderBook/OrderBookLastPrice'
-
-import Card from '@/components/Card'
 import TransactionsHistory from '@/views/TransactionsHistory/'
 import Markets from '@/views/Markets/Markets'
 import MarketsSearch from '@/views/Markets/MarketsSearch'
@@ -75,6 +82,7 @@ import OrderHistory from '@/views/OrderHistory/OrderHistory'
 import OrderHistorySearch from '@/views/OrderHistory/OrderHistorySearch'
 import Backup from '@/views/Backup/Backup'
 import Modal from '@/components/Modal/Modal'
+import Mobile from '@/views/Mobile/Mobile'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -92,14 +100,16 @@ export default {
     OrderHistory,
     OrderHistorySearch,
     Backup,
-    Modal
+    Modal,
+    Mobile
   },
   data() {
     return {}
   },
   computed: {
     ...mapGetters({
-      backupFlag: 'backup/getBackupFlag'
+      backupFlag: 'backup/getBackupFlag',
+      orderBookIsActive: 'orderBook/isActive'
     })
   },
   methods: {
