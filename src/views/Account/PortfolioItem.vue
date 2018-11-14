@@ -1,6 +1,12 @@
 <template>
-  <div class="portfolio-item">
+  <div 
+    class="portfolio-item" 
+    :class="{ 'portfolio-item--expanded': expanded }"
+    :style="styleObject"
+  >
     <span>{{ item.tiker }}</span>
+    <span v-show="expanded" class="deposit">deposit</span>
+    <span v-show="expanded" class="withdraw">withdraw</span>
     <span v-show="isBalancesMode">{{ formattedTokens }}</span>
     <span v-show="isBalancesMode">{{ formattedFiatValue }}</span>
     <span v-show="isBalancesMode">{{ item.share }}%</span>
@@ -20,6 +26,10 @@ export default {
     mode: {
       type: String,
       required: true
+    },
+    expanded: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -37,6 +47,13 @@ export default {
     },
     formattedFiatValue() {
       return this.preciseFiatValue(this.item.fiatValue || 0)
+    },
+    styleObject() {
+      const columns = this.expanded ? 6 : 4 
+      
+      return {
+        'grid-template-columns': `repeat(${columns}, 1fr)`
+      }
     }
   },
   methods: {
@@ -55,8 +72,8 @@ export default {
 .portfolio-item {
   color: config('colors.text-primary');
   padding: config('padding.grid-table');
+  font-size: config('textSizes.sm');
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   padding-left: 0;
   padding-right: 0;
   transition: background-color 0.15s ease;
@@ -68,14 +85,33 @@ export default {
   }
 }
 
+.portfolio-item--expanded {
+  font-size: config('textSizes.2xl');
+  .deposit, .withdraw {
+    font-size: config('textSizes.xl');
+  }
+}
+
 .portfolio-item span {
     padding: 0px 0px;
-    font-size: config('textSizes.sm');
+    
     overflow: hidden;
     text-overflow: ellipsis;
     &:not(:first-child) {
       text-align: right;
     }
+}
+
+.deposit {
+  color: config('colors.deposit-green');
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.withdraw {
+  color: config('colors.withdraw-red');
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 </style>

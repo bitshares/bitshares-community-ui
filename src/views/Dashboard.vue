@@ -11,7 +11,7 @@
           <AccountHeader slot="header"/>
           <AccountHeader slot="modal-header"/>
           <Portfolio slot="body"/>
-          <Portfolio slot="modal"/>
+          <Portfolio slot="modal" :expanded="true"/>
         </Card>
         <Card
           collapsible

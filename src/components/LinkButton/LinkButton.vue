@@ -1,5 +1,5 @@
 <template>
-  <div class="link-button">
+  <div class="link-button" :class="{ 'link-button--large': large }">
     {{ title }}
   </div>
 </template>
@@ -10,6 +10,10 @@ export default {
     title: {
       type: String,
       default: ''
+    },
+    large: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -26,6 +30,9 @@ export default {
   transition: opacity 0.15s;
   padding-bottom: 1px;
   user-select: none;
+  &--large {
+    font-size: config('textSizes.base')
+  }
   &:hover {
     padding-bottom: 0px;
     opacity: 1;
