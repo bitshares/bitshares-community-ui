@@ -153,7 +153,9 @@ let colors = {
   'mobile-footer-hover': '#121212',
   'star': '#a7a9ac',
   'primary': '#ffffff',
-  'book-item-hover': '#000'
+  'book-item-hover': '#000',
+  'deposit-green': '#79c60f',
+  'withdraw-red': '#ed1c24'
 }
 
 module.exports = {

@@ -9,9 +9,13 @@
           title="account"
         >
           <AccountHeader slot="header"/>
-          <AccountHeader slot="modal-header"/>
+          <AccountHeader
+            slot="modal-header"
+            :large="true"/>
           <Portfolio slot="body"/>
-          <Portfolio slot="modal"/>
+          <Portfolio
+            slot="modal"
+            :expanded="true"/>
         </Card>
         <Card
           collapsible
