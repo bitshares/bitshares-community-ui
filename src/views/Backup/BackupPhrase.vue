@@ -4,7 +4,7 @@
     <div class="backup-step-subtitle">Please carefully write down this phrase</div>
     <div class="backup-step-content">
       <BackupPhraseItem
-        v-for="(word, index) in phrase"
+        v-for="(word, index) in backupPhrase"
         :key="index"
         :word="word"
       />
@@ -32,7 +32,7 @@ export default {
     Button
   },
   props: {
-    phrase: {
+    backupPhrase: {
       type: Array,
       default() {
         return []

@@ -15,7 +15,7 @@
     <div class="backup-step-content-item _verify">Let’s verify your backup phrase</div>
     <div class="backup-step-content">
       <BackupPhraseItem
-        v-for="(word, index) in phrase"
+        v-for="(word, index) in randomPhrase"
         :key="index"
         :index="index"
         :word="word"
@@ -26,7 +26,7 @@
       <div class="backup-step-content-item">Is this correct?</div>
       <div
         class="backup-step-button _clear"
-        @click="$emit('clear')"
+        @click="onClear"
       >
         <Button
           text="Clear"
@@ -56,33 +56,40 @@ export default {
     Button
   },
   props: {
-    phrase: {
+    backupPhrase: {
       type: Array,
       default() {
         return []
-      }
-    },
-    userPhrase: {
-      type: Array,
-      default() {
-        return []
-      }
-    },
-    onSelectPhraseFromRandomList: {
-      type: Function,
-      default() {
-        return () => {}
-      }
-    },
-    onRemovePhrase: {
-      type: Function,
-      default() {
-        return () => {}
       }
     }
   },
   data() {
-    return {}
+    return {
+      userPhrase: [],
+      randomPhrase: []
+    }
+  },
+  mounted() {
+    this.randomPhrase = this.generateRandomPhrase()
+  },
+  methods: {
+    generateRandomPhrase() {
+      return this.backupPhrase.slice(0).sort(() => {
+        return Math.random() - 0.5
+      })
+    },
+    onSelectPhraseFromRandomList({ index }) {
+      this.userPhrase.push(this.randomPhrase[index])
+      this.randomPhrase = this.randomPhrase.filter((item, ndx) => ndx !== index)
+    },
+    onRemovePhrase({ index }) {
+      this.randomPhrase.push(this.userPhrase[index])
+      this.userPhrase = this.userPhrase.filter((item, ndx) => ndx !== index)
+    },
+    onClear() {
+      this.randomPhrase = this.generateRandomPhrase()
+      this.userPhrase = []
+    }
   }
 }
 </script>

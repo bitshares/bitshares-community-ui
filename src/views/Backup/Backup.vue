@@ -27,16 +27,12 @@
     />
     <BackupPhrase
       v-if="currentStep === 3"
-      :phrase="phrase"
+      :backup-phrase="phrase"
       @change="onChangeStep"
     />
     <BackupVerify
       v-if="currentStep === 4"
-      :phrase="randomPhrase"
-      :user-phrase="userPhrase"
-      :on-select-phrase-from-random-list="onSelectPhraseFromRandomList"
-      :on-remove-phrase="onRemovePhrase"
-      @clear="onClear"
+      :backup-phrase="phrase"
       @change="onChangeStep"
     />
     <BackupFinish v-if="currentStep === 5"/>
@@ -61,18 +57,14 @@ export default {
   data() {
     return {
       currentStep: 1,
-      backupPhrase: 'electric animal breakfast chicken kid cat dog js tag world word girl boy car machine',
-      randomPhrase: [],
-      userPhrase: []
+      backupPhrase: 'electric animal breakfast chicken kid cat dog js tag world word girl boy car machine'
+
     }
   },
   computed: {
     phrase() {
       return this.backupPhrase.split(' ')
     }
-  },
-  mounted() {
-    this.randomPhrase = this.generatePhrase()
   },
   methods: {
     ...mapActions('backup', ['setBackupFlag']),
@@ -85,25 +77,8 @@ export default {
     onChangeStep(step) {
       this.currentStep = step
     },
-    onSelectPhraseFromRandomList({ index }) {
-      this.userPhrase.push(this.randomPhrase[index])
-      this.randomPhrase = this.randomPhrase.filter((item, ndx) => ndx !== index)
-    },
-    onRemovePhrase({ index }) {
-      this.randomPhrase.push(this.userPhrase[index])
-      this.userPhrase = this.userPhrase.filter((item, ndx) => ndx !== index)
-    },
-    generatePhrase() {
-      return this.backupPhrase.split(' ').sort(() => {
-        return Math.random() - 0.5
-      })
-    },
     goBack() {
       this.currentStep--
-    },
-    onClear() {
-      this.randomPhrase = this.randomPhrase.concat(this.userPhrase)
-      this.userPhrase = []
     }
   }
 }
