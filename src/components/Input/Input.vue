@@ -257,7 +257,7 @@ export default {
   @apply text-base;
   color: config('colors.text-primary');
   position: absolute;
-  top: 25px;
+  top: 22px;
   left: 0;
   transition: all 0.3s;
   pointer-events: none;
