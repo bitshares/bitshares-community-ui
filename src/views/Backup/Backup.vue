@@ -18,24 +18,24 @@
       />
     </div>
     <BackupStep1
-      v-if="currentStep === 1"
+      v-if="currentStep === stepConfig['BACKUP_STEP_1']"
       @change="onChangeStep"
     />
     <BackupStep2
-      v-if="currentStep === 2"
+      v-if="currentStep === stepConfig['BACKUP_STEP_2']"
       @change="onChangeStep"
     />
     <BackupPhrase
-      v-if="currentStep === 3"
+      v-if="currentStep === stepConfig['BACKUP_PHRASE']"
       :backup-phrase="phrase"
       @change="onChangeStep"
     />
     <BackupVerify
-      v-if="currentStep === 4"
+      v-if="currentStep === stepConfig['BACKUP_VERIFY']"
       :backup-phrase="phrase"
       @change="onChangeStep"
     />
-    <BackupFinish v-if="currentStep === 5"/>
+    <BackupFinish v-if="currentStep === stepConfig['BACKUP_FINISH']"/>
   </div>
 </template>
 <script>
@@ -57,8 +57,14 @@ export default {
   data() {
     return {
       currentStep: 1,
-      backupPhrase: 'electric animal breakfast chicken kid cat dog js tag world word girl boy car machine'
-
+      backupPhrase: 'electric animal breakfast chicken kid cat dog js tag world word girl boy car machine',
+      stepConfig: {
+        'BACKUP_STEP_1': 1,
+        'BACKUP_STEP_2': 2,
+        'BACKUP_PHRASE': 3,
+        'BACKUP_VERIFY': 4,
+        'BACKUP_FINISH': 5
+      }
     }
   },
   computed: {
