@@ -36,5 +36,5 @@ export const getFloatCurrency = (n) => {
   const value = n.toString()
 
   if (value[0] === '0' && value.length > 9) return value.slice(1, 10)
-  return value.slice(0, 9).split('00').join('')
+  return value.slice(0, 9).replace(/0+$/, '')
 }
