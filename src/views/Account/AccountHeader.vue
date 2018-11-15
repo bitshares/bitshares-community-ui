@@ -40,7 +40,6 @@ export default {
   font-size: config('textSizes.sm');
   align-items: baseline;
   flex-direction: row;
-  padding-top: 1rem;
   color: config('colors.text-primary');
   &--large {
     .text-weak {
@@ -63,6 +62,7 @@ export default {
   align-items: center;
   flex-direction: column;
   margin-bottom: 2rem;
+  padding-top: 1rem;
   font-size: config('textSizes.lg');
   .title {
     font-size: config('textSizes.lg');

@@ -1,14 +1,14 @@
 <template>
-  <div class="backup-step">
-    <div class="backup-step-button _clear">
+  <div class="backup-step backup-step-unlock">
+    <div class="backup-step-button">
       <input
         v-model="password"
         class="input"
         type="password"
-        placeholder="password"
+        placeholder="Password"
       >
       <Button
-        text="Unlock"
+        text="Unlock wallet"
         width="full"
         @click="unlock"
       />
@@ -74,19 +74,26 @@ export default {
       }
     }
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    padding: 1rem;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // text-align: center;
     font-family: config('fonts.gotham');
 
     .backup-step-button {
       box-sizing: border-box;
       display: inline-block;
-      margin-top: 1rem;
-      width: 13rem;
     }
   }
+  .backup-step-unlock {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
   @media (max-width: 800px) {
     .backup-step {
       .backup-step-button {
