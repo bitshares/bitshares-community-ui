@@ -5,7 +5,6 @@
       'backup-step-word--cursor': isCursor
     }"
     class="backup-step-word"
-    @click="onClick({ index })"
   >
     {{ word }}
   </div>
@@ -29,12 +28,6 @@ export default {
     index: {
       type: Number,
       default: 0
-    },
-    onClick: {
-      type: Function,
-      default() {
-        return () => {}
-      }
     }
   },
   data() {
