@@ -120,12 +120,12 @@ export default {
 
 <style lang="scss">
 .portfolio-table {
-  font-family: config("fonts.gotham");
   height: 100%;
   overflow: hidden;
 }
 
 .portfolio-header {
+  font-family: config("fonts.gotham");
   display: flex;
   flex-shrink: 0;
   justify-content: space-between;
