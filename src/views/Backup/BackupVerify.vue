@@ -29,6 +29,7 @@
       <div class="backup-step-button _clear">
         <Button
           text="Clear"
+          type="secondary"
           width="full"
           @click="onClear"
         />

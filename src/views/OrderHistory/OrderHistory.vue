@@ -1,6 +1,6 @@
 <template>
   <div class="order-history pt-3 lg:pt-0">
-    <LoadingContainer :loading="isFetching || !items.length">
+    <LoadingContainer :loading="isFetching">
       <OrderHistoryTable
         :table-headers="tableHeaders"
         :items="filteredItems"

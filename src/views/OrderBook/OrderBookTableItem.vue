@@ -68,7 +68,7 @@ export default {
   .order-book-table-row {
     display: flex;
     font-size: config('textSizes.sm');
-    font-family: config('fonts.gotham');
+    // font-family: config('fonts.gotham');
     .order-book-table-item {
       padding: 0.3rem 0;
       flex: 1;
