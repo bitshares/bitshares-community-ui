@@ -1,5 +1,11 @@
 <template>
   <div class="dashboard">
+    <Modal
+      v-if="backupFlag"
+      @close="setBackupFlag(false)"
+    >
+      <Backup/>
+    </Modal>
     <div class="dashboard hidden lg:block">
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
@@ -60,7 +66,6 @@
 
 <script>
 import Card from '@/components/Card'
-import { mapGetters } from 'vuex'
 import Portfolio from '@/views/Account/Portfolio.vue'
 import AccountHeader from '@/views/Account/AccountHeader.vue'
 import OrderBook from '@/views/OrderBook/OrderBook'
@@ -70,7 +75,11 @@ import Markets from '@/views/Markets/Markets'
 import MarketsSearch from '@/views/Markets/MarketsSearch'
 import OrderHistory from '@/views/OrderHistory/OrderHistory'
 import OrderHistorySearch from '@/views/OrderHistory/OrderHistorySearch'
+import Backup from '@/views/Backup/Backup'
+import Modal from '@/components/Modal/Modal'
 import Mobile from '@/views/Mobile/Mobile'
+
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Dashboard',
@@ -85,16 +94,24 @@ export default {
     OrderBookLastPrice,
     OrderHistory,
     OrderHistorySearch,
+    Backup,
+    Modal,
     Mobile
+  },
+  data() {
+    return {}
   },
   computed: {
     ...mapGetters({
+      backupFlag: 'backup/getBackupFlag',
       orderBookIsActive: 'orderBook/isActive'
     })
+  },
+  methods: {
+    ...mapActions('backup', ['setBackupFlag'])
   }
 }
 </script>
-
 <style >
   .dashboard {
     @apply h-full;

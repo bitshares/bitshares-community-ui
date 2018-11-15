@@ -1,7 +1,10 @@
 <template>
   <div class="mobile-mode flex lg:hidden">
     <div class="mobile-mode-main">
-      <Card :title="title">
+      <Card
+        :backup-show="activeComponentName === 'Account' ? true : false"
+        :title="title"
+      >
         <component
           slot="body"
           :is="componentName"

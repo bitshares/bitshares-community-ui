@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import app from './modules/app'
 import portfolio from './modules/portfolio'
+import backup from './modules/backup'
 import orderBook from './modules/orderBook'
 import orderHistory from './modules/orderHistory'
 import createPersistedState from 'vuex-persistedstate'
@@ -21,6 +22,7 @@ const store = new Vuex.Store({
     app,
     marketsMonitor,
     portfolio,
+    backup,
     orderBook,
     orderHistory,
     ...modules
