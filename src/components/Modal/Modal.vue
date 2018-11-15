@@ -49,9 +49,4 @@ export default {}
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
-@media (max-width: 800px) {
-  .modal-mask {
-    top: -1.25rem;
-  }
-}
 </style>
