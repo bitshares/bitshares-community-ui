@@ -30,3 +30,11 @@ export const amountValueShortener = amount => {
 export const getMaxSum = (items, field) => {
   return Math.max.apply(null, items.map(item => item[field]))
 }
+
+// short float currency
+export const getFloatCurrency = (n) => {
+  const value = n.toString()
+
+  if (value[0] === '0' && value.length > 9) return value.slice(1, 10)
+  return value.slice(0, 9).split('00').join('')
+}

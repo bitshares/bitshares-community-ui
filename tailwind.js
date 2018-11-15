@@ -678,7 +678,7 @@ module.exports = {
     '24': '6rem',
     '32': '8rem',
 
-    'book-item-p': '0.625rem',
+    'book-item-p': '0.225rem',
     'card-ui': '0.6875rem',
     'card': '1.25rem',
     'grid-table': '0.625rem'
