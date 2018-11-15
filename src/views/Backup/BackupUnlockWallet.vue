@@ -10,7 +10,7 @@
       <Button
         text="Unlock"
         width="full"
-        @click="isValid"
+        @click="unlock"
       />
     </div>
   </div>
@@ -37,9 +37,11 @@ export default {
   methods: {
     ...mapActions('acc', ['unlockWallet']),
 
-    isValid() {
+    unlock() {
       if (this.isValidPassword(this.password)) {
         this.unlockWallet(this.password)
+      } else {
+        this.$toast.error('Invalid password')
       }
     }
   }
