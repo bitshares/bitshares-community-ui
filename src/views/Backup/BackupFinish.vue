@@ -87,7 +87,6 @@ export default {
     },
     copyUserPhrase() {
       window.navigator.clipboard.writeText(this.backupPhrase)
-      this.updateBackupFlag()
     }
   }
 }
