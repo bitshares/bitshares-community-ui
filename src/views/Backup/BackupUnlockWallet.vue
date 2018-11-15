@@ -26,8 +26,7 @@ export default {
   },
   data() {
     return {
-      password: '',
-      errors: {}
+      password: ''
     }
   },
   computed: {
