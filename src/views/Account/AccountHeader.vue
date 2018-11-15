@@ -5,8 +5,8 @@
               'account-header--large-mode': largeMode }"
     class="account-header"
   >
-    <div class="title">Balance</div>
-    <div class="amount">$ {{ totalFiatValue.toFixed(2) }}</div>
+    <span class="title">Balance</span>
+    <span class="amount">$ {{ totalFiatValue.toFixed(2) }}</span>
 
   </div>
 </template>
@@ -54,6 +54,7 @@ export default {
   opacity: 0.5;
   font-size: config('textSizes.xs-sm');
   line-height: normal;
+  margin-right: 0.5rem;
 }
 
 .account-header--large-mode {
