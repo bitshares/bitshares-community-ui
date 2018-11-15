@@ -166,6 +166,9 @@ export default {
       .backup-step-subtitle {
         width: 90%;
       }
+      .backup-step-footer {
+        bottom: .3rem;
+      }
     }
   }
 </style>

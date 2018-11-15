@@ -1,16 +1,11 @@
 <template>
   <div class="dashboard">
-    <div
-      style="color: #fff; cursor:pointer; text-align:center; color:green; margin-bottom:15px;"
-      @click="setBackupFlag(true)"
-    >Backup
-      <Modal
-        v-if="backupFlag"
-        @close="setBackupFlag(false)"
-      >
-        <Backup/>
-      </Modal>
-    </div>
+    <Modal
+      v-if="backupFlag"
+      @close="setBackupFlag(false)"
+    >
+      <Backup/>
+    </Modal>
     <div class="dashboard hidden lg:block">
       <div class="flex flex-col lg:flex-row mb-2">
         <Card
