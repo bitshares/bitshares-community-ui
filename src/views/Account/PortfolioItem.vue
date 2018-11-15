@@ -91,7 +91,6 @@ export default {
 
 .portfolio-item--expanded {
   font-size: config('textSizes.lg');
-  font-weight: 600;
   .deposit, .withdraw {
     font-size: config('textSizes.base');
   }
