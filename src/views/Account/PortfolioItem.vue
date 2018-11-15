@@ -90,9 +90,9 @@ export default {
 }
 
 .portfolio-item--expanded {
-  font-size: config('textSizes.2xl');
+  font-size: config('textSizes.lg');
   .deposit, .withdraw {
-    font-size: config('textSizes.xl');
+    font-size: config('textSizes.base');
   }
 }
 

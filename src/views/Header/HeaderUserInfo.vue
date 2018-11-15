@@ -2,10 +2,10 @@
   <div class="user-info">
     <!-- <svgicon name="userIcon"/> -->
     <div
-      style="color: #fff; cursor:pointer; text-align:center; color:green; margin-bottom:15px; margin-right: 17px"
+      class="backup-btn"
       @click="setBackupFlag(true)"
-    >Backup
-    </div>
+    >Backup</div>
+
     <svgicon
       v-show="userName"
       class="mr-3 cursor-pointer"
@@ -43,9 +43,16 @@ export default {
 }
 </script>
 
-<style scoped>
-  .user-info {
-    @apply inline-flex text-white;
-
+<style lang="scss" scoped>
+.backup-btn {
+  color: white;
+  margin-right: 2rem;
+  cursor: pointer;
+  &:hover {
+    border-bottom: 1px solid white;
   }
+}
+.user-info {
+  @apply inline-flex text-white;
+}
 </style>

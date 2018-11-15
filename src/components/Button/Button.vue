@@ -114,6 +114,8 @@ export default {
 .btn--secondary {
   background-color:config('colors.bg-base');
   color: config('colors.primary');
+  padding-top: 14px;
+  padding-bottom: 14px;
   border: solid;
   border-width: 1px;
   border-color:config('colors.primary');

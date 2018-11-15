@@ -1,10 +1,21 @@
 <template>
   <div class="mobile-mode flex lg:hidden">
     <div class="mobile-mode-main">
-      <Card
-        :backup-show="activeComponentName === 'Account' ? true : false"
-        :title="title"
-      >
+      <Card :title="title">
+        <div
+          slot="header"
+          class="temp-acc-header">
+          <div
+            v-if="activeComponentName === 'Account'"
+            class="temp-acc-btn"
+            @click="handleLogout"
+          >Logout</div>
+          <div
+            v-if="activeComponentName === 'Account'"
+            class="temp-acc-btn"
+            @click="setBackupFlag(true)"
+          >Backup</div>
+        </div>
         <component
           slot="body"
           :is="componentName"
@@ -72,11 +83,17 @@ export default {
   },
   methods: {
     ...mapActions({
-      deinitOrderBook: 'orderBook/deinit'
+      deinitOrderBook: 'orderBook/deinit',
+      setBackupFlag: 'backup/setBackupFlag',
+      logout: 'acc/logout'
     }),
     switchActiveComponent(name) {
       this.deinitOrderBook()
       this.activeComponentName = name
+    },
+    handleLogout() {
+      this.$router.push({ name: 'login' })
+      this.logout()
     }
   }
 }
@@ -93,4 +110,13 @@ export default {
       height: 100%;
     }
   }
+
+  .temp-acc-header {
+    display: flex;
+    .temp-acc-btn {
+      margin-left: 1rem;
+      border-bottom: 1px solid #ccc;
+    }
+  }
+
 </style>

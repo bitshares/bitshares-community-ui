@@ -37,12 +37,6 @@
         <div class="title">
           <div> {{ title }} </div>
         </div>
-        <div
-          v-if="backupShow"
-          class="backup-btn"
-          @click="setBackupFlag(true)"
-        >Backup
-        </div>
         <svgicon
           v-if="collapsible"
           :class="collapsed ? 'collapse-btn--active' : 'collapse-btn'"
@@ -80,7 +74,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 import Modal from '@/components/Modal'
 import '@/assets/icons/expand'
 
@@ -98,10 +91,6 @@ export default {
     collapsible: {
       type: Boolean,
       default: false
-    },
-    backupShow: {
-      type: Boolean,
-      default: false
     }
   },
   data() {
@@ -111,9 +100,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      setBackupFlag: 'backup/setBackupFlag'
-    }),
     handleCollapseClick() {
       this.collapsed = !this.collapsed
     }
@@ -139,6 +125,7 @@ export default {
 }
 
 .card--expanded {
+  height: 35rem;
   .card-header {
     padding-right: 2rem;
     padding-top: 1rem;
@@ -224,21 +211,6 @@ export default {
 .card-collapsed {
   height: 2.8rem;
   transition: 0.2s;
-}
-.backup-btn {
-  display: none;
-}
-@media (max-width: 800px) {
-  .card-container {
-    .backup-btn {
-      display: block;
-      float: right;
-      margin-right: 0;
-      text-align: right;
-      cursor: pointer;
-      color: green;
-    }
-  }
 }
 
 </style>
