@@ -1,6 +1,11 @@
 <template>
   <div class="user-info">
     <!-- <svgicon name="userIcon"/> -->
+    <div
+      style="color: #fff; cursor:pointer; text-align:center; color:green; margin-bottom:15px; margin-right: 17px"
+      @click="setBackupFlag(true)"
+    >Backup
+    </div>
     <svgicon
       v-show="userName"
       class="mr-3 cursor-pointer"
@@ -27,7 +32,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      logout: 'acc/logout'
+      logout: 'acc/logout',
+      setBackupFlag: 'backup/setBackupFlag'
     }),
     handleLogout() {
       this.$router.push({ name: 'login' })
