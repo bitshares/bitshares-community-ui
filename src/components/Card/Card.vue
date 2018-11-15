@@ -110,9 +110,6 @@ export default {
       collapsed: false
     }
   },
-  mounted() {
-    console.log(this)
-  },
   methods: {
     ...mapActions({
       setBackupFlag: 'backup/setBackupFlag'
