@@ -10,7 +10,7 @@
         :word="word"
         :border="true"
         :is-cursor="true"
-        :on-click="onRemovePhrase"
+        @click.native="removeWord({ index })"
       />
     </div>
     <div class="backup-step-content-item _verify">Let’s verify your backup phrase</div>
@@ -21,7 +21,7 @@
         :index="index"
         :word="word"
         :is-cursor="true"
-        :on-click="onSelectPhraseFromRandomList"
+        @click.native="selectWord({ index })"
       />
     </div>
     <div class="backup-step-footer">
@@ -83,11 +83,11 @@ export default {
         return Math.random() - 0.5
       })
     },
-    onSelectPhraseFromRandomList({ index }) {
+    selectWord({ index }) {
       this.userPhrase.push(this.randomPhrase[index])
       this.randomPhrase = this.randomPhrase.filter((item, ndx) => ndx !== index)
     },
-    onRemovePhrase({ index }) {
+    removeWord({ index }) {
       this.randomPhrase.push(this.userPhrase[index])
       this.userPhrase = this.userPhrase.filter((item, ndx) => ndx !== index)
     },
