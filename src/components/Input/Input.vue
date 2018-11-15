@@ -140,7 +140,7 @@ export default {
       return this.title || this.inputMessages.title
     },
     tipText() {
-      return this.tip || this.inputMessages.tip
+      return this.tip || (this.inputMessages && this.inputMessages.tip) || ''
     },
     validationMessages() {
       return this.inputMessages.validation

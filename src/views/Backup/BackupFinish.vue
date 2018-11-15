@@ -60,6 +60,12 @@ export default {
   components: {
     Button
   },
+  props: {
+    backupPhrase: {
+      type: String,
+      default: ''
+    }
+  },
   data() {
     return {
       paragraphs: [
@@ -71,16 +77,16 @@ export default {
   },
   methods: {
     ...mapActions('backup', ['setBackupFlag']),
+    ...mapActions('acc', ['storeBackupDate']),
 
     updateBackupFlag() {
       this.$nextTick(() => {
         this.setBackupFlag(false)
+        this.storeBackupDate()
       })
     },
     copyUserPhrase() {
-      // later this phrase will be copy from vuex getter
-      const phrase = 'electric animal breakfast chicken kid cat dog js tag world word girl boy car machine'
-      window.navigator.clipboard.writeText(phrase)
+      window.navigator.clipboard.writeText(this.backupPhrase)
       this.updateBackupFlag()
     }
   }

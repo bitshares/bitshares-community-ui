@@ -155,7 +155,7 @@ export default {
     }
 
     ._verify {
-      margin: 1.5625rem auto;
+      margin: .5rem auto;
     }
   }
   @media (max-width: 800px) {
