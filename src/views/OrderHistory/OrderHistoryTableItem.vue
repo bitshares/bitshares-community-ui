@@ -116,10 +116,12 @@ export default {
     }
   }
   .order-history-table-row .table-item {
-    padding-right: 0.15rem;
-    align-self: center;
+    padding-right: 0.25rem;
+    // align-self: center;
+    padding-top: 0.5rem;
     overflow: hidden;
-    text-overflow: ellipsis;
+    word-wrap: break-word;
+    // text-overflow: ellipsis;
     font-size: config('textSizes.sm');
     &--ticker {
       margin-top: 0.1rem;
@@ -133,8 +135,9 @@ export default {
     }
   }
   .table-item > .table-item-base {
-    white-space: nowrap;
+    // white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    word-break: break-all;
+    // text-overflow: ellipsis;
   }
 </style>
