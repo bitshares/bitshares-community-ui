@@ -25,8 +25,9 @@
       v-if="currentStep === stepConfig['BACKUP_STEP_2']"
       @change="onChangeStep"
     />
+    <BackupUnlockWallet v-if="currentStep === stepConfig['BACKUP_PHRASE'] && isLocked"/>
     <BackupPhrase
-      v-if="currentStep === stepConfig['BACKUP_PHRASE']"
+      v-if="currentStep === stepConfig['BACKUP_PHRASE'] && !isLocked"
       :backup-phrase="phrase"
       @change="onChangeStep"
     />
@@ -35,16 +36,20 @@
       :backup-phrase="phrase"
       @change="onChangeStep"
     />
-    <BackupFinish v-if="currentStep === stepConfig['BACKUP_FINISH']"/>
+    <BackupFinish
+      v-if="currentStep === stepConfig['BACKUP_FINISH']"
+      :backup-phrase="backupPhrase"
+    />
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import BackupStep1 from './BackupStep1'
 import BackupStep2 from './BackupStep2'
 import BackupPhrase from './BackupPhrase'
 import BackupVerify from './BackupVerify'
 import BackupFinish from './BackupFinish'
+import BackupUnlockWallet from './BackupUnlockWallet'
 
 export default {
   components: {
@@ -52,12 +57,12 @@ export default {
     BackupStep2,
     BackupPhrase,
     BackupVerify,
-    BackupFinish
+    BackupFinish,
+    BackupUnlockWallet
   },
   data() {
     return {
       currentStep: 1,
-      backupPhrase: 'electric animal breakfast chicken kid cat dog js tag world word girl boy car machine',
       stepConfig: {
         'BACKUP_STEP_1': 1,
         'BACKUP_STEP_2': 2,
@@ -68,6 +73,10 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      backupPhrase: 'acc/getBrainkey',
+      isLocked: 'acc/isLocked'
+    }),
     phrase() {
       return this.backupPhrase.split(' ')
     }

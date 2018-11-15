@@ -155,7 +155,7 @@ export default {
     }
 
     ._verify {
-      margin: 1.5625rem auto;
+      margin: .5rem auto;
     }
   }
   @media (max-width: 800px) {
@@ -165,6 +165,9 @@ export default {
       }
       .backup-step-subtitle {
         width: 90%;
+      }
+      .backup-step-footer {
+        bottom: .3rem;
       }
     }
   }
