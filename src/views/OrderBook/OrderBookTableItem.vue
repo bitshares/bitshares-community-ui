@@ -12,15 +12,17 @@
       class="order-book-table-item"
     >
       <span class="order-book-item-sum">
-        {{ item.sum.toFixed(4) }}
+        {{ sum }}
       </span>
       <span class="order-book-item-price">
-        {{ item.price.toFixed(4) }}
+        {{ price }}
       </span>
     </div>
   </div>
 </template>
 <script>
+import { getFloatCurrency } from '@/helpers/utils'
+
 export default {
   props: {
     item: {
@@ -45,6 +47,12 @@ export default {
     }
   },
   computed: {
+    sum() {
+      return getFloatCurrency(this.item.sum)
+    },
+    price() {
+      return getFloatCurrency(this.item.price)
+    },
     gradientDirection() {
       return this.type === 'sell' ? 'to right' : 'to left'
     },
@@ -117,7 +125,7 @@ export default {
         margin-left: config('margin.book-item-m');
         padding-left:config('padding.book-item-p');
         .order-book-item-sum {
-          margin-right: 1rem;
+          margin-right: .5rem;
           float: right;
         }
       }
