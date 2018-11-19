@@ -52,9 +52,14 @@
         </Card>
         <Card
           class="lg:w-1/3"
-          title="My orders history">
+          title="My orders history"
+          :expandable="true"
+        >
           <!-- <OrderHistorySearch slot="header"/> -->
           <OrderHistory slot="body"/>
+          <OrderHistory
+            slot="modal"
+          />
         </Card>
       </div>
     </div>
