@@ -30,10 +30,10 @@ export default {
     return {
       tableHeaders: [
         { title: 'Pair', field: 'payAssetSymbol', align: 'left' },
-        { title: 'Price', field: 'price', align: 'left' },
+        { title: this.expanded ? 'Avg./Price' : 'Price', field: 'price', align: 'left' },
         { title: 'Get', field: 'get', align: 'left' },
         { title: 'Spend', field: 'spend', align: 'left' },
-        { title: 'Open', field: 'dateOpen', align: 'left', expanded: true },
+        { title: 'Open', field: 'dateOpen', align: 'right', expanded: true },
         { title: 'Closed', field: 'dateClose', align: 'right' }
       ]
     }
