@@ -55,11 +55,11 @@
           class="lg:w-1/3"
           title="My orders history"
         >
-          <!-- <OrderHistorySearch slot="header"/> -->
+          <OrderHistorySearch slot="modal-header"/>
           <OrderHistory slot="body"/>
           <OrderHistory
             slot="modal"
-            :expanded="true"
+            :expand-mode="true"
           />
         </Card>
       </div>

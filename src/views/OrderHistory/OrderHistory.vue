@@ -4,7 +4,7 @@
       <OrderHistoryTable
         :table-headers="tableHeaders"
         :items="filteredItems"
-        :expanded="expanded"
+        :expanded="expandMode"
       />
     </LoadingContainer>
   </div>
@@ -21,7 +21,7 @@ export default {
     LoadingContainer
   },
   props: {
-    expanded: {
+    expandMode: {
       type: Boolean,
       default: false
     }
@@ -30,7 +30,7 @@ export default {
     return {
       tableHeaders: [
         { title: 'Pair', field: 'payAssetSymbol', align: 'left' },
-        { title: this.expanded ? 'Avg./Price' : 'Price', field: 'price', align: 'left' },
+        { title: this.expandMode ? 'Avg./Price' : 'Price', field: 'price', align: 'left' },
         { title: 'Get', field: 'get', align: 'left' },
         { title: 'Spend', field: 'spend', align: 'left' },
         { title: 'Open', field: 'dateOpen', align: 'right', expanded: true },
@@ -53,7 +53,7 @@ export default {
     }
   },
   mounted() {
-    if (!this.expanded) {
+    if (!this.expandMode) {
       this.tableHeaders = this.tableHeaders.filter(field => !field.expanded)
     }
   }
