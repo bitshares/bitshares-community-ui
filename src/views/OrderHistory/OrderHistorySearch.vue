@@ -2,8 +2,8 @@
   <SearchInput
     :value="searchStr"
     hint="Search"
-    @input="changeSearchStr"
     class="order-history-search"
+    @input="changeSearchStr"
   />
 </template>
 
