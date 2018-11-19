@@ -99,6 +99,22 @@ export default {
 
     &--expanded {
       grid-template-columns: repeat(6, 1fr);
+
+      .table-item {
+        .table-item-base {
+          font-size: config('textSizes.lg');
+          padding-top: .3rem;
+        }
+        .table-item--ticker {
+          font-size: config('textSizes.base');
+        }
+      }
+      .table-item--dates {
+        color: config('colors.inactive');
+        .table-item-date {
+          font-size: config('textSizes.base');
+        }
+      }
     }
   }
   .order-history-table-item {

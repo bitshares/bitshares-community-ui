@@ -5,7 +5,8 @@
       :headers="tableHeaders"
       :header-left-padding="1.6"
       :header-right-padding="1.5"
-      :default-sort="defaultSort">
+      :default-sort="defaultSort"
+      :large="expanded">
 
       <template slot-scope="{ sortedItems }">
         <OrderHistoryTableItem
