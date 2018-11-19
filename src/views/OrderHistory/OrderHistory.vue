@@ -4,6 +4,7 @@
       <OrderHistoryTable
         :table-headers="tableHeaders"
         :items="filteredItems"
+        :expanded="expanded"
       />
     </LoadingContainer>
   </div>
@@ -19,6 +20,12 @@ export default {
     OrderHistoryTable,
     LoadingContainer
   },
+  props: {
+    expanded: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       tableHeaders: [
@@ -26,7 +33,7 @@ export default {
         { title: 'Price', field: 'price', align: 'left' },
         { title: 'Get', field: 'get', align: 'left' },
         { title: 'Spend', field: 'spend', align: 'left' },
-        // { title: 'Open', field: 'dateOpen', align: 'left' },
+        { title: 'Open', field: 'dateOpen', align: 'left', expanded: true },
         { title: 'Closed', field: 'dateClose', align: 'right' }
       ]
     }
@@ -43,6 +50,11 @@ export default {
         return item.payAssetSymbol.toLowerCase().includes(search) ||
           item.receiveAssetSymbol.toLowerCase().includes(search)
       })
+    }
+  },
+  mounted() {
+    if (!this.expanded) {
+      this.tableHeaders = this.tableHeaders.filter(field => !field.expanded)
     }
   }
 }

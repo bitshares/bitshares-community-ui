@@ -7,7 +7,10 @@
     }"
     class="order-history-table-item"
   >
-    <div class="order-history-table-row">
+    <div
+      :class="{'order-history-table-row--expanded': expanded}"
+      class="order-history-table-row"
+    >
       <div class="table-item">
         <div class="table-item-base">{{ item.payAssetSymbol }}</div>
         <div class="table-item--ticker">/{{ item.receiveAssetSymbol }}</div>
@@ -24,10 +27,13 @@
         <div class="table-item-base">{{ spend }}</div>
         <div class="table-item--ticker">{{ item.payAssetSymbol }}</div>
       </div>
-      <!-- <div class="table-item--dates">
+      <div
+        v-if="expanded"
+        class="table-item--dates"
+      >
         <div class="table-item-date">{{ dateOpen }}</div>
         <div class="table-item-date">{{ timeOpen }}</div>
-      </div> -->
+      </div>
       <div class="table-item--dates">
         <div class="table-item-date">{{ dateClose }}</div>
         <div class="table-item-date">{{ timeClose }}</div>
@@ -48,6 +54,10 @@ export default {
       }
     },
     isLast: {
+      type: Boolean,
+      default: false
+    },
+    expanded: {
       type: Boolean,
       default: false
     }
@@ -86,6 +96,10 @@ export default {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     height: 3.9375rem;
+
+    &--expanded {
+      grid-template-columns: repeat(6, 1fr);
+    }
   }
   .order-history-table-item {
     color: config('colors.text-primary');

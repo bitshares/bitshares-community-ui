@@ -13,6 +13,7 @@
           :key="index"
           :item="item"
           :is-last="sortedItems.length - 1 === index"
+          :expanded="expanded"
         />
       </template>
     </SortableTable>
@@ -39,6 +40,10 @@ export default {
       default() {
         return []
       }
+    },
+    expanded: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
