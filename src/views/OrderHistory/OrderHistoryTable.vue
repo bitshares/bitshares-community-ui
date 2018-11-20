@@ -5,7 +5,8 @@
       :headers="tableHeaders"
       :header-left-padding="1.6"
       :header-right-padding="1.5"
-      :default-sort="defaultSort">
+      :default-sort="defaultSort"
+      :large="expanded">
 
       <template slot-scope="{ sortedItems }">
         <OrderHistoryTableItem
@@ -13,6 +14,7 @@
           :key="index"
           :item="item"
           :is-last="sortedItems.length - 1 === index"
+          :expanded="expanded"
         />
       </template>
     </SortableTable>
@@ -39,6 +41,10 @@ export default {
       default() {
         return []
       }
+    },
+    expanded: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
