@@ -1,5 +1,5 @@
 import markets from '@/store/modules/marketsMonitor'
-import { createLocalVue } from 'vue-test-utils'
+import { createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
 const localVue = createLocalVue()
