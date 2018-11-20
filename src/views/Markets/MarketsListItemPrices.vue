@@ -16,7 +16,7 @@
         <div class="_tickerTitle tickers-list__itemVolume pl-6"> /{{ item.base }}</div>
       </div>
       <div class="tickers-list__item _alignRight">
-        <div class="_currencyTitle">{{ +item.price.toFixed(4) }}</div>
+        <div class="_currencyTitle">{{ +item.price }}</div>
         <div class="_tickerTitle tickers-list__itemVolume">${{ item.usdPrice.toFixed(2) }}</div>
       </div>
       <div class="tickers-list__item _alignRight">
