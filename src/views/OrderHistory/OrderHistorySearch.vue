@@ -27,7 +27,6 @@ export default {
 </script>
 <style lang="scss">
   .order-history-search {
-    transform: scale(1.2, 1.2);
     margin: -0.625rem 0.525rem 0 0
   }
 </style>
