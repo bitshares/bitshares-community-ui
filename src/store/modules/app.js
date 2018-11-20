@@ -16,7 +16,7 @@ const actions = {
     console.log('init user data')
     const userId = rootGetters['acc/getAccountUserId']
     dispatch('assets/fetchDefaultAssets', null, { root: true })
-    dispatch('market/fetchMarketStats', 'USD', { root: true })
+    dispatch('marketsMonitor/initialize', null, { root: true })
     await dispatch('acc/fetchCurrentUser', userId, { root: true })
     // await Promise.all([
     // dispatch('transactions/fetchComissions', null, { root: true }),
