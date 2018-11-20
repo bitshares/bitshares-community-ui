@@ -1,5 +1,4 @@
 // import config from 'vuex-bitshares/config.js'
-
 const types = {
   UPDATE_FAVOURITES: 'UPDATE_FAVOURITES',
   UPDATE_CURRENT_BASE: 'UPDATE_CURRENT_BASE',
