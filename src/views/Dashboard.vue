@@ -66,9 +66,8 @@
           :expandable="true"
           class="lg:w-1/3"
           title="My active orders">
-          <OrderActive
-            slot="body"
-          />
+          <OrderActiveSearch slot="modal-header"/>
+          <OrderActive slot="body"/>
           <OrderActive
             slot="modal"
             :expand-mode="true"
@@ -94,6 +93,7 @@ import MarketsSearch from '@/views/Markets/MarketsSearch'
 import OrderActive from '@/views/OrderActive/OrderActive'
 import OrderHistory from '@/views/OrderHistory/OrderHistory'
 import OrderHistorySearch from '@/views/OrderHistory/OrderHistorySearch'
+import OrderActiveSearch from '@/views/OrderActive/OrderActiveSearch'
 import Backup from '@/views/Backup/Backup'
 import Modal from '@/components/Modal/Modal'
 import Mobile from '@/views/Mobile/Mobile'
@@ -114,6 +114,7 @@ export default {
     OrderActive,
     OrderHistory,
     OrderHistorySearch,
+    OrderActiveSearch,
     Backup,
     Modal,
     Mobile

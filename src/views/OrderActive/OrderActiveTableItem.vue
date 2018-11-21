@@ -8,7 +8,41 @@
     }"
     class="order-active-table-item"
   >
+    <!--MINI-->
     <div
+      v-if="!expanded"
+      :class="{'order-active-table-row--expanded': expanded}"
+      class="order-active-table-row"
+    >
+      <div class="table-item">
+        <div class="table-item-base">{{ item.payAssetSymbol }}</div>
+        <div class="table-item--ticker">/{{ item.receiveAssetSymbol }}</div>
+      </div>
+      <div class="table-item">
+        <div class="table-item-base">{{ price }}</div>
+        <div class="table-item--ticker">{{ price }}</div>
+      </div>
+      <div class="table-item">
+        <div class="table-item-base _alignRight">{{ price }}</div>
+        <div
+          :style="{'color': fillColor }"
+          class="table-item--filled"
+        >
+          {{ filled }}
+        </div>
+        <!--<div class="table-item-remove">
+          <svgicon
+            :width="removeSize"
+            :height="removeSize"
+            color="rgba(255,255,255,.5)"
+            name="cancel"
+          />
+        </div>-->
+      </div>
+    </div>
+    <!-- NORMAL-->
+    <div
+      v-if="expanded"
       :class="{'order-active-table-row--expanded': expanded}"
       class="order-active-table-row"
     >
@@ -24,7 +58,7 @@
         <div class="table-item-base">{{ get }}</div>
         <div class="table-item--ticker">{{ item.receiveAssetSymbol }}</div>
       </div>
-      <div class="table-item">
+      <div class="table-item _relative">
         <div class="table-item-base">{{ spend }}</div>
         <div class="table-item--ticker">{{ item.payAssetSymbol }}</div>
       </div>
@@ -42,16 +76,15 @@
       <div class="table-item--dates">
         <div class="table-item-date">{{ dateOpen }}</div>
         <div class="table-item-date">{{ timeOpen }}</div>
-        <div class="table-item-remove">
-          <svgicon
-            :width="removeSize"
-            :height="removeSize"
-            color="rgba(255,255,255,.5)"
-            name="cancel"
-          />
-        </div>
       </div>
-
+      <!--<div class="table-item-remove">
+        <svgicon
+          :width="removeSize"
+          :height="removeSize"
+          color="rgba(255,255,255,.5)"
+          name="cancel"
+        />
+      </div>-->
     </div>
   </div>
 </template>
@@ -115,39 +148,30 @@ export default {
   .order-active-table-row {
     color: config('colors.white');
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     height: 3.9375rem;
     .table-item--dates {
       position: relative;
     }
-    .table-item-remove {
-      position: absolute;
-      right: -17px;
-      top: 5px;
-      cursor: pointer;
+    .table-item-base {
+      font-size: config('textSizes.lg');
+      padding-top: .3rem;
+    }
+    .table-item--ticker {
+      font-size: config('textSizes.base');
     }
     &--expanded {
       grid-template-columns: repeat(6, 1fr);
-      .table-item {
-        .table-item-base {
-          font-size: config('textSizes.lg');
-          padding-top: .3rem;
-        }
-        .table-item--ticker {
-          font-size: config('textSizes.base');
-        }
-      }
       .table-item--dates {
         position: relative;
         color: config('colors.inactive');
-        .table-item-remove {
-          right: -40px;
-          top: 6px;
-        }
         .table-item-date {
           font-size: config('textSizes.base');
         }
       }
+    }
+    ._relative {
+      position: relative;
     }
   }
   .order-active-table-item {
@@ -158,8 +182,19 @@ export default {
     grid-row: 1;
     transition: background-color 0.15s ease;
     padding: 0 1.5rem 0 1rem;
+
+    .table-item--filled {
+      text-align: right;
+      font-size: config('textSizes.base');
+    }
+
     &--expanded {
-      margin: 0.1250rem 2rem 0.1250rem 0.1250rem;
+      margin: 0.1250rem 0 0.1250rem 0.1250rem;
+
+      .table-item--filled {
+        text-align: right;
+        font-size: config('textSizes.xl');
+      }
     }
     &:hover {
       position: relative;
@@ -175,10 +210,6 @@ export default {
     &--last {
       position: relative;
       z-index: 100;
-    }
-    .table-item--filled {
-      text-align: right;
-      font-size: config('textSizes.xl');
     }
   }
   .order-active-table-row .table-item {
@@ -205,5 +236,8 @@ export default {
     overflow: hidden;
     word-break: break-all;
     // text-overflow: ellipsis;
+    &._alignRight {
+      text-align: right;
+    }
   }
 </style>
