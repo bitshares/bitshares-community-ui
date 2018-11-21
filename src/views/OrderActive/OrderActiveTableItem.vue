@@ -189,7 +189,7 @@ export default {
     }
 
     &--expanded {
-      margin: 0.1250rem 2rem 0.1250rem 0.1250rem;
+      margin: 0.1250rem 0 0.1250rem 0.1250rem;
 
       .table-item--filled {
         text-align: right;

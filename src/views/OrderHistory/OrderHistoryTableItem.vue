@@ -8,6 +8,24 @@
     class="order-history-table-item"
   >
     <div
+      v-if="!expanded"
+      class="order-history-table-row"
+    >
+      <div class="table-item">
+        <div class="table-item-base">{{ item.payAssetSymbol }}</div>
+        <div class="table-item--ticker">/{{ item.receiveAssetSymbol }}</div>
+      </div>
+      <div class="table-item">
+        <div class="table-item-base">{{ price }}</div>
+        <div class="table-item--ticker">{{ price }}</div>
+      </div>
+      <div class="table-item">
+        <div class="table-item-base _alignRight">{{ price }}</div>
+        <div class="table-item--ticker _alignRight">{{ dateClose }} {{ timeClose }}</div>
+      </div>
+    </div>
+    <div
+      v-if="expanded"
       :class="{'order-history-table-row--expanded': expanded}"
       class="order-history-table-row"
     >
@@ -27,10 +45,7 @@
         <div class="table-item-base">{{ spend }}</div>
         <div class="table-item--ticker">{{ item.payAssetSymbol }}</div>
       </div>
-      <div
-        v-if="expanded"
-        class="table-item--dates"
-      >
+      <div class="table-item--dates">
         <div class="table-item-date">{{ dateOpen }}</div>
         <div class="table-item-date">{{ timeOpen }}</div>
       </div>
@@ -43,7 +58,7 @@
 </template>
 <script>
 import { format } from 'date-fns'
-// import { getVolumeFormat } from '@/helpers/utils'
+import { getFloatCurrency } from '@/helpers/utils'
 
 export default {
   props: {
@@ -79,13 +94,13 @@ export default {
       return format(this.item.dateClose, 'HH:mm')
     },
     price() {
-      return this.item.price
+      return getFloatCurrency(this.item.price)
     },
     get() {
-      return this.item.get
+      return getFloatCurrency(this.item.get)
     },
     spend() {
-      return this.item.spend
+      return getFloatCurrency(this.item.spend)
     }
   }
 }
@@ -94,21 +109,19 @@ export default {
   .order-history-table-row {
     color: config('colors.white');
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     height: 3.9375rem;
 
+    .table-item-base {
+      font-size: config('textSizes.lg');
+      padding-top: .3rem;
+    }
+    .table-item--ticker {
+      font-size: config('textSizes.base');
+    }
     &--expanded {
       grid-template-columns: repeat(6, 1fr);
 
-      .table-item {
-        .table-item-base {
-          font-size: config('textSizes.lg');
-          padding-top: .3rem;
-        }
-        .table-item--ticker {
-          font-size: config('textSizes.base');
-        }
-      }
       .table-item--dates {
         color: config('colors.inactive');
         .table-item-date {
@@ -162,6 +175,9 @@ export default {
       align-self: center;
       text-align: right;
       font-size: config('textSizes.xs-sm');
+    }
+    ._alignRight {
+      text-align: right;
     }
   }
   .table-item > .table-item-base {

@@ -4,7 +4,7 @@
       :items="items"
       :headers="tableHeaders"
       :header-left-padding="1.6"
-      :header-right-padding="rightTablePadding"
+      :header-right-padding="2"
       :default-sort="defaultSort"
       :large="expanded">
 
@@ -52,14 +52,6 @@ export default {
         field: 'dateOpen',
         type: 'desc'
       }
-    }
-  },
-  computed: {
-    rightTablePadding() {
-      if (this.expanded) {
-        return 4
-      }
-      return 2
     }
   }
 }
