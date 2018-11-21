@@ -51,10 +51,16 @@
           <OrderBook slot="body"/>
         </Card>
         <Card
+          :expandable="true"
           class="lg:w-1/3"
-          title="My orders history">
-          <!-- <OrderHistorySearch slot="header"/> -->
+          title="My orders history"
+        >
+          <OrderHistorySearch slot="modal-header"/>
           <OrderHistory slot="body"/>
+          <OrderHistory
+            slot="modal"
+            :expand-mode="true"
+          />
         </Card>
         <Card
           :expandable="true"

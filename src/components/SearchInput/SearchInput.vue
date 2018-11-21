@@ -8,7 +8,11 @@
       @input="$emit('input', $event.target.value)"
     >
     <div class="search-icon">
-      <svgicon name="search"/>
+      <svgicon
+        width="20"
+        height="20"
+        name="search"
+      />
     </div>
   </div>
 </template>
