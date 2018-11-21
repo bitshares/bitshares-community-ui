@@ -2,7 +2,7 @@
   <div class="order-active pt-3 lg:pt-0">
     <LoadingContainer :loading="isFetching">
       <OrderActiveTable
-        :table-headers="tableHeadersActive"
+        :table-headers="expandMode ? tableHeadersActive : tableHeadersActiveMini"
         :items="filteredItems"
         :expanded="expandMode"
         :active-orders="activeOrders"
@@ -39,6 +39,11 @@ export default {
         { title: 'Spend', field: 'spend', align: 'left' },
         { title: 'Filled', field: 'filled', align: 'right', expanded: true },
         { title: 'Open', field: 'dateOpen', align: 'right' }
+      ],
+      tableHeadersActiveMini: [
+        { title: 'Pair', field: 'payAssetSymbol', align: 'left' },
+        { title: 'Avg./Price', field: 'price', align: 'left' },
+        { title: 'Vol./Filled', field: 'filled', align: 'right' }
       ]
     }
   },
