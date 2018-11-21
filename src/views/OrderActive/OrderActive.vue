@@ -5,7 +5,6 @@
         :table-headers="expandMode ? tableHeadersActive : tableHeadersActiveMini"
         :items="filteredItems"
         :expanded="expandMode"
-        :active-orders="activeOrders"
       />
     </LoadingContainer>
   </div>
@@ -22,10 +21,6 @@ export default {
   },
   props: {
     expandMode: {
-      type: Boolean,
-      default: false
-    },
-    activeOrders: {
       type: Boolean,
       default: false
     }
