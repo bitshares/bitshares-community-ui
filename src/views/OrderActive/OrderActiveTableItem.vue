@@ -58,7 +58,7 @@
 <script>
 import { format } from 'date-fns'
 import '@icons/cancel'
-// import { getVolumeFormat } from '@/helpers/utils'
+import { getFloatCurrency } from '@/helpers/utils'
 export default {
   props: {
     item: {
@@ -87,13 +87,13 @@ export default {
       return format(this.item.dateOpen, 'HH:mm')
     },
     price() {
-      return this.item.price
+      return getFloatCurrency(this.item.price)
     },
     get() {
-      return this.item.get
+      return getFloatCurrency(this.item.get)
     },
     spend() {
-      return this.item.spend
+      return getFloatCurrency(this.item.spend)
     },
     filled() {
       return `${this.item.filled}%`
