@@ -1,20 +1,22 @@
 <template>
   <div
     :class="{
-      'order-tabs--buy': activeTab === 'buy',
-      'order-tabs--sell': activeTab === 'sell'
+      'order-tabs--buy': activeTitle === 'buy',
+      'order-tabs--sell': activeTitle === 'sell'
     }"
     class="order-tabs"
   >
     <div
-      :class="{'_inactive': activeTab === 'sell'}"
+      :class="{'_inactive': activeTitle === 'sell'}"
       class="order-tabs-item _buy"
+      @click="activeTab.title = 'buy'"
     >
       <div class="order-tabs-title">{{ buyTitle }}</div>
     </div>
     <div
-      :class="{'_inactive': activeTab === 'buy'}"
+      :class="{'_inactive': activeTitle === 'buy'}"
       class="order-tabs-item _sell"
+      @click="activeTab.title = 'sell'"
     >
       <div class="order-tabs-title">{{ sellTitle }}</div>
     </div>
@@ -24,8 +26,12 @@
 export default {
   props: {
     activeTab: {
-      type: String,
-      default: 'buy'
+      type: Object,
+      default() {
+        return {
+          title: 'buy'
+        }
+      }
     },
     currentBase: {
       type: String,
@@ -41,6 +47,9 @@ export default {
     },
     sellTitle() {
       return `SELL ${this.currentBase}/USD`
+    },
+    activeTitle() {
+      return this.activeTab.title
     }
   }
 }
@@ -59,9 +68,20 @@ export default {
       font-weight: config('fontWeights.extrabold');
       font-size: config('textSizes.lg');
       cursor: pointer;
+    }
 
-      &:not(._inactive) {
-        border-top: 5px solid #79c60f;
+    &--buy {
+      .order-tabs-item {
+        &:not(._inactive) {
+          border-top: 5px solid #79c60f;
+        }
+      }
+    }
+    &--sell {
+      .order-tabs-item {
+        &:not(._inactive) {
+          border-top: 5px solid rgba(255, 47, 47, 0.5);
+        }
       }
     }
     ._buy {

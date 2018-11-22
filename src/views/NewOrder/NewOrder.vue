@@ -1,7 +1,6 @@
 <template>
   <div class="new-order">
     <NewOrderTabs
-      :tab="activeTab"
       :current-base="currentBase"
     />
   </div>
@@ -14,14 +13,12 @@ export default {
   components: {
     NewOrderTabs
   },
-  props: {
-    activeTab: {
-      type: String,
-      default: 'buy'
-    }
-  },
   data() {
-    return {}
+    return {
+      activeTab: {
+        title: 'buy'
+      }
+    }
   },
   computed: {
     ...mapGetters({
