@@ -10,6 +10,7 @@ import vuexBitshares from 'vuex-bitshares'
 import Cookies from 'js-cookie'
 import paths from './cachedPaths'
 import marketsMonitor from './modules/marketsMonitor'
+import newOrder from './modules/newOrder'
 
 const { modules, plugins } = vuexBitshares
 Vue.use(Vuex)
@@ -25,6 +26,7 @@ const store = new Vuex.Store({
     backup,
     orderBook,
     orderHistory,
+    newOrder,
     ...modules
   },
   plugins: [
