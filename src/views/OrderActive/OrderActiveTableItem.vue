@@ -30,14 +30,6 @@
         >
           {{ filled }}
         </div>
-        <!--<div class="table-item-remove">
-          <svgicon
-            :width="removeSize"
-            :height="removeSize"
-            color="rgba(255,255,255,.5)"
-            name="cancel"
-          />
-        </div>-->
       </div>
     </div>
     <!-- NORMAL-->
@@ -85,6 +77,14 @@
           name="cancel"
         />
       </div>-->
+    </div>
+    <div class="table-item-remove">
+      <svgicon
+        :width="removeSize"
+        :height="removeSize"
+        color="rgba(255,255,255,.5)"
+        name="cancel"
+      />
     </div>
   </div>
 </template>
@@ -182,18 +182,34 @@ export default {
     grid-row: 1;
     transition: background-color 0.15s ease;
     padding: 0 1.5rem 0 1rem;
+    position: relative;
 
     .table-item--filled {
       text-align: right;
       font-size: config('textSizes.base');
     }
 
+    .table-item-remove {
+      position: absolute;
+      right: 10px;
+      top: 22px;
+      cursor: pointer;
+    }
+
     &--expanded {
       margin: 0.1250rem 0 0.1250rem 0.1250rem;
+      padding-right: 2.8rem;
+      overflow-x: hidden;
 
       .table-item--filled {
         text-align: right;
         font-size: config('textSizes.xl');
+      }
+      .table-item-remove {
+        position: absolute;
+        right: 15px;
+        top: 22px;
+        cursor: pointer;
       }
     }
     &:hover {
