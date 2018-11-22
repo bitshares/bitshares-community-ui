@@ -24,8 +24,13 @@
             :expanded="true"/>
         </Card>
         <Card
+          class="lg:w-1/3"
+          title="New Order">
+          <NewOrder slot="body"/>
+        </Card>
+        <Card
           collapsible
-          class="lg:w-2/3 disabled"
+          class="lg:w-1/3 disabled"
           title="Graph"
         />
       </div>
@@ -84,6 +89,7 @@ import OrderHistorySearch from '@/views/OrderHistory/OrderHistorySearch'
 import Backup from '@/views/Backup/Backup'
 import Modal from '@/components/Modal/Modal'
 import Mobile from '@/views/Mobile/Mobile'
+import NewOrder from '@/views/NewOrder/NewOrder'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -102,7 +108,8 @@ export default {
     OrderHistorySearch,
     Backup,
     Modal,
-    Mobile
+    Mobile,
+    NewOrder
   },
   data() {
     return {}
