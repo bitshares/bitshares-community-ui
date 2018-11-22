@@ -3,39 +3,114 @@ const types = {
 }
 
 const state = {
-  searchStr: ''
+  searchStr: '',
+  activeList: [
+    {
+      dateClose: 1541712454000,
+      dateOpen: 1541712454000,
+      get: 0.0006,
+      order: 'buy',
+      payAssetSymbol: 'BTS',
+      avg: 1.3531,
+      price: 1.1231,
+      vol: 1313.232,
+      receiveAssetSymbol: 'CNY',
+      spend: '0.0009'
+    },
+    {
+      dateClose: 1541712454000,
+      dateOpen: 1541712454000,
+      get: 0.0006,
+      order: 'sell',
+      payAssetSymbol: 'BTS',
+      avg: 1.318,
+      price: 1.912,
+      vol: 1313.232,
+      receiveAssetSymbol: 'CNY',
+      spend: '0.0009'
+    },
+    {
+      dateClose: 1541712454000,
+      dateOpen: 1541712454000,
+      get: 0.0006,
+      order: 'buy',
+      payAssetSymbol: 'BTS',
+      avg: 1.35000,
+      price: 1.50000,
+      vol: 1313.232,
+      receiveAssetSymbol: 'CNY',
+      spend: '0.0009'
+    },
+    {
+      dateClose: 1541712454000,
+      dateOpen: 1541712454000,
+      get: 0.0006,
+      order: 'buy',
+      payAssetSymbol: 'BTS',
+      avg: 1.319,
+      price: 1.671,
+      vol: 1313.232,
+      receiveAssetSymbol: 'CNY',
+      spend: '0.0009'
+    },
+    {
+      dateClose: 1541712454000,
+      dateOpen: 1541712454000,
+      get: 0.0006,
+      order: 'sell',
+      payAssetSymbol: 'BTS',
+      avg: 1.3500,
+      price: 1.500,
+      vol: 1313.232,
+      receiveAssetSymbol: 'CNY',
+      spend: '0.0009'
+    },
+    {
+      dateClose: 1541712454000,
+      dateOpen: 1541712454000,
+      get: 0.0006,
+      order: 'buy',
+      payAssetSymbol: 'BTS',
+      avg: 2.353184,
+      price: 2.5120,
+      vol: 1313.232,
+      receiveAssetSymbol: 'CNY',
+      spend: '0.0009'
+    },
+    {
+      dateClose: 1541712454000,
+      dateOpen: 1541712454000,
+      get: 0.0006,
+      order: 'buy',
+      payAssetSymbol: 'BTS',
+      avg: 1.35319,
+      price: 1.53182,
+      vol: 1313.232,
+      receiveAssetSymbol: 'CNY',
+      spend: '0.0009'
+    },
+    {
+      dateClose: 1541712454000,
+      dateOpen: 1541712454000,
+      get: 0.0006,
+      order: 'sell',
+      payAssetSymbol: 'BTS',
+      avg: 1.35232,
+      price: 1.531931,
+      vol: 1313.232,
+      receiveAssetSymbol: 'CNY',
+      spend: '0.0009'
+    }
+  ]
 }
 
 const getters = {
   getSearchStr(state) {
     return state.searchStr
   },
-  getFillOrderInfo: (state, getters, rootState, rootGetters) => (order) => {
-    const { payload, buyer, date } = order
-    const type = buyer ? 'buy' : 'sell'
-    const assetPays = rootGetters['assets/getAssetById'](payload.pays.asset_id)
-    const assetReceives = rootGetters['assets/getAssetById'](payload.receives.asset_id)
-    const amountPays = payload.pays.amount / 10 ** assetPays.precision
-    const amountReceives = payload.receives.amount / 10 ** assetReceives.precision
-    const price = buyer ? amountPays / amountReceives : amountReceives / amountPays
-    return {
-      payAssetSymbol: assetPays.symbol,
-      receiveAssetSymbol: assetReceives.symbol,
-      get: amountReceives.toFixed(8).replace(/\.?0+$/, ''),
-      spend: amountPays.toFixed(8).replace(/\.?0+$/, ''),
-      price: price.toFixed(5),
-      order: type,
-      dateClose: date,
-      dateOpen: date
-    }
-  },
-  getHistoryList: (state, getters, rootState, rootGetters) => {
-    const operations = rootGetters['operations/getOperations']
-    const fillOrders = operations.filter(operation => operation.type === 'fill_order')
-    const list = fillOrders.map(order => getters.getFillOrderInfo(order))
-
+  getActiveList: (state, getters, rootState, rootGetters) => {
     // now its demo case for activeOrders test
-    return list.map(listItem => Object.assign(
+    return state.activeList.map(listItem => Object.assign(
       {},
       listItem,
       { filled: Math.round(Math.random() * 100) }

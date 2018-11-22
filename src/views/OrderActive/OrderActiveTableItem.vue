@@ -19,7 +19,7 @@
         <div class="table-item--ticker">/{{ item.receiveAssetSymbol }}</div>
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ price }}</div>
+        <div class="table-item-base">{{ avg }}</div>
         <div class="table-item--ticker">{{ price }}</div>
       </div>
       <div class="table-item">
@@ -121,6 +121,12 @@ export default {
     },
     price() {
       return getFloatCurrency(this.item.price)
+    },
+    avg() {
+      return getFloatCurrency(this.item.avg)
+    },
+    vol() {
+      return getFloatCurrency(this.item.vol)
     },
     get() {
       return getFloatCurrency(this.item.get)

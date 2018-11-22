@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      items: 'orderActive/getHistoryList',
+      items: 'orderActive/getActiveList',
       searchStr: 'orderActive/getSearchStr',
       isFetching: 'operations/isFetching'
     }),
