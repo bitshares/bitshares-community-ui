@@ -2,8 +2,7 @@
   <div
     :class="{
       'order-history-table-item--buy': item.order === 'buy',
-      'order-history-table-item--sell': item.order === 'sell',
-      'order-history-table-item--last': isLast
+      'order-history-table-item--sell': item.order === 'sell'
     }"
     class="order-history-table-item"
   >
@@ -68,10 +67,6 @@ export default {
         return {}
       }
     },
-    isLast: {
-      type: Boolean,
-      default: false
-    },
     expanded: {
       type: Boolean,
       default: false
@@ -107,7 +102,7 @@ export default {
 </script>
 <style lang="scss">
   .order-history-table-row {
-    color: config('colors.white');
+    color: config('colors.primary');
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     height: 3.9375rem;
@@ -131,6 +126,10 @@ export default {
     }
   }
   .order-history-table-item {
+    &:last-child {
+      position: relative;
+      z-index: 100;
+    }
     color: config('colors.text-primary');
     margin: 0.1250rem 0 0.1250rem 0.1250rem;
 
@@ -153,18 +152,12 @@ export default {
     &--sell {
       border-left: 7px solid config('colors.sell');
     }
-    &--last {
-      position: relative;
-      z-index: 100;
-    }
   }
   .order-history-table-row .table-item {
     padding-right: 0.25rem;
-    // align-self: center;
     padding-top: 0.5rem;
     overflow: hidden;
     word-wrap: break-word;
-    // text-overflow: ellipsis;
     font-size: config('textSizes.sm');
     &--ticker {
       margin-top: 0.1rem;
@@ -181,9 +174,7 @@ export default {
     }
   }
   .table-item > .table-item-base {
-    // white-space: nowrap;
     overflow: hidden;
     word-break: break-all;
-    // text-overflow: ellipsis;
   }
 </style>

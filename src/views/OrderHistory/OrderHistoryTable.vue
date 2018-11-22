@@ -13,7 +13,6 @@
           v-for="(item, index) in sortedItems"
           :key="index"
           :item="item"
-          :is-last="sortedItems.length - 1 === index"
           :expanded="expanded"
         />
       </template>

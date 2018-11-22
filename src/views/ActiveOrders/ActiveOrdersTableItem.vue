@@ -1,18 +1,17 @@
 <template>
   <div
     :class="{
-      'order-active-table-item--buy': item.order === 'buy',
-      'order-active-table-item--sell': item.order === 'sell',
-      'order-active-table-item--last': isLast,
-      'order-active-table-item--expanded': expanded
+      'active-orders-table-item--buy': item.order === 'buy',
+      'active-orders-table-item--sell': item.order === 'sell',
+      'active-orders-table-item--expanded': expanded
     }"
-    class="order-active-table-item"
+    class="active-orders-table-item"
   >
     <!--MINI-->
     <div
       v-if="!expanded"
-      :class="{'order-active-table-row--expanded': expanded}"
-      class="order-active-table-row"
+      :class="{'active-orders-table-row--expanded': expanded}"
+      class="active-orders-table-row"
     >
       <div class="table-item">
         <div class="table-item-base">{{ item.payAssetSymbol }}</div>
@@ -35,8 +34,8 @@
     <!-- NORMAL-->
     <div
       v-if="expanded"
-      :class="{'order-active-table-row--expanded': expanded}"
-      class="order-active-table-row"
+      :class="{'active-orders-table-row--expanded': expanded}"
+      class="active-orders-table-row"
     >
       <div class="table-item">
         <div class="table-item-base">{{ item.payAssetSymbol }}</div>
@@ -96,10 +95,6 @@ export default {
         return {}
       }
     },
-    isLast: {
-      type: Boolean,
-      default: false
-    },
     expanded: {
       type: Boolean,
       default: false
@@ -143,7 +138,7 @@ export default {
     },
     removeSize() {
       if (this.expanded) {
-        return '18'
+        return '14'
       }
       return '10'
     }
@@ -156,11 +151,11 @@ export default {
 }
 </script>
 <style lang="scss">
-  .order-active-table-row {
+  .active-orders-table-row {
     color: config('colors.white');
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    height: 3.9375rem;
+    min-height: 3.9375rem;
     .table-item--dates {
       position: relative;
     }
@@ -185,7 +180,11 @@ export default {
       position: relative;
     }
   }
-  .order-active-table-item {
+  .active-orders-table-item {
+    &:last-child {
+      position: relative;
+      z-index: 100;
+    }
     color: config('colors.text-primary');
     margin: 0.1250rem 0 0.1250rem 0.1250rem;
     grid-auto-flow: column;
@@ -234,18 +233,12 @@ export default {
     &--sell {
       border-left: 7px solid config('colors.sell');
     }
-    &--last {
-      position: relative;
-      z-index: 100;
-    }
   }
-  .order-active-table-row .table-item {
+  .active-orders-table-row .table-item {
     padding-right: 0.25rem;
-    // align-self: center;
     padding-top: 0.5rem;
     overflow: hidden;
     word-wrap: break-word;
-    // text-overflow: ellipsis;
     font-size: config('textSizes.sm');
     &--ticker {
       margin-top: 0.1rem;
@@ -259,10 +252,8 @@ export default {
     }
   }
   .table-item > .table-item-base {
-    // white-space: nowrap;
     overflow: hidden;
     word-break: break-all;
-    // text-overflow: ellipsis;
     &._alignRight {
       text-align: right;
     }

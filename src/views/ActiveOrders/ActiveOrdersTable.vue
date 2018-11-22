@@ -1,5 +1,5 @@
 <template>
-  <div class="order-active-table">
+  <div class="active-orders-table">
     <SortableTable
       :items="items"
       :headers="tableHeaders"
@@ -9,12 +9,11 @@
       :large="expanded">
 
       <template slot-scope="{ sortedItems }">
-        <OrderActiveTableItem
+        <ActiveOrdersTableItem
           v-for="(item, index) in sortedItems"
           :key="index"
           :index="index"
           :item="item"
-          :is-last="sortedItems.length - 1 === index"
           :expanded="expanded"
         />
       </template>
@@ -23,11 +22,11 @@
 </template>
 <script>
 import SortableTable from '@/components/SortableTable'
-import OrderActiveTableItem from './OrderActiveTableItem'
+import ActiveOrdersTableItem from './ActiveOrdersTableItem'
 export default {
   components: {
     SortableTable,
-    OrderActiveTableItem
+    ActiveOrdersTableItem
   },
   props: {
     tableHeaders: {
@@ -63,7 +62,7 @@ export default {
 }
 </script>
 <style lang="scss">
-  .order-active-table {
+  .active-orders-table {
     height: 100%;
   }
 </style>
