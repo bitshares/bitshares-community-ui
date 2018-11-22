@@ -12,6 +12,7 @@
       @click="activeTab.title = 'buy'"
     >
       <div class="order-tabs-title">{{ buyTitle }}</div>
+      <div class="order-tabs-subtitle">{{ tradeData.buy.price }}</div>
     </div>
     <div
       :class="{'_inactive': activeTitle === 'buy'}"
@@ -19,6 +20,7 @@
       @click="activeTab.title = 'sell'"
     >
       <div class="order-tabs-title">{{ sellTitle }}</div>
+      <div class="order-tabs-subtitle">{{ tradeData.sell.price }}</div>
     </div>
   </div>
 </template>
@@ -36,6 +38,12 @@ export default {
     currentBase: {
       type: String,
       default: 'USD'
+    },
+    tradeData: {
+      type: Object,
+      default() {
+        return {}
+      }
     }
   },
   data() {
@@ -68,6 +76,15 @@ export default {
       font-weight: config('fontWeights.extrabold');
       font-size: config('textSizes.lg');
       cursor: pointer;
+
+      .order-tabs-title {
+        height: 65px;
+        margin-top: -7px;
+      }
+      .order-tabs-subtitle {
+        font-size: config('textSizes.sm');
+        margin-top: -45px;
+      }
     }
 
     &--buy {
