@@ -69,16 +69,11 @@
         <div class="table-item-date">{{ dateOpen }}</div>
         <div class="table-item-date">{{ timeOpen }}</div>
       </div>
-      <!--<div class="table-item-remove">
-        <svgicon
-          :width="removeSize"
-          :height="removeSize"
-          color="rgba(255,255,255,.5)"
-          name="cancel"
-        />
-      </div>-->
     </div>
-    <div class="table-item-remove">
+    <div
+      class="table-item-remove"
+      @click="removeActiveOrder(index)"
+    >
       <svgicon
         :width="removeSize"
         :height="removeSize"
@@ -89,6 +84,7 @@
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 import { format } from 'date-fns'
 import '@icons/cancel'
 import { getFloatCurrency } from '@/helpers/utils'
@@ -107,6 +103,10 @@ export default {
     expanded: {
       type: Boolean,
       default: false
+    },
+    index: {
+      type: Number,
+      default: 0
     }
   },
   data() {
@@ -147,6 +147,11 @@ export default {
       }
       return '10'
     }
+  },
+  methods: {
+    ...mapActions({
+      removeActiveOrder: 'orderActive/removeActiveOrder'
+    })
   }
 }
 </script>

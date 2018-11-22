@@ -12,6 +12,7 @@
         <OrderActiveTableItem
           v-for="(item, index) in sortedItems"
           :key="index"
+          :index="index"
           :item="item"
           :is-last="sortedItems.length - 1 === index"
           :expanded="expanded"
