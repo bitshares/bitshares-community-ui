@@ -34,3 +34,8 @@ Loading Big Blue Button
 ```js
 <Button text="Сохранить" loading size="big"/>
 ```
+
+Secondary type hollow big button
+```js
+<Button text="Сохранить" type="secondary" size="big"/>
+```

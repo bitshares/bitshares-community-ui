@@ -18,6 +18,7 @@
       :spellcheck="false"
       class="input__input"
       @input="handleInput"
+      @focus="handleFocus"
       @blur="handleBlur"
       @paste="handlePaste"
       @keyup.enter="$refs.input.blur"
@@ -25,7 +26,7 @@
 
     <!-- floating title = placeholder -->
     <span
-      :class="{'input_has-content': !!value }"
+      :class="{'input_has-content': !! value }"
       class="input__title">
       {{ titleText }}
     </span>
@@ -38,6 +39,14 @@
       width="24"
       height="24"
       @click.stop.native="handleIconClick"
+    />
+    <svgicon
+      v-if="value && !icon"
+      name="cross"
+      class="delete__icon"
+      width="12"
+      height="12"
+      @click.stop.native="$emit('input', '')"
     />
 
     <!-- tip message -->
@@ -168,6 +177,9 @@ export default {
       this.$debouncedTouch()
       this.$emit('input', number)
     },
+    handleFocus() {
+      this.$emit('focus')
+    },
     handleBlur() {
       this.$emit('blur', this.$refs.input.value)
     },
@@ -188,6 +200,14 @@ export default {
 .input__icon {
   position: absolute;
   top: 16px;
+  right: 0;
+  cursor: pointer;
+}
+
+.delete__icon {
+  color: config('colors.text-primary');
+  position: absolute;
+  top: 22px;
   right: 0;
   cursor: pointer;
 }
@@ -221,9 +241,15 @@ export default {
     letter-spacing: 0.3px;
   }
 }
+
+.input__input {
+  @apply pr-4;
+}
+
 .input--has-icon .input__input {
   @apply pr-8;
 }
+
 .input--has-error .input__input {
   border-color: config('colors.text-error');
 }
@@ -231,7 +257,7 @@ export default {
   @apply text-base;
   color: config('colors.text-primary');
   position: absolute;
-  top: 25px;
+  top: 22px;
   left: 0;
   transition: all 0.3s;
   pointer-events: none;

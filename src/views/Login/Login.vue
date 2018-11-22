@@ -3,11 +3,12 @@
     <div class="login h-full sm:h-auto">
       <div class="login__title">Login</div>
       <Tabs
-        :tabs="['password', 'private key']"
+        :tabs="['simple cloud', 'secure key']"
+        :active="type"
         @change="changeLoginType">
 
         <div
-          slot="password"
+          slot="simple cloud"
           class="login__form">
 
           <VInput
@@ -27,33 +28,47 @@
 
         </div>
         <div
-          slot="private key"
+          slot="secure key"
           class="login__form">
           <VInput
-            v-model.trim="brainkey"
+            v-model="brainkey"
             :errors="$v.brainkey"
             input-name="brainkey"
             class="mb-6"
+            @focus="onBrainkeyInputFocus"
+            @blur="onBrainkeyInputBlur"
           />
 
           <KeyfileLoader
+            v-if="showFileField"
             @select="selectFile"
-            @remove="removeFile"/>
-
-          <VInput
-            v-model.trim="pin"
-            :errors="$v.pin"
-            :password="true"
-            input-name="pin"
-            class="mb-4 mt-2"
+            @remove="removeFile"
           />
 
-          <VInput
-            v-model.trim="confirmPin"
-            :errors="$v.confirmPin"
-            :password="true"
-            input-name="confirmPin"
-          />
+          <template v-if="$v.brainkey.brainkeyValidator">
+            <VInput
+              v-model.trim="pin"
+              :errors="$v.pin"
+              :password="true"
+              input-name="pin"
+              class="mb-4 mt-2"
+            />
+            <VInput
+              v-model.trim="confirmPin"
+              :errors="$v.confirmPin"
+              :password="true"
+              input-name="confirmPin"
+            />
+          </template>
+          <template v-if="file">
+            <VInput
+              v-model.trim="pin"
+              :errors="$v.pin"
+              type="password"
+              input-name="password"
+              class="mb-4 mt-2"
+            />
+          </template>
         </div>
       </Tabs>
 
@@ -71,9 +86,6 @@
       <div class="login__footer">
         <div class="footer-link">
           <router-link :to="{ name: 'signup' }">Sign up with new account</router-link>
-        </div>
-        <div class="footer-link">
-          <router-link :to="{ name: 'login' }">I accept Terms of Use</router-link>
         </div>
       </div>
     </div>
@@ -94,26 +106,39 @@ export default {
   components: { VInput, Button, Tabs, KeyfileLoader },
   mixins: [validationMixin],
   validations() {
-    return this.type === 'password'
-      ? {
+    if (this.type === 'simple cloud') {
+      return {
         name: { required },
         password: { required },
         brainkey: {},
         pin: {},
         confirmPin: {}
       }
-      : {
-        name: {},
-        password: {},
-        brainkey: {
-          required: (value) => {
-            if (this.file) return true
-            return required(value)
-          }
-        },
-        pin: { required, minLength: minLength(6) },
-        confirmPin: { sameAsPin: sameAs('pin') }
+    } else {
+      if (this.file) {
+        return {
+          name: {},
+          password: {},
+          brainkey: {},
+          pin: { required, minLength: minLength(6) },
+          confirmPin: {}
+        }
+      } else {
+        return {
+          name: {},
+          password: {},
+          brainkey: {
+            required: value => {
+              if (this.file) return true
+              return required(value)
+            },
+            brainkeyValidator: value => (value.split(' ').length - 1 >= 15)
+          },
+          pin: { required, minLength: minLength(6) },
+          confirmPin: { sameAsPin: sameAs('pin') }
+        }
       }
+    }
   },
   data() {
     return {
@@ -123,8 +148,9 @@ export default {
       pin: '',
       confirmPin: '',
       inProgress: false,
-      type: 'password',
-      file: null
+      type: 'simple cloud',
+      file: null,
+      showFileField: true
     }
   },
   computed: {
@@ -142,7 +168,7 @@ export default {
       this.$v.$touch()
       if (this.$v.$invalid) return
       this.inProgress = true
-      if (this.type === 'password') {
+      if (this.type === 'simple cloud') {
         const { error } = await this.cloudLogin({
           name: this.name.toLowerCase(),
           password: this.password
@@ -168,6 +194,7 @@ export default {
         password: this.pin,
         backup: this.file
       })
+      console.log('Result', success, error, this.pin)
       this.inProgress = false
       if (success) this.$router.push({ name: 'main' })
       else this.$toast.error(error)
@@ -182,6 +209,12 @@ export default {
     },
     removeFile() {
       this.file = null
+    },
+    onBrainkeyInputFocus() {
+      this.showFileField = false
+    },
+    onBrainkeyInputBlur() {
+      this.showFileField = true
     }
   }
 }
@@ -195,6 +228,7 @@ export default {
   }
   .login {
     @apply max-w-sm w-full shadow-md;
+    border: 1px solid config('colors.card-border');
     border-radius: 2px;
     background-color: black;
     &__title {

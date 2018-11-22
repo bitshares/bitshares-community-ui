@@ -3,15 +3,25 @@
     <div
       :class="{'tab-hader--centered': centered}"
       class="tabs-header">
+      <div @click="handleTabClick('favourites')">
+        <Star
+          v-if="currencyMode"
+          :active="activeFavourite"
+          class="tabs__favourite"
+        />
+      </div>
       <div
         v-for="(tab, index) in tabs"
         :key="index"
-        :style="{ width: tabWidth + '%' }"
-        :class="activeTabIndex === index ? 'tab--active' : ''"
+        :style="{ width: currencyMode ? 'auto' : tabWidth + '%' }"
+        :class="{
+          'tab--active': active === tab,
+          'tab--currency': currencyMode
+        }"
         class="tab"
         @click="handleTabClick(index)"
       >
-        {{ tab }}
+        {{ format(tab) }}
       </div>
     </div>
     <slot :name="tabs[activeTabIndex]" />
@@ -19,7 +29,13 @@
 </template>
 
 <script>
+import Star from '@/components/Star'
+import { removePrefix } from '@/helpers/utils'
+
 export default {
+  components: {
+    Star
+  },
   props: {
     tabs: {
       default: () => [],
@@ -28,11 +44,21 @@ export default {
     centered: {
       default: true,
       type: Boolean
+    },
+    currencyMode: {
+      default: false,
+      type: Boolean
+    },
+    active: {
+      type: String,
+      required: false,
+      default: ''
     }
   },
   data() {
     return {
-      activeTabIndex: 0
+      activeTabIndex: 0,
+      activeFavourite: false
     }
   },
   computed: {
@@ -43,13 +69,22 @@ export default {
   methods: {
     handleTabClick(index) {
       this.activeTabIndex = index
-      this.$emit('change', this.tabs[index])
+      this.$emit('change', this.tabs[index] || 'favourites')
+
+      this.tabs[index] ? this.activeFavourite = false : this.activeFavourite = true
+    },
+    format(value) {
+      if (!this.currencyMode) return value
+      return removePrefix(value, 'OPEN.')
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.tabs {
+  user-select: none;
+}
 
 .tabs-header {
   display: flex;
@@ -58,6 +93,11 @@ export default {
   text-transform: uppercase;
   &--centered {
     justify-content: center;
+  }
+
+  .tabs__favourite {
+    margin: 0 1px 0 8px;
+    line-height: 28px;
   }
 }
 
@@ -68,14 +108,33 @@ export default {
   border-bottom: 3px solid config('colors.tab-header');
   text-align: center;
   transition: color 0.2s, border-color 0.2s;
+
   &--active {
     @apply cursor-default;
     color: config('colors.tab-active')!important;
     border-bottom-color: config('colors.tab-active')!important;
   }
+
+  &--currency {
+    margin: 0 7px;
+    margin-top: -7px;
+    border-bottom: none;
+    padding-bottom: .25rem;
+    font-family: config('fonts.gotham-medium');
+  }
+
   &:hover {
-    color:config('colors.tab-hover');;
+    color:config('colors.tab-hover');
     border-bottom-color: config('colors.tab-hover');
+  }
+}
+.tabs-header .tab.tab--currency.tab--active {
+  border-bottom: 1px solid;
+  border-bottom-color: config('colors.tab-active');
+}
+.markets--expanded {
+  .tabs-header .tab.tab--currency {
+    margin-right: 25px;
   }
 }
 </style>

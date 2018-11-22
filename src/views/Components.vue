@@ -3,18 +3,26 @@
     This is an components page
     <div>
       <Card
-        :title="'Test Title'">
+        :title="'Test Title'"
+      >
         <div slot="header">
           <Button
             text="button test"
             size="medium"
+            type="primary"
           />
         </div>
         <div slot="body">
           <Button
             text="button test"
             size="big"
+            type="secondary"
           />
+          <SortableHeaderItem
+            title="ticker"
+            sort="desc"
+          />
+          <Star />
         </div>
       </Card>
     </div>
@@ -38,6 +46,9 @@
         text="button test"
         size="small"/>
     </div>
+    <MobileFooter
+      :items="[{name: 'markets', title: 'Markets', icon:'markets'}, {name: 'orders', title: 'Orders', icon:'orders'}, {name: 'account', title: 'Account', icon:'account'}]"
+    />
   </div>
 </template>
 
@@ -45,10 +56,13 @@
 import Button from '@/components/Button/'
 import Tabs from '@/components/Tabs/'
 import Card from '@/components/Card'
+import MobileFooter from '@/components/MobileFooter'
+import SortableHeaderItem from '@/components/SortableHeaderItem'
+import Star from '@/components/Star'
 
 export default {
   name: 'Components',
-  components: { Button, Tabs, Card },
+  components: { Button, Tabs, Card, Star, SortableHeaderItem, MobileFooter },
   data() {
     return {
       testString: '',
