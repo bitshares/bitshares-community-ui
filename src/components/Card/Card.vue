@@ -1,8 +1,8 @@
 <template>
-  <div class="card-container mb-2 lg:mb-0 h-full">
+  <div class="card-container mb-card-margin lg:mb-0 h-full">
     <div
       :class="{'card-collapsed': collapsed}"
-      class="card border-transparent sm:border-card-border lg:mr-2 h-full lg:h-card-height"
+      class="card border-none lg:mr-card-margin h-full lg:h-card-height"
     >
       <Modal
         v-if="expanded"
