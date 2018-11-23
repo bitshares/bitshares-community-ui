@@ -8,6 +8,7 @@
     </Modal>
     <div class="dashboard hidden lg:block">
       <div class="flex flex-col lg:flex-row mb-card-margin">
+        
         <Card
           :expandable="true"
           collapsible
@@ -23,13 +24,16 @@
             slot="modal"
             :expanded="true"/>
         </Card>
+        
         <Card
           collapsible
           class="lg:w-2/3 disabled"
           title="Graph"
         />
+
       </div>
       <div class="flex flex-col lg:flex-row mb-card-margin">
+        
         <Card
           :expandable="true"
           :long="true"
@@ -44,19 +48,24 @@
             slot="modal"
             :expand-mode="true"/>
         </Card>
+
         <div class="flex lg:w-2/3">
           <div class="flex flex-col lg:w-1/2 mr-card-margin">
+            
             <Card
               collapsible
               title="new order"
               class="mb-card-margin"
             />
+
             <Card
               collapsible
               title="active orders"
             />
+
           </div>
           <div class="flex flex-col lg:w-1/2">
+            
             <Card
               v-if="orderBookIsActive"
               collapsible
@@ -65,6 +74,7 @@
             >
               <OrderBook slot="body"/>
             </Card>
+
             <Card
               :expandable="true"
               title="My orders history"
@@ -76,6 +86,7 @@
                 :expand-mode="true"
               />
             </Card>
+            
           </div>
         </div>
       </div>
