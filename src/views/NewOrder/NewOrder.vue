@@ -65,11 +65,13 @@ export default {
 <style lang="scss">
   .new-order {
     position: relative;
-    height: 352px;
-
+    height: 100%;
     .order-btn {
+      width: 96%;
       position: absolute;
-      bottom: 0;
+      left: 2%;
+      bottom: 0.625rem;
+
       &--buy {
         background: #79c60f;
       }

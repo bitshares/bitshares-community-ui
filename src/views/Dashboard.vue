@@ -23,9 +23,7 @@
             slot="modal"
             :expanded="true"/>
         </Card>
-        <Card
-          class="lg:w-1/3"
-          title="New Order">
+        <Card class="lg:w-1/3">
           <NewOrder slot="body"/>
         </Card>
         <Card
