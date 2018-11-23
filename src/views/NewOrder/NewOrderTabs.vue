@@ -81,8 +81,8 @@ export default {
     .order-tabs-item {
       box-sizing: border-box;
       width: 50%;
-      height: 57px;
-      line-height: 57px;
+      height: 3.5625rem;
+      line-height: 3.5625rem;
       text-align: center;
       font-weight: config('fontWeights.extrabold');
       font-size: config('textSizes.lg');
@@ -91,14 +91,14 @@ export default {
     &--buy {
       .order-tabs-item {
         &:not(._inactive) {
-          border-top: 5px solid #79c60f;
+          border-top: 0.3125rem solid #79c60f;
         }
       }
     }
     &--sell {
       .order-tabs-item {
         &:not(._inactive) {
-          border-top: 5px solid rgba(255, 47, 47, 0.5);
+          border-top: 0.3125rem solid rgba(255, 47, 47, 0.5);
         }
       }
     }

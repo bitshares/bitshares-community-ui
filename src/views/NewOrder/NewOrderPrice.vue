@@ -40,7 +40,7 @@ export default {
 </script>
 <style lang="scss">
   .order-price {
-    margin-top: 20px;
+    margin-top: 1.25rem;
     display: inline-block;
     width: 50%;
     text-align: center;
@@ -63,26 +63,26 @@ export default {
       color: config('colors.inactive');
       text-align: right;
       position: absolute;
-      top: 5px;
+      top: 0.3125rem;
 
       .order-percent {
         display: none;
       }
       &--buy {
-        right: 8px;
+        right: 0.5rem;
         .order-percent {
           display: block;
           position: absolute;
           color: config('colors.inactive');
-          left: 23px;
-          top: 18px;
+          left: 1.4375rem;
+          top: 1.125rem;
         }
       }
       &--sell {
-        left: 8px;
+        left: 0.5rem;
       }
       .order-points-first {
-        margin-bottom: 16px;
+        margin-bottom: 1rem;
       }
     }
   }

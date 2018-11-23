@@ -19,9 +19,9 @@
         'order-btn--buy': tabType === 'buy',
         'order-btn--sell': tabType === 'sell'
       }"
-      :text="operationTitle"
       class="order-btn"
       width="full"
+      v-html="operationTitle"
     />
   </div>
 </template>
@@ -54,10 +54,12 @@ export default {
       return this.activeTab.title
     },
     operationTitle() {
+      const getTemplate = (type) => `<span class='operation-title'>${type}</span>`
+
       if (this.activeTab.title === 'buy') {
-        return `Buy ${this.tradeData.buy.value} ${this.currentBase}`
+        return `${getTemplate('buy')} ${this.tradeData.buy.value} ${this.currentBase}`
       }
-      return `Sell ${this.tradeData.sell.value} ${this.currentBase}`
+      return `${getTemplate('sell')} ${this.tradeData.sell.value} ${this.currentBase}`
     }
   }
 }
@@ -77,6 +79,11 @@ export default {
       }
       &--sell {
         background: #ed1c24;
+      }
+      .operation-title {
+        font-weight: 600;
+        display: inline-block;
+        margin-right: 0.225rem
       }
     }
   }

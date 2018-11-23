@@ -28,12 +28,12 @@ export default {
 </script>
 <style lang="scss">
   .order-tabs-title {
-    height: 65px;
-    margin-top: -7px;
+    height: 4.0625rem;
+    margin-top: -0.4375rem;
   }
   .order-tabs-subtitle {
     font-size: config('textSizes.sm');
-    margin-top: -45px;
+    margin-top: -2.8125rem;
     color:rgba(255, 47, 47, 0.5);
 
     &--increased {
