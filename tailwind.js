@@ -132,7 +132,7 @@ let colors = {
 
   'text-primary': '#ffffff',
   'inactive': 'rgba(255, 255, 255, 0.5)',
-  'bg-base': '#000000',
+  'bg-base': '#353535',
 
   'input-border': '#ced2d6',
   'card-background': '#000000',
@@ -198,7 +198,7 @@ module.exports = {
     'sm': '576px',
     'md': '768px',
     'lg': '992px',
-    'xl': '1200px'
+    'xl': '1157px'
   },
 
   /*
@@ -706,6 +706,7 @@ module.exports = {
     'small': '0.125rem',
     '1': '0.25rem',
     '2': '0.5rem',
+    'card-margin': '0.625rem',
     '3': '0.75rem',
     '4': '1rem',
     '5': '1.25rem',
