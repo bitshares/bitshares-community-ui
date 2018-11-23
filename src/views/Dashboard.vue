@@ -7,11 +7,11 @@
       <Backup/>
     </Modal>
     <div class="dashboard hidden lg:block">
-      <div class="flex flex-col lg:flex-row mb-2">
+      <div class="flex flex-col lg:flex-row mb-card-margin">
         <Card
           :expandable="true"
           collapsible
-          class="lg:w-1/3"
+          class="lg:w-1/3 lg:mr-card-margin"
           title="account"
         >
           <AccountHeader slot="header"/>
@@ -29,11 +29,12 @@
           title="Graph"
         />
       </div>
-      <div class="flex flex-col lg:flex-row mb-2">
+      <div class="flex flex-col lg:flex-row mb-card-margin">
         <Card
           :expandable="true"
+          :long="true"
           collapsible
-          class="lg:w-1/3"
+          class="lg:w-1/3 lg:mr-card-margin"
           title="markets"
         >
           <MarketsSearch slot="header"/>
@@ -43,25 +44,40 @@
             slot="modal"
             :expand-mode="true"/>
         </Card>
-        <Card
-          v-if="orderBookIsActive"
-          collapsible
-          class="lg:w-1/3"
-          title="order book">
-          <OrderBook slot="body"/>
-        </Card>
-        <Card
-          :expandable="true"
-          class="lg:w-1/3"
-          title="My orders history"
-        >
-          <OrderHistorySearch slot="modal-header"/>
-          <OrderHistory slot="body"/>
-          <OrderHistory
-            slot="modal"
-            :expand-mode="true"
-          />
-        </Card>
+        <div class="flex lg:w-2/3">
+          <div class="flex flex-col lg:w-1/2 mr-card-margin">
+            <Card
+              collapsible
+              title="new order"
+              class="mb-card-margin"
+            />
+            <Card
+              collapsible
+              title="active orders"
+            />
+          </div>
+          <div class="flex flex-col lg:w-1/2">
+            <Card
+              v-if="orderBookIsActive"
+              collapsible
+              title="order book"
+              class="mb-card-margin"
+            >
+              <OrderBook slot="body"/>
+            </Card>
+            <Card
+              :expandable="true"
+              title="My orders history"
+            >
+              <OrderHistorySearch slot="modal-header"/>
+              <OrderHistory slot="body"/>
+              <OrderHistory
+                slot="modal"
+                :expand-mode="true"
+              />
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
 

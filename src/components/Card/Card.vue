@@ -1,8 +1,11 @@
 <template>
-  <div class="card-container mb-card-margin lg:mb-0 h-full">
+  <div class="card-container h-full">
     <div
-      :class="{'card-collapsed': collapsed}"
-      class="card border-none lg:mr-card-margin h-full lg:h-card-height"
+      :class="{
+        'card--collapsed': collapsed, 
+        'lg:h-card-long-height': long
+      }"
+      class="card border-none h-full lg:h-card-height"
     >
       <Modal
         v-if="expanded"
@@ -91,6 +94,10 @@ export default {
     collapsible: {
       type: Boolean,
       default: false
+    },
+    long: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -125,7 +132,10 @@ export default {
 }
 
 .card--expanded {
-  height: 35rem;
+  // height: 35rem;
+  &.card--long {
+    height: 70rem;
+  }
   .card-header {
     padding-right: 2rem;
     padding-top: 1rem;
@@ -208,7 +218,7 @@ export default {
   cursor: pointer;
 }
 
-.card-collapsed {
+.card--collapsed {
   height: 2.8rem;
   transition: 0.2s;
 }
