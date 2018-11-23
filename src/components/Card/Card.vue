@@ -132,6 +132,7 @@ export default {
 }
 
 .card--expanded {
+  height: 35rem;
   .card-header {
     padding-right: 2rem;
     padding-top: 1rem;
