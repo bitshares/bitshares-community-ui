@@ -13,12 +13,16 @@
       class="active-orders-table-row"
     >
       <div class="table-item">
-        <div class="table-item-base">{{ item.payAssetSymbol }}</div>
-        <div class="table-item--ticker">/{{ item.receiveAssetSymbol }}</div>
+        <TwoLineItem
+          :top="item.payAssetSymbol"
+          :bottom="item.receiveAssetSymbol"
+        />
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ avg }}</div>
-        <div class="table-item--ticker">{{ price }}</div>
+        <TwoLineItem
+          :top="avg"
+          :bottom="price"
+        />
       </div>
       <div class="table-item">
         <div class="table-item-base text-right">{{ price }}</div>
@@ -37,20 +41,32 @@
       class="active-orders-table-row"
     >
       <div class="table-item">
-        <div class="table-item-base">{{ item.payAssetSymbol }}</div>
-        <div class="table-item--ticker">/{{ item.receiveAssetSymbol }}</div>
+        <TwoLineItem
+          :top="item.payAssetSymbol"
+          :bottom="item.receiveAssetSymbol"
+          :expanded="expanded"
+        />
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ avg }}</div>
-        <div class="table-item--ticker">{{ price }}</div>
+        <TwoLineItem
+          :top="avg"
+          :bottom="price"
+          :expanded="expanded"
+        />
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ get }}</div>
-        <div class="table-item--ticker">{{ item.receiveAssetSymbol }}</div>
+        <TwoLineItem
+          :top="get"
+          :bottom="item.receiveAssetSymbol"
+          :expanded="expanded"
+        />
       </div>
       <div class="table-item _relative">
-        <div class="table-item-base">{{ spend }}</div>
-        <div class="table-item--ticker">{{ item.payAssetSymbol }}</div>
+        <TwoLineItem
+          :top="spend"
+          :bottom="item.payAssetSymbol"
+          :expanded="expanded"
+        />
       </div>
       <div
         v-if="expanded"
@@ -86,7 +102,12 @@ import { mapActions } from 'vuex'
 import { format } from 'date-fns'
 import '@icons/cancel'
 import { getFloatCurrency } from '@/helpers/utils'
+import TwoLineItem from '@/components/TwoLineItem/TwoLineItem'
+
 export default {
+  components: {
+    TwoLineItem
+  },
   props: {
     item: {
       type: Object,
