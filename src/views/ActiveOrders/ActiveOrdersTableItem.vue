@@ -173,13 +173,6 @@ export default {
     .table-item--dates {
       position: relative;
     }
-    .table-item-base {
-      font-size: config('textSizes.lg');
-      padding-top: .3rem;
-    }
-    .table-item--ticker {
-      font-size: config('textSizes.sm');
-    }
   &.active-orders-table-row--expanded {
     grid-template-columns: repeat(6, 1fr);
     .table-item--dates {
@@ -188,12 +181,6 @@ export default {
       .table-item-date {
         font-size: config('textSizes.base');
       }
-    }
-    .table-item-base {
-      font-size: config('textSizes.xl');
-    }
-    .table-item--ticker {
-      font-size: config('textSizes.base');
     }
   }
     ._relative {
@@ -263,10 +250,6 @@ export default {
       text-align: right;
       font-size: config('textSizes.xs-sm');
     }
-  }
-  .table-item > .table-item-base {
-    overflow: hidden;
-    word-break: break-all;
   }
   .active-orders-table-item {
     &.active-orders-table-item--expanded {
