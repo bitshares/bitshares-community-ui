@@ -11,16 +11,22 @@
       class="order-history-table-row"
     >
       <div class="table-item">
-        <div class="table-item-base">{{ item.payAssetSymbol }}</div>
-        <div class="table-item--ticker">/{{ item.receiveAssetSymbol }}</div>
+        <TwoLineItem
+          :top="item.payAssetSymbol"
+          :bottom="item.receiveAssetSymbol"
+        />
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ price }}</div>
-        <div class="table-item--ticker">{{ price }}</div>
+        <TwoLineItem
+          :top="price"
+          :bottom="price"
+        />
       </div>
-      <div class="table-item">
-        <div class="table-item-base text-right">{{ price }}</div>
-        <div class="table-item--ticker text-right">{{ dateClose }} {{ timeClose }}</div>
+      <div class="table-item text-right">
+        <TwoLineItem
+          :top="price"
+          :bottom="fullCloseTitle"
+        />
       </div>
     </div>
     <div
@@ -58,8 +64,12 @@
 <script>
 import { format } from 'date-fns'
 import { getFloatCurrency } from '@/helpers/utils'
+import TwoLineItem from '@/components/TwoLineItem/TwoLineItem'
 
 export default {
+  components: {
+    TwoLineItem
+  },
   props: {
     item: {
       type: Object,
@@ -87,6 +97,9 @@ export default {
     },
     timeClose() {
       return format(this.item.dateClose, 'HH:mm')
+    },
+    fullCloseTitle() {
+      return `${this.dateClose} ${this.timeClose}`
     },
     price() {
       return getFloatCurrency(this.item.price)
