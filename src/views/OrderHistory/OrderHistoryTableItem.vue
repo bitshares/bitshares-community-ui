@@ -132,13 +132,6 @@ export default {
     grid-template-columns: repeat(3, 1fr);
     height: 3.9375rem;
 
-    .table-item-base {
-      font-size: config('textSizes.lg');
-      padding-top: .3rem;
-    }
-    .table-item--ticker {
-      font-size: config('textSizes.sm');
-    }
   &.order-history-table-row--expanded {
     grid-template-columns: repeat(6, 1fr);
 
@@ -147,12 +140,6 @@ export default {
       .table-item-date {
         font-size: config('textSizes.base');
       }
-    }
-    .table-item-base {
-      font-size: config('textSizes.xl');
-    }
-    .table-item--ticker {
-      font-size: config('textSizes.base');
     }
   }
   }
@@ -200,9 +187,5 @@ export default {
       text-align: right;
       font-size: config('textSizes.xs-sm');
     }
-  }
-  .table-item > .table-item-base {
-    overflow: hidden;
-    word-break: break-all;
   }
 </style>
