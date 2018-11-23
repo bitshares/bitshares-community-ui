@@ -76,17 +76,17 @@
         v-if="expanded"
         class="table-item"
       >
-      <TwoLineItem
-        :expanded="expanded"
-      >
-        <div
-          slot="bottom"
-          :style="{'color': fillColor }"
-          class="table-item--filled"
+        <TwoLineItem
+          :expanded="expanded"
         >
-          {{ item.filled }}%
-        </div>
-      </TwoLineItem>
+          <div
+            slot="bottom"
+            :style="{'color': fillColor }"
+            class="table-item--filled"
+          >
+            {{ item.filled }}%
+          </div>
+        </TwoLineItem>
       </div>
       <div class="table-item--dates">
         <div class="table-item-date">{{ dateOpen }}</div>

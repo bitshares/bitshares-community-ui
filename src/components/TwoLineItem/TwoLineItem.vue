@@ -4,10 +4,12 @@
     class="two-line-item"
   >
     <slot name="top">
-      <div v-if="top"class="two-line-item-top">{{ top }}</div>
+      <div
+        v-if="top"
+        class="two-line-item-top">{{ top }}</div>
     </slot>
     <slot name="bottom">
-      <div :class="{'two-line-item-bottom': bottom}">{{ bottom }}</div>
+      <div class="two-line-item-bottom">{{ bottom }}</div>
     </slot>
   </div>
 </template>
