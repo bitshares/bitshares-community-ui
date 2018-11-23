@@ -2,7 +2,7 @@
   <div class="card-container h-full">
     <div
       :class="{
-        'card--collapsed': collapsed, 
+        'card--collapsed': collapsed,
         'lg:h-card-long-height': long
       }"
       class="card border-none h-full lg:h-card-height"
