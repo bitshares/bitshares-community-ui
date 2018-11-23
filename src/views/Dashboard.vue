@@ -8,7 +8,7 @@
     </Modal>
     <div class="dashboard hidden lg:block">
       <div class="flex flex-col lg:flex-row mb-card-margin">
-        
+
         <Card
           :expandable="true"
           collapsible
@@ -24,7 +24,7 @@
             slot="modal"
             :expanded="true"/>
         </Card>
-        
+
         <Card
           collapsible
           class="lg:w-2/3 disabled"
@@ -33,7 +33,7 @@
 
       </div>
       <div class="flex flex-col lg:flex-row mb-card-margin">
-        
+
         <Card
           :expandable="true"
           :long="true"
@@ -51,7 +51,7 @@
 
         <div class="flex lg:w-2/3">
           <div class="flex flex-col lg:w-1/2 mr-card-margin">
-            
+
             <Card
               collapsible
               title="new order"
@@ -65,7 +65,7 @@
 
           </div>
           <div class="flex flex-col lg:w-1/2">
-            
+
             <Card
               v-if="orderBookIsActive"
               collapsible
@@ -86,7 +86,7 @@
                 :expand-mode="true"
               />
             </Card>
-            
+
           </div>
         </div>
       </div>
