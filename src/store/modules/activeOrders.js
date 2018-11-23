@@ -5,6 +5,7 @@ const types = {
 
 const state = {
   searchStr: '',
+  isFetching: false,
   activeList: [
     {
       dateClose: 1541712454000,
@@ -108,6 +109,9 @@ const state = {
 const getters = {
   getSearchStr(state) {
     return state.searchStr
+  },
+  isFetching(state) {
+    return state.isFetching
   },
   getActiveList: (state, getters, rootState, rootGetters) => {
     // now its demo case for activeOrders test

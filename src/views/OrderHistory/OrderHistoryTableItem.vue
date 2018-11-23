@@ -19,8 +19,8 @@
         <div class="table-item--ticker">{{ price }}</div>
       </div>
       <div class="table-item">
-        <div class="table-item-base _alignRight">{{ price }}</div>
-        <div class="table-item--ticker _alignRight">{{ dateClose }} {{ timeClose }}</div>
+        <div class="table-item-base text-right">{{ price }}</div>
+        <div class="table-item--ticker text-right">{{ dateClose }} {{ timeClose }}</div>
       </div>
     </div>
     <div
@@ -147,10 +147,10 @@ export default {
     }
 
     &--buy {
-      border-left: 7px solid config('colors.buy');
+      border-left: 0.4375rem solid config('colors.buy');
     }
     &--sell {
-      border-left: 7px solid config('colors.sell');
+      border-left: 0.4375rem solid config('colors.sell');
     }
   }
   .order-history-table-row .table-item {
@@ -168,9 +168,6 @@ export default {
       align-self: center;
       text-align: right;
       font-size: config('textSizes.xs-sm');
-    }
-    ._alignRight {
-      text-align: right;
     }
   }
   .table-item > .table-item-base {

@@ -22,7 +22,7 @@
         <div class="table-item--ticker">{{ price }}</div>
       </div>
       <div class="table-item">
-        <div class="table-item-base _alignRight">{{ price }}</div>
+        <div class="table-item-base text-right">{{ price }}</div>
         <div
           :style="{'color': fillColor }"
           class="table-item--filled"
@@ -145,7 +145,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      removeActiveOrder: 'orderActive/removeActiveOrder'
+      removeActiveOrder: 'activeOrders/removeActiveOrder'
     })
   }
 }
@@ -217,8 +217,8 @@ export default {
       }
       .table-item-remove {
         position: absolute;
-        right: 15px;
-        top: 22px;
+        right: 0.9375rem;
+        top: 1.375rem;
         cursor: pointer;
       }
     }
@@ -228,10 +228,10 @@ export default {
       background: #131313;
     }
     &--buy {
-      border-left: 7px solid config('colors.buy');
+      border-left: 0.4375rem solid config('colors.buy');
     }
     &--sell {
-      border-left: 7px solid config('colors.sell');
+      border-left: 0.4375rem solid config('colors.sell');
     }
   }
   .active-orders-table-row .table-item {
@@ -254,8 +254,5 @@ export default {
   .table-item > .table-item-base {
     overflow: hidden;
     word-break: break-all;
-    &._alignRight {
-      text-align: right;
-    }
   }
 </style>
