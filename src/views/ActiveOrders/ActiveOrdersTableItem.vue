@@ -13,21 +13,29 @@
       class="active-orders-table-row"
     >
       <div class="table-item">
-        <div class="table-item-base">{{ item.payAssetSymbol }}</div>
-        <div class="table-item--ticker">/{{ item.receiveAssetSymbol }}</div>
+        <TwoLineItem
+          :top="item.payAssetSymbol"
+          :bottom="item.receiveAssetSymbol"
+        />
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ avg }}</div>
-        <div class="table-item--ticker">{{ price }}</div>
+        <TwoLineItem
+          :top="avg"
+          :bottom="price"
+        />
       </div>
-      <div class="table-item">
-        <div class="table-item-base text-right">{{ price }}</div>
-        <div
-          :style="{'color': fillColor }"
-          class="table-item--filled"
+      <div class="table-item text-right">
+        <TwoLineItem
+          :top="price"
         >
-          {{ item.filled }}%
-        </div>
+          <div
+            slot="bottom"
+            :style="{'color': fillColor }"
+            class="table-item--filled"
+          >
+            {{ item.filled }}%
+          </div>
+        </TwoLineItem>
       </div>
     </div>
     <!-- NORMAL-->
@@ -37,31 +45,48 @@
       class="active-orders-table-row"
     >
       <div class="table-item">
-        <div class="table-item-base">{{ item.payAssetSymbol }}</div>
-        <div class="table-item--ticker">/{{ item.receiveAssetSymbol }}</div>
+        <TwoLineItem
+          :top="item.payAssetSymbol"
+          :bottom="item.receiveAssetSymbol"
+          :expanded="expanded"
+        />
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ avg }}</div>
-        <div class="table-item--ticker">{{ price }}</div>
+        <TwoLineItem
+          :top="avg"
+          :bottom="price"
+          :expanded="expanded"
+        />
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ get }}</div>
-        <div class="table-item--ticker">{{ item.receiveAssetSymbol }}</div>
+        <TwoLineItem
+          :top="get"
+          :bottom="item.receiveAssetSymbol"
+          :expanded="expanded"
+        />
       </div>
       <div class="table-item _relative">
-        <div class="table-item-base">{{ spend }}</div>
-        <div class="table-item--ticker">{{ item.payAssetSymbol }}</div>
+        <TwoLineItem
+          :top="spend"
+          :bottom="item.payAssetSymbol"
+          :expanded="expanded"
+        />
       </div>
       <div
         v-if="expanded"
         class="table-item"
       >
-        <div
-          :style="{'color': fillColor }"
-          class="table-item--filled"
+        <TwoLineItem
+          :expanded="expanded"
         >
-          {{ item.filled }}%
-        </div>
+          <div
+            slot="bottom"
+            :style="{'color': fillColor }"
+            class="table-item--filled"
+          >
+            {{ item.filled }}%
+          </div>
+        </TwoLineItem>
       </div>
       <div class="table-item--dates">
         <div class="table-item-date">{{ dateOpen }}</div>
@@ -86,7 +111,12 @@ import { mapActions } from 'vuex'
 import { format } from 'date-fns'
 import '@icons/cancel'
 import { getFloatCurrency } from '@/helpers/utils'
+import TwoLineItem from '@/components/TwoLineItem/TwoLineItem'
+
 export default {
+  components: {
+    TwoLineItem
+  },
   props: {
     item: {
       type: Object,
@@ -152,13 +182,6 @@ export default {
     .table-item--dates {
       position: relative;
     }
-    .table-item-base {
-      font-size: config('textSizes.lg');
-      padding-top: .3rem;
-    }
-    .table-item--ticker {
-      font-size: config('textSizes.sm');
-    }
   &.active-orders-table-row--expanded {
     grid-template-columns: repeat(6, 1fr);
     .table-item--dates {
@@ -168,19 +191,13 @@ export default {
         font-size: config('textSizes.base');
       }
     }
-    .table-item-base {
-      font-size: config('textSizes.xl');
-    }
-    .table-item--ticker {
-      font-size: config('textSizes.base');
-    }
   }
     ._relative {
       position: relative;
     }
   }
   .active-orders-table-item {
-    &--expanded {
+    &.active-orders-table-item--expanded {
       margin: 0.1250rem 0 0.1250rem 0.1250rem;
       padding-right: 2.8rem;
       overflow-x: hidden;
@@ -242,10 +259,6 @@ export default {
       text-align: right;
       font-size: config('textSizes.xs-sm');
     }
-  }
-  .table-item > .table-item-base {
-    overflow: hidden;
-    word-break: break-all;
   }
   .active-orders-table-item {
     &.active-orders-table-item--expanded {

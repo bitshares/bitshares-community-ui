@@ -11,16 +11,22 @@
       class="order-history-table-row"
     >
       <div class="table-item">
-        <div class="table-item-base">{{ item.payAssetSymbol }}</div>
-        <div class="table-item--ticker">/{{ item.receiveAssetSymbol }}</div>
+        <TwoLineItem
+          :top="item.payAssetSymbol"
+          :bottom="item.receiveAssetSymbol"
+        />
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ price }}</div>
-        <div class="table-item--ticker">{{ price }}</div>
+        <TwoLineItem
+          :top="price"
+          :bottom="price"
+        />
       </div>
-      <div class="table-item">
-        <div class="table-item-base text-right">{{ price }}</div>
-        <div class="table-item--ticker text-right">{{ dateClose }} {{ timeClose }}</div>
+      <div class="table-item text-right">
+        <TwoLineItem
+          :top="price"
+          :bottom="fullCloseTitle"
+        />
       </div>
     </div>
     <div
@@ -29,20 +35,32 @@
       class="order-history-table-row"
     >
       <div class="table-item">
-        <div class="table-item-base">{{ item.payAssetSymbol }}</div>
-        <div class="table-item--ticker">/{{ item.receiveAssetSymbol }}</div>
+        <TwoLineItem
+          :top="item.payAssetSymbol"
+          :bottom="item.receiveAssetSymbol"
+          :expanded="expanded"
+        />
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ price }}</div>
-        <div class="table-item--ticker">{{ item.receiveAssetSymbol }}</div>
+        <TwoLineItem
+          :top="price"
+          :bottom="item.receiveAssetSymbol"
+          :expanded="expanded"
+        />
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ get }}</div>
-        <div class="table-item--ticker">{{ item.receiveAssetSymbol }}</div>
+        <TwoLineItem
+          :top="get"
+          :bottom="item.receiveAssetSymbol"
+          :expanded="expanded"
+        />
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ spend }}</div>
-        <div class="table-item--ticker">{{ item.payAssetSymbol }}</div>
+        <TwoLineItem
+          :top="spend"
+          :bottom="item.payAssetSymbol"
+          :expanded="expanded"
+        />
       </div>
       <div class="table-item--dates">
         <div class="table-item-date">{{ dateOpen }}</div>
@@ -58,8 +76,12 @@
 <script>
 import { format } from 'date-fns'
 import { getFloatCurrency } from '@/helpers/utils'
+import TwoLineItem from '@/components/TwoLineItem/TwoLineItem'
 
 export default {
+  components: {
+    TwoLineItem
+  },
   props: {
     item: {
       type: Object,
@@ -88,6 +110,9 @@ export default {
     timeClose() {
       return format(this.item.dateClose, 'HH:mm')
     },
+    fullCloseTitle() {
+      return `${this.dateClose} ${this.timeClose}`
+    },
     price() {
       return getFloatCurrency(this.item.price)
     },
@@ -107,13 +132,6 @@ export default {
     grid-template-columns: repeat(3, 1fr);
     height: 3.9375rem;
 
-    .table-item-base {
-      font-size: config('textSizes.lg');
-      padding-top: .3rem;
-    }
-    .table-item--ticker {
-      font-size: config('textSizes.sm');
-    }
   &.order-history-table-row--expanded {
     grid-template-columns: repeat(6, 1fr);
 
@@ -122,12 +140,6 @@ export default {
       .table-item-date {
         font-size: config('textSizes.base');
       }
-    }
-    .table-item-base {
-      font-size: config('textSizes.xl');
-    }
-    .table-item--ticker {
-      font-size: config('textSizes.base');
     }
   }
   }
@@ -175,9 +187,5 @@ export default {
       text-align: right;
       font-size: config('textSizes.xs-sm');
     }
-  }
-  .table-item > .table-item-base {
-    overflow: hidden;
-    word-break: break-all;
   }
 </style>
