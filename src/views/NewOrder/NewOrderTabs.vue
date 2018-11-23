@@ -11,21 +11,32 @@
       class="order-tabs-item _buy"
       @click="activeTab.title = 'buy'"
     >
-      <div class="order-tabs-title">{{ buyTitle }}</div>
-      <div class="order-tabs-subtitle">{{ tradeData.buy.price }}</div>
+      <NewOrderTabsTitle
+        :title="buyTitle"
+        :sub-title="tradeData.buy.price"
+        :increased="tradeData.buy.increased"
+      />
     </div>
     <div
       :class="{'_inactive': activeTitle === 'buy'}"
       class="order-tabs-item _sell"
       @click="activeTab.title = 'sell'"
     >
-      <div class="order-tabs-title">{{ sellTitle }}</div>
-      <div class="order-tabs-subtitle">{{ tradeData.sell.price }}</div>
+      <NewOrderTabsTitle
+        :title="sellTitle"
+        :sub-title="tradeData.sell.price"
+        :increased="tradeData.sell.increased"
+      />
     </div>
   </div>
 </template>
 <script>
+import NewOrderTabsTitle from './NewOrderTabsTitle'
+
 export default {
+  components: {
+    NewOrderTabsTitle
+  },
   props: {
     activeTab: {
       type: Object,
@@ -76,17 +87,7 @@ export default {
       font-weight: config('fontWeights.extrabold');
       font-size: config('textSizes.lg');
       cursor: pointer;
-
-      .order-tabs-title {
-        height: 65px;
-        margin-top: -7px;
-      }
-      .order-tabs-subtitle {
-        font-size: config('textSizes.sm');
-        margin-top: -45px;
-      }
     }
-
     &--buy {
       .order-tabs-item {
         &:not(._inactive) {
@@ -102,7 +103,7 @@ export default {
       }
     }
     ._buy {
-      color: #79c60f;
+      color: rgba(121, 198, 15, 0.5);
     }
     ._sell {
       color: rgba(255, 47, 47, 0.5);

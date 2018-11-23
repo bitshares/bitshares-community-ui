@@ -4,7 +4,7 @@ const state = {
     buy: {
       base: 'Get BTC',
       price: 5611.15,
-      up: true,
+      increased: true,
       down: false,
       value: 0.02,
       max: 0.04,
@@ -13,8 +13,7 @@ const state = {
     },
     sell: {
       price: 5610.02,
-      up: false,
-      down: true,
+      increased: false,
       base: 'Spend USD',
       value: 112.22,
       max: 437,
