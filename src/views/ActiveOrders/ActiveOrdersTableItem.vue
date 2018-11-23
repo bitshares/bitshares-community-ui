@@ -24,14 +24,18 @@
           :bottom="price"
         />
       </div>
-      <div class="table-item">
-        <div class="table-item-base text-right">{{ price }}</div>
-        <div
-          :style="{'color': fillColor }"
-          class="table-item--filled"
+      <div class="table-item text-right">
+        <TwoLineItem
+          :top="price"
         >
-          {{ item.filled }}%
-        </div>
+          <div
+            slot="bottom"
+            :style="{'color': fillColor }"
+            class="table-item--filled"
+          >
+            {{ item.filled }}%
+          </div>
+        </TwoLineItem>
       </div>
     </div>
     <!-- NORMAL-->
@@ -72,12 +76,17 @@
         v-if="expanded"
         class="table-item"
       >
+      <TwoLineItem
+        :expanded="expanded"
+      >
         <div
+          slot="bottom"
           :style="{'color': fillColor }"
           class="table-item--filled"
         >
           {{ item.filled }}%
         </div>
+      </TwoLineItem>
       </div>
       <div class="table-item--dates">
         <div class="table-item-date">{{ dateOpen }}</div>
@@ -188,7 +197,7 @@ export default {
     }
   }
   .active-orders-table-item {
-    &--expanded {
+    &.active-orders-table-item--expanded {
       margin: 0.1250rem 0 0.1250rem 0.1250rem;
       padding-right: 2.8rem;
       overflow-x: hidden;

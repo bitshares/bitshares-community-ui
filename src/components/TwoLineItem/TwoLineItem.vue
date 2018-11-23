@@ -3,8 +3,12 @@
     :class="{'two-line-item--expanded': expanded}"
     class="two-line-item"
   >
-    <div class="two-line-item-top">{{ top }}</div>
-    <div class="two-line-item-bottom">{{ bottom }}</div>
+    <slot name="top">
+      <div v-if="top"class="two-line-item-top">{{ top }}</div>
+    </slot>
+    <slot name="bottom">
+      <div :class="{'two-line-item-bottom': bottom}">{{ bottom }}</div>
+    </slot>
   </div>
 </template>
 <script>
