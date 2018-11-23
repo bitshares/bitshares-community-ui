@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <Header/>
-    <div class="main__content lg:p-2">
+    <div class="main__content">
       <router-view/>
     </div>
     <!-- <Footer/> -->
