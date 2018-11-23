@@ -210,12 +210,6 @@ export default {
         text-align: right;
         font-size: config('textSizes.xl');
       }
-      .table-item-remove {
-        position: absolute;
-        right: 0.9375rem;
-        top: 1.375rem;
-        cursor: pointer;
-      }
     }
     &:last-child {
       position: relative;
@@ -273,5 +267,15 @@ export default {
   .table-item > .table-item-base {
     overflow: hidden;
     word-break: break-all;
+  }
+  .active-orders-table-item {
+    &.active-orders-table-item--expanded {
+      .table-item-remove {
+        position: absolute;
+        right: 0.9375rem;
+        top: 1.375rem;
+        cursor: pointer;
+      }
+    }
   }
 </style>
