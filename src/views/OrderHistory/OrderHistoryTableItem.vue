@@ -35,20 +35,32 @@
       class="order-history-table-row"
     >
       <div class="table-item">
-        <div class="table-item-base">{{ item.payAssetSymbol }}</div>
-        <div class="table-item--ticker">/{{ item.receiveAssetSymbol }}</div>
+        <TwoLineItem
+          :top="item.payAssetSymbol"
+          :bottom="item.receiveAssetSymbol"
+          :expanded="expanded"
+        />
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ price }}</div>
-        <div class="table-item--ticker">{{ item.receiveAssetSymbol }}</div>
+        <TwoLineItem
+          :top="price"
+          :bottom="item.receiveAssetSymbol"
+          :expanded="expanded"
+        />
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ get }}</div>
-        <div class="table-item--ticker">{{ item.receiveAssetSymbol }}</div>
+        <TwoLineItem
+          :top="get"
+          :bottom="item.receiveAssetSymbol"
+          :expanded="expanded"
+        />
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ spend }}</div>
-        <div class="table-item--ticker">{{ item.payAssetSymbol }}</div>
+        <TwoLineItem
+          :top="spend"
+          :bottom="item.payAssetSymbol"
+          :expanded="expanded"
+        />
       </div>
       <div class="table-item--dates">
         <div class="table-item-date">{{ dateOpen }}</div>
