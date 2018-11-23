@@ -16,7 +16,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      searchStr: 'orderActive/getSearchStr'
+      searchStr: 'activeOrders/getSearchStr'
     })
   },
   methods: {

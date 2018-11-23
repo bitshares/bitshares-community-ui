@@ -43,13 +43,13 @@
             slot="modal"
             :expand-mode="true"/>
         </Card>
-        <Card
+        <!--<Card
           v-if="orderBookIsActive"
           collapsible
           class="lg:w-1/3"
           title="order book">
           <OrderBook slot="body"/>
-        </Card>
+        </Card>-->
         <Card
           :expandable="true"
           class="lg:w-1/3"

@@ -37,9 +37,7 @@ export default {
     },
     items: {
       type: Array,
-      default() {
-        return []
-      }
+      required: true
     },
     expanded: {
       type: Boolean,

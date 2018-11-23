@@ -10,7 +10,6 @@
     <!--MINI-->
     <div
       v-if="!expanded"
-      :class="{'active-orders-table-row--expanded': expanded}"
       class="active-orders-table-row"
     >
       <div class="table-item">
@@ -27,7 +26,7 @@
           :style="{'color': fillColor }"
           class="table-item--filled"
         >
-          {{ filled }}
+          {{ item.filled }}%
         </div>
       </div>
     </div>
@@ -42,8 +41,8 @@
         <div class="table-item--ticker">/{{ item.receiveAssetSymbol }}</div>
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ price }}</div>
-        <div class="table-item--ticker">{{ item.receiveAssetSymbol }}</div>
+        <div class="table-item-base">{{ avg }}</div>
+        <div class="table-item--ticker">{{ price }}</div>
       </div>
       <div class="table-item">
         <div class="table-item-base">{{ get }}</div>
@@ -61,7 +60,7 @@
           :style="{'color': fillColor }"
           class="table-item--filled"
         >
-          {{ filled }}
+          {{ item.filled }}%
         </div>
       </div>
       <div class="table-item--dates">
@@ -129,18 +128,12 @@ export default {
     spend() {
       return getFloatCurrency(this.item.spend)
     },
-    filled() {
-      return `${this.item.filled}%`
-    },
     fillColor() {
       const R = Math.round(255 / 100 * this.item.filled)
       return `rgb(${255 - R}, 255, 0)`
     },
     removeSize() {
-      if (this.expanded) {
-        return '14'
-      }
-      return '10'
+      return this.expanded ? '14' : '10'
     }
   },
   methods: {
@@ -164,23 +157,45 @@ export default {
       padding-top: .3rem;
     }
     .table-item--ticker {
-      font-size: config('textSizes.base');
+      font-size: config('textSizes.sm');
     }
-    &--expanded {
-      grid-template-columns: repeat(6, 1fr);
-      .table-item--dates {
-        position: relative;
-        color: config('colors.inactive');
-        .table-item-date {
-          font-size: config('textSizes.base');
-        }
+  &.active-orders-table-row--expanded {
+    grid-template-columns: repeat(6, 1fr);
+    .table-item--dates {
+      position: relative;
+      color: config('colors.inactive');
+      .table-item-date {
+        font-size: config('textSizes.base');
       }
     }
+    .table-item-base {
+      font-size: config('textSizes.xl');
+    }
+    .table-item--ticker {
+      font-size: config('textSizes.base');
+    }
+  }
     ._relative {
       position: relative;
     }
   }
   .active-orders-table-item {
+    &--expanded {
+      margin: 0.1250rem 0 0.1250rem 0.1250rem;
+      padding-right: 2.8rem;
+      overflow-x: hidden;
+
+      .table-item--filled {
+        text-align: right;
+        font-size: config('textSizes.xl');
+      }
+      .table-item-remove {
+        position: absolute;
+        right: 0.9375rem;
+        top: 1.375rem;
+        cursor: pointer;
+      }
+    }
     &:last-child {
       position: relative;
       z-index: 100;
@@ -204,23 +219,6 @@ export default {
       right: 10px;
       top: 22px;
       cursor: pointer;
-    }
-
-    &--expanded {
-      margin: 0.1250rem 0 0.1250rem 0.1250rem;
-      padding-right: 2.8rem;
-      overflow-x: hidden;
-
-      .table-item--filled {
-        text-align: right;
-        font-size: config('textSizes.xl');
-      }
-      .table-item-remove {
-        position: absolute;
-        right: 0.9375rem;
-        top: 1.375rem;
-        cursor: pointer;
-      }
     }
     &:hover {
       position: relative;

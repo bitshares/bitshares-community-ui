@@ -112,18 +112,24 @@ export default {
       padding-top: .3rem;
     }
     .table-item--ticker {
-      font-size: config('textSizes.base');
+      font-size: config('textSizes.sm');
     }
-    &--expanded {
-      grid-template-columns: repeat(6, 1fr);
+  &.order-history-table-row--expanded {
+    grid-template-columns: repeat(6, 1fr);
 
-      .table-item--dates {
-        color: config('colors.inactive');
-        .table-item-date {
-          font-size: config('textSizes.base');
-        }
+    .table-item--dates {
+      color: config('colors.inactive');
+      .table-item-date {
+        font-size: config('textSizes.base');
       }
     }
+    .table-item-base {
+      font-size: config('textSizes.xl');
+    }
+    .table-item--ticker {
+      font-size: config('textSizes.base');
+    }
+  }
   }
   .order-history-table-item {
     &:last-child {
