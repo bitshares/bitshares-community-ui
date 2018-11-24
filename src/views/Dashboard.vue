@@ -7,11 +7,12 @@
       <Backup/>
     </Modal>
     <div class="dashboard hidden lg:block">
-      <div class="flex flex-col lg:flex-row mb-2">
+      <div class="flex flex-col lg:flex-row mb-card-margin">
+
         <Card
           :expandable="true"
           collapsible
-          class="lg:w-1/3"
+          class="lg:w-1/3 lg:mr-card-margin"
           title="account"
         >
           <AccountHeader slot="header"/>
@@ -23,17 +24,21 @@
             slot="modal"
             :expanded="true"/>
         </Card>
+
         <Card
           collapsible
           class="lg:w-2/3 disabled"
           title="Graph"
         />
+
       </div>
-      <div class="flex flex-col lg:flex-row mb-2">
+      <div class="flex flex-col lg:flex-row mb-card-margin">
+
         <Card
           :expandable="true"
+          :long="true"
           collapsible
-          class="lg:w-1/3"
+          class="lg:w-1/3 lg:mr-card-margin"
           title="markets"
         >
           <MarketsSearch slot="header"/>
@@ -43,36 +48,54 @@
             slot="modal"
             :expand-mode="true"/>
         </Card>
-        <!--<Card
-          v-if="orderBookIsActive"
-          collapsible
-          class="lg:w-1/3"
-          title="order book">
-          <OrderBook slot="body"/>
-        </Card>-->
-        <Card
-          :expandable="true"
-          class="lg:w-1/3"
-          title="My orders history"
-        >
-          <OrderHistorySearch slot="modal-header"/>
-          <OrderHistory slot="body"/>
-          <OrderHistory
-            slot="modal"
-            :expand-mode="true"
-          />
-        </Card>
-        <Card
-          :expandable="true"
-          class="lg:w-1/3"
-          title="My active orders">
-          <ActiveOrdersSearch slot="modal-header"/>
-          <ActiveOrders slot="body"/>
-          <ActiveOrders
-            slot="modal"
-            :expand-mode="true"
-          />
-        </Card>
+
+        <div class="flex lg:w-2/3">
+          <div class="flex flex-col lg:w-1/2 mr-card-margin">
+
+            <Card
+              collapsible
+              title="new order"
+              class="mb-card-margin"
+            />
+
+            <Card
+              :expandable="true"
+              collapsible
+              title="active orders"
+            >
+              <ActiveOrdersSearch slot="modal-header"/>
+              <ActiveOrders slot="body"/>
+              <ActiveOrders
+                slot="modal"
+                :expand-mode="true"
+              />
+            </Card>
+
+          </div>
+          <div class="flex flex-col lg:w-1/2">
+
+            <Card
+              collapsible
+              title="order book"
+              class="mb-card-margin"
+            >
+              <OrderBook slot="body"/>
+            </Card>
+
+            <Card
+              :expandable="true"
+              title="My orders history"
+            >
+              <OrderHistorySearch slot="modal-header"/>
+              <OrderHistory slot="body"/>
+              <OrderHistory
+                slot="modal"
+                :expand-mode="true"
+              />
+            </Card>
+
+          </div>
+        </div>
       </div>
     </div>
 
@@ -124,8 +147,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      backupFlag: 'backup/getBackupFlag',
-      orderBookIsActive: 'orderBook/isActive'
+      backupFlag: 'backup/getBackupFlag'
     })
   },
   methods: {

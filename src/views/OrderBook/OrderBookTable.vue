@@ -12,8 +12,8 @@
       :items="items"
       :headers="tableHeaders"
       :type="tableType"
-      :header-left-padding="tableType === 'buy' ? 0.6 : 0.6"
-      :header-right-padding="tableType === 'sell' ? 0.4 : 0.6"
+      :header-left-padding="tableType === 'buy' ? 1 : 0.6"
+      :header-right-padding="tableType === 'sell' ? 1 : 0.6"
       :default-sort="defaultSort"
     >
       <template slot-scope="{ sortedItems }">
@@ -90,7 +90,7 @@ export default {
     }
   }
   .order-book__column-title {
-    padding: 0 0.4rem 0 0.6rem;
+    padding: 0 1rem;
     margin-bottom: 0.6rem;
     color: config('colors.text-primary');
     // margin-bottom: -0.9375rem;
