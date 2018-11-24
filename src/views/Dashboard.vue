@@ -43,13 +43,13 @@
             slot="modal"
             :expand-mode="true"/>
         </Card>
-        <Card
+        <!--<Card
           v-if="orderBookIsActive"
           collapsible
           class="lg:w-1/3"
           title="order book">
           <OrderBook slot="body"/>
-        </Card>
+        </Card>-->
         <Card
           :expandable="true"
           class="lg:w-1/3"
@@ -58,6 +58,17 @@
           <OrderHistorySearch slot="modal-header"/>
           <OrderHistory slot="body"/>
           <OrderHistory
+            slot="modal"
+            :expand-mode="true"
+          />
+        </Card>
+        <Card
+          :expandable="true"
+          class="lg:w-1/3"
+          title="My active orders">
+          <ActiveOrdersSearch slot="modal-header"/>
+          <ActiveOrders slot="body"/>
+          <ActiveOrders
             slot="modal"
             :expand-mode="true"
           />
@@ -79,8 +90,10 @@ import OrderBookLastPrice from '@/views/OrderBook/OrderBookLastPrice'
 import TransactionsHistory from '@/views/TransactionsHistory/'
 import Markets from '@/views/Markets/Markets'
 import MarketsSearch from '@/views/Markets/MarketsSearch'
+import ActiveOrders from '@/views/ActiveOrders/ActiveOrders'
 import OrderHistory from '@/views/OrderHistory/OrderHistory'
 import OrderHistorySearch from '@/views/OrderHistory/OrderHistorySearch'
+import ActiveOrdersSearch from '@/views/ActiveOrders/ActiveOrdersSearch'
 import Backup from '@/views/Backup/Backup'
 import Modal from '@/components/Modal/Modal'
 import Mobile from '@/views/Mobile/Mobile'
@@ -98,8 +111,10 @@ export default {
     MarketsSearch,
     OrderBook,
     OrderBookLastPrice,
+    ActiveOrders,
     OrderHistory,
     OrderHistorySearch,
+    ActiveOrdersSearch,
     Backup,
     Modal,
     Mobile

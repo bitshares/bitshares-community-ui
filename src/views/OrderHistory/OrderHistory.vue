@@ -2,7 +2,7 @@
   <div class="order-history pt-3 lg:pt-0">
     <LoadingContainer :loading="isFetching">
       <OrderHistoryTable
-        :table-headers="tableHeaders"
+        :table-headers="expandMode ? tableHeaders : tableHeadersMini"
         :items="filteredItems"
         :expanded="expandMode"
       />
@@ -35,6 +35,11 @@ export default {
         { title: 'Spend', field: 'spend', align: 'left' },
         { title: 'Open', field: 'dateOpen', align: 'right', expanded: true },
         { title: 'Closed', field: 'dateClose', align: 'right' }
+      ],
+      tableHeadersMini: [
+        { title: 'Pair', field: 'payAssetSymbol', align: 'left' },
+        { title: 'Avg./Price', field: 'price', align: 'left' },
+        { title: 'Filled/Date', field: 'filled', align: 'right' }
       ]
     }
   },

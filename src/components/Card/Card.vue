@@ -129,6 +129,7 @@ export default {
   .card-header {
     padding-right: 2rem;
     padding-top: 1rem;
+    padding-left: 1.25rem;
     .title {
       font-size: config('textSizes.lg')
     }
