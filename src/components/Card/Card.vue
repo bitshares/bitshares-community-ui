@@ -210,12 +210,9 @@ export default {
   }
 }
 
-
-
 .header {
   margin-left: auto;
 }
-
 
 .card--collapsed {
   height: 2.8rem;
