@@ -16,6 +16,10 @@ const actions = {
     console.log('init user data')
     const userId = rootGetters['acc/getAccountUserId']
     dispatch('assets/fetchDefaultAssets', null, { root: true })
+    dispatch('orderBook/initialize', {
+      baseSymbol: 'BTS',
+      quoteSymbol: 'USD' },
+    { root: true })
     dispatch('marketsMonitor/initialize', null, { root: true })
     await dispatch('acc/fetchCurrentUser', userId, { root: true })
     // await Promise.all([
@@ -25,12 +29,6 @@ const actions = {
       { userId, limit: 100 },
       { root: true }
     )
-    // ])
-    // const defaultAssetsIds = rootGetters['assets/getDefaultAssetsIds']
-    // defaultAssetsIds.forEach(id => {
-    //   if (balances[id]) return
-    //   balances[id] = { balance: 0 }
-    // })
 
     const balances = { ...rootGetters['acc/getUserBalances'] }
     await dispatch(

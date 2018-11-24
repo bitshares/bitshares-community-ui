@@ -51,12 +51,10 @@ export default ({
 .spinner-container {
   display: flex;
   justify-content: center;
-  margin: 40px 0;
-  height: 40px;
-  position: relative;
+  align-items: center;
+  margin-top: 40%;
 }
 .spinner {
-  position: absolute;
   border-radius: 50%;
   width: 36px;
   height: 36px;

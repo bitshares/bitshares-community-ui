@@ -74,7 +74,6 @@
           <div class="flex flex-col lg:w-1/2">
 
             <Card
-              v-if="orderBookIsActive"
               collapsible
               title="order book"
               class="mb-card-margin"
@@ -147,8 +146,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      backupFlag: 'backup/getBackupFlag',
-      orderBookIsActive: 'orderBook/isActive'
+      backupFlag: 'backup/getBackupFlag'
     })
   },
   methods: {

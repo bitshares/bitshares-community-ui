@@ -76,7 +76,6 @@ export default {
   .order-book-table-row {
     display: flex;
     font-size: config('textSizes.sm');
-    // font-family: config('fonts.gotham');
     .order-book-table-item {
       padding: 0.3rem 0;
       flex: 1;
@@ -103,7 +102,7 @@ export default {
         margin-right: config('margin.book-item-m');
         padding-right: config('padding.book-item-p');
         .order-book-item-sum {
-          margin-left: config('margin.book-item-m10');
+          margin-left: 1rem;
           float: left;
         }
       }
@@ -125,7 +124,7 @@ export default {
         margin-left: config('margin.book-item-m');
         padding-left:config('padding.book-item-p');
         .order-book-item-sum {
-          margin-right: .5rem;
+          margin-right: 1rem;
           float: right;
         }
       }
