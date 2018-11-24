@@ -42,7 +42,8 @@
         </div>
         <svgicon
           v-if="collapsible"
-          :class="collapsed ? 'collapse-btn--active' : 'collapse-btn'"
+          :class="{'collapse-btn--active' : collapsed }"
+          class="collapse-btn"
           width="11"
           height="11"
           name="arrowDown"
@@ -129,17 +130,25 @@ export default {
   background-color: config('colors.card-background');
   border-width: 1px;
   transition: 0.2s;
-}
-
-.card--expanded {
-  height: 35rem;
-  .card-header {
-    padding-right: 2rem;
-    padding-top: 1rem;
-    padding-left: 1.25rem;
-    .title {
-      font-size: config('textSizes.lg')
+  &.card--expanded {
+    height: 35rem;
+    .card-header {
+      padding-right: 2rem;
+      padding-top: 1rem;
+      padding-left: 1.25rem;
+      .title {
+        font-size: config('textSizes.lg')
+      }
     }
+  }
+  &.card--collapsed {
+    height: 2.8rem;
+    transition: 0.2s;
+  }
+  .card-body {
+    @apply pt-3;
+    height: 100%;
+    overflow: hidden;
   }
 }
 
@@ -154,6 +163,23 @@ export default {
   justify-content: space-between;
   align-items: baseline;
   position: relative;
+  .title {
+    font-size: config('textSizes.base');
+    font-family: config('fonts.gotham-medium');
+    text-transform: uppercase;
+    font-size: config('textSizes.base');
+    white-space: nowrap;
+  }
+  .collapse-btn {
+    transform: rotate(-90deg);
+    transition: transform 0.2s;
+    margin: 0 auto 0 0.5em;
+    opacity: 0.8;
+    cursor: pointer;
+    &.collapse-btn--active {
+      transform: none;
+    }
+  }
   .expand-btn {
     top: 0.4rem;
     right: 0.4rem;
@@ -184,37 +210,12 @@ export default {
   }
 }
 
-.title {
-  font-size: config('textSizes.base');
-  font-family: config('fonts.gotham-medium');
-  text-transform: uppercase;
-  font-size: config('textSizes.base');
-  white-space: nowrap;
-}
+
 
 .header {
   margin-left: auto;
 }
 
-.card-body {
-  @apply pt-3;
-  height: 100%;
-  overflow: hidden;
-}
-
-.collapse-btn {
-  transform: rotate(-90deg);
-  transition: 0.2s;
-  margin: 0 auto 0 0.1875em;
-  opacity: 0.8;
-  cursor: pointer;
-}
-
-.collapse-btn--active {
-  margin: 0 auto 0 0.1875em;
-  transition: 0.2s;
-  cursor: pointer;
-}
 
 .card--collapsed {
   height: 2.8rem;

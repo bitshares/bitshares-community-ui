@@ -59,6 +59,7 @@
             />
 
             <Card
+              :expandable="true"
               collapsible
               title="active orders"
             >
