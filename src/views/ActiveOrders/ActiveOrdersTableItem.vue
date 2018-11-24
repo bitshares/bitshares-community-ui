@@ -206,6 +206,11 @@ export default {
         text-align: right;
         font-size: config('textSizes.xl');
       }
+      .table-item--filled {
+        text-align: right;
+        font-size: 1.5625rem;
+        padding-top: 0.375rem;
+      }
     }
     &:last-child {
       position: relative;
@@ -219,11 +224,6 @@ export default {
     transition: background-color 0.15s ease;
     padding: 0 1.5rem 0 1rem;
     position: relative;
-
-    .table-item--filled {
-      text-align: right;
-      font-size: config('textSizes.base');
-    }
 
     .table-item-remove {
       position: absolute;

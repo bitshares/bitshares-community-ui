@@ -31,6 +31,7 @@ export default {
 </script>
 <style lang="scss">
   .two-line-item {
+    letter-spacing: -0.0625rem;
     .two-line-item-top {
       font-size: config('textSizes.lg');
       color: config('colors.primary');
