@@ -61,7 +61,14 @@
             <Card
               collapsible
               title="active orders"
-            />
+            >
+              <ActiveOrdersSearch slot="modal-header"/>
+              <ActiveOrders slot="body"/>
+              <ActiveOrders
+                slot="modal"
+                :expand-mode="true"
+              />
+            </Card>
 
           </div>
           <div class="flex flex-col lg:w-1/2">
@@ -106,8 +113,10 @@ import OrderBookLastPrice from '@/views/OrderBook/OrderBookLastPrice'
 import TransactionsHistory from '@/views/TransactionsHistory/'
 import Markets from '@/views/Markets/Markets'
 import MarketsSearch from '@/views/Markets/MarketsSearch'
+import ActiveOrders from '@/views/ActiveOrders/ActiveOrders'
 import OrderHistory from '@/views/OrderHistory/OrderHistory'
 import OrderHistorySearch from '@/views/OrderHistory/OrderHistorySearch'
+import ActiveOrdersSearch from '@/views/ActiveOrders/ActiveOrdersSearch'
 import Backup from '@/views/Backup/Backup'
 import Modal from '@/components/Modal/Modal'
 import Mobile from '@/views/Mobile/Mobile'
@@ -125,8 +134,10 @@ export default {
     MarketsSearch,
     OrderBook,
     OrderBookLastPrice,
+    ActiveOrders,
     OrderHistory,
     OrderHistorySearch,
+    ActiveOrdersSearch,
     Backup,
     Modal,
     Mobile

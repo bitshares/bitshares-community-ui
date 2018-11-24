@@ -97,6 +97,7 @@ export default {
 .header-item__title {
   position: relative;
   white-space: nowrap;
+  letter-spacing: -0.0455rem;
 }
 
 .header-item__arrows {
