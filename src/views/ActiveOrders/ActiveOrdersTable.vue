@@ -3,7 +3,7 @@
     <SortableTable
       :items="items"
       :headers="tableHeaders"
-      :header-left-padding="1.6"
+      :header-left-padding="headerLeftPadding"
       :header-right-padding="headerRightPadding"
       :default-sort="defaultSort"
       :large="expanded">
@@ -55,6 +55,9 @@ export default {
   computed: {
     headerRightPadding() {
       return this.expanded ? 3.2 : 1.7
+    },
+    headerLeftPadding() {
+      return this.expanded ? 1.3 : 1
     }
   }
 }

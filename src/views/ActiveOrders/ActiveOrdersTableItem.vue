@@ -178,6 +178,7 @@ export default {
     color: config('colors.white');
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    margin-left: -0.15rem;
     min-height: 3.9375rem;
     .table-item--dates {
       position: relative;
@@ -201,6 +202,7 @@ export default {
       margin: 0.1250rem 0 0.1250rem 0.1250rem;
       padding-right: 2.8rem;
       overflow-x: hidden;
+      padding-left: 1rem;
 
       .table-item--filled {
         text-align: right;
@@ -222,13 +224,13 @@ export default {
     grid-column: 1 / 2;
     grid-row: 1;
     transition: background-color 0.15s ease;
-    padding: 0 1.5rem 0 1rem;
+    padding: 0 1.7rem 0 .8rem;
     position: relative;
 
     .table-item-remove {
       position: absolute;
-      right: 10px;
-      top: 22px;
+      right: 0.5625rem;
+      top: 1.375rem;
       cursor: pointer;
     }
     &:hover {
@@ -237,15 +239,14 @@ export default {
       background: #131313;
     }
     &--buy {
-      border-left: 0.4375rem solid config('colors.buy');
+      border-left: .3125rem solid config('colors.buy');
     }
     &--sell {
-      border-left: 0.4375rem solid config('colors.sell');
+      border-left: .3125rem solid config('colors.sell');
     }
   }
   .active-orders-table-row .table-item {
-    padding-right: 0.25rem;
-    padding-top: 0.5rem;
+    padding-top: 0.6rem;
     overflow: hidden;
     word-wrap: break-word;
     font-size: config('textSizes.sm');

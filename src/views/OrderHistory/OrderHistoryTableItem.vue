@@ -2,7 +2,8 @@
   <div
     :class="{
       'order-history-table-item--buy': item.order === 'buy',
-      'order-history-table-item--sell': item.order === 'sell'
+      'order-history-table-item--sell': item.order === 'sell',
+      'order-history-table-item--expanded': expanded
     }"
     class="order-history-table-item"
   >
@@ -131,6 +132,7 @@ export default {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     height: 3.9375rem;
+    margin-left: -0.15rem;
 
   &.order-history-table-row--expanded {
     grid-template-columns: repeat(6, 1fr);
@@ -156,8 +158,10 @@ export default {
     grid-row: 1;
 
     transition: background-color 0.15s ease;
-    padding: 0 1.5rem 0 1rem;
-
+    padding: 0 1.5rem 0 .8rem;
+    &--expanded {
+      padding-left: 1rem;
+    }
     &:hover {
       position: relative;
       z-index: 2;
@@ -165,15 +169,14 @@ export default {
     }
 
     &--buy {
-      border-left: 0.4375rem solid config('colors.buy');
+      border-left: .3125rem solid config('colors.buy');
     }
     &--sell {
-      border-left: 0.4375rem solid config('colors.sell');
+      border-left: .3125rem solid config('colors.sell');
     }
   }
   .order-history-table-row .table-item {
-    padding-right: 0.25rem;
-    padding-top: 0.5rem;
+    padding-top: 0.6rem;
     overflow: hidden;
     word-wrap: break-word;
     font-size: config('textSizes.sm');
