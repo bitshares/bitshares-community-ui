@@ -30,7 +30,7 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import NewOrderTabsTitle from './NewOrderTabsTitle'
 
 export default {
@@ -42,7 +42,7 @@ export default {
       type: String,
       default: 'buy'
     },
-    currentBase: {
+    base: {
       type: String,
       default: 'USD'
     },
@@ -59,11 +59,14 @@ export default {
     return {}
   },
   computed: {
+    ...mapGetters({
+      quote: 'newOrder/getQuote'
+    }),
     buyTitle() {
-      return `BUY ${this.currentBase}/USD`
+      return `BUY ${this.base}/${this.quote}`
     },
     sellTitle() {
-      return `SELL ${this.currentBase}/USD`
+      return `SELL ${this.base}/${this.quote}`
     }
   },
   methods: {

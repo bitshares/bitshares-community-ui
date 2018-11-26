@@ -9,7 +9,7 @@
 
 export default {
   props: {
-    currentBase: {
+    base: {
       type: String,
       default: 'BTC'
     },
@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     title() {
-      return this.orderType === 'buy' ? `Spend ${this.currentBase}` : `Get USD`
+      return this.orderType === 'buy' ? `Spend ${this.base}` : `Get USD`
     }
   }
 }

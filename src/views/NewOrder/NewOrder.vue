@@ -1,7 +1,7 @@
 <template>
   <div class="new-order">
     <NewOrderTabs
-      :current-base="currentBase"
+      :base="base"
       :active-tab="activeTab"
       :buy-price="marketBuyPrice"
       :sell-price="marketSellPrice"
@@ -15,12 +15,12 @@
       :percents="percents"
     />
     <NewOrderPrice
-      :current-base="currentBase"
+      :base="base"
       order-type="buy"
       class="float-left"
     />
     <NewOrderPrice
-      :current-base="currentBase"
+      :base="base"
       order-type="sell"
       class="float-right"
     />
@@ -58,7 +58,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentBase: 'newOrder/getCurrentBase',
+      base: 'newOrder/getBase',
       marketBuyPrice: 'newOrder/getMarketBuyPrice',
       marketSellPrice: 'newOrder/getMarketSellPrice',
       activeTab: 'newOrder/getActiveTab',
@@ -68,9 +68,9 @@ export default {
 
     buttonTitle() {
       if (this.activeTab === 'buy') {
-        return `${this.marketBuyPrice} ${this.currentBase}`
+        return `${this.marketBuyPrice} ${this.base}`
       }
-      return `${this.marketSellPrice} ${this.currentBase}`
+      return `${this.marketSellPrice} ${this.base}`
     }
   },
   methods: {

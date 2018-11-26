@@ -19,7 +19,7 @@ const getDefaultState = () => ({
 })
 
 const getters = {
-  getCurrentBase(state) {
+  getBase(state) {
     return state.base
   },
   getQuote(state) {
