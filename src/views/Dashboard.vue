@@ -24,18 +24,14 @@
             slot="modal"
             :expanded="true"/>
         </Card>
-        <Card class="lg:w-1/3">
-          <NewOrder slot="body"/>
-        </Card>
         <Card
           collapsible
-          class="lg:w-1/3 disabled"
+          class="lg:w-2/3 disabled"
           title="Graph"
         />
 
       </div>
       <div class="flex flex-col lg:flex-row mb-card-margin">
-
         <Card
           :expandable="true"
           :long="true"
@@ -53,13 +49,13 @@
 
         <div class="flex lg:w-2/3">
           <div class="flex flex-col lg:w-1/2 mr-card-margin">
-
             <Card
               collapsible
               title="new order"
               class="mb-card-margin"
-            />
-
+            >
+              <NewOrder slot="body"/>
+            </Card>
             <Card
               :expandable="true"
               collapsible

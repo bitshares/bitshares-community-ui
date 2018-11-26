@@ -93,11 +93,11 @@ export default {
     &--buy {
       .order-tabs-item {
         &:not(._inactive) {
-          border-top: 0.3125rem solid config('colors.new-order-buy');
-          color: config('colors.new-order-buy');
+          border-top: 0.3125rem solid config('colors.buy');
+          color: config('colors.buy');
 
           .order-tabs-subtitle {
-            color: config('colors.new-order-buy');
+            color: config('colors.buy');
           }
         }
       }
@@ -105,11 +105,11 @@ export default {
     &--sell {
       .order-tabs-item {
         &:not(._inactive) {
-          border-top: 0.3125rem solid config('colors.new-order-sell');
-          color: config('colors.new-order-sell');
+          border-top: 0.3125rem solid config('colors.sell');
+          color: config('colors.sell');
 
           .order-tabs-subtitle {
-            color: config('colors.new-order-sell');
+            color: config('colors.sell');
           }
         }
       }

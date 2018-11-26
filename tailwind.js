@@ -155,10 +155,7 @@ let colors = {
   'primary': '#ffffff',
   'book-item-hover': '#000',
   'deposit-green': '#79c60f',
-  'withdraw-red': '#ed1c24',
-
-  'new-order-buy': 'rgb(121, 198, 15)',
-  'new-order-sell': 'rgb(255, 47, 47)'
+  'withdraw-red': '#ed1c24'
 }
 
 module.exports = {
