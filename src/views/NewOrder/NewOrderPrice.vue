@@ -34,7 +34,7 @@ export default {
     position: relative;
 
     .order-price-title {
-      font-size: config('textSizes.sm');
+      font-size: 0.6875rem;
       color: config('colors.inactive');
     }
     .order-price-value {
@@ -43,7 +43,7 @@ export default {
       padding-top: .3rem;
     }
     .order-price-max {
-      font-size: config('textSizes.sm');
+      font-size: 0.6875rem;
       color: config('colors.white');
     }
   }

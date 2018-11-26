@@ -6,6 +6,9 @@
       :buy-price="marketBuyPrice"
       :sell-price="marketSellPrice"
     />
+    <NewOrderPercents
+      :percents="percents"
+    />
     <NewOrderPrice
       :current-base="currentBase"
       order-type="buy"
@@ -31,12 +34,14 @@
 import { mapGetters } from 'vuex'
 import NewOrderTabs from './NewOrderTabs'
 import NewOrderPrice from './NewOrderPrice'
+import NewOrderPercents from './NewOrderPercents'
 import Btn from '@/components/Button/Button'
 
 export default {
   components: {
     NewOrderTabs,
     NewOrderPrice,
+    NewOrderPercents,
     Btn
   },
   data() {
@@ -47,7 +52,8 @@ export default {
       currentBase: 'newOrder/getCurrentBase',
       marketBuyPrice: 'newOrder/getMarketBuyPrice',
       marketSellPrice: 'newOrder/getMarketSellPrice',
-      activeTab: 'newOrder/getActiveTab'
+      activeTab: 'newOrder/getActiveTab',
+      percents: 'newOrder/getPercents'
     }),
 
     buttonTitle() {
