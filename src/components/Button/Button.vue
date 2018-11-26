@@ -18,6 +18,7 @@
       color="black"
     />
     <span v-else>
+      <slot />
       {{ text }}
     </span>
   </button>

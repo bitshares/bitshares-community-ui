@@ -1,30 +1,17 @@
 <template>
   <div class="order-price">
-    <div class="order-price-title">{{ tradeItem.base }}</div>
-    <div class="order-price-value">{{ tradeItem.value }}</div>
-    <div class="order-price-max">max {{ tradeItem.max }}</div>
-    <div
-      :class="{
-        'order-points--buy': orderType === 'buy',
-        'order-points--sell': orderType === 'sell'
-      }"
-      class="order-points"
-    >
-      <div class="order-points-first">{{ tradeItem.point1 }}</div>
-      <div class="order-points-second">{{ tradeItem.point2 }}</div>
-      <div class="order-percent">%</div>
-    </div>
+    <div class="order-price-title">{{ currentBase }}</div>
+    <div class="order-price-value">0</div>
+    <div class="order-price-max">max 0</div>
   </div>
 </template>
 <script>
 
 export default {
   props: {
-    tradeItem: {
-      type: Object,
-      default() {
-        return {}
-      }
+    currentBase: {
+      type: String,
+      default: 'BTC'
     },
     orderType: {
       type: String,
@@ -58,32 +45,6 @@ export default {
     .order-price-max {
       font-size: config('textSizes.sm');
       color: config('colors.white');
-    }
-    .order-points {
-      color: config('colors.inactive');
-      text-align: right;
-      position: absolute;
-      top: 0.3125rem;
-
-      .order-percent {
-        display: none;
-      }
-      &--buy {
-        right: 0.5rem;
-        .order-percent {
-          display: block;
-          position: absolute;
-          color: config('colors.inactive');
-          left: 1.4375rem;
-          top: 1.125rem;
-        }
-      }
-      &--sell {
-        left: 0.5rem;
-      }
-      .order-points-first {
-        margin-bottom: 1rem;
-      }
     }
   }
 </style>

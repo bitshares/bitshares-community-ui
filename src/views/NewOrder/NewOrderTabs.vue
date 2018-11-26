@@ -1,36 +1,36 @@
 <template>
   <div
     :class="{
-      'order-tabs--buy': activeTitle === 'buy',
-      'order-tabs--sell': activeTitle === 'sell'
+      'order-tabs--buy': activeTab === 'buy',
+      'order-tabs--sell': activeTab === 'sell'
     }"
     class="order-tabs"
   >
     <div
-      :class="{'_inactive': activeTitle === 'sell'}"
+      :class="{'_inactive': activeTab === 'sell'}"
       class="order-tabs-item _buy"
-      @click="activeTab.title = 'buy'"
+      @click="setActiveTab('buy')"
     >
       <NewOrderTabsTitle
         :title="buyTitle"
-        :sub-title="tradeData.buy.price"
-        :increased="tradeData.buy.increased"
+        :sub-title="buyPrice"
       />
     </div>
     <div
-      :class="{'_inactive': activeTitle === 'buy'}"
+      :class="{'_inactive': activeTab === 'buy'}"
       class="order-tabs-item _sell"
-      @click="activeTab.title = 'sell'"
+      @click="setActiveTab('sell')"
     >
       <NewOrderTabsTitle
         :title="sellTitle"
-        :sub-title="tradeData.sell.price"
-        :increased="tradeData.sell.increased"
+        :sub-title="sellPrice"
+        :is-sell="true"
       />
     </div>
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 import NewOrderTabsTitle from './NewOrderTabsTitle'
 
 export default {
@@ -39,22 +39,20 @@ export default {
   },
   props: {
     activeTab: {
-      type: Object,
-      default() {
-        return {
-          title: 'buy'
-        }
-      }
+      type: String,
+      default: 'buy'
     },
     currentBase: {
       type: String,
       default: 'USD'
     },
-    tradeData: {
-      type: Object,
-      default() {
-        return {}
-      }
+    buyPrice: {
+      type: Number,
+      default: 0
+    },
+    sellPrice: {
+      type: Number,
+      default: 0
     }
   },
   data() {
@@ -66,10 +64,12 @@ export default {
     },
     sellTitle() {
       return `SELL ${this.currentBase}/USD`
-    },
-    activeTitle() {
-      return this.activeTab.title
     }
+  },
+  methods: {
+    ...mapActions({
+      setActiveTab: 'newOrder/setActiveTab'
+    })
   }
 }
 </script>
@@ -82,7 +82,6 @@ export default {
       box-sizing: border-box;
       width: 50%;
       height: 3.5625rem;
-      line-height: 3.5625rem;
       text-align: center;
       font-weight: config('fontWeights.extrabold');
       font-size: config('textSizes.lg');
@@ -91,22 +90,24 @@ export default {
     &--buy {
       .order-tabs-item {
         &:not(._inactive) {
-          border-top: 0.3125rem solid #79c60f;
+          border-top: 0.3125rem solid rgb(121, 198, 15);
+          color: rgb(121, 198, 15);
         }
       }
     }
     &--sell {
       .order-tabs-item {
         &:not(._inactive) {
-          border-top: 0.3125rem solid rgba(255, 47, 47, 0.5);
+          border-top: 0.3125rem solid rgb(255, 47, 47);
+          color: rgb(255, 47, 47);
         }
       }
     }
     ._buy {
-      color: rgba(121, 198, 15, 0.5);
+      color: rgba(121, 198, 15, .5);
     }
     ._sell {
-      color: rgba(255, 47, 47, 0.5);
+      color: rgba(255, 47, 47, .5);
     }
     ._inactive {
       background: #212121;

@@ -198,7 +198,7 @@ export default {
   overflow: hidden;
 
   &.no-pt {
-    padding-top: 0;
+    @apply pt-0;
   }
 }
 

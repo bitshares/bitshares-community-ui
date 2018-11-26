@@ -3,26 +3,28 @@
     <NewOrderTabs
       :current-base="currentBase"
       :active-tab="activeTab"
-      :trade-data="tradeData"
-
+      :buy-price="marketBuyPrice"
+      :sell-price="marketSellPrice"
     />
     <NewOrderPrice
-      :trade-item="tradeData.buy"
+      :current-base="currentBase"
       order-type="buy"
     />
     <NewOrderPrice
-      :trade-item="tradeData.sell"
+      :current-base="currentBase"
       order-type="sell"
     />
     <Btn
       :class="{
-        'order-btn--buy': tabType === 'buy',
-        'order-btn--sell': tabType === 'sell'
+        'order-btn--buy': activeTab === 'buy',
+        'order-btn--sell': activeTab === 'sell'
       }"
+      :text="buttonTitle"
       class="order-btn"
       width="full"
-      v-html="operationTitle"
-    />
+    >
+      <span class="operation-title">{{ activeTab }}</span>
+    </Btn>
   </div>
 </template>
 <script>
@@ -38,28 +40,21 @@ export default {
     Btn
   },
   data() {
-    return {
-      activeTab: {
-        title: 'buy'
-      }
-    }
+    return {}
   },
   computed: {
     ...mapGetters({
       currentBase: 'newOrder/getCurrentBase',
-      tradeData: 'newOrder/getTradeData'
+      marketBuyPrice: 'newOrder/getMarketBuyPrice',
+      marketSellPrice: 'newOrder/getMarketSellPrice',
+      activeTab: 'newOrder/getActiveTab'
     }),
 
-    tabType() {
-      return this.activeTab.title
-    },
-    operationTitle() {
-      const getTemplate = (type) => `<span class='operation-title'>${type}</span>`
-
-      if (this.activeTab.title === 'buy') {
-        return `${getTemplate('buy')} ${this.tradeData.buy.value} ${this.currentBase}`
+    buttonTitle() {
+      if (this.activeTab === 'buy') {
+        return `${this.marketBuyPrice} ${this.currentBase}`
       }
-      return `${getTemplate('sell')} ${this.tradeData.sell.value} ${this.currentBase}`
+      return `${this.marketSellPrice} ${this.currentBase}`
     }
   }
 }

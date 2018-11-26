@@ -2,7 +2,7 @@
   <div class="order-tabs-titles">
     <div class="order-tabs-title">{{ title }}</div>
     <div
-      :class="{'order-tabs-subtitle--increased': !!increased}"
+      :class="{'order-tabs-subtitle--sell': isSell}"
       class="order-tabs-subtitle"
     >{{ subTitle }}
     </div>
@@ -19,7 +19,7 @@ export default {
       type: Number,
       required: true
     },
-    increased: {
+    isSell: {
       type: Boolean,
       default: false
     }
@@ -27,17 +27,18 @@ export default {
 }
 </script>
 <style lang="scss">
-  .order-tabs-title {
-    height: 4.0625rem;
-    margin-top: -0.4375rem;
+  .order-tabs-titles {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 3.5625rem;
   }
   .order-tabs-subtitle {
     font-size: config('textSizes.sm');
-    margin-top: -2.8125rem;
-    color:rgba(255, 47, 47, 0.5);
+    color: rgba(121, 198, 15, 0.5);
 
-    &--increased {
-      color: rgba(121, 198, 15, 0.5);
+    &--sell {
+      color:rgba(255, 47, 47, 0.5);
     }
   }
 </style>
