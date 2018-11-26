@@ -6,6 +6,11 @@
       :buy-price="marketBuyPrice"
       :sell-price="marketSellPrice"
     />
+    <Tabs
+      :tabs="['MARKET', 'LIMIT']"
+      :active="activeIndication"
+      @change="setActiveIndication"
+    />
     <NewOrderPercents
       :percents="percents"
     />
@@ -33,18 +38,20 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import NewOrderTabs from './NewOrderTabs'
 import NewOrderPrice from './NewOrderPrice'
 import NewOrderPercents from './NewOrderPercents'
 import Btn from '@/components/Button/Button'
+import Tabs from '@/components/Tabs/Tabs'
 
 export default {
   components: {
     NewOrderTabs,
     NewOrderPrice,
     NewOrderPercents,
-    Btn
+    Btn,
+    Tabs
   },
   data() {
     return {}
@@ -55,7 +62,8 @@ export default {
       marketBuyPrice: 'newOrder/getMarketBuyPrice',
       marketSellPrice: 'newOrder/getMarketSellPrice',
       activeTab: 'newOrder/getActiveTab',
-      percents: 'newOrder/getPercents'
+      percents: 'newOrder/getPercents',
+      activeIndication: 'newOrder/getActiveIndication'
     }),
 
     buttonTitle() {
@@ -64,6 +72,11 @@ export default {
       }
       return `${this.marketSellPrice} ${this.currentBase}`
     }
+  },
+  methods: {
+    ...mapActions({
+      setActiveIndication: 'newOrder/setActiveIndication'
+    })
   }
 }
 </script>

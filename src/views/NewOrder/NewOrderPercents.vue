@@ -40,7 +40,7 @@ export default {
     z-index: 10;
     position: absolute;
     left: calc(50% - 4.5rem);
-    top: 4.5625rem;
+    top: 7.3rem;
     text-align: center;
     width: 9rem;
     box-sizing: border-box;
