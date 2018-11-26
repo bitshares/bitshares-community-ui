@@ -32,13 +32,17 @@ export default {
     flex-direction: column;
     justify-content: center;
     height: 3.5625rem;
-  }
-  .order-tabs-subtitle {
-    font-size: config('textSizes.sm');
-    color: rgba(121, 198, 15, 0.5);
 
-    &--sell {
-      color:rgba(255, 47, 47, 0.5);
+    .order-tabs-title {
+      margin-bottom: 0.3125rem;
+    }
+    .order-tabs-subtitle {
+      font-size: 0.6875rem;
+      color: rgba(121, 198, 15, 0.5);
+
+      &--sell {
+        color:rgba(255, 47, 47, 0.5);
+      }
     }
   }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="order-price">
-    <div class="order-price-title">{{ currentBase }}</div>
+    <div class="order-price-title">{{ title }}</div>
     <div class="order-price-value">0</div>
     <div class="order-price-max">max 0</div>
   </div>
@@ -22,14 +22,18 @@ export default {
     return {}
   },
   computed: {
+    title() {
+      return this.orderType === 'buy' ? `Spend ${this.currentBase}` : `Get USD`
+    }
   }
 }
 </script>
 <style lang="scss">
   .order-price {
     margin-top: 1.25rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
     display: inline-block;
-    width: 50%;
     text-align: center;
     position: relative;
 

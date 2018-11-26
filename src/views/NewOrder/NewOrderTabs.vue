@@ -90,16 +90,24 @@ export default {
     &--buy {
       .order-tabs-item {
         &:not(._inactive) {
-          border-top: 0.3125rem solid rgb(121, 198, 15);
-          color: rgb(121, 198, 15);
+          border-top: 0.3125rem solid config('colors.new-order-buy');
+          color: config('colors.new-order-buy');
+
+          .order-tabs-subtitle {
+            color: config('colors.new-order-buy');
+          }
         }
       }
     }
     &--sell {
       .order-tabs-item {
         &:not(._inactive) {
-          border-top: 0.3125rem solid rgb(255, 47, 47);
-          color: rgb(255, 47, 47);
+          border-top: 0.3125rem solid config('colors.new-order-sell');
+          color: config('colors.new-order-sell');
+
+          .order-tabs-subtitle {
+            color: config('colors.new-order-sell');
+          }
         }
       }
     }

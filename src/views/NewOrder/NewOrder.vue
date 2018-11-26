@@ -12,10 +12,12 @@
     <NewOrderPrice
       :current-base="currentBase"
       order-type="buy"
+      class="float-left"
     />
     <NewOrderPrice
       :current-base="currentBase"
       order-type="sell"
+      class="float-right"
     />
     <Btn
       :class="{
