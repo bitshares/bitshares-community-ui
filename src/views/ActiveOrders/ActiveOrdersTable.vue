@@ -1,17 +1,18 @@
 <template>
-  <div class="order-history-table">
+  <div class="active-orders-table">
     <SortableTable
       :items="items"
       :headers="tableHeaders"
       :header-left-padding="headerLeftPadding"
-      :header-right-padding="1.5"
+      :header-right-padding="headerRightPadding"
       :default-sort="defaultSort"
       :large="expanded">
 
       <template slot-scope="{ sortedItems }">
-        <OrderHistoryTableItem
+        <ActiveOrdersTableItem
           v-for="(item, index) in sortedItems"
           :key="index"
+          :index="index"
           :item="item"
           :expanded="expanded"
         />
@@ -21,12 +22,11 @@
 </template>
 <script>
 import SortableTable from '@/components/SortableTable'
-import OrderHistoryTableItem from './OrderHistoryTableItem'
-
+import ActiveOrdersTableItem from './ActiveOrdersTableItem'
 export default {
   components: {
     SortableTable,
-    OrderHistoryTableItem
+    ActiveOrdersTableItem
   },
   props: {
     tableHeaders: {
@@ -37,9 +37,7 @@ export default {
     },
     items: {
       type: Array,
-      default() {
-        return []
-      }
+      required: true
     },
     expanded: {
       type: Boolean,
@@ -49,12 +47,15 @@ export default {
   data() {
     return {
       defaultSort: {
-        field: 'dateClose',
+        field: 'dateOpen',
         type: 'desc'
       }
     }
   },
   computed: {
+    headerRightPadding() {
+      return this.expanded ? 3.2 : 1.7
+    },
     headerLeftPadding() {
       return this.expanded ? 1.3 : 1
     }
@@ -62,7 +63,7 @@ export default {
 }
 </script>
 <style lang="scss">
-  .order-history-table {
+  .active-orders-table {
     height: 100%;
   }
 </style>

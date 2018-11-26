@@ -54,10 +54,10 @@ export default {
       fetching: 'orderBook/isFetching'
     }),
     baseAssetSymbol() {
-      return this.baseAsset && this.baseAsset.symbol
+      return (this.baseAsset && this.baseAsset.symbol) || ''
     },
     quoteAssetSymbol() {
-      return this.quoteAsset && this.quoteAsset.symbol
+      return (this.quoteAsset && this.quoteAsset.symbol) || ''
     }
   }
 }

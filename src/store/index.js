@@ -5,6 +5,7 @@ import portfolio from './modules/portfolio'
 import backup from './modules/backup'
 import orderBook from './modules/orderBook'
 import orderHistory from './modules/orderHistory'
+import activeOrders from './modules/activeOrders'
 import createPersistedState from 'vuex-persistedstate'
 import vuexBitshares from 'vuex-bitshares'
 import Cookies from 'js-cookie'
@@ -27,6 +28,7 @@ const store = new Vuex.Store({
     orderBook,
     orderHistory,
     newOrder,
+    activeOrders,
     ...modules
   },
   plugins: [
