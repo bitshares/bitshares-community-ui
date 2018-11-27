@@ -1,6 +1,6 @@
 <template>
   <div class="input-wrapper">
-    <input
+    <!-- <input
       :placeholder="hint || placeholder"
       :value="value"
       :class="{'search-input--active': value.length }"
@@ -13,15 +13,23 @@
         height="20"
         name="search"
       />
-    </div>
+    </div> -->
+    <Input
+      :title="hint || placeholder"
+      :value="value"
+      input-name="search"
+      @input="$emit('input', $event)"
+    >
   </div>
 </template>
 
 <script>
 import '@icons/search'
 import '@icons/cancel'
+import Input from '@/components/SimpleInput'
 
 export default {
+  components: { Input },
   props: {
     hint: {
       type: String,
