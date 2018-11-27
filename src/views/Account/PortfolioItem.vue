@@ -4,9 +4,10 @@
     :style="styleObject"
     class="portfolio-item"
   >
-    <span class="single-item">
-      {{ item.tiker }}
-      <!-- <TwoLineItem :top="item.tiker"/> -->
+      <!-- <span class="single-item"> -->
+    <span>
+      <!-- {{ item.tiker }} -->
+      <TwoLineItem :top="item.tiker"/>
     </span>
     <span
       v-show="expanded"
@@ -32,8 +33,10 @@
     <span v-show="isPricesMode">
       <TwoLineItem
         :top="formattedTokenPrice"
-        :bottom="formattedBtcValue"
-      />
+        
+      >
+        <div slot="bottom"><b>₿</b> {{ formattedBtcValue }}</div>
+      </TwoLineItem>
     </span>
 
     <span
@@ -83,7 +86,7 @@ export default {
       return '$' + this.preciseFiatValue(this.item.fiatValue || 0)
     },
     formattedBtcValue() {
-      return '₿ ' + getFloatCurrency(this.item.btcValue || 0)
+      return getFloatCurrency(this.item.btcValue || 0)
     },
     styleObject() {
       const columns = this.expanded ? 6 : 3
