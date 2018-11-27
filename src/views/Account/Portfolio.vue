@@ -90,12 +90,21 @@ export default {
       ]
     },
     tableHeadersExpanded() {
-      const headers = this.tableHeaders.slice()
-      headers.splice(1, 0, {
-        title: '', field: '', align: 'center'
-      }, { title: '', field: '', align: 'center' })
-
-      return headers
+      return this.mode === 'balances' ? [
+        { title: 'Asset', field: 'tiker', align: 'left' },
+        { title: '', field: '', align: 'center' },
+        { title: '', field: '', align: 'center' },
+        { title: 'Tokens', field: 'tokens', align: 'right' },
+        { title: '$Value', field: 'usdValue', align: 'right' },
+        { title: 'Share', field: 'share', align: 'right' }
+      ] : [
+        { title: 'Asset', field: 'tiker', align: 'left' },
+        { title: '', field: '', align: 'center' },
+        { title: '', field: '', align: 'center' },
+        { title: 'Price', field: 'tokenPrice', align: 'right' },
+        { title: '24h', field: 'change1', align: 'right' },
+        { title: '7d', field: 'change7', align: 'right' }
+      ]
     },
     filteredItems() {
       if (this.showSmallAssets) return this.items

@@ -4,48 +4,58 @@
     :style="styleObject"
     class="portfolio-item"
   >
-      <!-- <span class="single-item"> -->
-    <span>
-      <!-- {{ item.tiker }} -->
-      <TwoLineItem :top="item.tiker"/>
-    </span>
-    <span
-      v-show="expanded"
-      class="deposit">deposit</span>
-    <span
-      v-show="expanded"
-      class="withdraw">withdraw</span>
+    <div>
+      <div class="single-item" v-if="expanded">{{ item.tiker }}</div>
+      <TwoLineItem v-else :top="item.tiker"/>
+    </div>
 
-    <span v-show="isBalancesMode">
+    <div
+      v-show="expanded"
+      class="single-item deposit">deposit</div>
+    <div
+      v-show="expanded"
+      class="single-item withdraw">withdraw</div>
+
+    <div
+      v-show="isBalancesMode && expanded"
+      class="text-right single-item"
+    >
+      {{ formattedTokens }}
+    </div>
+
+    <div v-show="isBalancesMode">
       <TwoLineItem
+        v-if="!expanded"
         :top="formattedTokens"
         :bottom="formattedFiatValue"
       />
-    </span>
+      <div class="text-right single-item" v-else>{{ formattedFiatValue }}</div>
+    </div>
 
-    <span
+    <div
       v-show="isBalancesMode"
       class="text-right single-item"
     >
       {{ item.share }}%
-    </span>
+    </div>
 
-    <span v-show="isPricesMode">
+    <div v-show="isPricesMode">
       <TwoLineItem
+        v-if="!expanded"
         :top="formattedTokenPrice"
-        
       >
         <div slot="bottom"><b>₿</b> {{ formattedBtcValue }}</div>
       </TwoLineItem>
-    </span>
+      <div v-else class="text-right single-item">{{ formattedTokenPrice }}</div>
+    </div>
 
-    <span
+    <div
       v-show="isPricesMode"
       class="text-right single-item"
     >
       {{ item.change1.toFixed(0).toString() }}%
-    </span>
-    <!-- <span v-show="isPricesMode">{{ item.change7.toFixed(0).toString() }}%</span> -->
+    </div>
+    <div class="text-right" v-show="isPricesMode && expanded">{{ item.change7.toFixed(0).toString() }}%</div>
   </div>
 </template>
 
@@ -132,8 +142,7 @@ export default {
   }
 }
 
-.portfolio-item span {
-    // padding: 0px 0px;
+.portfolio-item div {
     overflow: hidden;
     text-overflow: ellipsis;
     &.single-item {
