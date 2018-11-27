@@ -1,6 +1,6 @@
 <template>
   <div class="input-wrapper">
-    <!-- <input
+    <input
       :placeholder="hint || placeholder"
       :value="value"
       :class="{'search-input--active': value.length }"
@@ -13,13 +13,13 @@
         height="20"
         name="search"
       />
-    </div> -->
-    <Input
+    </div>
+    <!-- <Input
       :title="hint || placeholder"
       :value="value"
       input-name="search"
       @input="$emit('input', $event)"
-    >
+    > -->
   </div>
 </template>
 
