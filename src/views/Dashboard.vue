@@ -51,7 +51,6 @@
           <div class="flex flex-col lg:w-1/2 mr-card-margin">
             <Card
               collapsible
-              title="new order"
               class="mb-card-margin"
             >
               <NewOrder slot="body"/>
