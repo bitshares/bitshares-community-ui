@@ -68,7 +68,7 @@ export default {
       mode: 'balances',
       showSmallAssets: true,
       defaultSort: {
-        field: 'fiatValue',
+        field: 'share',
         type: 'desc'
       }
     }
@@ -80,15 +80,13 @@ export default {
     }),
     tableHeaders() {
       return this.mode === 'balances' ? [
-        { title: 'Tiker', field: 'tiker', align: 'left' },
-        { title: 'Tokens', field: 'tokens' },
-        { title: '$Value', field: 'fiatValue' },
+        { title: 'Asset', field: 'tiker', align: 'left' },
+        { title: 'Balance', field: 'tokens', align: 'left' },
         { title: 'Share', field: 'share' }
       ] : [
-        { title: 'Tiker', field: 'tiker', align: 'left' },
-        { title: '$Price', field: 'tokenPrice' },
-        { title: '24h%', field: 'change1' },
-        { title: '7d%', field: 'change7' }
+        { title: 'Asset', field: 'tiker', align: 'left' },
+        { title: 'Price', field: 'tokenPrice', align: 'left' },
+        { title: '24h', field: 'change1' }
       ]
     },
     tableHeadersExpanded() {

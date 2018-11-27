@@ -4,24 +4,54 @@
     :style="styleObject"
     class="portfolio-item"
   >
-    <span>{{ item.tiker }}</span>
+    <span class="single-item">
+      {{ item.tiker }}
+      <!-- <TwoLineItem :top="item.tiker"/> -->
+    </span>
     <span
       v-show="expanded"
       class="deposit">deposit</span>
     <span
       v-show="expanded"
       class="withdraw">withdraw</span>
-    <span v-show="isBalancesMode">{{ formattedTokens }}</span>
-    <span v-show="isBalancesMode">{{ formattedFiatValue }}</span>
-    <span v-show="isBalancesMode">{{ item.share }}%</span>
-    <span v-show="isPricesMode">{{ formattedTokenPrice }}</span>
-    <span v-show="isPricesMode">{{ item.change1.toFixed(0).toString() }}%</span>
-    <span v-show="isPricesMode">{{ item.change7.toFixed(0).toString() }}%</span>
+
+    <span v-show="isBalancesMode">
+      <TwoLineItem
+        :top="formattedTokens"
+        :bottom="formattedFiatValue"
+      />
+    </span>
+
+    <span
+      v-show="isBalancesMode"
+      class="text-right single-item"
+    >
+      {{ item.share }}%
+    </span>
+
+    <span v-show="isPricesMode">
+      <TwoLineItem
+        :top="formattedTokenPrice"
+        :bottom="formattedBtcValue"
+      />
+    </span>
+    
+    <span
+      v-show="isPricesMode"
+      class="text-right single-item"
+    >
+      {{ item.change1.toFixed(0).toString() }}%
+    </span>
+    <!-- <span v-show="isPricesMode">{{ item.change7.toFixed(0).toString() }}%</span> -->
   </div>
 </template>
 
 <script>
+import TwoLineItem from '@/components/TwoLineItem'
+import { getFloatCurrency } from '@/helpers/utils'
+
 export default {
+  components: { TwoLineItem },
   props: {
     item: {
       type: Object,
@@ -44,16 +74,19 @@ export default {
       return this.mode === 'prices'
     },
     formattedTokens() {
-      return this.item.tokens.toFixed(2)
+      return getFloatCurrency(this.item.tokens)
     },
     formattedTokenPrice() {
-      return this.preciseFiatValue(this.item.tokenPrice || 0)
+      return '$' + this.preciseFiatValue(this.item.tokenPrice || 0)
     },
     formattedFiatValue() {
-      return this.preciseFiatValue(this.item.fiatValue || 0)
+      return '$' + this.preciseFiatValue(this.item.fiatValue || 0)
+    },
+    formattedBtcValue() {
+      return '₿ ' + getFloatCurrency(this.item.btcValue || 0)
     },
     styleObject() {
-      const columns = this.expanded ? 6 : 4
+      const columns = this.expanded ? 6 : 3
 
       return {
         'grid-template-columns': `repeat(${columns}, 1fr)`
@@ -97,12 +130,12 @@ export default {
 }
 
 .portfolio-item span {
-    padding: 0px 0px;
-
+    // padding: 0px 0px;
     overflow: hidden;
     text-overflow: ellipsis;
-    &:not(:first-child) {
-      text-align: right;
+    &.single-item {
+      font-size: config('textSizes.xl');
+      align-self: center;
     }
 }
 

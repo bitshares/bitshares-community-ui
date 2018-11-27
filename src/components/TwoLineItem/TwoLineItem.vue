@@ -15,11 +15,11 @@
 export default {
   props: {
     top: {
-      type: String,
+      type: [String, Number],
       default: ''
     },
     bottom: {
-      type: String,
+      type: [String, Number],
       default: ''
     },
     expanded: {
