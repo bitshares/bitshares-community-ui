@@ -43,6 +43,7 @@ export default {
 <style scoped lang="scss">
   .search-input {
     width: 9.375rem;
+    padding-right: 1.65rem;
     border: none;
     outline: none;
     background: transparent;
@@ -57,14 +58,13 @@ export default {
   }
   .search-icon {
     display: inline-block;
-    width: 0.75rem;
-    height: 0.75rem;
-    position: relative;
-    top: 0.0625rem;
+    position: absolute;
+    bottom: .3rem;
+    right: .3rem;
     opacity: .5;
-    right: .95rem;
   }
   .input-wrapper {
+    position: relative;
     &:hover {
       cursor: pointer;
 
