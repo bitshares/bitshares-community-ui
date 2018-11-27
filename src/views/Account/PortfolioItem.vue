@@ -35,7 +35,7 @@
         :bottom="formattedBtcValue"
       />
     </span>
-    
+
     <span
       v-show="isPricesMode"
       class="text-right single-item"
