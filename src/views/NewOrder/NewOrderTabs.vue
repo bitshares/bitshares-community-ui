@@ -1,48 +1,65 @@
 <template>
   <div
     :class="{
-      'order-tabs--buy': activeTab === 'buy',
-      'order-tabs--sell': activeTab === 'sell'
+      'order-tabs--buy': type === 'buy',
+      'order-tabs--sell': type === 'sell'
     }"
     class="order-tabs"
   >
     <div
-      :class="{'_inactive': activeTab === 'sell'}"
+      :class="{'_inactive': type === 'sell'}"
       class="order-tabs-item _buy"
-      @click="setActiveTab('buy')"
+      @click="$emit('change', 'buy')"
     >
       <NewOrderTabsTitle
         :title="buyTitle"
         :sub-title="buyPrice"
       />
+      <svgicon
+        width="12"
+        height="12"
+        name="high"
+        class="order-tabs-item-icon"
+      />
     </div>
     <div
-      :class="{'_inactive': activeTab === 'buy'}"
+      :class="{'_inactive': type === 'buy'}"
       class="order-tabs-item _sell"
-      @click="setActiveTab('sell')"
+      @click="$emit('change', 'sell')"
     >
       <NewOrderTabsTitle
         :title="sellTitle"
         :sub-title="sellPrice"
         :is-sell="true"
       />
+      <svgicon
+        width="12"
+        height="12"
+        name="low"
+        class="order-tabs-item-icon"
+      />
     </div>
   </div>
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex'
 import NewOrderTabsTitle from './NewOrderTabsTitle'
+import '@/assets/icons/low'
+import '@/assets/icons/high'
 
 export default {
   components: {
     NewOrderTabsTitle
   },
   props: {
-    activeTab: {
+    type: {
       type: String,
       default: 'buy'
     },
     base: {
+      type: String,
+      default: 'USD'
+    },
+    quote: {
       type: String,
       default: 'USD'
     },
@@ -55,24 +72,13 @@ export default {
       default: 0
     }
   },
-  data() {
-    return {}
-  },
   computed: {
-    ...mapGetters({
-      quote: 'newOrder/getQuote'
-    }),
     buyTitle() {
       return `BUY ${this.base}/${this.quote}`
     },
     sellTitle() {
       return `SELL ${this.base}/${this.quote}`
     }
-  },
-  methods: {
-    ...mapActions({
-      setActiveTab: 'newOrder/setActiveTab'
-    })
   }
 }
 </script>
@@ -82,6 +88,7 @@ export default {
     flex-direction: row;
     box-sizing: border-box;
     .order-tabs-item {
+      position: relative;
       box-sizing: border-box;
       width: 50%;
       height: 3.5625rem;
@@ -116,9 +123,19 @@ export default {
     }
     ._buy {
       color: rgba(121, 198, 15, .5);
+      .order-tabs-item-icon {
+        position: absolute;
+        right: 3.875rem;
+        top: 2.1875rem;
+      }
     }
     ._sell {
       color: rgba(255, 47, 47, .5);
+      .order-tabs-item-icon {
+        position: absolute;
+        left: 3.625rem;
+        top: 2.1875rem;
+      }
     }
     ._inactive {
       background: #212121;

@@ -7,7 +7,9 @@
       'btn--big': size === 'big',
       'btn--wide': width === 'full',
       'btn--round': type === 'round',
-      'btn--secondary': type === 'secondary'
+      'btn--secondary': type === 'secondary',
+      'btn--buy': type === 'buy',
+      'btn--sell': type === 'sell',
     }"
     :disabled="disabled"
     class="btn btn-blue"
@@ -124,6 +126,26 @@ export default {
 .btn--secondary:hover {
   background-color:config('colors.primary');
   color:config('colors.bg-base');
+}
+.btn--buy {
+  width: 96%;
+  position: absolute;
+  left: 2%;
+  bottom: 0.625rem;
+  background-color: config('colors.buy');
+  &:hover {
+    background-color: config('colors.buy');
+  }
+}
+.btn--sell {
+  width: 96%;
+  position: absolute;
+  left: 2%;
+  bottom: 0.625rem;
+  background-color: config('colors.sell');
+  &:hover {
+    background-color: config('colors.sell');
+  }
 }
 .spinner {
   margin-right: 10px;

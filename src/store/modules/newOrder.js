@@ -1,5 +1,5 @@
 const types = {
-  SET_ACTIVE_TAB: 'SET_ACTIVE_TAB',
+  SET_TYPE: 'SET_TYPE',
   SET_ACTIVE_PERCENT: 'SET_ACTIVE_PERCENT',
   SET_ACTIVE_INDICATION: 'SET_ACTIVE_INDICATION'
 }
@@ -11,7 +11,6 @@ const getDefaultState = () => ({
   marketBuyPrice: 5611.15,
   orderAmount: 0.02,
   type: 'buy',
-  activeTab: 'buy',
 
   activeIndication: 'MARKET',
   activePercent: 10,
@@ -37,9 +36,6 @@ const getters = {
   getType(state) {
     return state.type
   },
-  getActiveTab(state) {
-    return state.activeTab
-  },
   getPercents(state) {
     return state.percents
   },
@@ -52,8 +48,8 @@ const getters = {
 }
 
 const mutations = {
-  [types.SET_ACTIVE_TAB](state, tab) {
-    state.activeTab = tab
+  [types.SET_TYPE](state, tab) {
+    state.type = tab
   },
   [types.SET_ACTIVE_PERCENT](state, percent) {
     state.activePercent = percent
@@ -64,8 +60,8 @@ const mutations = {
 }
 
 const actions = {
-  setActiveTab({ commit }, tab) {
-    commit(types.SET_ACTIVE_TAB, tab)
+  setType({ commit }, tab) {
+    commit(types.SET_TYPE, tab)
   },
   setActivePercent({ commit }, percent) {
     commit(types.SET_ACTIVE_PERCENT, percent)
