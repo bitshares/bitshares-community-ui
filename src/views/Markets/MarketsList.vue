@@ -61,7 +61,16 @@ export default {
           { title: 'Pair', field: 'ticker', align: 'left', paddingLeft: 1.5 },
           { title: 'Price, USD', field: 'usdPrice', align: 'right' },
           { title: 'Vol, USD', field: 'usdVolume', align: 'right' },
-          { title: '24h', field: 'change24h', align: 'right' }
+          {
+            title: '24h',
+            field: 'change24h',
+            align: 'right',
+            isDouble: true,
+            doubleData: {
+              title: '7d',
+              field: 'change7d'
+            }
+          }
         ],
         large: [
           { title: 'Name', field: 'ticker', align: 'left', paddingLeft: 1.5 },

@@ -9,11 +9,15 @@
         v-for="(header, index) in headers"
         :key="index"
         :title="header.title"
-        :sort="sort.field === header.field && sort.type || ''"
+        :sort="(header.isDouble && doubleField && sort.type || '') || sort.field === header.field && sort.type || ''"
         :align="header.align"
         :padding-left="header.paddingLeft"
         :large="large"
-        @click.native="toggleSort(header.field)"
+        :is-double="header.isDouble"
+        :double-data="header.doubleData || {}"
+        :double-field="doubleField"
+        @click.native="toggleSort(doubleField || header.field, header.doubleData)"
+        @activate:double="onDoubleActivate"
       />
     </div>
     <ScrollingContainer :shadower-height="shadowerHeight || 15">
@@ -72,7 +76,8 @@ export default {
       sort: {
         field: '',
         type: 'desc'
-      }
+      },
+      doubleField: ''
     }
   },
   computed: {
@@ -92,13 +97,20 @@ export default {
     this.sort = this.defaultSort
   },
   methods: {
-    toggleSort(field) {
+    toggleSort(field, doubleData) {
+      if (field !== this.doubleField && !doubleData) {
+        this.doubleField = ''
+      }
       if (this.sort.field === field) {
         this.sort.type = this.sort.type === 'asc' ? 'desc' : 'asc'
         return
       }
+
       this.sort.field = field
       this.sort.type = 'desc'
+    },
+    onDoubleActivate(doubleField) {
+      this.doubleField = doubleField
     }
   }
 }

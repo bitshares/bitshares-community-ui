@@ -10,8 +10,14 @@
     class="header-item">
     <div
       :class="{'header-item__title--title-active': sort}"
-      class="header-item__title">
-      {{ title }}
+      class="header-item__title"
+    >
+      <span
+        :class="{'_inactive': doubleField}"
+        @click="$emit('activate:double', '')"
+      >
+        {{ title }}
+      </span>
       <div
         v-if="showIcon && sort"
         class="header-item__arrows">
@@ -26,7 +32,23 @@
           name="sortArrow"
         />
       </div>
+      <span
+        v-if="isDouble && doubleField"
+        class="_inactive"
+      >/</span>
+      <span
+        v-if="doubleField"
+        @click="$emit('activate:double', doubleData.field)"
+      >{{ doubleData.title }}</span>
     </div>
+    <span
+      v-if="isDouble && !doubleField"
+      :class="{'_double-title--marginLeft-0': !showIcon || !sort}"
+      class="_double-title"
+      @click="$emit('activate:double', doubleData.field)"
+    >
+      /{{ doubleData.title }}
+    </span>
   </div>
 </template>
 
@@ -59,6 +81,20 @@ export default {
     large: {
       type: Boolean,
       required: true
+    },
+    isDouble: {
+      type: Boolean,
+      default: false
+    },
+    doubleData: {
+      type: Object,
+      default() {
+        return {}
+      }
+    },
+    doubleField: {
+      type: String,
+      default: ''
     }
   },
   computed: {
@@ -125,5 +161,18 @@ export default {
 
 .header-item__title--title-active {
   color: config('colors.text-primary');
+}
+
+._double-title {
+  margin-left: 14px;
+  display: inline-block;
+
+  &--marginLeft-0 {
+    margin-left: 0;
+  }
+}
+
+._inactive {
+  color: config('colors.inactive');
 }
 </style>
