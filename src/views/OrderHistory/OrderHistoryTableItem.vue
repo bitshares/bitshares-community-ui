@@ -77,7 +77,7 @@
 <script>
 import { format } from 'date-fns'
 import { getFloatCurrency } from '@/helpers/utils'
-import TwoLineItem from '@/components/TwoLineItem/TwoLineItem'
+import TwoLineItem from '@/components/TwoLineItem'
 
 export default {
   components: {
