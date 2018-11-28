@@ -17,13 +17,19 @@ const getters = {
     const assetReceives = rootGetters['assets/getAssetById'](payload.receives.asset_id)
     const amountPays = payload.pays.amount / 10 ** assetPays.precision
     const amountReceives = payload.receives.amount / 10 ** assetReceives.precision
+    const amountReceivesForAvg = payload['fill_price'].base.amount / 10 ** assetReceives.precision
+    const amountPaysForAvg = payload['fill_price'].quote.amount / 10 ** assetPays.precision
+
     const price = buyer ? amountPays / amountReceives : amountReceives / amountPays
+    const avg = buyer ? amountPaysForAvg / amountReceivesForAvg : amountReceivesForAvg / amountPaysForAvg
+
     return {
       payAssetSymbol: assetPays.symbol,
       receiveAssetSymbol: assetReceives.symbol,
-      get: amountReceives.toFixed(8).replace(/\.?0+$/, ''),
-      spend: amountPays.toFixed(8).replace(/\.?0+$/, ''),
-      price: price.toFixed(5),
+      get: amountReceives,
+      spend: amountPays,
+      price,
+      avg,
       order: type,
       dateClose: date,
       dateOpen: date

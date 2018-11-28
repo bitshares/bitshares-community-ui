@@ -19,13 +19,13 @@
       </div>
       <div class="table-item">
         <TwoLineItem
-          :top="price"
+          :top="avg"
           :bottom="price"
         />
       </div>
       <div class="table-item text-right">
         <TwoLineItem
-          :top="price"
+          :top="item.order === 'buy' ? get : spend"
           :bottom="fullCloseTitle"
         />
       </div>
@@ -44,8 +44,8 @@
       </div>
       <div class="table-item">
         <TwoLineItem
-          :top="price"
-          :bottom="item.receiveAssetSymbol"
+          :top="avg"
+          :bottom="price"
           :expanded="expanded"
         />
       </div>
@@ -116,6 +116,9 @@ export default {
     },
     price() {
       return getFloatCurrency(this.item.price)
+    },
+    avg() {
+      return getFloatCurrency(this.item.avg)
     },
     get() {
       return getFloatCurrency(this.item.get)
