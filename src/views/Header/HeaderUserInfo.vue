@@ -1,7 +1,7 @@
 <template>
   <div class="user-info">
     <!-- <svgicon name="userIcon"/> -->
-    <div
+    <!-- <div
       class="backup-btn"
       @click="setBackupFlag(true)"
     >Backup</div>
@@ -11,9 +11,8 @@
       class="mr-3 cursor-pointer"
       name="logout"
       @click.native="handleLogout"
-    />
+    /> -->
     <p class="uppercase text-lg">{{ userName }}</p>
-    <!-- <svgicon name="arrowDown"/> -->
   </div>
 </template>
 
@@ -55,5 +54,6 @@ export default {
 .user-info {
   margin-left: auto;
   @apply inline-flex text-white;
+  margin-right: 1rem;
 }
 </style>

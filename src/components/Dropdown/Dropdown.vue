@@ -1,5 +1,6 @@
 <template>
   <div
+    v-click-outside="closeDropdown"
     class="dropdown"
     @click="handleDropdownClick"
   >
@@ -9,9 +10,9 @@
       height="24"
       class="dropdown-icon"
     />
-    <div 
-      class="dropdown_triangle"
+    <div
       v-show="expanded"
+      class="dropdown_triangle"
     />
     <div
       :class="{ 'dropdown-block--inactive': !expanded }"
@@ -19,24 +20,27 @@
       class="dropdown-block"
     >
       <div
-        v-for="item in menuItems"
+        v-for="item in items"
         :key="item"
         class="dropdown-item w-screen sm:w-64"
-        @click="$emit(item)"
+        @click="handleItemClick(item)"
       >
-        <div class="item-name">{{ item }}</div>
+        {{ item }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import '@icons/arrowDown'
 import '@icons/burger'
+import vClickOutside from 'v-click-outside'
 
 export default {
+  directives: {
+    clickOutside: vClickOutside.directive
+  },
   props: {
-    menuItems: {
+    items: {
       type: Array,
       required: true
     }
@@ -49,7 +53,7 @@ export default {
   computed: {
     styleObject() {
       return {
-        height: (this.expanded ? this.menuItems.length * 2.5 : 0) + 'rem'
+        height: (this.expanded ? this.items.length * 2.5 : 0) + 'rem'
       }
     }
   },
@@ -57,8 +61,11 @@ export default {
     handleDropdownClick() {
       this.expanded = !this.expanded
     },
-    handleDropdownClose() {
-      this.expanded = false
+    handleItemClick(item) {
+      this.$emit('clicked', item)
+    },
+    closeDropdown() {
+      if (this.expanded) this.expanded = false
     }
   }
 }
@@ -126,9 +133,4 @@ export default {
   color: config('colors.table-bg');
   background-color: config('colors.text-primary');
 }
-
-.item-name {
-  margin: 0 auto;
-}
-
 </style>

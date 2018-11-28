@@ -6,7 +6,7 @@
       width="141"
       height="33" />
     <UserInfo />
-    <Dropdown :menu-items="['SWITCH ACCOUNTS', 'SETTINGS', 'FAQ', 'LOG OUT']"/>
+    <Dropdown :items="menuItems" @clicked="handleDropdownClick"/>
   </div>
 </template>
 
@@ -17,7 +17,15 @@ import '@icons/bitshares'
 
 export default {
   name: 'Header',
-  components: { UserInfo, Dropdown }
+  components: { UserInfo, Dropdown },
+  data: () => ({
+    menuItems: ['BACKUP', 'LOG OUT']
+  }),
+  methods: {
+    handleDropdownClick(item) {
+      console.log(item)
+    }
+  }
 }
 </script>
 
