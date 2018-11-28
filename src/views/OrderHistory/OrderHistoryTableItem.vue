@@ -25,7 +25,7 @@
       </div>
       <div class="table-item text-right">
         <TwoLineItem
-          :top="price"
+          :top="item.order === 'buy' ? get : spend"
           :bottom="fullCloseTitle"
         />
       </div>
