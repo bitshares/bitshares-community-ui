@@ -53,6 +53,7 @@ export default {
   }
 }
 .user-info {
+  margin-left: auto;
   @apply inline-flex text-white;
 }
 </style>

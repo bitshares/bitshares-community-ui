@@ -5,10 +5,8 @@
       color="white"
       width="141"
       height="33" />
-    <div>
       <UserInfo />
       <Dropdown :menu-items="['SWITCH ACCOUNTS', 'SETTINGS', 'FAQ', 'LOG OUT']"/>
-    </div>
   </div>
 </template>
 
