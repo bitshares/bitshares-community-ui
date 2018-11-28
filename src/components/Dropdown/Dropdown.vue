@@ -1,5 +1,6 @@
 <template>
   <div
+    class="dropdown"
     @click="handleDropdownClick"
   >
     <svgicon
@@ -8,11 +9,15 @@
       height="24"
       class="dropdown-icon"
     />
+    <div 
+      class="dropdown_triangle"
+      v-show="expanded"
+    />
     <div
-      :class="dropdownActive ? 'dropdown--active' : 'dropdown--inactive'"
-      class="dropdown-block "
+      :class="{ 'dropdown-block--inactive': !expanded }"
+      :style="styleObject"
+      class="dropdown-block"
     >
-      <div class="triangle" />
       <div
         v-for="item in menuItems"
         :key="item"
@@ -20,12 +25,6 @@
         @click="$emit(item)"
       >
         <div class="item-name">{{ item }}</div>
-        <svgicon
-          name="arrowDown"
-          width="12"
-          height="12"
-          class="submenu-icon"
-        />
       </div>
     </div>
   </div>
@@ -44,68 +43,82 @@ export default {
   },
   data: () => {
     return {
-      dropdownActive: false
+      expanded: false
+    }
+  },
+  computed: {
+    styleObject() {
+      return {
+        height: (this.expanded ? this.menuItems.length * 2.5 : 0) + 'rem'
+      }
     }
   },
   methods: {
     handleDropdownClick() {
-      this.dropdownActive = !this.dropdownActive
+      this.expanded = !this.expanded
     },
     handleDropdownClose() {
-      this.dropdownActive = false
+      this.expanded = false
     }
   }
 }
 </script>
 
 <style lang="scss">
-.submenu-icon {
-  transform: translate(0, 0.1875rem) rotate(-90deg);
-  color: config('colors.mobile-footer');
+
+.dropdown {
+  position: relative;
+  user-select: none;
 }
 
 .dropdown-icon {
   color: config('colors.text-primary');
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8
+  }
 }
 
-.dropdown-icon:hover {
-  cursor: pointer;
-  opacity: 0.8
-}
-
-.dropdown--active {
+.dropdown-block {
   display: block;
   color: config('colors.text-primary');
-  position:fixed;
+  position:absolute;
+  right: 0;
+  top: 100%;
   z-index: 2;
-  transform: translate(-92%, 10%);
+  margin-top: 0.75rem;
   background-color: config('colors.mobile-footer');
-  padding: 0.9375rem 0 0.9375rem 0;
+  transition: height 0.15s, opacity 0.15s;
+  overflow: hidden;
+  &--inactive {
+    height: 0;
+    opacity: 0;
+  }
 }
 
-.dropdown--inactive {
-  display: none;
-}
-
-.triangle {
-  width: 0;
+.dropdown_triangle {
   border-left: 0.625rem solid transparent;
   border-right: 0.625rem solid transparent;
   border-bottom: 0.625rem solid config('colors.mobile-footer');
-  margin: 0 0 0 auto;
-  transform: translate(-0.9375rem, -1.5625rem)
+  position: absolute;
+  right: 0.1rem;
+  top: 100%;
+  margin-top: 0.2rem;
 }
 
 .dropdown-item {
   display:flex;
-  justify-content: space-between;
-  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.2rem;
+  height: 2.5rem;
   font-size: 1.125rem;
   font-weight: 500;
-  padding: 1.063rem 0.4rem 1.063rem 1.063rem;
-  border-bottom: solid;
-  border-bottom-width: 0.063rem;
-  border-bottom-color: config('colors.divider');
+  border-bottom: 0.063rem solid config('colors.divider');
+  transition: background-color 0.1s, color 0.1s;
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 .dropdown-item:hover {

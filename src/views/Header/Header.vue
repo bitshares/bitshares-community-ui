@@ -5,8 +5,8 @@
       color="white"
       width="141"
       height="33" />
-      <UserInfo />
-      <Dropdown :menu-items="['SWITCH ACCOUNTS', 'SETTINGS', 'FAQ', 'LOG OUT']"/>
+    <UserInfo />
+    <Dropdown :menu-items="['SWITCH ACCOUNTS', 'SETTINGS', 'FAQ', 'LOG OUT']"/>
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
 
 <style>
 .header {
-  @apply px-2 py-3;
+  @apply py-3;
   justify-content: space-between;
   align-items: flex-end;
 }
