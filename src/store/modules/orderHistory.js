@@ -26,10 +26,10 @@ const getters = {
     return {
       payAssetSymbol: assetPays.symbol,
       receiveAssetSymbol: assetReceives.symbol,
-      get: amountReceives.toFixed(8).replace(/\.?0+$/, ''),
-      spend: amountPays.toFixed(8).replace(/\.?0+$/, ''),
-      price: price.toFixed(5),
-      avg: avg.toFixed(5),
+      get: amountReceives,
+      spend: amountPays,
+      price,
+      avg,
       order: type,
       dateClose: date,
       dateOpen: date
