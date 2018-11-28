@@ -5,8 +5,12 @@
     class="portfolio-item"
   >
     <div>
-      <div class="single-item" v-if="expanded">{{ item.tiker }}</div>
-      <TwoLineItem v-else :top="item.tiker"/>
+      <div
+        v-if="expanded"
+        class="single-item">{{ item.tiker }}</div>
+      <TwoLineItem
+        v-else
+        :top="item.tiker"/>
     </div>
 
     <div
@@ -29,7 +33,9 @@
         :top="formattedTokens"
         :bottom="formattedFiatValue"
       />
-      <div class="text-right single-item" v-else>{{ formattedFiatValue }}</div>
+      <div
+        v-else
+        class="text-right single-item">{{ formattedFiatValue }}</div>
     </div>
 
     <div
@@ -46,7 +52,9 @@
       >
         <div slot="bottom"><b>₿</b> {{ formattedBtcValue }}</div>
       </TwoLineItem>
-      <div v-else class="text-right single-item">{{ formattedTokenPrice }}</div>
+      <div
+        v-else
+        class="text-right single-item">{{ formattedTokenPrice }}</div>
     </div>
 
     <div
@@ -55,7 +63,9 @@
     >
       {{ item.change1.toFixed(0).toString() }}%
     </div>
-    <div class="text-right" v-show="isPricesMode && expanded">{{ item.change7.toFixed(0).toString() }}%</div>
+    <div
+      v-show="isPricesMode && expanded"
+      class="text-right">{{ item.change7.toFixed(0).toString() }}%</div>
   </div>
 </template>
 
@@ -121,7 +131,7 @@ export default {
 
 .portfolio-item {
   color: config('colors.text-primary');
-  padding: config('padding.grid-table');
+  padding: .725rem 1.5rem .525rem 1rem;
   font-size: config('textSizes.sm');
   display: grid;
   padding-left: 0;
