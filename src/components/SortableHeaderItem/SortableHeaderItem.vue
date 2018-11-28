@@ -164,7 +164,7 @@ export default {
 }
 
 ._double-title {
-  margin-left: 14px;
+  margin-left: 0.875rem;
   display: inline-block;
 
   &--marginLeft-0 {
