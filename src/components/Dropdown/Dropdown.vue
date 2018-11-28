@@ -20,12 +20,13 @@
       class="dropdown-block"
     >
       <div
-        v-for="item in items"
-        :key="item"
+        v-for="(item, index) in items"
+        :key="index"
+        :class="{ 'disabled': item.disabled }"
         class="dropdown-item w-screen sm:w-64"
-        @click="handleItemClick(item)"
+        @click="handleItemClick(item.event)"
       >
-        {{ item }}
+        {{ item.title }}
       </div>
     </div>
   </div>
@@ -61,8 +62,8 @@ export default {
     handleDropdownClick() {
       this.expanded = !this.expanded
     },
-    handleItemClick(item) {
-      this.$emit('clicked', item)
+    handleItemClick(eventName) {
+      this.$emit('clicked', eventName)
     },
     closeDropdown() {
       if (this.expanded) this.expanded = false
@@ -123,6 +124,7 @@ export default {
   font-weight: 500;
   border-bottom: 0.063rem solid config('colors.divider');
   transition: background-color 0.1s, color 0.1s;
+  text-transform: uppercase;
   &:last-child {
     border-bottom: none;
   }
