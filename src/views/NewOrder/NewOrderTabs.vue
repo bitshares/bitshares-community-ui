@@ -12,14 +12,10 @@
       @click="$emit('change', 'buy')"
     >
       <NewOrderTabsTitle
-        :title="buyTitle"
+        :title="getTitle('buy')"
         :sub-title="buyPrice"
-      />
-      <svgicon
-        width="12"
-        height="12"
-        name="high"
-        class="order-tabs-item-icon"
+        :in-active="type === 'sell'"
+        type="buy"
       />
     </div>
     <div
@@ -28,23 +24,16 @@
       @click="$emit('change', 'sell')"
     >
       <NewOrderTabsTitle
-        :title="sellTitle"
+        :title="getTitle('sell')"
         :sub-title="sellPrice"
-        :is-sell="true"
-      />
-      <svgicon
-        width="12"
-        height="12"
-        name="low"
-        class="order-tabs-item-icon"
+        :in-active="type === 'buy'"
+        type="sell"
       />
     </div>
   </div>
 </template>
 <script>
 import NewOrderTabsTitle from './NewOrderTabsTitle'
-import '@/assets/icons/low'
-import '@/assets/icons/high'
 
 export default {
   components: {
@@ -72,12 +61,9 @@ export default {
       default: 0
     }
   },
-  computed: {
-    buyTitle() {
-      return `BUY ${this.base}/${this.quote}`
-    },
-    sellTitle() {
-      return `SELL ${this.base}/${this.quote}`
+  methods: {
+    getTitle(type) {
+      return `${type.toUpperCase()} ${this.base}/${this.quote}`
     }
   }
 }
@@ -91,7 +77,7 @@ export default {
       position: relative;
       box-sizing: border-box;
       width: 50%;
-      height: 3.5625rem;
+      height: 100%;
       text-align: center;
       font-weight: config('fontWeights.extrabold');
       font-size: config('textSizes.lg');
@@ -102,10 +88,6 @@ export default {
         &:not(._inactive) {
           border-top: 0.3125rem solid config('colors.buy');
           color: config('colors.buy');
-
-          .order-tabs-subtitle {
-            color: config('colors.buy');
-          }
         }
       }
     }
@@ -114,28 +96,14 @@ export default {
         &:not(._inactive) {
           border-top: 0.3125rem solid config('colors.sell');
           color: config('colors.sell');
-
-          .order-tabs-subtitle {
-            color: config('colors.sell');
-          }
         }
       }
     }
     ._buy {
       color: rgba(121, 198, 15, .5);
-      .order-tabs-item-icon {
-        position: absolute;
-        right: 3.875rem;
-        top: 2.1875rem;
-      }
     }
     ._sell {
       color: rgba(255, 47, 47, .5);
-      .order-tabs-item-icon {
-        position: absolute;
-        left: 3.625rem;
-        top: 2.1875rem;
-      }
     }
     ._inactive {
       background: #212121;

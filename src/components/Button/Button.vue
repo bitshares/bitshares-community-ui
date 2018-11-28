@@ -128,20 +128,12 @@ export default {
   color:config('colors.bg-base');
 }
 .btn--buy {
-  width: 96%;
-  position: absolute;
-  left: 2%;
-  bottom: 0.625rem;
   background-color: config('colors.buy');
   &:hover {
     background-color: config('colors.buy');
   }
 }
 .btn--sell {
-  width: 96%;
-  position: absolute;
-  left: 2%;
-  bottom: 0.625rem;
   background-color: config('colors.sell');
   &:hover {
     background-color: config('colors.sell');

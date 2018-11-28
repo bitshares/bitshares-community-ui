@@ -16,7 +16,7 @@
     <Btn
       :type="type"
       :text="buttonTitle"
-      width="full"
+      class="new-order-button"
     >
       <span class="operation-title">{{ type }}</span>
     </Btn>
@@ -46,9 +46,6 @@ export default {
     }),
 
     buttonTitle() {
-      if (this.type === 'buy') {
-        return `${this.orderAmount} ${this.base}`
-      }
       return `${this.orderAmount} ${this.base}`
     }
   },
@@ -64,11 +61,19 @@ export default {
   .new-order {
     position: relative;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 
     .operation-title {
       font-weight: 600;
       display: inline-block;
       margin-right: 0.225rem
+    }
+    .new-order-button {
+      margin-top: auto;
+      width: 96%;
+      margin-left: 2%;
+      margin-bottom: 2%;
     }
   }
 </style>
