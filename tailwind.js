@@ -132,7 +132,7 @@ let colors = {
 
   'text-primary': '#ffffff',
   'inactive': 'rgba(255, 255, 255, 0.5)',
-  'bg-base': '#000000',
+  'bg-base': '#353535',
 
   'input-border': '#ced2d6',
   'card-background': '#000000',
@@ -154,7 +154,9 @@ let colors = {
   'star': '#a7a9ac',
   'primary': '#ffffff',
   'book-item-hover': '#000',
-  'divider': 'rgba(255, 255, 255, 0.1)'
+  'divider': 'rgba(255, 255, 255, 0.1)',
+  'deposit-green': '#79c60f',
+  'withdraw-red': '#ed1c24'
 }
 
 module.exports = {
@@ -197,7 +199,7 @@ module.exports = {
     'sm': '576px',
     'md': '768px',
     'lg': '992px',
-    'xl': '1200px'
+    'xl': '1157px'
   },
 
   /*
@@ -554,6 +556,8 @@ module.exports = {
     '32': '8rem',
     '48': '12rem',
     '64': '16rem',
+    'card-height': '25rem',
+    'card-long-height': '50.625rem',
     'full': '100%',
     'screen': '100vh'
   },
@@ -676,7 +680,7 @@ module.exports = {
     '24': '6rem',
     '32': '8rem',
 
-    'book-item-p': '0.625rem',
+    'book-item-p': '0.225rem',
     'card-ui': '0.6875rem',
     'card': '1.25rem',
     'grid-table': '0.625rem'
@@ -704,6 +708,7 @@ module.exports = {
     'small': '0.125rem',
     '1': '0.25rem',
     '2': '0.5rem',
+    'card-margin': '0.625rem',
     '3': '0.75rem',
     '4': '1rem',
     '5': '1.25rem',

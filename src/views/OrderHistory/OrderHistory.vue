@@ -1,9 +1,10 @@
 <template>
-  <div class="order-history">
-    <LoadingContainer :loading="isFetching || !items.length">
+  <div class="order-history pt-3 lg:pt-0">
+    <LoadingContainer :loading="isFetching">
       <OrderHistoryTable
-        :table-headers="tableHeaders"
+        :table-headers="expandMode ? tableHeaders : tableHeadersMini"
         :items="filteredItems"
+        :expanded="expandMode"
       />
     </LoadingContainer>
   </div>
@@ -19,15 +20,26 @@ export default {
     OrderHistoryTable,
     LoadingContainer
   },
+  props: {
+    expandMode: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       tableHeaders: [
         { title: 'Pair', field: 'payAssetSymbol', align: 'left' },
-        { title: 'Price', field: 'price', align: 'left' },
+        { title: this.expandMode ? 'Avg./Price' : 'Price', field: 'price', align: 'left' },
         { title: 'Get', field: 'get', align: 'left' },
         { title: 'Spend', field: 'spend', align: 'left' },
-        // { title: 'Open', field: 'dateOpen', align: 'left' },
+        { title: 'Open', field: 'dateOpen', align: 'right', expanded: true },
         { title: 'Closed', field: 'dateClose', align: 'right' }
+      ],
+      tableHeadersMini: [
+        { title: 'Pair', field: 'payAssetSymbol', align: 'left' },
+        { title: 'Avg./Price', field: 'price', align: 'left' },
+        { title: 'Filled/Date', field: 'filled', align: 'right' }
       ]
     }
   },
@@ -43,6 +55,11 @@ export default {
         return item.payAssetSymbol.toLowerCase().includes(search) ||
           item.receiveAssetSymbol.toLowerCase().includes(search)
       })
+    }
+  },
+  mounted() {
+    if (!this.expandMode) {
+      this.tableHeaders = this.tableHeaders.filter(field => !field.expanded)
     }
   }
 }

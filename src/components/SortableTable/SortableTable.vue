@@ -12,6 +12,7 @@
         :sort="sort.field === header.field && sort.type || ''"
         :align="header.align"
         :padding-left="header.paddingLeft"
+        :large="large"
         @click.native="toggleSort(header.field)"
       />
     </div>
@@ -60,6 +61,10 @@ export default {
     shadowerHeight: {
       type: Number,
       default: 0
+    },
+    large: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

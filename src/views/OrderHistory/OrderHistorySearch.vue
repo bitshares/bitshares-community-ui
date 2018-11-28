@@ -2,6 +2,7 @@
   <SearchInput
     :value="searchStr"
     hint="Search"
+    class="order-history-search"
     @input="changeSearchStr"
   />
 </template>
@@ -24,3 +25,8 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+  .order-history-search {
+    margin: -0.625rem 0.525rem 0 0
+  }
+</style>
