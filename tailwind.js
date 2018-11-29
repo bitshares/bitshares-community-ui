@@ -154,6 +154,7 @@ let colors = {
   'star': '#a7a9ac',
   'primary': '#ffffff',
   'book-item-hover': '#000',
+  'divider': 'rgba(255, 255, 255, 0.1)',
   'deposit-green': '#79c60f',
   'withdraw-red': '#ed1c24'
 }

@@ -4,24 +4,77 @@
     :style="styleObject"
     class="portfolio-item"
   >
-    <span>{{ item.tiker }}</span>
-    <span
+    <div>
+      <div
+        v-if="expanded"
+        class="single-item">{{ item.tiker }}</div>
+      <TwoLineItem
+        v-else
+        :top="item.tiker"/>
+    </div>
+
+    <div
       v-show="expanded"
-      class="deposit">deposit</span>
-    <span
+      class="single-item deposit">deposit</div>
+    <div
       v-show="expanded"
-      class="withdraw">withdraw</span>
-    <span v-show="isBalancesMode">{{ formattedTokens }}</span>
-    <span v-show="isBalancesMode">{{ formattedFiatValue }}</span>
-    <span v-show="isBalancesMode">{{ item.share }}%</span>
-    <span v-show="isPricesMode">{{ formattedTokenPrice }}</span>
-    <span v-show="isPricesMode">{{ item.change1.toFixed(0).toString() }}%</span>
-    <span v-show="isPricesMode">{{ item.change7.toFixed(0).toString() }}%</span>
+      class="single-item withdraw">withdraw</div>
+
+    <div
+      v-show="isBalancesMode && expanded"
+      class="text-right single-item"
+    >
+      {{ formattedTokens }}
+    </div>
+
+    <div v-show="isBalancesMode">
+      <TwoLineItem
+        v-if="!expanded"
+        :top="formattedTokens"
+        :bottom="formattedFiatValue"
+      />
+      <div
+        v-else
+        class="text-right single-item">{{ formattedFiatValue }}</div>
+    </div>
+
+    <div
+      v-show="isBalancesMode"
+      class="text-right single-item"
+    >
+      {{ item.share }}%
+    </div>
+
+    <div v-show="isPricesMode">
+      <TwoLineItem
+        v-if="!expanded"
+        :top="formattedTokenPrice"
+      >
+        <div slot="bottom"><b>₿</b> {{ formattedBtcValue }}</div>
+      </TwoLineItem>
+      <div
+        v-else
+        class="text-right single-item">{{ formattedTokenPrice }}</div>
+    </div>
+
+    <div
+      v-show="isPricesMode"
+      class="text-right single-item"
+    >
+      {{ item.change1.toFixed(0).toString() }}%
+    </div>
+    <div
+      v-show="isPricesMode && expanded"
+      class="text-right">{{ item.change7.toFixed(0).toString() }}%</div>
   </div>
 </template>
 
 <script>
+import TwoLineItem from '@/components/TwoLineItem'
+import { getFloatCurrency } from '@/helpers/utils'
+
 export default {
+  components: { TwoLineItem },
   props: {
     item: {
       type: Object,
@@ -44,16 +97,19 @@ export default {
       return this.mode === 'prices'
     },
     formattedTokens() {
-      return this.item.tokens.toFixed(2)
+      return getFloatCurrency(this.item.tokens)
     },
     formattedTokenPrice() {
-      return this.preciseFiatValue(this.item.tokenPrice || 0)
+      return '$' + this.preciseFiatValue(this.item.tokenPrice || 0)
     },
     formattedFiatValue() {
-      return this.preciseFiatValue(this.item.fiatValue || 0)
+      return '$' + this.preciseFiatValue(this.item.fiatValue || 0)
+    },
+    formattedBtcValue() {
+      return getFloatCurrency(this.item.btcValue || 0)
     },
     styleObject() {
-      const columns = this.expanded ? 6 : 4
+      const columns = this.expanded ? 6 : 3
 
       return {
         'grid-template-columns': `repeat(${columns}, 1fr)`
@@ -75,7 +131,7 @@ export default {
 
 .portfolio-item {
   color: config('colors.text-primary');
-  padding: config('padding.grid-table');
+  padding: .725rem 1.5rem .525rem 1rem;
   font-size: config('textSizes.sm');
   display: grid;
   padding-left: 0;
@@ -96,13 +152,12 @@ export default {
   }
 }
 
-.portfolio-item span {
-    padding: 0px 0px;
-
+.portfolio-item div {
     overflow: hidden;
     text-overflow: ellipsis;
-    &:not(:first-child) {
-      text-align: right;
+    &.single-item {
+      font-size: config('textSizes.xl');
+      align-self: center;
     }
 }
 

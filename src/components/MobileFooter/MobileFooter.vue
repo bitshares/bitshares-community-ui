@@ -20,8 +20,6 @@
 </template>
 
 <script>
-import '@icons/paste'
-
 export default {
   name: 'MobileFooter',
   props: {
