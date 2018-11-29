@@ -9,9 +9,7 @@
       'btn--round': type === 'round',
       'btn--secondary': type === 'secondary',
       'btn--buy': type === 'buy',
-      'btn--sell': type === 'sell',
-      'btn--buy-disabled': type === 'buy-disabled',
-      'btn--sell-disabled': type === 'sell-disabled',
+      'btn--sell': type === 'sell'
     }"
     :disabled="disabled"
     class="btn btn-blue"
