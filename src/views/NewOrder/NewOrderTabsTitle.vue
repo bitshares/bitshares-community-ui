@@ -69,7 +69,7 @@ export default {
       }
       &._inactive {
         .order-tabs-subtitle {
-          color: rgba(121, 198, 15, 0.5);
+          color: config('colors.buy-disabled');
         }
       }
     }
@@ -83,7 +83,7 @@ export default {
       }
       &._inactive {
         .order-tabs-subtitle {
-          color:rgba(255, 47, 47, 0.5);
+          color: config('colors.sell-disabled');
         }
       }
     }

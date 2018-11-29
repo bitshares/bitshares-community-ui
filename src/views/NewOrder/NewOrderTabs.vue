@@ -85,6 +85,7 @@ export default {
     }
     &--buy {
       .order-tabs-item {
+        border-top: 0.3125rem solid transparent;
         &:not(._inactive) {
           border-top: 0.3125rem solid config('colors.buy');
           color: config('colors.buy');
@@ -93,6 +94,7 @@ export default {
     }
     &--sell {
       .order-tabs-item {
+        border-top: 0.3125rem solid transparent;
         &:not(._inactive) {
           border-top: 0.3125rem solid config('colors.sell');
           color: config('colors.sell');
@@ -100,10 +102,10 @@ export default {
       }
     }
     ._buy {
-      color: rgba(121, 198, 15, .5);
+      color: config('colors.buy-disabled');
     }
     ._sell {
-      color: rgba(255, 47, 47, .5);
+      color: config('colors.sell-disabled');
     }
     ._inactive {
       background: #212121;

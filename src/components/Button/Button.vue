@@ -10,6 +10,8 @@
       'btn--secondary': type === 'secondary',
       'btn--buy': type === 'buy',
       'btn--sell': type === 'sell',
+      'btn--buy-disabled': type === 'buy-disabled',
+      'btn--sell-disabled': type === 'sell-disabled',
     }"
     :disabled="disabled"
     class="btn btn-blue"
@@ -133,10 +135,22 @@ export default {
     background-color: config('colors.buy');
   }
 }
+.btn--buy-disabled {
+  background-color: config('colors.buy-disabled');
+  &:hover {
+    background-color: config('colors.buy-disabled');
+  }
+}
 .btn--sell {
   background-color: config('colors.sell');
   &:hover {
     background-color: config('colors.sell');
+  }
+}
+.btn--sell-disabled {
+  background-color: config('colors.sell-disabled');
+  &:hover {
+    background-color: config('colors.sell-disabled');
   }
 }
 .spinner {

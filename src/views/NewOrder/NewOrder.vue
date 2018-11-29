@@ -13,13 +13,15 @@
       :active="activeIndication"
       @change="setActiveIndication"
     />
-    <Btn
-      :type="type"
-      :text="buttonTitle"
-      class="new-order-button"
-    >
-      <span class="operation-title">{{ type }}</span>
-    </Btn>
+    <div class="new-order-button">
+      <Btn
+        :type="type"
+        :text="buttonTitle"
+        width="full"
+      >
+        <span class="operation-title">{{ type }}</span>
+      </Btn>
+    </div>
   </div>
 </template>
 <script>
@@ -71,9 +73,7 @@ export default {
     }
     .new-order-button {
       margin-top: auto;
-      width: 96%;
-      margin-left: 2%;
-      margin-bottom: 2%;
+      padding: 0.5rem;
     }
   }
 </style>
