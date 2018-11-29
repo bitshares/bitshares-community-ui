@@ -99,6 +99,20 @@ export default {
   @apply pointer-events-none;
   color: config('colors.button-text-disabled');
   background-color: config('colors.button-bg-disabled');
+  &.btn--buy {
+    color: rgba(0,0,0,.5);
+    background-color: config('colors.buy-disabled');
+    &:hover {
+      background-color: config('colors.buy-disabled');
+    }
+  }
+  &.btn--sell {
+    color: rgba(0,0,0,.5);
+    background-color: config('colors.sell-disabled');
+    &:hover {
+      background-color: config('colors.sell-disabled');
+    }
+  }
 }
 .btn--small {
   @apply py-1 pr-4 cursor-pointer text-xs;
@@ -135,22 +149,10 @@ export default {
     background-color: config('colors.buy');
   }
 }
-.btn--buy-disabled {
-  background-color: config('colors.buy-disabled');
-  &:hover {
-    background-color: config('colors.buy-disabled');
-  }
-}
 .btn--sell {
   background-color: config('colors.sell');
   &:hover {
     background-color: config('colors.sell');
-  }
-}
-.btn--sell-disabled {
-  background-color: config('colors.sell-disabled');
-  &:hover {
-    background-color: config('colors.sell-disabled');
   }
 }
 .spinner {
