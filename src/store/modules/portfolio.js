@@ -32,6 +32,13 @@ const getters = {
     return fiatValue / (10 ** fiatAsset.precision)
   },
 
+  getBalanceBtcValue: (state, getters, rootState, rootGetters) => (baseValue) => {
+    const multiplier = rootGetters['history/getHistoryAssetMultiplier'](1, '1.3.861').last
+    const btcValue = parseFloat((baseValue * multiplier).toFixed(0), 10)
+    const btcAsset = rootGetters['assets/getAssetById']('1.3.861')
+    return btcValue / (10 ** btcAsset.precision)
+  },
+
   getPriceChangeById: (state, getters, rootState, rootGetters) => ({ days, assetId }) => {
     const multiplier = rootGetters['history/getHistoryAssetMultiplier'](1, state.fiatId)
     const prices = rootGetters['history/getByDay'](days)[assetId]
@@ -51,6 +58,7 @@ const getters = {
       const tokens = balance / 10 ** asset.precision
       const baseValue = getters.getBalanceBaseValue({ assetId, value: balance })
       const fiatValue = getters.getBalanceFiatValue(baseValue)
+      const btcValue = getters.getBalanceBtcValue(baseValue / tokens)
       const tokenPrice = fiatValue / tokens
       const change7 = getters.getPriceChangeById({ assetId, days: 7 })
       const change1 = getters.getPriceChangeById({ assetId, days: 1 })
@@ -61,6 +69,7 @@ const getters = {
         tiker: asset.symbol,
         tokens,
         fiatValue,
+        btcValue,
         baseValue,
         share,
         tokenPrice,

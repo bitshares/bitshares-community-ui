@@ -4,6 +4,7 @@
       <div class="login__title">Login</div>
       <Tabs
         :tabs="['simple cloud', 'secure key']"
+        :active="type"
         @change="changeLoginType">
 
         <div
@@ -147,7 +148,7 @@ export default {
       pin: '',
       confirmPin: '',
       inProgress: false,
-      type: 'password',
+      type: 'simple cloud',
       file: null,
       showFileField: true
     }
@@ -227,7 +228,6 @@ export default {
   }
   .login {
     @apply max-w-sm w-full shadow-md;
-    border: 1px solid config('colors.card-border');
     border-radius: 2px;
     background-color: black;
     &__title {

@@ -12,20 +12,22 @@
       class="order-book-table-item"
     >
       <span class="order-book-item-sum">
-        {{ item.sum }}
+        {{ sum }}
       </span>
-      {{ item.price }}
+      <span class="order-book-item-price">
+        {{ price }}
+      </span>
     </div>
   </div>
 </template>
 <script>
+import { getFloatCurrency } from '@/helpers/utils'
+
 export default {
   props: {
     item: {
       type: Object,
-      default() {
-        return {}
-      }
+      required: true
     },
     align: {
       type: String,
@@ -45,6 +47,12 @@ export default {
     }
   },
   computed: {
+    sum() {
+      return getFloatCurrency(this.item.sum)
+    },
+    price() {
+      return getFloatCurrency(this.item.price)
+    },
     gradientDirection() {
       return this.type === 'sell' ? 'to right' : 'to left'
     },
@@ -67,9 +75,9 @@ export default {
 <style lang="scss">
   .order-book-table-row {
     display: flex;
-    height: 26px;
-    line-height: 26px;
+    font-size: config('textSizes.sm');
     .order-book-table-item {
+      padding: 0.3rem 0;
       flex: 1;
       cursor: pointer;
       .order-book-item-sum {
@@ -94,7 +102,7 @@ export default {
         margin-right: config('margin.book-item-m');
         padding-right: config('padding.book-item-p');
         .order-book-item-sum {
-          margin-left: config('margin.book-item-m10');
+          margin-left: 1rem;
           float: left;
         }
       }

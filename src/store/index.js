@@ -2,8 +2,10 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import app from './modules/app'
 import portfolio from './modules/portfolio'
-import books from './modules/books'
+import backup from './modules/backup'
+import orderBook from './modules/orderBook'
 import orderHistory from './modules/orderHistory'
+import activeOrders from './modules/activeOrders'
 import createPersistedState from 'vuex-persistedstate'
 import vuexBitshares from 'vuex-bitshares'
 import Cookies from 'js-cookie'
@@ -21,8 +23,10 @@ const store = new Vuex.Store({
     app,
     marketsMonitor,
     portfolio,
-    books,
+    backup,
+    orderBook,
     orderHistory,
+    activeOrders,
     ...modules
   },
   plugins: [

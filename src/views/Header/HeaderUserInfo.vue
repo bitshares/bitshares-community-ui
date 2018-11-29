@@ -1,22 +1,11 @@
 <template>
   <div class="user-info">
-    <!-- <svgicon name="userIcon"/> -->
-    <svgicon
-      v-show="userName"
-      class="mr-3 cursor-pointer"
-      name="logout"
-      @click.native="handleLogout"
-    />
     <p class="uppercase text-lg">{{ userName }}</p>
-    <!-- <svgicon name="arrowDown"/> -->
   </div>
 </template>
 
-<script type="text/javascript">
-import { mapGetters, mapActions } from 'vuex'
-import '@icons/userIcon'
-import '@icons/arrowDown'
-import '@icons/logout'
+<script>
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'UserInfo',
@@ -26,9 +15,6 @@ export default {
     })
   },
   methods: {
-    ...mapActions({
-      logout: 'acc/logout'
-    }),
     handleLogout() {
       this.$router.push({ name: 'login' })
       this.logout()
@@ -37,9 +23,10 @@ export default {
 }
 </script>
 
-<style scoped>
-  .user-info {
-    @apply inline-flex text-white;
-
-  }
+<style lang="scss" scoped>
+.user-info {
+  margin-left: auto;
+  @apply inline-flex text-white;
+  margin-right: 1rem;
+}
 </style>

@@ -30,7 +30,7 @@ export default {
     }
   },
   pin: {
-    title: 'create pin code',
+    title: 'new pin code',
     tip: 'PIN code encrypts the private key, stored on this device',
     validation: {
       required: 'Enter PIN',
@@ -43,5 +43,8 @@ export default {
       sameAsPin: 'PIN codes do not match'
 
     }
+  },
+  search: {
+    title: 'search'
   }
 }

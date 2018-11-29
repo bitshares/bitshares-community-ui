@@ -4,6 +4,7 @@
       'header-item--left-aligned': align === 'left',
       'header-item--center-aligned': align === 'center',
       'header-item--right-aligned': align === 'right',
+      'header-item--large': large,
     }"
     :style="styleObject"
     class="header-item">
@@ -54,6 +55,10 @@ export default {
       type: Number,
       required: false,
       default: 0
+    },
+    large: {
+      type: Boolean,
+      required: true
     }
   },
   computed: {
@@ -84,11 +89,15 @@ export default {
   &--right-aligned {
     justify-content: flex-end;
   }
+  &--large {
+    font-size: config('textSizes.base');
+  }
 }
 
 .header-item__title {
   position: relative;
   white-space: nowrap;
+  letter-spacing: -0.0455rem;
 }
 
 .header-item__arrows {
