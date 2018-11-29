@@ -43,5 +43,8 @@ export default {
       sameAsPin: 'PIN codes do not match'
 
     }
+  },
+  search: {
+    title: 'search'
   }
 }

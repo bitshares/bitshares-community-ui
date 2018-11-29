@@ -3,23 +3,24 @@
     :class="{'two-line-item--expanded': expanded}"
     class="two-line-item"
   >
-    <slot name="top">
-      <div class="two-line-item-top">{{ top }}</div>
-    </slot>
-    <slot name="bottom">
-      <div class="two-line-item-bottom">{{ bottom }}</div>
-    </slot>
+
+    <div class="two-line-item-top">
+      <slot name="top">{{ top }}</slot>
+    </div>
+    <div class="two-line-item-bottom">
+      <slot name="bottom">{{ bottom }}</slot>
+    </div>
   </div>
 </template>
 <script>
 export default {
   props: {
     top: {
-      type: String,
+      type: [String, Number],
       default: ''
     },
     bottom: {
-      type: String,
+      type: [String, Number],
       default: ''
     },
     expanded: {

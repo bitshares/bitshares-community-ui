@@ -26,7 +26,7 @@
         </Card>
         <Card
           collapsible
-          class="lg:w-2/3 disabled"
+          class="lg:w-2/3"
           title="Graph"
         />
 

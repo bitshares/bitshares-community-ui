@@ -24,11 +24,11 @@ export default {
 <style lang="scss">
 .link-button {
   cursor: pointer;
-  @apply font-gotham text-xs;
+  @apply font-gotham text-xs-sm;
   color: config('colors.text-primary');
   opacity: 0.5;
   text-transform: uppercase;
-  letter-spacing: -0.6px;
+  letter-spacing: -0.7px;
   transition: opacity 0.15s;
   padding-bottom: 1px;
   user-select: none;
