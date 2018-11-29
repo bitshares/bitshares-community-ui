@@ -10,14 +10,17 @@
           class="tickers__favourite"
           @click.stop.native="$emit('change', { item })"
         />
-        <div class="tickers-list__itemPair pl-6">
-          <span class="_currencyTitle">{{ item.ticker }}</span>
-        </div>
-        <div class="_tickerTitle tickers-list__itemVolume pl-6"> /{{ item.base }}</div>
+        <TwoLineItem
+          :top="item.ticker"
+          :bottom="base"
+          class="pl-6"
+        />
       </div>
       <div class="tickers-list__item _alignRight">
-        <div class="_currencyTitle">{{ +item.price }}</div>
-        <div class="_tickerTitle tickers-list__itemVolume">${{ item.usdPrice.toFixed(2) }}</div>
+        <TwoLineItem
+          :top="price"
+          :bottom="usdPrice"
+        />
       </div>
       <div class="tickers-list__item _alignRight">
         <div class="tickers-list__itemVolume">{{ volUsd }}</div>
@@ -25,7 +28,7 @@
       <div class="tickers-list__item _alignRight">
         <div
           :class="getClassesOfDynamic({ price: item.change24h })"
-          class="_currencyTitle">
+          class="tickers-list__itemVolume _currencyTitle">
           {{ changeValue24 }}
         </div>
       </div>
@@ -74,10 +77,13 @@
 </template>
 <script>
 import Star from '@/components/Star'
+import TwoLineItem from '@/components/TwoLineItem/TwoLineItem'
+import { getFloatCurrency } from '@/helpers/utils'
 
 export default {
   components: {
-    Star
+    Star,
+    TwoLineItem
   },
   props: {
     isFavourite: {
@@ -109,6 +115,17 @@ export default {
       default: false
     }
   },
+  computed: {
+    price() {
+      return getFloatCurrency(this.item.price)
+    },
+    usdPrice() {
+      return getFloatCurrency(this.item.usdPrice)
+    },
+    base() {
+      return `/${this.item.base}`
+    }
+  },
   methods: {
     getClassesOfDynamic({ price }) {
       return {
@@ -123,7 +140,7 @@ export default {
   .tickers__favourite {
     position: absolute;
     left: 0;
-    top: 4px;
+    top: 0.75rem;
   }
   .tickers-list__item {
     font-weight: config('fontWeights.semibold');
@@ -136,9 +153,8 @@ export default {
   }
 
   .tickers-list__itemVolume {
-    font-size: config('textSizes.xs');
-    color: config('colors.white');
-    opacity: .8;
+    font-size: config('textSizes.lg');
+    color: config('colors.primary');
   }
 
   .tickers-list__itemPair {
@@ -147,6 +163,7 @@ export default {
   }
   .tickers-list-row {
     display: grid;
+    align-items: center;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     padding: 0.4375rem 1rem .4375rem .54rem;
     transition: background 0.2s ease;
