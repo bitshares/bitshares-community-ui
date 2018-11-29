@@ -72,6 +72,7 @@ export default {
       return this.favouritesMode ? this.favourites : this.list
     },
     filteredItems() {
+      console.log(this.itemsList.filter(item => item.ticker.toLowerCase().includes(this.searchStr.toLowerCase())))
       return this.itemsList.filter(item => item.ticker.toLowerCase().includes(this.searchStr.toLowerCase()))
     }
   },

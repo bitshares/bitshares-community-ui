@@ -12,20 +12,24 @@
         />
         <TwoLineItem
           :top="item.ticker"
-          :bottom="base"
+          :padding-off="true"
           class="pl-6"
-        />
+        >
+          <span slot="bottom">/{{ item.base }}</span>
+        </TwoLineItem>
       </div>
-      <div class="tickers-list__item _alignRight">
+      <div class="tickers-list__item">
         <TwoLineItem
           :top="price"
-          :bottom="usdPrice"
-        />
+          :padding-off="true"
+        >
+          <span slot="bottom">${{ item.usdPrice }}</span>
+        </TwoLineItem>
       </div>
-      <div class="tickers-list__item _alignRight">
+      <div class="tickers-list__item text-right _verticalCenter">
         <div class="tickers-list__itemVolume">{{ volUsd }}</div>
       </div>
-      <div class="tickers-list__item _alignRight">
+      <div class="tickers-list__item text-right _verticalCenter">
         <div
           :class="getClassesOfDynamic({ price: item.change24h })"
           class="tickers-list__itemVolume _currencyTitle">
@@ -53,23 +57,23 @@
         <div class="tickers-list__itemVolume">{{ volUsd }}</div>
       </div>
       <div class="tickers-list__item">
-        <div class="tickers-list__itemVolume">{{ usdPrice }}</div>
+        <div class="tickers-list__itemVolume">{{ price }}</div>
       </div>
-      <div class="tickers-list__item _alignCenter">
+      <div class="tickers-list__item text-center">
         <div
           :class="getClassesOfDynamic({ price: item.change24h })"
           class="_currencyTitle">
           {{ changeValue24 }}
         </div>
       </div>
-      <div class="tickers-list__item _alignCenter">
+      <div class="tickers-list__item text-center">
         <div
           :class="getClassesOfDynamic({ price: item.change7d })"
           class="_currencyTitle">
           {{ changeValue7 }}
         </div>
       </div>
-      <!-- <div class="tickers-list__item _alignRight">
+      <!-- <div class="tickers-list__item text-right">
         <div class="tickers-list__itemVolume">{{ marketCap }}</div>
       </div> -->
     </div>
@@ -117,13 +121,7 @@ export default {
   },
   computed: {
     price() {
-      return getFloatCurrency(this.item.price).toString()
-    },
-    usdPrice() {
-      return (getFloatCurrency(this.item.usdPrice) || 0).toString()
-    },
-    base() {
-      return `/${this.item.base}`
+      return getFloatCurrency(this.item.price)
     }
   },
   methods: {
@@ -140,7 +138,7 @@ export default {
   .tickers__favourite {
     position: absolute;
     left: 0;
-    top: 0.75rem;
+    top: .6rem;
   }
   .tickers-list__item {
     font-weight: config('fontWeights.semibold');
@@ -163,7 +161,6 @@ export default {
   }
   .tickers-list-row {
     display: grid;
-    align-items: center;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     padding: 0.4375rem 1rem .4375rem .54rem;
     transition: background 0.2s ease;
@@ -173,16 +170,6 @@ export default {
       position: relative;
       z-index: 2;
       background: #131313;
-    }
-    ._alignRight {
-      text-align: right;
-    }
-    ._alignCenter {
-      text-align: center;
-    }
-    ._tickerTitle {
-      font-size: config('textSizes.xs');
-      color: config('colors.inactive');
     }
     ._currencyTitle {
       color: config('colors.white');
@@ -200,6 +187,10 @@ export default {
     ._flex05 {
       flex: .7;
     }
+    ._verticalCenter {
+      min-height: 2.125rem;
+      line-height: 2.125rem;
+    }
   }
   .ticker-list-row_expanded {
     .tickers-list-row {
@@ -211,7 +202,7 @@ export default {
         .tickers__favourite {
           position: absolute;
           left: 0;
-          top: 0.1875rem;
+          top: .35rem;
         }
         .tickers-list__itemVolume {
           font-size: 1.5625rem;
@@ -223,7 +214,7 @@ export default {
           font-size: config('textSizes.base');
         }
         ._drop {
-          font-size: config('textSizes.xl');
+          font-size: 1.5625rem;
         }
         ._increase {
           font-size: 1.5625rem;
