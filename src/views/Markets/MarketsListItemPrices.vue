@@ -217,7 +217,7 @@ export default {
           font-size: 1.5625rem;
         }
         ._currencyTitle {
-          font-size: config('textSizes.xl');
+          font-size: 1.5625rem;
         }
         ._tickerTitle {
           font-size: config('textSizes.base');
