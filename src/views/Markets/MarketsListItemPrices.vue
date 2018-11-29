@@ -53,7 +53,7 @@
         <div class="tickers-list__itemVolume">{{ volUsd }}</div>
       </div>
       <div class="tickers-list__item">
-        <div class="tickers-list__itemVolume">${{ item.usdPrice.toFixed(2) }}</div>
+        <div class="tickers-list__itemVolume">{{ usdPrice }}</div>
       </div>
       <div class="tickers-list__item _alignCenter">
         <div
@@ -117,10 +117,10 @@ export default {
   },
   computed: {
     price() {
-      return getFloatCurrency(this.item.price)
+      return getFloatCurrency(this.item.price).toString()
     },
     usdPrice() {
-      return getFloatCurrency(this.item.usdPrice)
+      return (getFloatCurrency(this.item.usdPrice) || 0).toString()
     },
     base() {
       return `/${this.item.base}`
@@ -211,19 +211,22 @@ export default {
         .tickers__favourite {
           position: absolute;
           left: 0;
-          top: -1px;
+          top: 0.1875rem;
         }
         .tickers-list__itemVolume {
-          font-size: config('textSizes.xl')
+          font-size: 1.5625rem;
         }
         ._currencyTitle {
-          font-size: config('textSizes.xl')
+          font-size: config('textSizes.xl');
+        }
+        ._tickerTitle {
+          font-size: config('textSizes.base');
         }
         ._drop {
           font-size: config('textSizes.xl');
         }
         ._increase {
-          font-size: config('textSizes.xl');
+          font-size: 1.5625rem;
         }
       }
     }
