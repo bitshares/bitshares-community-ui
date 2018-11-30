@@ -30,8 +30,7 @@
       </div>
     </div>
     <!--SECOND FIELD-->
-    <span v-if="item.secondField && currentField !== item.field && currentField !== item.secondField">/</span>
-    <span v-if="item.secondField && currentField === item.secondField">/</span>
+    <span v-if="secondFieldActive || secondFieldNotActive">/</span>
     <div
       v-if="item.secondTitle"
       :class="{
@@ -102,6 +101,12 @@ export default {
       return {
         'padding-left': `${this.paddingLeft}rem`
       }
+    },
+    secondFieldActive() {
+      return this.item.secondField && this.currentField === this.item.secondField
+    },
+    secondFieldNotActive() {
+      return this.item.secondField && (this.currentField !== this.item.field) && (this.currentField !== this.item.secondField)
     }
   }
 }

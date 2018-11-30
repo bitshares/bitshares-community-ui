@@ -10,7 +10,7 @@
         :key="index"
         :item="header"
         :current-field="sort.field"
-        :sort="(sort.field === header.secondField && sort.type || '') || (sort.field === header.field && sort.type || '')"
+        :sort="getSort(header)"
         :align="header.align"
         :padding-left="header.paddingLeft"
         :large="large"
@@ -100,6 +100,9 @@ export default {
       }
       this.sort.field = field
       this.sort.type = 'desc'
+    },
+    getSort(header) {
+      return ((this.sort.field === header.secondField && this.sort.type) || '') || ((this.sort.field === header.field && this.sort.type) || '')
     }
   }
 }
