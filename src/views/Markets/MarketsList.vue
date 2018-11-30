@@ -58,10 +58,10 @@ export default {
       },
       marketsField: {
         small: [
-          { title: 'Pair', field: 'ticker', align: 'left', paddingLeft: 1.5 },
+          { title: 'Pair', field: 'ticker', align: 'left', paddingLeft: 1.5, secondTitle: '7d', secondField: 'custom' },
           { title: 'Price, USD', field: 'usdPrice', align: 'left' },
           { title: 'Vol, USD', field: 'usdVolume', align: 'right' },
-          { title: '24h', field: 'change24h', align: 'right' }
+          { title: '24h', field: 'change24h', align: 'right', secondTitle: '7d', secondField: 'change7d' }
         ],
         large: [
           { title: 'Name', field: 'ticker', align: 'left', paddingLeft: 1.5 },

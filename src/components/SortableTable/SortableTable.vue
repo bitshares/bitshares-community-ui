@@ -8,12 +8,13 @@
       <SortableHeaderItem
         v-for="(header, index) in headers"
         :key="index"
-        :title="header.title"
-        :sort="sort.field === header.field && sort.type || ''"
+        :item="header"
+        :current-field="sort.field"
+        :sort="(sort.field === header.secondField && sort.type || '') || (sort.field === header.field && sort.type || '')"
         :align="header.align"
         :padding-left="header.paddingLeft"
         :large="large"
-        @click.native="toggleSort(header.field)"
+        @change="toggleSort"
       />
     </div>
     <ScrollingContainer :shadower-height="shadowerHeight || 15">
