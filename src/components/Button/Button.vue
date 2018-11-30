@@ -7,7 +7,9 @@
       'btn--big': size === 'big',
       'btn--wide': width === 'full',
       'btn--round': type === 'round',
-      'btn--secondary': type === 'secondary'
+      'btn--secondary': type === 'secondary',
+      'btn--buy': type === 'buy',
+      'btn--sell': type === 'sell'
     }"
     :disabled="disabled"
     class="btn btn-blue"
@@ -18,6 +20,7 @@
       color="black"
     />
     <span v-else>
+      <slot />
       {{ text }}
     </span>
   </button>
@@ -94,6 +97,20 @@ export default {
   @apply pointer-events-none;
   color: config('colors.button-text-disabled');
   background-color: config('colors.button-bg-disabled');
+  &.btn--buy {
+    color: rgba(0,0,0,.5);
+    background-color: config('colors.buy-disabled');
+    &:hover {
+      background-color: config('colors.buy-disabled');
+    }
+  }
+  &.btn--sell {
+    color: rgba(0,0,0,.5);
+    background-color: config('colors.sell-disabled');
+    &:hover {
+      background-color: config('colors.sell-disabled');
+    }
+  }
 }
 .btn--small {
   @apply py-1 pr-4 cursor-pointer text-xs;
@@ -123,6 +140,18 @@ export default {
 .btn--secondary:hover {
   background-color:config('colors.primary');
   color:config('colors.bg-base');
+}
+.btn--buy {
+  background-color: config('colors.buy');
+  &:hover {
+    background-color: config('colors.buy');
+  }
+}
+.btn--sell {
+  background-color: config('colors.sell');
+  &:hover {
+    background-color: config('colors.sell');
+  }
 }
 .spinner {
   margin-right: 10px;

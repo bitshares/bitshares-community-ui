@@ -24,7 +24,6 @@
             slot="modal"
             :expanded="true"/>
         </Card>
-
         <Card
           collapsible
           class="lg:w-2/3"
@@ -33,7 +32,6 @@
 
       </div>
       <div class="flex flex-col lg:flex-row mb-card-margin">
-
         <Card
           :expandable="true"
           :long="true"
@@ -51,13 +49,12 @@
 
         <div class="flex lg:w-2/3">
           <div class="flex flex-col lg:w-1/2 mr-card-margin">
-
             <Card
               collapsible
-              title="new order"
               class="mb-card-margin"
-            />
-
+            >
+              <NewOrder slot="body"/>
+            </Card>
             <Card
               :expandable="true"
               collapsible
@@ -120,6 +117,7 @@ import ActiveOrdersSearch from '@/views/ActiveOrders/ActiveOrdersSearch'
 import Backup from '@/views/Backup/Backup'
 import Modal from '@/components/Modal/Modal'
 import Mobile from '@/views/Mobile/Mobile'
+import NewOrder from '@/views/NewOrder/NewOrder'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -140,7 +138,8 @@ export default {
     ActiveOrdersSearch,
     Backup,
     Modal,
-    Mobile
+    Mobile,
+    NewOrder
   },
   data() {
     return {}

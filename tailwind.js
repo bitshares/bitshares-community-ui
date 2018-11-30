@@ -44,8 +44,10 @@ View the full documentation at https://tailwindcss.com.
 let colors = {
   'transparent': 'transparent',
 
-  'buy': '#79c610',
-  'sell': '#ff3030',
+  'buy': 'rgb(121,198,16)',
+  'buy-disabled': 'rgba(121,198,16,.5)',
+  'sell': 'rgb(255,48,48)',
+  'sell-disabled': 'rgb(255,48,48,.5)',
   'black': '#22292f',
   'grey-darkest': '#3d4852',
   'grey-darker': '#606f7b',

@@ -36,7 +36,10 @@
         </div>
       </Modal>
 
-      <div class="card-header">
+      <div
+        v-if="title"
+        class="card-header"
+      >
         <div class="title">
           <div> {{ title }} </div>
         </div>
@@ -68,6 +71,7 @@
       <transition name="fade">
         <div
           v-if="!collapsed"
+          :class="{'no-pt': !title}"
           class="card-body"
         >
           <slot name="body" />
@@ -214,7 +218,31 @@ export default {
   margin-left: auto;
 }
 
-.card--collapsed {
+.card-body {
+  @apply pt-3;
+  height: 100%;
+  overflow: hidden;
+
+  &.no-pt {
+    @apply pt-0;
+  }
+}
+
+.collapse-btn {
+  transform: rotate(-90deg);
+  transition: 0.2s;
+  margin: 0 auto 0 0.1875em;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.collapse-btn--active {
+  margin: 0 auto 0 0.1875em;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.card-collapsed {
   height: 2.8rem;
   transition: 0.2s;
 }
