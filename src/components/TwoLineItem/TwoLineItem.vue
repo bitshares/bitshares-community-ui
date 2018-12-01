@@ -30,7 +30,7 @@ export default {
     expanded: {
       type: Boolean,
       default: false
-    },
+    }
   }
 }
 </script>
