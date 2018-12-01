@@ -15,6 +15,7 @@
 import { mapActions } from 'vuex'
 import MarketsListItemPrices from './MarketsListItemPrices'
 import { amountValueShortener } from '@/helpers/utils'
+import round from 'lodash/round'
 
 export default {
   components: { MarketsListItemPrices },
@@ -45,10 +46,10 @@ export default {
       return 0
     },
     changeValue7() {
-      return this.getChangeValue({ price: this.item.change7d })
+      return this.getChangeValue({ price: round(this.item.change7d, 1) })
     },
     changeValue24() {
-      return this.getChangeValue({ price: this.item.change24h })
+      return this.getChangeValue({ price: round(this.item.change24h, 1) })
     }
   },
   methods: {
