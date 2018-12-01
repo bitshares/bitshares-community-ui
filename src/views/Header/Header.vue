@@ -45,7 +45,7 @@ export default {
         title: 'log out',
         event: 'logout'
       }]
-    } 
+    }
   },
   methods: {
     ...mapActions({
