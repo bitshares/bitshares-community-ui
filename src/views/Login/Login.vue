@@ -37,6 +37,7 @@
             class="mb-6"
             @focus="onBrainkeyInputFocus"
             @blur="onBrainkeyInputBlur"
+            v-show="!file"
           />
 
           <KeyfileLoader
