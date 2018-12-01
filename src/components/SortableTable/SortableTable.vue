@@ -8,12 +8,13 @@
       <SortableHeaderItem
         v-for="(header, index) in headers"
         :key="index"
-        :title="header.title"
-        :sort="sort.field === header.field && sort.type || ''"
+        :item="header"
+        :current-field="sort.field"
+        :sort="getSort(header)"
         :align="header.align"
         :padding-left="header.paddingLeft"
         :large="large"
-        @click.native="toggleSort(header.field)"
+        @change="toggleSort"
       />
     </div>
     <ScrollingContainer :shadower-height="shadowerHeight || 15">
@@ -99,6 +100,9 @@ export default {
       }
       this.sort.field = field
       this.sort.type = 'desc'
+    },
+    getSort(header) {
+      return ((this.sort.field === header.secondField && this.sort.type) || '') || ((this.sort.field === header.field && this.sort.type) || '')
     }
   }
 }

@@ -3,13 +3,17 @@
     :class="{'two-line-item--expanded': expanded}"
     class="two-line-item"
   >
-
-    <div class="two-line-item-top">
-      <slot name="top">{{ top }}</slot>
-    </div>
-    <div class="two-line-item-bottom">
-      <slot name="bottom">{{ bottom }}</slot>
-    </div>
+    <slot name="top">
+      <div
+        :class="{'two-line-item-top--pt0': paddingOff}"
+        class="two-line-item-top"
+      >
+        {{ top }}
+      </div>
+    </slot>
+    <slot name="bottom">
+      <div class="two-line-item-bottom">{{ bottom }}</div>
+    </slot>
   </div>
 </template>
 <script>
@@ -26,6 +30,10 @@ export default {
     expanded: {
       type: Boolean,
       default: false
+    },
+    paddingOff: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -39,6 +47,10 @@ export default {
       overflow: hidden;
       word-break: break-all;
       padding-top: .3rem;
+
+      &--pt0 {
+        padding-top: 0;
+      }
     }
     .two-line-item-bottom {
       font-size: config('textSizes.sm');

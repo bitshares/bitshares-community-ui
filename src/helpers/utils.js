@@ -35,6 +35,6 @@ export const getMaxSum = (items, field) => {
 export const getFloatCurrency = (n) => {
   const value = n.toString().replace(/0+$/, '')
 
-  if (value[0] === '0' && value.length > 9) return value.slice(1, 10)
-  return value.slice(0, 9)
+  if (value[0] === '0' && value.length > 9) return value.slice(1, 10).toString()
+  return value.slice(0, 9) || '0'
 }
