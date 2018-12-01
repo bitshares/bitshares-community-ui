@@ -11,19 +11,15 @@
           @click.stop.native="$emit('change', { item })"
         />
         <TwoLineItem
-          :top="item.ticker"
-          :padding-off="true"
+          :top="formattedTiker"
           class="pl-6"
         >
-          <span slot="bottom">/{{ item.base }}</span>
+          <span slot="bottom">/{{ formattedBase }}</span>
         </TwoLineItem>
       </div>
-      <div class="tickers-list__item">
-        <TwoLineItem
-          :top="price"
-          :padding-off="true"
-        >
-          <span slot="bottom">${{ item.usdPrice }}</span>
+      <div class="tickers-list__item text-right">
+        <TwoLineItem :top="price">
+          <span slot="bottom">${{ formattedUsdPrice }}</span>
         </TwoLineItem>
       </div>
       <div class="tickers-list__item text-right _verticalCenter">
@@ -49,8 +45,8 @@
           @click.native="$emit('change', { item })"
         />
         <div class="tickers-list__itemPair">
-          <span class="_currencyTitle pl-6">{{ item.ticker }}</span>
-          <span class="_tickerTitle">/{{ item.base }}</span>
+          <span class="_currencyTitle pl-6">{{ formattedTiker }}</span>
+          <span class="_tickerTitle">/{{ formattedBase }}</span>
         </div>
       </div>
       <div class="tickers-list__item">
@@ -82,7 +78,7 @@
 <script>
 import Star from '@/components/Star'
 import TwoLineItem from '@/components/TwoLineItem/TwoLineItem'
-import { getFloatCurrency } from '@/helpers/utils'
+import { getFloatCurrency, shortenFiatValue, removePrefix } from '@/helpers/utils'
 
 export default {
   components: {
@@ -122,6 +118,15 @@ export default {
   computed: {
     price() {
       return getFloatCurrency(this.item.price)
+    },
+    formattedTiker() {
+      return removePrefix(this.item.ticker)
+    },
+    formattedBase() {
+      return removePrefix(this.item.base)
+    },
+    formattedUsdPrice() {
+      return shortenFiatValue(this.item.usdPrice)
     }
   },
   methods: {
@@ -162,7 +167,7 @@ export default {
   .tickers-list-row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    padding: 0.4375rem 1rem .4375rem .54rem;
+    padding: .2675rem 1rem .4375rem .54rem;
     transition: background 0.2s ease;
     cursor: pointer;
 
@@ -184,12 +189,8 @@ export default {
       color: config('colors.drop');
       opacity: 1;
     }
-    ._flex05 {
-      flex: .7;
-    }
     ._verticalCenter {
-      min-height: 2.125rem;
-      line-height: 2.125rem;
+      align-self: center;
     }
   }
   .ticker-list-row_expanded {

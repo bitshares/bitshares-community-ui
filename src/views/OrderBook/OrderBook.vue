@@ -26,6 +26,7 @@ import { mapGetters } from 'vuex'
 import OrderBookTable from './OrderBookTable'
 import OrderBookLastPrice from './OrderBookLastPrice'
 import LoadingContainer from '@/components/LoadingContainer'
+import { removePrefix } from '@/helpers/utils'
 
 export default {
   components: {
@@ -54,10 +55,10 @@ export default {
       fetching: 'orderBook/isFetching'
     }),
     baseAssetSymbol() {
-      return (this.baseAsset && this.baseAsset.symbol) || ''
+      return removePrefix((this.baseAsset && this.baseAsset.symbol) || '')
     },
     quoteAssetSymbol() {
-      return (this.quoteAsset && this.quoteAsset.symbol) || ''
+      return removePrefix((this.quoteAsset && this.quoteAsset.symbol) || '')
     }
   }
 }
