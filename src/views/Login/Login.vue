@@ -31,13 +31,13 @@
           slot="secure key"
           class="login__form">
           <VInput
+            v-show="!file"
             v-model="brainkey"
             :errors="$v.brainkey"
             input-name="brainkey"
             class="mb-6"
             @focus="onBrainkeyInputFocus"
             @blur="onBrainkeyInputBlur"
-            v-show="!file"
           />
 
           <KeyfileLoader
