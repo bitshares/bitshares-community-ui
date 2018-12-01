@@ -14,8 +14,8 @@
     >
       <div class="table-item">
         <TwoLineItem
-          :top="item.payAssetSymbol"
-          :bottom="item.receiveAssetSymbol"
+          :top="formattedPayAsset"
+          :bottom="formattedReceiveAsset"
         />
       </div>
       <div class="table-item">
@@ -46,8 +46,8 @@
     >
       <div class="table-item">
         <TwoLineItem
-          :top="item.payAssetSymbol"
-          :bottom="item.receiveAssetSymbol"
+          :top="formattedPayAsset"
+          :bottom="formattedReceiveAsset"
           :expanded="expanded"
         />
       </div>
@@ -61,14 +61,14 @@
       <div class="table-item">
         <TwoLineItem
           :top="get"
-          :bottom="item.receiveAssetSymbol"
+          :bottom="formattedReceiveAsset"
           :expanded="expanded"
         />
       </div>
       <div class="table-item _relative">
         <TwoLineItem
           :top="spend"
-          :bottom="item.payAssetSymbol"
+          :bottom="formattedPayAsset"
           :expanded="expanded"
         />
       </div>
@@ -110,7 +110,7 @@
 import { mapActions } from 'vuex'
 import { format } from 'date-fns'
 import '@icons/cancel'
-import { getFloatCurrency } from '@/helpers/utils'
+import { getFloatCurrency, removePrefix } from '@/helpers/utils'
 import TwoLineItem from '@/components/TwoLineItem/TwoLineItem'
 
 export default {
@@ -137,6 +137,12 @@ export default {
     return {}
   },
   computed: {
+    formattedPayAsset() {
+      return removePrefix(this.item.payAssetSymbol)
+    },
+    formattedReceiveAsset() {
+      return removePrefix(this.item.receiveAssetSymbol)
+    },
     dateOpen() {
       return format(this.item.dateOpen, 'DD/MM')
     },

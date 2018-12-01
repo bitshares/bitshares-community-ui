@@ -7,10 +7,10 @@
     <div>
       <div
         v-if="expanded"
-        class="single-item">{{ item.tiker }}</div>
+        class="single-item">{{ formattedTicker }}</div>
       <TwoLineItem
         v-else
-        :top="item.tiker"/>
+        :top="formattedTicker"/>
     </div>
 
     <div
@@ -71,7 +71,7 @@
 
 <script>
 import TwoLineItem from '@/components/TwoLineItem'
-import { getFloatCurrency } from '@/helpers/utils'
+import { getFloatCurrency, shortenFiatValue, removePrefix } from '@/helpers/utils'
 
 export default {
   components: { TwoLineItem },
@@ -96,14 +96,17 @@ export default {
     isPricesMode() {
       return this.mode === 'prices'
     },
+    formattedTicker() {
+      return removePrefix(this.item.tiker)
+    },
     formattedTokens() {
       return getFloatCurrency(this.item.tokens)
     },
     formattedTokenPrice() {
-      return '$' + this.preciseFiatValue(this.item.tokenPrice || 0)
+      return '$' + shortenFiatValue(this.item.tokenPrice || 0)
     },
     formattedFiatValue() {
-      return '$' + this.preciseFiatValue(this.item.fiatValue || 0)
+      return '$' + shortenFiatValue(this.item.fiatValue || 0)
     },
     formattedBtcValue() {
       return getFloatCurrency(this.item.btcValue || 0)
@@ -114,14 +117,6 @@ export default {
       return {
         'grid-template-columns': `repeat(${columns}, 1fr)`
       }
-    }
-  },
-  methods: {
-    preciseFiatValue(value, precision = 1) {
-      if (!value) return 0
-      if (value > 10) return Math.floor(value)
-      if (value > 0.1) return value.toFixed(precision)
-      return value.toFixed(2)
     }
   }
 }

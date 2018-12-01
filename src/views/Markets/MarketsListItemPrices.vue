@@ -11,11 +11,11 @@
           @click.stop.native="$emit('change', { item })"
         />
         <TwoLineItem
-          :top="item.ticker"
+          :top="formattedTiker"
           :padding-off="true"
           class="pl-6"
         >
-          <span slot="bottom">/{{ item.base }}</span>
+          <span slot="bottom">/{{ formattedBase }}</span>
         </TwoLineItem>
       </div>
       <div class="tickers-list__item">
@@ -23,7 +23,7 @@
           :top="price"
           :padding-off="true"
         >
-          <span slot="bottom">${{ item.usdPrice }}</span>
+          <span slot="bottom">${{ formattedUsdPrice }}</span>
         </TwoLineItem>
       </div>
       <div class="tickers-list__item text-right _verticalCenter">
@@ -49,8 +49,8 @@
           @click.native="$emit('change', { item })"
         />
         <div class="tickers-list__itemPair">
-          <span class="_currencyTitle pl-6">{{ item.ticker }}</span>
-          <span class="_tickerTitle">/{{ item.base }}</span>
+          <span class="_currencyTitle pl-6">{{ formattedTiker }}</span>
+          <span class="_tickerTitle">/{{ formattedBase }}</span>
         </div>
       </div>
       <div class="tickers-list__item">
@@ -82,7 +82,7 @@
 <script>
 import Star from '@/components/Star'
 import TwoLineItem from '@/components/TwoLineItem/TwoLineItem'
-import { getFloatCurrency } from '@/helpers/utils'
+import { getFloatCurrency, shortenFiatValue, removePrefix } from '@/helpers/utils'
 
 export default {
   components: {
@@ -122,6 +122,15 @@ export default {
   computed: {
     price() {
       return getFloatCurrency(this.item.price)
+    },
+    formattedTiker() {
+      return removePrefix(this.item.ticker)
+    },
+    formattedBase() {
+      return removePrefix(this.item.base)
+    },
+    formattedUsdPrice() {
+      return shortenFiatValue(this.item.usdPrice)
     }
   },
   methods: {

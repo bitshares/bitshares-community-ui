@@ -38,7 +38,7 @@ export default {
   },
   computed: {
     volUsd() {
-      return amountValueShortener(this.item.usdVolume.toFixed(0))
+      return amountValueShortener(this.item.usdVolume)
     },
     marketCap() {
       // return amountValueShortener(this.item.marketcap)
