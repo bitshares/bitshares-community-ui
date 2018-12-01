@@ -37,6 +37,7 @@ export default {
 <style lang="scss">
   .two-line-item {
     letter-spacing: -0.0563rem;
+    padding-right: 0.0563rem;
     .two-line-item-top {
       font-size: config('textSizes.lg');
       color: config('colors.primary');
