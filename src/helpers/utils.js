@@ -44,5 +44,5 @@ export const shortenFiatValue = (value, precision = 1) => {
   if (!value) return 0
   if (value > 10) return Math.floor(value)
   if (value > 0.1) return value.toFixed(precision)
-  return value.toFixed(2)
+  return +value.toFixed(2)
 }
