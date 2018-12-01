@@ -25,10 +25,6 @@ const getters = {
   isListFetching: (state, getters, rootState, rootGetters) => {
     const base = getters.getCurrentBase
     const stats = rootGetters['market/getMarketStats']
-    if (base === 'favourites') {
-      const favFetching = Object.keys(state.favourites).some(base => stats[base].fetching)
-      return favFetching
-    }
     return (stats[base] && stats[base].fetching) || false
   },
   getFavouritesList: (state, getters, rootState, rootGetters) => {

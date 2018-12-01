@@ -62,7 +62,6 @@ export default {
       searchStr: 'marketsMonitor/getSearchStr'
     }),
     showLoader() {
-      if (this.favouritesMode) return this.isFetching
       return this.isFetching && !this.itemsList.length
     },
     favouritesMode() {
