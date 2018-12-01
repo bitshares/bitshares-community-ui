@@ -12,17 +12,13 @@
         />
         <TwoLineItem
           :top="formattedTiker"
-          :padding-off="true"
           class="pl-6"
         >
           <span slot="bottom">/{{ formattedBase }}</span>
         </TwoLineItem>
       </div>
-      <div class="tickers-list__item">
-        <TwoLineItem
-          :top="price"
-          :padding-off="true"
-        >
+      <div class="tickers-list__item text-right">
+        <TwoLineItem :top="price">
           <span slot="bottom">${{ formattedUsdPrice }}</span>
         </TwoLineItem>
       </div>
@@ -171,7 +167,7 @@ export default {
   .tickers-list-row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    padding: 0.4375rem 1rem .4375rem .54rem;
+    padding: .2675rem 1rem .4375rem .54rem;
     transition: background 0.2s ease;
     cursor: pointer;
 
@@ -193,12 +189,8 @@ export default {
       color: config('colors.drop');
       opacity: 1;
     }
-    ._flex05 {
-      flex: .7;
-    }
     ._verticalCenter {
-      min-height: 2.125rem;
-      line-height: 2.125rem;
+      align-self: center;
     }
   }
   .ticker-list-row_expanded {
