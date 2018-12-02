@@ -8,7 +8,8 @@
     <UserInfo />
     <Dropdown
       :items="menuItems"
-      @clicked="handleDropdownClick"/>
+      @clicked="handleDropdownClick"
+    />
   </div>
 </template>
 
@@ -50,7 +51,7 @@ export default {
   methods: {
     ...mapActions({
       logout: 'acc/logout',
-      setBackupFlag: 'backup/setBackupFlag'
+      showBackupModal: 'backup/toggleModal'
     }),
     handleLogout() {
       this.$router.push({ name: 'login' })
@@ -62,7 +63,7 @@ export default {
           this.handleLogout()
           return
         case 'backup':
-          this.setBackupFlag(true)
+          this.showBackupModal(true)
       }
     }
   }

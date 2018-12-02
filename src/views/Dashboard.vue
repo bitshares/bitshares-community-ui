@@ -146,11 +146,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      backupFlag: 'backup/getBackupFlag'
+      backupFlag: 'backup/modalDisplayed'
     })
   },
   methods: {
-    ...mapActions('backup', ['setBackupFlag'])
+    ...mapActions('backup', ['toggleModal'])
   }
 }
 </script>
