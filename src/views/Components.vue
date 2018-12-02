@@ -30,3 +30,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  .components {
+    padding: 10px;
+  }
+</style>

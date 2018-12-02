@@ -12,7 +12,7 @@
 
           <Card
             :expandable="true"
-            collapsible
+            :collapsible="true"
             title="account"
             class="mb-card-margin"
           >
@@ -28,7 +28,7 @@
 
           <Card
             :expandable="true"
-            collapsible
+            :collapsible="true"
             title="markets"
           >
             <MarketsSearch slot="header"/>
@@ -44,14 +44,14 @@
         <div class="flex lg:w-2/3">
           <div class="flex flex-col lg:w-1/2 mr-card-margin">
             <Card
-              collapsible
+              :collapsible="true"
               class="mb-card-margin"
             >
               <NewOrder slot="body"/>
             </Card>
             <Card
               :expandable="true"
-              collapsible
+              :collapsible="true"
               title="active orders"
             >
               <ActiveOrdersSearch slot="modal-header"/>
@@ -66,7 +66,7 @@
           <div class="flex flex-col lg:w-1/2">
 
             <Card
-              collapsible
+              :collapsible="true"
               title="order book"
               class="mb-card-margin"
             >
@@ -75,6 +75,7 @@
 
             <Card
               :expandable="true"
+              :collapsible="true"
               title="My orders history"
             >
               <OrderHistorySearch slot="modal-header"/>
