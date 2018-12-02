@@ -40,6 +40,7 @@ function checkKeyDown(el, binding) {
 
 Vue.directive('restrict', {
   bind(el, binding) {
+    console.log(binding.modifiers)
     if (binding.value) checkKeyDown(el, binding)
   }
 })
