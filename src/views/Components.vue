@@ -1,25 +1,25 @@
 [<template>
   <div class="components">
     This is an components page
-    <Input
+    <SInput
       v-model="number"
       type="number"
       placeholder="BTC"
-    >
+    />
 
-    <Input
+    <SInput
       v-model="testString"
       placeholder="SEARCH"
-    >
+    />
   </div>
 </template>
 
 <script>
-import Input from '@/components/SimpleInput'
+import SInput from '@/components/SimpleInput'
 
 export default {
   name: 'Components',
-  components: { Input },
+  components: { SInput },
   data() {
     return {
       testString: '',
