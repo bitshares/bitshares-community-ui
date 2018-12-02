@@ -17,7 +17,7 @@ const actions = {
     const userId = rootGetters['acc/getAccountUserId']
     dispatch('assets/fetchDefaultAssets', null, { root: true })
     dispatch('marketsMonitor/initialize', null, { root: true })
-    
+
     await dispatch('acc/fetchCurrentUser', userId, { root: true })
     dispatch('orderBook/initialize', {
       baseSymbol: 'BTS',
