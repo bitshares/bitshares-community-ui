@@ -8,9 +8,10 @@
     class="input">
 
     <input
-      v-restrict.number="isNumber"
+      v-restrict.number.decimal="isNumber"
       ref="input"
       :value="value"
+      :placeholder="usedPlaceholder"
       :type="inputType"
       :disabled="disabled"
       :autocorrect="false"
@@ -24,7 +25,7 @@
       @keyup.enter="$refs.input.blur"
     >
 
-    <!-- floating title = placeholder -->
+    <!-- floating title -->
     <span
       :class="{'input_has-content': !! value }"
       class="input__title">
@@ -40,13 +41,15 @@
       height="24"
       @click.stop.native="handleIconClick"
     />
+
+    <!-- clear (cross) icon -->
     <svgicon
       v-if="value && !icon"
       name="cross"
       class="delete__icon"
       width="12"
       height="12"
-      @click.stop.native="$emit('input', '')"
+      @click.stop.native="handleClear"
     />
 
     <!-- tip message -->
@@ -68,20 +71,20 @@
 
 <script>
 import '@/assets/icons/'
-import messages from '@/helpers/inputMessages.js'
 
 export default {
   props: {
-    inputName: {
-      type: String,
-      required: true
-    },
     type: {
       type: String,
       default: 'text'
     },
     value: {
       type: [String, Number],
+      default: ''
+    },
+    placeholder: {
+      type: String,
+      required: false,
       default: ''
     },
     title: {
@@ -118,23 +121,20 @@ export default {
   computed: {
     inputType() {
       if (this.type === 'password') return this.type
-      if (this.type === 'number' || this.password) return 'tel'
+      if (this.type === 'number' && this.password) return 'tel'
       return 'text'
+    },
+    usedPlaceholder() {
+      return this.title ? '' : this.placeholder
     },
     isNumber() {
       return this.type === 'number'
     },
-    inputMessages() {
-      return messages[this.inputName]
-    },
     titleText() {
-      return this.title || this.inputMessages.title
+      return this.title
     },
     tipText() {
-      return this.tip || this.inputMessages.tip || ''
-    },
-    validationMessages() {
-      return this.inputMessages.validation
+      return this.tip
     }
   },
   mounted() {
@@ -146,15 +146,15 @@ export default {
   },
   methods: {
     handleInput({ target: { value } }) {
-      const newValue = this.isNumber ? (parseInt(value) || '') : value
-      this.$emit('input', newValue + '')
+      const newValue = this.isNumber ? (parseFloat(value) || null) : value
+      this.$emit('input', newValue)
     },
     // prevent pasting non-numbers if this is a number input
     handlePaste(event) {
       if (!this.isNumber) return
       event.preventDefault()
       const text = event.clipboardData.getData('text')
-      const number = this.value + (parseInt(text) || null)
+      const number = this.value + (parseFloat(text) || null)
       this.$emit('input', number)
     },
     handleFocus() {
@@ -165,6 +165,9 @@ export default {
     },
     handleIconClick() {
       this.$emit('icon-click')
+    },
+    handleClear() {
+      this.$emit('input', this.isNumber ? null : '')
     }
   }
 }
