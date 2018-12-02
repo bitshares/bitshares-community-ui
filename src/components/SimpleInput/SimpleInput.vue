@@ -25,7 +25,7 @@
       @keyup.enter="$refs.input.blur"
     >
 
-    <!-- floating title = placeholder -->
+    <!-- floating title -->
     <span
       :class="{'input_has-content': !! value }"
       class="input__title">
@@ -41,6 +41,8 @@
       height="24"
       @click.stop.native="handleIconClick"
     />
+
+    <!-- clear (cross) icon -->
     <svgicon
       v-if="value && !icon"
       name="cross"

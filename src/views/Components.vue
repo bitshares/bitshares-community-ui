@@ -5,12 +5,12 @@
       v-model="number"
       type="number"
       placeholder="BTC"
-    />
+    >
 
     <Input
       v-model="testString"
       placeholder="SEARCH"
-    />
+    >
   </div>
 </template>
 
