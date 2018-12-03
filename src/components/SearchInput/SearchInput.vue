@@ -26,10 +26,8 @@
 <script>
 import '@icons/search'
 import '@icons/cancel'
-import Input from '@/components/SimpleInput'
 
 export default {
-  components: { Input },
   props: {
     hint: {
       type: String,

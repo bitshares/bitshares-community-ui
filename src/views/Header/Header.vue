@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import UserInfo from './HeaderUserInfo'
 import Dropdown from '@/components/Dropdown'
 import '@icons/bitshares'
@@ -46,30 +46,36 @@ import '@icons/bitshares'
 export default {
   name: 'Header',
   components: { UserInfo, Dropdown },
-  data: () => ({
-    menuItems: [{
-      title: 'backup',
-      event: 'backup'
-    },
-    {
-      title: 'settings',
-      event: 'settings',
-      disabled: true
-    },
-    {
-      title: 'faq',
-      event: 'faq',
-      disabled: true
-    },
-    {
-      title: 'log out',
-      event: 'logout'
-    }]
-  }),
+  computed: {
+    ...mapGetters({
+      backupEnabled: 'acc/isWalletAcc'
+    }),
+    menuItems() {
+      return [{
+        title: 'backup',
+        event: 'backup',
+        disabled: !this.backupEnabled
+      },
+      {
+        title: 'settings',
+        event: 'settings',
+        disabled: true
+      },
+      {
+        title: 'faq',
+        event: 'faq',
+        disabled: true
+      },
+      {
+        title: 'log out',
+        event: 'logout'
+      }]
+    }
+  },
   methods: {
     ...mapActions({
       logout: 'acc/logout',
-      setBackupFlag: 'backup/setBackupFlag'
+      showBackupModal: 'backup/toggleModal'
     }),
     handleLogout() {
       this.$router.push({ name: 'login' })
@@ -81,7 +87,7 @@ export default {
           this.handleLogout()
           return
         case 'backup':
-          this.setBackupFlag(true)
+          this.showBackupModal(true)
       }
     }
   }

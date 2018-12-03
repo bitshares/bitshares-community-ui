@@ -16,12 +16,13 @@ const actions = {
     console.log('init user data')
     const userId = rootGetters['acc/getAccountUserId']
     dispatch('assets/fetchDefaultAssets', null, { root: true })
+    dispatch('marketsMonitor/initialize', null, { root: true })
+
+    await dispatch('acc/fetchCurrentUser', userId, { root: true })
     dispatch('orderBook/initialize', {
       baseSymbol: 'BTS',
       quoteSymbol: 'USD' },
     { root: true })
-    dispatch('marketsMonitor/initialize', null, { root: true })
-    await dispatch('acc/fetchCurrentUser', userId, { root: true })
     // await Promise.all([
     // dispatch('transactions/fetchComissions', null, { root: true }),
     dispatch(
