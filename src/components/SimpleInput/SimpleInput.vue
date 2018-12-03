@@ -28,14 +28,10 @@
 
     <!-- floating title -->
     <span
+      v-if="!valueMode"
       :class="{'input_has-content': !! value }"
       class="input__title">
       {{ titleText }}
-    </span>
-    <span
-      :class="{'input_has-note': valueMode }"
-      class="input__title">
-      {{ note }}
     </span>
 
     <svgicon
@@ -286,22 +282,14 @@ export default {
   color: config('colors.text-primary');
 }
 .input--value {
+  padding: 0;
+
   .input__input {
+    padding-right: 0;
+    text-align: center;
     outline: none;
     border-bottom: none;
     font-size: config('textSizes.xl');
-  }
-  .input_has-content {
-    top: 0.1250rem;
-    text-transform: none;
-    color: config('colors.inactive');
-    font-size: 0.6875rem;
-  }
-  .input_has-note.input__title {
-    color: config('colors.primary');
-    font-size: 0.6875rem;
-    top: 38px;
-    text-transform: none;
   }
 }
 </style>
