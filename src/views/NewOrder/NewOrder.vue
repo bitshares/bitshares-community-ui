@@ -18,18 +18,20 @@
       :active-percent="activePercent"
       @change="setActivePercent"
     />
-    <NewOrderInput
-      title="Spend"
-      placeholder="BTC"
-      note="max 0.04"
-      aside="left"
-    />
-    <NewOrderInput
-      title="Get"
-      placeholder="USD"
-      note="max 437"
-      aside="right"
-    />
+    <div class="new-order-fields">
+      <NewOrderInput
+        title="Spend"
+        placeholder="BTC"
+        note="max 0.04"
+        aside="left"
+      />
+      <NewOrderInput
+        title="Get"
+        placeholder="USD"
+        note="max 437"
+        aside="right"
+      />
+    </div>
     <div class="new-order-button">
       <Btn
         :type="type"
@@ -98,6 +100,10 @@ export default {
     .new-order-button {
       margin-top: auto;
       padding: 0.5rem;
+    }
+    .new-order-fields {
+      display: flex;
+      justify-content: space-between;
     }
   }
 </style>

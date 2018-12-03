@@ -177,6 +177,7 @@ export default {
 
 .input {
   position: relative;
+  text-align: center;
   @apply pt-3 pb-4;
 }
 
