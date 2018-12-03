@@ -36,13 +36,15 @@ export default {
   @apply inline-flex text-white;
 
   p {
-    color: config('colors.grey');
+    color: config('colors.text-primary');
     width: 100%;
-    padding-right: 10px;
+    padding-right: 1rem;
+    font-weight: 500;
+    font-size: 15px;
   }
 
   svg {
-    fill: config('colors.grey');
+    fill: config('colors.text-primary');
     transform: rotate(270deg);
     display: block;
     margin: auto;

@@ -4,8 +4,8 @@
       <svgicon
         name="bitshares"
         color="white"
-        width="141"
-        height="33"/>
+        width="110"
+        height="27"/>
     </div>
 
     <div class="lg:w-1/3">
@@ -13,11 +13,15 @@
 
       <Button
         text="Deposit"
-        class="header-btn lg:w-1/4"
+        class="header-btn lg:w-1/3"
+        type="secondary"
+        size="small"
       >Deposit</Button>
       <Button
         text="Withdraw"
-        class="ml-5 header-btn lg:w-1/4"
+        class="ml-5 header-btn lg:w-1/3"
+        type="secondary"
+        size="small"
       >Withdraw</Button>
     </div>
 
@@ -88,7 +92,13 @@ export default {
 .header {
   @apply py-3;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
+  height: 61px;
+  background-color: var(--black);
+  margin: 5px 0px 5px 0px;
+  width: 1280px;
+  margin-left: -4rem;
+  padding: 0rem 4rem;
 }
 
 .inline-block {
@@ -105,6 +115,8 @@ export default {
   height: 33px;
   font-size: .8em;
   text-transform: uppercase;
+  height: 31px;
+  width: 110px;
 
   &:hover {
     color: config('colors.black');
