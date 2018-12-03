@@ -36,64 +36,25 @@ export default {
   },
   computed: {
     ...mapGetters({
-      historyLoaded: 'history/initialLoaded',
-      totalFiatValue: 'portfolio/getTotalFiatValue'
+      historyLoaded: 'history/initialLoaded'
     })
   }
 }
 </script>
 
 <style scoped lang="scss">
-.account-header {
-  font-family: config("fonts.gotham");
-  font-size: config('textSizes.sm');
-  align-items: baseline;
-  flex-direction: row;
-  color: config('colors.text-primary');
-  &--large {
-    .text-weak {
-      font-size: config('textSizes.lg');
-      text-transform: uppercase;
-    }
-    font-size: config('textSizes.lg');
-  }
-}
-
-.title {
-  opacity: 0.5;
-  font-size: config('textSizes.sm');
-  line-height: normal;
-  margin-right: 0.5rem;
-}
-
-.account-header--large-mode {
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-bottom: 2rem;
-  padding-top: 1rem;
-  font-size: config('textSizes.lg');
-  .title {
-    font-size: config('textSizes.lg');
-    margin-bottom: 0.2rem;
-  }
-  .amount {
-    font-size: config('textSizes.5xl')
-  }
-}
-
 .mobile-account-header {
-  margin: 25px 0px 25px 0px;
+  margin: 1rem 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
 
-  Button {
-    width: 150px;
-    margin: 0px 10px 0px 10px;
-    line-height: 25px;
-    height:50px;
+  .mobile-account-header-btn {
+    width: 165px;
+    height: 48px;
+
+    margin: 0px 7px;
+    line-height: 20px;
     background-color: black;
 
     &:hover {
