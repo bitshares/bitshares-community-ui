@@ -14,7 +14,7 @@ const getDefaultState = () => ({
 
   activeIndication: 'MARKET',
   activePercent: 10,
-  percents: [10, 25, 50, 75]
+  percentItems: [10, 25, 50, 75]
 })
 
 const getters = {
@@ -36,8 +36,8 @@ const getters = {
   getType(state) {
     return state.type
   },
-  getPercents(state) {
-    return state.percents
+  getPercentItems(state) {
+    return state.percentItems
   },
   getActivePercent(state) {
     return state.activePercent
