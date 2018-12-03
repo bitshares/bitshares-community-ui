@@ -6,8 +6,7 @@
     class="account-header"
   >
     <span class="title">BALANCE</span>
-    <span class="amount">$ {{ totalFiatValue.toFixed(2) }}</span>
-
+    <span class="amount">$ {{ totalFiatValue ? totalFiatValue.toFixed(2) : 0 }}</span>
   </div>
 </template>
 

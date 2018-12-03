@@ -8,7 +8,10 @@
       class="flex md:hidden"
     />
 
-    <account-balance />
+    <div class="balance">
+      <span class="title">BALANCE</span>
+      <span class="amount">$ {{ totalFiatValue ? totalFiatValue.toFixed(2) : 0 }}</span>
+    </div>
 
     <div class="portfolio-header">
       <LinkButton
@@ -52,14 +55,13 @@
 import { mapGetters } from 'vuex'
 import LoadingContainer from '@/components/LoadingContainer'
 import LinkButton from '@/components/LinkButton'
-import AccountBalance from '@/views/Account/AccountBalance'
 import PortfolioItem from './PortfolioItem.vue'
 import MobileAccountHeader from './MobileAccountHeader'
 
 import SortableTable from '@/components/SortableTable'
 
 export default {
-  components: { AccountBalance, PortfolioItem, LoadingContainer, LinkButton, SortableTable, MobileAccountHeader },
+  components: { PortfolioItem, LoadingContainer, LinkButton, SortableTable, MobileAccountHeader },
   props: {
     expanded: {
       type: Boolean,
@@ -129,7 +131,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .portfolio-table {
   height: 100%;
   overflow: hidden;
@@ -142,5 +144,27 @@ export default {
   justify-content: space-between;
   margin-bottom: 1.25rem;
   padding: 0 1.5rem 0 1rem;
+}
+
+.balance {
+  margin: 2rem 0;
+  .title, .amount {
+    color: config('colors.text-primary');
+    display: block;
+    text-align: center;
+  }
+
+  .title {
+    font-size: config('textSizes.lg');
+    margin-bottom: 0.5rem;
+    opacity: 0.5;
+    font-size: config('textSizes.sm');
+    line-height: normal;
+    margin-right: 0.5rem;
+  }
+
+  .amount {
+    font-size: config('textSizes.5xl')
+  }
 }
 </style>
