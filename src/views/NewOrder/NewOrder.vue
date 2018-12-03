@@ -18,6 +18,18 @@
       :active-percent="activePercent"
       @change="setActivePercent"
     />
+    <NewOrderInput
+      title="Spend"
+      placeholder="BTC"
+      note="max 0.04"
+      aside="left"
+    />
+    <NewOrderInput
+      title="Get"
+      placeholder="USD"
+      note="max 437"
+      aside="right"
+    />
     <div class="new-order-button">
       <Btn
         :type="type"
@@ -33,6 +45,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import NewOrderTabs from './NewOrderTabs'
 import NewOrderPercentSelector from './NewOrderPercentSelector'
+import NewOrderInput from './NewOrderInput'
 import Btn from '@/components/Button/Button'
 import Tabs from '@/components/Tabs/Tabs'
 
@@ -40,6 +53,7 @@ export default {
   components: {
     NewOrderTabs,
     NewOrderPercentSelector,
+    NewOrderInput,
     Btn,
     Tabs
   },
