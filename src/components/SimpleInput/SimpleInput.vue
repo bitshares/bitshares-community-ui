@@ -3,7 +3,8 @@
     :class="{
       'input--has-icon': icon,
       'input--has-error': error,
-      'input--disabled': disabled
+      'input--disabled': disabled,
+      'input--value': valueMode
     }"
     class="input">
 
@@ -31,6 +32,11 @@
       class="input__title">
       {{ titleText }}
     </span>
+    <span
+      :class="{'input_has-note': valueMode }"
+      class="input__title">
+      {{ note }}
+    </span>
 
     <svgicon
       v-if="icon"
@@ -44,7 +50,7 @@
 
     <!-- clear (cross) icon -->
     <svgicon
-      v-if="value && !icon"
+      v-if="value && !icon && !valueMode"
       name="cross"
       class="delete__icon"
       width="12"
@@ -116,6 +122,14 @@ export default {
     error: {
       type: String,
       default: ''
+    },
+    valueMode: {
+      type: Boolean,
+      default: false
+    },
+    note: {
+      type: String,
+      default: ''
     }
   },
   computed: {
@@ -162,6 +176,9 @@ export default {
     },
     handleBlur() {
       this.$emit('blur', this.$refs.input.value)
+      if (this.valueMode && !this.value) {
+        this.$emit('input', this.placeholder)
+      }
     },
     handleIconClick() {
       this.$emit('icon-click')
@@ -245,7 +262,6 @@ export default {
   left: 0;
   transition: all 0.3s;
   pointer-events: none;
-  text-transform: uppercase;
   user-select: none;
 }
 
@@ -268,5 +284,24 @@ export default {
 
 .input__tip {
   color: config('colors.text-primary');
+}
+.input--value {
+  .input__input {
+    outline: none;
+    border-bottom: none;
+    font-size: config('textSizes.xl');
+  }
+  .input_has-content {
+    top: 0.1250rem;
+    text-transform: none;
+    color: config('colors.inactive');
+    font-size: 0.6875rem;
+  }
+  .input_has-note.input__title {
+    color: config('colors.primary');
+    font-size: 0.6875rem;
+    top: 38px;
+    text-transform: none;
+  }
 }
 </style>
