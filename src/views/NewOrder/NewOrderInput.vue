@@ -12,8 +12,8 @@
       type="number"
     />-->
     <input
-      type="text"
       :placeholder="placeholder"
+      type="text"
       class="new-order-input--field"
     >
     <div class="new-order-input--note">{{ note }}</div>
@@ -53,9 +53,9 @@ export default {
 </script>
 <style lang="scss">
   .new-order-input {
-    width: 70px;
+    width: 4.375rem;
     font-size: config('textSizes.xl');
-    margin-top: -14px;
+    margin-top: -0.875rem;
 
     &--note {
       color: config('colors.primary');
@@ -70,20 +70,20 @@ export default {
     }
 
     &--left {
-      margin-left: 40px;
+      margin-left: 2.5rem;
     }
 
     &--right {
-      margin-right: 15px;
+      margin-right: 0.9375rem;
     }
 
     &--field {
       width: 100%;
       outline: none;
-      margin-top: 3px;
-      margin-bottom: 3px;
+      margin-top: 0.1875rem;
+      margin-bottom: 0.1875rem;
       background-color: transparent;
-      border-left: 1px solid config('colors.primary');
+      border-left: 0.0625rem solid config('colors.primary');
       color: config('colors.primary');
       font-size: config('textSizes.xl');
     }
