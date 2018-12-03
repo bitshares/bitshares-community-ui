@@ -30,7 +30,7 @@ export default {
 </script>
 <style lang="scss">
   .new-order-percent-selector {
-    margin-top: 15px;
+    margin-top: 0.9375rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
