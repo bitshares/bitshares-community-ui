@@ -1,20 +1,21 @@
 <template>
   <div class="new-order-percent-selector">
-    <div
+    <NewOrderPercentSelectorItem
       v-for="(item, index) in percentItems"
       :key="index"
-      :class="{
-        'new-order-percent-selector--active': item === activePercent
-      }"
-      class="new-order-percent-selector--item"
-      @click="$emit('change', item)"
-    >
-      {{ item }}%
-    </div>
+      :item="item"
+      :active-percent="activePercent"
+      @click.native="$emit('change', item)"
+    />
   </div>
 </template>
 <script>
+import NewOrderPercentSelectorItem from './NewOrderPercentSelectorItem'
+
 export default {
+  components: {
+    NewOrderPercentSelectorItem
+  },
   props: {
     percentItems: {
       type: Array,
@@ -34,21 +35,5 @@ export default {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-
-    &--item {
-      color: config('colors.inactive');
-      padding: 3px 5px 0;
-      letter-spacing: -0.7px;
-      font-size: config('textSizes.xs-sm');
-
-      &:hover {
-        color: config('colors.primary');
-        cursor: pointer;
-      }
-    }
-    &--active {
-      color: config('colors.primary');
-      border: 1px solid config('colors.inactive');
-    }
   }
 </style>
