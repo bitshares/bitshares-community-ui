@@ -4,7 +4,8 @@
       'input--has-icon': icon,
       'input--has-error': error,
       'input--disabled': disabled,
-      'input--value': valueMode
+      'input--centered': centered,
+      'input--value-mode': valueMode
     }"
     class="input">
 
@@ -123,9 +124,9 @@ export default {
       type: Boolean,
       default: false
     },
-    note: {
-      type: String,
-      default: ''
+    centered: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -172,9 +173,6 @@ export default {
     },
     handleBlur() {
       this.$emit('blur', this.$refs.input.value)
-      if (this.valueMode && !this.value) {
-        this.$emit('input', this.placeholder)
-      }
     },
     handleIconClick() {
       this.$emit('icon-click')
@@ -190,8 +188,13 @@ export default {
 
 .input {
   position: relative;
-  text-align: center;
   @apply pt-3 pb-4;
+
+  &--centered {
+    .input__input {
+      text-align: center;
+    }
+  }
 }
 
 .input__icon {
@@ -258,6 +261,7 @@ export default {
   left: 0;
   transition: all 0.3s;
   pointer-events: none;
+  text-transform: uppercase;
   user-select: none;
 }
 
@@ -281,12 +285,11 @@ export default {
 .input__tip {
   color: config('colors.text-primary');
 }
-.input--value {
+.input--value-mode {
   padding: 0;
 
   .input__input {
     padding-right: 0;
-    text-align: center;
     outline: none;
     border-bottom: none;
     font-size: config('textSizes.xl');
