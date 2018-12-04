@@ -95,6 +95,7 @@ export default {
       padding: 0.5rem;
     }
     .new-order-fields {
+      margin-top: 3rem;
       display: flex;
       justify-content: space-between;
     }

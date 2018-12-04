@@ -1,9 +1,5 @@
 <template>
   <div
-    :class="{
-      'new-order-input--left': aside === 'left',
-      'new-order-input--right': aside === 'right'
-    }"
     class="new-order-input"
   >
     <div class="new-order-input-title">{{ title }}</div>
@@ -37,15 +33,6 @@ export default {
     note: {
       type: String,
       required: true
-    },
-    aside: {
-      type: String,
-      default: 'left'
-    }
-  },
-  data() {
-    return {
-      value: this.placeholder
     }
   }
 }
@@ -55,15 +42,6 @@ export default {
     text-align: center;
     width: 4.375rem;
     font-size: config('textSizes.xl');
-    margin-top: -0.875rem;
-
-    &--left {
-      margin-left: 0.9375rem;
-    }
-
-    &--right {
-      margin-right: 0.9375rem;
-    }
   }
   .new-order-input-note {
     color: config('colors.primary');

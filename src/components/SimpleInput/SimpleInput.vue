@@ -136,6 +136,9 @@ export default {
       return 'text'
     },
     usedPlaceholder() {
+      if (this.valueMode) {
+        return this.placeholder
+      }
       return this.title ? '' : this.placeholder
     },
     isNumber() {
