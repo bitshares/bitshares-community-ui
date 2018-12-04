@@ -13,7 +13,10 @@
       :active="activeIndication"
       @change="setActiveIndication"
     />
-    <div class="new-order-button">
+    <div
+      class="new-order-button"
+      @click="showConfirmOrder(true)"
+    >
       <Btn
         :type="type"
         :text="buttonTitle"
@@ -22,6 +25,12 @@
         <span class="operation-title">{{ type }}</span>
       </Btn>
     </div>
+    <Modal
+      v-if="confirmVisible"
+      @close="showConfirmOrder(false)"
+    >
+      <ConfirmOrder/>
+    </Modal>
   </div>
 </template>
 <script>
@@ -29,12 +38,21 @@ import { mapGetters, mapActions } from 'vuex'
 import NewOrderTabs from './NewOrderTabs'
 import Btn from '@/components/Button/Button'
 import Tabs from '@/components/Tabs/Tabs'
+import ConfirmOrder from '@/views/ConfirmOrder/ConfirmOrder'
+import Modal from '@/components/Modal'
 
 export default {
   components: {
     NewOrderTabs,
     Btn,
-    Tabs
+    Tabs,
+    ConfirmOrder,
+    Modal
+  },
+  data() {
+    return {
+      confirmVisible: false
+    }
   },
   computed: {
     ...mapGetters({
@@ -55,7 +73,10 @@ export default {
     ...mapActions({
       setActiveIndication: 'newOrder/setActiveIndication',
       setType: 'newOrder/setType'
-    })
+    }),
+    showConfirmOrder(value) {
+      this.confirmVisible = value
+    }
   }
 }
 </script>
