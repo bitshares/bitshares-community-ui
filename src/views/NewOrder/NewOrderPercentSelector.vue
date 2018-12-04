@@ -40,6 +40,9 @@ export default {
     padding: 0.1875rem 0.3125rem 0;
     letter-spacing: -0.0450rem;
     font-size: config('textSizes.xs-sm');
+    box-sizing: border-box;
+    margin: 0.01rem;
+    border: 0.0625rem solid transparent;
 
     &--active {
       color: config('colors.primary');
@@ -48,11 +51,12 @@ export default {
 
     &:hover {
       color: config('colors.primary');
+      border: 0.0625rem solid config('colors.inactive');
       cursor: pointer;
     }
     &:active {
-      border: 0.0625rem solid config('colors.inactive');
       color: config('colors.primary');
+      border: 0.0625rem solid config('colors.inactive');
     }
   }
 </style>
