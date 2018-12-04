@@ -25,11 +25,13 @@
         <span class="operation-title">{{ type }}</span>
       </Btn>
     </div>
+    <!-- CONFIRM ORDER -->
     <Modal
       v-if="confirmVisible"
-      @close="showConfirmOrder(false)"
+      :width-auto="true"
+      @close="showConfirmOrder"
     >
-      <ConfirmOrder/>
+      <ConfirmOrder @close="showConfirmOrder"/>
     </Modal>
   </div>
 </template>
