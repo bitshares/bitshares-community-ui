@@ -13,11 +13,6 @@
       :active="activeIndication"
       @change="setActiveIndication"
     />
-    <NewOrderPercentSelector
-      :percent-items="percentItems"
-      :active-percent="activePercent"
-      @change="setActivePercent"
-    />
     <div class="new-order-fields">
       <NewOrderInput
         title="Spend"
@@ -46,7 +41,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import NewOrderTabs from './NewOrderTabs'
-import NewOrderPercentSelector from './NewOrderPercentSelector'
 import NewOrderInput from './NewOrderInput'
 import Btn from '@/components/Button/Button'
 import Tabs from '@/components/Tabs/Tabs'
@@ -54,7 +48,6 @@ import Tabs from '@/components/Tabs/Tabs'
 export default {
   components: {
     NewOrderTabs,
-    NewOrderPercentSelector,
     NewOrderInput,
     Btn,
     Tabs
