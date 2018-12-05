@@ -13,6 +13,11 @@
       :active="activeIndication"
       @change="setActiveIndication"
     />
+    <NewOrderPercentSelector
+      :percent-items="percentItems"
+      :active-percent="activePercent"
+      @change="setActivePercent"
+    />
     <div class="new-order-button">
       <Btn
         :type="type"
@@ -27,12 +32,14 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import NewOrderTabs from './NewOrderTabs'
+import NewOrderPercentSelector from './NewOrderPercentSelector'
 import Btn from '@/components/Button/Button'
 import Tabs from '@/components/Tabs/Tabs'
 
 export default {
   components: {
     NewOrderTabs,
+    NewOrderPercentSelector,
     Btn,
     Tabs
   },
@@ -44,7 +51,9 @@ export default {
       marketBuyPrice: 'newOrder/getMarketBuyPrice',
       marketSellPrice: 'newOrder/getMarketSellPrice',
       type: 'newOrder/getType',
-      activeIndication: 'newOrder/getActiveIndication'
+      activeIndication: 'newOrder/getActiveIndication',
+      percentItems: 'newOrder/getPercentItems',
+      activePercent: 'newOrder/getActivePercent'
     }),
 
     buttonTitle() {
@@ -54,7 +63,8 @@ export default {
   methods: {
     ...mapActions({
       setActiveIndication: 'newOrder/setActiveIndication',
-      setType: 'newOrder/setType'
+      setType: 'newOrder/setType',
+      setActivePercent: 'newOrder/setActivePercent'
     })
   }
 }
