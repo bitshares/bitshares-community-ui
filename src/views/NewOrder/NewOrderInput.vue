@@ -32,7 +32,12 @@ export default {
     },
     note: {
       type: String,
-      required: true
+      default: ''
+    }
+  },
+  data() {
+    return {
+      value: ''
     }
   }
 }

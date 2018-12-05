@@ -18,13 +18,11 @@
         title="Spend"
         placeholder="BTC"
         note="max 0.04"
-        aside="left"
       />
       <NewOrderInput
         title="Get"
         placeholder="USD"
         note="max 437"
-        aside="right"
       />
     </div>
     <div

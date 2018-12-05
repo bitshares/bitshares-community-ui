@@ -19,19 +19,19 @@
     <div class="confirm-order-price-section">
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :placeholder="price"
+          :placeholder="price.toString()"
           title="Price. USD"
         />
       </div>
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :placeholder="spend"
+          :placeholder="spend.toString()"
           title="Spend. BTC"
         />
       </div>
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :placeholder="get"
+          :placeholder="get.toString()"
           title="Get. USD"
         />
       </div>
@@ -40,14 +40,14 @@
     <div class="confirm-order-price-section">
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :placeholder="tradingFee"
+          :placeholder="tradingFee.toString()"
           :note="tradingFeeTitle"
           title="Trading fee. USD"
         />
       </div>
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :placeholder="exchangeFee"
+          :placeholder="exchangeFee.toString()"
           :note="exchangeFeeTitle"
           title="Exchange fee. USD"
         />
@@ -65,6 +65,7 @@
         width="full"
         type="faded"
         class="confirm-order-btn"
+        @click="$emit('close', false)"
       />
     </div>
   </div>
@@ -105,12 +106,12 @@ export default {
       required: true
     },
     tradingFee: {
-      type: String,
-      default: ''
+      type: Number,
+      default: 0
     },
     exchangeFee: {
-      type: String,
-      default: ''
+      type: Number,
+      default: 0
     }
   },
   computed: {
