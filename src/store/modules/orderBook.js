@@ -6,7 +6,8 @@ import debounce from 'lodash/debounce'
 const types = {
   SET_ORDER_BOOK: 'SET_ORDER_BOOK',
   ORDER_BOOK_INIT_START: 'ORDER_BOOK_INIT_START',
-  ORDER_BOOK_RESET: 'ORDER_BOOK_RESET'
+  ORDER_BOOK_RESET: 'ORDER_BOOK_RESET',
+  UPDATE_LAST_ORDER: 'UPDATE_LAST_ORDER'
 }
 
 const getDefaultState = () => ({
@@ -17,7 +18,8 @@ const getDefaultState = () => ({
   orderBook: {
     buying: [],
     selling: []
-  }
+  },
+  lastOrder: null
 })
 
 const getters = {
@@ -66,6 +68,9 @@ const mutations = {
     state.baseAsset = baseAsset
     state.quoteAsset = quoteAsset
   },
+  [types.UPDATE_LAST_ORDER](state, order) {
+    state.lastOrder = processOrders([order], 'buy', state.baseAsset, state.quoteAsset)
+  },
   [types.ORDER_BOOK_RESET](state) {
     Object.assign(state, getDefaultState())
   }
@@ -85,6 +90,12 @@ const actions = {
         const orders = API.Market(baseAsset).getBook(quoteAsset)
         debouncedUpdate(store, { orders })
       })
+      console.log('subscribing')
+      market.subscribeToLastOrder(quoteAsset.id, (order) => {
+        console.log('Last price subscription works!', order)
+        actions.updateLastOrder(store, order)
+      })
+      // sub to last price
     } else {
       console.warn(`MARKET ERROR: No such market - ${baseSymbol}/${quoteSymbol}`)
     }
@@ -95,11 +106,22 @@ const actions = {
     if (baseAsset && quoteAsset) {
       const market = API.Market(baseAsset)
       market.unsubscribeFromMarket(quoteAsset.id)
+      // market.unsubscribeFromLastOrder()
+      // unsub from last price
     }
     commit(types.ORDER_BOOK_RESET)
   },
   updateOrderBook({ commit }, { orders }) {
     commit(types.SET_ORDER_BOOK, { orders })
+  },
+  async updateLastOrder({ commit }, order) {
+    // order.op = [1]
+    // const processedOperation = await API.Operations.parseOperations({ 
+    //   operations: [order],
+    //   userId: null
+    // })
+    // console.log(processedOperation)
+    commit(types.UPDATE_LAST_ORDER, order)
   }
 }
 
