@@ -33,6 +33,7 @@ const getters = {
     return maxFromBuy > maxFromSell ? maxFromBuy : maxFromSell
   },
   getOrderBook: state => state.orderBook,
+  getLastOrder: state => state.lastOrder,
   isActive: state => !!(state.baseAsset && state.quoteAsset),
   isFetching: state => state.fetching
 }
@@ -101,7 +102,6 @@ const actions = {
         const orders = API.Market(baseAsset).getBook(quoteAsset)
         debouncedUpdate(store, { orders })
       })
-      console.log('subscribing')
       market.subscribeToLastOrder(quoteAsset.id, (order) => {
         actions.updateLastOrder(store, order)
       })
