@@ -1,6 +1,6 @@
 <template>
   <div class="header hidden lg:flex">
-    <div class='back-header' />
+    <div class="back-header" />
     <div class="lg:w-1/3">
       <svgicon
         name="bitshares"
@@ -17,13 +17,13 @@
         class="header-btn lg:w-1/3"
         type="secondary"
         size="small"
-      ></Button>
+      />
       <Button
         text="Withdraw"
         class="ml-5 header-btn lg:w-1/3"
         type="secondary"
         size="small"
-      ></Button>
+      />
     </div>
 
     <div class="lg:w-1/3">
@@ -127,17 +127,9 @@ export default {
 
 .header-btn {
   @extend .inline-block;
-  text-align: center;
-  background-color: config('colors.bg-base');
-  border: 1px solid config('colors.white');
-  color: config('colors.white');
   padding: 0;
-  height: 33px;
-  font-size: .8em;
-  text-transform: uppercase;
   height: 31px;
   width: 110px;
-
   &:hover {
     color: config('colors.black');
     background: config('colors.white');
