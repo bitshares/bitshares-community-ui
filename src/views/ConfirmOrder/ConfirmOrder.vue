@@ -188,7 +188,7 @@ export default {
     flex-direction: row;
     justify-content: center;
     width: 80%;
-    margin-top: 15px;
+    margin-top: 0.9375rem;
   }
   .confirm-order-price-section-item {
     margin: .2rem;
