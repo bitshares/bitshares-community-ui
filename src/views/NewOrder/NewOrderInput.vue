@@ -40,7 +40,7 @@ export default {
 <style lang="scss">
   .new-order-input {
     text-align: center;
-    width: 4.375rem;
+    width: 6.475rem;
     font-size: config('textSizes.xl');
   }
   .new-order-input-note {

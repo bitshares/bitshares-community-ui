@@ -15,6 +15,45 @@
     <div class="confirm-order-date">07-nov-18, 14:39</div>
     <div class="confirm-order-title confirm-order-title--xl">sell btc/usd</div>
 
+    <!-- SECTION 1 -->
+    <div class="confirm-order-price-section">
+      <div class="confirm-order-price-section-item">
+        <NewOrderInput
+          title="Price. USD"
+          placeholder="3874"
+        />
+      </div>
+      <div class="confirm-order-price-section-item">
+        <NewOrderInput
+          title="Spend. BTC"
+          placeholder="0.5"
+        />
+      </div>
+      <div class="confirm-order-price-section-item">
+        <NewOrderInput
+          title="Get. USD"
+          placeholder="1932"
+        />
+      </div>
+    </div>
+    <!-- SECTION 2 -->
+    <div class="confirm-order-price-section">
+      <div class="confirm-order-price-section-item">
+        <NewOrderInput
+          title="Trading fee. USD"
+          placeholder="15.82"
+          note="~15.82 USD"
+        />
+      </div>
+      <div class="confirm-order-price-section-item">
+        <NewOrderInput
+          title="Exchange fee. USD"
+          placeholder="10.23"
+          note="~10.23 USD"
+        />
+      </div>
+    </div>
+
     <div class="confirm-order-buttons">
       <Button
         text="Confirm"
@@ -32,10 +71,12 @@
 </template>
 <script>
 import Button from '@/components/Button'
+import NewOrderInput from '@/views/NewOrder/NewOrderInput'
 
 export default {
   components: {
-    Button
+    Button,
+    NewOrderInput
   }
 }
 </script>
@@ -90,5 +131,16 @@ export default {
       font-weight: normal;
       font-size: config('textSizes.lg');
     }
+  }
+
+  .confirm-order-price-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 80%;
+    margin-top: 15px;
+  }
+  .confirm-order-price-section-item {
+    margin: .2rem;
   }
 </style>
