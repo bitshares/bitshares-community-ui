@@ -1,5 +1,6 @@
 <template>
   <div class="header hidden lg:flex">
+    <div class='back-header' />
     <div class="lg:w-1/3">
       <svgicon
         name="bitshares"
@@ -16,13 +17,13 @@
         class="header-btn lg:w-1/3"
         type="secondary"
         size="small"
-      >Deposit</Button>
+      ></Button>
       <Button
         text="Withdraw"
         class="ml-5 header-btn lg:w-1/3"
         type="secondary"
         size="small"
-      >Withdraw</Button>
+      ></Button>
     </div>
 
     <div class="lg:w-1/3">
@@ -40,12 +41,13 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import UserInfo from './HeaderUserInfo'
+import Button from '@/components/Button'
 import Dropdown from '@/components/Dropdown'
 import '@icons/bitshares'
 
 export default {
   name: 'Header',
-  components: { UserInfo, Dropdown },
+  components: { UserInfo, Dropdown, Button },
   computed: {
     ...mapGetters({
       backupEnabled: 'acc/isWalletAcc'
@@ -100,11 +102,23 @@ export default {
   justify-content: space-between;
   align-items: center;
   height: 61px;
-  background-color: var(--black);
+  background-color: transparent;
   margin: 5px 0px 5px 0px;
-  width: 1280px;
-  margin-left: -4rem;
-  padding: 0rem 4rem;
+  width: 100%;
+
+  & > * {
+    z-index: 1;
+  }
+}
+
+.back-header {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  background: black;
+  opacity: .2;
+  height: 55px;
+  z-index: 0;
 }
 
 .inline-block {
