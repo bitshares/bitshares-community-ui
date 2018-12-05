@@ -13,26 +13,26 @@
     </div>
     <div class="confirm-order-title">Confirm order</div>
     <div class="confirm-order-date">07-nov-18, 14:39</div>
-    <div class="confirm-order-title confirm-order-title--xl">sell btc/usd</div>
+    <div class="confirm-order-title confirm-order-title--xl">{{ confirmTitle }}</div>
 
     <!-- SECTION 1 -->
     <div class="confirm-order-price-section">
       <div class="confirm-order-price-section-item">
         <NewOrderInput
+          :placeholder="price"
           title="Price. USD"
-          placeholder="3874"
         />
       </div>
       <div class="confirm-order-price-section-item">
         <NewOrderInput
+          :placeholder="spend"
           title="Spend. BTC"
-          placeholder="0.5"
         />
       </div>
       <div class="confirm-order-price-section-item">
         <NewOrderInput
+          :placeholder="get"
           title="Get. USD"
-          placeholder="1932"
         />
       </div>
     </div>
@@ -40,16 +40,16 @@
     <div class="confirm-order-price-section">
       <div class="confirm-order-price-section-item">
         <NewOrderInput
+          :placeholder="tradingFee"
+          :note="tradingFeeTitle"
           title="Trading fee. USD"
-          placeholder="15.82"
-          note="~15.82 USD"
         />
       </div>
       <div class="confirm-order-price-section-item">
         <NewOrderInput
+          :placeholder="exchangeFee"
+          :note="exchangeFeeTitle"
           title="Exchange fee. USD"
-          placeholder="10.23"
-          note="~10.23 USD"
         />
       </div>
     </div>
@@ -77,6 +77,51 @@ export default {
   components: {
     Button,
     NewOrderInput
+  },
+  props: {
+    base: {
+      type: String,
+      required: true
+    },
+    quote: {
+      type: String,
+      required: true
+    },
+    type: {
+      type: String,
+      required: true
+    },
+    price: {
+      type: Number,
+      required: true
+    },
+    get: {
+      type: Number,
+      required: true
+    },
+    spend: {
+      type: Number,
+      required: true
+    },
+    tradingFee: {
+      type: String,
+      default: ''
+    },
+    exchangeFee: {
+      type: String,
+      default: ''
+    }
+  },
+  computed: {
+    confirmTitle() {
+      return `${this.type} ${this.base}/${this.quote}`
+    },
+    tradingFeeTitle() {
+      return `~${this.tradingFee} ${this.quote}`
+    },
+    exchangeFeeTitle() {
+      return `~${this.exchangeFee} ${this.quote}`
+    }
   }
 }
 </script>

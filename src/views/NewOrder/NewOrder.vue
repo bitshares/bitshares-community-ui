@@ -45,7 +45,17 @@
       :width-auto="true"
       @close="showConfirmOrder"
     >
-      <ConfirmOrder @close="showConfirmOrder"/>
+      <ConfirmOrder
+        :base="base"
+        :quote="quote"
+        :type="type"
+        :price="confirmPrice"
+        :get="confirmGet"
+        :spend="confirmSpend"
+        :trading-fee="confirmTradingFee"
+        :exchange-fee="confirmExchangeFee"
+        @close="showConfirmOrder"
+      />
     </Modal>
   </div>
 </template>
@@ -82,7 +92,13 @@ export default {
       type: 'newOrder/getType',
       activeIndication: 'newOrder/getActiveIndication',
       percentItems: 'newOrder/getPercentItems',
-      activePercent: 'newOrder/getActivePercent'
+      activePercent: 'newOrder/getActivePercent',
+
+      confirmPrice: 'confirmOrder/getPrice',
+      confirmGet: 'confirmOrder/getGet',
+      confirmSpend: 'confirmOrder/getSpend',
+      confirmTradingFee: 'confirmOrder/getTradingFee',
+      confirmExchangeFee: 'confirmOrder/getExchangeFee'
     }),
 
     buttonTitle() {
