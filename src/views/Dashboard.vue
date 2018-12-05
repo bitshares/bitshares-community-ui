@@ -138,11 +138,13 @@ export default {
     NewOrder
   },
   data() {
-    return {}
+    return {
+      backupFlag: true
+    }
   },
   computed: {
     ...mapGetters({
-      backupFlag: 'backup/modalDisplayed'
+      // backupFlag: 'backup/modalDisplayed'
     })
   },
   methods: {

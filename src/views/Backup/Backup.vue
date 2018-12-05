@@ -1,7 +1,10 @@
 <template>
-  <div class="backup">
+  <div
+    :class="{'backup--auto': currentStep === stepConfig['BACKUP_MENU']}"
+    class="backup"
+  >
     <svgicon
-      v-if="currentStep > 1"
+      v-if="currentStep > 0"
       class="backup-paginator"
       name="arrowDown"
       @click="goBack"
@@ -17,6 +20,10 @@
         name="cancel"
       />
     </div>
+    <BackupMenu
+      v-if="currentStep === stepConfig['BACKUP_MENU']"
+      @change="onChangeStep"
+    />
     <BackupStep1
       v-if="currentStep === stepConfig['BACKUP_STEP_1']"
       @change="onChangeStep"
@@ -44,6 +51,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import BackupMenu from './BackupMenu'
 import BackupStep1 from './BackupStep1'
 import BackupStep2 from './BackupStep2'
 import BackupPhrase from './BackupPhrase'
@@ -53,6 +61,7 @@ import BackupUnlockWallet from './BackupUnlockWallet'
 
 export default {
   components: {
+    BackupMenu,
     BackupStep1,
     BackupStep2,
     BackupPhrase,
@@ -62,8 +71,9 @@ export default {
   },
   data() {
     return {
-      currentStep: 1,
+      currentStep: 0,
       stepConfig: {
+        'BACKUP_MENU': 0,
         'BACKUP_STEP_1': 1,
         'BACKUP_STEP_2': 2,
         'BACKUP_PHRASE': 3,
@@ -125,6 +135,10 @@ export default {
       transform: rotate(90deg);
       z-index: 10;
       cursor: pointer;
+    }
+
+    &--auto {
+      height: auto;
     }
   }
 
