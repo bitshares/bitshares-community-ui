@@ -1,6 +1,8 @@
 <template>
   <div
-    :class="{'backup--auto': currentStep === stepConfig['BACKUP_MENU']}"
+    :class="{
+      'backup--auto': isAutoSize
+    }"
     class="backup"
   >
     <svgicon
@@ -47,11 +49,15 @@
       v-if="currentStep === stepConfig['BACKUP_FINISH']"
       :backup-phrase="backupPhrase"
     />
+    <BackupKeyDownload
+      v-if="currentStep === stepConfig['BACKUP_DOWNLOAD']"
+    />
   </div>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import BackupMenu from './BackupMenu'
+import BackupKeyDownload from './BackupKeyDownload'
 import BackupStep1 from './BackupStep1'
 import BackupStep2 from './BackupStep2'
 import BackupPhrase from './BackupPhrase'
@@ -62,6 +68,7 @@ import BackupUnlockWallet from './BackupUnlockWallet'
 export default {
   components: {
     BackupMenu,
+    BackupKeyDownload,
     BackupStep1,
     BackupStep2,
     BackupPhrase,
@@ -71,14 +78,15 @@ export default {
   },
   data() {
     return {
-      currentStep: 0,
+      currentStep: 6,
       stepConfig: {
         'BACKUP_MENU': 0,
         'BACKUP_STEP_1': 1,
         'BACKUP_STEP_2': 2,
         'BACKUP_PHRASE': 3,
         'BACKUP_VERIFY': 4,
-        'BACKUP_FINISH': 5
+        'BACKUP_FINISH': 5,
+        'BACKUP_DOWNLOAD': 6
       }
     }
   },
@@ -89,6 +97,9 @@ export default {
     }),
     phrase() {
       return this.backupPhrase.split(' ')
+    },
+    isAutoSize() {
+      return this.currentStep === this.stepConfig['BACKUP_MENU'] || this.currentStep === this.stepConfig['BACKUP_DOWNLOAD']
     }
   },
   methods: {
