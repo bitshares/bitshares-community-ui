@@ -13,7 +13,7 @@ const getDefaultState = () => ({
   type: 'buy',
 
   activeIndication: 'MARKET',
-  activePercent: 10,
+  activePercent: 0,
   percentItems: [10, 25, 50, 75]
 })
 
