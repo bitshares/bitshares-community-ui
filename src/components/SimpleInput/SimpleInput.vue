@@ -3,7 +3,9 @@
     :class="{
       'input--has-icon': icon,
       'input--has-error': error,
-      'input--disabled': disabled
+      'input--disabled': disabled,
+      'input--centered': centered,
+      'input--value-mode': valueMode
     }"
     class="input">
 
@@ -27,6 +29,7 @@
 
     <!-- floating title -->
     <span
+      v-if="!valueMode"
       :class="{'input_has-content': !! value }"
       class="input__title">
       {{ titleText }}
@@ -44,7 +47,7 @@
 
     <!-- clear (cross) icon -->
     <svgicon
-      v-if="value && !icon"
+      v-if="value && !icon && !valueMode"
       name="cross"
       class="delete__icon"
       width="12"
@@ -116,6 +119,14 @@ export default {
     error: {
       type: String,
       default: ''
+    },
+    valueMode: {
+      type: Boolean,
+      default: false
+    },
+    centered: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -125,6 +136,9 @@ export default {
       return 'text'
     },
     usedPlaceholder() {
+      if (this.valueMode) {
+        return this.placeholder
+      }
       return this.title ? '' : this.placeholder
     },
     isNumber() {
@@ -178,6 +192,12 @@ export default {
 .input {
   position: relative;
   @apply pt-3 pb-4;
+
+  &--centered {
+    .input__input {
+      text-align: center;
+    }
+  }
 }
 
 .input__icon {
@@ -267,5 +287,15 @@ export default {
 
 .input__tip {
   color: config('colors.text-primary');
+}
+.input--value-mode {
+  padding: 0;
+
+  .input__input {
+    padding-right: 0;
+    outline: none;
+    border-bottom: none;
+    font-size: config('textSizes.xl');
+  }
 }
 </style>
