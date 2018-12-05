@@ -15,6 +15,13 @@
             class="temp-acc-btn"
             @click="setBackupFlag(true)"
           >Backup</div>
+          <svgicon
+            v-if="activeComponentName === 'Orders'"
+            name="cross"
+            class="plus-icon"
+            width="22"
+            height="22"
+          />
         </div>
         <component
           slot="body"
@@ -117,6 +124,11 @@ export default {
       margin-left: 1rem;
       border-bottom: 1px solid #ccc;
     }
+  }
+
+  .plus-icon {
+    transform: rotate(45deg);
+    padding: 5px;
   }
 
 </style>
