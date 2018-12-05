@@ -8,7 +8,7 @@
     />
     <div
       class="backup-close"
-      @click="updateBackupFlag"
+      @click="closeModal"
     >
       <svgicon
         width="12"
@@ -82,11 +82,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions('backup', ['setBackupFlag']),
+    ...mapActions('backup', ['toggleModal']),
 
-    updateBackupFlag() {
+    closeModal() {
       this.$nextTick(() => {
-        this.setBackupFlag(false)
+        this.toggleModal(false)
       })
     },
     onChangeStep(step) {
@@ -109,8 +109,7 @@ export default {
     background: config('colors.bg-base');
     width: 30rem;
     height: 30.4375rem;
-    border: 0.0625rem solid config('colors.white');
-
+    box-shadow: 0px 0px 13px 1px black;
     .backup-close {
       position: absolute;
       right: 0.625rem;

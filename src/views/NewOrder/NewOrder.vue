@@ -13,6 +13,20 @@
       :active="activeIndication"
       @change="setActiveIndication"
     />
+    <div class="new-order-fields">
+      <NewOrderInput
+        title="Spend"
+        placeholder="BTC"
+        note="max 0.04"
+        aside="left"
+      />
+      <NewOrderInput
+        title="Get"
+        placeholder="USD"
+        note="max 437"
+        aside="right"
+      />
+    </div>
     <div class="new-order-button">
       <Btn
         :type="type"
@@ -27,12 +41,14 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import NewOrderTabs from './NewOrderTabs'
+import NewOrderInput from './NewOrderInput'
 import Btn from '@/components/Button/Button'
 import Tabs from '@/components/Tabs/Tabs'
 
 export default {
   components: {
     NewOrderTabs,
+    NewOrderInput,
     Btn,
     Tabs
   },
@@ -44,7 +60,9 @@ export default {
       marketBuyPrice: 'newOrder/getMarketBuyPrice',
       marketSellPrice: 'newOrder/getMarketSellPrice',
       type: 'newOrder/getType',
-      activeIndication: 'newOrder/getActiveIndication'
+      activeIndication: 'newOrder/getActiveIndication',
+      percentItems: 'newOrder/getPercentItems',
+      activePercent: 'newOrder/getActivePercent'
     }),
 
     buttonTitle() {
@@ -54,7 +72,8 @@ export default {
   methods: {
     ...mapActions({
       setActiveIndication: 'newOrder/setActiveIndication',
-      setType: 'newOrder/setType'
+      setType: 'newOrder/setType',
+      setActivePercent: 'newOrder/setActivePercent'
     })
   }
 }
@@ -74,6 +93,11 @@ export default {
     .new-order-button {
       margin-top: auto;
       padding: 0.5rem;
+    }
+    .new-order-fields {
+      margin-top: 3rem;
+      display: flex;
+      justify-content: space-between;
     }
   }
 </style>

@@ -7,10 +7,28 @@
           class="temp-acc-header"
         >
           <svgicon
+            v-if="activeComponentName === 'Account'"
             name="search"
             width="24"
             height="24"
             class="search-icon"
+          />
+          <div
+            v-if="activeComponentName === 'Account'"
+            class="temp-acc-btn"
+            @click="handleLogout"
+          >Logout</div>
+          <div
+            v-if="activeComponentName === 'Account'"
+            class="temp-acc-btn"
+            @click="setBackupFlag(true)"
+          >Backup</div>
+          <svgicon
+            v-if="activeComponentName === 'Orders'"
+            name="cross"
+            class="plus-icon"
+            width="22"
+            height="22"
           />
         </div>
         <component
@@ -115,9 +133,13 @@ export default {
       border-bottom: 1px solid #ccc;
     }
   }
-
+  
   .search-icon {
     margin-right: 25px;
   }
-
+   
+  .plus-icon {
+    transform: rotate(45deg);
+    padding: 5px;
+  }
 </style>
