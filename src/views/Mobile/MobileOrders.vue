@@ -1,19 +1,13 @@
 <template>
-  <div>
-    <Tabs
-      :tabs="['active', 'history']"
-      :active="activeTab"
-      @change="switchTab"
-    >
-      <div slot="active">
-        <active-orders />
-      </div>
+  <Tabs
+    :tabs="['active', 'history']"
+    :active="activeTab"
+    @change="switchTab"
+  >
+    <active-orders slot="active" />
 
-      <div slot="history">
-        <order-history />
-      </div>
-    </Tabs>
-  </div>
+    <order-history slot="history" />
+  </Tabs>
 </template>
 
 <script>
