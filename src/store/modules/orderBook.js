@@ -37,6 +37,17 @@ const getters = {
   isFetching: state => state.fetching
 }
 
+const processLastOrder = (order, baseAsset, quoteAsset) => {
+  const type = order.pays.asset_id === baseAsset.id ? 'buy' : 'sell'
+  const sellField = type === 'buy' ? 'pays' : 'receives'
+  const buyField = type === 'buy' ? 'receives' : 'pays'
+  const sellAmount = order[sellField].amount / 10 ** baseAsset.precision
+  const buyAmount = order[buyField].amount / 10 ** quoteAsset.precision
+  const price = sellAmount / buyAmount
+
+  return { price, sum: sellAmount }
+}
+
 const processOrders = (orders, type, baseAsset, quoteAsset) => {
   const processedOrders = orders.map(order => {
     let sum = order.for_sale / 10 ** baseAsset.precision
@@ -69,7 +80,7 @@ const mutations = {
     state.quoteAsset = quoteAsset
   },
   [types.UPDATE_LAST_ORDER](state, order) {
-    state.lastOrder = processOrders([order], 'buy', state.baseAsset, state.quoteAsset)
+    state.lastOrder = processLastOrder(order, state.baseAsset, state.quoteAsset)
   },
   [types.ORDER_BOOK_RESET](state) {
     Object.assign(state, getDefaultState())
@@ -92,10 +103,8 @@ const actions = {
       })
       console.log('subscribing')
       market.subscribeToLastOrder(quoteAsset.id, (order) => {
-        console.log('Last price subscription works!', order)
         actions.updateLastOrder(store, order)
       })
-      // sub to last price
     } else {
       console.warn(`MARKET ERROR: No such market - ${baseSymbol}/${quoteSymbol}`)
     }
@@ -106,8 +115,6 @@ const actions = {
     if (baseAsset && quoteAsset) {
       const market = API.Market(baseAsset)
       market.unsubscribeFromMarket(quoteAsset.id)
-      // market.unsubscribeFromLastOrder()
-      // unsub from last price
     }
     commit(types.ORDER_BOOK_RESET)
   },
@@ -115,12 +122,6 @@ const actions = {
     commit(types.SET_ORDER_BOOK, { orders })
   },
   async updateLastOrder({ commit }, order) {
-    // order.op = [1]
-    // const processedOperation = await API.Operations.parseOperations({ 
-    //   operations: [order],
-    //   userId: null
-    // })
-    // console.log(processedOperation)
     commit(types.UPDATE_LAST_ORDER, order)
   }
 }
