@@ -14,13 +14,13 @@
 
       <Button
         text="Deposit"
-        class="header-btn lg:w-1/3"
+        class="header-btn"
         type="secondary"
         size="small"
       />
       <Button
         text="Withdraw"
-        class="ml-5 header-btn lg:w-1/3"
+        class="ml-5 header-btn"
         type="secondary"
         size="small"
       />
@@ -103,7 +103,7 @@ export default {
   align-items: center;
   height: 61px;
   background-color: transparent;
-  margin: 5px 0px 5px 0px;
+  margin: .25rem 0rem;
   width: 100%;
 
   & > * {
@@ -130,10 +130,6 @@ export default {
   padding: 0;
   height: 31px;
   width: 110px;
-  &:hover {
-    color: config('colors.black');
-    background: config('colors.white');
-  }
 }
 
 .dropdown {

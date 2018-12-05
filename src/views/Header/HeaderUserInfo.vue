@@ -40,7 +40,7 @@ export default {
     width: 100%;
     padding-right: 1rem;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 1rem;
   }
 
   svg {
@@ -48,7 +48,7 @@ export default {
     transform: rotate(270deg);
     display: block;
     margin: auto;
-    margin-top: 3px;
+    margin-top: .15rem;
   }
 }
 </style>
