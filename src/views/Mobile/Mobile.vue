@@ -12,10 +12,6 @@
             height="24"
             class="search-icon"
           />
-          <Dropdown
-            :items="dropdownItems"
-            @clicked="handleDropdownClick"
-          />
         </div>
         <component
           slot="body"
@@ -34,11 +30,9 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import MobileFooter from '@/components/MobileFooter'
-import Account from '@/views/Account/MobileAccount'
-import Dropdown from '@/components/Dropdown'
+import Account from '@/views/Mobile/MobileAccount.vue'
 import Card from '@/components/Card'
 import Markets from '@/views/Markets/Markets.vue'
-// import Account from '@/views/Account/Portfolio.vue'
 import Orders from '@/views/OrderHistory/OrderHistory.vue'
 import OrderBook from '@/views/OrderBook/OrderBook.vue'
 import '@icons/markets'
@@ -47,7 +41,7 @@ import '@icons/account'
 
 export default {
   name: 'Mobile',
-  components: { MobileFooter, Markets, Account, Dropdown, Orders, Card, OrderBook },
+  components: { MobileFooter, Markets, Account, Orders, Card, OrderBook },
   data() {
     return {
       activeComponentName: 'Markets',
@@ -57,24 +51,6 @@ export default {
         name: 'Orders', title: 'Orders', icon: 'orders'
       }, {
         name: 'Account', title: 'Account', icon: 'account'
-      }],
-      dropdownItems: [{
-        title: 'backup',
-        event: 'backup'
-      },
-      {
-        title: 'settings',
-        event: 'settings',
-        disabled: true
-      },
-      {
-        title: 'faq',
-        event: 'faq',
-        disabled: true
-      },
-      {
-        title: 'log out',
-        event: 'logout'
       }]
     }
   },
@@ -115,15 +91,6 @@ export default {
     handleLogout() {
       this.$router.push({ name: 'login' })
       this.logout()
-    },
-    handleDropdownClick(eventName) {
-      switch (eventName) {
-        case 'logout':
-          this.handleLogout()
-          return
-        case 'backup':
-          this.setBackupFlag(true)
-      }
     }
   }
 }

@@ -3,10 +3,23 @@
     :loading="!historyLoaded"
     class="portfolio-container h-full">
 
-    <MobileAccountHeader
-      :large-mode="true"
-      class="flex md:hidden"
-    />
+    <div class="mobile-account-header">
+      <div class="xs:w-1/2 sm:w-1/2">
+        <Button
+          class="mobile-account-header-btn"
+          text="Deposit"
+          type="secondary"
+        />
+      </div>
+
+      <div class="xs:w-1/2 sm:w-1/2">
+        <Button
+          class="mobile-account-header-btn"
+          text="Withdraw"
+          type="secondary"
+        />
+      </div>
+    </div>
 
     <div class="balance">
       <span class="title">BALANCE</span>
@@ -54,14 +67,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import LoadingContainer from '@/components/LoadingContainer'
+import Button from '@/components/Button'
 import LinkButton from '@/components/LinkButton'
-import PortfolioItem from './PortfolioItem.vue'
-import MobileAccountHeader from './MobileAccountHeader'
-
 import SortableTable from '@/components/SortableTable'
+import PortfolioItem from '@/views/Account/PortfolioItem.vue'
 
 export default {
-  components: { PortfolioItem, LoadingContainer, LinkButton, SortableTable, MobileAccountHeader },
+  components: { Button, PortfolioItem, LoadingContainer, LinkButton, SortableTable },
   props: {
     expanded: {
       type: Boolean,
@@ -165,6 +177,26 @@ export default {
 
   .amount {
     font-size: config('textSizes.5xl')
+  }
+}
+
+.mobile-account-header {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .mobile-account-header-btn {
+    width: 165px;
+    height: 48px;
+
+    margin: 0px 7px;
+    line-height: 20px;
+    background-color: black;
+
+    &:hover {
+      background-color: config('colors.white');
+    }
   }
 }
 </style>
