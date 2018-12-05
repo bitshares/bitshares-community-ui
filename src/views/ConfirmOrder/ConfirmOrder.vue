@@ -12,7 +12,7 @@
       />
     </div>
     <div class="confirm-order-title">Confirm order</div>
-    <div class="confirm-order-date">07-nov-18, 14:39</div>
+    <div class="confirm-order-date">{{ confirmDate }}</div>
     <div class="confirm-order-title confirm-order-title--xl">{{ confirmTitle }}</div>
 
     <!-- SECTION 1 -->
@@ -70,6 +70,7 @@
   </div>
 </template>
 <script>
+import { format } from 'date-fns'
 import Button from '@/components/Button'
 import NewOrderInput from '@/views/NewOrder/NewOrderInput'
 
@@ -121,6 +122,9 @@ export default {
     },
     exchangeFeeTitle() {
       return `~${this.exchangeFee} ${this.quote}`
+    },
+    confirmDate() {
+      return format(new Date(), 'DD-MMM-YY, HH:mm')
     }
   }
 }
