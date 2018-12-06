@@ -4,15 +4,21 @@
   >
     <div class="new-order-input-title">{{ title }}</div>
     <SimpleInput
-      v-model="value"
+      :value="value"
       :value-mode="true"
       :title="title"
       :placeholder="placeholder"
       :centered="true"
       :disabled="disabled"
       type="number"
+      @input="handleChange"
     />
-    <div class="new-order-input-note">{{ note }}</div>
+    <div
+      class="new-order-input-note"
+      @click="$emit('note-click')"
+    >
+      {{ note }}
+    </div>
   </div>
 </template>
 <script>
@@ -38,11 +44,15 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    value: {
+      type: Number,
+      default: null
     }
   },
-  data() {
-    return {
-      value: ''
+  methods: {
+    handleChange(value) {
+      this.$emit('change', value)
     }
   }
 }

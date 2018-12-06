@@ -16,22 +16,26 @@
     <div class="new-order-fields">
       <NewOrderInput
         :placeholder="quote"
+        :value="spendAmount"
         title="Spend"
         note="max 0.04"
+        @change="handleSpendAmountInput"
       />
       <NewOrderInput
         :placeholder="base"
+        :value="getAmount"
         title="Get"
         note="max 437"
+        @change="handleGetAmountInput"
       />
     </div>
-    <div class="new-order-price">
+    <!-- <div class="new-order-price">
       <NewOrderInput
-        title="Price .TRUSTY"
+        :title="priceTitle"
         placeholder="PRICE"
         note="~0.4 USD"
       />
-    </div>
+    </div> -->
     <div
       class="new-order-button"
       @click="showConfirmOrder(true)"
@@ -97,8 +101,14 @@ export default {
       type: 'newOrder/getType',
       activeIndication: 'newOrder/getActiveIndication',
       percentItems: 'newOrder/getPercentItems',
-      activePercent: 'newOrder/getActivePercent'
+      activePercent: 'newOrder/getActivePercent',
+      getAmount: 'newOrder/getGetAmount',
+      spendAmount: 'newOrder/getSpendAmount'
     }),
+
+    priceTitle() {
+      return `Price .${this.quote}`
+    },
 
     buttonTitle() {
       return `${this.orderAmount} ${this.base}`
@@ -108,10 +118,18 @@ export default {
     ...mapActions({
       setActiveIndication: 'newOrder/setActiveIndication',
       setType: 'newOrder/setType',
-      setActivePercent: 'newOrder/setActivePercent'
+      setActivePercent: 'newOrder/setActivePercent',
+      setGetAmount: 'newOrder/setGetAmount',
+      setSpendAmount: 'newOrder/setSpendAmount'
     }),
     showConfirmOrder(value) {
       this.confirmVisible = value
+    },
+    handleGetAmountInput(value) {
+      this.setGetAmount(value)
+    },
+    handleSpendAmountInput(value) {
+      this.setSpendAmount(value)
     }
   }
 }
