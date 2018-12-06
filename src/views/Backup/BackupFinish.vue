@@ -17,7 +17,7 @@
       <div class="backup-step-finish-text">{{ text }}</div>
     </div>
     <div class="backup-step-footer">
-      <div
+      <!-- <div
         class="backup-step-button _password">
         <Button
           type="secondary"
@@ -25,7 +25,7 @@
           width="full"
           @click="copyUserPhrase"
         />
-      </div>
+      </div> -->
       <div class="backup-step-content _footer-content">
         <div class="backup-step-finish-icon">
           <svgicon
@@ -36,8 +36,8 @@
           />
         </div>
         <div class="backup-step-finish-text">
-          I have read, understood, and agreed to
-          <span class="_terms">theTerms of Use</span>
+          I have read, understood, and agreed to the
+          <span class="_terms">Terms of Use</span>
         </div>
       </div>
       <div class="backup-step-button">
@@ -76,12 +76,14 @@ export default {
     }
   },
   methods: {
-    ...mapActions('backup', ['setBackupFlag']),
-    ...mapActions('acc', ['storeBackupDate']),
+    ...mapActions({
+      toggleModal: 'backup/toggleModal',
+      storeBackupDate: 'acc/storeBackupDate'
+    }),
 
     updateBackupFlag() {
       this.$nextTick(() => {
-        this.setBackupFlag(false)
+        this.toggleModal(false)
         this.storeBackupDate()
       })
     },

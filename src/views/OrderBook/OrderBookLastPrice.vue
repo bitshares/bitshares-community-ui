@@ -31,7 +31,7 @@ export default {
     z-index: 100;
     width: 7.625rem;
     left: calc(50% - 3.8125rem);
-    z-index: 100;
+    z-index: 2;
     top: 1.73rem;
     height: 0.7rem;
   }

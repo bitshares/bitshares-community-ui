@@ -8,56 +8,50 @@
     </Modal>
     <div class="dashboard hidden lg:block">
       <div class="flex flex-col lg:flex-row mb-card-margin">
+        <div class="flex flex-col lg:w-1/3 mr-card-margin">
 
-        <Card
-          :expandable="true"
-          collapsible
-          class="lg:w-1/3 lg:mr-card-margin"
-          title="account"
-        >
-          <AccountHeader slot="header"/>
-          <AccountHeader
-            slot="modal-header"
-            :large="true"/>
-          <Portfolio slot="body"/>
-          <Portfolio
-            slot="modal"
-            :expanded="true"/>
-        </Card>
-        <Card
-          collapsible
-          class="lg:w-2/3"
-          title="Graph"
-        />
+          <Card
+            :expandable="true"
+            :collapsible="true"
+            title="account"
+            class="mb-card-margin"
+          >
+            <AccountHeader slot="header"/>
+            <AccountHeader
+              slot="modal-header"
+              :large="true"/>
+            <Portfolio slot="body"/>
+            <Portfolio
+              slot="modal"
+              :expanded="true"/>
+          </Card>
 
-      </div>
-      <div class="flex flex-col lg:flex-row mb-card-margin">
-        <Card
-          :expandable="true"
-          :long="true"
-          collapsible
-          class="lg:w-1/3 lg:mr-card-margin"
-          title="markets"
-        >
-          <MarketsSearch slot="header"/>
-          <Markets slot="body"/>
-          <MarketsSearch slot="modal-header"/>
-          <Markets
-            slot="modal"
-            :expand-mode="true"/>
-        </Card>
+          <Card
+            :expandable="true"
+            :collapsible="true"
+            title="markets"
+          >
+            <MarketsSearch slot="header"/>
+            <Markets slot="body"/>
+            <MarketsSearch slot="modal-header"/>
+            <Markets
+              slot="modal"
+              :expand-mode="true"/>
+          </Card>
+
+        </div>
 
         <div class="flex lg:w-2/3">
           <div class="flex flex-col lg:w-1/2 mr-card-margin">
             <Card
-              collapsible
+              :collapsible="true"
               class="mb-card-margin"
             >
               <NewOrder slot="body"/>
             </Card>
             <Card
               :expandable="true"
-              collapsible
+              :collapsible="true"
               title="active orders"
             >
               <ActiveOrdersSearch slot="modal-header"/>
@@ -72,7 +66,7 @@
           <div class="flex flex-col lg:w-1/2">
 
             <Card
-              collapsible
+              :collapsible="true"
               title="order book"
               class="mb-card-margin"
             >
@@ -81,6 +75,7 @@
 
             <Card
               :expandable="true"
+              :collapsible="true"
               title="My orders history"
             >
               <OrderHistorySearch slot="modal-header"/>
@@ -93,6 +88,7 @@
 
           </div>
         </div>
+
       </div>
     </div>
 
@@ -146,11 +142,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      backupFlag: 'backup/getBackupFlag'
+      backupFlag: 'backup/modalDisplayed'
     })
   },
   methods: {
-    ...mapActions('backup', ['setBackupFlag'])
+    ...mapActions('backup', ['toggleModal'])
   }
 }
 </script>
