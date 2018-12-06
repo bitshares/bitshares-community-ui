@@ -34,7 +34,6 @@
         :title="priceTitle"
         :value="price"
         placeholder="PRICE"
-        note="~0.4 USD"
         @change="setPrice"
       />
     </div>
@@ -60,9 +59,9 @@
         :base="base"
         :quote="quote"
         :type="type"
-        :price="3874"
-        :get="1932"
-        :spend="0.5"
+        :price="price"
+        :get="getAmount"
+        :spend="spendAmount"
         :trading-fee="15.82"
         :exchange-fee="10.23"
         @close="showConfirmOrder"

@@ -40,7 +40,7 @@
       </div>
     </div>
     <!-- SECTION 2 -->
-    <div class="confirm-order-price-section">
+    <!-- <div class="confirm-order-price-section">
       <div class="confirm-order-price-section-item">
         <NewOrderInput
           :placeholder="tradingFee.toString()"
@@ -57,13 +57,14 @@
           title="Exchange fee. USD"
         />
       </div>
-    </div>
+    </div> -->
 
     <div class="confirm-order-buttons">
       <Button
         text="Confirm"
         width="full"
         class="confirm-order-btn"
+        @click="$emit('confirm')"
       />
       <Button
         text="Cancel"
