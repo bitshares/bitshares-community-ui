@@ -111,8 +111,8 @@ export default {
     },
 
     buttonTitle() {
-      const orderAmount = this.type === 'buy' ? this.getAmount : this.sellAmount
-      return `${orderAmount} ${this.base}`
+      const orderAmount = this.type === 'buy' ? this.getAmount : this.spendAmount
+      return `${orderAmount || 0} ${this.base}`
     }
   },
   methods: {
