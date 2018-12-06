@@ -37,7 +37,7 @@ const getters = {
   getGetAmount: state => state.getAmount,
   getPrice: state => state.price,
   getFiatPrice: (state, getters, rootState, rootGetters) => {
-    
+
     // calc usd price based on asset
   }
 }
