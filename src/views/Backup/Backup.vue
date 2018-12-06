@@ -127,7 +127,7 @@ export default {
     display: flex;
     justify-content: center;
     margin: 0 auto;
-    background: config('colors.bg-base');
+    background: config('colors.card-background');
     width: 30rem;
     height: 30.4375rem;
     box-shadow: 0px 0px 13px 1px black;
