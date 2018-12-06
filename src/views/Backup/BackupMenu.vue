@@ -75,6 +75,10 @@ export default {
         margin: 1.2rem auto 0;
         width: 100%;
       }
+      .backup-step-footer {
+        padding: 0 1.25rem;
+      }
     }
+
   }
 </style>
