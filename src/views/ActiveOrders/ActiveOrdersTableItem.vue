@@ -208,7 +208,7 @@ export default {
     }
   }
   .active-orders-table-item {
-    height: 3.125rem;
+    min-height: 3.125rem;
 
     &.active-orders-table-item--expanded {
       margin: 0.1250rem 0 0.1250rem 0.1250rem;

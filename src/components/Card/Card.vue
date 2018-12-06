@@ -160,7 +160,7 @@ export default {
   padding:config('padding.card-ui');
   padding-left: 1rem;
   padding-right: 1.5rem;
-  padding-bottom: 0.3rem;
+  padding-bottom: 0.8rem;
   color: config('colors.text-primary');
   display:flex;
   flex-shrink: 0;

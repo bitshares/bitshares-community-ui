@@ -64,6 +64,6 @@ export default {
 </script>
 <style lang="scss">
   .active-orders-table {
-    height: 92%;
+    height: 100%;
   }
 </style>
