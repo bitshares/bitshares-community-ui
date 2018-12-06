@@ -34,6 +34,12 @@ const getters = {
   },
   getOrderBook: state => state.orderBook,
   getLastOrder: state => state.lastOrder,
+  getTopOrders: state => {
+    return {
+      buy: state.orderBook.buying[0] || { price: 0 },
+      sell: state.orderBook.selling[0] || { price: 0 }
+    }
+  },
   isActive: state => !!(state.baseAsset && state.quoteAsset),
   isFetching: state => state.fetching
 }

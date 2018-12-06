@@ -4,8 +4,8 @@
       :base="base"
       :quote="quote"
       :type="type"
-      :buy-price="marketBuyPrice"
-      :sell-price="marketSellPrice"
+      :buy-price="marketPrices.buy.price"
+      :sell-price="marketPrices.sell.price"
       @change="setType"
     />
     <!-- <Tabs
@@ -96,16 +96,14 @@ export default {
     ...mapGetters({
       base: 'newOrder/getBase',
       quote: 'newOrder/getQuote',
-      orderAmount: 'newOrder/getOrderAmount',
-      marketBuyPrice: 'newOrder/getMarketBuyPrice',
-      marketSellPrice: 'newOrder/getMarketSellPrice',
       type: 'newOrder/getType',
       activeIndication: 'newOrder/getActiveIndication',
       percentItems: 'newOrder/getPercentItems',
       activePercent: 'newOrder/getActivePercent',
       getAmount: 'newOrder/getGetAmount',
       spendAmount: 'newOrder/getSpendAmount',
-      price: 'newOrder/getPrice'
+      price: 'newOrder/getPrice',
+      marketPrices: 'newOrder/getMarketPrices'
     }),
 
     priceTitle() {
@@ -113,7 +111,8 @@ export default {
     },
 
     buttonTitle() {
-      return `${this.orderAmount} ${this.base}`
+      const orderAmount = this.type === 'buy' ? this.getAmount : this.sellAmount
+      return `${orderAmount} ${this.base}`
     }
   },
   methods: {

@@ -14,14 +14,11 @@ const types = {
 const getDefaultState = () => ({
   base: 'BTC',
   quote: 'USD',
-  marketSellPrice: 5610.02,
-  marketBuyPrice: 5611.15,
   orderAmount: 0.02,
   getAmount: 0,
   spendAmount: 0,
   price: 0,
   type: 'buy',
-
   activeIndication: 'MARKET',
   activePercent: 0,
   percentItems: [10, 25, 50, 75]
@@ -30,8 +27,7 @@ const getDefaultState = () => ({
 const getters = {
   getBase: state => removePrefix(state.base),
   getQuote: state => removePrefix(state.quote),
-  getMarketSellPrice: state => state.marketSellPrice,
-  getMarketBuyPrice: state => state.marketBuyPrice,
+  getMarketPrices: (state, getters, rootState, rootGetters) => rootGetters['orderBook/getTopOrders'],
   getOrderAmount: state => state.orderAmount,
   getType: state => state.type,
   getPercentItems: state => state.percentItems,
@@ -40,7 +36,8 @@ const getters = {
   getSpendAmount: state => state.spendAmount,
   getGetAmount: state => state.getAmount,
   getPrice: state => state.price,
-  getFiatPrice: state => {
+  getFiatPrice: (state, getters, rootState, rootGetters) => {
+    
     // calc usd price based on asset
   }
 }
