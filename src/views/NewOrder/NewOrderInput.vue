@@ -9,6 +9,7 @@
       :title="title"
       :placeholder="placeholder"
       :centered="true"
+      :disabled="disabled"
       type="number"
     />
     <div class="new-order-input-note">{{ note }}</div>
@@ -33,6 +34,10 @@ export default {
     note: {
       type: String,
       default: ''
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

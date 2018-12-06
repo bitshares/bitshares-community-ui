@@ -12,7 +12,6 @@ import Cookies from 'js-cookie'
 import paths from './cachedPaths'
 import marketsMonitor from './modules/marketsMonitor'
 import newOrder from './modules/newOrder'
-import confirmOrder from './modules/confirmOrder'
 
 const { modules, plugins } = vuexBitshares
 Vue.use(Vuex)
@@ -30,7 +29,6 @@ const store = new Vuex.Store({
     orderHistory,
     newOrder,
     activeOrders,
-    confirmOrder,
     ...modules
   },
   plugins: [

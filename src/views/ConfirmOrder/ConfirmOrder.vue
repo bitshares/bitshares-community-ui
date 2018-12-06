@@ -20,18 +20,21 @@
       <div class="confirm-order-price-section-item">
         <NewOrderInput
           :placeholder="price.toString()"
+          :disabled="true"
           title="Price. USD"
         />
       </div>
       <div class="confirm-order-price-section-item">
         <NewOrderInput
           :placeholder="spend.toString()"
+          :disabled="true"
           title="Spend. BTC"
         />
       </div>
       <div class="confirm-order-price-section-item">
         <NewOrderInput
           :placeholder="get.toString()"
+          :disabled="true"
           title="Get. USD"
         />
       </div>
@@ -42,6 +45,7 @@
         <NewOrderInput
           :placeholder="tradingFee.toString()"
           :note="tradingFeeTitle"
+          :disabled="true"
           title="Trading fee. USD"
         />
       </div>
@@ -49,6 +53,7 @@
         <NewOrderInput
           :placeholder="exchangeFee.toString()"
           :note="exchangeFeeTitle"
+          :disabled="true"
           title="Exchange fee. USD"
         />
       </div>

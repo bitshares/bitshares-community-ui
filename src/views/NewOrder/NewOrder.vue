@@ -47,11 +47,11 @@
         :base="base"
         :quote="quote"
         :type="type"
-        :price="confirmPrice"
-        :get="confirmGet"
-        :spend="confirmSpend"
-        :trading-fee="confirmTradingFee"
-        :exchange-fee="confirmExchangeFee"
+        :price="3874"
+        :get="1932"
+        :spend="0.5"
+        :trading-fee="15.82"
+        :exchange-fee="10.23"
         @close="showConfirmOrder"
       />
     </Modal>
@@ -90,13 +90,7 @@ export default {
       type: 'newOrder/getType',
       activeIndication: 'newOrder/getActiveIndication',
       percentItems: 'newOrder/getPercentItems',
-      activePercent: 'newOrder/getActivePercent',
-
-      confirmPrice: 'confirmOrder/getPrice',
-      confirmGet: 'confirmOrder/getGet',
-      confirmSpend: 'confirmOrder/getSpend',
-      confirmTradingFee: 'confirmOrder/getTradingFee',
-      confirmExchangeFee: 'confirmOrder/getExchangeFee'
+      activePercent: 'newOrder/getActivePercent'
     }),
 
     buttonTitle() {

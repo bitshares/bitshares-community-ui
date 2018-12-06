@@ -296,6 +296,10 @@ export default {
     outline: none;
     border-bottom: none;
     font-size: config('textSizes.xl');
+
+    &:disabled {
+      opacity: 1;
+    }
   }
 }
 </style>
