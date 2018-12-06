@@ -7,7 +7,7 @@
         <Button
           text="Download key file"
           width="full"
-          @click="$emit('change', 0)"
+          @click="$emit('change', stepConfig['BACKUP_MENU'])"
         />
       </div>
     </div>
@@ -20,8 +20,11 @@ export default {
   components: {
     Button
   },
-  data() {
-    return {}
+  props: {
+    stepConfig: {
+      type: Object,
+      required: true
+    }
   }
 }
 </script>

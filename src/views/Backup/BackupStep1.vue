@@ -14,7 +14,7 @@
       <Button
         text="Continue to backup"
         width="full"
-        @click="$emit('change', 2)"
+        @click="$emit('change', stepConfig['BACKUP_STEP_2'])"
       />
     </div>
   </div>
@@ -26,8 +26,11 @@ export default {
   components: {
     Button
   },
-  data() {
-    return {}
+  props: {
+    stepConfig: {
+      type: Object,
+      required: true
+    }
   }
 }
 </script>

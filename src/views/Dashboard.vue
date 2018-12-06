@@ -91,7 +91,6 @@
 
       </div>
     </div>
-
     <!-- TODO: use some vue plugin to disable when not on mobile -->
     <Mobile/>
   </div>
@@ -139,7 +138,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-        backupFlag: 'backup/modalDisplayed'
+      backupFlag: 'backup/modalDisplayed'
     })
   },
   methods: {

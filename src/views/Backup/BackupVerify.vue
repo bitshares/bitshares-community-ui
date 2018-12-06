@@ -39,7 +39,7 @@
           :disabled="isIncorrectKey"
           text="Confirm"
           width="full"
-          @click="!isIncorrectKey && $emit('change', 5)"
+          @click="!isIncorrectKey && $emit('change', stepConfig['BACKUP_FINISH'])"
         />
       </div>
     </div>
@@ -61,6 +61,10 @@ export default {
       default() {
         return []
       }
+    },
+    stepConfig: {
+      type: Object,
+      required: true
     }
   },
   data() {

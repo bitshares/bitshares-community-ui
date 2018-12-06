@@ -8,7 +8,7 @@
           text="Save key file"
           type="secondary"
           width="full"
-          @click="$emit('change', 6)"
+          @click="$emit('change', stepConfig['BACKUP_DOWNLOAD'])"
         />
       </div>
       <div class="backup-step-button">
@@ -16,7 +16,7 @@
           text="create paper backup"
           type="secondary"
           width="full"
-          @click="$emit('change', 1)"
+          @click="$emit('change', stepConfig['BACKUP_STEP_1'])"
         />
       </div>
     </div>
@@ -29,8 +29,11 @@ export default {
   components: {
     Button
   },
-  data() {
-    return {}
+  props: {
+    stepConfig: {
+      type: Object,
+      required: true
+    }
   }
 }
 </script>

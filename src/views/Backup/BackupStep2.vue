@@ -14,7 +14,7 @@
       <Button
         text="I understand"
         width="full"
-        @click="$emit('change', 3)"
+        @click="$emit('change', stepConfig['BACKUP_PHRASE'])"
       />
     </div>
   </div>
@@ -27,8 +27,11 @@ export default {
   components: {
     Button
   },
-  data() {
-    return {}
+  props: {
+    stepConfig: {
+      type: Object,
+      required: true
+    }
   }
 }
 </script>

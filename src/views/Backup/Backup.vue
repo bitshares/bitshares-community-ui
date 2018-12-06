@@ -24,25 +24,30 @@
     </div>
     <BackupMenu
       v-if="currentStep === stepConfig['BACKUP_MENU']"
+      :step-config="stepConfig"
       @change="onChangeStep"
     />
     <BackupStep1
       v-if="currentStep === stepConfig['BACKUP_STEP_1']"
+      :step-config="stepConfig"
       @change="onChangeStep"
     />
     <BackupStep2
       v-if="currentStep === stepConfig['BACKUP_STEP_2']"
+      :step-config="stepConfig"
       @change="onChangeStep"
     />
     <BackupUnlockWallet v-if="currentStep === stepConfig['BACKUP_PHRASE'] && isLocked"/>
     <BackupPhrase
       v-if="currentStep === stepConfig['BACKUP_PHRASE'] && !isLocked"
       :backup-phrase="phrase"
+      :step-config="stepConfig"
       @change="onChangeStep"
     />
     <BackupVerify
       v-if="currentStep === stepConfig['BACKUP_VERIFY']"
       :backup-phrase="phrase"
+      :step-config="stepConfig"
       @change="onChangeStep"
     />
     <BackupFinish
@@ -51,6 +56,7 @@
     />
     <BackupKeyDownload
       v-if="currentStep === stepConfig['BACKUP_DOWNLOAD']"
+      :step-config="stepConfig"
     />
   </div>
 </template>

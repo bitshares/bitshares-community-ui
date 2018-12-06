@@ -15,7 +15,7 @@
       <Button
         text="i’ve written it down"
         width="full"
-        @click="$emit('change', 4)"
+        @click="$emit('change', stepConfig['BACKUP_VERIFY'])"
       />
     </div>
   </div>
@@ -36,6 +36,10 @@ export default {
       default() {
         return []
       }
+    },
+    stepConfig: {
+      type: Object,
+      required: true
     }
   },
   data() {
