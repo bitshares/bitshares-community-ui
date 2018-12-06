@@ -8,6 +8,7 @@
           text="Save key file"
           type="secondary"
           width="full"
+          @click="$emit('change', 6)"
         />
       </div>
       <div class="backup-step-button">
@@ -15,6 +16,7 @@
           text="create paper backup"
           type="secondary"
           width="full"
+          @click="$emit('change', 1)"
         />
       </div>
     </div>

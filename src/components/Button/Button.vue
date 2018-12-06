@@ -129,7 +129,7 @@ export default {
   @apply rounded;
 }
 .btn--secondary {
-  background-color:config('colors.bg-base');
+  background-color: #000;
   color: config('colors.primary');
   padding-top: 14px;
   padding-bottom: 14px;

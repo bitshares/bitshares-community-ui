@@ -78,7 +78,7 @@ export default {
   },
   data() {
     return {
-      currentStep: 6,
+      currentStep: 0,
       stepConfig: {
         'BACKUP_MENU': 0,
         'BACKUP_STEP_1': 1,
@@ -114,6 +114,10 @@ export default {
       this.currentStep = step
     },
     goBack() {
+      if (this.currentStep === this.stepConfig['BACKUP_DOWNLOAD']) {
+        this.currentStep = 0
+        return
+      }
       this.currentStep--
     }
   }

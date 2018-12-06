@@ -7,6 +7,7 @@
         <Button
           text="Download key file"
           width="full"
+          @click="$emit('change', 0)"
         />
       </div>
     </div>
