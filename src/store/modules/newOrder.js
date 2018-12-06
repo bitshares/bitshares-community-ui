@@ -7,6 +7,7 @@ const types = {
   SET_MARKET: 'SET_MARKET',
   SET_GET_AMOUNT: 'SET_GET_AMOUNT',
   SET_SPEND_AMOUNT: 'SET_SPEND_AMOUNT',
+  SET_PRICE: 'SET_PRICE',
   RESET: 'RESET'
 }
 
@@ -18,6 +19,7 @@ const getDefaultState = () => ({
   orderAmount: 0.02,
   getAmount: 0,
   spendAmount: 0,
+  price: 0,
   type: 'buy',
 
   activeIndication: 'MARKET',
@@ -36,7 +38,11 @@ const getters = {
   getActivePercent: state => state.activePercent,
   getActiveIndication: state => state.activeIndication,
   getSpendAmount: state => state.spendAmount,
-  getGetAmount: state => state.getAmount
+  getGetAmount: state => state.getAmount,
+  getPrice: state => state.price,
+  getFiatPrice: state => {
+    // calc usd price based on asset
+  }
 }
 
 const mutations = {
@@ -58,6 +64,9 @@ const mutations = {
   },
   [types.SET_SPEND_AMOUNT](state, value) {
     state.spendAmount = value
+  },
+  [types.SET_PRICE](state, value) {
+    state.price = value
   }
 }
 
@@ -74,11 +83,26 @@ const actions = {
   setActiveIndication({ commit }, indication) {
     commit(types.SET_ACTIVE_INDICATION, indication)
   },
-  setGetAmount({ commit }, value) {
+  setGetAmount({ commit, state }, value) {
     commit(types.SET_GET_AMOUNT, value)
+    if (state.spendAmount && value) {
+      commit(types.SET_PRICE, state.spendAmount / value)
+    }
+    if (!value) commit(types.SET_PRICE, null)
   },
-  setSpendAmount({ commit }, value) {
+  setSpendAmount({ commit, state }, value) {
     commit(types.SET_SPEND_AMOUNT, value)
+    if (state.getAmount && value) {
+      commit(types.SET_PRICE, value / state.getAmount)
+    }
+    if (!value) commit(types.SET_PRICE, null)
+  },
+  setPrice({ commit, state }, value) {
+    commit(types.SET_PRICE, value)
+    // check if buy/sell
+    if (state.spendAmount && value) {
+      commit(types.SET_GET_AMOUNT, value * state.spendAmount)
+    }
   }
 }
 

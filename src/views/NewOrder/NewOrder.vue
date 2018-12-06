@@ -8,34 +8,36 @@
       :sell-price="marketSellPrice"
       @change="setType"
     />
-    <Tabs
+    <!-- <Tabs
       :tabs="['MARKET', 'LIMIT']"
       :active="activeIndication"
       @change="setActiveIndication"
-    />
+    /> -->
     <div class="new-order-fields">
       <NewOrderInput
         :placeholder="quote"
         :value="spendAmount"
         title="Spend"
         note="max 0.04"
-        @change="handleSpendAmountInput"
+        @change="setSpendAmount"
       />
       <NewOrderInput
         :placeholder="base"
         :value="getAmount"
         title="Get"
         note="max 437"
-        @change="handleGetAmountInput"
+        @change="setGetAmount"
       />
     </div>
-    <!-- <div class="new-order-price">
+    <div class="new-order-price">
       <NewOrderInput
         :title="priceTitle"
+        :value="price"
         placeholder="PRICE"
         note="~0.4 USD"
+        @change="setPrice"
       />
-    </div> -->
+    </div>
     <div
       class="new-order-button"
       @click="showConfirmOrder(true)"
@@ -103,7 +105,8 @@ export default {
       percentItems: 'newOrder/getPercentItems',
       activePercent: 'newOrder/getActivePercent',
       getAmount: 'newOrder/getGetAmount',
-      spendAmount: 'newOrder/getSpendAmount'
+      spendAmount: 'newOrder/getSpendAmount',
+      price: 'newOrder/getPrice'
     }),
 
     priceTitle() {
@@ -120,16 +123,11 @@ export default {
       setType: 'newOrder/setType',
       setActivePercent: 'newOrder/setActivePercent',
       setGetAmount: 'newOrder/setGetAmount',
-      setSpendAmount: 'newOrder/setSpendAmount'
+      setSpendAmount: 'newOrder/setSpendAmount',
+      setPrice: 'newOrder/setPrice'
     }),
     showConfirmOrder(value) {
       this.confirmVisible = value
-    },
-    handleGetAmountInput(value) {
-      this.setGetAmount(value)
-    },
-    handleSpendAmountInput(value) {
-      this.setSpendAmount(value)
     }
   }
 }
