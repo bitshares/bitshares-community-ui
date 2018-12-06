@@ -1,7 +1,11 @@
+import { removePrefix } from '@/helpers/utils'
+
 const types = {
   SET_TYPE: 'SET_TYPE',
   SET_ACTIVE_PERCENT: 'SET_ACTIVE_PERCENT',
-  SET_ACTIVE_INDICATION: 'SET_ACTIVE_INDICATION'
+  SET_ACTIVE_INDICATION: 'SET_ACTIVE_INDICATION',
+  SET_MARKET: 'SET_MARKET',
+  RESET: 'RESET'
 }
 
 const getDefaultState = () => ({
@@ -10,6 +14,8 @@ const getDefaultState = () => ({
   marketSellPrice: 5610.02,
   marketBuyPrice: 5611.15,
   orderAmount: 0.02,
+  getAmount: 0,
+  spendAmount: 0,
   type: 'buy',
 
   activeIndication: 'MARKET',
@@ -18,33 +24,17 @@ const getDefaultState = () => ({
 })
 
 const getters = {
-  getBase(state) {
-    return state.base
-  },
-  getQuote(state) {
-    return state.quote
-  },
-  getMarketSellPrice(state) {
-    return state.marketSellPrice
-  },
-  getMarketBuyPrice(state) {
-    return state.marketBuyPrice
-  },
-  getOrderAmount(state) {
-    return state.orderAmount
-  },
-  getType(state) {
-    return state.type
-  },
-  getPercentItems(state) {
-    return state.percentItems
-  },
-  getActivePercent(state) {
-    return state.activePercent
-  },
-  getActiveIndication(state) {
-    return state.activeIndication
-  }
+  getBase: state => removePrefix(state.base),
+  getQuote: state => removePrefix(state.quote),
+  getMarketSellPrice: state => state.marketSellPrice,
+  getMarketBuyPrice: state => state.marketBuyPrice,
+  getOrderAmount: state => state.orderAmount,
+  getType: state => state.type,
+  getPercentItems: state => state.percentItems,
+  getActivePercent: state => state.activePercent,
+  getActiveIndication: state => state.activeIndication,
+  getSpendAmount: state => state.spendAmount,
+  getGetAmount: state => state.getAmount
 }
 
 const mutations = {
@@ -56,12 +46,19 @@ const mutations = {
   },
   [types.SET_ACTIVE_INDICATION](state, indication) {
     state.activeIndication = indication
+  },
+  [types.SET_MARKET](state, { base, quote }) {
+    state.base = base
+    state.quote = quote
   }
 }
 
 const actions = {
   setType({ commit }, tab) {
     commit(types.SET_TYPE, tab)
+  },
+  setMarket({ commit }, { base, quote }) {
+    commit(types.SET_MARKET, { base, quote })
   },
   setActivePercent({ commit }, percent) {
     commit(types.SET_ACTIVE_PERCENT, percent)
