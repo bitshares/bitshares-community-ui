@@ -175,13 +175,13 @@ export default {
     white-space: nowrap;
   }
   .collapse-btn {
-    transform: rotate(-90deg);
+    transform: none;
     transition: transform 0.2s;
     margin: 0 auto 0 0.5em;
     opacity: 0.8;
     cursor: pointer;
     &.collapse-btn--active {
-      transform: none;
+      transform: rotate(-90deg);
     }
   }
   .expand-btn {

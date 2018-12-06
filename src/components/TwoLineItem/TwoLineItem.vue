@@ -43,7 +43,6 @@ export default {
       color: config('colors.primary');
       overflow: hidden;
       word-break: break-all;
-      padding-top: .3rem;
     }
     .two-line-item-bottom {
       font-size: config('textSizes.sm');

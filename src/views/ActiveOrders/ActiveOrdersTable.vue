@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       defaultSort: {
-        field: 'dateOpen',
+        field: 'payAssetSymbol',
         type: 'desc'
       }
     }
@@ -64,6 +64,6 @@ export default {
 </script>
 <style lang="scss">
   .active-orders-table {
-    height: 100%;
+    height: 92%;
   }
 </style>
