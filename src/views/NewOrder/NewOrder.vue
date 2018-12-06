@@ -15,14 +15,21 @@
     />
     <div class="new-order-fields">
       <NewOrderInput
+        :placeholder="quote"
         title="Spend"
-        placeholder="BTC"
         note="max 0.04"
       />
       <NewOrderInput
+        :placeholder="base"
         title="Get"
-        placeholder="USD"
         note="max 437"
+      />
+    </div>
+    <div class="new-order-price">
+      <NewOrderInput
+        title="Price .TRUSTY"
+        placeholder="PRICE"
+        note="~0.4 USD"
       />
     </div>
     <div
@@ -129,6 +136,11 @@ export default {
       margin-top: 3rem;
       display: flex;
       justify-content: space-between;
+    }
+    .new-order-price {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
     }
   }
 </style>
