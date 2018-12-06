@@ -153,7 +153,7 @@ export default {
       return getFloatCurrency(this.item.price)
     },
     avg() {
-      return getFloatCurrency(this.item.avg)
+      return ''
     },
     vol() {
       return getFloatCurrency(this.item.vol)
