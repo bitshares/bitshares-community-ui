@@ -1,5 +1,6 @@
 <template>
-  <div class="backup-step backup-step-unlock">
+  <div class="backup-step">
+    <div class="backup-step-title">backup</div>
     <div class="backup-step-button">
       <SInput
         v-model="password"
@@ -50,21 +51,25 @@ export default {
 </script>
 <style lang="scss" scoped>
   .backup-step {
-    width: 100%;
-    padding: 1rem;
-    font-family: config('fonts.gotham');
-
-    .backup-step-button {
-      box-sizing: border-box;
-      display: inline-block;
-    }
-  }
-  .backup-step-unlock {
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    width: 100%;
+    font-family: config('fonts.gotham');
+
+    .backup-step-title {
+      text-align: center;
+      margin-top: 0.9375rem;
+      text-transform: uppercase;
+      font-family: config('fonts.gotham-medium');
+      font-size: config('textSizes.lg');
+    }
+
+    .backup-step-button {
+      width: 100%;
+      margin-top: auto;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
   }
 
   @media (max-width: 800px) {
