@@ -4,7 +4,10 @@
       class="modal-mask"
       @click.self.stop="$emit('close')"
     >
-      <div class="modal-wrapper">
+      <div
+        :class="{'modal-wrapper--width-auto': widthAuto}"
+        class="modal-wrapper"
+      >
         <slot/>
       </div>
     </div>
@@ -13,7 +16,14 @@
 
 <script>
 
-export default {}
+export default {
+  props: {
+    widthAuto: {
+      type: Boolean,
+      default: false
+    }
+  }
+}
 </script>
 
 <style lang="scss">
@@ -34,6 +44,10 @@ export default {}
 .modal-wrapper {
   width: 56rem;
   transition: all .3s ease;
+
+  &--width-auto {
+    width: auto;
+  }
 }
 
 .modal-enter {

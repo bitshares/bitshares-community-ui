@@ -6,7 +6,8 @@ import debounce from 'lodash/debounce'
 const types = {
   SET_ORDER_BOOK: 'SET_ORDER_BOOK',
   ORDER_BOOK_INIT_START: 'ORDER_BOOK_INIT_START',
-  ORDER_BOOK_RESET: 'ORDER_BOOK_RESET'
+  ORDER_BOOK_RESET: 'ORDER_BOOK_RESET',
+  UPDATE_LAST_ORDER: 'UPDATE_LAST_ORDER'
 }
 
 const getDefaultState = () => ({
@@ -17,7 +18,8 @@ const getDefaultState = () => ({
   orderBook: {
     buying: [],
     selling: []
-  }
+  },
+  lastOrder: null
 })
 
 const getters = {
@@ -31,8 +33,20 @@ const getters = {
     return maxFromBuy > maxFromSell ? maxFromBuy : maxFromSell
   },
   getOrderBook: state => state.orderBook,
+  getLastOrder: state => state.lastOrder,
   isActive: state => !!(state.baseAsset && state.quoteAsset),
   isFetching: state => state.fetching
+}
+
+const processLastOrder = (order, baseAsset, quoteAsset) => {
+  const type = order.pays.asset_id === baseAsset.id ? 'buy' : 'sell'
+  const sellField = type === 'buy' ? 'pays' : 'receives'
+  const buyField = type === 'buy' ? 'receives' : 'pays'
+  const sellAmount = order[sellField].amount / 10 ** baseAsset.precision
+  const buyAmount = order[buyField].amount / 10 ** quoteAsset.precision
+  const price = sellAmount / buyAmount
+
+  return { price, sum: sellAmount }
 }
 
 const processOrders = (orders, type, baseAsset, quoteAsset) => {
@@ -66,6 +80,9 @@ const mutations = {
     state.baseAsset = baseAsset
     state.quoteAsset = quoteAsset
   },
+  [types.UPDATE_LAST_ORDER](state, order) {
+    state.lastOrder = processLastOrder(order, state.baseAsset, state.quoteAsset)
+  },
   [types.ORDER_BOOK_RESET](state) {
     Object.assign(state, getDefaultState())
   }
@@ -85,6 +102,9 @@ const actions = {
         const orders = API.Market(baseAsset).getBook(quoteAsset)
         debouncedUpdate(store, { orders })
       })
+      market.subscribeToLastOrder(quoteAsset.id, (order) => {
+        actions.updateLastOrder(store, order)
+      })
     } else {
       console.warn(`MARKET ERROR: No such market - ${baseSymbol}/${quoteSymbol}`)
     }
@@ -100,6 +120,9 @@ const actions = {
   },
   updateOrderBook({ commit }, { orders }) {
     commit(types.SET_ORDER_BOOK, { orders })
+  },
+  async updateLastOrder({ commit }, order) {
+    commit(types.UPDATE_LAST_ORDER, order)
   }
 }
 

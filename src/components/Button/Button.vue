@@ -9,7 +9,8 @@
       'btn--round': type === 'round',
       'btn--secondary': type === 'secondary',
       'btn--buy': type === 'buy',
-      'btn--sell': type === 'sell'
+      'btn--sell': type === 'sell',
+      'btn--faded': type === 'faded',
     }"
     :disabled="disabled"
     class="btn btn-blue"
@@ -152,6 +153,14 @@ export default {
   &:hover {
     background-color: config('colors.sell');
   }
+}
+.btn--faded {
+  background-color: config('colors.card-background');
+  font-size: config('textSizes.lg');
+  &:hover {
+    background-color: config('colors.card-background');
+  }
+  color: config('colors.inactive');
 }
 .spinner {
   margin-right: 10px;
