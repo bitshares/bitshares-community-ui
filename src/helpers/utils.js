@@ -33,7 +33,8 @@ export const getMaxSum = (items, field) => {
 
 // short float currency
 export const getFloatCurrency = (n) => {
-  const value = n.toString().replace(/0+$/, '')
+  const hasPoint = () => !!~n.toString().indexOf('.')
+  const value = hasPoint() ? n.toString().replace(/0+$/, '') : n.toString()
 
   if (value[0] === '0' && value.length > 9) return value.slice(1, 10).toString()
   return value.slice(0, 9) || '0'
