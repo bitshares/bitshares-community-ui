@@ -17,16 +17,19 @@
       <NewOrderInput
         :placeholder="quote"
         :value="spendAmount"
+        :note="`max ${maxSpend}`"
+        :error="spendExceeded"
         title="Spend"
-        note="max 0.04"
         @change="setSpendAmount"
+        @note-click="setMaxSpend"
       />
       <NewOrderInput
         :placeholder="base"
         :value="getAmount"
+        :note="`max ${maxGet}`"
         title="Get"
-        note="max 437"
         @change="setGetAmount"
+        @note-click="setMaxSpend"
       />
     </div>
     <div class="new-order-price">
@@ -103,9 +106,20 @@ export default {
       getAmount: 'newOrder/getGetAmount',
       spendAmount: 'newOrder/getSpendAmount',
       price: 'newOrder/getPrice',
-      marketPrices: 'newOrder/getMarketPrices'
+      marketPrices: 'newOrder/getMarketPrices',
+      maxBase: 'newOrder/getMaxBase',
+      maxQuote: 'newOrder/getMaxQuote'
     }),
-
+    maxSpend() {
+      return this.maxQuote
+    },
+    maxGet() {
+      return this.maxSpend * this.price
+      // todo: calc based on maxGet & price
+    },
+    spendExceeded() {
+      return this.spendAmount > this.maxSpend
+    },
     priceTitle() {
       return `Price .${this.quote}`
     },
@@ -122,10 +136,14 @@ export default {
       setActivePercent: 'newOrder/setActivePercent',
       setGetAmount: 'newOrder/setGetAmount',
       setSpendAmount: 'newOrder/setSpendAmount',
-      setPrice: 'newOrder/setPrice'
+      setPrice: 'newOrder/setPrice',
+      setMaxSpend: 'newOrder/setMaxSpend'
     }),
     showConfirmOrder(value) {
       this.confirmVisible = value
+    },
+    setMaxSpend() {
+      this.setSpendAmount(this.maxSpend)
     }
   }
 }
@@ -148,6 +166,7 @@ export default {
     }
     .new-order-fields {
       margin-top: 3rem;
+      padding: 0 1rem;
       display: flex;
       justify-content: space-between;
     }

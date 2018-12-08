@@ -14,6 +14,7 @@
       @input="handleChange"
     />
     <div
+      :class="{'new-order-input-note--error': error }"
       class="new-order-input-note"
       @click="$emit('note-click')"
     >
@@ -48,6 +49,10 @@ export default {
     value: {
       type: Number,
       default: null
+    },
+    error: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -67,11 +72,15 @@ export default {
     color: config('colors.primary');
     font-size: 0.6875rem;
     letter-spacing: normal;
+    cursor: pointer;
+    &--error {
+      color: config('colors.text-error');
+    }
   }
 
   .new-order-input-title {
     color: config('colors.inactive');
     font-size: 0.6875rem;
-    letter-spacing: normal;
+    // letter-spacing: normal;
   }
 </style>

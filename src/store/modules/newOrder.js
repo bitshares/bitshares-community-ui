@@ -15,9 +15,9 @@ const getDefaultState = () => ({
   base: 'BTC',
   quote: 'USD',
   orderAmount: 0.02,
-  getAmount: 0,
-  spendAmount: 0,
-  price: 0,
+  getAmount: null,
+  spendAmount: null,
+  price: null,
   type: 'buy',
   activeIndication: 'MARKET',
   activePercent: 0,
@@ -39,6 +39,14 @@ const getters = {
   getFiatPrice: (state, getters, rootState, rootGetters) => {
 
     // calc usd price based on asset
+  },
+  getMaxBase: (state, getters, rootState, rootGetters) => {
+    console.log(state.base)
+    return rootGetters['portfolio/getTokensByAsset'](state.base)
+  },
+  getMaxQuote: (state, getters, rootState, rootGetters) => {
+    console.log((state.quote))
+    return rootGetters['portfolio/getTokensByAsset'](state.quote)
   }
 }
 
@@ -82,24 +90,24 @@ const actions = {
   },
   setGetAmount({ commit, state }, value) {
     commit(types.SET_GET_AMOUNT, value)
-    if (state.spendAmount && value) {
-      commit(types.SET_PRICE, state.spendAmount / value)
-    }
-    if (!value) commit(types.SET_PRICE, null)
+    // if (state.spendAmount && value) {
+    //   commit(types.SET_PRICE, state.spendAmount / value)
+    // }
+    // if (!value) commit(types.SET_PRICE, null)
   },
   setSpendAmount({ commit, state }, value) {
     commit(types.SET_SPEND_AMOUNT, value)
-    if (state.getAmount && value) {
-      commit(types.SET_PRICE, value / state.getAmount)
-    }
-    if (!value) commit(types.SET_PRICE, null)
+    // if (state.getAmount && value) {
+    //   commit(types.SET_PRICE, value / state.getAmount)
+    // }
+    // if (!value) commit(types.SET_PRICE, null)
   },
   setPrice({ commit, state }, value) {
     commit(types.SET_PRICE, value)
     // check if buy/sell
-    if (state.spendAmount && value) {
-      commit(types.SET_GET_AMOUNT, value * state.spendAmount)
-    }
+    // if (state.spendAmount && value) {
+    //   commit(types.SET_GET_AMOUNT, value * state.spendAmount)
+    // }
   }
 }
 
