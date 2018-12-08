@@ -77,9 +77,9 @@
   </div>
 </template>
 <script>
-import { format } from 'date-fns'
 import Button from '@/components/Button'
 import NewOrderInput from '@/views/NewOrder/NewOrderInput'
+import format from 'date-fns/format'
 
 export default {
   components: {
@@ -137,7 +137,7 @@ export default {
     },
     getAsset() {
       return this.type === 'buy' ? this.base : this.quote
-    },
+    }
   }
 }
 </script>
