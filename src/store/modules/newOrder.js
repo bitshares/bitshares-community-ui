@@ -12,8 +12,8 @@ const types = {
   SET_PRICE: 'SET_PRICE',
   RESET: 'RESET',
   RESET_AMOUNTS: 'RESET_AMOUNTS',
-  ORDER_PLACING_REQUEST: 'ORDER_PLACING_REQUEST',
-  ORDER_PLACING_COMPLETE: 'ORDER_PLACING_COMPLETE'
+  PLACE_ORDER_REQUEST: 'ORDER_PLACE_REQUEST',
+  PLACE_ORDER_COMPLETE: 'ORDER_PLACE_COMPLETE'
 }
 
 const getDefaultState = () => ({
@@ -26,7 +26,8 @@ const getDefaultState = () => ({
   type: 'buy',
   activeIndication: 'MARKET',
   activePercent: 0,
-  percentItems: [10, 25, 50, 75]
+  percentItems: [10, 25, 50, 75],
+  inProgress: false
 })
 
 const getters = {
@@ -83,6 +84,12 @@ const mutations = {
     state.spendAmount = null
     state.getAmount = null
     state.price = null
+  },
+  [types.PLACE_ORDER_REQUEST](state) {
+    state.inProgress = true
+  },
+  [types.PLACE_ORDER_COMPLETE](state) {
+    state.inProgress = false
   }
 }
 
@@ -135,13 +142,20 @@ const actions = {
   async dispatchOrder({ commit, state, rootGetters }) {
     const baseAsset = rootGetters['assets/getAssetBySymbol'](state.base)
     const quoteAsset = rootGetters['assets/getAssetBySymbol'](state.quote)
+    const spendPrecision = (state.type === 'buy' ? quoteAsset : baseAsset).precision
+    const getPrecision = (state.type === 'sell' ? baseAsset : quoteAsset).precision
+    const spend = state.spendAmount * 10 ** spendPrecision
+    const get = state.getAmount * 10 ** getPrecision
+    console.log(state.getAmount, state.spendAmount)
+    console.log(get, spend)
+
     const market = API.Market(baseAsset)
     if (market) {
       const sides = market.getOrderSides({
-        type: this.type === 'buy' ? 'get' : 'spend',
+        type: state.type === 'buy' ? 'get' : 'spend',
         asset: quoteAsset,
-        spend: state.spendAmount,
-        get: state.getAmount
+        spend,
+        get
       })
       const userId = rootGetters['acc/getAccountUserId']
       const newOrder = API.Transactions.createOrder(sides, userId)
@@ -150,8 +164,9 @@ const actions = {
         console.warn('wallet is locked')
         return
       }
-      commit(types.ORDER_PLACING_REQUEST)
+      commit(types.PLACE_ORDER_REQUEST)
       const result = await API.Transactions.placeOrder(newOrder, keys)
+      commit(types.PLACE_ORDER_COMPLETE)
       console.log(result)
       if (result.success) {
         Vue.prototype.$toast.success('Order placed')

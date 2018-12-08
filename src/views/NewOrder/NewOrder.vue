@@ -15,7 +15,7 @@
     /> -->
     <div class="new-order-fields">
       <NewOrderInput
-        :placeholder="quote"
+        :placeholder="spendAsset"
         :value="spendAmount"
         :note="`max ${maxSpend}`"
         :error="spendExceeded"
@@ -24,7 +24,7 @@
         @note-click="setMaxSpend"
       />
       <NewOrderInput
-        :placeholder="base"
+        :placeholder="getAsset"
         :value="getAmount"
         :title="`Get ${getAsset}`"
         @change="setGetAmount"
