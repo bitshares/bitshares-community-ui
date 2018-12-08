@@ -45,16 +45,16 @@
         :text="buttonTitle"
         :disabled="invalidOrder"
         width="full"
-        @click="showConfirmOrder(true)"
+        @click="showConfirm"
       >
         <span class="operation-title">{{ type }}</span>
       </Btn>
     </div>
     <!-- CONFIRM ORDER -->
     <Modal
-      v-if="confirmVisible"
+      v-if="confirmDisplayed"
       :width-auto="true"
-      @close="showConfirmOrder"
+      @close="hideConfirm"
     >
       <ConfirmOrder
         :base="base"
@@ -65,8 +65,9 @@
         :spend="spendAmount"
         :trading-fee="15.82"
         :exchange-fee="10.23"
+        :pending="pending"
         @confirm="dispatchOrder"
-        @close="showConfirmOrder"
+        @close="hideConfirm"
       />
     </Modal>
   </div>
@@ -89,11 +90,6 @@ export default {
     ConfirmOrder,
     Modal
   },
-  data() {
-    return {
-      confirmVisible: false
-    }
-  },
   computed: {
     ...mapGetters({
       base: 'newOrder/getBase',
@@ -107,14 +103,15 @@ export default {
       price: 'newOrder/getPrice',
       marketPrices: 'newOrder/getMarketPrices',
       maxBase: 'newOrder/getMaxBase',
-      maxQuote: 'newOrder/getMaxQuote'
+      maxQuote: 'newOrder/getMaxQuote',
+      confirmDisplayed: 'newOrder/confirmDisplayed',
+      pending: 'newOrder/inProgress'
     }),
     maxSpend() {
       return this.type === 'buy' ? this.maxQuote : this.maxBase
     },
     maxGet() {
       return this.maxSpend * this.price
-      // todo: calc based on maxGet & price
     },
     spendExceeded() {
       return this.spendAmount > this.maxSpend
@@ -145,11 +142,10 @@ export default {
       setSpendAmount: 'newOrder/setSpendAmount',
       setPrice: 'newOrder/setPrice',
       setMaxSpend: 'newOrder/setMaxSpend',
-      dispatchOrder: 'newOrder/dispatchOrder'
+      dispatchOrder: 'newOrder/dispatchOrder',
+      showConfirm: 'newOrder/showConfirm',
+      hideConfirm: 'newOrder/hideConfirm'
     }),
-    showConfirmOrder(value) {
-      this.confirmVisible = value
-    },
     setMaxSpend() {
       this.setSpendAmount(this.maxSpend)
     }

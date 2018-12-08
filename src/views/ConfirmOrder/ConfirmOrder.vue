@@ -59,12 +59,22 @@
       </div>
     </div> -->
 
+    <SInput
+      v-if="isLocked"
+      v-model="password"
+      :password="true"
+      type="number"
+      title="UNLOCK WALLET"
+    />
+
     <div class="confirm-order-buttons">
       <Button
+        :disabled="confirmDisabled"
+        :loading="pending"
         text="Confirm"
         width="full"
         class="confirm-order-btn"
-        @click="$emit('confirm')"
+        @click="handleConfirm"
       />
       <Button
         text="Cancel"
@@ -79,12 +89,15 @@
 <script>
 import Button from '@/components/Button'
 import NewOrderInput from '@/views/NewOrder/NewOrderInput'
+import SInput from '@/components/SimpleInput'
+import { mapGetters, mapActions } from 'vuex'
 import format from 'date-fns/format'
 
 export default {
   components: {
     Button,
-    NewOrderInput
+    NewOrderInput,
+    SInput
   },
   props: {
     base: {
@@ -114,9 +127,23 @@ export default {
     exchangeFee: {
       type: Number,
       default: 0
+    },
+    pending: {
+      type: Boolean,
+      default: false
     }
   },
+  data: () => ({
+    password: ''
+  }),
   computed: {
+    ...mapGetters({
+      isValidPassword: 'acc/isValidPassword',
+      isLocked: 'acc/isLocked'
+    }),
+    confirmDisabled() {
+      return this.isLocked && !this.password
+    },
     confirmTitle() {
       return `${this.type} ${this.base}/${this.quote}`
     },
@@ -137,6 +164,22 @@ export default {
     },
     getAsset() {
       return this.type === 'buy' ? this.base : this.quote
+    }
+  },
+  methods: {
+    ...mapActions({
+      unlockWallet: 'acc/unlockWallet'
+    }),
+    handleConfirm() {
+      if (this.isLocked) {
+        if (this.isValidPassword(this.password + '')) {
+          this.unlockWallet(this.password + '')
+        } else {
+          this.$toast.error('WRONG PASSWORD')
+          return
+        }
+      }
+      this.$emit('confirm')
     }
   }
 }

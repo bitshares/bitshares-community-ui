@@ -13,7 +13,9 @@ const types = {
   RESET: 'RESET',
   RESET_AMOUNTS: 'RESET_AMOUNTS',
   PLACE_ORDER_REQUEST: 'ORDER_PLACE_REQUEST',
-  PLACE_ORDER_COMPLETE: 'ORDER_PLACE_COMPLETE'
+  PLACE_ORDER_COMPLETE: 'ORDER_PLACE_COMPLETE',
+  SHOW_CONFIRM: 'SHOW_CONFIRM',
+  HIDE_CONFIRM: 'HIDE_CONFIRM'
 }
 
 const getDefaultState = () => ({
@@ -27,7 +29,8 @@ const getDefaultState = () => ({
   activeIndication: 'MARKET',
   activePercent: 0,
   percentItems: [10, 25, 50, 75],
-  inProgress: false
+  inProgress: false,
+  showConfirm: false
 })
 
 const getters = {
@@ -51,7 +54,9 @@ const getters = {
   },
   getMaxQuote: (state, getters, rootState, rootGetters) => {
     return rootGetters['portfolio/getTokensByAsset'](state.quote)
-  }
+  },
+  inProgress: state => state.inProgress,
+  confirmDisplayed: state => state.showConfirm
 }
 
 const mutations = {
@@ -90,6 +95,12 @@ const mutations = {
   },
   [types.PLACE_ORDER_COMPLETE](state) {
     state.inProgress = false
+  },
+  [types.SHOW_CONFIRM](state) {
+    state.showConfirm = true
+  },
+  [types.HIDE_CONFIRM](state) {
+    state.showConfirm = false
   }
 }
 
@@ -107,6 +118,12 @@ const actions = {
   },
   setActiveIndication({ commit }, indication) {
     commit(types.SET_ACTIVE_INDICATION, indication)
+  },
+  showConfirm({ commit }) {
+    commit(types.SHOW_CONFIRM)
+  },
+  hideConfirm({ commit }) {
+    commit(types.HIDE_CONFIRM)
   },
   setGetAmount({ commit, state }, value) {
     commit(types.SET_GET_AMOUNT, value)
@@ -152,7 +169,7 @@ const actions = {
     const market = API.Market(baseAsset)
     if (market) {
       const sides = market.getOrderSides({
-        type: state.type === 'buy' ? 'get' : 'spend',
+        type: state.type === 'sell' ? 'get' : 'spend',
         asset: quoteAsset,
         spend,
         get
@@ -168,6 +185,7 @@ const actions = {
       const result = await API.Transactions.placeOrder(newOrder, keys)
       commit(types.PLACE_ORDER_COMPLETE)
       console.log(result)
+      commit(types.HIDE_CONFIRM)
       if (result.success) {
         Vue.prototype.$toast.success('Order placed')
       } else {
