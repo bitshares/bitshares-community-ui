@@ -52,10 +52,11 @@
             <Card
               :expandable="true"
               :collapsible="true"
-              title="active orders"
+              title="my active orders"
             >
-              <ActiveOrdersSearch slot="modal-header"/>
+              <ActiveOrdersSearch slot="header"/>
               <ActiveOrders slot="body"/>
+              <ActiveOrdersSearch slot="modal-header"/>
               <ActiveOrders
                 slot="modal"
                 :expand-mode="true"
