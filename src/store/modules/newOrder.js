@@ -8,7 +8,8 @@ const types = {
   SET_GET_AMOUNT: 'SET_GET_AMOUNT',
   SET_SPEND_AMOUNT: 'SET_SPEND_AMOUNT',
   SET_PRICE: 'SET_PRICE',
-  RESET: 'RESET'
+  RESET: 'RESET',
+  RESET_AMOUNTS: 'RESET_AMOUNTS'
 }
 
 const getDefaultState = () => ({
@@ -73,11 +74,17 @@ const mutations = {
   },
   [types.RESET](state) {
     Object.assign(state, getDefaultState())
+  },
+  [types.RESET_AMOUNTS](state) {
+    state.spendAmount = null
+    state.getAmount = null
+    state.price = null
   }
 }
 
 const actions = {
   setType({ commit }, tab) {
+    commit(types.RESET_AMOUNTS)
     commit(types.SET_TYPE, tab)
   },
   setMarket({ commit }, { base, quote }) {
