@@ -65,7 +65,7 @@
         :spend="spendAmount"
         :trading-fee="15.82"
         :exchange-fee="10.23"
-
+        @confirm="dispatchOrder"
         @close="showConfirmOrder"
       />
     </Modal>
@@ -144,7 +144,8 @@ export default {
       setGetAmount: 'newOrder/setGetAmount',
       setSpendAmount: 'newOrder/setSpendAmount',
       setPrice: 'newOrder/setPrice',
-      setMaxSpend: 'newOrder/setMaxSpend'
+      setMaxSpend: 'newOrder/setMaxSpend',
+      dispatchOrder: 'newOrder/dispatchOrder'
     }),
     showConfirmOrder(value) {
       this.confirmVisible = value

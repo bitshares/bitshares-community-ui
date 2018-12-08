@@ -1,4 +1,5 @@
 import { removePrefix } from '@/helpers/utils'
+import API from 'vuex-bitshares/src/services/api'
 
 const types = {
   SET_TYPE: 'SET_TYPE',
@@ -120,12 +121,39 @@ const actions = {
   },
   setOrderData({ commit, state }, { type, price, sum }) {
     console.log(type, price, sum)
-    if (state.type === type) commit(types.SET_TYPE, type === 'buy' ? 'sell' : type)
+    if (state.type === type) commit(types.SET_TYPE, type === 'buy' ? 'sell' : 'buy')
     commit(types.SET_PRICE, price)
     if (state.type === 'buy') {
       if (!state.getAmount) commit(types.SET_GET_AMOUNT, sum)
     } else {
       if (!state.spendAmount) commit(types.SET_SPEND_AMOUNT, sum)
+    }
+  },
+  async dispatchOrder({ commit, state, rootGetters }) {
+    console.log(state.base, state.quote)
+    const baseAsset = rootGetters['assets/getAssetBySymbol'](state.base)
+    const quoteAsset = rootGetters['assets/getAssetBySymbol'](state.quote)
+    const market = API.Market(baseAsset)
+    if (market) {
+      const sides = market.getOrderSides({
+        type: this.type === 'buy' ? 'get' : 'spend',
+        asset: quoteAsset,
+        spend: state.spendAmount,
+        get: state.getAmount
+      })
+      const userId = rootGetters['acc/getAccountUserId']
+      const newOrder = API.Transactions.createOrder(sides, userId)
+      const keys = rootGetters['acc/getKeys']
+      if (!keys) {
+        console.warn('wallet is locked')
+        return
+      }
+      console.log(newOrder, keys)
+      const result = await API.Transactions.placeOrder(newOrder, keys)
+      console.log(result)
+    } else {
+      console.warn('No Market: ', baseAsset.symbol)
+      // todo: noty error
     }
   }
 }
