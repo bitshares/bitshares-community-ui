@@ -39,15 +39,13 @@
         @change="setPrice"
       />
     </div>
-    <div
-      class="new-order-button"
-      @click="showConfirmOrder(true)"
-    >
+    <div class="new-order-button">
       <Btn
         :type="type"
         :text="buttonTitle"
         :disabled="invalidOrder"
         width="full"
+        @click="showConfirmOrder(true)"
       >
         <span class="operation-title">{{ type }}</span>
       </Btn>
@@ -62,12 +60,12 @@
         :base="base"
         :quote="quote"
         :type="type"
-        :price="price"
+        :price="price || 0"
         :get="getAmount"
         :spend="spendAmount"
         :trading-fee="15.82"
         :exchange-fee="10.23"
-        
+
         @close="showConfirmOrder"
       />
     </Modal>
@@ -135,7 +133,7 @@ export default {
       return `${orderAmount || 0} ${this.base}`
     },
     invalidOrder() {
-      return !this.spendAmount || !this.getAmount ||this.spendExceeded
+      return !this.spendAmount || !this.getAmount || this.spendExceeded
     }
   },
   methods: {

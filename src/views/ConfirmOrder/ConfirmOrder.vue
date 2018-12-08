@@ -19,21 +19,21 @@
     <div class="confirm-order-price-section">
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :placeholder="price.toString()"
+          :placeholder="price || ''"
           :disabled="true"
           title="Price. USD"
         />
       </div>
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :placeholder="spend.toString()"
+          :placeholder="spend || ''"
           :disabled="true"
           title="Spend. BTC"
         />
       </div>
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :placeholder="get.toString()"
+          :placeholder="get || ''"
           :disabled="true"
           title="Get. USD"
         />

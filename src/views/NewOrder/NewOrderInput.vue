@@ -35,7 +35,7 @@ export default {
       default: 'Spend'
     },
     placeholder: {
-      type: String,
+      type: [String, Number],
       default: 'BTC'
     },
     note: {
