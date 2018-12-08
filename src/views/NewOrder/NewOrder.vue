@@ -19,14 +19,14 @@
         :value="spendAmount"
         :note="`max ${maxSpend}`"
         :error="spendExceeded"
-        :title="`Spend, ${spendAsset}`"
+        :title="`Spend ${spendAsset}`"
         @change="setSpendAmount"
         @note-click="setMaxSpend"
       />
       <NewOrderInput
         :placeholder="base"
         :value="getAmount"
-        :title="`Get, ${getAsset}`"
+        :title="`Get ${getAsset}`"
         @change="setGetAmount"
         @note-click="setMaxSpend"
       />

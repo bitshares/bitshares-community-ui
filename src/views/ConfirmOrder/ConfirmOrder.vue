@@ -19,23 +19,23 @@
     <div class="confirm-order-price-section">
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :placeholder="price || ''"
+          :value="price || ''"
           :disabled="true"
-          title="Price. USD"
+          :title="`Price ${quote}`"
         />
       </div>
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :placeholder="spend || ''"
+          :value="spend || ''"
           :disabled="true"
-          title="Spend. BTC"
+          :title="`Spend ${spendAsset}`"
         />
       </div>
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :placeholder="get || ''"
+          :value="get || ''"
           :disabled="true"
-          title="Get. USD"
+          :title="`Get ${getAsset}`"
         />
       </div>
     </div>
@@ -99,10 +99,6 @@ export default {
       type: String,
       required: true
     },
-    price: {
-      type: Number,
-      required: true
-    },
     get: {
       type: Number,
       required: true
@@ -124,6 +120,9 @@ export default {
     confirmTitle() {
       return `${this.type} ${this.base}/${this.quote}`
     },
+    price() {
+      return this.type === 'buy' ? this.spend / this.get : this.get / this.spend
+    },
     tradingFeeTitle() {
       return `~${this.tradingFee} ${this.quote}`
     },
@@ -132,7 +131,13 @@ export default {
     },
     confirmDate() {
       return format(new Date(), 'DD-MMM-YY, HH:mm')
-    }
+    },
+    spendAsset() {
+      return this.type === 'buy' ? this.quote : this.base
+    },
+    getAsset() {
+      return this.type === 'buy' ? this.base : this.quote
+    },
   }
 }
 </script>
