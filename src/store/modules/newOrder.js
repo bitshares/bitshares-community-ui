@@ -1,5 +1,6 @@
 import { removePrefix } from '@/helpers/utils'
 import API from 'vuex-bitshares/src/services/api'
+import Vue from 'vue'
 
 const types = {
   SET_TYPE: 'SET_TYPE',
@@ -10,7 +11,9 @@ const types = {
   SET_SPEND_AMOUNT: 'SET_SPEND_AMOUNT',
   SET_PRICE: 'SET_PRICE',
   RESET: 'RESET',
-  RESET_AMOUNTS: 'RESET_AMOUNTS'
+  RESET_AMOUNTS: 'RESET_AMOUNTS',
+  ORDER_PLACING_REQUEST: 'ORDER_PLACING_REQUEST',
+  ORDER_PLACING_COMPLETE: 'ORDER_PLACING_COMPLETE'
 }
 
 const getDefaultState = () => ({
@@ -130,7 +133,6 @@ const actions = {
     }
   },
   async dispatchOrder({ commit, state, rootGetters }) {
-    console.log(state.base, state.quote)
     const baseAsset = rootGetters['assets/getAssetBySymbol'](state.base)
     const quoteAsset = rootGetters['assets/getAssetBySymbol'](state.quote)
     const market = API.Market(baseAsset)
@@ -148,9 +150,14 @@ const actions = {
         console.warn('wallet is locked')
         return
       }
-      console.log(newOrder, keys)
+      commit(types.ORDER_PLACING_REQUEST)
       const result = await API.Transactions.placeOrder(newOrder, keys)
       console.log(result)
+      if (result.success) {
+        Vue.prototype.$toast.success('Order placed')
+      } else {
+        Vue.prototype.$toast.error('Error when placing order: ' + result.error)
+      }
     } else {
       console.warn('No Market: ', baseAsset.symbol)
       // todo: noty error
