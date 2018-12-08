@@ -19,15 +19,14 @@
         :value="spendAmount"
         :note="`max ${maxSpend}`"
         :error="spendExceeded"
-        title="Spend"
+        :title="`Spend, ${spendAsset}`"
         @change="setSpendAmount"
         @note-click="setMaxSpend"
       />
       <NewOrderInput
         :placeholder="base"
         :value="getAmount"
-        :note="`max ${maxGet}`"
-        title="Get"
+        :title="`Get, ${getAsset}`"
         @change="setGetAmount"
         @note-click="setMaxSpend"
       />
@@ -111,7 +110,7 @@ export default {
       maxQuote: 'newOrder/getMaxQuote'
     }),
     maxSpend() {
-      return this.maxQuote
+      return this.type === 'buy' ? this.maxQuote : this.maxBase
     },
     maxGet() {
       return this.maxSpend * this.price
@@ -123,7 +122,12 @@ export default {
     priceTitle() {
       return `Price .${this.quote}`
     },
-
+    spendAsset() {
+      return this.type === 'buy' ? this.quote : this.base
+    },
+    getAsset() {
+      return this.type === 'buy' ? this.base : this.quote
+    },
     buttonTitle() {
       const orderAmount = this.type === 'buy' ? this.getAmount : this.spendAmount
       return `${orderAmount || 0} ${this.base}`

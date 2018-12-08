@@ -41,11 +41,9 @@ const getters = {
     // calc usd price based on asset
   },
   getMaxBase: (state, getters, rootState, rootGetters) => {
-    console.log(state.base)
     return rootGetters['portfolio/getTokensByAsset'](state.base)
   },
   getMaxQuote: (state, getters, rootState, rootGetters) => {
-    console.log((state.quote))
     return rootGetters['portfolio/getTokensByAsset'](state.quote)
   }
 }
@@ -72,6 +70,9 @@ const mutations = {
   },
   [types.SET_PRICE](state, value) {
     state.price = value
+  },
+  [types.RESET](state) {
+    Object.assign(state, getDefaultState())
   }
 }
 
@@ -80,6 +81,7 @@ const actions = {
     commit(types.SET_TYPE, tab)
   },
   setMarket({ commit }, { base, quote }) {
+    commit(types.RESET)
     commit(types.SET_MARKET, { base, quote })
   },
   setActivePercent({ commit }, percent) {
