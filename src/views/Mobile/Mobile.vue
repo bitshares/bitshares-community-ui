@@ -13,7 +13,7 @@
           <div
             v-if="activeComponentName === 'Account'"
             class="temp-acc-btn"
-            @click="setBackupFlag(true)"
+            @click="toggleBackupModal"
           >Backup</div>
           <svgicon
             v-if="activeComponentName === 'Orders'"
@@ -91,7 +91,7 @@ export default {
   methods: {
     ...mapActions({
       deinitOrderBook: 'orderBook/deinit',
-      setBackupFlag: 'backup/setBackupFlag',
+      toggleBackupModal: 'backup/toggleModal',
       logout: 'acc/logout'
     }),
     switchActiveComponent(name) {

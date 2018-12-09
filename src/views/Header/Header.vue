@@ -33,6 +33,10 @@ export default {
         disabled: !this.backupEnabled
       },
       {
+        title: 'deposit',
+        event: 'deposit',
+      },
+      {
         title: 'settings',
         event: 'settings',
         disabled: true
@@ -51,7 +55,8 @@ export default {
   methods: {
     ...mapActions({
       logout: 'acc/logout',
-      showBackupModal: 'backup/toggleModal'
+      showBackupModal: 'backup/toggleModal',
+      showDepositModal: 'deposit/toggleModal'
     }),
     handleLogout() {
       this.$router.push({ name: 'login' })
@@ -61,6 +66,9 @@ export default {
       switch (eventName) {
         case 'logout':
           this.handleLogout()
+          return
+        case 'deposit':
+          this.showDepositModal()
           return
         case 'backup':
           this.showBackupModal(true)

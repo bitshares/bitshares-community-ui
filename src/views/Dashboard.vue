@@ -2,10 +2,14 @@
   <div class="dashboard">
     <Modal
       v-if="backupFlag"
-      @close="setBackupFlag(false)"
+      :width-auto="true"
+      @close="toggleModal"
     >
       <Backup/>
     </Modal>
+
+    <Deposit/>
+    
     <div class="dashboard hidden lg:block">
       <div class="flex flex-col lg:flex-row mb-card-margin">
         <div class="flex flex-col lg:w-1/3 mr-card-margin">
@@ -115,6 +119,7 @@ import Backup from '@/views/Backup/Backup'
 import Modal from '@/components/Modal/Modal'
 import Mobile from '@/views/Mobile/Mobile'
 import NewOrder from '@/views/NewOrder/NewOrder'
+import Deposit from '@/views/Deposit/DepositWidget'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -136,10 +141,8 @@ export default {
     Backup,
     Modal,
     Mobile,
-    NewOrder
-  },
-  data() {
-    return {}
+    NewOrder,
+    Deposit
   },
   computed: {
     ...mapGetters({

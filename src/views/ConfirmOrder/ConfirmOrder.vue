@@ -1,16 +1,5 @@
 <template>
   <div class="confirm-order">
-    <div
-      class="confirm-order-close"
-      @click="$emit('close', false)"
-    >
-      <svgicon
-        width="12"
-        height="12"
-        color="rgba(255,255,255,0.5)"
-        name="cancel"
-      />
-    </div>
     <div class="confirm-order-title">Confirm order</div>
     <div class="confirm-order-date">{{ confirmDate }}</div>
     <div class="confirm-order-title confirm-order-title--xl">{{ confirmTitle }}</div>
@@ -145,12 +134,6 @@ export default {
     width: 22.1875rem;
     height: 21.875rem;
     background-color: config('colors.card-background');
-  }
-  .confirm-order-close {
-    position: absolute;
-    right: 0.625rem;
-    top: 0.4375rem;
-    cursor: pointer;
   }
   .confirm-order-title {
     margin-top: 1.25rem;
