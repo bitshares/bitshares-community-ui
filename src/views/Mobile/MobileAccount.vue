@@ -41,71 +41,10 @@ import AccountHeader from '@/views/Account/AccountHeader'
 
 export default {
   components: { Button, AccountHeader, Portfolio, LoadingContainer },
-  props: {
-    expanded: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data() {
-    return {
-      mode: 'balances',
-      showSmallAssets: true,
-      defaultSort: {
-        field: 'share',
-        type: 'desc'
-      }
-    }
-  },
   computed: {
     ...mapGetters({
-      items: 'portfolio/getItems',
-      historyLoaded: 'history/initialLoaded',
-      totalFiatValue: 'portfolio/getTotalFiatValue'
-    }),
-    tableHeaders() {
-      return this.mode === 'balances' ? [
-        { title: 'Asset', field: 'tiker', align: 'left' },
-        { title: 'Balance', field: 'tokens', align: 'left' },
-        { title: 'Share', field: 'share' }
-      ] : [
-        { title: 'Asset', field: 'tiker', align: 'left' },
-        { title: 'Price', field: 'tokenPrice', align: 'left' },
-        { title: '24h', field: 'change1' }
-      ]
-    },
-    tableHeadersExpanded() {
-      return this.mode === 'balances' ? [
-        { title: 'Asset', field: 'tiker', align: 'left' },
-        { title: '', field: '', align: 'center' },
-        { title: '', field: '', align: 'center' },
-        { title: 'Tokens', field: 'tokens', align: 'right' },
-        { title: '$Value', field: 'usdValue', align: 'right' },
-        { title: 'Share', field: 'share', align: 'right' }
-      ] : [
-        { title: 'Asset', field: 'tiker', align: 'left' },
-        { title: '', field: '', align: 'center' },
-        { title: '', field: '', align: 'center' },
-        { title: 'Price', field: 'tokenPrice', align: 'right' },
-        { title: '24h', field: 'change1', align: 'right' },
-        { title: '7d', field: 'change7', align: 'right' }
-      ]
-    },
-    filteredItems() {
-      if (this.showSmallAssets) return this.items
-      return this.items.filter(item => item.fiatValue >= 5)
-    },
-    inactiveMode() {
-      return this.mode === 'balances' ? 'prices' : 'balances'
-    },
-    hideSmallAssetsBtnText() {
-      return this.showSmallAssets ? 'hide small assets' : 'show all assets'
-    }
-  },
-  methods: {
-    toggleMode() {
-      this.mode = this.inactiveMode
-    }
+      historyLoaded: 'history/initialLoaded'
+    })
   }
 }
 </script>
