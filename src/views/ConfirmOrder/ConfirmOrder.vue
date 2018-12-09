@@ -1,7 +1,7 @@
 <template>
   <UnlockWallet>
     <div class="confirm-order">
-      
+
       <div class="confirm-order-title">Confirm order</div>
       <div class="confirm-order-date">{{ confirmDate }}</div>
       <div class="confirm-order-title confirm-order-title--xl">{{ confirmTitle }}</div>

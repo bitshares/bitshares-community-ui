@@ -6,8 +6,8 @@
         :password="true"
         type="number"
         title="password"
-      />
-      <Button 
+      >
+      <Button
         width="full"
         text="unlock wallet"
         @click="unlock"
@@ -46,10 +46,10 @@ export default {
         this.$toast.error('Invalid password')
       }
     }
-  
+
   }
 }
 </script>
 <style lang="scss">
-  
+
 </style>
