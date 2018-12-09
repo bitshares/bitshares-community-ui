@@ -2,7 +2,9 @@
   <div class="deposit h-full sm:w-120">
     <div class="title">Deposit</div>
     <div>Example content</div>
-    <Button class="example-button" text="example button"/>
+    <Button
+      class="example-button"
+      text="example button"/>
   </div>
 </template>
 
