@@ -9,7 +9,7 @@
     </Modal>
 
     <Deposit/>
-    
+
     <div class="dashboard hidden lg:block">
       <div class="flex flex-col lg:flex-row mb-card-margin">
         <div class="flex flex-col lg:w-1/3 mr-card-margin">

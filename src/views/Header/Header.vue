@@ -34,7 +34,7 @@ export default {
       },
       {
         title: 'deposit',
-        event: 'deposit',
+        event: 'deposit'
       },
       {
         title: 'settings',

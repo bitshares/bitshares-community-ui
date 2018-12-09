@@ -37,7 +37,7 @@ export default {
         return []
       }
     }
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>
