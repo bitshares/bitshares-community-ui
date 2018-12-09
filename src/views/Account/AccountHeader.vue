@@ -40,6 +40,7 @@ export default {
   align-items: baseline;
   flex-direction: row;
   color: config('colors.text-primary');
+  margin: 1.5rem 0;
   &--large {
     .text-weak {
       font-size: config('textSizes.lg');
@@ -65,8 +66,10 @@ export default {
   padding-top: 1rem;
   font-size: config('textSizes.lg');
   .title {
-    font-size: config('textSizes.lg');
-    margin-bottom: 0.2rem;
+    font-size: config('textSizes.sm');
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+    opacity: 0.5;
   }
   .amount {
     font-size: config('textSizes.5xl')
