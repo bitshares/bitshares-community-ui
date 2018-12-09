@@ -160,7 +160,7 @@ export default {
   padding:config('padding.card-ui');
   padding-left: 1rem;
   padding-right: 1.5rem;
-  padding-bottom: 0.3rem;
+  padding-bottom: 0.8rem;
   color: config('colors.text-primary');
   display:flex;
   flex-shrink: 0;
@@ -175,13 +175,13 @@ export default {
     white-space: nowrap;
   }
   .collapse-btn {
-    transform: rotate(-90deg);
+    transform: none;
     transition: transform 0.2s;
     margin: 0 auto 0 0.5em;
     opacity: 0.8;
     cursor: pointer;
     &.collapse-btn--active {
-      transform: none;
+      transform: rotate(-90deg);
     }
   }
   .expand-btn {

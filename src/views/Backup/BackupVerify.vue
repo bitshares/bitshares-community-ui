@@ -101,6 +101,7 @@ export default {
 </script>
 <style lang="scss" scoped>
   .backup-step {
+    user-select: none;
     width: 100%;
     position: relative;
     text-align: center;

@@ -33,7 +33,7 @@ export default {
         { title: this.expandMode ? 'Avg./Price' : 'Price', field: 'price', align: 'left' },
         { title: 'Get', field: 'get', align: 'left' },
         { title: 'Spend', field: 'spend', align: 'left' },
-        { title: 'Open', field: 'dateOpen', align: 'right', expanded: true },
+        // { title: 'Open', field: 'dateOpen', align: 'right' },
         { title: 'Closed', field: 'dateClose', align: 'right' }
       ],
       tableHeadersMini: [

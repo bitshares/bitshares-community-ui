@@ -20,7 +20,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions('orderActive', ['changeSearchStr'])
+    ...mapActions('activeOrders', ['changeSearchStr'])
   }
 }
 </script>

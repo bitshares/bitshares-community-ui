@@ -63,13 +63,13 @@
           :expanded="expanded"
         />
       </div>
-      <div class="table-item--dates">
+      <!-- <div class="table-item--dates">
         <div class="table-item-date">{{ dateOpen }}</div>
         <div class="table-item-date">{{ timeOpen }}</div>
-      </div>
+      </div> -->
       <div class="table-item--dates">
-        <div class="table-item-date">{{ dateClose }}</div>
-        <div class="table-item-date">{{ timeClose }}</div>
+        <div class="table-item-date">{{ dateClose }} {{ timeClose }}</div>
+        <!-- <div class="table-item-date">{{ timeClose }}</div> -->
       </div>
     </div>
   </div>
@@ -140,11 +140,11 @@ export default {
     color: config('colors.primary');
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    height: 3.9375rem;
+    min-height: 3.9375rem;
     margin-left: -0.15rem;
 
   &.order-history-table-row--expanded {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
 
     .table-item--dates {
       color: config('colors.inactive');

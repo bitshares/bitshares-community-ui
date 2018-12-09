@@ -7,10 +7,28 @@
           class="temp-acc-header"
         >
           <svgicon
+            v-if="activeComponentName === 'Account'"
             name="search"
             width="24"
             height="24"
             class="search-icon"
+          />
+          <div
+            v-if="activeComponentName === 'Account'"
+            class="temp-acc-btn"
+            @click="handleLogout"
+          >Logout</div>
+          <div
+            v-if="activeComponentName === 'Account'"
+            class="temp-acc-btn"
+            @click="setBackupFlag(true)"
+          >Backup</div>
+          <svgicon
+            v-if="activeComponentName === 'Orders'"
+            name="cross"
+            class="plus-icon"
+            width="22"
+            height="22"
           />
         </div>
         <component
@@ -33,7 +51,8 @@ import MobileFooter from '@/components/MobileFooter'
 import Account from '@/views/Mobile/MobileAccount.vue'
 import Card from '@/components/Card'
 import Markets from '@/views/Markets/Markets.vue'
-import Orders from '@/views/OrderHistory/OrderHistory.vue'
+import Account from '@/views/Account/Portfolio.vue'
+import Orders from '@/views/Mobile/MobileOrders.vue'
 import OrderBook from '@/views/OrderBook/OrderBook.vue'
 import '@icons/markets'
 import '@icons/orders'
@@ -65,7 +84,7 @@ export default {
         case 'Account':
           return this.userName
         case 'Orders':
-          return 'My orders history'
+          return 'My orders'
         default:
           return this.showOrderBook ? 'Order Book' : tabName
       }
@@ -115,9 +134,13 @@ export default {
       border-bottom: 1px solid #ccc;
     }
   }
-
+  
   .search-icon {
     margin-right: 25px;
   }
-
+   
+  .plus-icon {
+    transform: rotate(45deg);
+    padding: 5px;
+  }
 </style>

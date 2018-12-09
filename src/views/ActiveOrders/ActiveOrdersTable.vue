@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       defaultSort: {
-        field: 'dateOpen',
+        field: 'payAssetSymbol',
         type: 'desc'
       }
     }
