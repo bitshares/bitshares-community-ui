@@ -1,17 +1,5 @@
 <template>
   <div class="confirm-order">
-    <div
-      class="confirm-order-close"
-      @click="$emit('close', false)"
-    >
-      <svgicon
-        width="12"
-        height="12"
-        color="rgba(255,255,255,0.5)"
-        name="cancel"
-      />
-    </div>
-    <div class="confirm-order-title">Confirm order</div>
     <div class="confirm-order-date">{{ confirmDate }}</div>
     <div class="confirm-order-title confirm-order-title--xl">{{ confirmTitle }}</div>
 
@@ -59,20 +47,6 @@
       </div>
     </div>
 
-    <div class="confirm-order-buttons">
-      <Button
-        text="Confirm"
-        width="full"
-        class="confirm-order-btn"
-      />
-      <Button
-        text="Cancel"
-        width="full"
-        type="faded"
-        class="confirm-order-btn"
-        @click="$emit('close', false)"
-      />
-    </div>
   </div>
 </template>
 <script>
@@ -142,15 +116,8 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 22.1875rem;
-    height: 21.875rem;
+    // width: 22.1875rem;
     background-color: config('colors.card-background');
-  }
-  .confirm-order-close {
-    position: absolute;
-    right: 0.625rem;
-    top: 0.4375rem;
-    cursor: pointer;
   }
   .confirm-order-title {
     margin-top: 1.25rem;
@@ -172,20 +139,6 @@ export default {
     font-size: config('textSizes.base');
     letter-spacing: normal;
     text-transform: uppercase;
-  }
-  .confirm-order-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    margin: auto .620rem .620rem .620rem;
-    padding: .5rem;
-
-    .confirm-order-btn {
-      font-weight: normal;
-      font-size: config('textSizes.lg');
-    }
   }
 
   .confirm-order-price-section {

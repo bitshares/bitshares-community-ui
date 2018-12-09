@@ -6,17 +6,6 @@
       name="arrowDown"
       @click="goBack"
     />
-    <div
-      class="backup-close"
-      @click="closeModal"
-    >
-      <svgicon
-        width="12"
-        height="12"
-        color="rgba(255,255,255,0.5)"
-        name="cancel"
-      />
-    </div>
     <BackupStep1
       v-if="currentStep === stepConfig['BACKUP_STEP_1']"
       @change="onChangeStep"
@@ -110,13 +99,6 @@ export default {
     width: 30rem;
     height: 30.4375rem;
     box-shadow: 0px 0px 13px 1px black;
-    .backup-close {
-      position: absolute;
-      right: 0.625rem;
-      top: 0.625rem;
-      z-index: 11;
-      cursor: pointer;
-    }
 
     .backup-paginator {
       position: absolute;
@@ -130,7 +112,6 @@ export default {
 
   @media (max-width: 800px) {
     .backup {
-      border: none;
       width: auto;
     }
   }

@@ -15,6 +15,7 @@
           :index="index"
           :item="item"
           :expanded="expanded"
+          @remove="$emit('remove-order', item)"
         />
       </template>
     </SortableTable>

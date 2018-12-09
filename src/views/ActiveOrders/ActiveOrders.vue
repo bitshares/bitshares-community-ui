@@ -1,28 +1,48 @@
 <template>
-  <div class="active-orders pt-3 lg:pt-0">
+  <div
+    :class="{ 'w-220': expandMode }"
+    class="active-orders pt-3 lg:pt-0"
+  >
     <LoadingContainer :loading="isFetching">
       <ActiveOrdersTable
         :table-headers="tableHeaders"
         :items="filteredItems"
         :expanded="expandMode"
+        @remove-order="showRemoveModal = true"
       />
     </LoadingContainer>
+    <ConfirmModal
+      :show="showRemoveModal"
+      title="confirm order remove"
+      @close="showRemoveModal = false"
+      @confirm="removeOrder"
+    >
+      <div class="color-text-primary">Are you sure you want to remove order?</div>
+    </ConfirmModal>
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
 import LoadingContainer from '@/components/LoadingContainer'
 import ActiveOrdersTable from './ActiveOrdersTable'
+import ConfirmModal from '@/views/ConfirmModal/ConfirmModal.vue'
+
 export default {
-  name: 'OrderActive',
+  name: 'ActiveOrders',
   components: {
     ActiveOrdersTable,
-    LoadingContainer
+    LoadingContainer,
+    ConfirmModal
   },
   props: {
     expandMode: {
       type: Boolean,
       default: false
+    }
+  },
+  data() {
+    return {
+      showRemoveModal: false
     }
   },
   computed: {
@@ -53,6 +73,11 @@ export default {
         { title: 'Avg./Price', field: 'price', align: 'left' },
         { title: 'Vol./Filled', field: 'filled', align: 'right' }
       ]
+    }
+  },
+  methods: {
+    removeOrder() {
+      // console.log('confirmed order remove')
     }
   }
 }

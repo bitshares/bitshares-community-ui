@@ -9,7 +9,8 @@
     >
       <Modal
         v-if="expanded"
-        @close="expanded = false">
+        @close="expanded = false"
+      >
         <div
           class="card card--expanded border-card-border"
           @click.stop
@@ -18,14 +19,6 @@
             <div class="title">
               <div> {{ title }} </div>
             </div>
-            <svgicon
-              class="close-btn"
-              width="12"
-              height="12"
-              color="rgba(255,255,255,0.5)"
-              name="cancel"
-              @click.native="expanded = false"
-            />
             <slot
               class="header"
               name="modal-header"/>

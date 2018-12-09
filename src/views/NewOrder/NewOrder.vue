@@ -38,7 +38,26 @@
       </Btn>
     </div>
     <!-- CONFIRM ORDER -->
-    <Modal
+
+    <ConfirmModal
+      :show="confirmVisible"
+      title="confirm order"
+      @close="showConfirmOrder"
+    >
+      <ConfirmOrder
+        :base="base"
+        :quote="quote"
+        :type="type"
+        :price="3874"
+        :get="1932"
+        :spend="0.5"
+        :trading-fee="15.82"
+        :exchange-fee="10.23"
+        @close="showConfirmOrder"
+      />
+    </ConfirmModal>
+
+    <!-- <Modal
       v-if="confirmVisible"
       :width-auto="true"
       @close="showConfirmOrder"
@@ -54,7 +73,7 @@
         :exchange-fee="10.23"
         @close="showConfirmOrder"
       />
-    </Modal>
+    </Modal> -->
   </div>
 </template>
 <script>
@@ -65,6 +84,7 @@ import Btn from '@/components/Button/Button'
 import Tabs from '@/components/Tabs/Tabs'
 import ConfirmOrder from '@/views/ConfirmOrder/ConfirmOrder'
 import Modal from '@/components/Modal'
+import ConfirmModal from '@/views/ConfirmModal/ConfirmModal.vue'
 
 export default {
   components: {
@@ -73,7 +93,8 @@ export default {
     Btn,
     Tabs,
     ConfirmOrder,
-    Modal
+    Modal,
+    ConfirmModal
   },
   data() {
     return {
