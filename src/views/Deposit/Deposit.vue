@@ -1,5 +1,5 @@
 <template>
-  <div class="deposit h-full sm:w-120">
+  <div class="deposit-container h-full sm:w-120">
     <div class="title">Deposit</div>
     <div>Example content</div>
     <Button
@@ -16,7 +16,7 @@ export default {
 }
 </script>
 <style lang="scss">
-  .deposit {
+  .deposit-container {
     color: white;
     padding: 0.6rem;
     display: flex;
