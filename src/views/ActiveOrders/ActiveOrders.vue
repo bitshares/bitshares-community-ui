@@ -1,5 +1,8 @@
 <template>
-  <div class="active-orders pt-3 lg:pt-0">
+  <div
+    :class="{ 'w-220': expandMode }"
+    class="active-orders pt-3 lg:pt-0"
+  >
     <LoadingContainer :loading="isFetching">
       <ActiveOrdersTable
         :table-headers="tableHeaders"
