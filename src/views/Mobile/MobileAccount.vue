@@ -1,8 +1,5 @@
 <template>
-  <LoadingContainer
-    :loading="!historyLoaded"
-    class="portfolio-container h-full">
-
+  <div>
     <div class="mobile-account-header">
       <div class="xs:w-1/2 sm:w-1/2">
         <Button
@@ -27,25 +24,17 @@
     />
 
     <Portfolio />
-
-  </LoadingContainer>
-
+  </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import LoadingContainer from '@/components/LoadingContainer'
 import Button from '@/components/Button'
 import Portfolio from '@/views/Account/Portfolio'
 import AccountHeader from '@/views/Account/AccountHeader'
 
 export default {
-  components: { Button, AccountHeader, Portfolio, LoadingContainer },
-  computed: {
-    ...mapGetters({
-      historyLoaded: 'history/initialLoaded'
-    })
-  }
+  components: { Button, AccountHeader, Portfolio, LoadingContainer }
 }
 </script>
 
