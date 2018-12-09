@@ -1,29 +1,29 @@
 <template>
-  <div class="backup-step backup-step-unlock">
-    <div class="backup-step-button">
-      <SInput
+  <div class="unlock-wallet">
+    <div v-if="isLocked">
+      <Input
         v-model="password"
         :password="true"
         type="number"
-        title="PASSWORD"
+        title="password"
       />
-      <Button
-        text="Unlock wallet"
+      <Button 
         width="full"
+        text="unlock wallet"
         @click="unlock"
       />
     </div>
+    <slot v-else/>
   </div>
 </template>
-
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Input from '@/components/SimpleInput'
 import Button from '@/components/Button'
-import SInput from '@/components/SimpleInput'
 
 export default {
   components: {
-    Button, SInput
+    Button, Input
   },
   data() {
     return {
@@ -32,6 +32,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      isLocked: 'acc/isLocked',
       isValidPassword: 'acc/isValidPassword'
     })
   },
@@ -45,25 +46,10 @@ export default {
         this.$toast.error('Invalid password')
       }
     }
+  
   }
 }
 </script>
-<style lang="scss" scoped>
-  .backup-step {
-    width: 100%;
-    padding: 1rem;
-    font-family: config('fonts.gotham');
-
-    .backup-step-button {
-      box-sizing: border-box;
-      display: inline-block;
-    }
-  }
-  .backup-step-unlock {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
+<style lang="scss">
+  
 </style>
