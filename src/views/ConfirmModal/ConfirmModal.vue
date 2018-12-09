@@ -11,7 +11,7 @@
           v-model="password"
           :password="true"
           type="number"
-          title="password"
+          title="unlock wallet"
         />
       </div>
       <Button
