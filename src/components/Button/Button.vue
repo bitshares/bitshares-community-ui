@@ -114,6 +114,9 @@ export default {
 }
 .btn--small {
   @apply py-1 pr-4 cursor-pointer text-xs;
+  padding: 0 !important;
+  height: 2rem;
+  width: 6.785rem;
 }
 .btn--big {
   @apply py-2 px-6 cursor-pointer text-2xl;
@@ -131,8 +134,8 @@ export default {
 .btn--secondary {
   background-color:config('colors.bg-base');
   color: config('colors.primary');
-  padding-top: 14px;
-  padding-bottom: 14px;
+  padding-top: 1px;
+  padding-bottom: 1px;
   border: solid;
   border-width: 1px;
   border-color:config('colors.primary');

@@ -9,8 +9,8 @@
         height="27"/>
     </div>
 
-    <div class="lg:w-1/3">
-      <div class="lg:w-1/4 inline-block" />
+    <div class="lg:w-1/3 depositWithdraw">
+      <div class="lg:w-1/4" />
 
       <Button
         text="Deposit"
@@ -26,12 +26,12 @@
       />
     </div>
 
-    <div class="lg:w-1/3">
-      <div class="lg:w-1/3 inline-block" />
-      <UserInfo class="lg:w-1/2 inline-block"/>
+    <div class="lg:w-1/3 userMenuItems">
+      <div class="lg:w-1/3" />
+      <UserInfo class="lg:w-1/2"/>
       <Dropdown
         :items="menuItems"
-        class="lg:w-1/6 inline-block dropdown"
+        class="lg:w-1/6 dropdown"
         @clicked="handleDropdownClick"
       />
     </div>
@@ -101,9 +101,9 @@ export default {
   @apply py-3;
   justify-content: space-between;
   align-items: center;
-  height: 61px;
+  height: 3.81rem;
   background-color: transparent;
-  margin: .25rem 0rem;
+  margin: .25rem 0;
   width: 100%;
 
   & > * {
@@ -117,22 +117,17 @@ export default {
   left: 0;
   background: black;
   opacity: .2;
-  height: 55px;
+  height: 3.4375rem;
   z-index: 0;
-}
-
-.inline-block {
-  display: inline-block;
-}
-
-.header-btn {
-  @extend .inline-block;
-  padding: 0;
-  height: 31px;
-  width: 110px;
 }
 
 .dropdown {
   text-align: right;
+}
+
+.userMenuItems, .depositWithdraw {
+  & > * {
+    display: inline-block;
+  }
 }
 </style>
