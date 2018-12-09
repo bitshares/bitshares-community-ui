@@ -1,56 +1,54 @@
 <template>
-  <UnlockWallet>
-    <div class="confirm-order">
+  <!-- <UnlockWallet> -->
+  <div class="confirm-order">
+    <div class="confirm-order-date">{{ confirmDate }}</div>
+    <div class="confirm-order-title confirm-order-title--xl">{{ confirmTitle }}</div>
 
-      <div class="confirm-order-title">Confirm order</div>
-      <div class="confirm-order-date">{{ confirmDate }}</div>
-      <div class="confirm-order-title confirm-order-title--xl">{{ confirmTitle }}</div>
-
-      <!-- SECTION 1 -->
-      <div class="confirm-order-price-section">
-        <div class="confirm-order-price-section-item">
-          <NewOrderInput
-            :placeholder="price.toString()"
-            :disabled="true"
-            title="Price. USD"
-          />
-        </div>
-        <div class="confirm-order-price-section-item">
-          <NewOrderInput
-            :placeholder="spend.toString()"
-            :disabled="true"
-            title="Spend. BTC"
-          />
-        </div>
-        <div class="confirm-order-price-section-item">
-          <NewOrderInput
-            :placeholder="get.toString()"
-            :disabled="true"
-            title="Get. USD"
-          />
-        </div>
+    <!-- SECTION 1 -->
+    <div class="confirm-order-price-section">
+      <div class="confirm-order-price-section-item">
+        <NewOrderInput
+          :placeholder="price.toString()"
+          :disabled="true"
+          title="Price. USD"
+        />
       </div>
-      <!-- SECTION 2 -->
-      <div class="confirm-order-price-section">
-        <div class="confirm-order-price-section-item">
-          <NewOrderInput
-            :placeholder="tradingFee.toString()"
-            :note="tradingFeeTitle"
-            :disabled="true"
-            title="Trading fee. USD"
-          />
-        </div>
-        <div class="confirm-order-price-section-item">
-          <NewOrderInput
-            :placeholder="exchangeFee.toString()"
-            :note="exchangeFeeTitle"
-            :disabled="true"
-            title="Exchange fee. USD"
-          />
-        </div>
+      <div class="confirm-order-price-section-item">
+        <NewOrderInput
+          :placeholder="spend.toString()"
+          :disabled="true"
+          title="Spend. BTC"
+        />
       </div>
+      <div class="confirm-order-price-section-item">
+        <NewOrderInput
+          :placeholder="get.toString()"
+          :disabled="true"
+          title="Get. USD"
+        />
+      </div>
+    </div>
+    <!-- SECTION 2 -->
+    <div class="confirm-order-price-section">
+      <div class="confirm-order-price-section-item">
+        <NewOrderInput
+          :placeholder="tradingFee.toString()"
+          :note="tradingFeeTitle"
+          :disabled="true"
+          title="Trading fee. USD"
+        />
+      </div>
+      <div class="confirm-order-price-section-item">
+        <NewOrderInput
+          :placeholder="exchangeFee.toString()"
+          :note="exchangeFeeTitle"
+          :disabled="true"
+          title="Exchange fee. USD"
+        />
+      </div>
+    </div>
 
-      <div class="confirm-order-buttons">
+    <!-- <div class="confirm-order-buttons">
         <Button
           text="Confirm"
           width="full"
@@ -63,9 +61,9 @@
           class="confirm-order-btn"
           @click="$emit('close', false)"
         />
-      </div>
-    </div>
-  </UnlockWallet>
+      </div> -->
+  </div>
+  <!-- </UnlockWallet> -->
 </template>
 <script>
 import { format } from 'date-fns'

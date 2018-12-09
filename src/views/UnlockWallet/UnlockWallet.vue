@@ -1,12 +1,12 @@
 <template>
   <div class="unlock-wallet">
     <div v-if="isLocked">
-      <Input
+      <SInput
         v-model="password"
         :password="true"
         type="number"
         title="password"
-      >
+      />
       <Button
         width="full"
         text="unlock wallet"
@@ -18,12 +18,12 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import Input from '@/components/SimpleInput'
+import SInput from '@/components/SimpleInput'
 import Button from '@/components/Button'
 
 export default {
   components: {
-    Button, Input
+    Button, SInput
   },
   data() {
     return {
