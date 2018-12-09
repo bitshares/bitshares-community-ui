@@ -51,7 +51,6 @@ import MobileFooter from '@/components/MobileFooter'
 import Account from '@/views/Mobile/MobileAccount.vue'
 import Card from '@/components/Card'
 import Markets from '@/views/Markets/Markets.vue'
-import Account from '@/views/Account/Portfolio.vue'
 import Orders from '@/views/Mobile/MobileOrders.vue'
 import OrderBook from '@/views/OrderBook/OrderBook.vue'
 import '@icons/markets'
@@ -134,11 +133,9 @@ export default {
       border-bottom: 1px solid #ccc;
     }
   }
-  
   .search-icon {
     margin-right: 25px;
   }
-   
   .plus-icon {
     transform: rotate(45deg);
     padding: 5px;
