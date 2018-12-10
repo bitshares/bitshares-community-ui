@@ -146,9 +146,8 @@ const actions = {
   },
   setOrderData({ commit, state }, { type, price, sum }) {
     console.log(type, price, sum)
-    if (state.type === type) commit(types.SET_TYPE, type === 'buy' ? 'sell' : 'buy')
     commit(types.SET_PRICE, price)
-    if (state.type === 'buy') {
+    if (type === 'buy') {
       if (!state.getAmount) commit(types.SET_GET_AMOUNT, sum)
     } else {
       if (!state.spendAmount) commit(types.SET_SPEND_AMOUNT, sum)
