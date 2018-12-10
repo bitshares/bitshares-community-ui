@@ -12,14 +12,13 @@
     <div class="lg:w-1/3 deposit-withdraw">
       <Button
         text="Deposit"
-        class="header-btn"
         type="secondary"
         size="small"
         @click="showDepositModal"
       />
       <Button
         text="Withdraw"
-        class="ml-5 header-btn"
+        class="ml-5"
         type="secondary"
         size="small"
       />

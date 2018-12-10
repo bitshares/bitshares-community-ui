@@ -87,6 +87,7 @@ export default {
   justify-content: center;
   height: 51px;
   transition: background-color 0.2s, opacity 0.2s;
+  
   &:hover {
     background-color: config('colors.button-bg-hover');
   }
@@ -115,9 +116,9 @@ export default {
 }
 .btn--small {
   @apply py-1 pr-4 cursor-pointer text-xs;
-  padding: 0 !important;
   height: 2rem;
-  width: 6.785rem;
+  min-width: 6.785rem;
+  font-size: 0.9rem;
 }
 .btn--big {
   @apply py-2 px-6 cursor-pointer text-2xl;
@@ -133,17 +134,20 @@ export default {
   @apply rounded;
 }
 .btn--secondary {
-  background-color:config('colors.bg-base');
+  background-color: transparent;
   color: config('colors.primary');
   padding-top: 1px;
   padding-bottom: 1px;
   border: solid;
   border-width: 1px;
+  opacity: 0.8;
   border-color:config('colors.primary');
+  // font-family: Gotham_Pro;
 }
 .btn--secondary:hover {
   background-color:config('colors.primary');
   color:config('colors.bg-base');
+  opacity: 1;
 }
 .btn--buy {
   background-color: config('colors.buy');
