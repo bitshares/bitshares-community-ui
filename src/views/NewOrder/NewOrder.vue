@@ -13,6 +13,11 @@
       :active="activeIndication"
       @change="setActiveIndication"
     /> -->
+    <NewOrderPercentSelector 
+      :percent-items="percentItems" 
+      :active-percent="activePercent"
+      @change="setMaxSpend"
+    />
     <div class="new-order-fields">
       <NewOrderInput
         :placeholder="spendAsset"
@@ -79,6 +84,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import NewOrderTabs from './NewOrderTabs'
 import NewOrderInput from './NewOrderInput'
+import NewOrderPercentSelector from './NewOrderPercentSelector'
 import Btn from '@/components/Button/Button'
 import Tabs from '@/components/Tabs/Tabs'
 import ConfirmOrder from '@/views/ConfirmOrder/ConfirmOrder'
@@ -90,6 +96,7 @@ export default {
   components: {
     NewOrderTabs,
     NewOrderInput,
+    NewOrderPercentSelector,
     Btn,
     Tabs,
     ConfirmOrder,
@@ -156,8 +163,9 @@ export default {
       showConfirm: 'newOrder/showConfirm',
       hideConfirm: 'newOrder/hideConfirm'
     }),
-    setMaxSpend() {
-      this.setSpendAmount(this.maxSpend)
+    setMaxSpend(percent = 100) {
+      const amount = this.maxSpend / 100 * percent
+      this.setSpendAmount(amount)
     }
   }
 }
@@ -179,7 +187,7 @@ export default {
       padding: 0.5rem;
     }
     .new-order-fields {
-      margin-top: 3rem;
+      margin-top: 1rem;
       padding: 0 1rem;
       display: flex;
       justify-content: space-between;
