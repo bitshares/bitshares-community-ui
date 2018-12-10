@@ -49,7 +49,7 @@
         </div>
 
         <div class="flex flex-col lg:w-2/3">
-          <div class="mb-card-margin disabled">
+          <div class="mb-card-margin">
             <Card
               :collapsible="true"
               title="graph"
