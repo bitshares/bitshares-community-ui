@@ -53,7 +53,7 @@
             <Card
               :collapsible="true"
               title="graph"
-            />       
+            />
           </div>
           <div class="flex">
             <div class="flex flex-col lg:w-1/2 mr-card-margin">
