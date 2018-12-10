@@ -52,6 +52,9 @@ export default {
       isFetching: 'activeOrders/isFetching'
     }),
     filteredItems() {
+      if (!this.items) {
+        return []
+      }
       const search = this.searchStr.toLowerCase()
       return this.items.filter(item => {
         return item.payAssetSymbol.toLowerCase().includes(search)
