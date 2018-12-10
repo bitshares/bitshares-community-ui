@@ -13,84 +13,96 @@
     <div class="dashboard hidden lg:block">
       <div class="flex flex-col lg:flex-row mb-card-margin">
         <div class="flex flex-col lg:w-1/3 mr-card-margin">
-
-          <Card
-            :expandable="true"
-            :collapsible="true"
-            title="account"
-            class="mb-card-margin"
-          >
-            <AccountHeader slot="header"/>
-            <AccountHeader
-              slot="modal-header"
-              :large="true"/>
-            <Portfolio slot="body"/>
-            <Portfolio
-              slot="modal"
-              :expanded="true"/>
-          </Card>
-
-          <Card
-            :expandable="true"
-            :collapsible="true"
-            title="markets"
-          >
-            <MarketsSearch slot="header"/>
-            <Markets slot="body"/>
-            <MarketsSearch slot="modal-header"/>
-            <Markets
-              slot="modal"
-              :expand-mode="true"/>
-          </Card>
+          <div>
+            <Card
+              :expandable="true"
+              :collapsible="true"
+              title="account"
+              class="mb-card-margin"
+            >
+              <AccountHeader slot="header"/>
+              <AccountHeader
+                slot="modal-header"
+                :large="true"/>
+              <Portfolio slot="body"/>
+              <Portfolio
+                slot="modal"
+                :expanded="true"/>
+            </Card>
+          </div>
+          <div class="flex flex-col">
+            <Card
+              :expandable="true"
+              :collapsible="true"
+              :long="true"
+              title="markets"
+            >
+              <MarketsSearch slot="header"/>
+              <Markets slot="body"/>
+              <MarketsSearch slot="modal-header"/>
+              <Markets
+                slot="modal"
+                :expand-mode="true"/>
+            </Card>
+          </div>
 
         </div>
 
-        <div class="flex lg:w-2/3">
-          <div class="flex flex-col lg:w-1/2 mr-card-margin">
+        <div class="flex flex-col lg:w-2/3">
+          <div class="mb-card-margin disabled">
             <Card
               :collapsible="true"
-              class="mb-card-margin"
-            >
-              <NewOrder slot="body"/>
-            </Card>
-            <Card
-              :expandable="true"
-              :collapsible="true"
-              title="my active orders"
-            >
-              <ActiveOrdersSearch slot="header"/>
-              <ActiveOrders slot="body"/>
-              <ActiveOrdersSearch slot="modal-header"/>
-              <ActiveOrders
-                slot="modal"
-                :expand-mode="true"
-              />
-            </Card>
-
+              title="graph"
+            />       
           </div>
-          <div class="flex flex-col lg:w-1/2">
+          <div class="flex">
+            <div class="flex flex-col lg:w-1/2 mr-card-margin">
+              <Card
+                :collapsible="true"
+                class="mb-card-margin"
+              >
+                <NewOrder slot="body"/>
+              </Card>
+              <Card
+                :expandable="true"
+                :collapsible="true"
+                title="my active orders"
+              >
+                <ActiveOrdersSearch slot="header"/>
+                <ActiveOrders slot="body"/>
+                <ActiveOrdersSearch slot="modal-header"/>
+                <ActiveOrders
+                  slot="modal"
+                  :expand-mode="true"
+                />
+              </Card>
 
-            <Card
-              :collapsible="true"
-              title="order book"
-              class="mb-card-margin"
-            >
-              <OrderBook slot="body"/>
-            </Card>
+            </div>
+            <div class="flex flex-col lg:w-1/2">
+              <div>
+                <Card
+                  :collapsible="true"
+                  title="order book"
+                  class="mb-card-margin"
+                >
+                  <OrderBook slot="body"/>
+                </Card>
+              </div>
 
-            <Card
-              :expandable="true"
-              :collapsible="true"
-              title="My orders history"
-            >
-              <OrderHistorySearch slot="modal-header"/>
-              <OrderHistory slot="body"/>
-              <OrderHistory
-                slot="modal"
-                :expand-mode="true"
-              />
-            </Card>
+              <Card
+                :expandable="true"
+                :collapsible="true"
+                title="My orders history"
+              >
+                <OrderHistorySearch slot="modal-header"/>
+                <OrderHistory slot="body"/>
+                <OrderHistory
+                  slot="modal"
+                  :expand-mode="true"
+                />
+              </Card>
 
+            </div>
           </div>
         </div>
 

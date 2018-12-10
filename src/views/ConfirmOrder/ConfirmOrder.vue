@@ -131,7 +131,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    // width: 22.1875rem;
+    width: 30rem;
     background-color: config('colors.card-background');
   }
   .confirm-order-title {
@@ -158,9 +158,7 @@ export default {
 
   .confirm-order-price-section {
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    width: 80%;
     margin-top: 0.9375rem;
   }
   .confirm-order-price-section-item {
