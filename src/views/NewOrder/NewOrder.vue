@@ -54,26 +54,10 @@
 
     <ConfirmModal
       :show="confirmDisplayed"
+      :pending="pending"
       title="confirm order"
       @close="hideConfirm"
-    >
-      <ConfirmOrder
-        :base="base"
-        :quote="quote"
-        :type="type"
-        :price="3874"
-        :get="1932"
-        :spend="0.5"
-        :trading-fee="15.82"
-        :exchange-fee="10.23"
-        @close="hideConfirm"
-      />
-    </ConfirmModal>
-
-    <!-- <Modal
-      v-if="confirmVisible"
-      :width-auto="true"
-      @close="hideConfirm"
+      @confirm="dispatchOrder"
     >
       <ConfirmOrder
         :base="base"
@@ -84,11 +68,10 @@
         :spend="spendAmount"
         :trading-fee="15.82"
         :exchange-fee="10.23"
-        :pending="pending"
-        @confirm="dispatchOrder"
         @close="hideConfirm"
       />
-    </Modal> -->
+    </ConfirmModal>
+
   </div>
 </template>
 <script>

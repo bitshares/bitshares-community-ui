@@ -15,6 +15,8 @@
         />
       </div>
       <Button
+        :disabled="confirmDisabled"
+        :loading="pending"
         text="Confirm"
         width="full"
         @click="confirm"
@@ -46,6 +48,10 @@ export default {
     title: {
       type: String,
       default: ''
+    },
+    pending: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -57,7 +63,11 @@ export default {
     ...mapGetters({
       isLocked: 'acc/isLocked',
       isValidPassword: 'acc/isValidPassword'
-    })
+    }),
+
+    confirmDisabled() {
+      return this.isLocked && !this.password
+    }
   },
   methods: {
     ...mapActions('acc', ['unlockWallet']),
