@@ -125,32 +125,37 @@ const actions = {
   },
   setGetAmount({ commit, state }, value) {
     commit(types.SET_GET_AMOUNT, value)
-    // if (state.spendAmount && value) {
-    //   commit(types.SET_PRICE, state.spendAmount / value)
-    // }
-    // if (!value) commit(types.SET_PRICE, null)
+    if (state.price && value) {
+      commit(types.SET_SPEND_AMOUNT, value * state.price)
+    }
+    if (state.spendAmount && value && !state.price) {
+      commit(types.SET_PRICE, value / state.spendAmount)
+    }
   },
   setSpendAmount({ commit, state }, value) {
     commit(types.SET_SPEND_AMOUNT, value)
-    // if (state.getAmount && value) {
-    //   commit(types.SET_PRICE, value / state.getAmount)
-    // }
+    if (state.price && value) {
+      commit(types.SET_GET_AMOUNT, value / state.price)
+    }
+    if (state.getAmount && value && !state.price) {
+      commit(types.SET_PRICE, state.getAmount / value)
+    }
     // if (!value) commit(types.SET_PRICE, null)
   },
   setPrice({ commit, state }, value) {
     commit(types.SET_PRICE, value)
     // check if buy/sell
-    // if (state.spendAmount && value) {
-    //   commit(types.SET_GET_AMOUNT, value * state.spendAmount)
-    // }
+    if (state.spendAmount && value) {
+      commit(types.SET_GET_AMOUNT, value * state.spendAmount)
+    }
   },
   setOrderData({ commit, state }, { type, price, sum }) {
     console.log(type, price, sum)
-    commit(types.SET_PRICE, price)
+    actions.setPrice({ commit, state }, price)
     if (type === 'buy') {
-      if (!state.getAmount) commit(types.SET_GET_AMOUNT, sum)
+      if (!state.getAmount) actions.setGetAmount({ commit, state }, sum)
     } else {
-      if (!state.spendAmount) commit(types.SET_SPEND_AMOUNT, sum)
+      if (!state.spendAmount) actions.setSpendAmount({ commit, state }, sum)
     }
   },
   async dispatchOrder({ commit, state, rootGetters }) {

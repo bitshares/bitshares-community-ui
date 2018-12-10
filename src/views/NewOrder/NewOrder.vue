@@ -83,6 +83,7 @@ import Tabs from '@/components/Tabs/Tabs'
 import ConfirmOrder from '@/views/ConfirmOrder/ConfirmOrder'
 import Modal from '@/components/Modal'
 import ConfirmModal from '@/views/ConfirmModal/ConfirmModal.vue'
+import { getFloatCurrency } from '@/helpers/utils'
 
 export default {
   components: {
@@ -131,10 +132,14 @@ export default {
     },
     buttonTitle() {
       const orderAmount = this.type === 'buy' ? this.getAmount : this.spendAmount
-      return `${orderAmount || 0} ${this.base}`
+      const formattedAmount = getFloatCurrency(orderAmount || 0)
+      return `${formattedAmount} ${this.base}`
     },
     invalidOrder() {
       return !this.spendAmount || !this.getAmount || this.spendExceeded
+    },
+    formattedPrice() {
+      return getFloatCurrency(this.price)
     }
   },
   methods: {
