@@ -188,7 +188,7 @@ export default {
     }
     .new-order-fields {
       margin-top: 1rem;
-      padding: 0 1rem;
+      padding: 0 0.5rem;
       display: flex;
       justify-content: space-between;
     }
