@@ -13,8 +13,8 @@
       :active="activeIndication"
       @change="setActiveIndication"
     /> -->
-    <NewOrderPercentSelector 
-      :percent-items="percentItems" 
+    <NewOrderPercentSelector
+      :percent-items="percentItems"
       :active-percent="activePercent"
       @change="setMaxSpend"
     />
