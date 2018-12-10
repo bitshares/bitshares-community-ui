@@ -19,9 +19,8 @@ const types = {
 }
 
 const getDefaultState = () => ({
-  base: 'BTC',
-  quote: 'USD',
-  orderAmount: 0.02,
+  base: '',
+  quote: '',
   getAmount: null,
   spendAmount: null,
   price: null,
@@ -37,7 +36,6 @@ const getters = {
   getBase: state => removePrefix(state.base),
   getQuote: state => removePrefix(state.quote),
   getMarketPrices: (state, getters, rootState, rootGetters) => rootGetters['orderBook/getTopOrders'],
-  getOrderAmount: state => state.orderAmount,
   getType: state => state.type,
   getPercentItems: state => state.percentItems,
   getActivePercent: state => state.activePercent,

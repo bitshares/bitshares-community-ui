@@ -20,9 +20,13 @@ const actions = {
 
     await dispatch('acc/fetchCurrentUser', userId, { root: true })
     dispatch('orderBook/initialize', {
-      baseSymbol: 'BTS',
-      quoteSymbol: 'USD' },
+      baseSymbol: 'USD',
+      quoteSymbol: 'BTS' },
     { root: true })
+    dispatch('newOrder/setMarket', {
+      base: 'USD',
+      quote: 'BTS'
+    }, { root: true })
     // await Promise.all([
     // dispatch('transactions/fetchComissions', null, { root: true }),
     dispatch(
