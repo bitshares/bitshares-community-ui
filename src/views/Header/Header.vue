@@ -15,6 +15,7 @@
         class="header-btn"
         type="secondary"
         size="small"
+        @click="showDepositModal"
       />
       <Button
         text="Withdraw"
@@ -55,10 +56,6 @@ export default {
         disabled: !this.backupEnabled
       },
       {
-        title: 'deposit',
-        event: 'deposit'
-      },
-      {
         title: 'settings',
         event: 'settings',
         disabled: true
@@ -88,9 +85,6 @@ export default {
       switch (eventName) {
         case 'logout':
           this.handleLogout()
-          return
-        case 'deposit':
-          this.showDepositModal()
           return
         case 'backup':
           this.showBackupModal(true)
