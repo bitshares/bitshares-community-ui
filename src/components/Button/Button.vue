@@ -87,7 +87,7 @@ export default {
   justify-content: center;
   height: 51px;
   transition: background-color 0.2s, opacity 0.2s;
-  
+
   &:hover {
     background-color: config('colors.button-bg-hover');
   }

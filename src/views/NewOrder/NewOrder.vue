@@ -27,6 +27,7 @@
         :placeholder="getAsset"
         :value="getAmount"
         :title="`Get ${getAsset}`"
+        :note="`max ${maxGet}`"
         @change="setGetAmount"
         @note-click="setMaxSpend"
       />
@@ -116,7 +117,7 @@ export default {
       return this.type === 'buy' ? this.maxQuote : this.maxBase
     },
     maxGet() {
-      return this.maxSpend * this.price
+      return this.price ? getFloatCurrency(this.maxSpend / this.price) : 0
     },
     spendExceeded() {
       return this.spendAmount > this.maxSpend
