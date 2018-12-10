@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="{'markets_expanded': expandMode}"
+    :class="{'w-220': expandMode}"
     class="markets"
   >
     <div class="markets__header">
@@ -92,7 +92,6 @@ export default {
   }
 
   .markets__header {
-    // margin-top: 0.625rem;
     display: flex;
     flex-direction: row;
     flex-shrink: 0;

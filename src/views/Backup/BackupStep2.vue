@@ -24,12 +24,7 @@
 import Button from '@/components/Button/Button'
 
 export default {
-  components: {
-    Button
-  },
-  data() {
-    return {}
-  }
+  components: { Button }
 }
 </script>
 <style lang="scss" scoped>

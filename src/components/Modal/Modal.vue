@@ -5,9 +5,16 @@
       @click.self.stop="$emit('close')"
     >
       <div
-        :class="{'modal-wrapper--width-auto': widthAuto}"
-        class="modal-wrapper"
+        class="modal-wrapper w-full sm:w-auto h-full sm:h-auto"
       >
+        <svgicon
+          class="modal-wrapper__close"
+          width="12"
+          height="12"
+          color="rgba(255,255,255,0.5)"
+          name="cancel"
+          @click="$emit('close')"
+        />
         <slot/>
       </div>
     </div>
@@ -15,12 +22,23 @@
 </template>
 
 <script>
+import '@icons/cancel'
 
 export default {
   props: {
     widthAuto: {
       type: Boolean,
       default: false
+    },
+    width: {
+      type: String,
+      required: false,
+      default: 'auto'
+    },
+    height: {
+      type: String,
+      required: false,
+      default: 'auto'
     }
   }
 }
@@ -42,11 +60,19 @@ export default {
 }
 
 .modal-wrapper {
-  width: 56rem;
   transition: all .3s ease;
+  position: relative;
+  background: rgb(0, 0, 0);
 
   &--width-auto {
     width: auto;
+  }
+  &__close {
+    cursor: pointer;
+    position: absolute;
+    right: 0.625rem;
+    top: 0.4375rem;
+    z-index: 2;
   }
 }
 

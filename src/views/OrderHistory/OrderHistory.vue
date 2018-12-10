@@ -1,5 +1,8 @@
 <template>
-  <div class="order-history pt-3 lg:pt-0">
+  <div
+    :class="{ 'w-220': expandMode }"
+    class="order-history pt-3 lg:pt-0"
+  >
     <LoadingContainer :loading="isFetching">
       <OrderHistoryTable
         :table-headers="expandMode ? tableHeaders : tableHeadersMini"

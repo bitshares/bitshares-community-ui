@@ -100,7 +100,7 @@
     </div>
     <div
       class="table-item-remove"
-      @click="removeActiveOrder(index)"
+      @click="$emit('remove')"
     >
       <svgicon
         :width="removeSize"
@@ -112,7 +112,6 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
 import { format } from 'date-fns'
 import '@icons/cancel'
 import { getFloatCurrency, removePrefix } from '@/helpers/utils'
@@ -137,9 +136,6 @@ export default {
       type: Number,
       default: 0
     }
-  },
-  data() {
-    return {}
   },
   computed: {
     formattedPayAsset() {
@@ -176,11 +172,6 @@ export default {
     removeSize() {
       return this.expanded ? '14' : '10'
     }
-  },
-  methods: {
-    ...mapActions({
-      removeActiveOrder: 'activeOrders/removeActiveOrder'
-    })
   }
 }
 </script>
