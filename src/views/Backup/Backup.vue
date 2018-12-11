@@ -1,17 +1,12 @@
 <template>
-  <div
-    :class="{
-      'backup--auto': isAutoSize
-    }"
-    class="backup"
-  >
+  <div class="backup-container h-full sm:w-120">
     <svgicon
       v-if="currentStep > 0"
       class="backup-paginator"
       name="arrowDown"
       @click="goBack"
     />
-    <div
+    <!--<div
       class="backup-close"
       @click="closeModal"
     >
@@ -21,7 +16,7 @@
         color="rgba(255,255,255,0.5)"
         name="cancel"
       />
-    </div>
+    </div>-->
     <BackupMenu
       v-if="currentStep === stepConfig['BACKUP_MENU']"
       :step-config="stepConfig"
@@ -102,10 +97,7 @@ export default {
       isLocked: 'acc/isLocked'
     }),
     phrase() {
-      return this.backupPhrase.split(' ')
-    },
-    isAutoSize() {
-      return this.currentStep === this.stepConfig['BACKUP_MENU'] || this.currentStep === this.stepConfig['BACKUP_DOWNLOAD']
+      return 'cat dog pet hen dossy piggy animal jazz stirke kfffa'.split(' ')// this.backupPhrase.split(' ')
     }
   },
   methods: {
@@ -130,17 +122,11 @@ export default {
 }
 </script>
 <style lang="scss">
-  .backup {
+  .backup-container {
     cursor: default;
     position: relative;
     color: config('colors.white');
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
     background: config('colors.card-background');
-    width: 30rem;
-    height: 30.4375rem;
-    box-shadow: 0px 0px 13px 1px black;
 
     .backup-paginator {
       position: absolute;
@@ -149,16 +135,6 @@ export default {
       transform: rotate(90deg);
       z-index: 10;
       cursor: pointer;
-    }
-
-    &--auto {
-      height: auto;
-    }
-  }
-
-  @media (max-width: 800px) {
-    .backup {
-      width: auto;
     }
   }
 </style>

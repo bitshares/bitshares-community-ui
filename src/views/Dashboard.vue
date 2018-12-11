@@ -2,7 +2,6 @@
   <div class="dashboard">
     <Modal
       v-if="backupFlag"
-      :width-auto="true"
       @close="toggleModal"
     >
       <Backup/>

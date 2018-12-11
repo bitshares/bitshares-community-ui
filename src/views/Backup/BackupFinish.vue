@@ -1,5 +1,5 @@
 <template>
-  <div class="backup-step">
+  <div class="backup-step h-full sm:w-120">
     <div class="backup-step-title">almost done! let’s review</div>
     <div
       v-for="(text, index) in paragraphs"
@@ -95,10 +95,12 @@ export default {
 </script>
 <style lang="scss" scoped>
   .backup-step {
-    width: 100%;
-    position: relative;
+    display: flex;
+    flex-direction: column;
     text-align: center;
     font-family: config('fonts.gotham');
+    padding: 0 1.25rem 1.25rem;
+    min-height: 30.4375rem;
 
     .backup-step-title {
       margin-top: 0.9375rem;
@@ -110,7 +112,6 @@ export default {
 
     .backup-step-content {
       margin: 0 auto;
-      width: 28.625rem;
       margin-bottom: 0.9375rem;
       text-align: left;
       line-height: 1.3;
@@ -126,21 +127,15 @@ export default {
     }
 
     .backup-step-footer {
-      position: absolute;
-      width: 100%;
-      bottom: 1.0975rem;
-    }
-
-    .backup-step-button {
-      box-sizing: border-box;
-      display: inline-block;
-      width: 27.5rem;
+      display: flex;
+      flex-direction: column;
+      margin-top: auto;
     }
 
     .backup-step-finish-icon {
       width: 2.0625rem;
       display: inline-block;
-      margin: 0.3125rem 0.625rem 0.625rem 0.625rem;
+      margin: 0.2125rem 0.625rem 0.625rem 0.625rem;
     }
 
     .backup-step-finish-text {
@@ -156,35 +151,12 @@ export default {
     }
 
     ._footer-content {
-      margin-bottom: .5375rem;
-      margin-top: 0.9375rem;
-      padding-right: 1.5625rem;
-
       ._terms {
         color: #FBE709;
         border-bottom: 0.0625rem solid #FBE709;
       }
     }
   }
-  @media (max-width: 800px) {
-    .backup-step {
-      width: 90%;
-      .backup-step-subtitle {
-        font-size: 0.8125rem;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .backup-step-content {
-        width: 100%;
-        font-size: config('textSizes.sm');
-      }
-      .backup-step-button {
-        width: 100%;
-      }
-      .backup-step-footer {
-        bottom: .1rem;
-      }
-    }
-  }
+
 
 </style>

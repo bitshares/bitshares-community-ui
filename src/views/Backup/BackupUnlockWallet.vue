@@ -1,5 +1,5 @@
 <template>
-  <div class="backup-step">
+  <div class="backup-step h-full sm:w-120">
     <div class="backup-step-title">backup</div>
     <div class="backup-step-button">
       <SInput
@@ -53,7 +53,7 @@ export default {
   .backup-step {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    padding: 0 1.25rem 1.25rem;
     font-family: config('fonts.gotham');
 
     .backup-step-title {
@@ -65,17 +65,9 @@ export default {
     }
 
     .backup-step-button {
-      width: 100%;
+      display: flex;
+      flex-direction: column;
       margin-top: auto;
-      padding: 1rem;
-      box-sizing: border-box;
     }
-  }
-  .backup-step-unlock {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
   }
 </style>
