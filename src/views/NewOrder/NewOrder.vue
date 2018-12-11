@@ -66,17 +66,17 @@
       @close="hideConfirm"
       @confirm="dispatchOrder"
     >
-      <!-- <ConfirmOrder
+      <ConfirmOrder
         :base="base"
         :quote="quote"
         :type="type"
-        :price="price || 0"
-        :get="getAmount"
-        :spend="spendAmount"
+        :price="price"
+        :base-amount="baseAmount"
+        :quote-amount="quoteAmount"
         :trading-fee="15.82"
         :exchange-fee="10.23"
         @close="hideConfirm"
-      /> -->
+      />
     </ConfirmModal>
 
   </div>

@@ -158,13 +158,10 @@ const actions = {
   async dispatchOrder({ commit, state, rootGetters }) {
     const baseAsset = rootGetters['assets/getAssetBySymbol'](state.base)
     const quoteAsset = rootGetters['assets/getAssetBySymbol'](state.quote)
-    const spendPrecision = (state.type === 'buy' ? quoteAsset : baseAsset).precision
-    const getPrecision = (state.type === 'sell' ? baseAsset : quoteAsset).precision
-
-    const spend = state.spendAmount * 10 ** spendPrecision
-    const get = state.getAmount * 10 ** getPrecision
-    console.log(state.getAmount, state.spendAmount)
-    console.log(get, spend)
+    const baseAmount = state.baseAmount * 10 ** baseAsset.precision
+    const quoteAmount = state.quoteAmount * 10 ** quoteAsset.precision
+    const get = state.type === 'buy' ? baseAmount : quoteAmount
+    const spend = state.type === 'buy' ? quoteAmount : baseAmount
 
     const market = API.Market(baseAsset)
     if (market) {
@@ -174,13 +171,11 @@ const actions = {
         spend,
         get
       })
+      console.log(sides)
       const userId = rootGetters['acc/getAccountUserId']
       const newOrder = API.Transactions.createOrder(sides, userId)
+      console.log(newOrder)
       const keys = rootGetters['acc/getKeys']
-      if (!keys) {
-        console.warn('wallet is locked')
-        return
-      }
       commit(types.PLACE_ORDER_REQUEST)
       const result = await API.Transactions.placeOrder(newOrder, keys)
       commit(types.PLACE_ORDER_COMPLETE)
