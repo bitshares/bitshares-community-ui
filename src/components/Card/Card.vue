@@ -43,7 +43,7 @@
           width="11"
           height="11"
           name="arrowDown"
-          @click="handleCollapseClick"
+          @click.stop="handleCollapseClick"
         />
         <div
           v-if="expandable"
@@ -160,6 +160,7 @@ export default {
   justify-content: space-between;
   align-items: baseline;
   position: relative;
+  user-select: none;
   .title {
     font-size: config('textSizes.base');
     font-family: config('fonts.gotham-medium');

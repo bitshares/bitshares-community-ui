@@ -38,7 +38,7 @@ export default {
       default: ''
     },
     subTitle: {
-      type: Number,
+      type: [Number, String],
       required: true
     },
     inActive: {

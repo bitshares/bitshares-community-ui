@@ -1,12 +1,12 @@
 <template>
   <div class="user-info">
     <p class="uppercase text-lg">{{ userName }}</p>
-    <svgicon
+    <!-- <svgicon
       name="arrowDown"
       height="10"
       width="10"
       class="icon"
-    />
+    /> -->
   </div>
 </template>
 

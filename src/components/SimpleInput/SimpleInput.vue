@@ -86,7 +86,7 @@ export default {
       default: ''
     },
     placeholder: {
-      type: String,
+      type: [String, Number],
       required: false,
       default: ''
     },
@@ -289,7 +289,7 @@ export default {
   color: config('colors.text-primary');
 }
 .input--value-mode {
-  padding: 0;
+  padding: 0!important;
 
   .input__input {
     padding-right: 0;

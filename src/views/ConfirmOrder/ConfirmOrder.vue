@@ -7,28 +7,28 @@
     <div class="confirm-order-price-section">
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :placeholder="price.toString()"
+          :value="price || ''"
           :disabled="true"
-          title="Price. USD"
+          :title="`Price ${quote}`"
         />
       </div>
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :placeholder="spend.toString()"
+          :value="quoteAmount || ''"
           :disabled="true"
-          title="Spend. BTC"
+          :title="quoteInputTitle"
         />
       </div>
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :placeholder="get.toString()"
+          :value="baseAmount || ''"
           :disabled="true"
-          title="Get. USD"
+          :title="baseInputTitle"
         />
       </div>
     </div>
     <!-- SECTION 2 -->
-    <div class="confirm-order-price-section">
+    <!-- <div class="confirm-order-price-section">
       <div class="confirm-order-price-section-item">
         <NewOrderInput
           :placeholder="tradingFee.toString()"
@@ -45,18 +45,24 @@
           title="Exchange fee. USD"
         />
       </div>
-    </div>
+    </div> -->
+
+    <!-- <SInput
+      v-if="isLocked"
+      v-model="password"
+      :password="true"
+      type="number"
+      title="UNLOCK WALLET"
+    /> -->
 
   </div>
 </template>
 <script>
-import { format } from 'date-fns'
-import Button from '@/components/Button'
 import NewOrderInput from '@/views/NewOrder/NewOrderInput'
+import format from 'date-fns/format'
 
 export default {
   components: {
-    Button,
     NewOrderInput
   },
   props: {
@@ -72,15 +78,15 @@ export default {
       type: String,
       required: true
     },
+    baseAmount: {
+      type: Number,
+      required: true
+    },
     price: {
       type: Number,
       required: true
     },
-    get: {
-      type: Number,
-      required: true
-    },
-    spend: {
+    quoteAmount: {
       type: Number,
       required: true
     },
@@ -91,6 +97,10 @@ export default {
     exchangeFee: {
       type: Number,
       default: 0
+    },
+    pending: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -105,6 +115,14 @@ export default {
     },
     confirmDate() {
       return format(new Date(), 'DD-MMM-YY, HH:mm')
+    },
+    baseInputTitle() {
+      const type = this.type === 'buy' ? 'Get' : 'Spend'
+      return `${type} ${this.base}`
+    },
+    quoteInputTitle() {
+      const type = this.type === 'buy' ? 'Spend' : 'Get'
+      return `${type} ${this.quote}`
     }
   }
 }
@@ -116,7 +134,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    // width: 22.1875rem;
+    width: 30rem;
     background-color: config('colors.card-background');
   }
   .confirm-order-title {
@@ -143,9 +161,7 @@ export default {
 
   .confirm-order-price-section {
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    width: 80%;
     margin-top: 0.9375rem;
   }
   .confirm-order-price-section-item {
