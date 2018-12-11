@@ -139,11 +139,11 @@ export default {
       return `${type} ${this.quote}`
     },
     buttonTitle() {
-      return `${getFloatCurrency(this.baseAmount)} ${this.base}`
+      return `${getFloatCurrency(this.baseAmount || 0)} ${this.base}`
     },
     maxBaseTitle() {
       if (this.type === 'sell') return getFloatCurrency(this.maxBase)
-      return getFloatCurrency(this.price ? this.maxQuote / this.price : 0 )
+      return getFloatCurrency(this.price ? this.maxQuote / this.price : 0)
     },
     maxQuoteTitle() {
       if (this.type === 'buy') return getFloatCurrency(this.maxQuote)
@@ -170,7 +170,7 @@ export default {
     }),
     setMaxSpend(percent = 100) {
       const max = this.type === 'buy' ? this.maxQuote : this.maxBase
-      const amount = max / 100 * percent
+      const amount = percent === 100 ? max : max / 100 * percent
       if (this.type === 'buy') {
         this.setQuoteAmount(amount)
         if (this.price) this.setBaseAmount(amount / (this.price || 0))

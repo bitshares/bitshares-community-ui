@@ -29,8 +29,8 @@ const getDefaultState = () => ({
   inProgress: false,
   showConfirm: false,
 
-  baseAmount: 0,
-  quoteAmount: 0
+  baseAmount: null,
+  quoteAmount: null
 })
 
 const getters = {
