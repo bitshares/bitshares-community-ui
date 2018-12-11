@@ -97,7 +97,7 @@ export default {
       isLocked: 'acc/isLocked'
     }),
     phrase() {
-      return 'cat dog pet hen dossy piggy animal jazz stirke kfffa'.split(' ')// this.backupPhrase.split(' ')
+      return this.backupPhrase.split(' ')
     }
   },
   methods: {
