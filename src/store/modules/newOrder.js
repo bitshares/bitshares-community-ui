@@ -127,28 +127,28 @@ const actions = {
   setBaseAmount({ state, commit }, value) {
     commit(types.SET_BASE_AMOUNT, value)
     if (state.price && value) {
-      commit(types.SET_QUOTE_AMOUNT, value * state.price)
+      commit(types.SET_QUOTE_AMOUNT, value / state.price)
     }
     if (state.quoteAmount && value && !state.price) {
-      commit(types.SET_PRICE, state.quoteAmount / value)
+      commit(types.SET_PRICE, value / state.quoteAmount)
     }
   },
   setQuoteAmount({ state, commit }, value) {
     commit(types.SET_QUOTE_AMOUNT, value)
     if (state.price && value) {
-      commit(types.SET_BASE_AMOUNT, value / state.price)
+      commit(types.SET_BASE_AMOUNT, value * state.price)
     }
-    if (state.quoteAmount && value && !state.price) {
-      commit(types.SET_PRICE, state.quoteAmount / value)
+    if (state.baseAmount && value && !state.price) {
+      commit(types.SET_PRICE, state.baseAmount / value)
     }
   },
   setPrice({ commit, state }, value) {
     commit(types.SET_PRICE, value)
 
     if (state.type === 'buy') {
-      if (state.quoteAmount) commit(types.SET_BASE_AMOUNT, state.quoteAmount / value)
+      if (state.quoteAmount) commit(types.SET_BASE_AMOUNT, state.quoteAmount * value)
     } else {
-      if (state.baseAmount) commit(types.SET_QUOTE_AMOUNT, state.baseAmount * value)
+      if (state.baseAmount) commit(types.SET_QUOTE_AMOUNT, state.baseAmount / value)
     }
   },
   setOrderData({ commit, state }, { type, price, sum }) {

@@ -143,11 +143,11 @@ export default {
     },
     maxBaseTitle() {
       if (this.type === 'sell') return getFloatCurrency(this.maxBase)
-      return getFloatCurrency(this.price ? this.maxQuote / this.price : 0)
+      return getFloatCurrency(this.maxQuote * (this.price || 0))
     },
     maxQuoteTitle() {
       if (this.type === 'buy') return getFloatCurrency(this.maxQuote)
-      return getFloatCurrency(this.maxBase * (this.price || 0))
+      return this.price ? getFloatCurrency(this.maxBase / this.price) : 0
     },
     invalidOrder() {
       return !this.baseAmount || !this.quoteAmount || this.spendExceeded
@@ -171,12 +171,13 @@ export default {
     setMaxSpend(percent = 100) {
       const max = this.type === 'buy' ? this.maxQuote : this.maxBase
       const amount = percent === 100 ? max : max / 100 * percent
+      const price = this.price || 0
       if (this.type === 'buy') {
         this.setQuoteAmount(amount)
-        if (this.price) this.setBaseAmount(amount / (this.price || 0))
+        this.setBaseAmount(amount * price)
       } else {
         this.setBaseAmount(amount)
-        this.setQuoteAmount(amount * (this.price || 0))
+        if (price) this.setQuoteAmount(amount / price)
       }
     }
   }
