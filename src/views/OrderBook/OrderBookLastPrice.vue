@@ -64,9 +64,9 @@ export default {
 
     &--row {
       width: 100%;
-      top: 42px;
+      top: 2.625rem;
       left: 0;
-      padding: 2px 0;
+      padding: 0.125rem 0;
       z-index: 100;
     }
   }
@@ -84,7 +84,7 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    margin-top: 7px;
+    margin-top: 0.4375rem;
     text-align: center;
     color: config('colors.primary');
     font-size: config('textSizes.sm');
