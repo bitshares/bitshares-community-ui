@@ -14,8 +14,8 @@
       class="order-book__price-row"
     >
       <div class="order-book__price-row--left">100</div>
-      <div class="order-book__price-row--center">1 250</div>
-      <div class="order-book__price-row--right">100</div>
+      <div class="order-book__price-row--center">{{ price }}</div>
+      <div class="order-book__price-row--right">{{ data }}</div>
     </div>
   </div>
 </template>
@@ -35,8 +35,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      price: 'orderBook/getLastPrice'
-    })
+      price: 'orderBook/getLastPrice',
+      lastOrder: 'orderBook/getLastOrder'
+    }),
+
+    data() {
+      console.log(this.lastOrder)
+      return this.lastOrder
+    }
   }
 }
 </script>

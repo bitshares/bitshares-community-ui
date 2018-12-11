@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import OrderBookTable from './OrderBookTable'
 import OrderBookLastPrice from './OrderBookLastPrice'
 import LoadingContainer from '@/components/LoadingContainer'
@@ -61,6 +61,12 @@ export default {
     quoteAssetSymbol() {
       return removePrefix((this.quoteAsset && this.quoteAsset.symbol) || '')
     }
+  },
+  mounted() {
+    this.initialize({ baseSymbol: this.baseAssetSymbol, quoteSymbol: this.quoteAssetSymbol })
+  },
+  methods: {
+    ...mapActions('orderBook', ['initialize'])
   }
 }
 </script>
