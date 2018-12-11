@@ -13,14 +13,15 @@
       v-if="type === 'row'"
       class="order-book__price-row"
     >
-      <div class="order-book__price-row--left">100</div>
+      <div class="order-book__price-row--left">{{ sum }}</div>
       <div class="order-book__price-row--center">{{ price }}</div>
-      <div class="order-book__price-row--right">{{ data }}</div>
+      <div class="order-book__price-row--right">{{ sum }}</div>
     </div>
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import { getFloatCurrency } from '@/helpers/utils'
 
 export default {
   props: {
@@ -38,10 +39,11 @@ export default {
       price: 'orderBook/getLastPrice',
       lastOrder: 'orderBook/getLastOrder'
     }),
-
-    data() {
-      console.log(this.lastOrder)
-      return this.lastOrder
+    price() {
+      return this.lastOrder && getFloatCurrency(this.lastOrder.price)
+    },
+    sum() {
+      return this.lastOrder && getFloatCurrency(this.lastOrder.sum)
     }
   }
 }
