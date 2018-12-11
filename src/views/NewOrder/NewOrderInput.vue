@@ -4,15 +4,22 @@
   >
     <div class="new-order-input-title">{{ title }}</div>
     <SimpleInput
-      v-model="value"
+      :value="value"
       :value-mode="true"
       :title="title"
       :placeholder="placeholder"
       :centered="true"
       :disabled="disabled"
       type="number"
+      @input="handleChange"
     />
-    <div class="new-order-input-note">{{ note }}</div>
+    <div
+      :class="{'new-order-input-note--error': error }"
+      class="new-order-input-note"
+      @click="$emit('note-click')"
+    >
+      {{ note }}
+    </div>
   </div>
 </template>
 <script>
@@ -28,7 +35,7 @@ export default {
       default: 'Spend'
     },
     placeholder: {
-      type: String,
+      type: [String, Number],
       default: 'BTC'
     },
     note: {
@@ -38,11 +45,19 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    value: {
+      type: Number,
+      default: null
+    },
+    error: {
+      type: Boolean,
+      default: false
     }
   },
-  data() {
-    return {
-      value: ''
+  methods: {
+    handleChange(value) {
+      this.$emit('change', value)
     }
   }
 }
@@ -50,18 +65,22 @@ export default {
 <style lang="scss">
   .new-order-input {
     text-align: center;
-    width: 6.475rem;
+    width: 10rem;
     font-size: config('textSizes.xl');
   }
   .new-order-input-note {
     color: config('colors.primary');
     font-size: 0.6875rem;
     letter-spacing: normal;
+    cursor: pointer;
+    &--error {
+      color: config('colors.text-error');
+    }
   }
 
   .new-order-input-title {
     color: config('colors.inactive');
     font-size: 0.6875rem;
-    letter-spacing: normal;
+    // letter-spacing: normal;
   }
 </style>

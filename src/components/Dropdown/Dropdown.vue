@@ -94,7 +94,7 @@ export default {
   right: 0;
   top: 100%;
   z-index: 3;
-  margin-top: 0.75rem;
+  margin-top: 1.75rem;
   background-color: config('colors.mobile-footer');
   transition: height 0.15s, opacity 0.15s;
   overflow: hidden;
@@ -111,7 +111,7 @@ export default {
   position: absolute;
   right: 0.1rem;
   top: 100%;
-  margin-top: 0.2rem;
+  margin-top: 1.2rem;
 }
 
 .dropdown-item {

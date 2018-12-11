@@ -1,6 +1,7 @@
 <template>
   <LoadingContainer
     :loading="!historyLoaded"
+    :class="{'w-220': expanded }"
     class="portfolio-container h-full">
 
     <div class="portfolio-header">

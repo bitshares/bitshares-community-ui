@@ -10,6 +10,7 @@
           :anchor="true"
           title="Buying"
           align="left"
+          @item-clicked="handleOrderClick('buy', $event)"
         />
         <OrderBookTable
           :items="orderBook.selling"
@@ -17,6 +18,7 @@
           :max-sum="maxSum"
           title="Selling"
           align="right"
+          @item-clicked="handleOrderClick('sell', $event)"
         />
       </div>
     </LoadingContainer>
@@ -66,7 +68,13 @@ export default {
     this.initialize({ baseSymbol: this.baseAssetSymbol, quoteSymbol: this.quoteAssetSymbol })
   },
   methods: {
-    ...mapActions('orderBook', ['initialize'])
+    ...mapActions({
+      initialize: 'orderBook/initialize',
+      setNewOrderData: 'newOrder/setOrderData'
+    }),
+    handleOrderClick(type, { price, sum }) {
+      this.setNewOrderData({ type, price, sum })
+    }
   }
 }
 </script>

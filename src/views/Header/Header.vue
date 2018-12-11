@@ -9,29 +9,25 @@
         height="27"/>
     </div>
 
-    <div class="lg:w-1/3 depositWithdraw">
-      <div class="lg:w-1/4" />
-
+    <div class="lg:w-1/3 deposit-withdraw">
       <Button
         text="Deposit"
-        class="header-btn"
         type="secondary"
         size="small"
+        @click="showDepositModal"
       />
       <Button
         text="Withdraw"
-        class="ml-5 header-btn"
+        class="ml-5"
         type="secondary"
         size="small"
       />
     </div>
 
-    <div class="lg:w-1/3 userMenuItems">
-      <div class="lg:w-1/3" />
-      <UserInfo class="lg:w-1/2"/>
+    <div class="lg:w-1/3 user-menu-items">
+      <UserInfo/>
       <Dropdown
         :items="menuItems"
-        class="lg:w-1/6 dropdown"
         @clicked="handleDropdownClick"
       />
     </div>
@@ -57,10 +53,6 @@ export default {
         title: 'backup',
         event: 'backup',
         disabled: !this.backupEnabled
-      },
-      {
-        title: 'deposit',
-        event: 'deposit'
       },
       {
         title: 'settings',
@@ -93,9 +85,6 @@ export default {
         case 'logout':
           this.handleLogout()
           return
-        case 'deposit':
-          this.showDepositModal()
-          return
         case 'backup':
           this.showBackupModal(true)
       }
@@ -106,13 +95,13 @@ export default {
 
 <style lang='scss'>
 .header {
-  @apply py-3;
   justify-content: space-between;
   align-items: center;
-  height: 3.81rem;
-  background-color: transparent;
-  margin: .25rem 0;
+  height: 3.75rem;
+  margin: 0 0 .625rem;
   width: 100%;
+  flex-shrink: 0;
+  z-index: 3;
 
   & > * {
     z-index: 1;
@@ -125,17 +114,17 @@ export default {
   left: 0;
   background: black;
   opacity: .2;
-  height: 3.4375rem;
+  height: 3.75rem;
   z-index: 0;
 }
 
-.dropdown {
-  text-align: right;
+.deposit-withdraw {
+  display: flex;
+  justify-content: center;
 }
-
-.userMenuItems, .depositWithdraw {
-  & > * {
-    display: inline-block;
-  }
+.user-menu-items {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 </style>

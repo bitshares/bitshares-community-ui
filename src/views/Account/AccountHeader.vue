@@ -40,7 +40,7 @@ export default {
   align-items: baseline;
   flex-direction: row;
   color: config('colors.text-primary');
-  margin: 1.5rem 0;
+  // margin: 1.5rem 0;
   &--large {
     .text-weak {
       font-size: config('textSizes.lg');

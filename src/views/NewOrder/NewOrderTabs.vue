@@ -13,7 +13,7 @@
     >
       <NewOrderTabsTitle
         :title="getTitle('buy')"
-        :sub-title="buyPrice"
+        :sub-title="formattedBuyPrice"
         :in-active="type === 'sell'"
         type="buy"
       />
@@ -25,7 +25,7 @@
     >
       <NewOrderTabsTitle
         :title="getTitle('sell')"
-        :sub-title="sellPrice"
+        :sub-title="formattedSellPrice"
         :in-active="type === 'buy'"
         type="sell"
       />
@@ -34,6 +34,7 @@
 </template>
 <script>
 import NewOrderTabsTitle from './NewOrderTabsTitle'
+import { getFloatCurrency } from '@/helpers/utils'
 
 export default {
   components: {
@@ -59,6 +60,14 @@ export default {
     sellPrice: {
       type: Number,
       default: 0
+    }
+  },
+  computed: {
+    formattedBuyPrice() {
+      return this.buyPrice ? getFloatCurrency(this.buyPrice) : ''
+    },
+    formattedSellPrice() {
+      return this.sellPrice ? getFloatCurrency(this.sellPrice) : ''
     }
   },
   methods: {

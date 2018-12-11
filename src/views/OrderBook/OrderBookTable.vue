@@ -30,6 +30,7 @@
           :type="tableType"
           :max-sum="maxSum"
           :is-last="sortedItems.length - 1 === index"
+          @click.native="$emit('item-clicked', item)"
         />
       </template>
     </SortableTable>
