@@ -64,12 +64,8 @@ export default {
       return removePrefix((this.quoteAsset && this.quoteAsset.symbol) || '')
     }
   },
-  mounted() {
-    this.initialize({ baseSymbol: this.baseAssetSymbol, quoteSymbol: this.quoteAssetSymbol })
-  },
   methods: {
     ...mapActions({
-      initialize: 'orderBook/initialize',
       setNewOrderData: 'newOrder/setOrderData'
     }),
     handleOrderClick(type, { price, sum }) {
