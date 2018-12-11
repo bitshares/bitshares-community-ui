@@ -1,5 +1,5 @@
 <template>
-  <div class="backup-step">
+  <div class="backup-step h-full sm:w-120">
     <div class="backup-step-title">Verify backup</div>
     <div class="backup-step-subtitle">Please tap each word in the correct order</div>
     <div class="backup-step-content">
@@ -39,7 +39,7 @@
           :disabled="isIncorrectKey"
           text="Confirm"
           width="full"
-          @click="!isIncorrectKey && $emit('change', 5)"
+          @click="!isIncorrectKey && $emit('change', stepConfig['BACKUP_FINISH'])"
         />
       </div>
     </div>
@@ -61,6 +61,10 @@ export default {
       default() {
         return []
       }
+    },
+    stepConfig: {
+      type: Object,
+      required: true
     }
   },
   data() {
@@ -102,10 +106,12 @@ export default {
 <style lang="scss" scoped>
   .backup-step {
     user-select: none;
-    width: 100%;
-    position: relative;
+    display: flex;
+    flex-direction: column;
     text-align: center;
     font-family: config('fonts.gotham');
+    padding: 0 1.25rem 1.25rem;
+    min-height: 30.4375rem;
 
     .backup-step-title {
       margin-top: 0.9375rem;
@@ -116,15 +122,14 @@ export default {
 
     .backup-step-subtitle {
       margin: 0.9375rem auto 3rem;
-      width: 23.875rem;
       font-weight: config('fontWeights.semibold');
       font-size: config('textSizes.lg');
       text-align: center;
     }
 
     .backup-step-content {
-      margin: 0 auto;
-      width: 21.875rem;
+      margin: auto;
+      padding: 0 1.2rem;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
@@ -137,40 +142,19 @@ export default {
     }
 
     .backup-step-footer {
-      position: absolute;
-      width: 100%;
-      bottom: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      margin-top: auto;
     }
 
     .backup-step-button {
       box-sizing: border-box;
       display: inline-block;
       margin-top: 1rem;
-      width: 13rem;
 
-      &._clear {
-        margin-right: 0.3rem;
-      }
-      &._confirm {
-        margin-left: 1rem;
-      }
     }
-
     ._verify {
       margin: .5rem auto;
-    }
-  }
-  @media (max-width: 800px) {
-    .backup-step {
-      .backup-step-button {
-        width: 40%;
-      }
-      .backup-step-subtitle {
-        width: 90%;
-      }
-      .backup-step-footer {
-        bottom: .3rem;
-      }
     }
   }
 </style>

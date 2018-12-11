@@ -2,7 +2,6 @@
   <div class="dashboard">
     <Modal
       v-if="backupFlag"
-      :width-auto="true"
       @close="toggleModal"
     >
       <Backup/>
@@ -108,7 +107,6 @@
 
       </div>
     </div>
-
     <!-- TODO: use some vue plugin to disable when not on mobile -->
     <Mobile/>
   </div>
