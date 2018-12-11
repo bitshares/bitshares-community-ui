@@ -9,7 +9,8 @@
       'btn--round': type === 'round',
       'btn--secondary': type === 'secondary',
       'btn--buy': type === 'buy',
-      'btn--sell': type === 'sell'
+      'btn--sell': type === 'sell',
+      'btn--faded': type === 'faded',
     }"
     :disabled="disabled"
     class="btn btn-blue"
@@ -114,6 +115,9 @@ export default {
 }
 .btn--small {
   @apply py-1 pr-4 cursor-pointer text-xs;
+  padding: 0 !important;
+  height: 2rem;
+  width: 6.785rem;
 }
 .btn--big {
   @apply py-2 px-6 cursor-pointer text-2xl;
@@ -131,8 +135,8 @@ export default {
 .btn--secondary {
   background-color: #000;
   color: config('colors.primary');
-  padding-top: 14px;
-  padding-bottom: 14px;
+  padding-top: 1px;
+  padding-bottom: 1px;
   border: solid;
   border-width: 1px;
   border-color:config('colors.primary');
@@ -152,6 +156,14 @@ export default {
   &:hover {
     background-color: config('colors.sell');
   }
+}
+.btn--faded {
+  background-color: config('colors.card-background');
+  font-size: config('textSizes.lg');
+  &:hover {
+    background-color: config('colors.card-background');
+  }
+  color: config('colors.inactive');
 }
 .spinner {
   margin-right: 10px;

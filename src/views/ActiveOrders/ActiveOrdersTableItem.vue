@@ -16,7 +16,9 @@
         <TwoLineItem
           :top="formattedPayAsset"
           :bottom="formattedReceiveAsset"
-        />
+        >
+          <span slot="bottom">/{{ formattedReceiveAsset }}</span>
+        </TwoLineItem>
       </div>
       <div class="table-item">
         <TwoLineItem
@@ -47,9 +49,10 @@
       <div class="table-item">
         <TwoLineItem
           :top="formattedPayAsset"
-          :bottom="formattedReceiveAsset"
           :expanded="expanded"
-        />
+        >
+          <span slot="bottom">/{{ formattedReceiveAsset }}</span>
+        </TwoLineItem>
       </div>
       <div class="table-item">
         <TwoLineItem
@@ -61,16 +64,18 @@
       <div class="table-item">
         <TwoLineItem
           :top="get"
-          :bottom="formattedReceiveAsset"
           :expanded="expanded"
-        />
+        >
+          <span slot="bottom">/{{ formattedReceiveAsset }}</span>
+        </TwoLineItem>
       </div>
       <div class="table-item _relative">
         <TwoLineItem
           :top="spend"
-          :bottom="formattedPayAsset"
           :expanded="expanded"
-        />
+        >
+          <span slot="bottom">/{{ formattedPayAsset }}</span>
+        </TwoLineItem>
       </div>
       <div
         v-if="expanded"
@@ -95,7 +100,7 @@
     </div>
     <div
       class="table-item-remove"
-      @click="removeActiveOrder(index)"
+      @click="$emit('remove')"
     >
       <svgicon
         :width="removeSize"
@@ -107,7 +112,6 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
 import { format } from 'date-fns'
 import '@icons/cancel'
 import { getFloatCurrency, removePrefix } from '@/helpers/utils'
@@ -133,9 +137,6 @@ export default {
       default: 0
     }
   },
-  data() {
-    return {}
-  },
   computed: {
     formattedPayAsset() {
       return removePrefix(this.item.payAssetSymbol)
@@ -153,7 +154,7 @@ export default {
       return getFloatCurrency(this.item.price)
     },
     avg() {
-      return getFloatCurrency(this.item.avg)
+      return ''
     },
     vol() {
       return getFloatCurrency(this.item.vol)
@@ -171,11 +172,6 @@ export default {
     removeSize() {
       return this.expanded ? '14' : '10'
     }
-  },
-  methods: {
-    ...mapActions({
-      removeActiveOrder: 'activeOrders/removeActiveOrder'
-    })
   }
 }
 </script>
@@ -185,7 +181,6 @@ export default {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     margin-left: -0.15rem;
-    min-height: 3.9375rem;
     .table-item--dates {
       position: relative;
     }
@@ -204,6 +199,8 @@ export default {
     }
   }
   .active-orders-table-item {
+    min-height: 3.125rem;
+
     &.active-orders-table-item--expanded {
       margin: 0.1250rem 0 0.1250rem 0.1250rem;
       padding-right: 2.8rem;
@@ -236,7 +233,7 @@ export default {
     .table-item-remove {
       position: absolute;
       right: 0.5625rem;
-      top: 1.375rem;
+      top: 1rem;
       cursor: pointer;
     }
     &:hover {
@@ -252,7 +249,7 @@ export default {
     }
   }
   .active-orders-table-row .table-item {
-    padding-top: 0.6rem;
+    padding-top: .55rem;
     overflow: hidden;
     word-wrap: break-word;
     font-size: config('textSizes.sm');
@@ -272,8 +269,14 @@ export default {
       .table-item-remove {
         position: absolute;
         right: 0.9375rem;
-        top: 1.375rem;
+        top: 1rem;
         cursor: pointer;
+      }
+      .table-item {
+        padding-top: .4rem;
+      }
+      .table-item--dates {
+        margin-top: .4rem;
       }
     }
   }

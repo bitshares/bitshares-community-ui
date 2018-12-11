@@ -71,12 +71,11 @@ export default {
       box-sizing: border-box;
     }
   }
-
-  @media (max-width: 800px) {
-    .backup-step {
-      .backup-step-button {
-        width: 80%;
-      }
-    }
+  .backup-step-unlock {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
   }
 </style>

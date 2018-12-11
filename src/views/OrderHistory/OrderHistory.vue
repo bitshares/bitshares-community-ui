@@ -1,5 +1,8 @@
 <template>
-  <div class="order-history pt-3 lg:pt-0">
+  <div
+    :class="{ 'w-220': expandMode }"
+    class="order-history pt-3 lg:pt-0"
+  >
     <LoadingContainer :loading="isFetching">
       <OrderHistoryTable
         :table-headers="expandMode ? tableHeaders : tableHeadersMini"
@@ -50,6 +53,9 @@ export default {
       isFetching: 'operations/isFetching'
     }),
     filteredItems() {
+      if (!this.items) {
+        return []
+      }
       const search = this.searchStr.toLowerCase()
       return this.items.filter(item => {
         return item.payAssetSymbol.toLowerCase().includes(search) ||

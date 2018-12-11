@@ -141,13 +141,6 @@ export default {
     width: 30rem;
     height: 30.4375rem;
     box-shadow: 0px 0px 13px 1px black;
-    .backup-close {
-      position: absolute;
-      right: 0.625rem;
-      top: 0.625rem;
-      z-index: 11;
-      cursor: pointer;
-    }
 
     .backup-paginator {
       position: absolute;
@@ -165,7 +158,6 @@ export default {
 
   @media (max-width: 800px) {
     .backup {
-      border: none;
       width: auto;
     }
   }

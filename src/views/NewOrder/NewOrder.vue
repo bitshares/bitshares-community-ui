@@ -18,16 +18,17 @@
         title="Spend"
         placeholder="BTC"
         note="max 0.04"
-        aside="left"
       />
       <NewOrderInput
         title="Get"
         placeholder="USD"
         note="max 437"
-        aside="right"
       />
     </div>
-    <div class="new-order-button">
+    <div
+      class="new-order-button"
+      @click="showConfirmOrder(true)"
+    >
       <Btn
         :type="type"
         :text="buttonTitle"
@@ -36,6 +37,43 @@
         <span class="operation-title">{{ type }}</span>
       </Btn>
     </div>
+    <!-- CONFIRM ORDER -->
+
+    <ConfirmModal
+      :show="confirmVisible"
+      title="confirm order"
+      @close="showConfirmOrder"
+    >
+      <ConfirmOrder
+        :base="base"
+        :quote="quote"
+        :type="type"
+        :price="3874"
+        :get="1932"
+        :spend="0.5"
+        :trading-fee="15.82"
+        :exchange-fee="10.23"
+        @close="showConfirmOrder"
+      />
+    </ConfirmModal>
+
+    <!-- <Modal
+      v-if="confirmVisible"
+      :width-auto="true"
+      @close="showConfirmOrder"
+    >
+      <ConfirmOrder
+        :base="base"
+        :quote="quote"
+        :type="type"
+        :price="3874"
+        :get="1932"
+        :spend="0.5"
+        :trading-fee="15.82"
+        :exchange-fee="10.23"
+        @close="showConfirmOrder"
+      />
+    </Modal> -->
   </div>
 </template>
 <script>
@@ -44,13 +82,24 @@ import NewOrderTabs from './NewOrderTabs'
 import NewOrderInput from './NewOrderInput'
 import Btn from '@/components/Button/Button'
 import Tabs from '@/components/Tabs/Tabs'
+import ConfirmOrder from '@/views/ConfirmOrder/ConfirmOrder'
+import Modal from '@/components/Modal'
+import ConfirmModal from '@/views/ConfirmModal/ConfirmModal.vue'
 
 export default {
   components: {
     NewOrderTabs,
     NewOrderInput,
     Btn,
-    Tabs
+    Tabs,
+    ConfirmOrder,
+    Modal,
+    ConfirmModal
+  },
+  data() {
+    return {
+      confirmVisible: false
+    }
   },
   computed: {
     ...mapGetters({
@@ -74,7 +123,10 @@ export default {
       setActiveIndication: 'newOrder/setActiveIndication',
       setType: 'newOrder/setType',
       setActivePercent: 'newOrder/setActivePercent'
-    })
+    }),
+    showConfirmOrder(value) {
+      this.confirmVisible = value
+    }
   }
 }
 </script>
