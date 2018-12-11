@@ -123,7 +123,7 @@ export default {
     quoteInputTitle() {
       const type = this.type === 'buy' ? 'Spend' : 'Get'
       return `${type} ${this.quote}`
-    },
+    }
   }
 }
 </script>
