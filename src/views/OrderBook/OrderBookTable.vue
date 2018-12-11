@@ -7,7 +7,6 @@
     class="order-book-table"
   >
     <div class="order-book__column-title">{{ title }}</div>
-
     <SortableTable
       :items="items"
       :headers="tableHeaders"
@@ -15,7 +14,13 @@
       :header-left-padding="tableType === 'buy' ? 1 : 0.6"
       :header-right-padding="tableType === 'sell' ? 1 : 0.6"
       :default-sort="defaultSort"
+      :empty-area="true"
     >
+      <OrderBookLastPrice
+        v-if="anchor"
+        slot="row"
+        type="row"
+      />
       <template slot-scope="{ sortedItems }">
         <OrderBookTableItem
           v-for="(item, index) in sortedItems"
@@ -32,11 +37,13 @@
 </template>
 <script>
 import SortableTable from '@/components/SortableTable'
+import OrderBookLastPrice from './OrderBookLastPrice'
 import OrderBookTableItem from './OrderBookTableItem'
 
 export default {
   components: {
     SortableTable,
+    OrderBookLastPrice,
     OrderBookTableItem
   },
   props: {
@@ -59,6 +66,10 @@ export default {
     tableHeaders: {
       type: Array,
       required: true
+    },
+    anchor: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

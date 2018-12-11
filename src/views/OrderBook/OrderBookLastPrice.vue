@@ -1,7 +1,22 @@
 <template>
-  <div class="order-book__price">
-    <div class="order-book__priceTitle">Price, {{ quoteSymbol }}</div>
-    <!-- <div class="order-book__priceValue">{{ price }}</div> -->
+  <div
+    :class="{'order-book__price--row': type === 'row'}"
+    class="order-book__price"
+  >
+    <div
+      v-if="type === 'title'"
+      class="order-book__priceTitle"
+    >
+      Price, {{ quoteSymbol }}
+    </div>
+    <div
+      v-if="type === 'row'"
+      class="order-book__price-row"
+    >
+      <div class="order-book__price-row--left">100</div>
+      <div class="order-book__price-row--center">1 250</div>
+      <div class="order-book__price-row--right">100</div>
+    </div>
   </div>
 </template>
 <script>
@@ -11,7 +26,11 @@ export default {
   props: {
     quoteSymbol: {
       type: String,
-      required: true
+      default: ''
+    },
+    type: {
+      type: String,
+      default: 'title'
     }
   },
   computed: {
@@ -34,6 +53,14 @@ export default {
     z-index: 2;
     top: 1.73rem;
     height: 0.7rem;
+
+    &--row {
+      width: 100%;
+      top: 42px;
+      left: 0;
+      padding: 2px 0;
+      z-index: 100;
+    }
   }
   .order-book__priceTitle {
     color: config('colors.inactive');
@@ -43,5 +70,27 @@ export default {
   .order-book__priceValue {
     font-weight: config('fontWeights.bold');
     color: config('colors.white');
+  }
+  .order-book__price-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 7px;
+    text-align: center;
+    color: config('colors.primary');
+    font-size: config('textSizes.sm');
+
+    &--left {
+      margin-left: 1rem;
+    }
+    &--right {
+      margin-right: 1rem;
+    }
+    &--center {
+      font-size: config('textSizes.base');
+      letter-spacing: -0.0425px;
+      font-weight: config('fontWeights.extrabold');
+    }
   }
 </style>

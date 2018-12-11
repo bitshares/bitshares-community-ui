@@ -1,6 +1,5 @@
 <template>
   <div class="sortable-table">
-
     <div
       :style="headerStyle"
       class="sortable-table__header"
@@ -17,7 +16,11 @@
         @change="toggleSort"
       />
     </div>
-    <ScrollingContainer :shadower-height="shadowerHeight || 15">
+    <slot name="row"/>
+    <ScrollingContainer
+      :empty-area="emptyArea"
+      :shadower-height="shadowerHeight || 15"
+    >
       <div class="sortable-table__body">
         <slot :sorted-items="sortedItems"/>
       </div>
@@ -64,6 +67,10 @@ export default {
       default: 0
     },
     large: {
+      type: Boolean,
+      default: false
+    },
+    emptyArea: {
       type: Boolean,
       default: false
     }
