@@ -9,6 +9,7 @@
           :max-sum="maxSum"
           title="Buying"
           align="left"
+          @item-clicked="handleOrderClick('buy', $event)"
         />
         <OrderBookTable
           :items="orderBook.selling"
@@ -16,13 +17,14 @@
           :max-sum="maxSum"
           title="Selling"
           align="right"
+          @item-clicked="handleOrderClick('sell', $event)"
         />
       </div>
     </LoadingContainer>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import OrderBookTable from './OrderBookTable'
 import OrderBookLastPrice from './OrderBookLastPrice'
 import LoadingContainer from '@/components/LoadingContainer'
@@ -59,6 +61,14 @@ export default {
     },
     quoteAssetSymbol() {
       return removePrefix((this.quoteAsset && this.quoteAsset.symbol) || '')
+    }
+  },
+  methods: {
+    ...mapActions({
+      setNewOrderData: 'newOrder/setOrderData'
+    }),
+    handleOrderClick(type, { price, sum }) {
+      this.setNewOrderData({ type, price, sum })
     }
   }
 }

@@ -55,12 +55,17 @@ export default {
   methods: {
     ...mapActions({
       toggleFavourite: 'marketsMonitor/toggleFavourite',
-      activateOrderBook: 'orderBook/initialize'
+      activateOrderBook: 'orderBook/initialize',
+      setNewOrderMarket: 'newOrder/setMarket'
     }),
     handleClick() {
       this.activateOrderBook({
         baseSymbol: this.item.base,
         quoteSymbol: this.item.ticker
+      })
+      this.setNewOrderMarket({
+        base: this.item.base,
+        quote: this.item.ticker
       })
     },
     getChangeValue({ price }) {
