@@ -7,8 +7,8 @@ const types = {
   SET_ACTIVE_PERCENT: 'SET_ACTIVE_PERCENT',
   SET_ACTIVE_INDICATION: 'SET_ACTIVE_INDICATION',
   SET_MARKET: 'SET_MARKET',
-  SET_GET_AMOUNT: 'SET_GET_AMOUNT',
-  SET_SPEND_AMOUNT: 'SET_SPEND_AMOUNT',
+  SET_BASE_AMOUNT: 'SET_BASE_AMOUNT',
+  SET_QUOTE_AMOUNT: 'SET_QUOTE_AMOUNT',
   SET_PRICE: 'SET_PRICE',
   RESET: 'RESET',
   RESET_AMOUNTS: 'RESET_AMOUNTS',
@@ -21,15 +21,16 @@ const types = {
 const getDefaultState = () => ({
   base: '',
   quote: '',
-  getAmount: null,
-  spendAmount: null,
   price: null,
   type: 'buy',
   activeIndication: 'MARKET',
   activePercent: 0,
   percentItems: [10, 25, 50, 75],
   inProgress: false,
-  showConfirm: false
+  showConfirm: false,
+
+  baseAmount: 0,
+  quoteAmount: 0
 })
 
 const getters = {
@@ -37,11 +38,12 @@ const getters = {
   getQuote: state => removePrefix(state.quote),
   getMarketPrices: (state, getters, rootState, rootGetters) => rootGetters['orderBook/getTopOrders'],
   getType: state => state.type,
+  isBuyOrder: state => state.type === 'buy',
+  getBaseAmount: state => state.baseAmount,
+  getQuoteAmount: state => state.quoteAmount,
   getPercentItems: state => state.percentItems,
   getActivePercent: state => state.activePercent,
   getActiveIndication: state => state.activeIndication,
-  getSpendAmount: state => state.spendAmount,
-  getGetAmount: state => state.getAmount,
   getPrice: state => state.price,
   getFiatPrice: (state, getters, rootState, rootGetters) => {
 
@@ -71,11 +73,11 @@ const mutations = {
     state.base = base
     state.quote = quote
   },
-  [types.SET_GET_AMOUNT](state, value) {
-    state.getAmount = value
+  [types.SET_BASE_AMOUNT](state, value) {
+    state.baseAmount = value
   },
-  [types.SET_SPEND_AMOUNT](state, value) {
-    state.spendAmount = value
+  [types.SET_QUOTE_AMOUNT](state, value) {
+    state.quoteAmount = value
   },
   [types.SET_PRICE](state, value) {
     state.price = value
@@ -84,8 +86,8 @@ const mutations = {
     Object.assign(state, getDefaultState())
   },
   [types.RESET_AMOUNTS](state) {
-    state.spendAmount = null
-    state.getAmount = null
+    state.baseAmount = null
+    state.quoteAmount = null
     state.price = null
   },
   [types.PLACE_ORDER_REQUEST](state) {
@@ -104,7 +106,6 @@ const mutations = {
 
 const actions = {
   setType({ commit }, tab) {
-    commit(types.RESET_AMOUNTS)
     commit(types.SET_TYPE, tab)
   },
   setMarket({ commit }, { base, quote }) {
@@ -123,46 +124,43 @@ const actions = {
   hideConfirm({ commit }) {
     commit(types.HIDE_CONFIRM)
   },
-  setGetAmount({ commit, state }, value) {
-    commit(types.SET_GET_AMOUNT, value)
+  setBaseAmount({ state, commit }, value) {
+    commit(types.SET_BASE_AMOUNT, value)
     if (state.price && value) {
-      commit(types.SET_SPEND_AMOUNT, value * state.price)
+      commit(types.SET_QUOTE_AMOUNT, value * state.price)
     }
-    if (state.spendAmount && value && !state.price) {
-      commit(types.SET_PRICE, value / state.spendAmount)
+    if (state.quoteAmount && value && !state.price) {
+      commit(types.SET_PRICE, state.quoteAmount / value)
     }
   },
-  setSpendAmount({ commit, state }, value) {
-    commit(types.SET_SPEND_AMOUNT, value)
+  setQuoteAmount({ state, commit }, value) {
+    commit(types.SET_QUOTE_AMOUNT, value)
     if (state.price && value) {
-      commit(types.SET_GET_AMOUNT, value / state.price)
+      commit(types.SET_BASE_AMOUNT, value / state.price)
     }
-    if (state.getAmount && value && !state.price) {
-      commit(types.SET_PRICE, state.getAmount / value)
+    if (state.quoteAmount && value && !state.price) {
+      commit(types.SET_PRICE, state.quoteAmount / value)
     }
-    // if (!value) commit(types.SET_PRICE, null)
   },
   setPrice({ commit, state }, value) {
     commit(types.SET_PRICE, value)
-    // check if buy/sell
-    if (state.spendAmount && value) {
-      commit(types.SET_GET_AMOUNT, value * state.spendAmount)
+
+    if (state.type === 'buy') {
+      if (state.quoteAmount) commit(types.SET_BASE_AMOUNT, state.quoteAmount / value)
+    } else {
+      if (state.baseAmount) commit(types.SET_QUOTE_AMOUNT, state.baseAmount * value)
     }
   },
   setOrderData({ commit, state }, { type, price, sum }) {
-    console.log(type, price, sum)
     actions.setPrice({ commit, state }, price)
-    if (type === 'buy') {
-      if (!state.getAmount) actions.setGetAmount({ commit, state }, sum)
-    } else {
-      if (!state.spendAmount) actions.setSpendAmount({ commit, state }, sum)
-    }
+    if (!state.baseAmount) actions.setBaseAmount({ commit, state }, sum)
   },
   async dispatchOrder({ commit, state, rootGetters }) {
     const baseAsset = rootGetters['assets/getAssetBySymbol'](state.base)
     const quoteAsset = rootGetters['assets/getAssetBySymbol'](state.quote)
     const spendPrecision = (state.type === 'buy' ? quoteAsset : baseAsset).precision
     const getPrecision = (state.type === 'sell' ? baseAsset : quoteAsset).precision
+
     const spend = state.spendAmount * 10 ** spendPrecision
     const get = state.getAmount * 10 ** getPrecision
     console.log(state.getAmount, state.spendAmount)

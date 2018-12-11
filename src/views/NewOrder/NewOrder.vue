@@ -8,11 +8,11 @@
       :sell-price="marketPrices.sell.price"
       @change="setType"
     />
-    <!-- <Tabs
+    <Tabs
       :tabs="['MARKET', 'LIMIT']"
-      :active="activeIndication"
+      :active="'LIMIT'"
       @change="setActiveIndication"
-    /> -->
+    />
     <NewOrderPercentSelector
       :percent-items="percentItems"
       :active-percent="activePercent"
@@ -20,20 +20,21 @@
     />
     <div class="new-order-fields">
       <NewOrderInput
-        :placeholder="spendAsset"
-        :value="spendAmount"
-        :note="`max ${maxSpend}`"
+        :placeholder="quote"
+        :value="quoteAmount"
+        :note="`max ${maxQuoteTitle}`"
         :error="spendExceeded"
-        :title="`Spend ${spendAsset}`"
-        @change="setSpendAmount"
+        :title="quoteInputTitle"
+        @change="setQuoteAmount"
         @note-click="setMaxSpend"
       />
       <NewOrderInput
-        :placeholder="getAsset"
-        :value="getAmount"
-        :title="`Get ${getAsset}`"
-        :note="`max ${maxGet}`"
-        @change="setGetAmount"
+        :placeholder="base"
+        :value="baseAmount"
+        :title="baseInputTitle"
+        :error="spendExceeded"
+        :note="`max ${maxBaseTitle}`"
+        @change="setBaseAmount"
         @note-click="setMaxSpend"
       />
     </div>
@@ -65,7 +66,7 @@
       @close="hideConfirm"
       @confirm="dispatchOrder"
     >
-      <ConfirmOrder
+      <!-- <ConfirmOrder
         :base="base"
         :quote="quote"
         :type="type"
@@ -75,7 +76,7 @@
         :trading-fee="15.82"
         :exchange-fee="10.23"
         @close="hideConfirm"
-      />
+      /> -->
     </ConfirmModal>
 
   </div>
@@ -111,8 +112,8 @@ export default {
       activeIndication: 'newOrder/getActiveIndication',
       percentItems: 'newOrder/getPercentItems',
       activePercent: 'newOrder/getActivePercent',
-      getAmount: 'newOrder/getGetAmount',
-      spendAmount: 'newOrder/getSpendAmount',
+      baseAmount: 'newOrder/getBaseAmount',
+      quoteAmount: 'newOrder/getQuoteAmount',
       price: 'newOrder/getPrice',
       marketPrices: 'newOrder/getMarketPrices',
       maxBase: 'newOrder/getMaxBase',
@@ -120,31 +121,36 @@ export default {
       confirmDisplayed: 'newOrder/confirmDisplayed',
       pending: 'newOrder/inProgress'
     }),
-    maxSpend() {
-      return this.type === 'buy' ? this.maxQuote : this.maxBase
-    },
-    maxGet() {
-      return this.price ? getFloatCurrency(this.maxSpend / this.price) : 0
-    },
+
     spendExceeded() {
-      return this.spendAmount > this.maxSpend
+      const quoteExceeded = this.quoteAmount > this.maxQuote
+      const baseExceeded = this.baseAmount > this.maxBase
+      return this.type === 'buy' ? quoteExceeded : baseExceeded
     },
     priceTitle() {
-      return `Price .${this.quote}`
+      return `Price ${this.quote}`
     },
-    spendAsset() {
-      return this.type === 'buy' ? this.quote : this.base
+    baseInputTitle() {
+      const type = this.type === 'buy' ? 'Get' : 'Spend'
+      return `${type} ${this.base}`
     },
-    getAsset() {
-      return this.type === 'buy' ? this.base : this.quote
+    quoteInputTitle() {
+      const type = this.type === 'buy' ? 'Spend' : 'Get'
+      return `${type} ${this.quote}`
     },
     buttonTitle() {
-      const orderAmount = this.type === 'buy' ? this.getAmount : this.spendAmount
-      const formattedAmount = getFloatCurrency(orderAmount || 0)
-      return `${formattedAmount} ${this.base}`
+      return `${getFloatCurrency(this.baseAmount)} ${this.base}`
+    },
+    maxBaseTitle() {
+      if (this.type === 'sell') return getFloatCurrency(this.maxBase)
+      return getFloatCurrency(this.price ? this.maxQuote / this.price : 0 )
+    },
+    maxQuoteTitle() {
+      if (this.type === 'buy') return getFloatCurrency(this.maxQuote)
+      return getFloatCurrency(this.maxBase * (this.price || 0))
     },
     invalidOrder() {
-      return !this.spendAmount || !this.getAmount || this.spendExceeded
+      return !this.baseAmount || !this.quoteAmount || this.spendExceeded
     },
     formattedPrice() {
       return getFloatCurrency(this.price)
@@ -155,17 +161,23 @@ export default {
       setActiveIndication: 'newOrder/setActiveIndication',
       setType: 'newOrder/setType',
       setActivePercent: 'newOrder/setActivePercent',
-      setGetAmount: 'newOrder/setGetAmount',
-      setSpendAmount: 'newOrder/setSpendAmount',
+      setBaseAmount: 'newOrder/setBaseAmount',
+      setQuoteAmount: 'newOrder/setQuoteAmount',
       setPrice: 'newOrder/setPrice',
-      setMaxSpend: 'newOrder/setMaxSpend',
       dispatchOrder: 'newOrder/dispatchOrder',
       showConfirm: 'newOrder/showConfirm',
       hideConfirm: 'newOrder/hideConfirm'
     }),
     setMaxSpend(percent = 100) {
-      const amount = this.maxSpend / 100 * percent
-      this.setSpendAmount(amount)
+      const max = this.type === 'buy' ? this.maxQuote : this.maxBase
+      const amount = max / 100 * percent
+      if (this.type === 'buy') {
+        this.setQuoteAmount(amount)
+        if (this.price) this.setBaseAmount(amount / (this.price || 0))
+      } else {
+        this.setBaseAmount(amount)
+        this.setQuoteAmount(amount * (this.price || 0))
+      }
     }
   }
 }
