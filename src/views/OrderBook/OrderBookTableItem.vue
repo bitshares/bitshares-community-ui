@@ -57,7 +57,7 @@ export default {
       return this.type === 'sell' ? 'to right' : 'to left'
     },
     gradientColor() {
-      return this.type === 'sell' ? '30, 3, 2, 1' : '13, 23, 2, 1'
+      return this.type === 'sell' ? '56, 9, 7, 1' : '29, 46, 7, 1'
     },
     styleBackground() {
       const percent = Math.round(100 / this.maxSum * this.item.sum)

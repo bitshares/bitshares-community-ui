@@ -7,6 +7,7 @@
           :items="orderBook.buying"
           :table-headers="tableHeaders.buy"
           :max-sum="maxSum"
+          :anchor="true"
           title="Buying"
           align="left"
           @item-clicked="handleOrderClick('buy', $event)"
