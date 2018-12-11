@@ -6,17 +6,6 @@
       name="arrowDown"
       @click="goBack"
     />
-    <!--<div
-      class="backup-close"
-      @click="closeModal"
-    >
-      <svgicon
-        width="12"
-        height="12"
-        color="rgba(255,255,255,0.5)"
-        name="cancel"
-      />
-    </div>-->
     <BackupMenu
       v-if="currentStep === stepConfig['BACKUP_MENU']"
       :step-config="stepConfig"

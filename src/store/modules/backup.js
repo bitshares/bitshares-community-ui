@@ -3,7 +3,7 @@ const types = {
 }
 
 const state = {
-  showBackupModal: true
+  showBackupModal: false
 }
 
 const getters = {
