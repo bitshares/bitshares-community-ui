@@ -48,7 +48,7 @@ export default {
 <style lang="scss" scoped>
   .deposit-container {
     color: white;
-    padding: 0 1.2rem 1.2rem;
+    padding: 1.2rem;
     display: flex;
     flex-direction: column;
     overflow: hidden;

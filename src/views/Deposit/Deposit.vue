@@ -9,66 +9,69 @@
         @input="onSearch"
       />
     </div>
-    <ScrollingContainer
-      :shadower-height="0"
-    >
-      <div class="deposit-content">
-        <div
-          v-for="(deposit, index) in filteredList"
-          :key="index"
-          class="deposit-item"
-          @click="toggleAddressScreen(true)"
-        >
-          <Button
-            :text="deposit"
-            type="secondary"
-            width="full"
-            class="example-button"
-          />
+    <LoadingContainer :loading="!filteredList.length">
+      <ScrollingContainer
+        :shadower-height="0"
+      >
+        <div class="deposit-content">
+          <div
+            v-for="(deposit, index) in filteredList"
+            :key="index"
+            class="deposit-item"
+            @click="toggleAddressScreen(true)"
+          >
+            <Button
+              :text="deposit"
+              type="secondary"
+              width="full"
+              class="example-button"
+            />
+          </div>
         </div>
-      </div>
-    </ScrollingContainer>
-    <!--<Button
-      class="example-button"
-      text="example button"/>-->
+      </ScrollingContainer>
+    </LoadingContainer>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import Button from '@/components/Button'
 import ScrollingContainer from '@/components/ScrollingContainer'
 import SimpleInput from '@/components/SimpleInput'
+import LoadingContainer from '@/components/LoadingContainer'
 
 export default {
   components: {
     Button,
     ScrollingContainer,
-    SimpleInput
+    SimpleInput,
+    LoadingContainer
   },
   data() {
     return {
-      searchStr: '',
-      list: [
-        '32BIT (32bit)',
-        '8BIT (8Bit)',
-        'ANTI (AntiBitcoin)',
-        'bifd (bifd)',
-        'BIGUP (BigUp)',
-        'bill (bill)',
-        'BITB (BitBean)'
-      ]
+      searchStr: ''
     }
   },
   computed: {
+    ...mapGetters({
+      coins: 'openledger/getCoinsData',
+      fetching: 'openledger/pending'
+    }),
+    coinslist() {
+      return Object.keys(this.coins).map(coin => coin)
+    },
     filteredList() {
-      if (!this.searchStr) return this.list
-      return this.list.filter(deposit => deposit.indexOf(this.searchStr) > -1)
+      if (!this.searchStr) return this.coinslist
+      return this.coinslist.filter(deposit => deposit.indexOf(this.searchStr) > -1)
     }
+  },
+  mounted() {
+    this.fetchCoins()
   },
   methods: {
     ...mapActions({
-      toggleAddressScreen: 'deposit/toggleAddressScreen'
+      toggleAddressScreen: 'deposit/toggleAddressScreen',
+      fetchCoins: 'openledger/fetchCoins'
     }),
     onSearch(str) {
       this.searchStr = str
@@ -82,12 +85,10 @@ export default {
     padding: 0.6rem;
     display: flex;
     flex-direction: column;
-    height: 100%;
-    overflow: hidden;
-    min-height: 480px;
 
     .deposit-content {
-      height: 100%;
+      overflow-y: auto;
+      height: 30rem;
     }
     .deposit-title {
       font-size: config('textSizes.lg');
