@@ -12,6 +12,7 @@
       />
       <Button
         :text="depositAsset"
+        :disabled="true"
         type="secondary"
         width="full"
       />
@@ -26,6 +27,8 @@
         type="secondary"
         width="full"
         class="deposit-btn"
+        :disabled="!address"
+        @click="copyAddress"
       />
       <Button
         text="CANCEL"
@@ -61,7 +64,10 @@ export default {
     ...mapActions({
       toggleModal: 'deposit/toggleModal',
       toggleAddressScreen: 'deposit/toggleAddressScreen'
-    })
+    }),
+    copyAddress() {
+      window.navigator.clipboard.writeText(this.address)
+    }
   }
 }
 </script>
