@@ -2,7 +2,8 @@
   <Modal
     v-if="showDeposit"
     @close="toggle">
-    <DepositAddress/>
+    <Deposit v-if="!isAddressScreen"/>
+    <DepositAddress v-if="isAddressScreen"/>
   </Modal>
 </template>
 
@@ -22,7 +23,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showDeposit: 'deposit/modalDisplayed'
+      showDeposit: 'deposit/modalDisplayed',
+      isAddressScreen: 'deposit/isAddressScreen'
     })
   },
   methods: {

@@ -17,6 +17,7 @@
           v-for="(deposit, index) in filteredList"
           :key="index"
           class="deposit-item"
+          @click="toggleAddressScreen(true)"
         >
           <Button
             :text="deposit"
@@ -34,6 +35,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Button from '@/components/Button'
 import ScrollingContainer from '@/components/ScrollingContainer'
 import SimpleInput from '@/components/SimpleInput'
@@ -65,6 +67,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      toggleAddressScreen: 'deposit/toggleAddressScreen'
+    }),
     onSearch(str) {
       this.searchStr = str
     }

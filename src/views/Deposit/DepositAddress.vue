@@ -24,6 +24,7 @@
         type="secondary"
         width="full"
         class="deposit-btn"
+        @click="toggleModal"
       />
     </div>
   </div>
@@ -31,10 +32,16 @@
 
 <script>
 import Button from '@/components/Button'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
     Button
+  },
+  methods: {
+    ...mapActions({
+      toggleModal: 'deposit/toggleModal'
+    })
   }
 }
 </script>
