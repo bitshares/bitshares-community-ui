@@ -2,15 +2,23 @@
   <div class="deposit-container h-full sm:w-120">
     <div class="deposit-title">Deposit</div>
     <div class="deposit-item">
+      <svgicon
+        class="deposit-item-cancel"
+        width="12"
+        height="12"
+        color="rgba(255,255,255,0.5)"
+        name="cancel"
+        @click="toggleAddressScreen(false)"
+      />
       <Button
-        text="ANTI (AntiBitcoin)"
+        :text="depositAsset"
         type="secondary"
         width="full"
       />
     </div>
-    <div class="deposit-sub-title deposit-sub-title--warning">Send ANTI (AntiBitcoin) to the address below</div>
-    <div class="deposit-address">325ffgTTHABvb578bz6dfdfvbCcciv2bYYTv2300c1bPkhbnbgFVD</div>
-    <div class="deposit-sub-title deposit-sub-title--warning">IMPORTANT: Send not less than 0.0018 BTC to this deposit address .Sending less than 0.0018 BTC or any other currency will result in the loss of your deposit.</div>
+    <div class="deposit-sub-title deposit-sub-title--warning">{{ depositAsset }} to the address below</div>
+    <div class="deposit-address">{{ address }}</div>
+    <div class="deposit-sub-title deposit-sub-title--warning">IMPORTANT: Send not less than 0.0018 {{ depositAsset }} to this deposit address. Sending less than 0.0018 {{ depositAsset }} or any other currency will result in the loss of your deposit.</div>
     <div class="deposit-sub-title deposit-sub-title--error">ALERT: This asset is backed centralized counterparty</div>
     <div class="deposit-footer">
       <Button
@@ -31,16 +39,28 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import Button from '@/components/Button'
-import { mapActions } from 'vuex'
+import '@icons/cancel'
 
 export default {
   components: {
     Button
   },
+  computed: {
+    ...mapGetters({
+      depositAddress: 'openledger/getDepositAddress',
+      depositAsset: 'deposit/getDepositAsset'
+    }),
+    address() {
+      if (typeof this.depositAddress === 'object') return ''
+      return this.depositAddress
+    }
+  },
   methods: {
     ...mapActions({
-      toggleModal: 'deposit/toggleModal'
+      toggleModal: 'deposit/toggleModal',
+      toggleAddressScreen: 'deposit/toggleAddressScreen'
     })
   }
 }
@@ -51,9 +71,11 @@ export default {
     padding: 1.2rem;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    min-height: 480px;
+    min-height: 30rem;
 
+    .loading {
+      overflow: initial;
+    }
     .deposit-title {
       text-align: center;
       text-transform: uppercase;
@@ -83,6 +105,15 @@ export default {
     }
     .deposit-item {
       margin-top: 0;
+      position: relative;
+
+      .deposit-item-cancel {
+        position: absolute;
+        right: 1rem;
+        top: 1.2rem;
+        z-index: 100;
+        cursor: pointer;
+      }
     }
     .deposit-btn {
       margin-top: 1rem;

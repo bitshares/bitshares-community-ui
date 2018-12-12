@@ -15,13 +15,13 @@
       >
         <div class="deposit-content">
           <div
-            v-for="(deposit, index) in filteredList"
+            v-for="(asset, index) in filteredList"
             :key="index"
             class="deposit-item"
-            @click="toggleAddressScreen(true)"
+            @click="selectAsset(asset)"
           >
             <Button
-              :text="deposit"
+              :text="asset"
               type="secondary"
               width="full"
               class="example-button"
@@ -71,8 +71,15 @@ export default {
   methods: {
     ...mapActions({
       toggleAddressScreen: 'deposit/toggleAddressScreen',
-      fetchCoins: 'openledger/fetchCoins'
+      setDepositAsset: 'deposit/setDepositAsset',
+      fetchCoins: 'openledger/fetchCoins',
+      fetchDepositAddress: 'openledger/fetchDepositAddress'
     }),
+    selectAsset(asset) {
+      this.fetchDepositAddress({ asset })
+      this.setDepositAsset({ asset })
+      this.toggleAddressScreen(true)
+    },
     onSearch(str) {
       this.searchStr = str
     }
@@ -101,7 +108,7 @@ export default {
       text-align: center;
     }
     .deposit-item {
-      margin-top: 15px;
+      margin-top: 0.9375rem;
     }
     .example-button {
       margin-top: auto;
