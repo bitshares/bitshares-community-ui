@@ -79,6 +79,7 @@ export default {
     flex-direction: column;
     height: 100%;
     overflow: hidden;
+    min-height: 480px;
 
     .deposit-content {
       height: 100%;
