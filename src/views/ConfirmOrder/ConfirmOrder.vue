@@ -30,7 +30,7 @@
     <!-- SECTION 2 -->
     <!-- TODO: make new order input with type "comission" and provide select there -->
     <div class="confirm-order-comissions-section">
-      <div class="item">
+      <div class="item" v-if="tradingFee.value">
         <div class="description">
           Trading fee
         </div>
