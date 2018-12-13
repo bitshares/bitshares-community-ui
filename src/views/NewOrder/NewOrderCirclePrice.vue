@@ -79,9 +79,6 @@ export default {
   .circle-price-wrapper {
     @include size($default-size, $default-size);
 
-    &:nth-child(3n + 1) {
-      clear: both;
-    }
     .circle-price-item {
       @include size($default-size, $default-size);
       clip: rect(0, $default-size, $default-size, $default-size / 2);
