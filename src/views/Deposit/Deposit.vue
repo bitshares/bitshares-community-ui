@@ -2,31 +2,28 @@
   <div class="deposit-container h-full sm:w-120">
     <div class="deposit-title">Deposit</div>
     <div class="deposit-sub-title">Choose token</div>
-    <div class="desposit-search">
-      <SimpleInput
-        :value="searchStr"
-        :centered="true"
-        @input="onSearch"
-      />
-    </div>
-    <LoadingContainer :loading="!filteredList.length">
+    <LoadingContainer :loading="coinsPending">
+      <div class="desposit-search">
+        <SimpleInput
+          :value="searchStr"
+          :centered="true"
+          placeholder="search"
+          @input="onSearch"
+        />
+      </div>
       <ScrollingContainer
         :shadower-height="0"
       >
         <div class="deposit-content">
-          <div
+          <Button
             v-for="(asset, index) in filteredList"
             :key="index"
+            :text="asset"
+            type="secondary"
+            width="full"
             class="deposit-item"
             @click="selectAsset(asset)"
-          >
-            <Button
-              :text="asset"
-              type="secondary"
-              width="full"
-              class="example-button"
-            />
-          </div>
+          />
         </div>
       </ScrollingContainer>
     </LoadingContainer>
@@ -55,7 +52,7 @@ export default {
   computed: {
     ...mapGetters({
       coins: 'openledger/getCoinsData',
-      fetching: 'openledger/pending'
+      coinsPending: 'openledger/getCoinsPending'
     }),
     coinslist() {
       return Object.keys(this.coins).map(coin => coin)
@@ -65,7 +62,7 @@ export default {
       return this.coinslist.filter(deposit => deposit.indexOf(this.searchStr) > -1)
     }
   },
-  mounted() {
+  created() {
     this.fetchCoins()
   },
   methods: {
@@ -92,6 +89,7 @@ export default {
     padding: 0.6rem;
     display: flex;
     flex-direction: column;
+    height: 100%;
 
     .deposit-content {
       overflow-y: auto;
@@ -109,9 +107,6 @@ export default {
     }
     .deposit-item {
       margin-top: 0.9375rem;
-    }
-    .example-button {
-      margin-top: auto;
     }
   }
 </style>
