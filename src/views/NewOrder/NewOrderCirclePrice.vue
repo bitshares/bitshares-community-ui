@@ -6,21 +6,21 @@
       class="circle-price-wrapper"
     >
       <div
-        :class="{'_max': circle.base}"
+        :class="{'_max': circle.base || percent > 50}"
         class="circle-price-item"
       >
         <div
           :style="{
             'border-color': circle.color,
-            'transform': getRotate(circle.percent)
+            'transform': getRotate(circle.base ? circle.percent : percent)
           }"
           class="left-side half-circle"
         />
         <div
           :style="{
             'border-color': circle.color,
-            'transform': get180rotate(circle.percent),
-            'display': getDisplay(circle.percent)
+            'transform': get180rotate(circle.base ? circle.percent : percent),
+            'display': getDisplay(circle.base ? circle.percent : percent)
           }"
           class="right-side half-circle"
         />
@@ -41,7 +41,7 @@ export default {
     return {
       circles: [
         { base: true, percent: 100, color: '#131313' },
-        { base: false, percent: this.percent, color: '#4C4C4C' }
+        { base: false, percent: null, color: '#4C4C4C' }
       ]
     }
   },

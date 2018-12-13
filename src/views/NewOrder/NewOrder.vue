@@ -46,8 +46,8 @@
         @change="setPrice"
       />
     </div>
-    <NewOrderCirclePrice :percent="30"/>
-    <NewOrderCircleType :value="-50"/>
+    <NewOrderCirclePrice :percent="15"/>
+    <NewOrderCircleType :value="20"/>
     <NewOrderCircleType mode="layout"/>
     <div class="new-order-button">
       <Btn
