@@ -28,24 +28,25 @@
       </div>
     </div>
     <!-- SECTION 2 -->
-    <!-- <div class="confirm-order-price-section">
-      <div class="confirm-order-price-section-item">
-        <NewOrderInput
-          :placeholder="tradingFee.toString()"
-          :note="tradingFeeTitle"
-          :disabled="true"
-          title="Trading fee. USD"
-        />
+    <!-- TODO: make new order input with type "comission" and provide select there -->
+    <div class="confirm-order-comissions-section">
+      <div class="item">
+        <div class="description">
+          Trading fee
+        </div>
+        <div class="value">
+          {{ tradingFee }}
+        </div>
       </div>
-      <div class="confirm-order-price-section-item">
-        <NewOrderInput
-          :placeholder="exchangeFee.toString()"
-          :note="exchangeFeeTitle"
-          :disabled="true"
-          title="Exchange fee. USD"
-        />
+      <div class="item">
+        <div class="description">
+          Exchange fee
+        </div>
+        <div class="value">
+          {{ exchangeFee }}
+        </div>
       </div>
-    </div> -->
+    </div>
 
     <!-- <SInput
       v-if="isLocked"
@@ -90,13 +91,9 @@ export default {
       type: Number,
       required: true
     },
-    tradingFee: {
-      type: Number,
-      default: 0
-    },
-    exchangeFee: {
-      type: Number,
-      default: 0
+    fees: {
+      type: Object,
+      default: () => {}
     },
     pending: {
       type: Boolean,
@@ -107,11 +104,13 @@ export default {
     confirmTitle() {
       return `${this.type} ${this.base}/${this.quote}`
     },
-    tradingFeeTitle() {
-      return `~${this.tradingFee} ${this.quote}`
+    exchangeFee() {
+      const { value, asset } = this.fees.transaction
+      return `${value} ${asset}`
     },
-    exchangeFeeTitle() {
-      return `~${this.exchangeFee} ${this.quote}`
+    tradingFee() {
+      const { value, asset } = this.fees.market
+      return `${value} ${asset}`
     },
     confirmDate() {
       return format(new Date(), 'DD-MMM-YY, HH:mm')
@@ -166,5 +165,31 @@ export default {
   }
   .confirm-order-price-section-item {
     margin: .2rem;
+  }
+  .confirm-order-comissions-section {
+    display: flex;
+    margin-top: 0.9375rem;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    height: config('textSizes.4xl');
+
+    .item {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 50%;
+      .description {
+        font-size: config('textSizes.xxs-xs');
+        color: config('colors.inactive');
+      }
+
+      .value {
+        color: config('colors.primary');
+        font-size: config('textSizes.xs');
+      }
+    }
+
   }
 </style>

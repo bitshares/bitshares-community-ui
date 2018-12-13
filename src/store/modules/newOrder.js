@@ -10,6 +10,7 @@ const types = {
   SET_BASE_AMOUNT: 'SET_BASE_AMOUNT',
   SET_QUOTE_AMOUNT: 'SET_QUOTE_AMOUNT',
   SET_PRICE: 'SET_PRICE',
+  SET_FEES: 'SET_FEES',
   RESET: 'RESET',
   RESET_AMOUNTS: 'RESET_AMOUNTS',
   PLACE_ORDER_REQUEST: 'ORDER_PLACE_REQUEST',
@@ -22,21 +23,33 @@ const getDefaultState = () => ({
   base: '',
   quote: '',
   price: null,
+  fees: {
+    transaction: {
+      value: 0,
+      usdEq: 0,
+      asset: 'BTS'
+    },
+    market: {
+      value: 0,
+      usdEq: 0,
+      asset: 'BTS'
+    }
+  },
   type: 'buy',
   activeIndication: 'MARKET',
   activePercent: 0,
   percentItems: [10, 25, 50, 75],
   inProgress: false,
-  showConfirm: false,
-
   baseAmount: null,
-  quoteAmount: null
+  quoteAmount: null,
+  showConfirm: false
 })
 
 const getters = {
   getBase: state => removePrefix(state.base),
   getQuote: state => removePrefix(state.quote),
   getMarketPrices: (state, getters, rootState, rootGetters) => rootGetters['orderBook/getTopOrders'],
+  getFees: (state) => state.fees,
   getType: state => state.type,
   isBuyOrder: state => state.type === 'buy',
   getBaseAmount: state => state.baseAmount,
@@ -72,6 +85,10 @@ const mutations = {
   [types.SET_MARKET](state, { base, quote }) {
     state.base = base
     state.quote = quote
+  },
+  [types.SET_FEES](state, { transaction, market }) {
+    Vue.set(state.fees, 'transaction', transaction)
+    Vue.set(state.fees, 'market', market)
   },
   [types.SET_BASE_AMOUNT](state, value) {
     state.baseAmount = value
@@ -155,6 +172,28 @@ const actions = {
     actions.setPrice({ commit, state }, price)
     if (!state.baseAmount) actions.setBaseAmount({ commit, state }, sum)
   },
+  async fetchFees({ commit, state, rootGetters }) {
+    const { fee: transactionFeeRaw } = await API.Parameters.getComissionByType('limit_order_create')
+    // TODO: Worker 2 - in some market we can pay this fee with different asset (core exchange rate or fee pool)
+    const transactionFeeAsset = rootGetters['assets/getAssetBySymbol']('BTS')
+    const transactionFee = transactionFeeRaw / (10 ** transactionFeeAsset.precision)
+
+    const quoteAsset = rootGetters['assets/getAssetBySymbol'](state.quote)
+    // TODO: Preload comissions in assets module
+    const [{ options: { market_fee_percent: quoteFeePercent } }] = await API.Assets.fetch([quoteAsset.id])
+    const quoteFeeAmount = (state.quoteAmount * quoteFeePercent / 100).toFixed(quoteAsset.precision)
+
+    commit(types.SET_FEES, {
+      transaction: {
+        value: transactionFee,
+        asset: transactionFeeAsset.symbol
+      },
+      market: {
+        value: quoteFeeAmount,
+        asset: quoteAsset.symbol
+      }
+    })
+  },
   async dispatchOrder({ commit, state, rootGetters }) {
     const baseAsset = rootGetters['assets/getAssetBySymbol'](state.base)
     const quoteAsset = rootGetters['assets/getAssetBySymbol'](state.quote)
@@ -174,7 +213,7 @@ const actions = {
       console.log(sides)
       const userId = rootGetters['acc/getAccountUserId']
       const newOrder = API.Transactions.createOrder(sides, userId)
-      console.log(newOrder)
+      console.log('Order:', newOrder)
       const keys = rootGetters['acc/getKeys']
       commit(types.PLACE_ORDER_REQUEST)
       const result = await API.Transactions.placeOrder(newOrder, keys)

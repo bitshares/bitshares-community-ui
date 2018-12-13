@@ -52,7 +52,7 @@
         :text="buttonTitle"
         :disabled="invalidOrder"
         width="full"
-        @click="showConfirm"
+        @click="processOrder"
       >
         <span class="operation-title">{{ type }}</span>
       </Btn>
@@ -73,8 +73,7 @@
         :price="price"
         :base-amount="baseAmount"
         :quote-amount="quoteAmount"
-        :trading-fee="15.82"
-        :exchange-fee="10.23"
+        :fees="fees"
         @close="hideConfirm"
       />
     </ConfirmModal>
@@ -115,6 +114,7 @@ export default {
       baseAmount: 'newOrder/getBaseAmount',
       quoteAmount: 'newOrder/getQuoteAmount',
       price: 'newOrder/getPrice',
+      fees: 'newOrder/getFees',
       marketPrices: 'newOrder/getMarketPrices',
       maxBase: 'newOrder/getMaxBase',
       maxQuote: 'newOrder/getMaxQuote',
@@ -166,8 +166,12 @@ export default {
       setPrice: 'newOrder/setPrice',
       dispatchOrder: 'newOrder/dispatchOrder',
       showConfirm: 'newOrder/showConfirm',
-      hideConfirm: 'newOrder/hideConfirm'
+      hideConfirm: 'newOrder/hideConfirm',
+      fetchFees: 'newOrder/fetchFees'
     }),
+    processOrder() {
+      this.fetchFees().then(this.showConfirm)
+    },
     setMaxSpend(percent = 100) {
       const max = this.type === 'buy' ? this.maxQuote : this.maxBase
       const amount = percent === 100 ? max : max / 100 * percent
