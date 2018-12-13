@@ -52,7 +52,7 @@
         :text="buttonTitle"
         :disabled="invalidOrder"
         width="full"
-        @click="processOrder"
+        @click="showConfirm"
       >
         <span class="operation-title">{{ type }}</span>
       </Btn>
@@ -166,12 +166,8 @@ export default {
       setPrice: 'newOrder/setPrice',
       dispatchOrder: 'newOrder/dispatchOrder',
       showConfirm: 'newOrder/showConfirm',
-      hideConfirm: 'newOrder/hideConfirm',
-      fetchFees: 'newOrder/fetchFees'
+      hideConfirm: 'newOrder/hideConfirm'
     }),
-    processOrder() {
-      this.fetchFees().then(this.showConfirm)
-    },
     setMaxSpend(percent = 100) {
       const max = this.type === 'buy' ? this.maxQuote : this.maxBase
       const amount = percent === 100 ? max : max / 100 * percent

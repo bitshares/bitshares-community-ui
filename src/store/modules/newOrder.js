@@ -125,9 +125,10 @@ const actions = {
   setType({ commit }, tab) {
     commit(types.SET_TYPE, tab)
   },
-  setMarket({ commit }, { base, quote }) {
+  setMarket({ commit, dispatch }, { base, quote }) {
     commit(types.RESET)
     commit(types.SET_MARKET, { base, quote })
+    dispatch('fetchFees')
   },
   setActivePercent({ commit }, percent) {
     commit(types.SET_ACTIVE_PERCENT, percent)
@@ -181,7 +182,7 @@ const actions = {
     const quoteAsset = rootGetters['assets/getAssetBySymbol'](state.quote)
     // TODO: Preload comissions in assets module
     const [{ options: { market_fee_percent: quoteFeePercent } }] = await API.Assets.fetch([quoteAsset.id])
-    const quoteFeeAmount = (state.quoteAmount * quoteFeePercent / 100).toFixed(quoteAsset.precision)
+    const quoteFeeAmount = (state.quoteAmount * quoteFeePercent / 100)
 
     commit(types.SET_FEES, {
       transaction: {
@@ -189,7 +190,7 @@ const actions = {
         asset: transactionFeeAsset.symbol
       },
       market: {
-        value: quoteFeeAmount,
+        value: (quoteFeeAmount > 0) ? quoteFeeAmount.toFixed(quoteAsset.precision) : 0,
         asset: quoteAsset.symbol
       }
     })
