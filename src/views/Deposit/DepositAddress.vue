@@ -1,5 +1,5 @@
 <template>
-  <div class="deposit-container h-full sm:w-120 sm:sizes--fixed">
+  <div class="deposit-container h-full sm:w-120">
     <div class="deposit-title">Deposit</div>
     <div class="deposit-item">
       <svgicon
