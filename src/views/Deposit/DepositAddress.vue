@@ -17,7 +17,7 @@
         width="full"
       />
     </div>
-    <div class="deposit-sub-title deposit-sub-title--warning">{{ asset }} tokens to the address below</div>
+    <div class="deposit-sub-title deposit-sub-title--warning">Please send {{ asset }} tokens to the address below</div>
     <div class="deposit-qr-code"/>
     <div class="deposit-loader-wrapper">
       <LoadingContainer :loading="addressPending">
