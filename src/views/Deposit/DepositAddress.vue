@@ -158,6 +158,7 @@ export default {
     .deposit-container {
       .deposit-qr-code {
         height: 3.75rem;
+        min-height: 3rem;
       }
     }
   }
