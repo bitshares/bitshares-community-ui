@@ -2,31 +2,33 @@
   <div class="deposit-container h-full sm:w-120">
     <div class="deposit-title">Deposit</div>
     <div class="deposit-sub-title">Choose token</div>
-    <LoadingContainer :loading="coinsPending">
-      <div class="desposit-search">
-        <SimpleInput
-          :value="searchStr"
-          :centered="true"
-          placeholder="search"
-          @input="onSearch"
-        />
-      </div>
-      <ScrollingContainer
-        :shadower-height="0"
-      >
-        <div class="deposit-content">
-          <Button
-            v-for="(asset, index) in filteredList"
-            :key="index"
-            :text="asset"
-            type="secondary"
-            width="full"
-            class="deposit-item"
-            @click="selectAsset(asset)"
+    <div class="deposit-loader-wrapper">
+      <LoadingContainer :loading="coinsPending">
+        <div class="desposit-search">
+          <SimpleInput
+            :value="searchStr"
+            :centered="true"
+            placeholder="search"
+            @input="onSearch"
           />
         </div>
-      </ScrollingContainer>
-    </LoadingContainer>
+        <ScrollingContainer
+          :shadower-height="0"
+        >
+          <div class="deposit-content">
+            <Button
+              v-for="(asset, index) in filteredList"
+              :key="index"
+              :text="asset"
+              type="secondary"
+              width="full"
+              class="deposit-item"
+              @click="selectAsset(asset)"
+            />
+          </div>
+        </ScrollingContainer>
+      </LoadingContainer>
+    </div>
   </div>
 </template>
 
@@ -91,9 +93,14 @@ export default {
     flex-direction: column;
     height: 100%;
 
+    .deposit-loader-wrapper {
+      height: 100%;
+      overflow-y: auto;
+      padding: 3rem 0 0;
+    }
     .deposit-content {
       overflow-y: auto;
-      height: 30rem;
+      height: 27rem;
     }
     .deposit-title {
       font-size: config('textSizes.lg');
@@ -107,6 +114,13 @@ export default {
     }
     .deposit-item {
       margin-top: 0.9375rem;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    .deposit-container {
+      .deposit-content {
+        height: 100%;
+      }
     }
   }
 </style>
