@@ -57,7 +57,7 @@ export default {
       }
       const search = this.searchStr.toLowerCase()
       return this.items.filter(item => {
-        return item.payAssetSymbol.toLowerCase().includes(search)
+        return item.payAssetSymbol && item.payAssetSymbol.toLowerCase().includes(search)
       })
     },
     tableHeaders() {
