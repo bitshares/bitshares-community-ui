@@ -1,3 +1,4 @@
+      <!-- @change="onSave" -->
 <template>
   <div class="backup-container h-full sm:w-120">
     <svgicon
@@ -41,6 +42,7 @@
     <BackupKeyDownload
       v-if="currentStep === stepConfig['BACKUP_DOWNLOAD']"
       :step-config="stepConfig"
+      @download="onSave"
     />
   </div>
 </template>
@@ -83,7 +85,8 @@ export default {
   computed: {
     ...mapGetters({
       backupPhrase: 'acc/getBrainkey',
-      isLocked: 'acc/isLocked'
+      isLocked: 'acc/getBackupFile',
+      userName: 'acc/getCurrentUserName'
     }),
     phrase() {
       return this.backupPhrase.split(' ')
@@ -91,6 +94,9 @@ export default {
   },
   methods: {
     ...mapActions('backup', ['toggleModal']),
+    ...mapActions({
+      backupBlob: 'acc/getBackupBlob'
+    }),
 
     closeModal() {
       this.$nextTick(() => {
@@ -99,6 +105,30 @@ export default {
     },
     onChangeStep(step) {
       this.currentStep = step
+    },
+    saveAs(data, fileName) {
+      const a = document.createElement('a')
+      document.body.appendChild(a)
+      a.style = 'display: none'
+      const blob = new Blob(data, { type: 'application/octet-stream; charset=us-ascii' })
+      const url = window.URL.createObjectURL(blob)
+      a.href = url
+      a.download = fileName
+      a.click()
+      window.URL.revokeObjectURL(url)
+      document.body.removeChild(a)
+    },
+
+    async onSave(password) {
+      const blob = await this.backupBlob({
+        brainkey: this.backupPhrase,
+        password: password.toString(),
+        name: this.userName
+      })
+
+      console.log(blob)
+      console.log('main backup', password)
+      this.saveAs([new Uint8Array(blob)], 'bts_default121_20102.bin')
     },
     goBack() {
       if (this.currentStep === this.stepConfig['BACKUP_DOWNLOAD']) {
