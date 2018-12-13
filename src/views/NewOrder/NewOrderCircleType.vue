@@ -1,14 +1,39 @@
 <template>
-  <div
-    :class="{'circle-price-container--positive': isPositive}"
-    class="circle-price-container"
-  >
-    <div class="circle-price-wrapper">
-      <div class="circle-price-item">
-        <div
-          :style="{'transform': positiveRotate}"
-          class="half-circle"
-        />
+  <div class="circles">
+    <!--dynamic-->
+    <div
+      v-if="mode !== 'layout'"
+      :class="{'circle-container--positive': isPositive}"
+      class="circle-container"
+    >
+      <div class="circle-wrapper">
+        <div class="circle-item">
+          <div
+            :style="{'transform': rotate}"
+            class="half-circle-item"
+          />
+        </div>
+      </div>
+    </div>
+    <!--mode layout-->
+    <div v-if="mode === 'layout'">
+      <div
+        v-for="(item, index) in layoutItems"
+        :key="index"
+        :class="{'circle-container--positive': item.isPositive}"
+        class="circle-container"
+      >
+        <div class="circle-wrapper">
+          <div class="circle-item">
+            <div
+              :style="{
+                'transform': getLayoutRotate(item.isPositive),
+                'border': '3px solid ' + item.color
+              }"
+              class="half-circle-item"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -20,6 +45,18 @@ export default {
     value: {
       type: Number,
       default: 0
+    },
+    mode: {
+      type: String,
+      default: ''
+    }
+  },
+  data() {
+    return {
+      layoutItems: [
+        { color: 'rgba(121,198,16,.5)', isPositive: true },
+        { color: 'rgb(255,48,48,.5)', isPositive: false }
+      ]
     }
   },
   computed: {
@@ -32,23 +69,33 @@ export default {
       }
       return this.value
     },
-    positiveRotate() {
+    rotate() {
       if (this.value < 0) {
         return `rotate(${this.digit * 0.9}deg)`
       } else {
         return `rotate(-${this.digit * 0.9}deg)`
       }
     }
+  },
+  methods: {
+    getLayoutRotate(isPositive) {
+      if (isPositive) {
+        return `rotate(-${100 * 0.9}deg)`
+      } else {
+        return `rotate(${100 * 0.9}deg)`
+      }
+    }
   }
 }
 </script>
 <style lang="scss">
-  $default-size: 8.75rem;
+  $default-size: 7.75rem;
 
-  .circle-price-container {
+  .circle-container {
+    transform: scale(1.2, 1.2);
     position: absolute;
     top: 48%;
-    left: 31%;
+    left: 33%;
     width: $default-size;
     height: $default-size;
   }
@@ -57,33 +104,32 @@ export default {
     width: $width;
   }
 
-  .circle-price-wrapper {
+  .circle-wrapper {
     @include size($default-size, $default-size);
 
-    .circle-price-item {
+    .circle-item {
       @include size($default-size, $default-size);
       clip: rect(0, $default-size / 2, $default-size, 0);
       left: 0;
       position: absolute;
       top: 0;
-      .half-circle {
+      .half-circle-item {
         @include size($default-size, $default-size);
-        border: 5px solid config('colors.sell-disabled');
+        border: 3px solid config('colors.sell');
         border-radius: 50%;
         clip: rect(0, $default-size, $default-size, $default-size / 2);
         left: 0;
         position: absolute;
         top: 0;
-
       }
     }
   }
 
-  .circle-price-container--positive {
-    .circle-price-item {
+  .circle-container--positive {
+    .circle-item {
       clip: rect(0, $default-size, $default-size, $default-size / 2);
-      .half-circle {
-        border: 5px solid config('colors.buy-disabled');
+      .half-circle-item {
+        border: 3px solid config('colors.buy');
         clip: rect(0, $default-size / 2, $default-size, 0);
       }
     }

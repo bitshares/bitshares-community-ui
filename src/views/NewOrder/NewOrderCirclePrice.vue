@@ -62,12 +62,12 @@ export default {
 }
 </script>
 <style lang="scss">
-  $default-size: 8.75rem;
+  $default-size: 7.75rem;
 
   .circle-price-container {
     position: absolute;
     top: 48%;
-    left: 31%;
+    left: 33%;
     width: $default-size;
     height: $default-size;
   }
@@ -87,7 +87,7 @@ export default {
       top: 0;
       .half-circle {
         @include size($default-size, $default-size);
-        border: 5px solid #3498db;
+        border: 3px solid #3498db;
         border-radius: 50%;
         clip: rect(0, $default-size / 2, $default-size, 0);
         left: 0;
