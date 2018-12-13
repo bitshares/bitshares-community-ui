@@ -3,12 +3,27 @@
     <div
       v-for="(circle, index) in circles"
       :key="index"
-      :class="{'progress-100': circle.base}"
-      class="circle-price-wrapper progress-30"
+      class="circle-price-wrapper"
     >
-      <div class="circle-price-item">
-        <div class="left-side half-circle"/>
-        <div class="right-side half-circle"/>
+      <div
+        :class="{'_max': circle.base}"
+        class="circle-price-item"
+      >
+        <div
+          :style="{
+            'border-color': circle.color,
+            'transform': getRotate(circle.percent)
+          }"
+          class="left-side half-circle"
+        />
+        <div
+          :style="{
+            'border-color': circle.color,
+            'transform': get180rotate(circle.percent),
+            'display': getDisplay(circle.percent)
+          }"
+          class="right-side half-circle"
+        />
       </div>
     </div>
   </div>
@@ -25,18 +40,29 @@ export default {
   data() {
     return {
       circles: [
-        { base: true },
-        { base: false }
+        { base: true, percent: 100, color: '#131313' },
+        { base: false, percent: this.percent, color: '#4C4C4C' }
       ]
+    }
+  },
+  methods: {
+    getRotate(percent) {
+      return `rotate(${percent * 3.6}deg)`
+    },
+    get180rotate(percent) {
+      if (percent > 50) {
+        return `rotate(180deg)`
+      }
+      return ''
+    },
+    getDisplay(percent) {
+      return percent <= 50 ? 'none' : 'block'
     }
   }
 }
 </script>
 <style lang="scss">
-  $bg-color: #34495e;
   $default-size: 8.75rem;
-  $label-font-size: $default-size / 4;
-  $label-font-size-redo: $default-size * 4;
 
   .circle-price-container {
     position: absolute;
@@ -50,41 +76,18 @@ export default {
     width: $width;
   }
 
-  @mixin draw-progress($progress, $color) {
-    .circle-price-item {
-      .half-circle {
-        border-color: $color;
-      }
-      .left-side {
-        transform: rotate($progress * 3.6deg);
-      }
-      @if $progress <= 50 {
-        .right-side {
-          display: none;
-        }
-      } @else {
-        clip: rect(auto, auto, auto, auto);
-        .right-side {
-          transform: rotate(180deg);
-        }
-      }
-    }
-  }
-
   .circle-price-wrapper {
     @include size($default-size, $default-size);
 
     &:nth-child(3n + 1) {
       clear: both;
     }
-
     .circle-price-item {
       @include size($default-size, $default-size);
       clip: rect(0, $default-size, $default-size, $default-size / 2);
       left: 0;
       position: absolute;
       top: 0;
-
       .half-circle {
         @include size($default-size, $default-size);
         border: 5px solid #3498db;
@@ -94,13 +97,9 @@ export default {
         position: absolute;
         top: 0;
       }
-    }
-
-    &.progress-30 {
-      @include draw-progress(30, #4C4C4C);
-    }
-    &.progress-100 {
-      @include draw-progress(100, #131313);
+      &._max {
+        clip: rect(auto, auto, auto, auto);
+      }
     }
   }
 </style>
