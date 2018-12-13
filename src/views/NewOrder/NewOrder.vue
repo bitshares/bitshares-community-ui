@@ -73,8 +73,7 @@
         :price="price"
         :base-amount="baseAmount"
         :quote-amount="quoteAmount"
-        :trading-fee="15.82"
-        :exchange-fee="10.23"
+        :fees="fees"
         @close="hideConfirm"
       />
     </ConfirmModal>
@@ -115,6 +114,7 @@ export default {
       baseAmount: 'newOrder/getBaseAmount',
       quoteAmount: 'newOrder/getQuoteAmount',
       price: 'newOrder/getPrice',
+      fees: 'newOrder/getFees',
       marketPrices: 'newOrder/getMarketPrices',
       maxBase: 'newOrder/getMaxBase',
       maxQuote: 'newOrder/getMaxQuote',
