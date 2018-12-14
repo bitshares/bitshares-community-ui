@@ -70,7 +70,7 @@ export default {
   }
   .new-order-input-note {
     color: config('colors.primary');
-    font-size: 0.6875rem;
+    font-size: config('textSizes.xxs-xs');
     letter-spacing: normal;
     cursor: pointer;
     &--error {

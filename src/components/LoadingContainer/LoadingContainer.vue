@@ -52,7 +52,8 @@ export default ({
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 40%;
+  height: 100%;
+  line-height: 100%;
 }
 .spinner {
   border-radius: 50%;
