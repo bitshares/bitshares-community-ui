@@ -6,7 +6,7 @@
       v-model="password"
       :password="true"
       type="number"
-      title="input password"/>
+      title="password"/>
     <div class="backup-step-titles-wrapper">
       <div class="backup-step-subtitle--mini">key file</div>
       <div class="backup-step-subtitle">bts_default121_20102.bin</div>

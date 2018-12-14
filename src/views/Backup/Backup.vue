@@ -85,8 +85,9 @@ export default {
   computed: {
     ...mapGetters({
       backupPhrase: 'acc/getBrainkey',
-      isLocked: 'acc/getBackupFile',
-      userName: 'acc/getCurrentUserName'
+      isLocked: 'acc/isLocked',
+      userName: 'acc/getCurrentUserName',
+      isValidPassword: 'acc/isValidPassword'
     }),
     phrase() {
       return this.backupPhrase.split(' ')
@@ -95,7 +96,8 @@ export default {
   methods: {
     ...mapActions('backup', ['toggleModal']),
     ...mapActions({
-      backupBlob: 'acc/getBackupBlob'
+      backupBlob: 'acc/getBackupBlob',
+      unlockWallet: 'acc/unlockWallet'
     }),
 
     closeModal() {
@@ -120,14 +122,20 @@ export default {
     },
 
     async onSave(password) {
+      const passwordString = password.toString()
+
+      if (!this.isValidPassword(passwordString)) {
+        return
+      }
+      if (this.isLocked) {
+        this.unlockWallet(passwordString)
+      }
       const blob = await this.backupBlob({
         brainkey: this.backupPhrase,
-        password: password.toString(),
+        password: passwordString,
         name: this.userName
       })
 
-      console.log(blob)
-      console.log('main backup', password)
       this.saveAs([new Uint8Array(blob)], 'bts_default121_20102.bin')
     },
     goBack() {
