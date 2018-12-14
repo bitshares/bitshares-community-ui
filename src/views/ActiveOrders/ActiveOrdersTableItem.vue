@@ -66,7 +66,7 @@
           :top="get"
           :expanded="expanded"
         >
-          <span slot="bottom">/{{ formattedReceiveAsset }}</span>
+          <span slot="bottom">{{ formattedReceiveAsset }}</span>
         </TwoLineItem>
       </div>
       <div class="table-item _relative">
@@ -74,7 +74,7 @@
           :top="spend"
           :expanded="expanded"
         >
-          <span slot="bottom">/{{ formattedPayAsset }}</span>
+          <span slot="bottom">{{ formattedPayAsset }}</span>
         </TwoLineItem>
       </div>
       <div
