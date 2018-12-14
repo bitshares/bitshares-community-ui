@@ -5,10 +5,17 @@
   >
     <LoadingContainer :loading="isFetching">
       <OrderHistoryTable
+        v-if="filteredItems.length > 0"
         :table-headers="expandMode ? tableHeaders : tableHeadersMini"
         :items="filteredItems"
         :expanded="expandMode"
       />
+      <div
+        v-if="filteredItems.length === 0"
+        class="noOrderHistory"
+      >
+        <p>No Order History</p>
+      </div>
     </LoadingContainer>
   </div>
 </template>
@@ -74,5 +81,17 @@ export default {
   .order-history {
     position: relative;
     height: 100%;
+  }
+  .noOrderHistory {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    p {
+      color:config('colors.white');
+      opacity: 0.5;
+      text-align: center;
+      width: 100%;
+      font-size: 1.5rem;
+    }
   }
 </style>
