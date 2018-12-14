@@ -2,7 +2,7 @@
   <Modal
     v-if="showWithdraw"
     @close="toggle">
-    <Withdraw v-if="!isAddressScreen"/>
+    <Withdraw/>
   </Modal>
 </template>
 

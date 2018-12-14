@@ -2,9 +2,52 @@
   <div class="withdraw-container h-full sm:w-120">
     <div class="withdraw-title">withdraw</div>
     <div class="withdraw-sub-title">Choose token</div>
+    <div class="withdraw-loader-wrapper">
+      <LoadingContainer :loading="false">
+        <ScrollingContainer
+          :shadower-height="0"
+        >
+          <div class="withdraw-content">
+            <Button
+              v-for="(asset, index) in coinslist"
+              :key="index"
+              :text="asset"
+              type="secondary"
+              width="full"
+              class="withdraw-item"
+              @click="selectAsset(asset)"
+            />
+          </div>
+        </ScrollingContainer>
+      </LoadingContainer>
+    </div>
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import ScrollingContainer from '@/components/ScrollingContainer'
+import LoadingContainer from '@/components/LoadingContainer'
+import Button from '@/components/Button'
+
+export default {
+  components: {
+    ScrollingContainer,
+    LoadingContainer,
+    Button
+  },
+  computed: {
+    ...mapGetters({}),
+    coinslist() {
+      return []
+      // return Object.keys(this.coins).map(coin => coin)
+    }
+  },
+  methods: {
+    selectAsset() {
+      console.log(1)
+    }
+  }
+}
 </script>
 <style lang="scss">
   .withdraw-container {
@@ -14,6 +57,15 @@
     flex-direction: column;
     height: 100%;
 
+    .withdraw-loader-wrapper {
+      height: 100%;
+      overflow-y: auto;
+      padding: 3rem 0 0;
+    }
+    .withdraw-content {
+      overflow-y: auto;
+      height: 27rem;
+    }
     .withdraw-title {
       font-size: config('textSizes.lg');
       text-align: center;
@@ -24,5 +76,15 @@
       font-size: config('textSizes.lg');
       text-align: center;
     }
+    .withdraw-item {
+      margin-top: 0.9375rem;
+    }
+    @media screen and (max-width: 800px) {
+    .withdraw-container {
+      .withdraw-content {
+        height: 100%;
+      }
+    }
+  }
   }
 </style>
