@@ -3,7 +3,7 @@
     <div class="withdraw-title">withdraw</div>
     <div class="withdraw-sub-title">Choose token</div>
     <div class="withdraw-loader-wrapper">
-      <LoadingContainer :loading="false">
+      <LoadingContainer :loading="!coinslist.length">
         <ScrollingContainer
           :shadower-height="0"
         >
@@ -11,7 +11,7 @@
             <Button
               v-for="(asset, index) in coinslist"
               :key="index"
-              :text="asset"
+              :text="asset.tiker"
               type="secondary"
               width="full"
               class="withdraw-item"
@@ -36,15 +36,16 @@ export default {
     Button
   },
   computed: {
-    ...mapGetters({}),
+    ...mapGetters({
+      coins: 'portfolio/getItems'
+    }),
     coinslist() {
-      return []
-      // return Object.keys(this.coins).map(coin => coin)
+      console.log(this.coins)
+      return this.coins.filter(coin => coin.tokens > 0)
     }
   },
   methods: {
     selectAsset() {
-      console.log(1)
     }
   }
 }
@@ -60,7 +61,7 @@ export default {
     .withdraw-loader-wrapper {
       height: 100%;
       overflow-y: auto;
-      padding: 3rem 0 0;
+      padding: .5rem 0 0;
     }
     .withdraw-content {
       overflow-y: auto;
