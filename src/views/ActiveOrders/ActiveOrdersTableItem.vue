@@ -145,7 +145,7 @@ export default {
       return removePrefix(this.item.receiveAssetSymbol)
     },
     dateOpen() {
-      return format(this.item.dateOpen, 'DD/MM')
+      return format(this.item.dateOpen, 'DD/MM/YY')
     },
     timeOpen() {
       return format(this.item.dateOpen, 'HH:mm')
