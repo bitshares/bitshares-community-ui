@@ -2,20 +2,23 @@
   <Modal
     v-if="showWithdraw"
     @close="toggle">
-    <Withdraw/>
+    <!--<Withdraw/>-->
+    <WithdrawConfirm/>
   </Modal>
 </template>
 
 <script>
 import Modal from '@/components/Modal/Modal'
 import Withdraw from './Withdraw.vue'
+import WithdrawConfirm from './WithdrawConfirm.vue'
 
 import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'WithdrawWidget',
   components: {
     Modal,
-    Withdraw
+    Withdraw,
+    WithdrawConfirm
   },
   computed: {
     ...mapGetters({
