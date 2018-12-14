@@ -9,6 +9,7 @@ import activeOrders from './modules/activeOrders'
 import marketsMonitor from './modules/marketsMonitor'
 import newOrder from './modules/newOrder'
 import deposit from './modules/deposit'
+import withdraw from './modules/withdraw'
 
 import createPersistedState from 'vuex-persistedstate'
 import vuexBitshares from 'vuex-bitshares'
@@ -28,6 +29,7 @@ const store = new Vuex.Store({
     portfolio,
     backup,
     deposit,
+    withdraw,
     orderBook,
     orderHistory,
     newOrder,

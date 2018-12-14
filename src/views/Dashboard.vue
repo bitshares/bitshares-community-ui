@@ -8,6 +8,7 @@
     </Modal>
 
     <Deposit/>
+    <Withdraw/>
 
     <div class="dashboard hidden lg:block">
       <div class="flex flex-col lg:flex-row mb-card-margin">
@@ -130,6 +131,7 @@ import Modal from '@/components/Modal/Modal'
 import Mobile from '@/views/Mobile/Mobile'
 import NewOrder from '@/views/NewOrder/NewOrder'
 import Deposit from '@/views/Deposit/DepositWidget'
+import Withdraw from '@/views/Withdraw/WithdrawWidget'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -152,7 +154,8 @@ export default {
     Modal,
     Mobile,
     NewOrder,
-    Deposit
+    Deposit,
+    Withdraw
   },
   computed: {
     ...mapGetters({
