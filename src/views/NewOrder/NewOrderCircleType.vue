@@ -2,7 +2,6 @@
   <div class="circles">
     <!--dynamic-->
     <div
-      v-if="mode !== 'layout'"
       :class="{'circle-container--positive': isPositive}"
       class="circle-container"
     >
@@ -15,8 +14,8 @@
         </div>
       </div>
     </div>
-    <!--mode layout-->
-    <div v-if="mode === 'layout'">
+    <!-- layout-->
+    <div>
       <div
         v-for="(item, index) in layoutItems"
         :key="index"
@@ -45,10 +44,6 @@ export default {
     value: {
       type: Number,
       default: 0
-    },
-    mode: {
-      type: String,
-      default: ''
     }
   },
   data() {

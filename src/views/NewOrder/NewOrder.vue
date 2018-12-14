@@ -48,7 +48,6 @@
     </div>
     <NewOrderCirclePrice :percent="15"/>
     <NewOrderCircleType :value="20"/>
-    <NewOrderCircleType mode="layout"/>
     <div class="new-order-button">
       <Btn
         :type="type"
@@ -214,6 +213,7 @@ export default {
     .new-order-price {
       margin-top: 2rem;
       display: flex;
+      z-index: 10;
       justify-content: center;
     }
   }
