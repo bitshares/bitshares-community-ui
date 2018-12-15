@@ -115,10 +115,12 @@ export default {
   }
 }
 .btn--small {
-  @apply py-1 pr-4 cursor-pointer text-xs;
+  @apply cursor-pointer text-xs;
   height: 2rem;
-  min-width: 6.785rem;
+  padding: 0 0.76rem;
+  min-width: 6.8889rem;
   font-size: 0.9rem;
+  letter-spacing: -0.6px;
 }
 .btn--big {
   @apply py-2 px-6 cursor-pointer text-2xl;
