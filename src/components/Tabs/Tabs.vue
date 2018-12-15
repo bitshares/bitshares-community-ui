@@ -96,8 +96,8 @@ export default {
   }
 
   .tabs__favourite {
-    margin: 0px -5px 0px 11px;
-    line-height: 28px;
+    margin: 0px -0.3125rem 0px 0.6875rem;
+    line-height: 1.75rem;
   }
 }
 
