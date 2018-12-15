@@ -19,7 +19,7 @@
         :loading="pending"
         text="Confirm"
         width="full"
-        @click="confirm"
+        @click="unlock"
       />
       <Button
         text="Cancel"
@@ -105,13 +105,7 @@ export default {
       } else {
         this.error = true
       }
-    },
-
-    confirm() {
-      if (this.isLocked) this.unlock()
-      if (!this.isLocked) this.$emit('confirm')
     }
-
   }
 }
 </script>

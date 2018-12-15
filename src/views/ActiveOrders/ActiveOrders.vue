@@ -90,7 +90,6 @@ export default {
   methods: {
     async removeOrder() {
       const unlocked = await this.$unlock()
-      console.log(unlocked)
       if (unlocked) {
         console.log('unlocked -> remove order')
       }
