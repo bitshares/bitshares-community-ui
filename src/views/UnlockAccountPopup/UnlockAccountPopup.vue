@@ -1,9 +1,10 @@
 <template>
   <Modal
     v-if="show"
+    :no-overlay="true"
     @close="closeModal"
   >
-    <div class="unlock-account-popup-content">
+    <div class="unlock-account-popup-content sm:w-120">
       <div class="unlock-account-popup-title">unlock account</div>
       <SInput
         :password="true"
@@ -52,7 +53,8 @@ export default {
   data() {
     return {
       password: '',
-      show: false
+      show: false,
+      resolveCallback: null
     }
   },
   computed: {
@@ -62,7 +64,7 @@ export default {
     }),
 
     confirmDisabled() {
-      return this.isLocked && !this.password
+      return !this.password
     }
   },
   created() {
@@ -72,20 +74,27 @@ export default {
     ...mapActions('acc', ['unlockWallet']),
 
     showModal() {
-      this.show = true
-      const promise = new Promise((resolve, reject) => {
-
+      const promise = new Promise(resolve => {
+        this.resolveCallback = resolve
       })
+      if (!this.isLocked) {
+        this.resolveCallback(true)
+      } else {
+        this.show = true
+      }
       return promise
     },
 
     closeModal() {
+      this.resolveCallback(false)
       this.show = false
     },
 
     unlock() {
       if (this.isValidPassword(this.password + '')) {
         this.unlockWallet(this.password + '')
+        this.resolveCallback(true)
+        this.show = false
       } else {
         this.$toast.error('Invalid password')
       }

@@ -2,6 +2,7 @@
   <transition name="modal">
     <div
       class="modal-mask"
+      :class="{'modal-mask--no-overlay': noOverlay}"
       @click.self.stop="$emit('close')"
     >
       <div
@@ -39,6 +40,10 @@ export default {
       type: String,
       required: false,
       default: 'auto'
+    },
+    noOverlay: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -57,6 +62,9 @@ export default {
   justify-content: center;
   align-items: center;
   transition: opacity .3s ease;
+  &--no-overlay {
+    background: none;
+  }
 }
 
 .modal-wrapper {
