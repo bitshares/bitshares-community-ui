@@ -12,7 +12,7 @@
       />
       <Button
         :text="withdrawAsset.tiker"
-        :disabled="isAmountValid"
+        :disabled="true"
         type="secondary"
         width="full"
       />
@@ -22,16 +22,17 @@
       v-model="amount"
       :tip="maxWithdrawTitle"
       :centered="true"
-      :error="isAmountValid"
+      :error="isAmountValid === 'valid' ? '' : isAmountValid"
       title="withdrawal amount"
     />
     <div class="withdraw-footer">
       <Button
-        :disabled="!!isAmountValid"
+        :disabled="(isAmountValid === errorTitle || !isAmountValid) ? true : false"
         text="Confirm amount"
         type="secondary"
         width="full"
         class="withdraw-btn"
+        @click="setWithdrawStep('withdrawConfirmAddress')"
       />
     </div>
   </div>
@@ -49,7 +50,8 @@ export default {
   },
   data() {
     return {
-      amount: ''
+      amount: '',
+      errorTitle: 'Please enter valid amount'
     }
   },
   computed: {
@@ -66,9 +68,9 @@ export default {
         return ''
       }
       if (!isNumeric() || +this.amount < 1 || +this.amount > this.withdrawAsset.tokens) {
-        return 'Please enter valid amount'
+        return this.errorTitle
       }
-      return ''
+      return 'valid'
     }
   },
   methods: {

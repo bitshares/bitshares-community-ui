@@ -51,12 +51,12 @@ export default {
     }),
     selectAsset(asset) {
       this.setWithdrawAsset({ asset })
-      this.setWithdrawStep('withdrawConfirm')
+      this.setWithdrawStep('withdrawConfirmAmount')
     }
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   .withdraw-container {
     color: config('colors.primary');
     padding: 0.6rem;
@@ -72,6 +72,7 @@ export default {
     .withdraw-content {
       overflow-y: auto;
       height: 27rem;
+      justify-content: flex-start;
     }
     .withdraw-title {
       font-size: config('textSizes.lg');

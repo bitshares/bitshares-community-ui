@@ -3,14 +3,18 @@
     v-if="showWithdraw"
     @close="toggle">
     <Withdraw v-if="withdrawStep === 'withdraw'"/>
-    <WithdrawConfirm v-if="withdrawStep === 'withdrawConfirm'"/>
+    <WithdrawConfirmAmount v-if="withdrawStep === 'withdrawConfirmAmount'"/>
+    <WithdrawConfirmAddress v-if="withdrawStep === 'withdrawConfirmAddress'"/>
+    <WithdrawFinish v-if="withdrawStep === 'withdrawFinish'"/>
   </Modal>
 </template>
 
 <script>
 import Modal from '@/components/Modal/Modal'
 import Withdraw from './Withdraw.vue'
-import WithdrawConfirm from './WithdrawConfirm.vue'
+import WithdrawConfirmAmount from './WithdrawConfirmAmount'
+import WithdrawConfirmAddress from './WithdrawConfirmAddress'
+import WithdrawFinish from './WithdrawFinish'
 
 import { mapGetters, mapActions } from 'vuex'
 export default {
@@ -18,7 +22,9 @@ export default {
   components: {
     Modal,
     Withdraw,
-    WithdrawConfirm
+    WithdrawConfirmAmount,
+    WithdrawConfirmAddress,
+    WithdrawFinish
   },
   computed: {
     ...mapGetters({
@@ -26,9 +32,13 @@ export default {
       withdrawStep: 'withdraw/getWithdrawStep'
     })
   },
+  created() {
+    this.setWithdrawStep('withdraw')
+  },
   methods: {
     ...mapActions({
-      toggle: 'withdraw/toggleModal'
+      toggle: 'withdraw/toggleModal',
+      setWithdrawStep: 'withdraw/setWithdrawStep'
     })
   }
 }
