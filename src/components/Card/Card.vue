@@ -128,7 +128,7 @@ export default {
   border-width: 1px;
   transition: 0.2s;
   &.card--expanded {
-    height: 35rem;
+    height: 23.479rem;
     .card-header {
       padding-right: 2rem;
       padding-top: 1rem;

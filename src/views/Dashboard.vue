@@ -9,9 +9,34 @@
 
     <Deposit/>
 
+
     <div class="dashboard hidden lg:block">
+
+      <!-- <div class="flex">
+        <Card
+          :expandable="true"
+          :collapsible="true"
+          title="account"
+          class="mb-card-margin mr-card-margin lg:w-1/3"
+        >
+          <AccountHeader slot="header"/>
+          <AccountHeader
+            slot="modal-header"
+            :large="true"/>
+          <Portfolio slot="body"/>
+          <Portfolio
+            slot="modal"
+            :expanded="true"/>
+        </Card>
+        <Card
+          class="lg:w-2/3"
+          :collapsible="true"
+          title="graph"
+        />
+      </div> -->
+
       <div class="flex flex-col lg:flex-row mb-card-margin">
-        <div class="flex flex-col lg:w-1/3 mr-card-margin">
+        <div class="flex flex-col lg:w-1/3 pr-card-row">
           <div>
             <Card
               :expandable="true"
@@ -47,7 +72,7 @@
 
         </div>
 
-        <div class="flex flex-col lg:w-2/3">
+        <div class="flex flex-col lg:w-2/3 pr-card-row">
           <div class="mb-card-margin">
             <Card
               :collapsible="true"
@@ -55,7 +80,7 @@
             />
           </div>
           <div class="flex">
-            <div class="flex flex-col lg:w-1/2 mr-card-margin">
+            <div class="flex flex-col lg:w-1/2 pr-half-card-row">
               <Card
                 :collapsible="true"
                 class="mb-card-margin"
@@ -77,7 +102,7 @@
               </Card>
 
             </div>
-            <div class="flex flex-col lg:w-1/2">
+            <div class="flex flex-col lg:w-1/2 pl-half-card-row">
               <div>
                 <Card
                   :collapsible="true"
