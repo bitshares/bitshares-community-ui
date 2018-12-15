@@ -1,8 +1,8 @@
 <template>
   <transition name="modal">
     <div
-      class="modal-mask"
       :class="{'modal-mask--no-overlay': noOverlay}"
+      class="modal-mask"
       @click.self.stop="$emit('close')"
     >
       <div
