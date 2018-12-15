@@ -12,25 +12,25 @@
         />
         <TwoLineItem
           :top="formattedTiker"
-          class="pl-6"
+          class="pl-8"
         >
           <span slot="bottom">/{{ formattedBase }}</span>
         </TwoLineItem>
       </div>
-      <div class="tickers-list__item text-right">
+      <div class="tickers-list__item">
         <TwoLineItem :top="price">
           <span slot="bottom">${{ formattedUsdPrice }}</span>
         </TwoLineItem>
       </div>
-      <div class="tickers-list__item text-right _verticalCenter">
-        <div class="tickers-list__itemVolume">{{ volUsd }}</div>
-      </div>
-      <div class="tickers-list__item text-right _verticalCenter">
+      <div class="tickers-list__item text-center _verticalCenter">
         <div
           :class="getClassesOfDynamic({ price: item.change24h })"
           class="tickers-list__itemVolume _currencyTitle">
           {{ changeValue24 }}
         </div>
+      </div>
+      <div class="tickers-list__item text-right _verticalCenter">
+        <div class="tickers-list__itemVolume">{{ volUsd }}</div>
       </div>
     </div>
     <!--expand mode-->
@@ -45,7 +45,7 @@
           @click.native="$emit('change', { item })"
         />
         <div class="tickers-list__itemPair">
-          <span class="_currencyTitle pl-6">{{ formattedTiker }}</span>
+          <span class="_currencyTitle pl-8">{{ formattedTiker }}</span>
           <span class="_tickerTitle">/{{ formattedBase }}</span>
         </div>
       </div>
@@ -142,7 +142,7 @@ export default {
 <style lang="scss">
   .tickers__favourite {
     position: absolute;
-    left: 0;
+    left: .14rem;
     top: .6rem;
   }
   .tickers-list__item {
@@ -166,7 +166,7 @@ export default {
   }
   .tickers-list-row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1.25fr 1.25fr 0.75fr 0.75fr;
     padding: .2675rem 1rem .4375rem .54rem;
     transition: background 0.2s ease;
     cursor: pointer;
@@ -202,7 +202,7 @@ export default {
         }
         .tickers__favourite {
           position: absolute;
-          left: 0;
+          left: 0.21rem;
           top: .35rem;
         }
         .tickers-list__itemVolume {

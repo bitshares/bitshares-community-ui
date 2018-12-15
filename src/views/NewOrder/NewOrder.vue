@@ -13,6 +13,8 @@
       :active="'LIMIT'"
       @change="setActiveIndication"
     />
+    <NewOrderCirclePrice :percent="0"/>
+    <NewOrderCircleType :value="0"/>
     <NewOrderPercentSelector
       :percent-items="percentItems"
       :active-percent="activePercent"
@@ -46,6 +48,7 @@
         @change="setPrice"
       />
     </div>
+
     <div class="new-order-button">
       <Btn
         :type="type"
@@ -58,13 +61,12 @@
       </Btn>
     </div>
     <!-- CONFIRM ORDER -->
-
     <ConfirmModal
       :show="confirmDisplayed"
       :pending="pending"
       title="confirm order"
       @close="hideConfirm"
-      @confirm="dispatchOrder"
+      @confirm="handleOrderConfirm"
     >
       <ConfirmOrder
         :base="base"
@@ -73,8 +75,7 @@
         :price="price"
         :base-amount="baseAmount"
         :quote-amount="quoteAmount"
-        :trading-fee="15.82"
-        :exchange-fee="10.23"
+        :fees="fees"
         @close="hideConfirm"
       />
     </ConfirmModal>
@@ -91,6 +92,8 @@ import Tabs from '@/components/Tabs/Tabs'
 import ConfirmOrder from '@/views/ConfirmOrder/ConfirmOrder'
 import Modal from '@/components/Modal'
 import ConfirmModal from '@/views/ConfirmModal/ConfirmModal.vue'
+import NewOrderCirclePrice from './NewOrderCirclePrice'
+import NewOrderCircleType from './NewOrderCircleType'
 import { getFloatCurrency } from '@/helpers/utils'
 
 export default {
@@ -102,7 +105,9 @@ export default {
     Tabs,
     ConfirmOrder,
     Modal,
-    ConfirmModal
+    ConfirmModal,
+    NewOrderCirclePrice,
+    NewOrderCircleType
   },
   computed: {
     ...mapGetters({
@@ -115,6 +120,7 @@ export default {
       baseAmount: 'newOrder/getBaseAmount',
       quoteAmount: 'newOrder/getQuoteAmount',
       price: 'newOrder/getPrice',
+      fees: 'newOrder/getFees',
       marketPrices: 'newOrder/getMarketPrices',
       maxBase: 'newOrder/getMaxBase',
       maxQuote: 'newOrder/getMaxQuote',
@@ -178,6 +184,12 @@ export default {
       } else {
         this.setBaseAmount(amount)
         if (price) this.setQuoteAmount(amount / price)
+      }
+    },
+    async handleOrderConfirm() {
+      const unlocked = await this.$unlock()
+      if (unlocked) {
+        this.dispatchOrder()
       }
     }
   }

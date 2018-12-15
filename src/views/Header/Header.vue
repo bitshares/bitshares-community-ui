@@ -1,5 +1,5 @@
 <template>
-  <div class="header hidden lg:flex">
+  <div class="header hidden lg:flex pr-card-row">
     <div class="back-header" />
     <div class="lg:w-1/3">
       <svgicon

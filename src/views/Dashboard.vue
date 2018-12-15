@@ -12,7 +12,7 @@
 
     <div class="dashboard hidden lg:block">
       <div class="flex flex-col lg:flex-row mb-card-margin">
-        <div class="flex flex-col lg:w-1/3 mr-card-margin">
+        <div class="flex flex-col lg:w-1/3 pr-card-row">
           <div>
             <Card
               :expandable="true"
@@ -48,7 +48,7 @@
 
         </div>
 
-        <div class="flex flex-col lg:w-2/3">
+        <div class="flex flex-col lg:w-2/3 pr-card-row">
           <div class="mb-card-margin">
             <Card
               :collapsible="true"
@@ -56,7 +56,7 @@
             />
           </div>
           <div class="flex">
-            <div class="flex flex-col lg:w-1/2 mr-card-margin">
+            <div class="flex flex-col lg:w-1/2 pr-half-card-row">
               <Card
                 :collapsible="true"
                 class="mb-card-margin"
@@ -78,7 +78,7 @@
               </Card>
 
             </div>
-            <div class="flex flex-col lg:w-1/2">
+            <div class="flex flex-col lg:w-1/2 pl-half-card-row">
               <div>
                 <Card
                   :collapsible="true"
@@ -110,6 +110,7 @@
     </div>
     <!-- TODO: use some vue plugin to disable when not on mobile -->
     <Mobile/>
+    <UnlockAccountPopup/>
   </div>
 </template>
 
@@ -132,6 +133,7 @@ import Mobile from '@/views/Mobile/Mobile'
 import NewOrder from '@/views/NewOrder/NewOrder'
 import Deposit from '@/views/Deposit/DepositWidget'
 import Withdraw from '@/views/Withdraw/WithdrawWidget'
+import UnlockAccountPopup from '@/views/UnlockAccountPopup/UnlockAccountPopup'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -155,7 +157,8 @@ export default {
     Mobile,
     NewOrder,
     Deposit,
-    Withdraw
+    Withdraw,
+    UnlockAccountPopup
   },
   computed: {
     ...mapGetters({

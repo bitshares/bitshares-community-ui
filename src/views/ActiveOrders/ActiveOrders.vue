@@ -5,11 +5,20 @@
   >
     <LoadingContainer :loading="isFetching">
       <ActiveOrdersTable
+        v-if="filteredItems.length > 0"
         :table-headers="tableHeaders"
         :items="filteredItems"
         :expanded="expandMode"
         @remove-order="showRemoveModal = true"
       />
+      <div
+        v-if="filteredItems.length === 0"
+        class="noActiveOrders"
+      >
+        <p>
+          No Active Orders
+        </p>
+      </div>
     </LoadingContainer>
     <ConfirmModal
       :show="showRemoveModal"
@@ -57,7 +66,7 @@ export default {
       }
       const search = this.searchStr.toLowerCase()
       return this.items.filter(item => {
-        return item.payAssetSymbol.toLowerCase().includes(search)
+        return item.payAssetSymbol && item.payAssetSymbol.toLowerCase().includes(search)
       })
     },
     tableHeaders() {
@@ -79,8 +88,11 @@ export default {
     }
   },
   methods: {
-    removeOrder() {
-      // console.log('confirmed order remove')
+    async removeOrder() {
+      const unlocked = await this.$unlock()
+      if (unlocked) {
+        console.log('unlocked -> remove order')
+      }
     }
   }
 }
@@ -89,5 +101,18 @@ export default {
   .active-orders {
     position: relative;
     height: 100%;
+  }
+
+  .noActiveOrders {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    p {
+      color:config('colors.white');
+      opacity: 0.5;
+      text-align: center;
+      width: 100%;
+      font-size: 1.5rem;
+    }
   }
 </style>
