@@ -4,10 +4,11 @@
     :no-overlay="true"
     @close="closeModal"
   >
-    <div class="unlock-account-popup-content sm:w-120">
-      <div class="unlock-account-popup-title">unlock account</div>
+    <div class="unlock-account-popup__content sm:w-120">
+      <div class="unlock-account-popup__title">unlock account</div>
       <SInput
         :password="true"
+        :error="errorMessage"
         v-model="password"
         class="unlock-account-popup__input"
         type="password"
@@ -54,6 +55,7 @@ export default {
     return {
       password: '',
       show: false,
+      error: false,
       resolveCallback: null
     }
   },
@@ -62,9 +64,11 @@ export default {
       isLocked: 'acc/isLocked',
       isValidPassword: 'acc/isValidPassword'
     }),
-
     confirmDisabled() {
       return !this.password
+    },
+    errorMessage() {
+      return this.error ? 'Pin or Password is incorrect' : ''
     }
   },
   created() {
@@ -88,15 +92,18 @@ export default {
     closeModal() {
       this.resolveCallback(false)
       this.show = false
+      this.error = false
+      this.password = ''
     },
 
     unlock() {
+      this.error = false
       if (this.isValidPassword(this.password + '')) {
         this.unlockWallet(this.password + '')
         this.resolveCallback(true)
         this.show = false
       } else {
-        this.$toast.error('Invalid password')
+        this.error = true
       }
     },
 
@@ -109,16 +116,16 @@ export default {
 }
 </script>
 <style lang="scss">
-  .unlock-account-popup__input {
-    margin: 4rem 0;
-  }
-  .unlock-account-popup-title {
+  .unlock-account-popup__title {
     color: config('colors.text-primary');
     text-align: center;
     text-transform: uppercase;
     font-weight: 600;
   }
-  .unlock-account-popup-content {
+  .unlock-account-popup__content {
     padding: 1.25rem 1.25rem 0.5rem;
+  }
+  .unlock-account-popup__input {
+    margin: 4rem 0;
   }
 </style>
