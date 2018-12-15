@@ -10,7 +10,7 @@
         name="cancel"
       />
       <Button
-        :text="'asset'"
+        :text="withdrawAsset.tiker"
         :disabled="true"
         type="secondary"
         width="full"
@@ -21,10 +21,11 @@
     <SimpleInput
       :value="amount"
       :centered="true"
+      :placeholder="withdrawAsset.tokens"
       :no-padding="true"
       @input="confirm"
     />
-    <div class="withdraw-sub-title withdraw-sub-title--description-lower">max XXX BTC</div>
+    <div class="withdraw-sub-title withdraw-sub-title--description-lower">{{ maxWithdrawTitle }}</div>
     <div class="withdraw-footer">
       <Button
         text="Confirm amount"
@@ -36,9 +37,11 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import Button from '@/components/Button'
 import SimpleInput from '@/components/SimpleInput'
 import '@icons/cancel'
+
 export default {
   components: {
     Button,
@@ -50,6 +53,12 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      withdrawAsset: 'withdraw/getWithdrawAsset'
+    }),
+    maxWithdrawTitle() {
+      return `max ${this.withdrawAsset.tokens} ${this.withdrawAsset.tiker}`
+    }
   },
   methods: {
     confirm() {
@@ -89,7 +98,7 @@ export default {
         text-align: center;
         font-size: config('textSizes.xxs');
         color: config('colors.inactive');
-        margin: 5px 0 1rem 0;
+        margin: 0.3125rem 0 1.5rem 0;
       }
     }
     .withdraw-item {

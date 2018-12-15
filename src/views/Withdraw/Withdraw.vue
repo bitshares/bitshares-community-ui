@@ -24,7 +24,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import ScrollingContainer from '@/components/ScrollingContainer'
 import LoadingContainer from '@/components/LoadingContainer'
 import Button from '@/components/Button'
@@ -45,7 +45,13 @@ export default {
     }
   },
   methods: {
-    selectAsset() {
+    ...mapActions({
+      setWithdrawAsset: 'withdraw/setWithdrawAsset',
+      setWithdrawStep: 'withdraw/setWithdrawStep'
+    }),
+    selectAsset(asset) {
+      this.setWithdrawAsset({ asset })
+      this.setWithdrawStep('withdrawConfirm')
     }
   }
 }

@@ -2,8 +2,8 @@
   <Modal
     v-if="showWithdraw"
     @close="toggle">
-    <!--<Withdraw/>-->
-    <WithdrawConfirm/>
+    <Withdraw v-if="withdrawStep === 'withdraw'"/>
+    <WithdrawConfirm v-if="withdrawStep === 'withdrawConfirm'"/>
   </Modal>
 </template>
 
@@ -22,7 +22,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showWithdraw: 'withdraw/modalDisplayed'
+      showWithdraw: 'withdraw/modalDisplayed',
+      withdrawStep: 'withdraw/getWithdrawStep'
     })
   },
   methods: {
