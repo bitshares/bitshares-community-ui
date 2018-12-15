@@ -32,9 +32,6 @@ export default {
       withdrawStep: 'withdraw/getWithdrawStep'
     })
   },
-  created() {
-    this.setWithdrawStep('withdraw')
-  },
   methods: {
     ...mapActions({
       toggle: 'withdraw/toggleModal',

@@ -31,13 +31,13 @@ const mutations = {
 const actions = {
   toggleModal({ commit }) {
     commit(types.TOGGLE_WITHDRAW_MODAL)
+    commit(types.SET_WITHDRAW_STEP, 'withdraw')
   },
   setWithdrawAsset({ commit }, { asset }) {
     commit(types.SET_WITHDRAW_ASSET, { asset })
   },
   setWithdrawStep({ commit, state }, step) {
     commit(types.SET_WITHDRAW_STEP, step)
-    console.log(state.withdrawStep)
   }
 }
 
