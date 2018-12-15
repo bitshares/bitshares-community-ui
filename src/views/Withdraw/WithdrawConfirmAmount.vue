@@ -29,10 +29,9 @@
       <Button
         :disabled="(isAmountValid === errorTitle || !isAmountValid) ? true : false"
         text="Confirm amount"
-        type="secondary"
         width="full"
         class="withdraw-btn"
-        @click="setWithdrawStep('withdrawConfirmAddress')"
+        @click="confirmAmount"
       />
     </div>
   </div>
@@ -75,10 +74,15 @@ export default {
   },
   methods: {
     ...mapActions({
-      setWithdrawStep: 'withdraw/setWithdrawStep'
+      setWithdrawStep: 'withdraw/setWithdrawStep',
+      setWithdrawAmount: 'withdraw/setWithdrawAmount'
     }),
     cancelConfirm() {
       this.setWithdrawStep('withdraw')
+    },
+    confirmAmount() {
+      this.setWithdrawStep('withdrawConfirmAddress')
+      this.setWithdrawAmount({ amount: this.amount })
     }
   }
 }
