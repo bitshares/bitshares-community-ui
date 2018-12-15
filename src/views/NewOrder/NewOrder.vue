@@ -46,6 +46,8 @@
         @change="setPrice"
       />
     </div>
+    <NewOrderCirclePrice :percent="15"/>
+    <NewOrderCircleType :value="20"/>
     <div class="new-order-button">
       <Btn
         :type="type"
@@ -58,7 +60,6 @@
       </Btn>
     </div>
     <!-- CONFIRM ORDER -->
-
     <ConfirmModal
       :show="confirmDisplayed"
       :pending="pending"
@@ -90,6 +91,8 @@ import Tabs from '@/components/Tabs/Tabs'
 import ConfirmOrder from '@/views/ConfirmOrder/ConfirmOrder'
 import Modal from '@/components/Modal'
 import ConfirmModal from '@/views/ConfirmModal/ConfirmModal.vue'
+import NewOrderCirclePrice from './NewOrderCirclePrice'
+import NewOrderCircleType from './NewOrderCircleType'
 import { getFloatCurrency } from '@/helpers/utils'
 
 export default {
@@ -101,7 +104,9 @@ export default {
     Tabs,
     ConfirmOrder,
     Modal,
-    ConfirmModal
+    ConfirmModal,
+    NewOrderCirclePrice,
+    NewOrderCircleType
   },
   computed: {
     ...mapGetters({
@@ -208,6 +213,7 @@ export default {
     .new-order-price {
       margin-top: 2rem;
       display: flex;
+      z-index: 10;
       justify-content: center;
     }
   }
