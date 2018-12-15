@@ -17,11 +17,14 @@
       />
     </div>
     <div class="withdraw-sub-title">Enter withdrawal amount</div>
+    <div class="withdraw-sub-title withdraw-sub-title--description-upper">withdrawal amount</div>
     <SimpleInput
       :value="amount"
       :centered="true"
+      :no-padding="true"
       @input="confirm"
     />
+    <div class="withdraw-sub-title withdraw-sub-title--description-lower">max XXX BTC</div>
     <div class="withdraw-footer">
       <Button
         text="Confirm amount"
@@ -74,6 +77,20 @@ export default {
       letter-spacing: -0.0555rem;
       margin-top: 1rem;
       margin-bottom: 1rem;
+
+      &--description-upper {
+        text-transform: uppercase;
+        text-align: center;
+        font-size: config('textSizes.xxs');
+        color: config('colors.inactive');
+        margin: 0;
+      }
+      &--description-lower {
+        text-align: center;
+        font-size: config('textSizes.xxs');
+        color: config('colors.inactive');
+        margin: 5px 0 1rem 0;
+      }
     }
     .withdraw-item {
       margin-top: 0;
