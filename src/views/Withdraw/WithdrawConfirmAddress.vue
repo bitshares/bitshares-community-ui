@@ -77,7 +77,7 @@ export default {
     padding: 0.6rem;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 19.375rem;
 
     .withdraw-title {
       font-size: config('textSizes.lg');

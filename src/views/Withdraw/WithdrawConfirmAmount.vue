@@ -90,13 +90,11 @@ export default {
 <style lang="scss" scoped>
   .withdraw-container {
     color: config('colors.primary');
-    padding: 1.2rem;
+    padding: 0.6rem;
     display: flex;
     flex-direction: column;
     min-height: 19.375rem;
-    .loading {
-      overflow: initial;
-    }
+
     .withdraw-title {
       text-align: center;
       text-transform: uppercase;

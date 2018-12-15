@@ -40,7 +40,6 @@ export default {
       coins: 'portfolio/getItems'
     }),
     coinslist() {
-      console.log(this.coins)
       return this.coins.filter(coin => coin.tokens > 0)
     }
   },
@@ -71,8 +70,7 @@ export default {
     }
     .withdraw-content {
       overflow-y: auto;
-      height: 27rem;
-      justify-content: flex-start;
+      height: 19.375rem;
     }
     .withdraw-title {
       font-size: config('textSizes.lg');
