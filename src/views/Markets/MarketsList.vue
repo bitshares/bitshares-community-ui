@@ -9,6 +9,7 @@
       :default-sort="defaultSort"
       :header-left-padding="0.6"
       :header-right-padding="1"
+      :columns-config="expandMode ? [] : [1.25, 1.25, 0.75, 0.75]"
       :large="expandMode"
       class="tickers-list-header"
     >

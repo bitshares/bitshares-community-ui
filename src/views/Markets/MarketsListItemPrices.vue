@@ -166,7 +166,7 @@ export default {
   }
   .tickers-list-row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1.25fr 1.25fr 0.75fr 0.75fr;
     padding: .2675rem 1rem .4375rem .54rem;
     transition: background 0.2s ease;
     cursor: pointer;
