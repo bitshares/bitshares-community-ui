@@ -40,8 +40,8 @@
           v-if="collapsible"
           :class="{'collapse-btn--active' : collapsed }"
           class="collapse-btn"
-          width="11"
-          height="11"
+          width="20"
+          height="20"
           name="arrowDown"
           @click.stop="handleCollapseClick"
         />
@@ -58,6 +58,7 @@
           />
         </div>
         <slot
+          v-if="!collapsed"
           class="header"
           name="header"/>
       </div>
@@ -171,8 +172,11 @@ export default {
   .collapse-btn {
     transform: none;
     transition: transform 0.2s;
-    margin: 0 auto 0 0.5em;
+    margin-left: 0.5rem;
+    padding: 0.25rem;
     opacity: 0.8;
+    align-self: center;
+    flex-shrink: 0;
     cursor: pointer;
     &.collapse-btn--active {
       transform: rotate(-90deg);

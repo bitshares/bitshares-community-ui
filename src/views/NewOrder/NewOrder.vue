@@ -13,6 +13,8 @@
       :active="'LIMIT'"
       @change="setActiveIndication"
     />
+    <NewOrderCirclePrice :percent="0"/>
+    <NewOrderCircleType :value="0"/>
     <NewOrderPercentSelector
       :percent-items="percentItems"
       :active-percent="activePercent"
@@ -46,8 +48,7 @@
         @change="setPrice"
       />
     </div>
-    <NewOrderCirclePrice :percent="15"/>
-    <NewOrderCircleType :value="20"/>
+
     <div class="new-order-button">
       <Btn
         :type="type"
@@ -219,7 +220,6 @@ export default {
     .new-order-price {
       margin-top: 2rem;
       display: flex;
-      z-index: 10;
       justify-content: center;
     }
   }

@@ -687,6 +687,8 @@ module.exports = {
     'book-item-p': '0.225rem',
     'card-ui': '0.6875rem',
     'card': '1.25rem',
+    'card-row': '0.625rem',
+    'half-card-row': '0.3125rem',
     'grid-table': '0.625rem'
   },
 
