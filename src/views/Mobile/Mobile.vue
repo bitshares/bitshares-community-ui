@@ -1,6 +1,12 @@
 <template>
   <div class="mobile-mode flex lg:hidden">
     <div class="mobile-mode-main">
+      <Modal
+        v-if="newOrderFlag"
+        @close="closeOrderModal"
+      >
+        <NewOrder/>
+      </Modal>
       <Card :title="title">
         <div
           slot="header"
@@ -27,6 +33,7 @@
             v-if="activeComponentName === 'Orders'"
             name="cross"
             class="plus-icon"
+            @click="newOrder"
             width="22"
             height="22"
           />
@@ -48,18 +55,20 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import MobileFooter from '@/components/MobileFooter'
-import Account from '@/views/Mobile/MobileAccount.vue'
 import Card from '@/components/Card'
+import Modal from '@/components/Modal/Modal'
+import Account from '@/views/Mobile/MobileAccount.vue'
 import Markets from '@/views/Markets/Markets.vue'
 import Orders from '@/views/Mobile/MobileOrders.vue'
 import OrderBook from '@/views/OrderBook/OrderBook.vue'
+import NewOrder from '@/views/NewOrder/NewOrder.vue'
 import '@icons/markets'
 import '@icons/orders'
 import '@icons/account'
 
 export default {
   name: 'Mobile',
-  components: { MobileFooter, Markets, Account, Orders, Card, OrderBook },
+  components: { MobileFooter, Markets, Account, Orders, Card, OrderBook, Modal, NewOrder },
   data() {
     return {
       activeComponentName: 'Markets',
@@ -69,7 +78,8 @@ export default {
         name: 'Orders', title: 'Orders', icon: 'orders'
       }, {
         name: 'Account', title: 'Account', icon: 'account'
-      }]
+      }],
+      newOrderFlag: false
     }
   },
   computed: {
@@ -109,6 +119,12 @@ export default {
     handleLogout() {
       this.$router.push({ name: 'login' })
       this.logout()
+    },
+    newOrder() {
+      this.newOrderFlag = true
+    },
+    closeOrderModal() {
+      this.newOrderFlag = false
     }
   }
 }
