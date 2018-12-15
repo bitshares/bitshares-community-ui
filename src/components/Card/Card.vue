@@ -176,6 +176,7 @@ export default {
     padding: 0.25rem;
     opacity: 0.8;
     align-self: center;
+    flex-shrink: 0;
     cursor: pointer;
     &.collapse-btn--active {
       transform: rotate(-90deg);

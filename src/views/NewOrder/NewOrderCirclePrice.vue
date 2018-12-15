@@ -65,6 +65,8 @@ export default {
   $default-size: 7.75rem;
 
   .circle-price-container {
+    pointer-events: none;
+    z-index: 0;
     position: absolute;
     top: 48%;
     left: 33%;

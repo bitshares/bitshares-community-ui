@@ -86,7 +86,12 @@ export default {
 <style lang="scss">
   $default-size: 7.75rem;
 
-  .circle-container {
+  .circles {
+    pointer-events: none;
+    // z-index: -100;
+  }
+
+  .circle-container {  
     transform: scale(1.2, 1.2);
     position: absolute;
     top: 48%;
