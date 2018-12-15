@@ -12,7 +12,7 @@
         />
         <TwoLineItem
           :top="formattedTiker"
-          class="pl-6"
+          class="pl-8"
         >
           <span slot="bottom">/{{ formattedBase }}</span>
         </TwoLineItem>
@@ -45,7 +45,7 @@
           @click.native="$emit('change', { item })"
         />
         <div class="tickers-list__itemPair">
-          <span class="_currencyTitle pl-6">{{ formattedTiker }}</span>
+          <span class="_currencyTitle pl-8">{{ formattedTiker }}</span>
           <span class="_tickerTitle">/{{ formattedBase }}</span>
         </div>
       </div>
@@ -142,7 +142,7 @@ export default {
 <style lang="scss">
   .tickers__favourite {
     position: absolute;
-    left: 0;
+    left: .14rem;
     top: .6rem;
   }
   .tickers-list__item {
@@ -202,7 +202,7 @@ export default {
         }
         .tickers__favourite {
           position: absolute;
-          left: 0;
+          left: 0.21rem;
           top: .35rem;
         }
         .tickers-list__itemVolume {

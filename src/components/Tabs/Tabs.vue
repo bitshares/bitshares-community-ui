@@ -96,7 +96,7 @@ export default {
   }
 
   .tabs__favourite {
-    margin: 0 1px 0 8px;
+    margin: 0px -5px 0px 11px;
     line-height: 28px;
   }
 }
@@ -116,10 +116,11 @@ export default {
   }
 
   &--currency {
-    margin: 0 7px;
-    margin-top: -7px;
+    margin-left: 1rem;;
+    padding: 0.25rem 0;
     border-bottom: none;
-    padding-bottom: .25rem;
+    font-size: 1.25rem;
+    letter-spacing: -1px;
     font-family: config('fonts.gotham-medium');
   }
 
