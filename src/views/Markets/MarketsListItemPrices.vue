@@ -17,20 +17,20 @@
           <span slot="bottom">/{{ formattedBase }}</span>
         </TwoLineItem>
       </div>
-      <div class="tickers-list__item text-right">
+      <div class="tickers-list__item">
         <TwoLineItem :top="price">
           <span slot="bottom">${{ formattedUsdPrice }}</span>
         </TwoLineItem>
       </div>
-      <div class="tickers-list__item text-right _verticalCenter">
-        <div class="tickers-list__itemVolume">{{ volUsd }}</div>
-      </div>
-      <div class="tickers-list__item text-right _verticalCenter">
+      <div class="tickers-list__item text-center _verticalCenter">
         <div
           :class="getClassesOfDynamic({ price: item.change24h })"
           class="tickers-list__itemVolume _currencyTitle">
           {{ changeValue24 }}
         </div>
+      </div>
+      <div class="tickers-list__item text-right _verticalCenter">
+        <div class="tickers-list__itemVolume">{{ volUsd }}</div>
       </div>
     </div>
     <!--expand mode-->

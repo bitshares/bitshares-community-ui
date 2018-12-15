@@ -91,7 +91,7 @@ export default {
     // z-index: -100;
   }
 
-  .circle-container {  
+  .circle-container {
     transform: scale(1.2, 1.2);
     position: absolute;
     top: 48%;
