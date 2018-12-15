@@ -103,6 +103,7 @@ export default {
       letter-spacing: -0.0555rem;
       margin-top: 1rem;
       margin-bottom: 1rem;
+      text-align: center;
     }
     .withdraw-item {
       margin-top: 0;
