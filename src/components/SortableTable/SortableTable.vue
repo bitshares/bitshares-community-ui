@@ -11,7 +11,7 @@
         :current-field="sort.field"
         :sort="getSort(header)"
         :align="header.align"
-        :padding-left="header.paddingLeft"
+        :padding-left="header.paddingLeft + 0.3"
         :large="large"
         @change="toggleSort"
       />
