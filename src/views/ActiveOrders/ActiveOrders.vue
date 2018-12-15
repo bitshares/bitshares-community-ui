@@ -9,7 +9,7 @@
         :table-headers="tableHeaders"
         :items="filteredItems"
         :expanded="expandMode"
-        @remove-order="showRemoveModal = true"
+        @remove-order="removeOrder"
       />
       <div
         v-if="filteredItems.length === 0"
@@ -20,14 +20,14 @@
         </p>
       </div>
     </LoadingContainer>
-    <ConfirmModal
+    <!-- <ConfirmModal
       :show="showRemoveModal"
       title="confirm order remove"
       @close="showRemoveModal = false"
       @confirm="removeOrder"
     >
       <div class="color-text-primary">Are you sure you want to remove order?</div>
-    </ConfirmModal>
+    </ConfirmModal> -->
   </div>
 </template>
 <script>
@@ -88,8 +88,11 @@ export default {
     }
   },
   methods: {
-    removeOrder() {
-      // console.log('confirmed order remove')
+    async removeOrder() {
+      const unlocked = await this.$unlock()
+      if (unlocked) {
+        console.log('unlocked -> remove order')
+      }
     }
   }
 }

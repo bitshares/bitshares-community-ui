@@ -109,6 +109,7 @@
     </div>
     <!-- TODO: use some vue plugin to disable when not on mobile -->
     <Mobile/>
+    <UnlockAccountPopup/>
   </div>
 </template>
 
@@ -130,6 +131,7 @@ import Modal from '@/components/Modal/Modal'
 import Mobile from '@/views/Mobile/Mobile'
 import NewOrder from '@/views/NewOrder/NewOrder'
 import Deposit from '@/views/Deposit/DepositWidget'
+import UnlockAccountPopup from '@/views/UnlockAccountPopup/UnlockAccountPopup'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -152,7 +154,8 @@ export default {
     Modal,
     Mobile,
     NewOrder,
-    Deposit
+    Deposit,
+    UnlockAccountPopup
   },
   computed: {
     ...mapGetters({
