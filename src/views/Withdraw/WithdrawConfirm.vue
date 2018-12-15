@@ -8,26 +8,26 @@
         height="12"
         color="rgba(255,255,255,0.5)"
         name="cancel"
+        @click="cancelConfirm"
       />
       <Button
         :text="withdrawAsset.tiker"
-        :disabled="true"
+        :disabled="isAmountValid"
         type="secondary"
         width="full"
       />
     </div>
     <div class="withdraw-sub-title">Enter withdrawal amount</div>
-    <div class="withdraw-sub-title withdraw-sub-title--description-upper">withdrawal amount</div>
     <SimpleInput
-      :value="amount"
+      v-model="amount"
+      :tip="maxWithdrawTitle"
       :centered="true"
-      :placeholder="withdrawAsset.tokens"
-      :no-padding="true"
-      @input="confirm"
+      :error="isAmountValid"
+      title="withdrawal amount"
     />
-    <div class="withdraw-sub-title withdraw-sub-title--description-lower">{{ maxWithdrawTitle }}</div>
     <div class="withdraw-footer">
       <Button
+        :disabled="!!isAmountValid"
         text="Confirm amount"
         type="secondary"
         width="full"
@@ -37,7 +37,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import Button from '@/components/Button'
 import SimpleInput from '@/components/SimpleInput'
 import '@icons/cancel'
@@ -58,10 +58,25 @@ export default {
     }),
     maxWithdrawTitle() {
       return `max ${this.withdrawAsset.tokens} ${this.withdrawAsset.tiker}`
+    },
+    isAmountValid() {
+      const isNumeric = () => !isNaN(parseFloat(this.amount)) && isFinite(this.amount)
+
+      if (!this.amount) {
+        return ''
+      }
+      if (!isNumeric() || +this.amount < 1 || +this.amount > this.withdrawAsset.tokens) {
+        return 'Please enter valid amount'
+      }
+      return ''
     }
   },
   methods: {
-    confirm() {
+    ...mapActions({
+      setWithdrawStep: 'withdraw/setWithdrawStep'
+    }),
+    cancelConfirm() {
+      this.setWithdrawStep('withdraw')
     }
   }
 }
@@ -86,20 +101,6 @@ export default {
       letter-spacing: -0.0555rem;
       margin-top: 1rem;
       margin-bottom: 1rem;
-
-      &--description-upper {
-        text-transform: uppercase;
-        text-align: center;
-        font-size: config('textSizes.xxs');
-        color: config('colors.inactive');
-        margin: 0;
-      }
-      &--description-lower {
-        text-align: center;
-        font-size: config('textSizes.xxs');
-        color: config('colors.inactive');
-        margin: 0.3125rem 0 1.5rem 0;
-      }
     }
     .withdraw-item {
       margin-top: 0;
@@ -111,6 +112,10 @@ export default {
         z-index: 100;
         cursor: pointer;
       }
+    }
+    .withdraw-footer {
+      margin-top: auto;
+      display: flex;
     }
   }
 </style>

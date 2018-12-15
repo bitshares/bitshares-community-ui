@@ -5,8 +5,7 @@
       'input--has-error': error,
       'input--disabled': disabled,
       'input--centered': centered,
-      'input--value-mode': valueMode,
-      'input--no-padding': noPadding
+      'input--value-mode': valueMode
     }"
     class="input">
 
@@ -128,10 +127,6 @@ export default {
     centered: {
       type: Boolean,
       default: false
-    },
-    noPadding: {
-      type: Boolean,
-      default: false
     }
   },
   computed: {
@@ -202,13 +197,13 @@ export default {
     .input__input {
       text-align: center;
     }
-  }
-
-  &--no-padding {
-    padding: 0;
-
-    .input__input {
-      padding: 0;
+    .input__tip {
+      width: 100%;
+      text-align: center;
+    }
+    .input__title {
+      width: 100%;
+      text-align: center;
     }
   }
 }
