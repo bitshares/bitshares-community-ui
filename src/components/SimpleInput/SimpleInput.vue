@@ -197,6 +197,10 @@ export default {
     .input__input {
       text-align: center;
     }
+    .input__error {
+      width: 100%;
+      text-align: center;
+    }
     .input__tip {
       width: 100%;
       text-align: center;
