@@ -65,7 +65,7 @@
       :pending="pending"
       title="confirm order"
       @close="hideConfirm"
-      @confirm="dispatchOrder"
+      @confirm="handleOrderConfirm"
     >
       <ConfirmOrder
         :base="base"
@@ -183,6 +183,12 @@ export default {
       } else {
         this.setBaseAmount(amount)
         if (price) this.setQuoteAmount(amount / price)
+      }
+    },
+    async handleOrderConfirm() {
+      const unlocked = await this.$unlock()
+      if (unlocked) {
+        this.dispatchOrder()
       }
     }
   }

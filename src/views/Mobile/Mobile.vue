@@ -33,9 +33,9 @@
             v-if="activeComponentName === 'Orders'"
             name="cross"
             class="plus-icon"
-            @click="newOrder"
             width="22"
             height="22"
+            @click="newOrder"
           />
         </div>
         <component

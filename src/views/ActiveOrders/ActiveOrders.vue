@@ -88,8 +88,11 @@ export default {
     }
   },
   methods: {
-    removeOrder() {
-      // console.log('confirmed order remove')
+    async removeOrder() {
+      const unlocked = await this.$unlock()
+      if (unlocked) {
+        console.log('unlocked -> remove order')
+      }
     }
   }
 }

@@ -6,20 +6,11 @@
     <div class="confirm-modal-content">
       <div class="confirm-modal-title">{{ title }}</div>
       <slot/>
-      <div v-if="isLocked">
-        <SInput
-          v-model="password"
-          :password="true"
-          type="password"
-          title="unlock wallet"
-        />
-      </div>
       <Button
-        :disabled="confirmDisabled"
         :loading="pending"
         text="Confirm"
         width="full"
-        @click="confirm"
+        @click="$emit('confirm')"
       />
       <Button
         text="Cancel"
@@ -31,7 +22,6 @@
   </Modal>
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex'
 import SInput from '@/components/SimpleInput'
 import Button from '@/components/Button'
 import Modal from '@/components/Modal'
@@ -53,38 +43,6 @@ export default {
       type: Boolean,
       default: false
     }
-  },
-  data() {
-    return {
-      password: ''
-    }
-  },
-  computed: {
-    ...mapGetters({
-      isLocked: 'acc/isLocked',
-      isValidPassword: 'acc/isValidPassword'
-    }),
-
-    confirmDisabled() {
-      return this.isLocked && !this.password
-    }
-  },
-  methods: {
-    ...mapActions('acc', ['unlockWallet']),
-
-    unlock() {
-      if (this.isValidPassword(this.password + '')) {
-        this.unlockWallet(this.password + '')
-      } else {
-        this.$toast.error('Invalid password')
-      }
-    },
-
-    confirm() {
-      if (this.isLocked) this.unlock()
-      if (!this.isLocked) this.$emit('confirm')
-    }
-
   }
 }
 </script>
