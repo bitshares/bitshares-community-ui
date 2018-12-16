@@ -112,7 +112,9 @@
   </div>
 </template>
 <script>
+import { format } from 'date-fns'
 import '@icons/cancel'
+import { getFloatCurrency, removePrefix } from '@/helpers/utils'
 import TwoLineItem from '@/components/TwoLineItem/TwoLineItem'
 
 export default {
@@ -137,31 +139,31 @@ export default {
   },
   computed: {
     formattedPayAsset() {
-      return this.item.payAssetSymbol
+      return removePrefix(this.item.payAssetSymbol)
     },
     formattedReceiveAsset() {
-      return this.item.receiveAssetSymbol
+      return removePrefix(this.item.receiveAssetSymbol)
     },
     dateExpiring() {
-      return this.item.expiringDate
+      return format(this.item.expiration, 'DD/MM')
     },
     timeExpiring() {
-      return this.item.expiringTime
+      return format(this.item.expiration, 'HH:mm')
     },
     price() {
-      return this.item.price
+      return getFloatCurrency(this.item.price)
     },
     avg() {
       return ''
     },
     vol() {
-      return this.item.vol
+      return getFloatCurrency(this.item.vol)
     },
     get() {
-      return this.item.get
+      return getFloatCurrency(this.item.get)
     },
     spend() {
-      return this.item.spend
+      return getFloatCurrency(this.item.spend)
     },
     fillColor() {
       const R = Math.round(255 / 100 * this.item.filled)

@@ -68,7 +68,7 @@ export default {
           { title: 'Get', field: 'get', align: 'left' },
           { title: 'Spend', field: 'spend', align: 'left' },
           { title: 'Filled', field: 'filled', align: 'right', expanded: true },
-          { title: 'Expiring', field: 'dateOpen', align: 'right' }
+          { title: 'Expiring', field: 'dateExpiring', align: 'right' }
         ]
       }
       return [
