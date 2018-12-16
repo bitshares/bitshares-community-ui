@@ -1,30 +1,130 @@
 <template>
-  <div class="header">
-    <svgicon
-      name="bitshares"
-      color="white"
-      width="141"
-      height="33"/>
-    <UserInfo/>
-  </div>
+  <div class="header hidden lg:flex pr-card-row">
+    <div class="back-header" />
+    <div class="lg:w-1/3">
+      <svgicon
+        name="bitshares"
+        color="white"
+        width="110"
+        height="27"/>
+    </div>
 
+    <div class="lg:w-1/3 deposit-withdraw">
+      <Button
+        text="Deposit"
+        type="secondary"
+        size="small"
+        @click="showDepositModal"
+      />
+      <Button
+        text="Withdraw"
+        class="ml-5"
+        type="secondary"
+        size="small"
+      />
+    </div>
+
+    <div class="lg:w-1/3 user-menu-items">
+      <UserInfo/>
+      <Dropdown
+        :items="menuItems"
+        @clicked="handleDropdownClick"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import UserInfo from './HeaderUserInfo'
+import Button from '@/components/Button'
+import Dropdown from '@/components/Dropdown'
 import '@icons/bitshares'
 
 export default {
   name: 'Header',
-  components: { UserInfo }
+  components: { UserInfo, Dropdown, Button },
+  computed: {
+    ...mapGetters({
+      backupEnabled: 'acc/isWalletAcc'
+    }),
+    menuItems() {
+      return [{
+        title: 'backup',
+        event: 'backup',
+        disabled: !this.backupEnabled
+      },
+      {
+        title: 'settings',
+        event: 'settings',
+        disabled: true
+      },
+      {
+        title: 'faq',
+        event: 'faq',
+        disabled: true
+      },
+      {
+        title: 'log out',
+        event: 'logout'
+      }]
+    }
+  },
+  methods: {
+    ...mapActions({
+      logout: 'acc/logout',
+      showBackupModal: 'backup/toggleModal',
+      showDepositModal: 'deposit/toggleModal'
+    }),
+    handleLogout() {
+      this.$router.push({ name: 'login' })
+      this.logout()
+    },
+    handleDropdownClick(eventName) {
+      switch (eventName) {
+        case 'logout':
+          this.handleLogout()
+          return
+        case 'backup':
+          this.showBackupModal(true)
+      }
+    }
+  }
 }
 </script>
 
-<style>
+<style lang='scss'>
 .header {
-  @apply px-2 py-3;
-  display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
+  height: 3.75rem;
+  margin: 0 0 .625rem;
+  width: 100%;
+  flex-shrink: 0;
+  z-index: 3;
+
+  & > * {
+    z-index: 1;
+  }
+}
+
+.back-header {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  background: black;
+  opacity: .2;
+  height: 3.75rem;
+  z-index: 0;
+}
+
+.deposit-withdraw {
+  display: flex;
+  justify-content: center;
+}
+.user-menu-items {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 </style>

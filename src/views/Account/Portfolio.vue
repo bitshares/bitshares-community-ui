@@ -1,25 +1,29 @@
 <template>
   <LoadingContainer
     :loading="!historyLoaded"
+    :class="{'w-220': expanded }"
     class="portfolio-container h-full">
 
     <div class="portfolio-header">
       <LinkButton
         :title="hideSmallAssetsBtnText"
+        :large="expanded"
         @click.native="showSmallAssets = !showSmallAssets"
       />
       <LinkButton
         :title="`show ${inactiveMode}`"
+        :large="expanded"
         @click.native="toggleMode"/>
     </div>
 
     <div class="portfolio-table">
       <SortableTable
         :items="filteredItems"
-        :headers="tableHeaders"
+        :headers="expanded ? tableHeadersExpanded : tableHeaders"
         :default-sort="defaultSort"
         :header-left-padding="1"
         :header-right-padding="1.5"
+        :large="expanded"
         class="portfolio-table__header"
       >
         <template slot-scope="{ sortedItems }">
@@ -28,6 +32,7 @@
             :key="index"
             :mode="mode"
             :item="item"
+            :expanded="expanded"
           />
         </template>
       </SortableTable>
@@ -47,12 +52,18 @@ import SortableTable from '@/components/SortableTable'
 
 export default {
   components: { PortfolioItem, LoadingContainer, LinkButton, SortableTable },
+  props: {
+    expanded: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       mode: 'balances',
       showSmallAssets: true,
       defaultSort: {
-        field: 'fiatValue',
+        field: 'share',
         type: 'desc'
       }
     }
@@ -64,15 +75,30 @@ export default {
     }),
     tableHeaders() {
       return this.mode === 'balances' ? [
-        { title: 'Tiker', field: 'tiker', align: 'left' },
-        { title: 'Tokens', field: 'tokens' },
-        { title: '$Value', field: 'fiatValue' },
+        { title: 'Asset', field: 'tiker', align: 'left' },
+        { title: 'Balance', field: 'tokens', align: 'left' },
         { title: 'Share', field: 'share' }
       ] : [
-        { title: 'Tiker', field: 'tiker', align: 'left' },
-        { title: '$Price', field: 'tokenPrice' },
-        { title: '24h%', field: 'change1' },
-        { title: '7d%', field: 'change7' }
+        { title: 'Asset', field: 'tiker', align: 'left' },
+        { title: 'Price', field: 'tokenPrice', align: 'left' },
+        { title: '24h', field: 'change1' }
+      ]
+    },
+    tableHeadersExpanded() {
+      return this.mode === 'balances' ? [
+        { title: 'Asset', field: 'tiker', align: 'left' },
+        { title: '', field: '', align: 'center' },
+        { title: '', field: '', align: 'center' },
+        { title: 'Tokens', field: 'tokens', align: 'right' },
+        { title: '$Value', field: 'usdValue', align: 'right' },
+        { title: 'Share', field: 'share', align: 'right' }
+      ] : [
+        { title: 'Asset', field: 'tiker', align: 'left' },
+        { title: '', field: '', align: 'center' },
+        { title: '', field: '', align: 'center' },
+        { title: 'Price', field: 'tokenPrice', align: 'right' },
+        { title: '24h', field: 'change1', align: 'right' },
+        { title: '7d', field: 'change7', align: 'right' }
       ]
     },
     filteredItems() {
@@ -96,12 +122,12 @@ export default {
 
 <style lang="scss">
 .portfolio-table {
-  font-family: config("fonts.gotham");
   height: 100%;
   overflow: hidden;
 }
 
 .portfolio-header {
+  font-family: config("fonts.gotham");
   display: flex;
   flex-shrink: 0;
   justify-content: space-between;

@@ -15,22 +15,25 @@ const actions = {
   initUserData: async({ state, rootGetters, dispatch }) => {
     console.log('init user data')
     const userId = rootGetters['acc/getAccountUserId']
-    dispatch('market/fetchMarketStats', 'USD', { root: true })
     dispatch('assets/fetchDefaultAssets', null, { root: true })
+    dispatch('marketsMonitor/initialize', null, { root: true })
+
     await dispatch('acc/fetchCurrentUser', userId, { root: true })
+    dispatch('orderBook/initialize', {
+      baseSymbol: 'USD',
+      quoteSymbol: 'BTS' },
+    { root: true })
+    dispatch('newOrder/setMarket', {
+      base: 'USD',
+      quote: 'BTS'
+    }, { root: true })
     // await Promise.all([
     // dispatch('transactions/fetchComissions', null, { root: true }),
-    // dispatch(
-    //   'operations/fetchAndSubscribe',
-    //   { userId, limit: 50 },
-    //   { root: true }
-    // )
-    // ])
-    // const defaultAssetsIds = rootGetters['assets/getDefaultAssetsIds']
-    // defaultAssetsIds.forEach(id => {
-    //   if (balances[id]) return
-    //   balances[id] = { balance: 0 }
-    // })
+    dispatch(
+      'operations/fetchAndSubscribe',
+      { userId, limit: 100 },
+      { root: true }
+    )
 
     const balances = { ...rootGetters['acc/getUserBalances'] }
     await dispatch(
@@ -50,12 +53,13 @@ const actions = {
     }, { root: true })
   },
   unsubFromUserData({ dispatch }) {
-    // dispatch('operations/unsubscribeFromUserOperations', null, { root: true })
+    dispatch('operations/unsubscribeFromUserOperations', null, { root: true })
   },
   resetUserData({ dispatch }) {
     dispatch('history/resetHistory', null, { root: true })
-    // dispatch('operations/unsubscribeFromUserOperations', null, { root: true })
-    // dispatch('operations/resetState', null, { root: true })
+    dispatch('operations/unsubscribeFromUserOperations', null, { root: true })
+    dispatch('operations/resetState', null, { root: true })
+    dispatch('orderBook/deinit', null, { root: true })
   }
 }
 

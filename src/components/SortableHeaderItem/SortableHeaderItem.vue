@@ -4,16 +4,48 @@
       'header-item--left-aligned': align === 'left',
       'header-item--center-aligned': align === 'center',
       'header-item--right-aligned': align === 'right',
+      'header-item--large': large,
     }"
     :style="styleObject"
     class="header-item">
     <div
-      :class="{'header-item__title--title-active': sort}"
-      class="header-item__title">
-      {{ title }}
+      :class="{'header-item__title--title-active': currentField === item.field }"
+      class="header-item__title"
+      @click="$emit('change', item.field)"
+    >
+      {{ item.title }}
       <div
-        v-if="showIcon && sort"
+        v-if="showIcon && sort && currentField === item.field"
         class="header-item__arrows">
+        <svgicon
+          :class="sort === 'desc' ? 'active' : ''"
+          class="sort-arrow-up"
+          name="sortArrow"
+        />
+        <svgicon
+          :class="sort === 'asc' ? 'active' : ''"
+          class="sort-arrow-down"
+          name="sortArrow"
+        />
+      </div>
+    </div>
+    <!--SECOND FIELD-->
+    <span v-if="secondFieldActive || secondFieldNotActive">/</span>
+    <div
+      v-if="item.secondTitle"
+      :class="{
+        'header-item__title--title-active': currentField === item.secondField,
+        'header-field-m-left': (item.secondField && (currentField === item.field))
+      }"
+      class="header-item__title"
+      @click="$emit('change', item.secondField)"
+    >
+      <span v-if="item.secondField && currentField === item.field">/</span>
+      {{ item.secondTitle }}
+      <div
+        v-if="showIcon && sort && currentField === item.secondField"
+        class="header-item__arrows"
+      >
         <svgicon
           :class="sort === 'desc' ? 'active' : ''"
           class="sort-arrow-up"
@@ -38,9 +70,9 @@ export default {
       default: '',
       type: String
     },
-    title: {
-      default: '',
-      type: String
+    item: {
+      type: Object,
+      required: true
     },
     align: {
       type: String,
@@ -54,6 +86,14 @@ export default {
       type: Number,
       required: false,
       default: 0
+    },
+    large: {
+      type: Boolean,
+      required: true
+    },
+    currentField: {
+      type: String,
+      default: ''
     }
   },
   computed: {
@@ -61,6 +101,12 @@ export default {
       return {
         'padding-left': `${this.paddingLeft}rem`
       }
+    },
+    secondFieldActive() {
+      return this.item.secondField && this.currentField === this.item.secondField
+    },
+    secondFieldNotActive() {
+      return this.item.secondField && (this.currentField !== this.item.field) && (this.currentField !== this.item.secondField)
     }
   }
 }
@@ -84,11 +130,15 @@ export default {
   &--right-aligned {
     justify-content: flex-end;
   }
+  &--large {
+    font-size: config('textSizes.base');
+  }
 }
 
 .header-item__title {
   position: relative;
   white-space: nowrap;
+  letter-spacing: -0.0455rem;
 }
 
 .header-item__arrows {
@@ -108,6 +158,10 @@ export default {
   height: 0.1875rem;
   transform: rotate(-180deg);
   color: config('colors.inactive');
+}
+
+.header-field-m-left {
+  margin-left: 1rem;
 }
 
 .active {

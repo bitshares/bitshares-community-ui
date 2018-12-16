@@ -3,11 +3,11 @@
     <div class="signup h-full sm:h-auto">
       <div class="signup__title">Signup</div>
       <Tabs
-        :tabs="['password', 'private key']"
+        :tabs="['simple cloud', 'secure key']"
+        :active="type"
         @change="changeSignupType">
-
         <div
-          slot="password"
+          slot="simple cloud"
           class="signup__form">
 
           <div class="text-xs px-3 pb-1 text-center text-text-primary">
@@ -41,7 +41,7 @@
           <div class="text-xs px-0 pb-1 text-text-error">This password can't be recovered, write it on paper</div>
         </div>
         <div
-          slot="private key"
+          slot="secure key"
           class="signup__form">
 
           <div class="text-xs px-3 pb-1 text-center text-text-primary">
@@ -140,7 +140,7 @@ export default {
         }
       }
     }
-    if (this.type === 'password') {
+    if (this.type === 'simple cloud') {
       validations = {
         ...validations,
         password: { required },
@@ -168,7 +168,7 @@ export default {
       pin: '',
       confirmPin: '',
       inProgress: false,
-      type: 'password'
+      type: 'simple cloud'
     }
   },
   computed: {
@@ -189,7 +189,7 @@ export default {
     handleSignup() {
       this.$v.$touch()
       if (this.$v.$invalid) return
-      if (this.type === 'password') {
+      if (this.type === 'simple cloud') {
         this.handleSignupPassword()
       } else {
         this.handleSignupBrainkey()
@@ -242,7 +242,6 @@ export default {
   }
   .signup {
     @apply max-w-sm w-full shadow-md;
-    border: 1px solid config('colors.card-border');
     border-radius: 2px;
     background-color: black;
     &__title {

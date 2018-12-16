@@ -2,13 +2,19 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import app from './modules/app'
 import portfolio from './modules/portfolio'
-import books from './modules/books'
+import backup from './modules/backup'
+import orderBook from './modules/orderBook'
 import orderHistory from './modules/orderHistory'
+import activeOrders from './modules/activeOrders'
+import marketsMonitor from './modules/marketsMonitor'
+import newOrder from './modules/newOrder'
+import deposit from './modules/deposit'
+import mobile from './modules/mobile'
+
 import createPersistedState from 'vuex-persistedstate'
 import vuexBitshares from 'vuex-bitshares'
 import Cookies from 'js-cookie'
 import paths from './cachedPaths'
-import marketsMonitor from './modules/marketsMonitor'
 
 const { modules, plugins } = vuexBitshares
 Vue.use(Vuex)
@@ -21,8 +27,13 @@ const store = new Vuex.Store({
     app,
     marketsMonitor,
     portfolio,
-    books,
+    backup,
+    deposit,
+    orderBook,
     orderHistory,
+    newOrder,
+    activeOrders,
+    mobile,
     ...modules
   },
   plugins: [

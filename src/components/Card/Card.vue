@@ -1,12 +1,17 @@
 <template>
-  <div class="card-container lg:mr-2 mb-2 lg:mb-0">
+  <div class="card-container h-full">
     <div
-      class="card border-transparent sm:border-card-border"
+      :class="{
+        'card--collapsed': collapsed,
+        'card--mobile': mobile,
+        'lg:h-card-long-height': long
+      }"
+      class="card border-none h-full lg:h-card-height"
     >
-
       <Modal
         v-if="expanded"
-        @close="expanded = false">
+        @close="expanded = false"
+      >
         <div
           class="card card--expanded border-card-border"
           @click.stop
@@ -15,14 +20,6 @@
             <div class="title">
               <div> {{ title }} </div>
             </div>
-            <svgicon
-              class="close-btn"
-              width="12"
-              height="12"
-              color="rgba(255,255,255,0.5)"
-              name="cancel"
-              @click.native="expanded = false"
-            />
             <slot
               class="header"
               name="modal-header"/>
@@ -33,10 +30,22 @@
         </div>
       </Modal>
 
-      <div class="card-header">
+      <div
+        v-if="title"
+        class="card-header"
+      >
         <div class="title">
           <div> {{ title }} </div>
         </div>
+        <svgicon
+          v-if="collapsible"
+          :class="{'collapse-btn--active' : collapsed }"
+          class="collapse-btn"
+          width="20"
+          height="20"
+          name="arrowDown"
+          @click.stop="handleCollapseClick"
+        />
         <div
           v-if="expandable"
           class="expand-btn hidden lg:flex"
@@ -50,12 +59,19 @@
           />
         </div>
         <slot
+          v-if="!collapsed"
           class="header"
           name="header"/>
       </div>
-      <div class="card-body">
-        <slot name="body" />
-      </div>
+      <transition name="fade">
+        <div
+          v-if="!collapsed"
+          :class="{'no-pt': !title}"
+          class="card-body"
+        >
+          <slot name="body" />
+        </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -74,34 +90,76 @@ export default {
     expandable: {
       type: Boolean,
       default: false
+    },
+    collapsible: {
+      type: Boolean,
+      default: false
+    },
+    long: {
+      type: Boolean,
+      default: false
+    },
+    mobile: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
     return {
-      expanded: false
+      expanded: false,
+      collapsed: false
+    }
+  },
+  methods: {
+    handleCollapseClick() {
+      this.collapsed = !this.collapsed
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
+.card-container:last-child {
+  .card {
+    margin-right: 0;
+  }
+}
+
 .card {
-  height: 25rem;
   display: flex;
   overflow: hidden;
   flex-direction: column;
   font-family: config('fonts.gotham-regular');
   background-color: config('colors.card-background');
   border-width: 1px;
-  transition: max-height 0.2s;
-  &:last-child {
-    @apply mr-0;
+  transition: 0.2s;
+  &--expanded {
+    height: 35rem;
+    .card-header {
+      padding-right: 2rem;
+      padding-top: 1rem;
+      padding-left: 1.25rem;
+      .title {
+        font-size: config('textSizes.lg')
+      }
+    }
   }
-}
-
-.card--expanded {
-  .card-header {
-    padding-right: 2rem;
+  &--mobile {
+    .card-header {
+      padding-right: 1rem;
+    }
+    .card-body {
+      padding-top: 0!important;
+    }
+  }
+  &--collapsed {
+    height: 2.8rem;
+    transition: 0.2s;
+  }
+  .card-body {
+    @apply pt-3;
+    height: 100%;
+    overflow: hidden;
   }
 }
 
@@ -109,13 +167,34 @@ export default {
   padding:config('padding.card-ui');
   padding-left: 1rem;
   padding-right: 1.5rem;
-  padding-bottom: 0.3rem;
+  padding-bottom: 0.8rem;
   color: config('colors.text-primary');
   display:flex;
   flex-shrink: 0;
   justify-content: space-between;
   align-items: baseline;
   position: relative;
+  user-select: none;
+  .title {
+    font-size: config('textSizes.base');
+    font-family: config('fonts.gotham-medium');
+    text-transform: uppercase;
+    font-size: config('textSizes.base');
+    white-space: nowrap;
+  }
+  .collapse-btn {
+    transform: none;
+    transition: transform 0.2s;
+    margin-left: 0.5rem;
+    padding: 0.25rem;
+    opacity: 0.8;
+    align-self: center;
+    flex-shrink: 0;
+    cursor: pointer;
+    &.collapse-btn--active {
+      transform: rotate(-90deg);
+    }
+  }
   .expand-btn {
     top: 0.4rem;
     right: 0.4rem;
@@ -146,13 +225,6 @@ export default {
   }
 }
 
-.title {
-  font-size: config('textSizes.base');
-  font-family: config('fonts.gotham-medium');
-  text-transform: uppercase;
-  font-size: config('textSizes.base');
-}
-
 .header {
   margin-left: auto;
 }
@@ -161,6 +233,29 @@ export default {
   @apply pt-3;
   height: 100%;
   overflow: hidden;
+
+  &.no-pt {
+    @apply pt-0;
+  }
+}
+
+.collapse-btn {
+  transform: rotate(-90deg);
+  transition: 0.2s;
+  margin: 0 auto 0 0.1875em;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.collapse-btn--active {
+  margin: 0 auto 0 0.1875em;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.card-collapsed {
+  height: 2.8rem;
+  transition: 0.2s;
 }
 
 </style>

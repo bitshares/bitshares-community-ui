@@ -1,6 +1,9 @@
 <template>
   <perfect-scrollbar>
-    <div class="scrollable-container">
+    <div
+      :class="{'scrollable-container--empty-area': emptyArea}"
+      class="scrollable-container"
+    >
       <div
         :style="{ height: shadowerHeight + 'px' }"
         class="scrollable-container__shadower-top"/>
@@ -18,6 +21,10 @@ export default {
     shadowerHeight: {
       type: Number,
       default: 30
+    },
+    emptyArea: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -29,6 +36,10 @@ export default {
   position: relative;
   height: 100%;
   overflow: hidden;
+
+  &--empty-area {
+    margin-top: 1.5rem;
+  }
   &__shadower-top {
     position: absolute;
     top: 0;

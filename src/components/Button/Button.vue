@@ -3,11 +3,15 @@
     :class="{
       'btn--loading': loading,
       'btn--disabled': disabled,
-      'btn--small':size === 'small',
+      'btn--small': size === 'small',
+      'btn--mobile-small': size === 'mobile-small',
       'btn--big': size === 'big',
       'btn--wide': width === 'full',
       'btn--round': type === 'round',
-      'btn--secondary': type === 'secondary'
+      'btn--secondary': type === 'secondary',
+      'btn--buy': type === 'buy',
+      'btn--sell': type === 'sell',
+      'btn--faded': type === 'faded',
     }"
     :disabled="disabled"
     class="btn btn-blue"
@@ -18,6 +22,7 @@
       color="black"
     />
     <span v-else>
+      <slot />
       {{ text }}
     </span>
   </button>
@@ -83,6 +88,7 @@ export default {
   justify-content: center;
   height: 51px;
   transition: background-color 0.2s, opacity 0.2s;
+
   &:hover {
     background-color: config('colors.button-bg-hover');
   }
@@ -94,9 +100,36 @@ export default {
   @apply pointer-events-none;
   color: config('colors.button-text-disabled');
   background-color: config('colors.button-bg-disabled');
+  &.btn--buy {
+    color: rgba(0,0,0,.5);
+    background-color: config('colors.buy-disabled');
+    &:hover {
+      background-color: config('colors.buy-disabled');
+    }
+  }
+  &.btn--sell {
+    color: rgba(0,0,0,.5);
+    background-color: config('colors.sell-disabled');
+    &:hover {
+      background-color: config('colors.sell-disabled');
+    }
+  }
 }
 .btn--small {
-  @apply py-1 pr-4 cursor-pointer text-xs;
+  @apply cursor-pointer text-xs;
+  height: 2rem;
+  padding: 0 0.76rem;
+  min-width: 6.8889rem;
+  font-size: 0.9rem;
+  letter-spacing: -0.6px;
+}
+.btn--mobile-small {
+  letter-spacing: -0.75px;
+  font-size: 0.9375rem;
+  font-family: Gotham_Pro;
+  height: 3rem;
+  padding: 0;
+  width: 6.75rem;
 }
 .btn--big {
   @apply py-2 px-6 cursor-pointer text-2xl;
@@ -112,15 +145,40 @@ export default {
   @apply rounded;
 }
 .btn--secondary {
-  background-color:config('colors.bg-base');
+  background-color: transparent;
   color: config('colors.primary');
+  padding-top: 1px;
+  padding-bottom: 1px;
   border: solid;
   border-width: 1px;
+  opacity: 0.8;
   border-color:config('colors.primary');
+  // font-family: Gotham_Pro;
 }
 .btn--secondary:hover {
   background-color:config('colors.primary');
   color:config('colors.bg-base');
+  opacity: 1;
+}
+.btn--buy {
+  background-color: config('colors.buy');
+  &:hover {
+    background-color: config('colors.buy');
+  }
+}
+.btn--sell {
+  background-color: config('colors.sell');
+  &:hover {
+    background-color: config('colors.sell');
+  }
+}
+.btn--faded {
+  background-color: config('colors.card-background');
+  font-size: config('textSizes.lg');
+  &:hover {
+    background-color: config('colors.card-background');
+  }
+  color: config('colors.inactive');
 }
 .spinner {
   margin-right: 10px;

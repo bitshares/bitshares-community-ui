@@ -1,9 +1,9 @@
 // util functions should go here
 
 // convert sum to currency format, exapmle: 1 000 000 (use in markets)
-export const getVolumeFormat = sum => sum.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+export const getVolumeFormat = sum => sum < 1 ? sum : sum.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
 
-export const removePrefix = (string, prefix) => {
+export const removePrefix = (string, prefix = 'OPEN.') => {
   let trimmed = string
   if (string.substring(0, prefix.length) === prefix) trimmed = string.slice(prefix.length)
   return trimmed
@@ -29,4 +29,22 @@ export const amountValueShortener = amount => {
 // get max value from array[{}, {}, {}]
 export const getMaxSum = (items, field) => {
   return Math.max.apply(null, items.map(item => item[field]))
+}
+
+// short float currency
+export const getFloatCurrency = (n) => {
+  const inputValue = n.toString()
+  const hasPoint = () => !!~inputValue.indexOf('.')
+  const value = hasPoint() ? inputValue.replace(/0+$/, '') : inputValue
+
+  if (value[0] === '0' && value.length > 9) return value.slice(1, 10).toString()
+  return value.slice(0, 9) || '0'
+}
+
+// shortens fiat (USD) value
+export const shortenFiatValue = (value, precision = 1) => {
+  if (!value) return 0
+  if (value > 10) return Math.floor(value)
+  if (value > 0.1) return value.toFixed(precision)
+  return +value.toFixed(2)
 }

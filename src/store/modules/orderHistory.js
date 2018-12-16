@@ -3,73 +3,44 @@ const types = {
 }
 
 const state = {
-  searchStr: '',
-  history: [
-    {
-      base: 'BTC',
-      ticker: 'USD',
-      dateOpen: '02/11',
-      timeOpen: '15:46',
-      dateClose: '03/11',
-      timeClose: '1:20',
-      price: 6480,
-      get: 312,
-      spend: 0.048
-    },
-    {
-      base: 'BTS',
-      ticker: 'ETH',
-      dateOpen: '01/11',
-      timeOpen: '10:12',
-      dateClose: '02/11',
-      timeClose: '11:08',
-      price: 0.00048,
-      priceVol: 656535,
-      get: 20.5010,
-      getVol: 4832,
-      spend: 0.00997,
-      spendVol: 4589675
-    },
-    {
-      base: 'LTC',
-      ticker: 'ETH',
-      dateOpen: '28/10',
-      timeOpen: '10:12',
-      dateClose: '28/10',
-      timeClose: '11:08',
-      price: 0.06891,
-      priceVol: 0.48378,
-      get: 1.23520,
-      getVol: 0.48378,
-      spend: 2.24
-    },
-    {
-      base: 'LTC',
-      ticker: 'ETH',
-      dateOpen: '27/10',
-      timeOpen: '10:12',
-      dateClose: '27/10',
-      timeClose: '11:08',
-      price: 0.01255,
-      priceVol: 0.48378,
-      get: 1.23520,
-      getVol: 0.48378,
-      spend: 2.24
-    }
-  ]
+  searchStr: ''
 }
 
 const getters = {
   getSearchStr(state) {
     return state.searchStr
   },
-  getHistory(state) {
-    // more data, for scroll test
-    return state.history
-      .concat(state.history)
-      .concat(state.history)
-      .concat(state.history)
-      .concat(state.history)
+  getFillOrderInfo: (state, getters, rootState, rootGetters) => (order) => {
+    const { payload, buyer, date } = order
+    const type = buyer ? 'buy' : 'sell'
+    const assetPays = rootGetters['assets/getAssetById'](payload.pays.asset_id)
+    const assetReceives = rootGetters['assets/getAssetById'](payload.receives.asset_id)
+    const amountPays = payload.pays.amount / 10 ** assetPays.precision
+    const amountReceives = payload.receives.amount / 10 ** assetReceives.precision
+    const amountReceivesForAvg = payload['fill_price'].base.amount / 10 ** assetReceives.precision
+    const amountPaysForAvg = payload['fill_price'].quote.amount / 10 ** assetPays.precision
+
+    const price = buyer ? amountPays / amountReceives : amountReceives / amountPays
+    const avg = buyer ? amountPaysForAvg / amountReceivesForAvg : amountReceivesForAvg / amountPaysForAvg
+
+    return {
+      payAssetSymbol: assetPays.symbol,
+      receiveAssetSymbol: assetReceives.symbol,
+      get: amountReceives,
+      spend: amountPays,
+      price,
+      avg,
+      order: type,
+      dateClose: date,
+      dateOpen: date
+    }
+  },
+  getHistoryList: (state, getters, rootState, rootGetters) => {
+    const operations = rootGetters['operations/getOperations']
+    const fillOrders = operations.filter(operation => operation.type === 'fill_order')
+    const list = fillOrders.map(order => getters.getFillOrderInfo(order))
+
+    return list
   }
 }
 

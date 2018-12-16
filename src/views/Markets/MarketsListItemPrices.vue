@@ -8,26 +8,29 @@
         <Star
           :active="isFavourite"
           class="tickers__favourite"
-          @click.native="$emit('change', { item })"
+          @click.stop.native="$emit('change', { item })"
         />
-        <div class="tickers-list__itemPair pl-6">
-          <span class="_currencyTitle">{{ item.ticker }}</span>
-        </div>
-        <div class="_tickerTitle tickers-list__itemVolume pl-6"> /{{ item.base }}</div>
+        <TwoLineItem
+          :top="formattedTiker"
+          class="pl-8"
+        >
+          <span slot="bottom">/{{ formattedBase }}</span>
+        </TwoLineItem>
       </div>
-      <div class="tickers-list__item _alignRight">
-        <div class="_currencyTitle">{{ +item.price.toFixed(4) }}</div>
-        <div class="_tickerTitle tickers-list__itemVolume">${{ item.usdPrice.toFixed(2) }}</div>
+      <div class="tickers-list__item">
+        <TwoLineItem :top="price">
+          <span slot="bottom">${{ formattedUsdPrice }}</span>
+        </TwoLineItem>
       </div>
-      <div class="tickers-list__item _alignRight">
-        <div class="tickers-list__itemVolume">{{ volUsd }}</div>
-      </div>
-      <div class="tickers-list__item _alignRight">
+      <div class="tickers-list__item text-center _verticalCenter">
         <div
           :class="getClassesOfDynamic({ price: item.change24h })"
-          class="_currencyTitle">
+          class="tickers-list__itemVolume _currencyTitle">
           {{ changeValue24 }}
         </div>
+      </div>
+      <div class="tickers-list__item text-right _verticalCenter">
+        <div class="tickers-list__itemVolume">{{ volUsd }}</div>
       </div>
     </div>
     <!--expand mode-->
@@ -42,42 +45,45 @@
           @click.native="$emit('change', { item })"
         />
         <div class="tickers-list__itemPair">
-          <span class="_currencyTitle pl-6">{{ item.ticker }}</span>
-          <span class="_tickerTitle">/{{ item.base }}</span>
+          <span class="_currencyTitle pl-8">{{ formattedTiker }}</span>
+          <span class="_tickerTitle">/{{ formattedBase }}</span>
         </div>
       </div>
       <div class="tickers-list__item">
         <div class="tickers-list__itemVolume">{{ volUsd }}</div>
       </div>
       <div class="tickers-list__item">
-        <div class="tickers-list__itemVolume">${{ item.usdPrice.toFixed(2) }}</div>
+        <div class="tickers-list__itemVolume">{{ price }}</div>
       </div>
-      <div class="tickers-list__item _alignCenter">
+      <div class="tickers-list__item text-center">
         <div
           :class="getClassesOfDynamic({ price: item.change24h })"
           class="_currencyTitle">
           {{ changeValue24 }}
         </div>
       </div>
-      <div class="tickers-list__item _alignCenter">
+      <div class="tickers-list__item text-center">
         <div
           :class="getClassesOfDynamic({ price: item.change7d })"
           class="_currencyTitle">
           {{ changeValue7 }}
         </div>
       </div>
-      <div class="tickers-list__item _alignRight">
+      <!-- <div class="tickers-list__item text-right">
         <div class="tickers-list__itemVolume">{{ marketCap }}</div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 <script>
 import Star from '@/components/Star'
+import TwoLineItem from '@/components/TwoLineItem/TwoLineItem'
+import { getFloatCurrency, shortenFiatValue, removePrefix } from '@/helpers/utils'
 
 export default {
   components: {
-    Star
+    Star,
+    TwoLineItem
   },
   props: {
     isFavourite: {
@@ -109,6 +115,20 @@ export default {
       default: false
     }
   },
+  computed: {
+    price() {
+      return getFloatCurrency(this.item.price)
+    },
+    formattedTiker() {
+      return removePrefix(this.item.ticker)
+    },
+    formattedBase() {
+      return removePrefix(this.item.base)
+    },
+    formattedUsdPrice() {
+      return shortenFiatValue(this.item.usdPrice)
+    }
+  },
   methods: {
     getClassesOfDynamic({ price }) {
       return {
@@ -122,8 +142,8 @@ export default {
 <style lang="scss">
   .tickers__favourite {
     position: absolute;
-    left: 0;
-    top: 4px;
+    left: .14rem;
+    top: .6rem;
   }
   .tickers-list__item {
     font-weight: config('fontWeights.semibold');
@@ -136,9 +156,8 @@ export default {
   }
 
   .tickers-list__itemVolume {
-    font-size: config('textSizes.xs');
-    color: config('colors.white');
-    opacity: .8;
+    font-size: config('textSizes.lg');
+    color: config('colors.primary');
   }
 
   .tickers-list__itemPair {
@@ -147,8 +166,8 @@ export default {
   }
   .tickers-list-row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    padding: 0.4375rem 1rem .4375rem .54rem;
+    grid-template-columns: 1.25fr 1.25fr 0.75fr 0.75fr;
+    padding: .2675rem 1rem .4375rem .54rem;
     transition: background 0.2s ease;
     cursor: pointer;
 
@@ -156,16 +175,6 @@ export default {
       position: relative;
       z-index: 2;
       background: #131313;
-    }
-    ._alignRight {
-      text-align: right;
-    }
-    ._alignCenter {
-      text-align: center;
-    }
-    ._tickerTitle {
-      font-size: config('textSizes.xs');
-      color: config('colors.inactive');
     }
     ._currencyTitle {
       color: config('colors.white');
@@ -180,33 +189,36 @@ export default {
       color: config('colors.drop');
       opacity: 1;
     }
-    ._flex05 {
-      flex: .7;
+    ._verticalCenter {
+      align-self: center;
     }
   }
   .ticker-list-row_expanded {
     .tickers-list-row {
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
       .tickers-list__item {
         .tickers-list__itemPair {
           padding-right: .3rem;
         }
         .tickers__favourite {
           position: absolute;
-          left: 0;
-          top: -1px;
+          left: 0.21rem;
+          top: .35rem;
         }
         .tickers-list__itemVolume {
-          font-size: config('textSizes.xs')
+          font-size: 1.5625rem;
         }
         ._currencyTitle {
-          font-size: config('textSizes.xs')
+          font-size: 1.5625rem;
+        }
+        ._tickerTitle {
+          font-size: config('textSizes.base');
         }
         ._drop {
-          font-size: config('textSizes.sm');
+          font-size: 1.5625rem;
         }
         ._increase {
-          font-size: config('textSizes.sm');
+          font-size: 1.5625rem;
         }
       }
     }

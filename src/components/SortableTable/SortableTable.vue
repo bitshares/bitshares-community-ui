@@ -1,6 +1,5 @@
 <template>
   <div class="sortable-table">
-
     <div
       :style="headerStyle"
       class="sortable-table__header"
@@ -8,14 +7,20 @@
       <SortableHeaderItem
         v-for="(header, index) in headers"
         :key="index"
-        :title="header.title"
-        :sort="sort.field === header.field && sort.type || ''"
+        :item="header"
+        :current-field="sort.field"
+        :sort="getSort(header)"
         :align="header.align"
-        :padding-left="header.paddingLeft"
-        @click.native="toggleSort(header.field)"
+        :padding-left="header.paddingLeft + 0.56"
+        :large="large"
+        @change="toggleSort"
       />
     </div>
-    <ScrollingContainer :shadower-height="shadowerHeight || 15">
+    <slot name="row"/>
+    <ScrollingContainer
+      :empty-area="emptyArea"
+      :shadower-height="shadowerHeight || 15"
+    >
       <div class="sortable-table__body">
         <slot :sorted-items="sortedItems"/>
       </div>
@@ -60,6 +65,18 @@ export default {
     shadowerHeight: {
       type: Number,
       default: 0
+    },
+    large: {
+      type: Boolean,
+      default: false
+    },
+    emptyArea: {
+      type: Boolean,
+      default: false
+    },
+    columnsConfig: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
@@ -76,8 +93,10 @@ export default {
       return orderBy(this.items, this.sort.field, this.sort.type)
     },
     headerStyle() {
+      const columnsConfig = this.columnsConfig.length && this.columnsConfig
+      const valueString = columnsConfig ? columnsConfig.map(value => `${value}fr`).join(' ') : ''
       return {
-        'grid-template-columns': `repeat(${this.headers.length}, 1fr)`,
+        'grid-template-columns': valueString || `repeat(${this.headers.length}, 1fr)`,
         'padding-left': `${this.headerLeftPadding}rem`,
         'padding-right': `${this.headerRightPadding}rem`
       }
@@ -94,6 +113,9 @@ export default {
       }
       this.sort.field = field
       this.sort.type = 'desc'
+    },
+    getSort(header) {
+      return ((this.sort.field === header.secondField && this.sort.type) || '') || ((this.sort.field === header.field && this.sort.type) || '')
     }
   }
 }

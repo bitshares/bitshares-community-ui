@@ -3,11 +3,12 @@
     <div class="login h-full sm:h-auto">
       <div class="login__title">Login</div>
       <Tabs
-        :tabs="['password', 'private key']"
+        :tabs="['simple cloud', 'secure key']"
+        :active="type"
         @change="changeLoginType">
 
         <div
-          slot="password"
+          slot="simple cloud"
           class="login__form">
 
           <VInput
@@ -27,9 +28,10 @@
 
         </div>
         <div
-          slot="private key"
+          slot="secure key"
           class="login__form">
           <VInput
+            v-show="!file"
             v-model="brainkey"
             :errors="$v.brainkey"
             input-name="brainkey"
@@ -105,7 +107,7 @@ export default {
   components: { VInput, Button, Tabs, KeyfileLoader },
   mixins: [validationMixin],
   validations() {
-    if (this.type === 'password') {
+    if (this.type === 'simple cloud') {
       return {
         name: { required },
         password: { required },
@@ -147,7 +149,7 @@ export default {
       pin: '',
       confirmPin: '',
       inProgress: false,
-      type: 'password',
+      type: 'simple cloud',
       file: null,
       showFileField: true
     }
@@ -167,7 +169,7 @@ export default {
       this.$v.$touch()
       if (this.$v.$invalid) return
       this.inProgress = true
-      if (this.type === 'password') {
+      if (this.type === 'simple cloud') {
         const { error } = await this.cloudLogin({
           name: this.name.toLowerCase(),
           password: this.password
@@ -227,7 +229,6 @@ export default {
   }
   .login {
     @apply max-w-sm w-full shadow-md;
-    border: 1px solid config('colors.card-border');
     border-radius: 2px;
     background-color: black;
     &__title {
