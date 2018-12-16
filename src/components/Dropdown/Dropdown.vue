@@ -120,7 +120,8 @@ export default {
         font-size: 1rem;
         font-family: Gotham_Pro_Medium;
       }
-      &:hover {
+      &:hover, &:active {
+        color: config('colors.text-primary');
         background-color: inherit;
       }
     }

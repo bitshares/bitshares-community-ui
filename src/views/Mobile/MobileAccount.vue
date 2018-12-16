@@ -1,6 +1,6 @@
 <template>
   <div class="mobile-account">
-    <div class="mobile-account-header">
+    <div class="mobile-account-actions">
       <Button
         size="mobile-small"
         text="Deposit"
@@ -63,10 +63,11 @@ export default {
   padding: 0 1.5rem 0 1rem;
 }
 
-.mobile-account-header {
+.mobile-account-actions {
   margin: 0 0 1rem;
+  padding: 0 1rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 </style>

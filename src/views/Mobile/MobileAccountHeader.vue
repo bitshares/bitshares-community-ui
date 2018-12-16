@@ -46,7 +46,7 @@ export default {
       showDeposit: 'deposit/toggleModal',
       toggleBackupModal: 'backup/toggleModal',
       logout: 'acc/logout',
-      showBackupModal: 'backup/toggleModal',
+      showBackupModal: 'backup/toggleModal'
     }),
     handleLogout() {
       this.$router.push({ name: 'login' })

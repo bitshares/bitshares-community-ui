@@ -3,6 +3,7 @@
     <div
       :class="{
         'card--collapsed': collapsed,
+        'card--mobile': mobile,
         'lg:h-card-long-height': long
       }"
       class="card border-none h-full lg:h-card-height"
@@ -97,6 +98,10 @@ export default {
     long: {
       type: Boolean,
       default: false
+    },
+    mobile: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -128,7 +133,7 @@ export default {
   background-color: config('colors.card-background');
   border-width: 1px;
   transition: 0.2s;
-  &.card--expanded {
+  &--expanded {
     height: 35rem;
     .card-header {
       padding-right: 2rem;
@@ -139,7 +144,12 @@ export default {
       }
     }
   }
-  &.card--collapsed {
+  &--mobile {
+    .card-header {
+      padding-right: 1rem;
+    }
+  }
+  &--collapsed {
     height: 2.8rem;
     transition: 0.2s;
   }

@@ -7,7 +7,10 @@
       >
         <NewOrder/>
       </Modal>
-      <Card :title="title">
+      <Card
+        :title="title"
+        :mobile="true"
+      >
         <AccountHeader
           v-if="activeComponentName === 'Account'"
           slot="header"/>
