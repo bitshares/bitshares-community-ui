@@ -46,9 +46,9 @@ export default {
   },
   methods: {
     calcStyleObject(isActive) {
-      const maxHeight = this.$el ? this.$el.clientHeight - (this.items.length - 1) * 40 : '100%'
+      const maxHeight = this.$el ? (this.$el.clientHeight - (this.items.length - 1) * 40) + 'px' : '100%'
       return {
-        height: isActive ? `${maxHeight}px` : '2.5rem'
+        height: isActive ? `${maxHeight}` : '2.5rem'
       }
     }
   }
