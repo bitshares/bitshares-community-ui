@@ -14,10 +14,10 @@
     >
       <div class="table-item">
         <TwoLineItem
-          :top="formattedPayAsset"
-          :bottom="formattedReceiveAsset"
+          :top="formattedReceiveAsset"
+          :bottom="formattedPayAsset"
         >
-          <span slot="bottom">/{{ formattedReceiveAsset }}</span>
+          <span slot="bottom">/{{ formattedPayAsset }}</span>
         </TwoLineItem>
       </div>
       <div class="table-item">
@@ -48,10 +48,10 @@
     >
       <div class="table-item">
         <TwoLineItem
-          :top="formattedPayAsset"
+          :top="formattedReceiveAsset"
           :expanded="expanded"
         >
-          <span slot="bottom">/{{ formattedReceiveAsset }}</span>
+          <span slot="bottom">/{{ formattedPayAsset }}</span>
         </TwoLineItem>
       </div>
       <div class="table-item">
