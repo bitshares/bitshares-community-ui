@@ -5,9 +5,11 @@
       :active="activeTab"
       @change="switchTab"
     />
-    <ActiveOrders v-if="activeTab === 'active'"/>
+    <div class="mobile-orders__container">
+      <ActiveOrders v-if="activeTab === 'active'"/>
 
-    <OrderHistory v-if="activeTab === 'history'"/>
+      <OrderHistory v-if="activeTab === 'history'"/>
+    </div>
   </div>
 </template>
 
@@ -32,10 +34,17 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .mobile-orders {
   height: 100%;
   display: flex;
   flex-direction: column;
+  &__container {
+    padding-top: 0.5rem;
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 }
 </style>

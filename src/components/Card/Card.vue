@@ -148,6 +148,9 @@ export default {
     .card-header {
       padding-right: 1rem;
     }
+    .card-body {
+      padding-top: 0!important;
+    }
   }
   &--collapsed {
     height: 2.8rem;
