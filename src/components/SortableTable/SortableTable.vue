@@ -11,7 +11,7 @@
         :current-field="sort.field"
         :sort="getSort(header)"
         :align="header.align"
-        :padding-left="header.paddingLeft"
+        :padding-left="header.paddingLeft + 0.56"
         :large="large"
         @change="toggleSort"
       />
@@ -73,6 +73,10 @@ export default {
     emptyArea: {
       type: Boolean,
       default: false
+    },
+    columnsConfig: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
@@ -89,8 +93,10 @@ export default {
       return orderBy(this.items, this.sort.field, this.sort.type)
     },
     headerStyle() {
+      const columnsConfig = this.columnsConfig.length && this.columnsConfig
+      const valueString = columnsConfig ? columnsConfig.map(value => `${value}fr`).join(' ') : ''
       return {
-        'grid-template-columns': `repeat(${this.headers.length}, 1fr)`,
+        'grid-template-columns': valueString || `repeat(${this.headers.length}, 1fr)`,
         'padding-left': `${this.headerLeftPadding}rem`,
         'padding-right': `${this.headerRightPadding}rem`
       }

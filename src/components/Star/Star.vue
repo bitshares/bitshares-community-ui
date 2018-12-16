@@ -4,6 +4,8 @@
     class="star">
     <svgicon
       :name="(active || hoverState) ? 'starFilled' : 'star'"
+      height="19"
+      width="19"
       @mouseover.native="hoverState=true"
       @mouseleave.native="hoverState=false"
     />

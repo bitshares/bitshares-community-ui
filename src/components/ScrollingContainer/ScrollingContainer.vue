@@ -36,7 +36,7 @@ export default {
   overflow: hidden;
 
   &--empty-area {
-    margin-top: 1.125rem;
+    margin-top: 1.5rem;
   }
   &__shadower-top {
     position: absolute;

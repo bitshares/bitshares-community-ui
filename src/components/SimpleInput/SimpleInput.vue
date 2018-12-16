@@ -175,6 +175,7 @@ export default {
       this.$emit('focus')
     },
     handleBlur() {
+      if (!this.$refs.input) return
       this.$emit('blur', this.$refs.input.value)
     },
     handleIconClick() {
