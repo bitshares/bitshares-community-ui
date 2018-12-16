@@ -1,18 +1,18 @@
 <template>
-  <perfect-scrollbar :options="{ wheelPropagation: true }">
-    <div
-      :class="{'scrollable-container--empty-area': emptyArea}"
-      class="scrollable-container"
-    >
-      <div
-        :style="{ height: shadowerHeight + 'px' }"
-        class="scrollable-container__shadower-top"/>
-      <div
-        :style="{ height: shadowerHeight + 'px' }"
-        class="scrollable-container__shadower-bottom"/>
+  <div
+    :class="{'scrollable-container--empty-area': emptyArea}"
+    class="scrollable-container"
+  >
+    <perfect-scrollbar :options="{ wheelPropagation: true }">
       <slot/>
-    </div>
-  </perfect-scrollbar>
+    </perfect-scrollbar>
+    <div
+      :style="{ height: shadowerHeight + 'px' }"
+      class="scrollable-container__shadower-top"/>
+    <div
+      :style="{ height: shadowerHeight + 'px' }"
+      class="scrollable-container__shadower-bottom"/>
+  </div>
 </template>
 
 <script>
