@@ -8,36 +8,8 @@
         <NewOrder/>
       </Modal>
       <Card :title="title">
-        <div
-          slot="header"
-          class="temp-acc-header"
-        >
-          <svgicon
-            v-if="activeComponentName === 'Account'"
-            name="search"
-            width="24"
-            height="24"
-            class="search-icon"
-          />
-          <div
-            v-if="activeComponentName === 'Account'"
-            class="temp-acc-btn"
-            @click="handleLogout"
-          >Logout</div>
-          <div
-            v-if="activeComponentName === 'Account'"
-            class="temp-acc-btn"
-            @click="toggleBackupModal"
-          >Backup</div>
-          <svgicon
-            v-if="activeComponentName === 'Orders'"
-            name="cross"
-            class="plus-icon"
-            width="22"
-            height="22"
-            @click="newOrder"
-          />
-        </div>
+        <AccountHeader slot="header" v-if="activeComponentName === 'Account'"/>
+
         <component
           slot="body"
           :is="componentName"
@@ -58,6 +30,7 @@ import MobileFooter from '@/components/MobileFooter'
 import Card from '@/components/Card'
 import Modal from '@/components/Modal/Modal'
 import Account from '@/views/Mobile/MobileAccount.vue'
+import AccountHeader from '@/views/Mobile/MobileAccountHeader.vue'
 import Markets from '@/views/Markets/Markets.vue'
 import Orders from '@/views/Mobile/MobileOrders.vue'
 import OrderBook from '@/views/OrderBook/OrderBook.vue'
@@ -68,7 +41,7 @@ import '@icons/account'
 
 export default {
   name: 'Mobile',
-  components: { MobileFooter, Markets, Account, Orders, Card, OrderBook, Modal, NewOrder },
+  components: { MobileFooter, Markets, Account, Orders, Card, OrderBook, Modal, NewOrder, AccountHeader },
   data() {
     return {
       activeComponentName: 'Markets',
