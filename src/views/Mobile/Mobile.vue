@@ -8,7 +8,9 @@
         <NewOrder/>
       </Modal>
       <Card :title="title">
-        <AccountHeader slot="header" v-if="activeComponentName === 'Account'"/>
+        <AccountHeader
+          v-if="activeComponentName === 'Account'"
+          slot="header"/>
 
         <component
           slot="body"

@@ -1,7 +1,5 @@
 <template>
-  <div class="mobile-dropdown">
-    
-  </div>
+  <div class="mobile-dropdown"/>
 </template>
 
 <script>
@@ -41,7 +39,7 @@ export default {
     handleLogout() {
       this.$router.push({ name: 'login' })
       this.logout()
-    },
+    }
   }
 }
 </script>

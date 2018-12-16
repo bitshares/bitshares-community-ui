@@ -127,7 +127,6 @@ export default {
   }
 }
 
-
 .dropdown-icon {
   color: config('colors.text-primary');
   &:hover {

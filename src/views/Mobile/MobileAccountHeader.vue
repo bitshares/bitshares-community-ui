@@ -3,21 +3,12 @@
     slot="header"
     class="temp-acc-header"
   >
-
     <Dropdown
       :mobile="true"
       :title="'hobb1t'"
       :items="menuItems"
       @clicked="handleDropdownClick"
     />
-    <!-- <svgicon
-      v-if="activeComponentName === 'Orders'"
-      name="cross"
-      class="plus-icon"
-      width="22"
-      height="22"
-      @click="newOrder"
-    /> -->
   </div>
 </template>
 
@@ -53,14 +44,22 @@ export default {
   methods: {
     ...mapActions({
       showDeposit: 'deposit/toggleModal',
-      toggleBackupModal: 'backup/toggleModal'
+      toggleBackupModal: 'backup/toggleModal',
+      logout: 'acc/logout',
+      showBackupModal: 'backup/toggleModal',
     }),
     handleLogout() {
       this.$router.push({ name: 'login' })
       this.logout()
     },
-    handleDropdownClick(value) {
-      console.log(value)
+    handleDropdownClick(eventName) {
+      switch (eventName) {
+        case 'logout':
+          this.handleLogout()
+          return
+        case 'backup':
+          this.showBackupModal(true)
+      }
     }
   }
 }
