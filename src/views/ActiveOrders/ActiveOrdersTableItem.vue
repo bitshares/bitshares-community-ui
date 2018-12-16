@@ -28,7 +28,7 @@
       </div>
       <div class="table-item text-right">
         <TwoLineItem
-          :top="price"
+          :top="vol"
         >
           <div
             slot="bottom"
@@ -94,8 +94,8 @@
         </TwoLineItem>
       </div>
       <div class="table-item--dates">
-        <div class="table-item-date">{{ dateOpen }}</div>
-        <div class="table-item-date">{{ timeOpen }}</div>
+        <div class="table-item-date">{{ dateExpiring }}</div>
+        <div class="table-item-date">{{ timeExpiring }}</div>
       </div>
     </div>
     <div
@@ -112,9 +112,7 @@
   </div>
 </template>
 <script>
-import { format } from 'date-fns'
 import '@icons/cancel'
-import { getFloatCurrency, removePrefix } from '@/helpers/utils'
 import TwoLineItem from '@/components/TwoLineItem/TwoLineItem'
 
 export default {
@@ -139,31 +137,31 @@ export default {
   },
   computed: {
     formattedPayAsset() {
-      return removePrefix(this.item.payAssetSymbol)
+      return this.item.payAssetSymbol
     },
     formattedReceiveAsset() {
-      return removePrefix(this.item.receiveAssetSymbol)
+      return this.item.receiveAssetSymbol
     },
-    dateOpen() {
-      return format(this.item.dateOpen, 'DD/MM/YY')
+    dateExpiring() {
+      return this.item.expiringDate
     },
-    timeOpen() {
-      return format(this.item.dateOpen, 'HH:mm')
+    timeExpiring() {
+      return this.item.expiringTime
     },
     price() {
-      return getFloatCurrency(this.item.price)
+      return this.item.price
     },
     avg() {
       return ''
     },
     vol() {
-      return getFloatCurrency(this.item.vol)
+      return this.item.vol
     },
     get() {
-      return getFloatCurrency(this.item.get)
+      return this.item.get
     },
     spend() {
-      return getFloatCurrency(this.item.spend)
+      return this.item.spend
     },
     fillColor() {
       const R = Math.round(255 / 100 * this.item.filled)
