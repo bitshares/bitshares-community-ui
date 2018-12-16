@@ -9,14 +9,14 @@
       title="password"/>
     <div class="backup-step-titles-wrapper">
       <div class="backup-step-subtitle--mini">key file</div>
-      <div class="backup-step-subtitle">bts_default121_20102.bin</div>
+      <div class="backup-step-subtitle">{{ fileName }}</div>
     </div>
     <div class="backup-step-footer">
       <div class="backup-step-button">
         <Button
           text="Download key file"
           width="full"
-          @click="$emit('download', password)"
+          @click="$emit('download', { password, fileName })"
         />
       </div>
     </div>
@@ -26,6 +26,7 @@
 <script>
 import Button from '@/components/Button/Button'
 import SimpleInput from '@/components/SimpleInput'
+import { format } from 'date-fns'
 export default {
   components: {
     Button,
@@ -40,6 +41,11 @@ export default {
   data() {
     return {
       password: ''
+    }
+  },
+  computed: {
+    fileName() {
+      return 'bts_default_' + format(new Date(), 'DD-MM-YYYY') + '.bin'
     }
   }
 }

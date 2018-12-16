@@ -121,7 +121,7 @@ export default {
       document.body.removeChild(a)
     },
 
-    async onSave(password) {
+    async onSave({ password, fileName }) {
       const passwordString = password.toString()
 
       if (!this.isValidPassword(passwordString)) {
@@ -136,7 +136,7 @@ export default {
         name: this.userName
       })
 
-      this.saveAs([new Uint8Array(blob)], 'bts_default121_20102.bin')
+      this.saveAs([new Uint8Array(blob)], fileName)
     },
     goBack() {
       if (this.currentStep === this.stepConfig['BACKUP_DOWNLOAD']) {
