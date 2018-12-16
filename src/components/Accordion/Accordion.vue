@@ -7,7 +7,7 @@
       class="accordion-item"
       @click="$emit('change', item)"
     >
-      <div 
+      <div
         :class="{'accordion-item-header--active' : item === active }"
         class="accordion-item-header"
       >

@@ -1,30 +1,24 @@
 <template>
   <div class="mobile-mode flex lg:hidden">
     <div class="mobile-mode-main">
-      <!-- <Modal
-        v-if="newOrderFlag"
-        @close="closeOrderModal"
-      >
-        <NewOrder/>
-      </Modal> -->
       <Card
         :title="title"
         :mobile="true"
       >
         <AccountHeader
-          v-if="activeComponentName === 'Account'"
+          v-if="activeTab === 'Account'"
           slot="header"/>
 
         <component
           slot="body"
-          :is="componentName"
+          :is="activeTab"
         />
       </Card>
     </div>
 
     <MobileFooter
       :items="menuItems"
-      @click="switchActiveComponent"
+      @click="setActiveTab"
     />
   </div>
 </template>
@@ -38,15 +32,13 @@ import Account from '@/views/Mobile/MobileAccount.vue'
 import AccountHeader from '@/views/Mobile/MobileAccountHeader.vue'
 import Markets from '@/views/Markets/Markets.vue'
 import Orders from '@/views/Mobile/MobileOrders.vue'
-import OrderBook from '@/views/OrderBook/OrderBook.vue'
-import NewOrder from '@/views/NewOrder/NewOrder.vue'
 import '@icons/markets'
 import '@icons/orders'
 import '@icons/account'
 
 export default {
   name: 'Mobile',
-  components: { MobileFooter, Markets, Account, Orders, Card, OrderBook, Modal, NewOrder, AccountHeader },
+  components: { MobileFooter, Markets, Account, Orders, Card, Modal, AccountHeader },
   data() {
     return {
       activeComponentName: 'Markets',
@@ -56,7 +48,7 @@ export default {
         name: 'Orders', title: 'Orders', icon: 'orders'
       }, {
         name: 'Account', title: 'Account', icon: 'account'
-      }],
+      }]
     }
   },
   computed: {
@@ -64,33 +56,21 @@ export default {
       userName: 'acc/getCurrentUserName',
       activeTab: 'mobile/getActiveTab'
     }),
-    componentName() {
-      return this.activeTab
-    },
     title() {
-      const tabName = this.activeComponentName
       switch (this.activeTab) {
         case 'Account':
           return this.userName
         case 'Orders':
           return ''
         default:
-          return tabName
+          return this.activeTab
       }
     }
   },
   methods: {
     ...mapActions({
       setActiveTab: 'mobile/setActiveTab'
-    }),
-    switchActiveComponent(name) {
-      this.setActiveTab(name)
-      // this.activeComponentName = name
-    },
-    handleLogout() {
-      this.$router.push({ name: 'login' })
-      this.logout()
-    }
+    })
   }
 }
 </script>
@@ -105,20 +85,5 @@ export default {
       overflow: hidden;
       height: 100%;
     }
-  }
-
-  .temp-acc-header {
-    display: flex;
-    .temp-acc-btn {
-      margin-left: 1rem;
-      border-bottom: 1px solid #ccc;
-    }
-  }
-  .search-icon {
-    margin-right: 25px;
-  }
-  .plus-icon {
-    transform: rotate(45deg);
-    padding: 5px;
   }
 </style>
