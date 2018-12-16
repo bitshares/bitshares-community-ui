@@ -1,35 +1,44 @@
 <template>
   <div class="mobile-orders">
-    <Tabs
-      :tabs="['active', 'history']"
-      :active="activeTab"
-      @change="switchTab"
-    />
-    <div class="mobile-orders__container">
-      <ActiveOrders v-if="activeTab === 'active'"/>
-
-      <OrderHistory v-if="activeTab === 'history'"/>
-    </div>
+    <Accordion
+      :items="tabs"
+      :active="modeName"
+      @change="setOrdersMode"
+    >
+      <NewOrder slot="New Order"/>
+      <OrderBook slot="Order Book"/>
+      <ActiveOrders slot="Active Orders"/>
+      <OrderHistory slot="History"/>
+    </Accordion>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import Tabs from '@/components/Tabs'
+import Accordion from '@/components/Accordion'
+import NewOrder from '@/views/NewOrder/NewOrder.vue'
+import OrderBook from '@/views/OrderBook/OrderBook.vue'
 import OrderHistory from '@/views/OrderHistory/OrderHistory.vue'
 import ActiveOrders from '@/views/ActiveOrders/ActiveOrders.vue'
 
 export default {
   name: 'MobileOrders',
-  components: { Tabs, OrderHistory, ActiveOrders },
+  components: { Tabs, OrderHistory, ActiveOrders, Accordion, NewOrder, OrderBook },
   data() {
     return {
-      activeTab: 'active'
+      tabs: ['New Order', 'Order Book', 'Active Orders', 'History']
     }
   },
+  computed: {
+    ...mapGetters({
+      modeName: 'mobile/getOrdersMode'
+    })
+  },
   methods: {
-    switchTab(tab) {
-      this.activeTab = tab
-    }
+    ...mapActions({
+      setOrdersMode: 'mobile/setOrdersMode'
+    })
   }
 }
 </script>

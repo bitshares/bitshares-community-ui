@@ -1,12 +1,12 @@
 <template>
   <div class="mobile-mode flex lg:hidden">
     <div class="mobile-mode-main">
-      <Modal
+      <!-- <Modal
         v-if="newOrderFlag"
         @close="closeOrderModal"
       >
         <NewOrder/>
-      </Modal>
+      </Modal> -->
       <Card
         :title="title"
         :mobile="true"
@@ -57,52 +57,39 @@ export default {
       }, {
         name: 'Account', title: 'Account', icon: 'account'
       }],
-      newOrderFlag: false
     }
   },
   computed: {
+    ...mapGetters({
+      userName: 'acc/getCurrentUserName',
+      activeTab: 'mobile/getActiveTab'
+    }),
     componentName() {
-      if (this.activeComponentName === 'Markets' && this.showOrderBook) return 'OrderBook'
-      return this.activeComponentName
+      return this.activeTab
     },
     title() {
       const tabName = this.activeComponentName
-      switch (tabName) {
+      switch (this.activeTab) {
         case 'Account':
           return this.userName
         case 'Orders':
-          return 'My orders'
+          return ''
         default:
-          return this.showOrderBook ? 'Order Book' : tabName
+          return tabName
       }
-    },
-    ...mapGetters({
-      userName: 'acc/getCurrentUserName',
-      orderBookIsActive: 'orderBook/isActive'
-    }),
-    showOrderBook() {
-      return this.activeComponentName === 'Markets' && this.orderBookIsActive
     }
   },
   methods: {
     ...mapActions({
-      deinitOrderBook: 'orderBook/deinit',
-      toggleBackupModal: 'backup/toggleModal',
-      logout: 'acc/logout'
+      setActiveTab: 'mobile/setActiveTab'
     }),
     switchActiveComponent(name) {
-      this.deinitOrderBook()
-      this.activeComponentName = name
+      this.setActiveTab(name)
+      // this.activeComponentName = name
     },
     handleLogout() {
       this.$router.push({ name: 'login' })
       this.logout()
-    },
-    newOrder() {
-      this.newOrderFlag = true
-    },
-    closeOrderModal() {
-      this.newOrderFlag = false
     }
   }
 }
