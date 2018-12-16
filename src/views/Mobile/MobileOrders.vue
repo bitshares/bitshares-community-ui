@@ -1,13 +1,14 @@
 <template>
-  <Tabs
-    :tabs="['active', 'history']"
-    :active="activeTab"
-    @change="switchTab"
-  >
-    <active-orders slot="active" />
+  <div class="mobile-orders">
+    <Tabs
+      :tabs="['active', 'history']"
+      :active="activeTab"
+      @change="switchTab"
+    />
+    <ActiveOrders v-if="activeTab === 'active'"/>
 
-    <order-history slot="history" />
-  </Tabs>
+    <OrderHistory v-if="activeTab === 'history'"/>
+  </div>
 </template>
 
 <script>
@@ -30,3 +31,11 @@ export default {
   }
 }
 </script>
+
+<style>
+.mobile-orders {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+</style>
