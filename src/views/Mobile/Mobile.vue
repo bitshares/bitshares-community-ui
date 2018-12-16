@@ -18,6 +18,7 @@
 
     <MobileFooter
       :items="menuItems"
+      :active-tab="activeTab"
       @click="setActiveTab"
     />
   </div>
