@@ -1,7 +1,5 @@
 <template>
-  <div class="withdraw-container h-full sm:w-120">
-    <div class="withdraw-title">withdraw</div>
-
+  <div class="withdraw-form">
     <div class="withdraw-content">Are you sure you want to withdraw {{ withdrawAmount }} {{ withdrawAsset.tiker.toUpperCase() }} to {{ withdrawAddress }} address?</div>
     <div class="withdraw-footer">
       <Button
@@ -35,40 +33,31 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-  .withdraw-container {
-    color: config('colors.primary');
-    padding: 0.6rem;
+<style lang="scss">
+  .withdraw-form {
     display: flex;
     flex-direction: column;
-    min-height: 19.375rem;
-
-    .withdraw-title {
-      text-align: center;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      font-size: config('textSizes.lg');
-    }
-    .withdraw-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-      padding: 1.5rem;
-      line-height: 2;
-      word-break: break-word;
-      margin-top: auto;
-      font-size: config('textSizes.lg');
-    }
-    .withdraw-footer {
-      display: flex;
-      margin-top: auto;
-    }
-    .withdraw-title {
-      font-size: config('textSizes.lg');
-      text-align: center;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
+    height: 100%;
+  }
+  .withdraw-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 1.5rem;
+    line-height: 2;
+    word-break: break-word;
+    margin-top: auto;
+    font-size: config('textSizes.lg');
+  }
+  .withdraw-footer {
+    display: flex;
+    margin-top: auto;
+  }
+  .withdraw-title {
+    font-size: config('textSizes.lg');
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
   }
 </style>

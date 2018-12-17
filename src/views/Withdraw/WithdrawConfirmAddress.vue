@@ -1,6 +1,5 @@
 <template>
-  <div class="withdraw-container h-full sm:w-120">
-    <div class="withdraw-title">withdraw</div>
+  <div class="withdraw-form">
     <div class="withdraw-sub-title">Please scan QR code or enter transfer address manually</div>
     <SimpleInput
       v-model="address"
@@ -73,32 +72,23 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-  .withdraw-container {
-    color: config('colors.primary');
-    padding: 0.6rem;
+<style lang="scss">
+  .withdraw-form {
     display: flex;
     flex-direction: column;
-    min-height: 19.375rem;
-
-    .withdraw-title {
-      font-size: config('textSizes.lg');
-      text-align: center;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-    .withdraw-sub-title {
-      font-size: config('textSizes.lg');
-      text-align: center;
-    }
-    .withdraw-input {
-      margin-top: auto;
-      margin-bottom: 1rem;
-      display: flex;
-    }
-    .withdraw-footer {
-      margin-top: auto;
-      display: flex;
-    }
+    height: 100%;
+  }
+  .withdraw-sub-title {
+    font-size: config('textSizes.lg');
+    text-align: center;
+  }
+  .withdraw-input {
+    margin-top: auto;
+    margin-bottom: 1rem;
+    display: flex;
+  }
+  .withdraw-footer {
+    margin-top: auto;
+    display: flex;
   }
 </style>

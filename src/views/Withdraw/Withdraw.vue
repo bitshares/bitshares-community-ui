@@ -1,6 +1,5 @@
 <template>
-  <div class="withdraw-container h-full sm:w-120">
-    <div class="withdraw-title">withdraw</div>
+  <div class="withdraw-form">
     <div class="withdraw-sub-title">Choose token</div>
     <div class="withdraw-loader-wrapper">
       <LoadingContainer :loading="!coinslist.length">
@@ -55,7 +54,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
   .withdraw-container {
     color: config('colors.primary');
     padding: 0.6rem;
@@ -71,12 +70,6 @@ export default {
     .withdraw-content {
       overflow-y: auto;
       height: 19.375rem;
-    }
-    .withdraw-title {
-      font-size: config('textSizes.lg');
-      text-align: center;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
     }
     .withdraw-sub-title {
       font-size: config('textSizes.lg');

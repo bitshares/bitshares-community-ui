@@ -1,6 +1,5 @@
 <template>
-  <div class="withdraw-container h-full sm:w-120">
-    <div class="withdraw-title">Withdraw</div>
+  <div class="withdraw-form">
     <div class="withdraw-item">
       <svgicon
         class="withdraw-item-cancel"
@@ -90,40 +89,32 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-  .withdraw-container {
-    color: config('colors.primary');
-    padding: 0.6rem;
+<style lang="scss">
+  .withdraw-form {
     display: flex;
     flex-direction: column;
-    min-height: 19.375rem;
-
-    .withdraw-title {
-      text-align: center;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      font-size: config('textSizes.lg');
+    height: 100%;
+  }
+  .withdraw-sub-title {
+    letter-spacing: -0.0555rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .withdraw-item {
+    margin-top: 0;
+    position: relative;
+    .withdraw-item-cancel {
+      position: absolute;
+      right: 1rem;
+      top: 1.2rem;
+      z-index: 100;
+      cursor: pointer;
     }
-    .withdraw-sub-title {
-      letter-spacing: -0.0555rem;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-    .withdraw-item {
-      margin-top: 0;
-      position: relative;
-      .withdraw-item-cancel {
-        position: absolute;
-        right: 1rem;
-        top: 1.2rem;
-        z-index: 100;
-        cursor: pointer;
-      }
-    }
-    .withdraw-footer {
-      margin-top: auto;
-      display: flex;
-    }
+  }
+  .withdraw-footer {
+    margin-top: auto;
+    display: flex;
+    padding-top: 1rem;
   }
 </style>

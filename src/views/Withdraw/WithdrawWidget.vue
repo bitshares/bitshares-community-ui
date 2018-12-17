@@ -2,10 +2,13 @@
   <Modal
     v-if="showWithdraw"
     @close="toggle">
-    <Withdraw v-if="withdrawStep === 'withdraw'"/>
-    <WithdrawConfirmAmount v-if="withdrawStep === 'withdrawConfirmAmount'"/>
-    <WithdrawConfirmAddress v-if="withdrawStep === 'withdrawConfirmAddress'"/>
-    <WithdrawFinish v-if="withdrawStep === 'withdrawFinish'"/>
+    <div class="withdraw-container h-full sm:w-120">
+      <div class="withdraw-title">withdraw</div>
+      <Withdraw v-if="withdrawStep === 'withdraw'"/>
+      <WithdrawConfirmAmount v-if="withdrawStep === 'withdrawConfirmAmount'"/>
+      <WithdrawConfirmAddress v-if="withdrawStep === 'withdrawConfirmAddress'"/>
+      <WithdrawFinish v-if="withdrawStep === 'withdrawFinish'"/>
+    </div>
   </Modal>
 </template>
 
@@ -40,3 +43,19 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+  .withdraw-container {
+    color: config('colors.primary');
+    padding: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .withdraw-title {
+      font-size: config('textSizes.lg');
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+  }
+</style>
