@@ -13,7 +13,9 @@
         :align="header.align"
         :padding-left="header.paddingLeft"
         :large="large"
-        @change="toggleSort"
+        :disable-sort="header.disableSort"
+        :class="{ headerDisabled : header.disableSort }"
+        @change="header.disableSort ? () => {} : toggleSort"
       />
     </div>
     <slot name="row"/>
@@ -129,5 +131,8 @@ export default {
     padding-top: config('padding.2');
     height: 100%;
     overflow: auto;
+  }
+  .headerDisabled {
+    cursor: default !important;
   }
 </style>
