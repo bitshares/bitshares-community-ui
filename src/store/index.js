@@ -9,6 +9,7 @@ import activeOrders from './modules/activeOrders'
 import marketsMonitor from './modules/marketsMonitor'
 import newOrder from './modules/newOrder'
 import deposit from './modules/deposit'
+import graph from './modules/graph'
 
 import createPersistedState from 'vuex-persistedstate'
 import vuexBitshares from 'vuex-bitshares'
@@ -32,6 +33,7 @@ const store = new Vuex.Store({
     orderHistory,
     newOrder,
     activeOrders,
+    graph,
     ...modules
   },
   plugins: [
