@@ -134,6 +134,6 @@ export default {
   .sortable-table__body {
     padding-top: config('padding.2');
     height: 100%;
-    overflow: auto;
+    // overflow: auto;
   }
 </style>

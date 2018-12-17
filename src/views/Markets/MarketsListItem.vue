@@ -56,7 +56,9 @@ export default {
     ...mapActions({
       toggleFavourite: 'marketsMonitor/toggleFavourite',
       activateOrderBook: 'orderBook/initialize',
-      setNewOrderMarket: 'newOrder/setMarket'
+      setNewOrderMarket: 'newOrder/setMarket',
+      setActiveTab: 'mobile/setActiveTab',
+      setOrdersMode: 'mobile/setOrdersMode'
     }),
     handleClick() {
       this.activateOrderBook({
@@ -67,6 +69,8 @@ export default {
         base: this.item.base,
         quote: this.item.ticker
       })
+      this.setActiveTab('Orders')
+      this.setOrdersMode('New Order')
     },
     getChangeValue({ price }) {
       if (!price) return '0%'

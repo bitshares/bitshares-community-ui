@@ -25,6 +25,7 @@
     "vue-clipboard2": "^0.2.1",
     "vue-responsive": "^1.0.2",
     "vue-router": "^3.0.1",
+    "vue2-perfect-scrollbar": "^1.2.0",
     "vuelidate": "^0.7.4",
     "vuex": "^3.0.1",
     "vuex-bitshares": "file:vuex-bitshares",
