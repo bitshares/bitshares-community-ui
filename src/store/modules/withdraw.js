@@ -23,7 +23,7 @@ const getters = {
 }
 
 const mutations = {
-  [types.TOGGLE_WITHDRAW_MODAL](state, value) {
+  [types.TOGGLE_WITHDRAW_MODAL](state) {
     state.showModal = !state.showModal
   },
   [types.SET_WITHDRAW_ASSET](state, { asset }) {

@@ -22,12 +22,15 @@
       v-model="amount"
       :tip="maxWithdrawTitle"
       :centered="true"
-      :error="isAmountValid === 'valid' ? '' : isAmountValid"
+      :error="error"
+      :note-clickable="true"
       title="withdrawal amount"
+      type="number"
+      @note-clicked="amount = withdrawAsset.tokens"
     />
     <div class="withdraw-footer">
       <Button
-        :disabled="(isAmountValid === errorTitle || !isAmountValid) ? true : false"
+        :disabled="isAmountValid"
         text="Confirm amount"
         width="full"
         class="withdraw-btn"
@@ -49,8 +52,7 @@ export default {
   },
   data() {
     return {
-      amount: '',
-      errorTitle: 'Please enter valid amount'
+      amount: ''
     }
   },
   computed: {
@@ -61,15 +63,16 @@ export default {
       return `max ${this.withdrawAsset.tokens} ${this.withdrawAsset.tiker}`
     },
     isAmountValid() {
-      const isNumeric = () => !isNaN(parseFloat(this.amount)) && isFinite(this.amount)
-
-      if (!this.amount) {
+      if (+this.amount < 1 || +this.amount > this.withdrawAsset.tokens) {
+        return true
+      }
+      return false
+    },
+    error() {
+      if (this.amount === undefined || this.amount === '') {
         return ''
       }
-      if (!isNumeric() || +this.amount < 1 || +this.amount > this.withdrawAsset.tokens) {
-        return this.errorTitle
-      }
-      return 'valid'
+      return !this.isAmountValid ? '' : `Please enter valid amount less than or equal to ${this.withdrawAsset.tokens}`
     }
   },
   methods: {

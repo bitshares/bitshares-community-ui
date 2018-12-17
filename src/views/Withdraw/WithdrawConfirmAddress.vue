@@ -38,8 +38,7 @@ export default {
       address: '',
       validUser: false,
       userLoaded: false,
-      errorTitle: 'user not found',
-      validateUser: debounce(this.getUser, 500)
+      errorTitle: 'user not found'
     }
   },
   computed: {
@@ -49,6 +48,9 @@ export default {
       }
       return ''
     }
+  },
+  created() {
+    this.validateUser = debounce(this.getUser, 500)
   },
   methods: {
     ...mapActions({
@@ -61,7 +63,7 @@ export default {
       const user = await getUser(this.address)
       this.userLoaded = true
       if (user.success) {
-        this.validUser = true
+        this.validUser = user.success
       }
     },
     confirmAddress() {

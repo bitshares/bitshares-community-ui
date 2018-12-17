@@ -58,7 +58,10 @@
     <!-- tip message -->
     <div
       v-if="tipText && !error"
-      class="input__tip">
+      :class="{'input__tip--clickable': noteClickable}"
+      class="input__tip"
+      @click="noteClickable && $emit('note-clicked')"
+    >
       {{ tipText }}
     </div>
 
@@ -125,6 +128,10 @@ export default {
       default: false
     },
     centered: {
+      type: Boolean,
+      default: false
+    },
+    noteClickable: {
       type: Boolean,
       default: false
     }
@@ -205,6 +212,10 @@ export default {
     .input__tip {
       width: 100%;
       text-align: center;
+
+      &--clickable {
+        cursor: pointer;
+      }
     }
     .input__title {
       width: 100%;
