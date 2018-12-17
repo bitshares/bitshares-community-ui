@@ -1,16 +1,22 @@
+          <!-- @click="$emit('change', stepConfig['BACKUP_MENU'], password)" -->
 <template>
   <div class="backup-step h-full sm:w-120">
     <div class="backup-step-title">backup</div>
+    <SimpleInput
+      v-model="password"
+      :password="true"
+      type="number"
+      title="password"/>
     <div class="backup-step-titles-wrapper">
       <div class="backup-step-subtitle--mini">key file</div>
-      <div class="backup-step-subtitle">bts_default121_20102.bin</div>
+      <div class="backup-step-subtitle">{{ fileName }}</div>
     </div>
     <div class="backup-step-footer">
       <div class="backup-step-button">
         <Button
           text="Download key file"
           width="full"
-          @click="$emit('change', stepConfig['BACKUP_MENU'])"
+          @click="$emit('download', { password, fileName })"
         />
       </div>
     </div>
@@ -19,14 +25,27 @@
 
 <script>
 import Button from '@/components/Button/Button'
+import SimpleInput from '@/components/SimpleInput'
+import { format } from 'date-fns'
 export default {
   components: {
-    Button
+    Button,
+    SimpleInput
   },
   props: {
     stepConfig: {
       type: Object,
       required: true
+    }
+  },
+  data() {
+    return {
+      password: ''
+    }
+  },
+  computed: {
+    fileName() {
+      return 'bts_default_' + format(new Date(), 'DD-MM-YYYY') + '.bin'
     }
   }
 }

@@ -3,7 +3,8 @@
     :class="{
       'btn--loading': loading,
       'btn--disabled': disabled,
-      'btn--small':size === 'small',
+      'btn--small': size === 'small',
+      'btn--mobile-small': size === 'mobile-small',
       'btn--big': size === 'big',
       'btn--wide': width === 'full',
       'btn--round': type === 'round',
@@ -121,6 +122,14 @@ export default {
   min-width: 6.8889rem;
   font-size: 0.9rem;
   letter-spacing: -0.6px;
+}
+.btn--mobile-small {
+  letter-spacing: -0.75px;
+  font-size: 0.9375rem;
+  font-family: Gotham_Pro;
+  height: 3rem;
+  padding: 0;
+  width: 6.75rem;
 }
 .btn--big {
   @apply py-2 px-6 cursor-pointer text-2xl;

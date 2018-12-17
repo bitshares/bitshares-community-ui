@@ -1,3 +1,4 @@
+      <!-- @change="onSave" -->
 <template>
   <div class="backup-container h-full sm:w-120">
     <svgicon
@@ -41,6 +42,7 @@
     <BackupKeyDownload
       v-if="currentStep === stepConfig['BACKUP_DOWNLOAD']"
       :step-config="stepConfig"
+      @download="onSave"
     />
   </div>
 </template>
@@ -83,7 +85,9 @@ export default {
   computed: {
     ...mapGetters({
       backupPhrase: 'acc/getBrainkey',
-      isLocked: 'acc/isLocked'
+      isLocked: 'acc/isLocked',
+      userName: 'acc/getCurrentUserName',
+      isValidPassword: 'acc/isValidPassword'
     }),
     phrase() {
       return this.backupPhrase.split(' ')
@@ -91,6 +95,10 @@ export default {
   },
   methods: {
     ...mapActions('backup', ['toggleModal']),
+    ...mapActions({
+      backupBlob: 'acc/getBackupBlob',
+      unlockWallet: 'acc/unlockWallet'
+    }),
 
     closeModal() {
       this.$nextTick(() => {
@@ -99,6 +107,36 @@ export default {
     },
     onChangeStep(step) {
       this.currentStep = step
+    },
+    saveAs(data, fileName) {
+      const a = document.createElement('a')
+      document.body.appendChild(a)
+      a.style = 'display: none'
+      const blob = new Blob(data, { type: 'application/octet-stream; charset=us-ascii' })
+      const url = window.URL.createObjectURL(blob)
+      a.href = url
+      a.download = fileName
+      a.click()
+      window.URL.revokeObjectURL(url)
+      document.body.removeChild(a)
+    },
+
+    async onSave({ password, fileName }) {
+      const passwordString = password.toString()
+
+      if (!this.isValidPassword(passwordString)) {
+        return
+      }
+      if (this.isLocked) {
+        this.unlockWallet(passwordString)
+      }
+      const blob = await this.backupBlob({
+        brainkey: this.backupPhrase,
+        password: passwordString,
+        name: this.userName
+      })
+
+      this.saveAs([new Uint8Array(blob)], fileName)
     },
     goBack() {
       if (this.currentStep === this.stepConfig['BACKUP_DOWNLOAD']) {
