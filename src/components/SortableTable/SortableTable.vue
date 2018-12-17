@@ -103,8 +103,6 @@ export default {
   },
   methods: {
     toggleSort(field, header) {
-      console.log('toggleSort')
-      console.log(header)
       if (header.disableSort) return
       if (this.sort.field === field) {
         this.sort.type = this.sort.type === 'asc' ? 'desc' : 'asc'
