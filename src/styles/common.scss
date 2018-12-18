@@ -121,8 +121,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
     .ps .ps__rail-y:focus,
     .ps .ps__rail-x.ps--clicking,
     .ps .ps__rail-y.ps--clicking {
-    background-color: #eee;
-    opacity: 0.9;
+    background-color: none;
     }
     /*
     * Scrollbar thumb styles
@@ -141,10 +140,10 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
     }
     .ps__thumb-y {
     background-color: #b3b3b3;
-    border-radius: 6px;
+    border-radius: 8px;
     transition: background-color .2s linear, width .2s ease-in-out;
     -webkit-transition: background-color .2s linear, width .2s ease-in-out;
-    width: 4px;
+    width: 3px;
     /* there must be 'right' for ps__thumb-y */
     right: 4px;
     /* please don't change 'position' */
@@ -153,14 +152,14 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
     .ps__rail-x:hover > .ps__thumb-x,
     .ps__rail-x:focus > .ps__thumb-x,
     .ps__rail-x.ps--clicking .ps__thumb-x {
-    background-color: #999;
+    background-color: green;
     height: 11px;
     }
     .ps__rail-y:hover > .ps__thumb-y,
     .ps__rail-y:focus > .ps__thumb-y,
     .ps__rail-y.ps--clicking .ps__thumb-y {
-    background-color: #999;
-    width: 11px;
+    background-color: #b3b3b3d;
+    width: 4px;
     }
     /* MS supports */
     @supports (-ms-overflow-style: none) {
