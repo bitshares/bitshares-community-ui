@@ -15,7 +15,7 @@
         :large="large"
         :disable-sort="header.disableSort"
         :class="{ 'header-item--disabled' : header.disableSort }"
-        @change="toggleSort(sort.field, header)"
+        @change="toggleSort"
       />
     </div>
     <slot name="row"/>
@@ -108,7 +108,8 @@ export default {
     this.sort = this.defaultSort
   },
   methods: {
-    toggleSort(field, header) {
+    toggleSort(field) {
+      let header = this.headers.find(h => h.field === field) || {}
       if (header.disableSort) return
       if (this.sort.field === field) {
         this.sort.type = this.sort.type === 'asc' ? 'desc' : 'asc'
