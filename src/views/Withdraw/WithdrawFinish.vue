@@ -6,6 +6,7 @@
         text="confirm withdrawal"
         width="full"
         class="withdraw-btn"
+        disabled="true"
         @click="toggle"
       />
     </div>

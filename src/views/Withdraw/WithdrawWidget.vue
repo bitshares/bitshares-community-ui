@@ -58,4 +58,11 @@ export default {
       margin-bottom: 1rem;
     }
   }
+  @media screen and (max-width: 800px) {
+    .withdraw-container {
+      .withdraw-content {
+        height: 100%;
+      }
+    }
+  }
 </style>

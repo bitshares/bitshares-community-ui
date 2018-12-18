@@ -62,7 +62,7 @@ export default {
       return `max ${this.withdrawAsset.tokens} ${this.withdrawAsset.tiker}`
     },
     isAmountValid() {
-      if (+this.amount < 1 || +this.amount > this.withdrawAsset.tokens) {
+      if (+this.amount <= 0 || +this.amount > this.withdrawAsset.tokens) {
         return true
       }
       return false
@@ -102,7 +102,7 @@ export default {
     text-align: center;
   }
   .withdraw-item {
-    margin-top: 0;
+    margin-top: 1rem;
     position: relative;
     .withdraw-item-cancel {
       position: absolute;
