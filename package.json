@@ -17,7 +17,6 @@
     "date-fns": "^1.29.0",
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.11",
-    "notie": "^4.3.1",
     "toastr": "^2.1.4",
     "v-click-outside": "^2.0.1",
     "vue": "^2.5.17",
