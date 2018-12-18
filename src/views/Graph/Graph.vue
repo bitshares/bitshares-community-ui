@@ -7,17 +7,12 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import { Line } from 'vue-chartjs'
 
 export default {
   name: 'Graph',
   extends: Line,
-  data() {
-    return {
-      htmlLegend: null
-    }
-  },
   computed: {
     ...mapGetters({
       graphItems: 'graph/getGraphItems',
@@ -47,16 +42,13 @@ export default {
         }
       ]
     })
-  },
-  methods: {
-    ...mapActions({
-      updateGraphItems: 'graph/updateGraphItems'
-    })
   }
 }
 </script>
 <style lang="scss">
   .graph {
+    opacity: 0.5;
+    cursor: disabled;
     color: config('colors.primary');
   }
 </style>

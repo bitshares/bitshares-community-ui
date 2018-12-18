@@ -51,6 +51,7 @@
     "vue-template-compiler": "^2.5.17"
   },
   "gitHooks": {
-    "pre-commit": "npm run lint"
+    "pre-commit": "npm run lint",
+    "pre-push": "npm run test:unit"
   }
 }
