@@ -9,8 +9,8 @@ import activeOrders from './modules/activeOrders'
 import marketsMonitor from './modules/marketsMonitor'
 import newOrder from './modules/newOrder'
 import deposit from './modules/deposit'
+import graph from './modules/graph'
 import mobile from './modules/mobile'
-
 import createPersistedState from 'vuex-persistedstate'
 import vuexBitshares from 'vuex-bitshares'
 import Cookies from 'js-cookie'
@@ -33,6 +33,7 @@ const store = new Vuex.Store({
     orderHistory,
     newOrder,
     activeOrders,
+    graph,
     mobile,
     ...modules
   },

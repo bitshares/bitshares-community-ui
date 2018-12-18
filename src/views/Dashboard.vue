@@ -52,7 +52,9 @@
             <Card
               :collapsible="true"
               title="graph"
-            />
+            >
+              <Graph slot="body"/>
+            </Card>
           </div>
           <div class="flex">
             <div class="flex flex-col lg:w-1/2 pr-half-card-row">
@@ -132,6 +134,7 @@ import Mobile from '@/views/Mobile/Mobile'
 import NewOrder from '@/views/NewOrder/NewOrder'
 import Deposit from '@/views/Deposit/DepositWidget'
 import UnlockAccountPopup from '@/views/UnlockAccountPopup/UnlockAccountPopup'
+import Graph from '@/views/Graph/Graph'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -155,7 +158,8 @@ export default {
     Mobile,
     NewOrder,
     Deposit,
-    UnlockAccountPopup
+    UnlockAccountPopup,
+    Graph
   },
   computed: {
     ...mapGetters({
