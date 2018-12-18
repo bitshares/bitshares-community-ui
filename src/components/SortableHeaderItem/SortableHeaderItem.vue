@@ -133,6 +133,9 @@ export default {
   &--large {
     font-size: config('textSizes.base');
   }
+  &--disabled {
+    cursor: default;
+  }
 }
 
 .header-item__title {

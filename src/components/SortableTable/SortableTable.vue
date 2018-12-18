@@ -14,7 +14,7 @@
         :padding-left="header.paddingLeft"
         :large="large"
         :disable-sort="header.disableSort"
-        :class="{ headerDisabled : header.disableSort }"
+        :class="{ 'header-item--disabled' : header.disableSort }"
         @change="toggleSort(sort.field, header)"
       />
     </div>
@@ -132,8 +132,5 @@ export default {
     padding-top: config('padding.2');
     height: 100%;
     overflow: auto;
-  }
-  .headerDisabled {
-    cursor: default !important;
   }
 </style>
