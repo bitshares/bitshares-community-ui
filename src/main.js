@@ -6,12 +6,12 @@ import toast from './helpers/toast'
 import './directives/'
 import SvgIcon from 'vue-svgicon'
 import VueClipboard from 'vue-clipboard2'
+import PerfectScrollbar from 'vue2-perfect-scrollbar'
 
 Vue.prototype.$toast = toast
 Vue.use(VueClipboard)
-Vue.use(SvgIcon, {
-  tagName: 'svgicon'
-})
+Vue.use(SvgIcon, { tagName: 'svgicon' })
+Vue.use(PerfectScrollbar)
 
 window.crypto.randomBytes = require('randombytes')
 

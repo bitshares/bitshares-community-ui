@@ -1,44 +1,45 @@
 <template>
-  <div class="mobile-account">
-    <div class="mobile-account-actions">
-      <Button
-        size="mobile-small"
-        text="Deposit"
-        type="secondary"
-        @click="showDeposit"
-      />
-
-      <Button
-        size="mobile-small"
-        text="Withdraw"
-        type="secondary"
-      />
-
-      <Button
-        size="mobile-small"
-        text="Transfer"
-        type="secondary"
-      />
-    </div>
-
-    <AccountHeader :large-mode="true"/>
-
-    <Portfolio />
-  </div>
+  <div class="mobile-dropdown"/>
 </template>
 
 <script>
 import Button from '@/components/Button'
 import Portfolio from '@/views/Account/Portfolio'
 import AccountHeader from '@/views/Account/AccountHeader'
+import Dropdown from '@/components/Dropdown'
 import { mapActions } from 'vuex'
 
 export default {
-  components: { Button, AccountHeader, Portfolio },
+  components: { Button, AccountHeader, Portfolio, Dropdown },
+  data: () => ({
+    menuItems: [{
+      title: 'backup',
+      event: 'backup'
+    },
+    {
+      title: 'settings',
+      event: 'settings',
+      disabled: true
+    },
+    {
+      title: 'faq',
+      event: 'faq',
+      disabled: true
+    },
+    {
+      title: 'log out',
+      event: 'logout'
+    }]
+  }),
   methods: {
     ...mapActions({
-      showDeposit: 'deposit/toggleModal'
-    })
+      showDeposit: 'deposit/toggleModal',
+      toggleBackupModal: 'backup/toggleModal'
+    }),
+    handleLogout() {
+      this.$router.push({ name: 'login' })
+      this.logout()
+    }
   }
 }
 </script>
@@ -63,11 +64,10 @@ export default {
   padding: 0 1.5rem 0 1rem;
 }
 
-.mobile-account-actions {
+.mobile-account-header {
   margin: 0 0 1rem;
-  padding: 0 1rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 </style>

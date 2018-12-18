@@ -59,10 +59,12 @@ export default {
 
 .account-header--large-mode {
   width: 100%;
+  display: flex;
+  flex-shrink: 0;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   padding-top: 1rem;
   font-size: config('textSizes.lg');
   .title {

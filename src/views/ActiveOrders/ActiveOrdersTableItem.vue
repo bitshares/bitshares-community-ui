@@ -14,10 +14,10 @@
     >
       <div class="table-item">
         <TwoLineItem
-          :top="formattedPayAsset"
-          :bottom="formattedReceiveAsset"
+          :top="formattedReceiveAsset"
+          :bottom="formattedPayAsset"
         >
-          <span slot="bottom">/{{ formattedReceiveAsset }}</span>
+          <span slot="bottom">/{{ formattedPayAsset }}</span>
         </TwoLineItem>
       </div>
       <div class="table-item">
@@ -28,7 +28,7 @@
       </div>
       <div class="table-item text-right">
         <TwoLineItem
-          :top="price"
+          :top="vol"
         >
           <div
             slot="bottom"
@@ -48,10 +48,10 @@
     >
       <div class="table-item">
         <TwoLineItem
-          :top="formattedPayAsset"
+          :top="formattedReceiveAsset"
           :expanded="expanded"
         >
-          <span slot="bottom">/{{ formattedReceiveAsset }}</span>
+          <span slot="bottom">/{{ formattedPayAsset }}</span>
         </TwoLineItem>
       </div>
       <div class="table-item">
@@ -66,7 +66,7 @@
           :top="get"
           :expanded="expanded"
         >
-          <span slot="bottom">/{{ formattedReceiveAsset }}</span>
+          <span slot="bottom">{{ formattedReceiveAsset }}</span>
         </TwoLineItem>
       </div>
       <div class="table-item _relative">
@@ -74,7 +74,7 @@
           :top="spend"
           :expanded="expanded"
         >
-          <span slot="bottom">/{{ formattedPayAsset }}</span>
+          <span slot="bottom">{{ formattedPayAsset }}</span>
         </TwoLineItem>
       </div>
       <div
@@ -94,8 +94,8 @@
         </TwoLineItem>
       </div>
       <div class="table-item--dates">
-        <div class="table-item-date">{{ dateOpen }}</div>
-        <div class="table-item-date">{{ timeOpen }}</div>
+        <div class="table-item-date">{{ dateExpiring }}</div>
+        <div class="table-item-date">{{ timeExpiring }}</div>
       </div>
     </div>
     <div
@@ -144,11 +144,11 @@ export default {
     formattedReceiveAsset() {
       return removePrefix(this.item.receiveAssetSymbol)
     },
-    dateOpen() {
-      return format(this.item.dateOpen, 'DD/MM')
+    dateExpiring() {
+      return format(this.item.expiration, 'DD/MM')
     },
-    timeOpen() {
-      return format(this.item.dateOpen, 'HH:mm')
+    timeExpiring() {
+      return format(this.item.expiration, 'HH:mm')
     },
     price() {
       return getFloatCurrency(this.item.price)

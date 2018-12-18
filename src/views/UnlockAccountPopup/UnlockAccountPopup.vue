@@ -62,7 +62,9 @@ export default {
   computed: {
     ...mapGetters({
       isLocked: 'acc/isLocked',
-      isValidPassword: 'acc/isValidPassword'
+      isValidPassword: 'acc/isValidPassword',
+      loginType: 'acc/getLoginType',
+      username: 'acc/getCurrentUserName'
     }),
     confirmDisabled() {
       return !this.password
@@ -75,7 +77,7 @@ export default {
     Vue.prototype.$unlock = this.showModal
   },
   methods: {
-    ...mapActions('acc', ['unlockWallet']),
+    ...mapActions('acc', ['unlockWallet', 'cloudLogin']),
 
     showModal() {
       const promise = new Promise(resolve => {
@@ -96,7 +98,21 @@ export default {
       this.password = ''
     },
 
-    unlock() {
+    async processUnlockCloud() {
+      const { error } = await this.cloudLogin({
+        name: this.username,
+        password: this.password
+      })
+
+      if (error) {
+        this.error = error
+      } else {
+        this.resolveCallback(true)
+        this.show = false
+      }
+    },
+
+    processUnlockWallet() {
       this.error = false
       if (this.isValidPassword(this.password + '')) {
         this.unlockWallet(this.password + '')
@@ -104,6 +120,14 @@ export default {
         this.show = false
       } else {
         this.error = true
+      }
+    },
+
+    unlock() {
+      if (this.loginType === 'wallet') {
+        this.processUnlockWallet()
+      } else {
+        this.processUnlockCloud()
       }
     }
   }

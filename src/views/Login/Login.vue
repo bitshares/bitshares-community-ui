@@ -41,7 +41,7 @@
           />
 
           <KeyfileLoader
-            v-if="showFileField"
+            v-if="!brainkey"
             @select="selectFile"
             @remove="removeFile"
           />
@@ -133,7 +133,7 @@ export default {
               if (this.file) return true
               return required(value)
             },
-            brainkeyValidator: value => (value.split(' ').length - 1 >= 15)
+            brainkeyValidator: value => (value.split(' ').length - 1 === 15)
           },
           pin: { required, minLength: minLength(6) },
           confirmPin: { sameAsPin: sameAs('pin') }
@@ -210,12 +210,6 @@ export default {
     },
     removeFile() {
       this.file = null
-    },
-    onBrainkeyInputFocus() {
-      this.showFileField = false
-    },
-    onBrainkeyInputBlur() {
-      this.showFileField = true
     }
   }
 }
