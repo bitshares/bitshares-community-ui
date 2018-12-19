@@ -32,13 +32,31 @@ export const getMaxSum = (items, field) => {
 }
 
 // short float currency
-export const getFloatCurrency = (n) => {
+export const getFloatCurrency = (n, hasPlaces) => {
+  const isValidPretty = (val) => (val.indexOf('.') === -1 && val.length > 3) || val.indexOf('.') > 3
+  const convertToPretty = (val) => {
+    const str = val.toString()
+    const startPoint = str.indexOf('.')
+
+    if (startPoint > -1) {
+      const prettyStr = str.slice(0, startPoint).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+      const endStr = str.slice(startPoint)
+      return `${prettyStr}${endStr}`
+    }
+
+    return str.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+  }
+
   const inputValue = n.toString()
   const hasPoint = () => !!~inputValue.indexOf('.')
   const value = hasPoint() ? inputValue.replace(/0+$/, '') : inputValue
 
-  if (value[0] === '0' && value.length > 9) return value.slice(1, 10).toString()
-  return value.slice(0, 9) || '0'
+  if (value[0] === '0' && value.length > 9) {
+    const val = value.slice(1, 10)
+    return isValidPretty(val) && hasPlaces ? convertToPretty(val) : val
+  }
+  const val = value.slice(0, 9)
+  return isValidPretty(val) && hasPlaces ? convertToPretty(val) : val || '0'
 }
 
 // shortens fiat (USD) value
