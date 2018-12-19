@@ -68,6 +68,7 @@ export default {
 }
 
 .modal-wrapper {
+  border: 1px solid config('colors.modal-border');
   transition: all .3s ease;
   position: relative;
   background: rgb(0, 0, 0);
