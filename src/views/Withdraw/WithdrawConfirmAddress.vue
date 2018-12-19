@@ -61,9 +61,7 @@ export default {
       this.userLoaded = false
       const user = await getUser(this.address)
       this.userLoaded = true
-      if (user.success) {
-        this.validUser = user.success
-      }
+      this.validUser = user.success
     },
     confirmAddress() {
       this.setWithdrawStep('withdrawFinish')
