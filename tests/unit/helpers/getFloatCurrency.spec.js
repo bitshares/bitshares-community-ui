@@ -37,5 +37,5 @@ test('helpers: getFloatCurrency should be value with pretty format', () => {
 })
 
 test('helpers: getFloatCurrency should be value with pretty format and float point', () => {
-  expect(getFloatCurrency(50000.12332)).toBe('50 000.12332')
+  expect(getFloatCurrency(50000.12332)).toBe('50 000.123')
 })
