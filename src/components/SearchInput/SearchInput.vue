@@ -20,8 +20,8 @@
       />
     </div>
     <div
-      class="search-clear"
       v-if="value.length"
+      class="search-clear"
     >
       <svgicon
         width="14"
