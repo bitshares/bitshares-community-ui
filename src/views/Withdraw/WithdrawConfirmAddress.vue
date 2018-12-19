@@ -72,7 +72,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   .withdraw-form {
     display: flex;
     flex-direction: column;

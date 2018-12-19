@@ -46,7 +46,7 @@ export default {
 <style lang="scss">
   .withdraw-container {
     color: config('colors.primary');
-    padding: 0.6rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     height: 100%;

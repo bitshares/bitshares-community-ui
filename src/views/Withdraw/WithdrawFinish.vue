@@ -1,12 +1,10 @@
 <template>
   <div class="withdraw-form">
-    <div class="withdraw-content">Are you sure you want to withdraw {{ withdrawAmount }} {{ withdrawAsset.tiker.toUpperCase() }} to {{ withdrawAddress }} address?</div>
+    <div class="withdraw-content withdraw-content--auto">Are you sure you want to withdraw {{ withdrawAmount }} {{ withdrawAsset.tiker.toUpperCase() }} to {{ withdrawAddress }} address?</div>
     <div class="withdraw-footer">
       <Button
         text="confirm withdrawal"
         width="full"
-        class="withdraw-btn"
-        disabled="true"
         @click="toggle"
       />
     </div>
@@ -34,7 +32,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   .withdraw-form {
     display: flex;
     flex-direction: column;
@@ -45,7 +43,6 @@ export default {
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    padding: 1.5rem;
     line-height: 2;
     word-break: break-word;
     margin-top: auto;
@@ -54,11 +51,19 @@ export default {
   .withdraw-footer {
     display: flex;
     margin-top: auto;
+    padding-top: 1rem;
+    margin-bottom: .5rem;
   }
   .withdraw-title {
     font-size: config('textSizes.lg');
     text-align: center;
     text-transform: uppercase;
-    margin-bottom: 1rem;
+  }
+  @media screen and (max-width: 800px) {
+    .withdraw-content {
+      &--auto {
+        height: auto;
+      }
+    }
   }
 </style>

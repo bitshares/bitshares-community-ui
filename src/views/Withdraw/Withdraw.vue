@@ -1,24 +1,27 @@
 <template>
-  <div class="withdraw-form">
+  <div class="withdraw-list">
     <div class="withdraw-sub-title">Choose token</div>
-    <div class="withdraw-loader-wrapper">
-      <LoadingContainer :loading="!coinslist.length">
-        <ScrollingContainer
-          :shadower-height="8"
-        >
-          <div class="withdraw-content">
-            <Button
-              v-for="(asset, index) in coinslist"
-              :key="index"
-              :text="asset.tiker"
-              type="secondary"
-              width="full"
-              class="withdraw-item"
-              @click="selectAsset(asset)"
-            />
-          </div>
-        </ScrollingContainer>
-      </LoadingContainer>
+    <div class="withdraw-form">
+      <div class="withdraw-loader-wrapper">
+        <LoadingContainer :loading="!coinslist.length">
+          <ScrollingContainer
+            :empty-area="true"
+            :shadower-height="12"
+          >
+            <div class="withdraw-content">
+              <Button
+                v-for="(asset, index) in coinslist"
+                :key="index"
+                :text="asset.tiker"
+                type="secondary"
+                width="full"
+                class="withdraw-item"
+                @click="selectAsset(asset)"
+              />
+            </div>
+          </ScrollingContainer>
+        </LoadingContainer>
+      </div>
     </div>
   </div>
 </template>
@@ -55,6 +58,14 @@ export default {
 }
 </script>
 <style lang="scss">
+  .withdraw-list {
+    height: 100%;
+    overflow-y: auto;
+  }
+  .withdraw-form {
+    height: 100%;
+    overflow-y: auto;
+  }
   .withdraw-loader-wrapper {
     height: 100%;
     overflow-y: auto;
@@ -71,5 +82,10 @@ export default {
   .withdraw-item {
     margin-top: 0.9375rem;
     min-height: 3.125rem;
+
+    &:last-child {
+      position: relative;
+      z-index: 10;
+    }
   }
 </style>

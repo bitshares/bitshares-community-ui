@@ -29,7 +29,7 @@
     />
     <div class="withdraw-footer">
       <Button
-        :disabled="isAmountValid"
+        :disabled="isAmountInvalid"
         text="Confirm amount"
         width="full"
         class="withdraw-btn"
@@ -61,17 +61,14 @@ export default {
     maxWithdrawTitle() {
       return `max ${this.withdrawAsset.tokens} ${this.withdrawAsset.tiker}`
     },
-    isAmountValid() {
-      if (+this.amount <= 0 || +this.amount > this.withdrawAsset.tokens) {
-        return true
-      }
-      return false
+    isAmountInvalid() {
+      return !!+this.amount <= 0 || +this.amount > this.withdrawAsset.tokens
     },
     error() {
       if (this.amount === undefined || this.amount === '') {
         return ''
       }
-      return !this.isAmountValid ? '' : `Please enter valid amount less than or equal to ${this.withdrawAsset.tokens}`
+      return !this.isAmountInvalid ? '' : `Please enter valid amount less than or equal to ${this.withdrawAsset.tokens}`
     }
   },
   methods: {
@@ -89,7 +86,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   .withdraw-form {
     display: flex;
     flex-direction: column;
