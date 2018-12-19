@@ -32,12 +32,9 @@ export const getMaxSum = (items, field) => {
 }
 
 // short float currency
-export const getFloatCurrency = (n, opts) => {
-  if (!opts) {
-    opts = {
-      formatSpaces: true
-    }
-  }
+export const getFloatCurrency = (n, opts = {}) => {
+  const options = { formatSpaces: true, ...opts }
+
   // check format to calculate. if format has xxxx or xxxx.xxxx then need in calculate
   // when foramt x/xx/xx or x.x / xx.x / xxx.xxx then not needed
   const isValidPretty = (val) => (val.indexOf('.') === -1 && val.length > 3) || val.indexOf('.') > 3
@@ -62,10 +59,10 @@ export const getFloatCurrency = (n, opts) => {
 
   if (value[0] === '0' && value.length > 9) {
     const val = value.slice(1, 10)
-    return isValidPretty(val) && opts.formatSpaces ? convertToPretty(val) : val
+    return isValidPretty(val) && options.formatSpaces ? convertToPretty(val) : val
   }
   const val = value.slice(0, 9)
-  return isValidPretty(val) && opts.formatSpaces ? convertToPretty(val) : val || '0'
+  return isValidPretty(val) && options.formatSpaces ? convertToPretty(val) : val || '0'
 }
 
 // shortens fiat (USD) value
