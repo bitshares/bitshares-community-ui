@@ -64,7 +64,7 @@ export default {
       addressPending: 'openledger/getAddressPending'
     }),
     address() {
-      if (typeof this.depositAddress === 'object') return 'No deposit address'
+      if (!this.depositAddress || typeof this.depositAddress === 'object') return 'No deposit address'
       return this.depositAddress
     },
     asset() {
@@ -114,11 +114,14 @@ export default {
       }
     }
     .deposit-loader-wrapper {
-      height: 3rem;
+      height: 3.5rem;
       padding: 0;
     }
     .deposit-address {
-      width: 80%;
+      word-break: break-word;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       word-wrap: break-word;
       margin: auto;
       text-align: center;
@@ -156,9 +159,26 @@ export default {
   }
   @media screen and (max-width: 800px) {
     .deposit-container {
+      .deposit-address {
+        padding-top: 0;
+      }
       .deposit-qr-code {
-        height: 3.75rem;
-        min-height: 3rem;
+        height: 45%;
+        width: 45%;
+      }
+    }
+  }
+  @media screen and (max-width: 360px) {
+    .deposit-container {
+      .deposit-btn {
+        margin-top: .2rem;
+      }
+      .deposit-qr-code {
+        height: 35%;
+        width: 35%;
+      }
+      .deposit-sub-title--warning {
+        font-size: .8rem;
       }
     }
   }
