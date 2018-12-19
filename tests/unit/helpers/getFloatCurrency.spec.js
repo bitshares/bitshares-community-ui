@@ -31,3 +31,11 @@ test('helpers: getFloatCurrency should be with first 0, and digits when length >
 test('helpers: getFloatCurrency should be value with last 0 and no float point', () => {
   expect(getFloatCurrency(50)).toBe('50')
 })
+
+test('helpers: getFloatCurrency should be value with pretty format', () => {
+  expect(getFloatCurrency(5000)).toBe('5 000')
+})
+
+test('helpers: getFloatCurrency should be value with pretty format and float point', () => {
+  expect(getFloatCurrency(50000.12332)).toBe('50 000.12332')
+})

@@ -32,15 +32,24 @@ export const getMaxSum = (items, field) => {
 }
 
 // short float currency
-export const getFloatCurrency = (n, hasPlaces) => {
+export const getFloatCurrency = (n, opts) => {
+  if (!opts) {
+    opts = {
+      formatSpaces: true
+    }
+  }
+  // check format to calculate. if format has xxxx or xxxx.xxxx then need in calculate
+  // when foramt x/xx/xx or x.x / xx.x / xxx.xxx then not needed
   const isValidPretty = (val) => (val.indexOf('.') === -1 && val.length > 3) || val.indexOf('.') > 3
   const convertToPretty = (val) => {
+    // str after point does not needed in calculate
     const str = val.toString()
     const startPoint = str.indexOf('.')
 
     if (startPoint > -1) {
       const prettyStr = str.slice(0, startPoint).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
       const endStr = str.slice(startPoint)
+      // concat start str with spaces + after point str
       return `${prettyStr}${endStr}`
     }
 
@@ -53,10 +62,10 @@ export const getFloatCurrency = (n, hasPlaces) => {
 
   if (value[0] === '0' && value.length > 9) {
     const val = value.slice(1, 10)
-    return isValidPretty(val) && hasPlaces ? convertToPretty(val) : val
+    return isValidPretty(val) && opts.formatSpaces ? convertToPretty(val) : val
   }
   const val = value.slice(0, 9)
-  return isValidPretty(val) && hasPlaces ? convertToPretty(val) : val || '0'
+  return isValidPretty(val) && opts.formatSpaces ? convertToPretty(val) : val || '0'
 }
 
 // shortens fiat (USD) value
