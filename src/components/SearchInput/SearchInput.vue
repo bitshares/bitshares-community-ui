@@ -6,12 +6,24 @@
       :class="{'search-input--active': value.length }"
       class="search-input"
       @input="$emit('input', $event.target.value)"
+      @focus="inputMode = true"
+      @blur="inputMode = false"
     >
     <div class="search-icon">
       <svgicon
+        v-if="!inputMode"
         width="20"
         height="20"
         name="search"
+      />
+    </div>
+    <div class="search-clear">
+      <svgicon
+        v-if="inputMode && value.length"
+        width="14"
+        height="14"
+        name="cancel"
+        @click="$emit('input', $event.target.value)"
       />
     </div>
     <!-- <Input
@@ -40,7 +52,8 @@ export default {
   },
   data() {
     return {
-      placeholder: 'Search'
+      placeholder: 'Search',
+      inputMode: false
     }
   }
 }
@@ -69,6 +82,13 @@ export default {
     right: .3rem;
     opacity: .5;
   }
+  .search-clear {
+    display: inline-block;
+    position: absolute;
+    bottom: .3rem;
+    right: .3rem;
+    opacity: .5;
+  }
   .input-wrapper {
     position: relative;
     &:hover {
@@ -77,7 +97,9 @@ export default {
       .search-icon {
         opacity: 1;
       }
-
+      .search-clear {
+        opacity: 1;
+      }
       .search-input {
         visibility: visible;
       }
