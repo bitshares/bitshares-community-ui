@@ -1,5 +1,11 @@
 <template>
-  <div class="confirm-order">
+  <div
+    :class="{
+      'confirm-order--buy': type === 'buy',
+      'confirm-order--sell': type === 'sell',
+    }"
+    class="confirm-order"
+  >
     <div class="confirm-order-date">{{ confirmDate }}</div>
     <div class="confirm-order-title confirm-order-title--xl">{{ confirmTitle }}</div>
 
@@ -135,21 +141,19 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 30rem;
     background-color: config('colors.card-background');
   }
   .confirm-order-title {
     margin-top: 1.25rem;
     text-transform: uppercase;
     font-size: 0.9375rem;
-    font-weight: config('fontWeights.semibold');
+    font-weight: bold;
     color: config('colors.primary');
 
     &--xl {
       margin-top: 0.625rem;
       font-size: config('textSizes.xl');
       letter-spacing: -0.0625rem;
-      font-weight: normal;
     }
   }
   .confirm-order-date {
@@ -173,25 +177,37 @@ export default {
     margin-top: 0.9375rem;
     width: 100%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     flex-direction: column;
     height: config('textSizes.4xl');
 
     .item {
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
-      width: 50%;
       .description {
+        margin: .1rem;
         font-size: config('textSizes.xxs-xs');
         color: config('colors.inactive');
       }
 
       .value {
+        margin: .1rem;
         color: config('colors.primary');
         font-size: config('textSizes.xs');
       }
     }
-
+  }
+  .confirm-order {
+    &--buy {
+      .confirm-order-title {
+        color: config('colors.buy');
+      }
+    }
+    &--sell {
+      .confirm-order-title {
+        color: config('colors.sell');
+      }
+    }
   }
 </style>

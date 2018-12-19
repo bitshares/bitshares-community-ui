@@ -52,8 +52,8 @@
     <div class="new-order-button">
       <Btn
         :type="type"
-        :text="buttonTitle"
         :disabled="invalidOrder"
+        :text="buttonTitle"
         width="full"
         @click="showConfirm"
       >
@@ -64,6 +64,7 @@
     <ConfirmModal
       :show="confirmDisplayed"
       :pending="pending"
+      :type="type"
       title="confirm order"
       @close="hideConfirm"
       @confirm="handleOrderConfirm"
