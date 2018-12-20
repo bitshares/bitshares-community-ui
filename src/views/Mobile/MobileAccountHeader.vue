@@ -49,8 +49,9 @@ export default {
       showBackupModal: 'backup/toggleModal'
     }),
     handleLogout() {
-      this.$router.push({ name: 'login' })
-      this.logout()
+      this.$router.push({ name: 'login' }, () => {
+        this.logout()
+      })
     },
     handleDropdownClick(eventName) {
       switch (eventName) {
