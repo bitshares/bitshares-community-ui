@@ -171,9 +171,6 @@ export default {
     },
     removeSize() {
       return this.expanded ? '14' : '10'
-    },
-    orderId() {
-      return this.item.orderId
     }
   }
 }

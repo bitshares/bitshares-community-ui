@@ -22,11 +22,11 @@
     </LoadingContainer>
     <ConfirmModal
       :show="showRemoveModal"
+      :pending="orderRemoving"
       type="type"
       title="confirm order remove"
       @close="stopRemovingOrder"
-      @confirm="removeOrder"
-    >
+      @confirm="removeOrder">
       <div class="color-text-primary">Are you sure you want to remove order?</div>
     </ConfirmModal>
   </div>
@@ -54,7 +54,8 @@ export default {
   data() {
     return {
       showRemoveModal: false,
-      orderForCancelIndex: {}
+      orderForCancel: {},
+      orderRemoving: false
     }
   },
   computed: {
@@ -92,25 +93,29 @@ export default {
   },
   methods: {
     ...mapActions({
-      removeActiveOrder: 'activeOrders/removeActiveOrder'
+      cancelOrder: 'transactions/cancelOrder',
+      updateUser: 'acc/fetchCurrentUser'
     }),
-    confirmRemove(order) {
-      console.log('remove item', order)
-      this.orderForCancelIndex = order
-      this.showRemoveModal = true
-    },
-    async removeOrder() {
+    async confirmRemove(order) {
       const unlocked = await this.$unlock()
       if (unlocked) {
-        const res = await this.removeActiveOrder(this.orderForCancelIndex.orderId)
-        if (res.success) {
-          Vue.prototype.$toast.success('Order canceled');
-        } else {
-          Vue.prototype.$toast.error(res.error);
-        }
-        this.orderForCancelIndex = {}
-        this.showRemoveModal = false
+        this.orderForCancel = order
+        this.showRemoveModal = true
       }
+    },
+    async removeOrder() {
+      this.orderRemoving = true
+      const { orderId } = this.orderForCancel
+      const res = await this.cancelOrder({ orderId })
+      this.orderRemoving = false
+      if (res.success) {
+        Vue.prototype.$toast.success('Order canceled')
+        await this.updateUser()
+      } else {
+        Vue.prototype.$toast.error(res.error)
+      }
+      this.orderForCancel = {}
+      this.showRemoveModal = false
     },
     stopRemovingOrder() {
       this.orderForCancel = {}
