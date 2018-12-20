@@ -57,7 +57,7 @@ export default {
   },
   data() {
     return {
-      activeTabIndex: 0,
+      activeTabIndex: 0
       // activeFavourite: false
     }
   },
