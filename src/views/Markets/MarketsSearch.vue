@@ -1,7 +1,5 @@
 <template>
   <SearchInput
-    :value="searchStr"
-    hint="Search"
     @input="changeSearchStr"
   />
 </template>

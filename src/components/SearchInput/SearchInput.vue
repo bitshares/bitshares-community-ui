@@ -2,7 +2,7 @@
   <div class="input-wrapper">
     <input
       v-model="value"
-      :placeholder="hint || placeholder"
+      :placeholder="hint"
       :class="{'search-input--active': value.length }"
       class="search-input"
       @input="$emit('input', value)"
@@ -52,7 +52,6 @@ export default {
   },
   data() {
     return {
-      placeholder: 'Search',
       inputMode: false,
       value: ''
     }
