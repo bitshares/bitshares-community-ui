@@ -9,7 +9,7 @@
         :table-headers="tableHeaders"
         :items="filteredItems"
         :expanded="expandMode"
-        @remove-order="showRemoveModal = true"
+        @remove-order="confirmRemove"
       />
       <div
         v-if="filteredItems.length === 0"
@@ -22,8 +22,9 @@
     </LoadingContainer>
     <ConfirmModal
       :show="showRemoveModal"
+      type="type"
       title="confirm order remove"
-      @close="showRemoveModal = false"
+      @close="stopRemovingOrder"
       @confirm="removeOrder"
     >
       <div class="color-text-primary">Are you sure you want to remove order?</div>
@@ -31,7 +32,8 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import Vue from 'vue'
+import { mapGetters, mapActions } from 'vuex'
 import LoadingContainer from '@/components/LoadingContainer'
 import ActiveOrdersTable from './ActiveOrdersTable'
 import ConfirmModal from '@/views/ConfirmModal/ConfirmModal.vue'
@@ -51,7 +53,8 @@ export default {
   },
   data() {
     return {
-      showRemoveModal: false
+      showRemoveModal: false,
+      orderForCancelIndex: {}
     }
   },
   computed: {
@@ -88,11 +91,30 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      removeActiveOrder: 'activeOrders/removeActiveOrder'
+    }),
+    confirmRemove(order) {
+      console.log('remove item', order)
+      this.orderForCancelIndex = order
+      this.showRemoveModal = true
+    },
     async removeOrder() {
       const unlocked = await this.$unlock()
       if (unlocked) {
-        console.log('unlocked -> remove order')
+        const res = await this.removeActiveOrder(this.orderForCancelIndex.orderId)
+        if (res.success) {
+          Vue.prototype.$toast.success('Order canceled');
+        } else {
+          Vue.prototype.$toast.error(res.error);
+        }
+        this.orderForCancelIndex = {}
+        this.showRemoveModal = false
       }
+    },
+    stopRemovingOrder() {
+      this.orderForCancel = {}
+      this.showRemoveModal = false
     }
   }
 }

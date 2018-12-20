@@ -34,8 +34,9 @@ const actions = {
   changeSearchStr({ commit }, value) {
     commit(types.UPDATE_SEARCH_STR, value)
   },
-  removeActiveOrder({ commit, state }, ndx) {
-    commit(types.UPDATE_ACTIVE_LIST, state.activeList.filter((order, index) => ndx !== index))
+  async removeActiveOrder({ commit, state, dispatch }, orderId) {
+    const res = await dispatch('transactions/cancelOrder', { orderId }, { root: true })
+    return res
   }
 }
 
