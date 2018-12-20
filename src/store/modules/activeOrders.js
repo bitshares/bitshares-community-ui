@@ -33,9 +33,6 @@ const mutations = {
 const actions = {
   changeSearchStr({ commit }, value) {
     commit(types.UPDATE_SEARCH_STR, value)
-  },
-  removeActiveOrder({ commit, state }, ndx) {
-    commit(types.UPDATE_ACTIVE_LIST, state.activeList.filter((order, index) => ndx !== index))
   }
 }
 
