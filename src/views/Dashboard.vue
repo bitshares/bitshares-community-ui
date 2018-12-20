@@ -8,6 +8,7 @@
     </Modal>
 
     <Deposit/>
+    <Withdraw/>
 
     <div class="dashboard hidden lg:block">
       <div class="flex flex-col lg:flex-row mb-card-margin">
@@ -133,6 +134,7 @@ import Modal from '@/components/Modal/Modal'
 import Mobile from '@/views/Mobile/Mobile'
 import NewOrder from '@/views/NewOrder/NewOrder'
 import Deposit from '@/views/Deposit/DepositWidget'
+import Withdraw from '@/views/Withdraw/WithdrawWidget'
 import UnlockAccountPopup from '@/views/UnlockAccountPopup/UnlockAccountPopup'
 import Graph from '@/views/Graph/Graph'
 
@@ -158,6 +160,7 @@ export default {
     Mobile,
     NewOrder,
     Deposit,
+    Withdraw,
     UnlockAccountPopup,
     Graph
   },

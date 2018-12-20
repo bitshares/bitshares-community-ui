@@ -3,7 +3,13 @@
     v-if="show"
     @close="$emit('close')"
   >
-    <div class="confirm-modal-content">
+    <div
+      :class="{
+        'confirm-modal-content--buy': type === 'buy',
+        'confirm-modal-content--sell': type === 'sell',
+      }"
+      class="confirm-modal-content"
+    >
       <div class="confirm-modal-title">{{ title }}</div>
       <slot/>
       <Button
@@ -42,6 +48,10 @@ export default {
     pending: {
       type: Boolean,
       default: false
+    },
+    type: {
+      type: String,
+      required: true
     }
   }
 }
@@ -55,6 +65,14 @@ export default {
     margin-top: 1.25rem;
   }
   .confirm-modal-content {
-    padding: 0.5rem;
+    padding: 0 1.3125rem;
+    max-width: 30rem;
+
+    &--buy {
+      border-top: 0.25rem solid config('colors.buy');
+    }
+    &--sell {
+      border-top: 0.25rem solid config('colors.sell');
+    }
   }
 </style>
