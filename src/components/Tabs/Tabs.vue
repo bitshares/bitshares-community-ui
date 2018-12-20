@@ -6,7 +6,7 @@
       <div @click="handleTabClick('favourites')">
         <Star
           v-if="currencyMode"
-          :active="activeFavourite"
+          :active="isActiveFavourites"
           class="tabs__favourite"
         />
       </div>
@@ -58,12 +58,15 @@ export default {
   data() {
     return {
       activeTabIndex: 0,
-      activeFavourite: false
+      // activeFavourite: false
     }
   },
   computed: {
     tabWidth() {
       return 100 / this.tabs.length
+    },
+    isActiveFavourites() {
+      return this.active === 'favourites'
     }
   },
   methods: {
@@ -71,7 +74,7 @@ export default {
       this.activeTabIndex = index
       this.$emit('change', this.tabs[index] || 'favourites')
 
-      this.tabs[index] ? this.activeFavourite = false : this.activeFavourite = true
+      // // this.tabs[index] ? this.activeFavourite = false : this.activeFavourite = true
     },
     format(value) {
       if (!this.currencyMode) return value
@@ -96,8 +99,7 @@ export default {
   }
 
   .tabs__favourite {
-    margin: 0px -0.3125rem 0px 0.6875rem;
-    line-height: 1.75rem;
+    margin: 0.3125rem -0.3125rem 0 .6875rem;
   }
 }
 

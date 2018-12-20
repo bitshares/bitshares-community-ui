@@ -1,13 +1,19 @@
 <template>
   <div
-    :class="active ? 'is-active' : ''"
-    class="star">
+    :class="{'star--active': active}"
+    class="star"
+  >
     <svgicon
-      :name="(active || hoverState) ? 'starFilled' : 'star'"
+      class="star-icon"
+      name="star"
       height="19"
       width="19"
-      @mouseover.native="hoverState=true"
-      @mouseleave.native="hoverState=false"
+    />
+    <svgicon
+      class="star-filled-icon"
+      name="starFilled"
+      height="19"
+      width="19"
     />
   </div>
 </template>
@@ -27,13 +33,34 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .star {
   cursor: pointer;
   color: config('colors.star');
+  .star-filled-icon {
+    display: none;
+  }
 }
 
-.is-active {
+.star.star--active {
   color: config('colors.white');
+  .star-filled-icon {
+    display: inline-block;
+  }
+  .star-icon {
+    display: none;
+  }
 }
+
+@screen sm {
+  .star:hover {
+    .star-icon {
+      display: none;
+    }
+    .star-filled-icon {
+      display: block;
+    }
+  }
+}
+
 </style>
