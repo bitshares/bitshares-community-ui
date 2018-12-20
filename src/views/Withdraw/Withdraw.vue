@@ -39,9 +39,13 @@ export default {
   },
   computed: {
     ...mapGetters({
-      coins: 'portfolio/getItems'
+      coins: 'portfolio/getItems',
+      getAssetBySymbol: 'acc/getAssetBySymbol'
     }),
     coinslist() {
+      console.log(this.coins)
+      console.log(this.getAssetBySymbol({ assetsByName: this.coins[0].tiker) })
+      console.log(this.getAssetBySymbol({ assetsByName: this.coins[1].tiker) })
       return this.coins.filter(coin => coin.tokens)
     }
   },

@@ -3,7 +3,8 @@ const types = {
   SET_WITHDRAW_ASSET: 'SET_WITHDRAW_ASSET',
   SET_WITHDRAW_AMOUNT: 'SET_WITHDRAW_AMOUNT',
   SET_WITHDRAW_ADDRESS: 'SET_WITHDRAW_ADDRESS',
-  SET_WITHDRAW_STEP: 'SET_WITHDRAW_STEP'
+  SET_WITHDRAW_STEP: 'SET_WITHDRAW_STEP',
+  SET_WITHDRAW_TYPE: 'SET_WITHDRAW_TYPE'
 }
 
 const getInitialState = () => ({
@@ -11,7 +12,8 @@ const getInitialState = () => ({
   withdrawAsset: null,
   withdrawAmount: null,
   withdrawAddress: null,
-  withdrawStep: 'withdraw'
+  withdrawStep: 'withdraw',
+  type: 'withdraw'
 })
 
 const getters = {
@@ -19,7 +21,8 @@ const getters = {
   getWithdrawAsset: state => state.withdrawAsset,
   getWithdrawAmount: state => state.withdrawAmount,
   getWithdrawAddress: state => state.withdrawAddress,
-  getWithdrawStep: state => state.withdrawStep
+  getWithdrawStep: state => state.withdrawStep,
+  getWithdrawType: state => state.type
 }
 
 const mutations = {
@@ -37,13 +40,17 @@ const mutations = {
   },
   [types.SET_WITHDRAW_STEP](state, step) {
     state.withdrawStep = step
+  },
+  [types.SET_WITHDRAW_TYPE](state, type) {
+    state.type = type
   }
 }
 
 const actions = {
-  toggleModal({ commit }) {
+  toggleModal({ commit }, type) {
     commit(types.TOGGLE_WITHDRAW_MODAL)
     commit(types.SET_WITHDRAW_STEP, 'withdraw')
+    commit(types.SET_WITHDRAW_TYPE, type)
   },
   setWithdrawAsset({ commit }, { asset }) {
     commit(types.SET_WITHDRAW_ASSET, { asset })

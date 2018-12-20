@@ -5,9 +5,16 @@
       v-model="address"
       :centered="true"
       :error="error"
-      title="withdrawal address"
+      :title="inputTitle"
       class="withdraw-input"
       @input="validateUser"
+    />
+    <SimpleInput
+      v-if="withdrawType === 'transfer'"
+      v-model="memo"
+      :centered="true"
+      title="MEMO"
+      class="withdraw-input"
     />
     <div class="withdraw-footer">
       <Button
@@ -21,7 +28,7 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import debounce from 'lodash/debounce'
 import Button from '@/components/Button'
 import SimpleInput from '@/components/SimpleInput'
@@ -35,17 +42,24 @@ export default {
   data() {
     return {
       address: '',
+      memo: '',
       validUser: false,
       userLoaded: false,
       errorTitle: 'user not found'
     }
   },
   computed: {
+    ...mapGetters({
+      withdrawType: 'withdraw/getWithdrawType'
+    }),
     error() {
       if (!this.validUser && this.address && this.userLoaded) {
         return this.errorTitle
       }
       return ''
+    },
+    inputTitle() {
+      return `${this.withdrawType} address`
     }
   },
   created() {

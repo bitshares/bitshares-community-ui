@@ -8,7 +8,7 @@
     </Modal>
 
     <Deposit/>
-    <Withdraw/>
+    <Withdraw :type="withdrawType"/>
 
     <div class="dashboard hidden lg:block">
       <div class="flex flex-col lg:flex-row mb-card-margin">
@@ -166,7 +166,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      backupFlag: 'backup/modalDisplayed'
+      backupFlag: 'backup/modalDisplayed',
+      withdrawType: 'withdraw/getWithdrawType'
     })
   },
   methods: {

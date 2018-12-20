@@ -3,7 +3,7 @@
     v-if="showWithdraw"
     @close="toggle">
     <div class="withdraw-container h-full sm:w-120">
-      <div class="withdraw-title">withdraw</div>
+      <div class="withdraw-title">{{ type }}</div>
       <Withdraw v-if="withdrawStep === 'withdraw'"/>
       <WithdrawConfirmAmount v-if="withdrawStep === 'withdrawConfirmAmount'"/>
       <WithdrawConfirmAddress v-if="withdrawStep === 'withdrawConfirmAddress'"/>
@@ -28,6 +28,12 @@ export default {
     WithdrawConfirmAmount,
     WithdrawConfirmAddress,
     WithdrawFinish
+  },
+  props: {
+    type: {
+      type: String,
+      default: 'withdraw'
+    }
   },
   computed: {
     ...mapGetters({

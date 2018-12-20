@@ -21,7 +21,14 @@
         class="ml-5"
         type="secondary"
         size="small"
-        @click="showWithdrawModal"
+        @click="showWithdrawModal('withdraw')"
+      />
+      <Button
+        text="Transfer"
+        class="ml-5"
+        type="secondary"
+        size="small"
+        @click="showWithdrawModal('transfer')"
       />
     </div>
 
