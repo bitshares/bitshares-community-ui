@@ -12,6 +12,7 @@
         size="mobile-small"
         text="Withdraw"
         type="secondary"
+        @click="showWithdraw"
       />
 
       <Button
@@ -37,7 +38,8 @@ export default {
   components: { Button, AccountHeader, Portfolio },
   methods: {
     ...mapActions({
-      showDeposit: 'deposit/toggleModal'
+      showDeposit: 'deposit/toggleModal',
+      showWithdraw: 'withdraw/toggleModal'
     })
   }
 }
