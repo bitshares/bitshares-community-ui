@@ -7,7 +7,7 @@
       :error="error"
       :title="inputTitle"
       class="withdraw-input"
-      @input="validateUser"
+      @input="validate"
     />
     <SimpleInput
       v-if="withdrawType === 'transfer'"
@@ -18,7 +18,7 @@
     />
     <div class="withdraw-footer">
       <Button
-        :disabled="!validUser"
+        :disabled="!validUser || transferAddressValid"
         text="Confirm address"
         width="full"
         class="withdraw-btn"
@@ -50,7 +50,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      withdrawType: 'withdraw/getWithdrawType'
+      withdrawType: 'withdraw/getWithdrawType',
+      withdrawAsset: 'withdraw/getWithdrawAsset',
+      transferAddressValid: 'openledger/getTransferAddressValid'
     }),
     error() {
       if (!this.validUser && this.address && this.userLoaded) {
@@ -63,12 +65,17 @@ export default {
     }
   },
   created() {
-    this.validateUser = debounce(this.getUser, 500)
+    if (this.withdrawType === 'transfer') {
+      this.validate = debounce(this.checkTransferIsValid, 500)
+    } else {
+      this.validate = debounce(this.getUser, 500)
+    }
   },
   methods: {
     ...mapActions({
       setWithdrawStep: 'withdraw/setWithdrawStep',
-      setWithdrawAddress: 'withdraw/setWithdrawAddress'
+      setWithdrawAddress: 'withdraw/setWithdrawAddress',
+      checkIfAddressIsValid: 'openledger/checkIfAddressIsValid'
     }),
     async getUser() {
       this.validUser = false
@@ -76,6 +83,9 @@ export default {
       const user = await getUser(this.address)
       this.userLoaded = true
       this.validUser = user.success
+    },
+    checkTransferIsValid() {
+      this.checkIfAddressIsValid({ address: this.address, asset: this.withdrawAsset.tiker })
     },
     confirmAddress() {
       this.setWithdrawStep('withdrawFinish')
