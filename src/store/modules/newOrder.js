@@ -148,6 +148,8 @@ const actions = {
     commit(types.HIDE_CONFIRM)
   },
   setBaseAmount({ state, commit }, value) {
+    if (state.activeIndication === 'MARKET' && state.type === 'buy') return
+
     commit(types.SET_BASE_AMOUNT, value)
     if (state.price && value) {
       commit(types.SET_QUOTE_AMOUNT, value / state.price)
@@ -157,6 +159,8 @@ const actions = {
     }
   },
   setQuoteAmount({ state, commit }, value) {
+    if (state.activeIndication === 'MARKET' && state.type === 'sell') return
+
     commit(types.SET_QUOTE_AMOUNT, value)
     if (state.price && value) {
       commit(types.SET_BASE_AMOUNT, value * state.price)
@@ -166,10 +170,9 @@ const actions = {
     }
   },
   setPrice({ commit, state }, value) {
-    commit(types.SET_PRICE, value)
-
     if (state.activeIndication === 'MARKET') return
 
+    commit(types.SET_PRICE, value)
     if (state.type === 'buy') {
       if (state.quoteAmount) commit(types.SET_BASE_AMOUNT, state.quoteAmount * value)
     } else {

@@ -22,9 +22,9 @@
     />
     <div class="new-order-fields">
       <NewOrderInput
-        :placeholder="quote"
+        :placeholder="amountPlaceholder('quote')"
         :value="quoteAmount"
-        :note="`max ${maxQuoteTitle}`"
+        :note="amountNote('quote')"
         :error="spendExceeded"
         :title="quoteInputTitle"
         :disabled="isMarketTab && !isBuyTab"
@@ -32,12 +32,12 @@
         @note-click="setMaxSpend"
       />
       <NewOrderInput
-        :placeholder="base"
+        :placeholder="amountPlaceholder('base')"
         :value="baseAmount"
         :title="baseInputTitle"
         :error="spendExceeded"
         :disabled="isMarketTab && isBuyTab"
-        :note="`max ${maxBaseTitle}`"
+        :note="amountNote('base')"
         @change="setBaseAmount"
         @note-click="setMaxSpend"
       />
@@ -55,7 +55,7 @@
     <div class="new-order-button">
       <Btn
         :type="type"
-        :disabled="invalidOrder && !isMarketTab"
+        :disabled="invalidOrder && invalidOrderMarket"
         :text="buttonTitle"
         width="full"
         @click="showConfirm"
@@ -172,6 +172,10 @@ export default {
     invalidOrder() {
       return !this.baseAmount || !this.quoteAmount || this.spendExceeded
     },
+    invalidOrderMarket() {
+      if (this.activeIndication !== 'MARKET') return true
+      return ((this.type === 'buy' && !this.quoteAmount) || (this.type === 'sell' && !this.baseAmount))
+    },
     formattedPrice() {
       return getFloatCurrency(this.price)
     }
@@ -188,6 +192,24 @@ export default {
       showConfirm: 'newOrder/showConfirm',
       hideConfirm: 'newOrder/hideConfirm'
     }),
+    amountNote(side) {
+      if (this.isMarketSide(side)) return null
+      if (side === 'base') return `max ${this.maxBaseTitle}`
+      if (side === 'quote') return `max ${this.maxQuoteTitle}`
+    },
+    amountPlaceholder(side) {
+      if (this.isMarketSide(side)) {
+        return 'MARKET'
+      } else {
+        return this[side]
+      }
+    },
+    isMarketSide(side) {
+      if (this.activeIndication === 'MARKET') {
+        return ((this.type === 'buy' && side === 'base') || (this.type === 'sell' && side === 'quote'))
+      }
+      return false
+    },
     changeOrderType(type) {
       if (type === 'MARKET') {
         this.setPrice(null)
