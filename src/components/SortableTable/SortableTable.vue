@@ -109,8 +109,6 @@ export default {
   },
   methods: {
     toggleSort(field) {
-      let header = this.headers.find(h => h.field === field) || {}
-      if (header.disableSort) return
       if (this.sort.field === field) {
         this.sort.type = this.sort.type === 'asc' ? 'desc' : 'asc'
         return

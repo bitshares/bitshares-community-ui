@@ -11,7 +11,7 @@
     <div
       :class="{'header-item__title--title-active': currentField === item.field }"
       class="header-item__title"
-      @click="$emit('change', item.field)"
+      @click="!disableSort && $emit('change', item.field)"
     >
       {{ item.title }}
       <div
@@ -94,6 +94,11 @@ export default {
     currentField: {
       type: String,
       default: ''
+    },
+    disableSort: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   computed: {
