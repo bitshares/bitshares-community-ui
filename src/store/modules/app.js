@@ -34,7 +34,6 @@ const actions = {
       { userId, limit: 100 },
       { root: true }
     )
-
     const balances = { ...rootGetters['acc/getUserBalances'] }
     await dispatch(
       'assets/fetchAssets',

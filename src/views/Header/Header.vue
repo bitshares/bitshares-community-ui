@@ -21,6 +21,7 @@
         class="ml-5"
         type="secondary"
         size="small"
+        @click="showWithdrawModal"
       />
     </div>
 
@@ -74,11 +75,13 @@ export default {
     ...mapActions({
       logout: 'acc/logout',
       showBackupModal: 'backup/toggleModal',
-      showDepositModal: 'deposit/toggleModal'
+      showDepositModal: 'deposit/toggleModal',
+      showWithdrawModal: 'withdraw/toggleModal'
     }),
     handleLogout() {
-      this.$router.push({ name: 'login' })
-      this.logout()
+      this.$router.push({ name: 'login' }, () => {
+        this.logout()
+      })
     },
     handleDropdownClick(eventName) {
       switch (eventName) {

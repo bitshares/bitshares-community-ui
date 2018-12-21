@@ -138,7 +138,7 @@ let colors = {
 
   'input-border': '#ced2d6',
   'card-background': '#000000',
-  'card-border': 'rgba(255, 255, 255, 0.5)',
+  'modal-border': 'rgba(255, 255, 255, 0.5)',
   'text-error': '#fff200',
   'button-text': 'black',
   'button-text-disabled': '#808080',

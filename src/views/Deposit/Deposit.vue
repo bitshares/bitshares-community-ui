@@ -8,12 +8,12 @@
           <SimpleInput
             :value="searchStr"
             :centered="true"
-            placeholder="search"
+            placeholder="SEARCH"
             @input="onSearch"
           />
         </div>
         <ScrollingContainer
-          :shadower-height="0"
+          :shadower-height="12"
         >
           <div class="deposit-content">
             <Button
@@ -88,7 +88,7 @@ export default {
 <style lang="scss">
   .deposit-container {
     color: white;
-    padding: 0.6rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -96,7 +96,8 @@ export default {
     .deposit-loader-wrapper {
       height: 100%;
       overflow-y: auto;
-      padding: 3rem 0 0;
+      padding: .2rem 0 0;
+      margin-top: 1rem;
     }
     .deposit-content {
       overflow-y: auto;
@@ -107,6 +108,7 @@ export default {
       text-align: center;
       text-transform: uppercase;
       margin-bottom: 1rem;
+      font-weight: config('fontWeights.bold');
     }
     .deposit-sub-title {
       font-size: config('textSizes.lg');
@@ -114,6 +116,11 @@ export default {
     }
     .deposit-item {
       margin-top: 0.9375rem;
+
+      &:last-child {
+        position: relative;
+        z-index: 10;
+      }
     }
   }
   @media screen and (max-width: 800px) {

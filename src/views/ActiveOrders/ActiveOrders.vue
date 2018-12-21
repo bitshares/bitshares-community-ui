@@ -9,7 +9,7 @@
         :table-headers="tableHeaders"
         :items="filteredItems"
         :expanded="expandMode"
-        @remove-order="showRemoveModal = true"
+        @remove-order="confirmRemove"
       />
       <div
         v-if="filteredItems.length === 0"
@@ -22,16 +22,18 @@
     </LoadingContainer>
     <ConfirmModal
       :show="showRemoveModal"
+      :pending="orderRemoving"
+      type="type"
       title="confirm order remove"
-      @close="showRemoveModal = false"
-      @confirm="removeOrder"
-    >
+      @close="stopRemovingOrder"
+      @confirm="removeOrder">
       <div class="color-text-primary">Are you sure you want to remove order?</div>
     </ConfirmModal>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import Vue from 'vue'
+import { mapGetters, mapActions } from 'vuex'
 import LoadingContainer from '@/components/LoadingContainer'
 import ActiveOrdersTable from './ActiveOrdersTable'
 import ConfirmModal from '@/views/ConfirmModal/ConfirmModal.vue'
@@ -51,7 +53,9 @@ export default {
   },
   data() {
     return {
-      showRemoveModal: false
+      showRemoveModal: false,
+      orderForCancel: {},
+      orderRemoving: false
     }
   },
   computed: {
@@ -88,11 +92,34 @@ export default {
     }
   },
   methods: {
-    async removeOrder() {
+    ...mapActions({
+      cancelOrder: 'transactions/cancelOrder',
+      updateUser: 'acc/fetchCurrentUser'
+    }),
+    async confirmRemove(order) {
       const unlocked = await this.$unlock()
       if (unlocked) {
-        console.log('unlocked -> remove order')
+        this.orderForCancel = order
+        this.showRemoveModal = true
       }
+    },
+    async removeOrder() {
+      this.orderRemoving = true
+      const { orderId } = this.orderForCancel
+      const res = await this.cancelOrder({ orderId })
+      this.orderRemoving = false
+      if (res.success) {
+        Vue.prototype.$toast.success('Order canceled')
+        await this.updateUser()
+      } else {
+        Vue.prototype.$toast.error(res.error)
+      }
+      this.orderForCancel = {}
+      this.showRemoveModal = false
+    },
+    stopRemovingOrder() {
+      this.orderForCancel = {}
+      this.showRemoveModal = false
     }
   }
 }

@@ -41,12 +41,12 @@ export default {
     tableHeaders() {
       return {
         buy: [
-          { title: `Sum, ${this.baseAssetSymbol}`, field: 'sum', align: 'left' },
+          { title: `Sum, ${this.baseAssetSymbol}`, field: 'sum', align: 'left', disableSort: true },
           { title: ``, field: 'price' }
         ],
         sell: [
           { title: ``, field: 'price', align: 'left' },
-          { title: `Sum, ${this.baseAssetSymbol}`, field: 'sum' }
+          { title: `Sum, ${this.baseAssetSymbol}`, field: 'sum', disableSort: true }
         ]
       }
     },

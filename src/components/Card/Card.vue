@@ -13,7 +13,7 @@
         @close="expanded = false"
       >
         <div
-          class="card card--expanded border-card-border"
+          class="card card--expanded"
           @click.stop
         >
           <div class="card-header">
@@ -131,7 +131,6 @@ export default {
   flex-direction: column;
   font-family: config('fonts.gotham-regular');
   background-color: config('colors.card-background');
-  border-width: 1px;
   transition: 0.2s;
   &--expanded {
     height: 35rem;
