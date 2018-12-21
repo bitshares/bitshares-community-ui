@@ -1,12 +1,13 @@
 <template>
-  <div class="backup-step backup-step-unlock">
+  <div class="backup-step h-full sm:w-120">
+    <div class="backup-step-title">backup</div>
     <div class="backup-step-button">
-      <input
+      <SInput
         v-model="password"
-        class="input"
-        type="password"
-        placeholder="Password"
-      >
+        :password="true"
+        type="number"
+        title="PASSWORD"
+      />
       <Button
         text="Unlock wallet"
         width="full"
@@ -19,10 +20,11 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import Button from '@/components/Button'
+import SInput from '@/components/SimpleInput'
 
 export default {
   components: {
-    Button
+    Button, SInput
   },
   data() {
     return {
@@ -38,8 +40,8 @@ export default {
     ...mapActions('acc', ['unlockWallet']),
 
     unlock() {
-      if (this.isValidPassword(this.password)) {
-        this.unlockWallet(this.password)
+      if (this.isValidPassword(this.password + '')) {
+        this.unlockWallet(this.password + '')
       } else {
         this.$toast.error('Invalid password')
       }
@@ -49,56 +51,23 @@ export default {
 </script>
 <style lang="scss" scoped>
   .backup-step {
-    .input {
-      @apply text-2xl;
-      @apply pt-1 px-0 pb-0;
-      color: config('colors.text-primary');
-      width: 100%;
-      margin-bottom: 1rem;
-      border-radius: 0;
-      background-color: transparent;
-      border: none;
-      border-bottom: 1px solid config('colors.input-border');
-      box-shadow: none !important;
-      text-overflow: ellipsis;
-      font-size: config('textSizes.lg');
-      transition: border-color ease-in-out 0.15s;
-      &:disabled {
-        opacity: 0.3;
-        user-select: none;
-        pointer-events: none;
-      }
-      &:focus {
-        outline: 0 !important;
-        border-color: config('colors.text-primary');
-      }
-    }
-    width: 100%;
-    padding: 1rem;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-    // text-align: center;
-    font-family: config('fonts.gotham');
-
-    .backup-step-button {
-      box-sizing: border-box;
-      display: inline-block;
-    }
-  }
-  .backup-step-unlock {
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-  }
+    padding: 0 1.25rem 1.25rem;
+    font-family: config('fonts.gotham');
 
-  @media (max-width: 800px) {
-    .backup-step {
-      .backup-step-button {
-        width: 80%;
-      }
+    .backup-step-title {
+      text-align: center;
+      margin-top: 0.9375rem;
+      text-transform: uppercase;
+      font-family: config('fonts.gotham-medium');
+      font-size: config('textSizes.lg');
+    }
+
+    .backup-step-button {
+      display: flex;
+      flex-direction: column;
+      margin-top: auto;
     }
   }
 </style>

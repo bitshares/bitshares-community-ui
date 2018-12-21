@@ -1,6 +1,7 @@
 <template>
   <div
     v-click-outside="closeDropdown"
+    :class="{ 'dropdown--mobile': mobile }"
     class="dropdown"
     @click="handleDropdownClick"
   >
@@ -19,6 +20,18 @@
       :style="styleObject"
       class="dropdown-block"
     >
+      <div
+        v-if="mobile"
+        class="dropdown-item dropdown-item--title"
+      >
+        <span>{{ title }}</span>
+        <svgicon
+          name="cancel"
+          width="23"
+          height="23"
+          color="white"
+        />
+      </div>
       <div
         v-for="(item, index) in items"
         :key="index"
@@ -44,6 +57,14 @@ export default {
     items: {
       type: Array,
       required: true
+    },
+    mobile: {
+      type: Boolean,
+      default: false
+    },
+    title: {
+      type: String,
+      default: ''
     }
   },
   data: () => {
@@ -53,8 +74,10 @@ export default {
   },
   computed: {
     styleObject() {
+      const itemHeight = this.mobile ? 3 : 2.5
+      const itemsNum = this.mobile ? this.items.length + 1 : this.items.length
       return {
-        height: (this.expanded ? this.items.length * 2.5 : 0) + 'rem'
+        height: (this.expanded ? itemsNum * itemHeight : 0) + 'rem'
       }
     }
   },
@@ -79,6 +102,32 @@ export default {
   user-select: none;
 }
 
+.dropdown--mobile {
+  .dropdown-block {
+    margin-top: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+  .dropdown-item {
+    height: 3rem;
+    padding: 0 1rem;
+    &--title {
+      justify-content: space-between;
+      span {
+        margin-top: -0.3rem;
+        font-size: 1rem;
+        font-family: Gotham_Pro_Medium;
+      }
+      &:hover, &:active {
+        color: config('colors.text-primary');
+        background-color: inherit;
+      }
+    }
+  }
+}
+
 .dropdown-icon {
   color: config('colors.text-primary');
   &:hover {
@@ -93,8 +142,8 @@ export default {
   position:absolute;
   right: 0;
   top: 100%;
-  z-index: 2;
-  margin-top: 0.75rem;
+  z-index: 3;
+  margin-top: 1.75rem;
   background-color: config('colors.mobile-footer');
   transition: height 0.15s, opacity 0.15s;
   overflow: hidden;
@@ -111,7 +160,7 @@ export default {
   position: absolute;
   right: 0.1rem;
   top: 100%;
-  margin-top: 0.2rem;
+  margin-top: 1.2rem;
 }
 
 .dropdown-item {

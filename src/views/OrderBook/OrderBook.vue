@@ -7,8 +7,10 @@
           :items="orderBook.buying"
           :table-headers="tableHeaders.buy"
           :max-sum="maxSum"
+          :anchor="true"
           title="Buying"
           align="left"
+          @item-clicked="handleOrderClick('buy', $event)"
         />
         <OrderBookTable
           :items="orderBook.selling"
@@ -16,16 +18,18 @@
           :max-sum="maxSum"
           title="Selling"
           align="right"
+          @item-clicked="handleOrderClick('sell', $event)"
         />
       </div>
     </LoadingContainer>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import OrderBookTable from './OrderBookTable'
 import OrderBookLastPrice from './OrderBookLastPrice'
 import LoadingContainer from '@/components/LoadingContainer'
+import { removePrefix } from '@/helpers/utils'
 
 export default {
   components: {
@@ -37,12 +41,12 @@ export default {
     tableHeaders() {
       return {
         buy: [
-          { title: `Sum, ${this.baseAssetSymbol}`, field: 'sum', align: 'left' },
+          { title: `Sum, ${this.baseAssetSymbol}`, field: 'sum', align: 'left', disableSort: true },
           { title: ``, field: 'price' }
         ],
         sell: [
           { title: ``, field: 'price', align: 'left' },
-          { title: `Sum, ${this.baseAssetSymbol}`, field: 'sum' }
+          { title: `Sum, ${this.baseAssetSymbol}`, field: 'sum', disableSort: true }
         ]
       }
     },
@@ -54,10 +58,18 @@ export default {
       fetching: 'orderBook/isFetching'
     }),
     baseAssetSymbol() {
-      return (this.baseAsset && this.baseAsset.symbol) || ''
+      return removePrefix((this.baseAsset && this.baseAsset.symbol) || '')
     },
     quoteAssetSymbol() {
-      return (this.quoteAsset && this.quoteAsset.symbol) || ''
+      return removePrefix((this.quoteAsset && this.quoteAsset.symbol) || '')
+    }
+  },
+  methods: {
+    ...mapActions({
+      setNewOrderData: 'newOrder/setOrderData'
+    }),
+    handleOrderClick(type, { price, sum }) {
+      this.setNewOrderData({ type, price, sum })
     }
   }
 }

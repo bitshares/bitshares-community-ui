@@ -1,12 +1,8 @@
 <template>
   <LoadingContainer
     :loading="!historyLoaded"
+    :class="{'w-220': expanded }"
     class="portfolio-container h-full">
-
-    <AccountHeader
-      :large-mode="true"
-      class="flex md:hidden"
-    />
 
     <div class="portfolio-header">
       <LinkButton
@@ -51,12 +47,11 @@ import { mapGetters } from 'vuex'
 import LoadingContainer from '@/components/LoadingContainer'
 import LinkButton from '@/components/LinkButton'
 import PortfolioItem from './PortfolioItem.vue'
-import AccountHeader from './AccountHeader'
 
 import SortableTable from '@/components/SortableTable'
 
 export default {
-  components: { PortfolioItem, LoadingContainer, LinkButton, SortableTable, AccountHeader },
+  components: { PortfolioItem, LoadingContainer, LinkButton, SortableTable },
   props: {
     expanded: {
       type: Boolean,

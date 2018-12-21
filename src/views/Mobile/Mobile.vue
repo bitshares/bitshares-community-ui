@@ -1,31 +1,25 @@
 <template>
   <div class="mobile-mode flex lg:hidden">
     <div class="mobile-mode-main">
-      <Card :title="title">
-        <div
-          slot="header"
-          class="temp-acc-header">
-          <div
-            v-if="activeComponentName === 'Account'"
-            class="temp-acc-btn"
-            @click="handleLogout"
-          >Logout</div>
-          <div
-            v-if="activeComponentName === 'Account'"
-            class="temp-acc-btn"
-            @click="setBackupFlag(true)"
-          >Backup</div>
-        </div>
+      <Card
+        :title="title"
+        :mobile="true"
+      >
+        <AccountHeader
+          v-if="activeTab === 'Account'"
+          slot="header"/>
+
         <component
           slot="body"
-          :is="componentName"
+          :is="activeTab"
         />
       </Card>
     </div>
 
     <MobileFooter
       :items="menuItems"
-      @click="switchActiveComponent"
+      :active-tab="activeTab"
+      @click="setActiveTab"
     />
   </div>
 </template>
@@ -34,17 +28,18 @@
 import { mapGetters, mapActions } from 'vuex'
 import MobileFooter from '@/components/MobileFooter'
 import Card from '@/components/Card'
+import Modal from '@/components/Modal/Modal'
+import Account from '@/views/Mobile/MobileAccount.vue'
+import AccountHeader from '@/views/Mobile/MobileAccountHeader.vue'
 import Markets from '@/views/Markets/Markets.vue'
-import Account from '@/views/Account/Portfolio.vue'
-import Orders from '@/views/OrderHistory/OrderHistory.vue'
-import OrderBook from '@/views/OrderBook/OrderBook.vue'
+import Orders from '@/views/Mobile/MobileOrders.vue'
 import '@icons/markets'
 import '@icons/orders'
 import '@icons/account'
 
 export default {
   name: 'Mobile',
-  components: { MobileFooter, Markets, Account, Orders, Card, OrderBook },
+  components: { MobileFooter, Markets, Account, Orders, Card, Modal, AccountHeader },
   data() {
     return {
       activeComponentName: 'Markets',
@@ -58,43 +53,25 @@ export default {
     }
   },
   computed: {
-    componentName() {
-      if (this.activeComponentName === 'Markets' && this.showOrderBook) return 'OrderBook'
-      return this.activeComponentName
-    },
+    ...mapGetters({
+      userName: 'acc/getCurrentUserName',
+      activeTab: 'mobile/getActiveTab'
+    }),
     title() {
-      const tabName = this.activeComponentName
-      switch (tabName) {
+      switch (this.activeTab) {
         case 'Account':
           return this.userName
         case 'Orders':
-          return 'My orders history'
+          return ''
         default:
-          return this.showOrderBook ? 'Order Book' : tabName
+          return this.activeTab
       }
-    },
-    ...mapGetters({
-      userName: 'acc/getCurrentUserName',
-      orderBookIsActive: 'orderBook/isActive'
-    }),
-    showOrderBook() {
-      return this.activeComponentName === 'Markets' && this.orderBookIsActive
     }
   },
   methods: {
     ...mapActions({
-      deinitOrderBook: 'orderBook/deinit',
-      setBackupFlag: 'backup/setBackupFlag',
-      logout: 'acc/logout'
-    }),
-    switchActiveComponent(name) {
-      this.deinitOrderBook()
-      this.activeComponentName = name
-    },
-    handleLogout() {
-      this.$router.push({ name: 'login' })
-      this.logout()
-    }
+      setActiveTab: 'mobile/setActiveTab'
+    })
   }
 }
 </script>
@@ -110,13 +87,4 @@ export default {
       height: 100%;
     }
   }
-
-  .temp-acc-header {
-    display: flex;
-    .temp-acc-btn {
-      margin-left: 1rem;
-      border-bottom: 1px solid #ccc;
-    }
-  }
-
 </style>

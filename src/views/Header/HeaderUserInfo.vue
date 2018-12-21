@@ -1,6 +1,12 @@
 <template>
   <div class="user-info">
     <p class="uppercase text-lg">{{ userName }}</p>
+    <!-- <svgicon
+      name="arrowDown"
+      height="10"
+      width="10"
+      class="icon"
+    /> -->
   </div>
 </template>
 
@@ -26,7 +32,23 @@ export default {
 <style lang="scss" scoped>
 .user-info {
   margin-left: auto;
+  text-align: right;
   @apply inline-flex text-white;
-  margin-right: 1rem;
+
+  p {
+    color: config('colors.text-primary');
+    width: 100%;
+    padding-right: 1rem;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+
+  svg {
+    fill: config('colors.text-primary');
+    transform: rotate(270deg);
+    display: block;
+    margin: auto;
+    margin-top: .15rem;
+  }
 }
 </style>

@@ -15,6 +15,7 @@
           :index="index"
           :item="item"
           :expanded="expanded"
+          @remove="$emit('remove-order', item)"
         />
       </template>
     </SortableTable>
@@ -47,7 +48,7 @@ export default {
   data() {
     return {
       defaultSort: {
-        field: 'dateOpen',
+        field: 'payAssetSymbol',
         type: 'desc'
       }
     }

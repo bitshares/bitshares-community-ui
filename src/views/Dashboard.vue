@@ -2,105 +2,117 @@
   <div class="dashboard">
     <Modal
       v-if="backupFlag"
-      @close="setBackupFlag(false)"
+      @close="toggleModal"
     >
       <Backup/>
     </Modal>
+
+    <Deposit/>
+    <Withdraw/>
+
     <div class="dashboard hidden lg:block">
       <div class="flex flex-col lg:flex-row mb-card-margin">
-
-        <Card
-          :expandable="true"
-          collapsible
-          class="lg:w-1/3 lg:mr-card-margin"
-          title="account"
-        >
-          <AccountHeader slot="header"/>
-          <AccountHeader
-            slot="modal-header"
-            :large="true"/>
-          <Portfolio slot="body"/>
-          <Portfolio
-            slot="modal"
-            :expanded="true"/>
-        </Card>
-
-        <Card
-          collapsible
-          class="lg:w-2/3"
-          title="Graph"
-        />
-
-      </div>
-      <div class="flex flex-col lg:flex-row mb-card-margin">
-
-        <Card
-          :expandable="true"
-          :long="true"
-          collapsible
-          class="lg:w-1/3 lg:mr-card-margin"
-          title="markets"
-        >
-          <MarketsSearch slot="header"/>
-          <Markets slot="body"/>
-          <MarketsSearch slot="modal-header"/>
-          <Markets
-            slot="modal"
-            :expand-mode="true"/>
-        </Card>
-
-        <div class="flex lg:w-2/3">
-          <div class="flex flex-col lg:w-1/2 mr-card-margin">
-
-            <Card
-              collapsible
-              title="new order"
-              class="mb-card-margin"
-            />
-
+        <div class="flex flex-col lg:w-1/3 pr-card-row">
+          <div>
             <Card
               :expandable="true"
-              collapsible
-              title="active orders"
+              :collapsible="true"
+              title="account"
+              class="mb-card-margin"
             >
-              <ActiveOrdersSearch slot="modal-header"/>
-              <ActiveOrders slot="body"/>
-              <ActiveOrders
+              <AccountHeader slot="header"/>
+              <AccountHeader
+                slot="modal-header"
+                :large="true"/>
+              <Portfolio slot="body"/>
+              <Portfolio
                 slot="modal"
-                :expand-mode="true"
-              />
+                :expanded="true"/>
             </Card>
-
           </div>
-          <div class="flex flex-col lg:w-1/2">
-
-            <Card
-              collapsible
-              title="order book"
-              class="mb-card-margin"
-            >
-              <OrderBook slot="body"/>
-            </Card>
-
+          <div class="flex flex-col">
             <Card
               :expandable="true"
-              title="My orders history"
+              :collapsible="true"
+              :long="true"
+              title="markets"
             >
-              <OrderHistorySearch slot="modal-header"/>
-              <OrderHistory slot="body"/>
-              <OrderHistory
+              <MarketsSearch slot="header"/>
+              <Markets slot="body"/>
+              <MarketsSearch slot="modal-header"/>
+              <Markets
                 slot="modal"
-                :expand-mode="true"
-              />
+                :expand-mode="true"/>
             </Card>
+          </div>
 
+        </div>
+
+        <div class="flex flex-col lg:w-2/3 pr-card-row">
+          <div class="mb-card-margin">
+            <Card
+              :collapsible="true"
+              title="graph"
+            >
+              <Graph slot="body"/>
+            </Card>
+          </div>
+          <div class="flex">
+            <div class="flex flex-col lg:w-1/2 pr-half-card-row">
+              <Card
+                :collapsible="true"
+                class="mb-card-margin"
+              >
+                <NewOrder slot="body"/>
+              </Card>
+              <Card
+                :expandable="true"
+                :collapsible="true"
+                title="my active orders"
+              >
+                <ActiveOrdersSearch slot="header"/>
+                <ActiveOrders slot="body"/>
+                <ActiveOrdersSearch slot="modal-header"/>
+                <ActiveOrders
+                  slot="modal"
+                  :expand-mode="true"
+                />
+              </Card>
+
+            </div>
+            <div class="flex flex-col lg:w-1/2 pl-half-card-row">
+              <div>
+                <Card
+                  :collapsible="true"
+                  title="order book"
+                  class="mb-card-margin"
+                >
+                  <OrderBook slot="body"/>
+                </Card>
+              </div>
+
+              <Card
+                :expandable="true"
+                :collapsible="true"
+                title="My orders history"
+              >
+                <OrderHistorySearch slot="modal-header"/>
+                <OrderHistory slot="body"/>
+                <OrderHistory
+                  slot="modal"
+                  :expand-mode="true"
+                />
+              </Card>
+
+            </div>
           </div>
         </div>
+
       </div>
     </div>
-
     <!-- TODO: use some vue plugin to disable when not on mobile -->
     <Mobile/>
+    <UnlockAccountPopup/>
   </div>
 </template>
 
@@ -120,6 +132,11 @@ import ActiveOrdersSearch from '@/views/ActiveOrders/ActiveOrdersSearch'
 import Backup from '@/views/Backup/Backup'
 import Modal from '@/components/Modal/Modal'
 import Mobile from '@/views/Mobile/Mobile'
+import NewOrder from '@/views/NewOrder/NewOrder'
+import Deposit from '@/views/Deposit/DepositWidget'
+import Withdraw from '@/views/Withdraw/WithdrawWidget'
+import UnlockAccountPopup from '@/views/UnlockAccountPopup/UnlockAccountPopup'
+import Graph from '@/views/Graph/Graph'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -140,18 +157,20 @@ export default {
     ActiveOrdersSearch,
     Backup,
     Modal,
-    Mobile
-  },
-  data() {
-    return {}
+    Mobile,
+    NewOrder,
+    Deposit,
+    Withdraw,
+    UnlockAccountPopup,
+    Graph
   },
   computed: {
     ...mapGetters({
-      backupFlag: 'backup/getBackupFlag'
+      backupFlag: 'backup/modalDisplayed'
     })
   },
   methods: {
-    ...mapActions('backup', ['setBackupFlag'])
+    ...mapActions('backup', ['toggleModal'])
   }
 }
 </script>

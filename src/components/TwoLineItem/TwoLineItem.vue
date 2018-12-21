@@ -3,13 +3,17 @@
     :class="{'two-line-item--expanded': expanded}"
     class="two-line-item"
   >
-
     <div class="two-line-item-top">
-      <slot name="top">{{ top }}</slot>
+      <slot name="top">
+        {{ top }}
+      </slot>
     </div>
     <div class="two-line-item-bottom">
-      <slot name="bottom">{{ bottom }}</slot>
+      <slot name="bottom">
+        {{ bottom }}
+      </slot>
     </div>
+
   </div>
 </template>
 <script>
@@ -32,13 +36,13 @@ export default {
 </script>
 <style lang="scss">
   .two-line-item {
-    letter-spacing: -0.0625rem;
+    letter-spacing: -0.0563rem;
+    padding-right: 0.0563rem;
     .two-line-item-top {
       font-size: config('textSizes.lg');
       color: config('colors.primary');
       overflow: hidden;
       word-break: break-all;
-      padding-top: .3rem;
     }
     .two-line-item-bottom {
       font-size: config('textSizes.sm');

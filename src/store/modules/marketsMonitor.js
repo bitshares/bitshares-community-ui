@@ -1,4 +1,4 @@
-// import config from 'vuex-bitshares/config.js'
+import config from 'vuex-bitshares/config.js'
 const types = {
   UPDATE_FAVOURITES: 'UPDATE_FAVOURITES',
   UPDATE_CURRENT_BASE: 'UPDATE_CURRENT_BASE',
@@ -25,10 +25,6 @@ const getters = {
   isListFetching: (state, getters, rootState, rootGetters) => {
     const base = getters.getCurrentBase
     const stats = rootGetters['market/getMarketStats']
-    if (base === 'favourites') {
-      const favFetching = Object.keys(state.favourites).map(base => stats[base].fetching).find(isFetching => !!isFetching)
-      return !!favFetching
-    }
     return (stats[base] && stats[base].fetching) || false
   },
   getFavouritesList: (state, getters, rootState, rootGetters) => {
@@ -70,17 +66,13 @@ const mutations = {
 }
 
 const actions = {
-  initialize(store) {
-    const { state } = store
-    actions.setCurrentBase(store, state.currentBase)
-    // const { defaultMarkets } = config
+  initialize({ dispatch }) {
+    const { defaultMarkets } = config
 
-    // Object.keys(defaultMarkets).forEach(base => {
-    //   Object.keys(defaultMarkets[base]).forEach(quote => {
-    //     dispatch('stats/fetchStats', quote, { root: true })
-    //   })
-    // })
-    // fetch additional market stats
+    // fetch market stats
+    Object.keys(defaultMarkets).forEach(base => {
+      dispatch('market/fetchMarketStats', base, { root: true })
+    })
   },
   toggleFavourite({ state, commit, getters }, { base, quote }) {
     const newFavourites = Object.assign({}, state.favourites)

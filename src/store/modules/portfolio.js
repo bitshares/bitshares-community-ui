@@ -81,6 +81,11 @@ const getters = {
     return items
   },
 
+  getTokensByAsset: (state, getters) => assetName => {
+    const balanceObject = getters.getItems.find(item => item.tiker === assetName)
+    return balanceObject ? balanceObject.tokens : 0
+  },
+
   fiatId: state => state.fiatId
 }
 

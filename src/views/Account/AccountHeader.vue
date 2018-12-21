@@ -6,8 +6,7 @@
     class="account-header"
   >
     <span class="title">BALANCE</span>
-    <span class="amount">$ {{ totalFiatValue.toFixed(2) }}</span>
-
+    <span class="amount">$ {{ totalFiatValue ? totalFiatValue.toFixed(2) : 0 }}</span>
   </div>
 </template>
 
@@ -41,6 +40,7 @@ export default {
   align-items: baseline;
   flex-direction: row;
   color: config('colors.text-primary');
+  // margin: 1.5rem 0;
   &--large {
     .text-weak {
       font-size: config('textSizes.lg');
@@ -59,15 +59,19 @@ export default {
 
 .account-header--large-mode {
   width: 100%;
+  display: flex;
+  flex-shrink: 0;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   padding-top: 1rem;
   font-size: config('textSizes.lg');
   .title {
-    font-size: config('textSizes.lg');
-    margin-bottom: 0.2rem;
+    font-size: config('textSizes.sm');
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+    opacity: 0.5;
   }
   .amount {
     font-size: config('textSizes.5xl')

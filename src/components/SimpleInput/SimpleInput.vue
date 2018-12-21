@@ -3,14 +3,17 @@
     :class="{
       'input--has-icon': icon,
       'input--has-error': error,
-      'input--disabled': disabled
+      'input--disabled': disabled,
+      'input--centered': centered,
+      'input--value-mode': valueMode
     }"
     class="input">
 
     <input
-      v-restrict.number="isNumber"
+      v-restrict.number.decimal="isNumber"
       ref="input"
       :value="value"
+      :placeholder="usedPlaceholder"
       :type="inputType"
       :disabled="disabled"
       :autocorrect="false"
@@ -24,8 +27,9 @@
       @keyup.enter="$refs.input.blur"
     >
 
-    <!-- floating title = placeholder -->
+    <!-- floating title -->
     <span
+      v-if="!valueMode"
       :class="{'input_has-content': !! value }"
       class="input__title">
       {{ titleText }}
@@ -40,19 +44,24 @@
       height="24"
       @click.stop.native="handleIconClick"
     />
+
+    <!-- clear (cross) icon -->
     <svgicon
-      v-if="value && !icon"
+      v-if="value && !icon && !valueMode"
       name="cross"
       class="delete__icon"
       width="12"
       height="12"
-      @click.stop.native="$emit('input', '')"
+      @click.stop.native="handleClear"
     />
 
     <!-- tip message -->
     <div
       v-if="tipText && !error"
-      class="input__tip">
+      :class="{'input__tip--clickable': noteClickable}"
+      class="input__tip"
+      @click="noteClickable && $emit('note-clicked')"
+    >
       {{ tipText }}
     </div>
 
@@ -68,20 +77,20 @@
 
 <script>
 import '@/assets/icons/'
-import messages from '@/helpers/inputMessages.js'
 
 export default {
   props: {
-    inputName: {
-      type: String,
-      required: true
-    },
     type: {
       type: String,
       default: 'text'
     },
     value: {
       type: [String, Number],
+      default: ''
+    },
+    placeholder: {
+      type: [String, Number],
+      required: false,
       default: ''
     },
     title: {
@@ -113,28 +122,40 @@ export default {
     error: {
       type: String,
       default: ''
+    },
+    valueMode: {
+      type: Boolean,
+      default: false
+    },
+    centered: {
+      type: Boolean,
+      default: false
+    },
+    noteClickable: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
     inputType() {
       if (this.type === 'password') return this.type
-      if (this.type === 'number' || this.password) return 'tel'
+      if (this.type === 'number' && this.password) return 'tel'
       return 'text'
+    },
+    usedPlaceholder() {
+      if (this.valueMode) {
+        return this.placeholder
+      }
+      return this.title ? '' : this.placeholder
     },
     isNumber() {
       return this.type === 'number'
     },
-    inputMessages() {
-      return messages[this.inputName]
-    },
     titleText() {
-      return this.title || this.inputMessages.title
+      return this.title
     },
     tipText() {
-      return this.tip || this.inputMessages.tip || ''
-    },
-    validationMessages() {
-      return this.inputMessages.validation
+      return this.tip
     }
   },
   mounted() {
@@ -146,25 +167,29 @@ export default {
   },
   methods: {
     handleInput({ target: { value } }) {
-      const newValue = this.isNumber ? (parseInt(value) || '') : value
-      this.$emit('input', newValue + '')
+      const newValue = this.isNumber ? (parseFloat(value) || null) : value
+      this.$emit('input', newValue)
     },
     // prevent pasting non-numbers if this is a number input
     handlePaste(event) {
       if (!this.isNumber) return
       event.preventDefault()
       const text = event.clipboardData.getData('text')
-      const number = this.value + (parseInt(text) || null)
+      const number = this.value + (parseFloat(text) || null)
       this.$emit('input', number)
     },
     handleFocus() {
       this.$emit('focus')
     },
     handleBlur() {
+      if (!this.$refs.input) return
       this.$emit('blur', this.$refs.input.value)
     },
     handleIconClick() {
       this.$emit('icon-click')
+    },
+    handleClear() {
+      this.$emit('input', this.isNumber ? null : '')
     }
   }
 }
@@ -175,6 +200,28 @@ export default {
 .input {
   position: relative;
   @apply pt-3 pb-4;
+
+  &--centered {
+    .input__input {
+      text-align: center;
+    }
+    .input__error {
+      width: 100%;
+      text-align: center;
+    }
+    .input__tip {
+      width: 100%;
+      text-align: center;
+
+      &--clickable {
+        cursor: pointer;
+      }
+    }
+    .input__title {
+      width: 100%;
+      text-align: center;
+    }
+  }
 }
 
 .input__icon {
@@ -264,5 +311,19 @@ export default {
 
 .input__tip {
   color: config('colors.text-primary');
+}
+.input--value-mode {
+  padding: 0!important;
+
+  .input__input {
+    padding-right: 0;
+    outline: none;
+    border-bottom: none;
+    font-size: config('textSizes.xl');
+
+    &:disabled {
+      opacity: 1;
+    }
+  }
 }
 </style>

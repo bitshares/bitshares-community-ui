@@ -1,11 +1,21 @@
 <template>
-  <div class="order-history pt-3 lg:pt-0">
+  <div
+    :class="{ 'w-220': expandMode }"
+    class="order-history pt-3 lg:pt-0"
+  >
     <LoadingContainer :loading="isFetching">
       <OrderHistoryTable
+        v-if="filteredItems.length > 0"
         :table-headers="expandMode ? tableHeaders : tableHeadersMini"
         :items="filteredItems"
         :expanded="expandMode"
       />
+      <div
+        v-if="filteredItems.length === 0"
+        class="noOrderHistory"
+      >
+        <p>No Order History</p>
+      </div>
     </LoadingContainer>
   </div>
 </template>
@@ -33,7 +43,7 @@ export default {
         { title: this.expandMode ? 'Avg./Price' : 'Price', field: 'price', align: 'left' },
         { title: 'Get', field: 'get', align: 'left' },
         { title: 'Spend', field: 'spend', align: 'left' },
-        { title: 'Open', field: 'dateOpen', align: 'right', expanded: true },
+        // { title: 'Open', field: 'dateOpen', align: 'right' },
         { title: 'Closed', field: 'dateClose', align: 'right' }
       ],
       tableHeadersMini: [
@@ -50,6 +60,9 @@ export default {
       isFetching: 'operations/isFetching'
     }),
     filteredItems() {
+      if (!this.items) {
+        return []
+      }
       const search = this.searchStr.toLowerCase()
       return this.items.filter(item => {
         return item.payAssetSymbol.toLowerCase().includes(search) ||
@@ -68,5 +81,17 @@ export default {
   .order-history {
     position: relative;
     height: 100%;
+  }
+  .noOrderHistory {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    p {
+      color:config('colors.white');
+      opacity: 0.5;
+      text-align: center;
+      width: 100%;
+      font-size: 1.5rem;
+    }
   }
 </style>

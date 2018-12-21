@@ -14,9 +14,11 @@
     >
       <div class="table-item">
         <TwoLineItem
-          :top="item.payAssetSymbol"
-          :bottom="item.receiveAssetSymbol"
-        />
+          :top="formattedReceiveAsset"
+          :bottom="formattedPayAsset"
+        >
+          <span slot="bottom">/{{ formattedPayAsset }}</span>
+        </TwoLineItem>
       </div>
       <div class="table-item">
         <TwoLineItem
@@ -26,7 +28,7 @@
       </div>
       <div class="table-item text-right">
         <TwoLineItem
-          :top="price"
+          :top="vol"
         >
           <div
             slot="bottom"
@@ -46,10 +48,11 @@
     >
       <div class="table-item">
         <TwoLineItem
-          :top="item.payAssetSymbol"
-          :bottom="item.receiveAssetSymbol"
+          :top="formattedReceiveAsset"
           :expanded="expanded"
-        />
+        >
+          <span slot="bottom">/{{ formattedPayAsset }}</span>
+        </TwoLineItem>
       </div>
       <div class="table-item">
         <TwoLineItem
@@ -61,16 +64,18 @@
       <div class="table-item">
         <TwoLineItem
           :top="get"
-          :bottom="item.receiveAssetSymbol"
           :expanded="expanded"
-        />
+        >
+          <span slot="bottom">{{ formattedReceiveAsset }}</span>
+        </TwoLineItem>
       </div>
       <div class="table-item _relative">
         <TwoLineItem
           :top="spend"
-          :bottom="item.payAssetSymbol"
           :expanded="expanded"
-        />
+        >
+          <span slot="bottom">{{ formattedPayAsset }}</span>
+        </TwoLineItem>
       </div>
       <div
         v-if="expanded"
@@ -89,13 +94,13 @@
         </TwoLineItem>
       </div>
       <div class="table-item--dates">
-        <div class="table-item-date">{{ dateOpen }}</div>
-        <div class="table-item-date">{{ timeOpen }}</div>
+        <div class="table-item-date">{{ dateExpiring }}</div>
+        <div class="table-item-date">{{ timeExpiring }}</div>
       </div>
     </div>
     <div
       class="table-item-remove"
-      @click="removeActiveOrder(index)"
+      @click="$emit('remove')"
     >
       <svgicon
         :width="removeSize"
@@ -107,10 +112,9 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
 import { format } from 'date-fns'
 import '@icons/cancel'
-import { getFloatCurrency } from '@/helpers/utils'
+import { getFloatCurrency, removePrefix } from '@/helpers/utils'
 import TwoLineItem from '@/components/TwoLineItem/TwoLineItem'
 
 export default {
@@ -133,21 +137,24 @@ export default {
       default: 0
     }
   },
-  data() {
-    return {}
-  },
   computed: {
-    dateOpen() {
-      return format(this.item.dateOpen, 'DD/MM')
+    formattedPayAsset() {
+      return removePrefix(this.item.payAssetSymbol)
     },
-    timeOpen() {
-      return format(this.item.dateOpen, 'HH:mm')
+    formattedReceiveAsset() {
+      return removePrefix(this.item.receiveAssetSymbol)
+    },
+    dateExpiring() {
+      return format(this.item.expiration, 'DD/MM')
+    },
+    timeExpiring() {
+      return format(this.item.expiration, 'HH:mm')
     },
     price() {
       return getFloatCurrency(this.item.price)
     },
     avg() {
-      return getFloatCurrency(this.item.avg)
+      return ''
     },
     vol() {
       return getFloatCurrency(this.item.vol)
@@ -165,11 +172,6 @@ export default {
     removeSize() {
       return this.expanded ? '14' : '10'
     }
-  },
-  methods: {
-    ...mapActions({
-      removeActiveOrder: 'activeOrders/removeActiveOrder'
-    })
   }
 }
 </script>
@@ -179,7 +181,6 @@ export default {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     margin-left: -0.15rem;
-    min-height: 3.9375rem;
     .table-item--dates {
       position: relative;
     }
@@ -198,6 +199,8 @@ export default {
     }
   }
   .active-orders-table-item {
+    min-height: 3.125rem;
+
     &.active-orders-table-item--expanded {
       margin: 0.1250rem 0 0.1250rem 0.1250rem;
       padding-right: 2.8rem;
@@ -230,7 +233,7 @@ export default {
     .table-item-remove {
       position: absolute;
       right: 0.5625rem;
-      top: 1.375rem;
+      top: 1rem;
       cursor: pointer;
     }
     &:hover {
@@ -246,7 +249,7 @@ export default {
     }
   }
   .active-orders-table-row .table-item {
-    padding-top: 0.6rem;
+    padding-top: .55rem;
     overflow: hidden;
     word-wrap: break-word;
     font-size: config('textSizes.sm');
@@ -266,8 +269,14 @@ export default {
       .table-item-remove {
         position: absolute;
         right: 0.9375rem;
-        top: 1.375rem;
+        top: 1rem;
         cursor: pointer;
+      }
+      .table-item {
+        padding-top: .4rem;
+      }
+      .table-item--dates {
+        margin-top: .4rem;
       }
     }
   }
