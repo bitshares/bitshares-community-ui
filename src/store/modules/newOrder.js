@@ -49,6 +49,12 @@ const getDefaultState = () => ({
 const getters = {
   getBase: state => removePrefix(state.base),
   getQuote: state => removePrefix(state.quote),
+  baseAsset: (state, getters, rootState, rootGetters) => {
+    return rootGetters['assets/getAssetBySymbol'](getters['getBase'])
+  },
+  quoteAsset: (state, getters, rootState, rootGetters) => {
+    return rootGetters['assets/getAssetBySymbol'](getters['getQuote'])
+  },
   getMarketPrices: (state, getters, rootState, rootGetters) => rootGetters['orderBook/getTopOrders'],
   getFees: (state) => state.fees,
   getType: state => state.type,
@@ -169,19 +175,26 @@ const actions = {
       commit(types.SET_PRICE, state.baseAmount / value)
     }
   },
-  setPrice({ commit, state }, value) {
+  setPrice({ commit, state, getters }, value) {
     if (state.activeIndication === 'MARKET') return
 
-    commit(types.SET_PRICE, value)
-    if (state.type === 'buy') {
-      if (state.quoteAmount) commit(types.SET_BASE_AMOUNT, state.quoteAmount * value)
-    } else {
-      if (state.baseAmount) commit(types.SET_QUOTE_AMOUNT, state.baseAmount / value)
+    const basePrecision = getters.baseAsset.precision
+    const quotePrecision = getters.quoteAsset.precision
+
+    const price = (state.type === 'buy') ? +value.toFixed(basePrecision) : +value.toFixed(quotePrecision)
+    commit(types.SET_PRICE, price)
+
+    if (state.type === 'buy' && state.quoteAmount) {
+      const baseAmount = +(state.quoteAmount * price).toFixed(basePrecision)
+      commit(types.SET_BASE_AMOUNT, baseAmount)
+    } else if (state.type === 'sell' && state.baseAmount) {
+      const quoteAmount = +(state.baseAmount / price).toFixed(quotePrecision)
+      commit(types.SET_QUOTE_AMOUNT, quoteAmount)
     }
   },
-  setOrderData({ commit, state }, { type, price, sum }) {
-    actions.setPrice({ commit, state }, price)
-    if (!state.baseAmount) actions.setBaseAmount({ commit, state }, sum)
+  setOrderData({ dispatch, state }, { type, price, sum }) {
+    dispatch('setPrice', price)
+    if (!state.baseAmount) dispatch('setBaseAmount', sum)
   },
   async fetchFees({ commit, state, rootGetters }) {
     const { fee: transactionFeeRaw } = await API.Parameters.getComissionByType('limit_order_create')
@@ -205,9 +218,9 @@ const actions = {
       }
     })
   },
-  async dispatchOrder({ commit, state, rootGetters }) {
-    const baseAsset = rootGetters['assets/getAssetBySymbol'](state.base)
-    const quoteAsset = rootGetters['assets/getAssetBySymbol'](state.quote)
+  async dispatchOrder({ commit, state, rootGetters, getters }) {
+    const baseAsset = getters.baseAsset
+    const quoteAsset = getters.quoteAsset
     const baseAmount = state.baseAmount * 10 ** baseAsset.precision
     const quoteAmount = state.quoteAmount * 10 ** quoteAsset.precision
     const get = state.type === 'buy' ? baseAmount : quoteAmount

@@ -212,7 +212,7 @@ export default {
     },
     changeOrderType(type) {
       if (type === 'MARKET') {
-        this.setPrice(null)
+        this.setPrice(0)
       }
       this.setActiveIndication(type)
     },
