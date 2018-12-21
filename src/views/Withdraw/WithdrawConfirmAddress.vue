@@ -15,6 +15,7 @@
       :centered="true"
       title="MEMO"
       class="withdraw-input"
+      @input="saveMemo"
     />
     <div class="withdraw-footer">
       <Button
@@ -65,8 +66,8 @@ export default {
     }
   },
   created() {
-    if (this.withdrawType === 'transfer') {
-      this.validate = debounce(this.checkTransferIsValid, 500)
+    if (this.withdrawType === 'withdraw') {
+      this.validate = debounce(this.checkAddressIsValid, 500)
     } else {
       this.validate = debounce(this.getUser, 500)
     }
@@ -75,7 +76,8 @@ export default {
     ...mapActions({
       setWithdrawStep: 'withdraw/setWithdrawStep',
       setWithdrawAddress: 'withdraw/setWithdrawAddress',
-      checkIfAddressIsValid: 'openledger/checkIfAddressIsValid'
+      checkIfAddressIsValid: 'openledger/checkIfAddressIsValid',
+      saveWithdrawMemo: 'withdraw/setWithdrawMemo'
     }),
     async getUser() {
       this.validUser = false
@@ -84,12 +86,15 @@ export default {
       this.userLoaded = true
       this.validUser = user.success
     },
-    checkTransferIsValid() {
+    checkAddressIsValid() {
       this.checkIfAddressIsValid({ address: this.address, asset: this.withdrawAsset.tiker })
     },
     confirmAddress() {
       this.setWithdrawStep('withdrawFinish')
       this.setWithdrawAddress({ address: this.address })
+    },
+    saveMemo() {
+      this.saveWithdrawMemo(this.memo)
     }
   }
 }

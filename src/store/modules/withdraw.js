@@ -4,7 +4,8 @@ const types = {
   SET_WITHDRAW_AMOUNT: 'SET_WITHDRAW_AMOUNT',
   SET_WITHDRAW_ADDRESS: 'SET_WITHDRAW_ADDRESS',
   SET_WITHDRAW_STEP: 'SET_WITHDRAW_STEP',
-  SET_WITHDRAW_TYPE: 'SET_WITHDRAW_TYPE'
+  SET_WITHDRAW_TYPE: 'SET_WITHDRAW_TYPE',
+  SET_WITHDRAW_MEMO: 'SET_WITHDRAW_MEMO'
 }
 
 const getInitialState = () => ({
@@ -13,6 +14,7 @@ const getInitialState = () => ({
   withdrawAmount: null,
   withdrawAddress: null,
   withdrawStep: 'withdraw',
+  withdrawMemo: '',
   type: 'withdraw'
 })
 
@@ -22,7 +24,8 @@ const getters = {
   getWithdrawAmount: state => state.withdrawAmount,
   getWithdrawAddress: state => state.withdrawAddress,
   getWithdrawStep: state => state.withdrawStep,
-  getWithdrawType: state => state.type
+  getWithdrawType: state => state.type,
+  getWithdrawMemo: state => state.withdrawMemo
 }
 
 const mutations = {
@@ -43,6 +46,9 @@ const mutations = {
   },
   [types.SET_WITHDRAW_TYPE](state, type) {
     state.type = type
+  },
+  [types.SET_WITHDRAW_MEMO](state, memo) {
+    state.withdrawMemo = memo
   }
 }
 
@@ -63,6 +69,9 @@ const actions = {
   },
   setWithdrawStep({ commit, state }, step) {
     commit(types.SET_WITHDRAW_STEP, step)
+  },
+  setWithdrawMemo({ commit }, memo) {
+    commit(types.SET_WITHDRAW_MEMO, memo)
   }
 }
 
