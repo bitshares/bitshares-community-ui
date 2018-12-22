@@ -17,7 +17,6 @@
     <NewOrderCircleType :value="0"/>
     <NewOrderPercentSelector
       :percent-items="percentItems"
-      :active-percent="activePercent"
       @change="setMaxSpend"
     />
     <div class="new-order-fields">
