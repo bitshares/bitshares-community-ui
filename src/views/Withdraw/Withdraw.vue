@@ -7,7 +7,7 @@
       >
         <div class="withdraw-content">
           <Button
-            v-for="(asset, index) in coinslist"
+            v-for="(asset, index) in coinsList"
             :key="index"
             :text="asset.tiker"
             type="secondary"
@@ -33,11 +33,13 @@ export default {
   computed: {
     ...mapGetters({
       coins: 'portfolio/getItems',
-      getAssetBySymbol: 'assets/getAssetBySymbol'
+      getAssetBySymbol: 'assets/getAssetBySymbol',
+      type: 'withdraw/getWithdrawType'
     }),
-    coinslist() {
-      // this.getAssetBySymbol(coin.tiker).issuer === coin.assetId
-      return this.coins.filter(coin => coin.tokens)
+    coinsList() {
+      const list = this.coins.filter(coin => coin.tokens)
+      const withdrawList = list.filter(coin => this.getAssetBySymbol(coin.tiker).issuer === '1.2.96397')
+      return this.type === 'transfer' ? list : withdrawList
     }
   },
   methods: {
