@@ -13,17 +13,17 @@
     <div class="confirm-order-price-section">
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :value="price || null"
+          :value="quoteAmount || null"
           :disabled="true"
-          :title="`Price ${quote}`"
+          :title="quoteInputTitle"
           placeholder="Market"
         />
       </div>
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :value="quoteAmount || null"
+          :value="price || null"
           :disabled="true"
-          :title="quoteInputTitle"
+          :title="`Price ${quote}`"
           placeholder="Market"
         />
       </div>
