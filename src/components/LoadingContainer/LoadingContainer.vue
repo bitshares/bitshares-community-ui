@@ -40,6 +40,7 @@ export default ({
 .loading-container {
   height: 100%;
   overflow: hidden;
+  min-height: 3rem;
 }
 
 .loading-container__content {
