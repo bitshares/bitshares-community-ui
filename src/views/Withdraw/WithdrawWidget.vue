@@ -47,10 +47,9 @@ export default {
 <style lang="scss">
   .withdraw-container {
     color: config('colors.primary');
-    padding: 1rem;
+    padding: 1rem 0 0;
     display: flex;
     flex-direction: column;
-    height: 100%;
 
     .withdraw-title {
       font-size: config('textSizes.lg');
@@ -59,11 +58,10 @@ export default {
       margin-bottom: 1rem;
     }
   }
-  @media screen and (max-width: 800px) {
+
+  @screen sm {
     .withdraw-container {
-      .withdraw-content {
-        height: 100%;
-      }
+      height: 30rem;
     }
   }
 </style>
