@@ -58,7 +58,7 @@
         :disabled="invalidOrder && invalidOrderMarket"
         :text="buttonTitle"
         width="full"
-        @click="showConfirm"
+        @click="clickCreateOrder"
       >
         <span class="operation-title">{{ type }}</span>
       </Btn>
@@ -88,6 +88,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Vue from 'vue'
 import NewOrderTabs from './NewOrderTabs'
 import NewOrderInput from './NewOrderInput'
 import NewOrderPercentSelector from './NewOrderPercentSelector'
@@ -130,7 +131,8 @@ export default {
       maxBase: 'newOrder/getMaxBase',
       maxQuote: 'newOrder/getMaxQuote',
       confirmDisplayed: 'newOrder/confirmDisplayed',
-      pending: 'newOrder/inProgress'
+      pending: 'newOrder/inProgress',
+      hasFeeBalance: 'newOrder/hasFeeBalance'
     }),
     getPricePlaceholder() {
       return (this.isMarketTab) ? 'MARKET' : 'PRICE'
@@ -151,11 +153,27 @@ export default {
     },
     baseInputTitle() {
       const type = this.isBuyTab ? 'Get' : 'Spend'
-      return `${type} ${this.base}`
+      if (this.isMarketTab) {
+        if (!this.isBuyTab) {
+          return (this.baseAmount !== null) ? `${type} ${this.base}` : type
+        } else {
+          return `${type} ${this.base}`
+        }
+      } else {
+        return (this.baseAmount !== null) ? `${type} ${this.base}` : type
+      }
     },
     quoteInputTitle() {
       const type = this.isBuyTab ? 'Spend' : 'Get'
-      return `${type} ${this.quote}`
+      if (this.isMarketTab) {
+        if (this.isBuyTab) {
+          return (this.quoteAmount !== null) ? `${type} ${this.quote}` : type
+        } else {
+          return `${type} ${this.quote}`
+        }
+      } else {
+        return (this.quoteAmount !== null) ? `${type} ${this.quote}` : type
+      }
     },
     buttonTitle() {
       const amount = (this.isMarketTab) ? '' : getFloatCurrency(this.baseAmount || 0)
@@ -192,6 +210,13 @@ export default {
       showConfirm: 'newOrder/showConfirm',
       hideConfirm: 'newOrder/hideConfirm'
     }),
+    clickCreateOrder() {
+      if (this.hasFeeBalance) {
+        this.showConfirm()
+      } else {
+        Vue.prototype.$toast.error('Not enough BTS to place order')
+      }
+    },
     amountNote(side) {
       if (this.isMarketSide(side)) return null
       if (side === 'base') return `max ${this.maxBaseTitle}`
@@ -212,11 +237,12 @@ export default {
     },
     changeOrderType(type) {
       if (type === 'MARKET') {
-        this.setPrice(null)
+        this.setPrice(0)
       }
       this.setActiveIndication(type)
     },
     setMaxSpend(percent = 100) {
+      this.setActivePercent(percent)
       const max = this.type === 'buy' ? this.maxQuote : this.maxBase
       const amount = percent === 100 ? max : max / 100 * percent
       const price = this.price || 0
