@@ -5,13 +5,21 @@
       v-model="address"
       :centered="true"
       :error="error"
-      title="withdrawal address"
+      :title="inputTitle"
       class="withdraw-input"
-      @input="validateUser"
+      @input="validate"
+    />
+    <SimpleInput
+      v-if="withdrawType === 'transfer'"
+      v-model="memo"
+      :centered="true"
+      title="MEMO"
+      class="withdraw-input"
+      @input="saveMemo"
     />
     <div class="withdraw-footer">
       <Button
-        :disabled="!validUser"
+        :disabled="!validUser || transferAddressValid"
         text="Confirm address"
         width="full"
         class="withdraw-btn"
@@ -21,7 +29,7 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import debounce from 'lodash/debounce'
 import Button from '@/components/Button'
 import SimpleInput from '@/components/SimpleInput'
@@ -35,26 +43,41 @@ export default {
   data() {
     return {
       address: '',
+      memo: '',
       validUser: false,
       userLoaded: false,
       errorTitle: 'user not found'
     }
   },
   computed: {
+    ...mapGetters({
+      withdrawType: 'withdraw/getWithdrawType',
+      withdrawAsset: 'withdraw/getWithdrawAsset',
+      transferAddressValid: 'openledger/getTransferAddressValid'
+    }),
     error() {
       if (!this.validUser && this.address && this.userLoaded) {
         return this.errorTitle
       }
       return ''
+    },
+    inputTitle() {
+      return `${this.withdrawType} address`
     }
   },
   created() {
-    this.validateUser = debounce(this.getUser, 500)
+    if (this.withdrawType === 'withdraw') {
+      this.validate = debounce(this.checkAddressIsValid, 500)
+    } else {
+      this.validate = debounce(this.getUser, 500)
+    }
   },
   methods: {
     ...mapActions({
       setWithdrawStep: 'withdraw/setWithdrawStep',
-      setWithdrawAddress: 'withdraw/setWithdrawAddress'
+      setWithdrawAddress: 'withdraw/setWithdrawAddress',
+      checkIfAddressIsValid: 'openledger/checkIfAddressIsValid',
+      saveWithdrawMemo: 'withdraw/setWithdrawMemo'
     }),
     async getUser() {
       this.validUser = false
@@ -63,9 +86,15 @@ export default {
       this.userLoaded = true
       this.validUser = user.success
     },
+    checkAddressIsValid() {
+      this.checkIfAddressIsValid({ address: this.address, asset: this.withdrawAsset.tiker })
+    },
     confirmAddress() {
       this.setWithdrawStep('withdrawFinish')
       this.setWithdrawAddress({ address: this.address })
+    },
+    saveMemo() {
+      this.saveWithdrawMemo(this.memo)
     }
   }
 }

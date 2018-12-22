@@ -3,7 +3,7 @@
     v-if="showWithdraw"
     @close="toggle">
     <div class="withdraw-container h-full sm:w-120">
-      <div class="withdraw-title">withdraw</div>
+      <div class="withdraw-title">{{ withdrawType }}</div>
       <Withdraw v-if="withdrawStep === 'withdraw'"/>
       <WithdrawConfirmAmount v-if="withdrawStep === 'withdrawConfirmAmount'"/>
       <WithdrawConfirmAddress v-if="withdrawStep === 'withdrawConfirmAddress'"/>
@@ -32,7 +32,8 @@ export default {
   computed: {
     ...mapGetters({
       showWithdraw: 'withdraw/modalDisplayed',
-      withdrawStep: 'withdraw/getWithdrawStep'
+      withdrawStep: 'withdraw/getWithdrawStep',
+      withdrawType: 'withdraw/getWithdrawType'
     })
   },
   methods: {

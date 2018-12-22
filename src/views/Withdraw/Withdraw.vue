@@ -39,9 +39,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      coins: 'portfolio/getItems'
+      coins: 'portfolio/getItems',
+      getAssetBySymbol: 'assets/getAssetBySymbol'
     }),
     coinslist() {
+      // this.getAssetBySymbol(coin.tiker).issuer === coin.assetId
       return this.coins.filter(coin => coin.tokens)
     }
   },
