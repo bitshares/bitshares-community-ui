@@ -36,8 +36,6 @@
             :errors="$v.brainkey"
             input-name="brainkey"
             class="mb-6"
-            @focus="onBrainkeyInputFocus"
-            @blur="onBrainkeyInputBlur"
           />
 
           <KeyfileLoader
@@ -174,8 +172,12 @@ export default {
           name: this.name.toLowerCase(),
           password: this.password
         })
-        if (error) this.$toast.error('Invalid username or password')
-        else this.$router.push({ name: 'main' })
+        if (error) {
+          this.loginError = true
+          this.$toast.error('Invalid username or password')
+        } else {
+          this.$router.push({ name: 'main' })
+        }
       } else {
         if (this.file) {
           this.handleLoginFile()
@@ -185,10 +187,13 @@ export default {
           brainkey: this.brainkey.toLowerCase(),
           password: this.pin
         })
-        if (error) this.$toast.error('Invalid brainkey')
-        else this.$router.push({ name: 'main' })
+        if (error) {
+          this.$toast.error('Invalid brainkey')
+          this.inProgress = false
+        } else {
+          this.$router.push({ name: 'main' })
+        }
       }
-      this.inProgress = false
     },
     async handleLoginFile() {
       const { success, error } = await this.fileLogin({
@@ -196,9 +201,11 @@ export default {
         backup: this.file
       })
       console.log('Result', success, error, this.pin)
-      this.inProgress = false
       if (success) this.$router.push({ name: 'main' })
-      else this.$toast.error(error)
+      else {
+        this.$toast.error(error)
+        this.inProgress = false
+      }
     },
     changeLoginType(type) {
       this.type = type

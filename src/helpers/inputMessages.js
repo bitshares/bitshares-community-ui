@@ -2,7 +2,7 @@ export default {
   userName: {
     title: 'account name',
     validation: {
-      required: 'Enter username',
+      required: 'Enter account name',
       minLength: 'Must be 4 characters or more',
       isUnique: 'Username already exists',
       hasSpecialSymbol: 'Should contain @, - or number',

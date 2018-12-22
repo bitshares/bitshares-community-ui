@@ -22,10 +22,6 @@
       </div>
       <div class="table-item single-item">
         {{ price }}
-        <!-- <TwoLineItem -->
-        <!-- :top="avg" -->
-        <!-- :bottom="price" -->
-        <!-- /> -->
       </div>
       <div class="table-item text-right">
         <TwoLineItem
@@ -55,12 +51,8 @@
           <span slot="bottom">/{{ formattedPayAsset }}</span>
         </TwoLineItem>
       </div>
-      <div class="table-item">
-        <TwoLineItem
-          :top="avg"
-          :bottom="price"
-          :expanded="expanded"
-        />
+      <div class="table-item single-item">
+        {{ price }}
       </div>
       <div class="table-item">
         <TwoLineItem
