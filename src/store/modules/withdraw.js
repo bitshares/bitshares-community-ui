@@ -54,6 +54,7 @@ const mutations = {
 
 const actions = {
   toggleModal({ commit }, type) {
+    console.log(type)
     commit(types.TOGGLE_WITHDRAW_MODAL)
     commit(types.SET_WITHDRAW_STEP, 'withdraw')
     commit(types.SET_WITHDRAW_TYPE, type)

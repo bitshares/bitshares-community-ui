@@ -73,10 +73,12 @@ export default {
     }),
     menuItems() {
       const items = menuItems.slice()
-      if (this.backupEnabled) items.unshift({
-        title: 'backup',
-        event: 'backup'
-      })
+      if (this.backupEnabled) {
+        items.unshift({
+          title: 'backup',
+          event: 'backup'
+        })
+      }
       return items
     }
   },

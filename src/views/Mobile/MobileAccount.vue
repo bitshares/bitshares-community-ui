@@ -12,13 +12,14 @@
         size="mobile-small"
         text="Withdraw"
         type="secondary"
-        @click="showWithdraw"
+        @click="showWithdraw('withdraw')"
       />
 
       <Button
         size="mobile-small"
         text="Transfer"
         type="secondary"
+        @click="showWithdraw('transfer')"
       />
     </div>
 
