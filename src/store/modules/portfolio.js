@@ -67,6 +67,7 @@ const getters = {
       return {
         assetId,
         tiker: asset.symbol,
+        fullname: asset.fullname,
         tokens,
         fiatValue,
         btcValue,
