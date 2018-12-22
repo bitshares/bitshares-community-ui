@@ -58,7 +58,7 @@
         :disabled="invalidOrder && invalidOrderMarket"
         :text="buttonTitle"
         width="full"
-        @click="showConfirm"
+        @click="clickCreateOrder"
       >
         <span class="operation-title">{{ type }}</span>
       </Btn>
@@ -88,6 +88,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Vue from 'vue'
 import NewOrderTabs from './NewOrderTabs'
 import NewOrderInput from './NewOrderInput'
 import NewOrderPercentSelector from './NewOrderPercentSelector'
@@ -130,7 +131,8 @@ export default {
       maxBase: 'newOrder/getMaxBase',
       maxQuote: 'newOrder/getMaxQuote',
       confirmDisplayed: 'newOrder/confirmDisplayed',
-      pending: 'newOrder/inProgress'
+      pending: 'newOrder/inProgress',
+      hasFeeBalance: 'newOrder/hasFeeBalance'
     }),
     getPricePlaceholder() {
       return (this.isMarketTab) ? 'MARKET' : 'PRICE'
@@ -208,6 +210,13 @@ export default {
       showConfirm: 'newOrder/showConfirm',
       hideConfirm: 'newOrder/hideConfirm'
     }),
+    clickCreateOrder() {
+      if (this.hasFeeBalance) {
+        this.showConfirm();
+      } else {
+        Vue.prototype.$toast.error('Not enough BTS to place order')
+      }
+    },
     amountNote(side) {
       if (this.isMarketSide(side)) return null
       if (side === 'base') return `max ${this.maxBaseTitle}`
