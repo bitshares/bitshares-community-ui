@@ -10,7 +10,8 @@
         class="single-item">{{ formattedTicker }}</div>
       <TwoLineItem
         v-else
-        :top="formattedTicker"/>
+        :top="formattedTicker"
+        :bottom="formattedFullname"/>
     </div>
 
     <div
@@ -98,6 +99,9 @@ export default {
     },
     formattedTicker() {
       return removePrefix(this.item.tiker)
+    },
+    formattedFullname() {
+      return this.item.fullname
     },
     formattedTokens() {
       return getFloatCurrency(this.item.tokens)

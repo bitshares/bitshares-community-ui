@@ -12,7 +12,7 @@
               <Button
                 v-for="(asset, index) in coinslist"
                 :key="index"
-                :text="asset.tiker"
+                :text="asset.tickerName"
                 type="secondary"
                 width="full"
                 class="withdraw-item"
@@ -44,7 +44,13 @@ export default {
     }),
     coinslist() {
       // this.getAssetBySymbol(coin.tiker).issuer === coin.assetId
-      return this.coins.filter(coin => coin.tokens)
+      return (this.coins.filter(coin => coin.tokens)).map(coin => {
+        coin.tickerName = coin.tiker
+        if (coin.fullname) {
+          coin.tickerName += ' (' + coin.fullname + ')'
+        }
+        return coin
+      })
     }
   },
   methods: {
