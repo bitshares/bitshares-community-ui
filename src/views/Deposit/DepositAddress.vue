@@ -24,7 +24,12 @@
         <div class="deposit-address">{{ address }}</div>
       </LoadingContainer>
     </div>
-    <div class="deposit-sub-title deposit-sub-title--warning">IMPORTANT: Send not less than 0.0018 {{ asset }} to this deposit address. Sending less than 0.0018 {{ asset }} or any other currency will result in the loss of your deposit.</div>
+    <div
+      v-show="fee"
+      class="deposit-sub-title deposit-sub-title--warning"
+    >
+      IMPORTANT: Send not less than {{ fee }} {{ asset }} to this deposit address. Sending less than {{ fee }} {{ asset }} or any other currency will result in the loss of your deposit.
+    </div>
     <div class="deposit-sub-title deposit-sub-title--error">ALERT: This asset is backed by centralized counterparty.</div>
     <div class="deposit-footer">
       <Button
@@ -61,7 +66,8 @@ export default {
     ...mapGetters({
       depositAddress: 'openledger/getDepositAddress',
       depositAsset: 'deposit/getDepositAsset',
-      addressPending: 'openledger/getAddressPending'
+      addressPending: 'openledger/getAddressPending',
+      depositCoins: 'openledger/getCoinsData'
     }),
     invalidAdress() {
       return !this.depositAddress || typeof this.depositAddress === 'object'
@@ -71,6 +77,9 @@ export default {
     },
     asset() {
       return this.depositAsset.toUpperCase()
+    },
+    fee() {
+      return parseFloat(this.depositCoins[this.depositAsset].gateFee)
     }
   },
   methods: {
