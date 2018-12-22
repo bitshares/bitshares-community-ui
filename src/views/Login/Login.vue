@@ -173,7 +173,7 @@ export default {
           password: this.password
         })
         if (error) {
-          this.loginError = true
+          this.inProgress = false
           this.$toast.error('Invalid username or password')
         } else {
           this.$router.push({ name: 'main' })
@@ -203,7 +203,7 @@ export default {
       console.log('Result', success, error, this.pin)
       if (success) this.$router.push({ name: 'main' })
       else {
-        this.$toast.error(error)
+        this.$toast.error('Invalid file or password')
         this.inProgress = false
       }
     },

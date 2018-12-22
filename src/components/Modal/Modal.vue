@@ -2,7 +2,7 @@
   <transition name="modal">
     <div
       :class="{'modal-mask--no-overlay': noOverlay}"
-      class="modal-mask"
+      class="modal-mask sm:pt-32"
       @click.self.stop="$emit('close')"
     >
       <div
@@ -60,7 +60,7 @@ export default {
   background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   transition: opacity .3s ease;
   &--no-overlay {
     background: none;
