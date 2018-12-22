@@ -76,10 +76,26 @@ const getters = {
     return (feeAssetBalance >= fee)
   },
   getMaxBase: (state, getters, rootState, rootGetters) => {
-    return rootGetters['portfolio/getTokensByAsset'](state.base)
+    const rawAmount = rootGetters['portfolio/getTokensByAsset'](state.base)
+    if (!getters.isBuyOrder) {
+      const { value, asset } = getters.getFees.transaction
+      if (state.base === asset) {
+        const reduced = rawAmount - value;
+        return (reduced > 0) ? reduced : 0
+      }
+    }
+    return rawAmount
   },
   getMaxQuote: (state, getters, rootState, rootGetters) => {
-    return rootGetters['portfolio/getTokensByAsset'](state.quote)
+    const rawAmount = rootGetters['portfolio/getTokensByAsset'](state.quote)
+    if (getters.isBuyOrder) {
+      const { value, asset } = getters.getFees.transaction
+      if (state.quote === asset) {
+        const reduced = rawAmount - value;
+        return (reduced > 0) ? reduced : 0
+      }
+    }
+    return rawAmount
   },
   inProgress: state => state.inProgress,
   confirmDisplayed: state => state.showConfirm
