@@ -154,6 +154,10 @@ export default {
   opacity: 0.8;
   border-color:config('colors.primary');
   // font-family: Gotham_Pro;
+  &.btn--disabled {
+    color: config('colors.button-text-disabled');
+    border-color: config('colors.button-text-disabled');
+  }
 }
 .btn--secondary:hover {
   background-color:config('colors.primary');
