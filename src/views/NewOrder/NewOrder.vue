@@ -9,9 +9,9 @@
       @change="setType"
     />
     <Tabs
-      :tabs="['MARKET', 'LIMIT']"
-      :active="'LIMIT'"
-      @change="setActiveIndication"
+      :tabs="possibleIndications"
+      :active="activeIndication"
+      @change="changeOrderType"
     />
     <NewOrderCirclePrice :percent="0"/>
     <NewOrderCircleType :value="0"/>
@@ -22,20 +22,22 @@
     />
     <div class="new-order-fields">
       <NewOrderInput
-        :placeholder="quote"
+        :placeholder="amountPlaceholder('quote')"
         :value="quoteAmount"
-        :note="`max ${maxQuoteTitle}`"
+        :note="amountNote('quote')"
         :error="spendExceeded"
         :title="quoteInputTitle"
+        :disabled="isMarketTab && !isBuyTab"
         @change="setQuoteAmount"
         @note-click="setMaxSpend"
       />
       <NewOrderInput
-        :placeholder="base"
+        :placeholder="amountPlaceholder('base')"
         :value="baseAmount"
         :title="baseInputTitle"
         :error="spendExceeded"
-        :note="`max ${maxBaseTitle}`"
+        :disabled="isMarketTab && isBuyTab"
+        :note="amountNote('base')"
         @change="setBaseAmount"
         @note-click="setMaxSpend"
       />
@@ -43,8 +45,9 @@
     <div class="new-order-price">
       <NewOrderInput
         :title="priceTitle"
-        :value="price"
-        placeholder="PRICE"
+        :value="(price === 0) ? null : price"
+        :disabled="isMarketTab"
+        :placeholder="getPricePlaceholder"
         @change="setPrice"
       />
     </div>
@@ -52,7 +55,7 @@
     <div class="new-order-button">
       <Btn
         :type="type"
-        :disabled="invalidOrder"
+        :disabled="invalidOrder && invalidOrderMarket"
         :text="buttonTitle"
         width="full"
         @click="showConfirm"
@@ -116,6 +119,7 @@ export default {
       quote: 'newOrder/getQuote',
       type: 'newOrder/getType',
       activeIndication: 'newOrder/getActiveIndication',
+      possibleIndications: 'newOrder/getPossibleIndications',
       percentItems: 'newOrder/getPercentItems',
       activePercent: 'newOrder/getActivePercent',
       baseAmount: 'newOrder/getBaseAmount',
@@ -128,7 +132,15 @@ export default {
       confirmDisplayed: 'newOrder/confirmDisplayed',
       pending: 'newOrder/inProgress'
     }),
-
+    getPricePlaceholder() {
+      return (this.isMarketTab) ? 'MARKET' : 'PRICE'
+    },
+    isMarketTab() {
+      return this.activeIndication === 'MARKET'
+    },
+    isBuyTab() {
+      return this.type === 'buy'
+    },
     spendExceeded() {
       const quoteExceeded = this.quoteAmount > this.maxQuote
       const baseExceeded = this.baseAmount > this.maxBase
@@ -138,15 +150,16 @@ export default {
       return `Price ${this.quote}`
     },
     baseInputTitle() {
-      const type = this.type === 'buy' ? 'Get' : 'Spend'
+      const type = this.isBuyTab ? 'Get' : 'Spend'
       return `${type} ${this.base}`
     },
     quoteInputTitle() {
-      const type = this.type === 'buy' ? 'Spend' : 'Get'
+      const type = this.isBuyTab ? 'Spend' : 'Get'
       return `${type} ${this.quote}`
     },
     buttonTitle() {
-      return `${getFloatCurrency(this.baseAmount || 0)} ${this.base}`
+      const amount = (this.isMarketTab) ? '' : getFloatCurrency(this.baseAmount || 0)
+      return `${amount} ${this.base}`
     },
     maxBaseTitle() {
       if (this.type === 'sell') return getFloatCurrency(this.maxBase)
@@ -158,6 +171,10 @@ export default {
     },
     invalidOrder() {
       return !this.baseAmount || !this.quoteAmount || this.spendExceeded
+    },
+    invalidOrderMarket() {
+      if (this.activeIndication !== 'MARKET') return true
+      return ((this.type === 'buy' && !this.quoteAmount) || (this.type === 'sell' && !this.baseAmount))
     },
     formattedPrice() {
       return getFloatCurrency(this.price)
@@ -175,6 +192,30 @@ export default {
       showConfirm: 'newOrder/showConfirm',
       hideConfirm: 'newOrder/hideConfirm'
     }),
+    amountNote(side) {
+      if (this.isMarketSide(side)) return null
+      if (side === 'base') return `max ${this.maxBaseTitle}`
+      if (side === 'quote') return `max ${this.maxQuoteTitle}`
+    },
+    amountPlaceholder(side) {
+      if (this.isMarketSide(side)) {
+        return 'MARKET'
+      } else {
+        return this[side]
+      }
+    },
+    isMarketSide(side) {
+      if (this.activeIndication === 'MARKET') {
+        return ((this.type === 'buy' && side === 'base') || (this.type === 'sell' && side === 'quote'))
+      }
+      return false
+    },
+    changeOrderType(type) {
+      if (type === 'MARKET') {
+        this.setPrice(null)
+      }
+      this.setActiveIndication(type)
+    },
     setMaxSpend(percent = 100) {
       const max = this.type === 'buy' ? this.maxQuote : this.maxBase
       const amount = percent === 100 ? max : max / 100 * percent

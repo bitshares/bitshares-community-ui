@@ -22,7 +22,7 @@ const types = {
 const getDefaultState = () => ({
   base: '',
   quote: '',
-  price: null,
+  price: 0,
   fees: {
     transaction: {
       value: 0,
@@ -36,7 +36,8 @@ const getDefaultState = () => ({
     }
   },
   type: 'buy',
-  activeIndication: 'MARKET',
+  possibleIndications: ['MARKET', 'LIMIT'],
+  activeIndication: 'LIMIT',
   activePercent: 0,
   percentItems: [10, 25, 50, 75],
   inProgress: false,
@@ -57,6 +58,7 @@ const getters = {
   getPercentItems: state => state.percentItems,
   getActivePercent: state => state.activePercent,
   getActiveIndication: state => state.activeIndication,
+  getPossibleIndications: state => state.possibleIndications,
   getPrice: state => state.price,
   getFiatPrice: (state, getters, rootState, rootGetters) => {
 
@@ -105,7 +107,7 @@ const mutations = {
   [types.RESET_AMOUNTS](state) {
     state.baseAmount = null
     state.quoteAmount = null
-    state.price = null
+    state.price = 0
   },
   [types.PLACE_ORDER_REQUEST](state) {
     state.inProgress = true
@@ -134,6 +136,9 @@ const actions = {
     commit(types.SET_ACTIVE_PERCENT, percent)
   },
   setActiveIndication({ commit }, indication) {
+    if (indication === 'MARKET') {
+      commit(types.RESET_AMOUNTS)
+    }
     commit(types.SET_ACTIVE_INDICATION, indication)
   },
   showConfirm({ commit }) {
@@ -143,6 +148,8 @@ const actions = {
     commit(types.HIDE_CONFIRM)
   },
   setBaseAmount({ state, commit }, value) {
+    if (state.activeIndication === 'MARKET' && state.type === 'buy') return
+
     commit(types.SET_BASE_AMOUNT, value)
     if (state.price && value) {
       commit(types.SET_QUOTE_AMOUNT, value / state.price)
@@ -152,6 +159,8 @@ const actions = {
     }
   },
   setQuoteAmount({ state, commit }, value) {
+    if (state.activeIndication === 'MARKET' && state.type === 'sell') return
+
     commit(types.SET_QUOTE_AMOUNT, value)
     if (state.price && value) {
       commit(types.SET_BASE_AMOUNT, value * state.price)
@@ -161,8 +170,9 @@ const actions = {
     }
   },
   setPrice({ commit, state }, value) {
-    commit(types.SET_PRICE, value)
+    if (state.activeIndication === 'MARKET') return
 
+    commit(types.SET_PRICE, value)
     if (state.type === 'buy') {
       if (state.quoteAmount) commit(types.SET_BASE_AMOUNT, state.quoteAmount * value)
     } else {

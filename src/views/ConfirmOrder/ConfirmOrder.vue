@@ -13,23 +13,26 @@
     <div class="confirm-order-price-section">
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :value="price || ''"
+          :value="price || null"
           :disabled="true"
           :title="`Price ${quote}`"
+          placeholder="Market"
         />
       </div>
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :value="quoteAmount || ''"
+          :value="quoteAmount || null"
           :disabled="true"
           :title="quoteInputTitle"
+          placeholder="Market"
         />
       </div>
       <div class="confirm-order-price-section-item">
         <NewOrderInput
-          :value="baseAmount || ''"
+          :value="baseAmount || null"
           :disabled="true"
           :title="baseInputTitle"
+          placeholder="Market"
         />
       </div>
     </div>
@@ -89,15 +92,15 @@ export default {
     },
     baseAmount: {
       type: Number,
-      required: true
+      default: 0
     },
     price: {
       type: Number,
-      required: true
+      default: 0
     },
     quoteAmount: {
       type: Number,
-      required: true
+      default: 0
     },
     fees: {
       type: Object,
