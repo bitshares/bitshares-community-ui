@@ -23,8 +23,8 @@
       <div class="table-item single-item">
         {{ price }}
         <!-- <TwoLineItem -->
-          <!-- :top="avg" -->
-          <!-- :bottom="price" -->
+        <!-- :top="avg" -->
+        <!-- :bottom="price" -->
         <!-- /> -->
       </div>
       <div class="table-item text-right">
