@@ -151,11 +151,27 @@ export default {
     },
     baseInputTitle() {
       const type = this.isBuyTab ? 'Get' : 'Spend'
-      return `${type} ${this.base}`
+      if (this.isMarketTab) {
+        if (!this.isBuyTab) {
+          return (this.baseAmount !== null) ? `${type} ${this.base}` : type
+        } else {
+          return `${type} ${this.base}`
+        }
+      } else {
+        return (this.baseAmount !== null) ? `${type} ${this.base}` : type
+      }
     },
     quoteInputTitle() {
       const type = this.isBuyTab ? 'Spend' : 'Get'
-      return `${type} ${this.quote}`
+      if (this.isMarketTab) {
+        if (this.isBuyTab) {
+          return (this.quoteAmount !== null) ? `${type} ${this.quote}` : type
+        } else {
+          return `${type} ${this.quote}`
+        }
+      } else {
+        return (this.quoteAmount !== null) ? `${type} ${this.quote}` : type
+      }
     },
     buttonTitle() {
       const amount = (this.isMarketTab) ? '' : getFloatCurrency(this.baseAmount || 0)
