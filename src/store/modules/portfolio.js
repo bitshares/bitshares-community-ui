@@ -62,10 +62,6 @@ const getters = {
       const tokenPrice = fiatValue / tokens
       const change7 = getters.getPriceChangeById({ assetId, days: 7 })
       const change1 = getters.getPriceChangeById({ assetId, days: 1 })
-      // let tiker = asset.symbol
-      // if (asset.fullname) {
-      //   tiker += ' (' + asset.fullname + ')'
-      // }
 
       const share = Math.round((baseValue / getters.getTotalBaseValue) * 100)
       return {
