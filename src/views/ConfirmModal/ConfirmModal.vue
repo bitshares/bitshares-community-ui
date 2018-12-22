@@ -1,13 +1,13 @@
 <template>
   <Modal
     v-if="show"
+    :class="{
+      'modal-border-buy': type === 'buy',
+      'modal-border-sell': type === 'sell',
+    }"
     @close="$emit('close')"
   >
     <div
-      :class="{
-        'confirm-modal-content--buy': type === 'buy',
-        'confirm-modal-content--sell': type === 'sell',
-      }"
       class="confirm-modal-content"
     >
       <div class="confirm-modal-title">{{ title }}</div>
@@ -67,12 +67,13 @@ export default {
   .confirm-modal-content {
     padding: 0 1.3125rem;
     max-width: 30rem;
+  }
 
-    &--buy {
-      border-top: 0.25rem solid config('colors.buy');
-    }
-    &--sell {
-      border-top: 0.25rem solid config('colors.sell');
-    }
+  .modal-border-buy .modal-wrapper {
+    border-top: 0.25rem solid config('colors.buy');
+  }
+
+  .modal-border-sell .modal-wrapper {
+    border-top: 0.25rem solid config('colors.sell');
   }
 </style>
