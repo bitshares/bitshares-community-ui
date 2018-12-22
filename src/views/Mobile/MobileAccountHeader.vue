@@ -5,7 +5,7 @@
   >
     <Dropdown
       :mobile="true"
-      :title="'hobb1t'"
+      :title="username"
       :items="menuItems"
       @clicked="handleDropdownClick"
     />
@@ -17,7 +17,7 @@ import Button from '@/components/Button'
 import Portfolio from '@/views/Account/Portfolio'
 import AccountHeader from '@/views/Account/AccountHeader'
 import Dropdown from '@/components/Dropdown'
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: { Button, AccountHeader, Portfolio, Dropdown },
@@ -41,6 +41,11 @@ export default {
       event: 'logout'
     }]
   }),
+  computed: {
+    ...mapGetters({
+      username: 'acc/getCurrentUserName'
+    })
+  },
   methods: {
     ...mapActions({
       showDeposit: 'deposit/toggleModal',
