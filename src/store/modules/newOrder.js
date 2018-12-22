@@ -187,7 +187,7 @@ const actions = {
       commit(types.SET_QUOTE_AMOUNT, +(value / state.price).toFixed(quotePrecision))
     }
     if (state.quoteAmount && value && !state.price) {
-      commit(types.SET_PRICE, value / state.quoteAmount)
+      commit(types.SET_PRICE, +(value / state.quoteAmount).toFixed(quotePrecision))
     }
   },
   setQuoteAmount({ state, commit, getters }, value) {
@@ -199,7 +199,7 @@ const actions = {
       commit(types.SET_BASE_AMOUNT, +(value * state.price).toFixed(basePrecision))
     }
     if (state.baseAmount && value && !state.price) {
-      commit(types.SET_PRICE, state.baseAmount / value)
+      commit(types.SET_PRICE, +(state.baseAmount / value).toFixed(basePrecision))
     }
   },
   setPrice({ commit, state, getters }, value) {
