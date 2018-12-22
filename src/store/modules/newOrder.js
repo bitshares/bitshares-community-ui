@@ -80,7 +80,7 @@ const getters = {
     if (!getters.isBuyOrder) {
       const { value, asset } = getters.getFees.transaction
       if (state.base === asset) {
-        const reduced = rawAmount - value;
+        const reduced = rawAmount - value
         return (reduced > 0) ? reduced : 0
       }
     }
@@ -91,7 +91,7 @@ const getters = {
     if (getters.isBuyOrder) {
       const { value, asset } = getters.getFees.transaction
       if (state.quote === asset) {
-        const reduced = rawAmount - value;
+        const reduced = rawAmount - value
         return (reduced > 0) ? reduced : 0
       }
     }
