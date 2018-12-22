@@ -77,7 +77,7 @@ export default {
       if (this.expandMode) {
         return [
           { title: 'Pair', field: 'payAssetSymbol', align: 'left' },
-          { title: this.expandMode ? 'Avg./Price' : 'Price', field: 'price', align: 'left' },
+          { title: 'Price', field: 'price', align: 'left' },
           { title: 'Get', field: 'get', align: 'left' },
           { title: 'Spend', field: 'spend', align: 'left' },
           { title: 'Filled', field: 'filled', align: 'right', expanded: true },
@@ -86,7 +86,7 @@ export default {
       }
       return [
         { title: 'Pair', field: 'payAssetSymbol', align: 'left' },
-        { title: 'Avg./Price', field: 'price', align: 'left' },
+        { title: 'Price', field: 'price', align: 'left' },
         { title: 'Vol./Filled', field: 'filled', align: 'right' }
       ]
     }
