@@ -57,7 +57,7 @@ export default {
 
 <style lang="scss" scoped>
   .accordion {
-    height: 100%;
+    min-height: 30rem;
     display: flex;
     flex-direction: column;
   }

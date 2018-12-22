@@ -1,16 +1,21 @@
 <template>
-  <div class="mobile-orders">
-    <Accordion
-      :items="tabs"
-      :active="modeName"
-      @change="setOrdersMode"
-    >
-      <NewOrder slot="New Order"/>
-      <OrderBook slot="Order Book"/>
-      <ActiveOrders slot="Active Orders"/>
-      <OrderHistory slot="History"/>
-    </Accordion>
-  </div>
+  <ScrollingContainer>
+    <div class="mobile-orders">
+      <div class="mobile-orders-new-order-title">NEW ORDER</div>
+      <div class="mobile-new-order">
+        <NewOrder/>
+      </div>
+      <Accordion
+        :items="tabs"
+        :active="modeName"
+        @change="setOrdersMode"
+      >
+        <OrderBook slot="Order Book"/>
+        <ActiveOrders slot="Active Orders"/>
+        <OrderHistory slot="History"/>
+      </Accordion>
+    </div>
+  </ScrollingContainer>
 </template>
 
 <script>
@@ -21,13 +26,14 @@ import NewOrder from '@/views/NewOrder/NewOrder.vue'
 import OrderBook from '@/views/OrderBook/OrderBook.vue'
 import OrderHistory from '@/views/OrderHistory/OrderHistory.vue'
 import ActiveOrders from '@/views/ActiveOrders/ActiveOrders.vue'
+import ScrollingContainer from '@/components/ScrollingContainer'
 
 export default {
   name: 'MobileOrders',
-  components: { Tabs, OrderHistory, ActiveOrders, Accordion, NewOrder, OrderBook },
+  components: { Tabs, OrderHistory, ActiveOrders, Accordion, NewOrder, OrderBook, ScrollingContainer },
   data() {
     return {
-      tabs: ['New Order', 'Order Book', 'Active Orders', 'History']
+      tabs: ['Order Book', 'Active Orders', 'History']
     }
   },
   computed: {
@@ -48,6 +54,8 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
+  // overflow: auto;
+  padding-bottom: 1rem;
   &__container {
     padding-top: 0.5rem;
     flex-grow: 1;
@@ -55,5 +63,16 @@ export default {
     display: flex;
     flex-direction: column;
   }
+}
+.mobile-orders-new-order-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  padding: .6875rem 1rem;
+  position: relative;
+  z-index: 10;
+}
+.mobile-new-order {
+  height: 25rem;
 }
 </style>

@@ -70,7 +70,7 @@ export default {
         quote: this.item.ticker
       })
       this.setActiveTab('Orders')
-      this.setOrdersMode('New Order')
+      this.setOrdersMode('Order Book')
     },
     getChangeValue({ price }) {
       if (!price) return '0%'
