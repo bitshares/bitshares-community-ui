@@ -61,6 +61,7 @@ export default {
       setOrdersMode: 'mobile/setOrdersMode'
     }),
     handleClick() {
+      console.log(this.item.base, this.item.ticker)
       this.activateOrderBook({
         baseSymbol: this.item.base,
         quoteSymbol: this.item.ticker

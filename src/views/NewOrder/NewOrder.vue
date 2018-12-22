@@ -284,7 +284,7 @@ export default {
       justify-content: space-between;
     }
     .new-order-price {
-      margin-top: 2rem;
+      margin-top: 1rem;
       display: flex;
       justify-content: center;
     }

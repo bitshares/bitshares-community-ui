@@ -95,7 +95,7 @@ export default {
     opacity: 0.7;
     transform: scale(1.2, 1.2);
     position: absolute;
-    bottom: 5.25rem;
+    bottom: 6rem;
     left: calc(50% - 3.875rem);
     width: $default-size;
     height: $default-size;

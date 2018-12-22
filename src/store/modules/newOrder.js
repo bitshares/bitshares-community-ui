@@ -1,6 +1,7 @@
 import { removePrefix } from '@/helpers/utils'
 import API from 'vuex-bitshares/src/services/api'
 import Vue from 'vue'
+import floor from 'lodash/floor'
 
 const types = {
   SET_TYPE: 'SET_TYPE',
@@ -50,10 +51,10 @@ const getters = {
   getBase: state => removePrefix(state.base),
   getQuote: state => removePrefix(state.quote),
   baseAsset: (state, getters, rootState, rootGetters) => {
-    return rootGetters['assets/getAssetBySymbol'](getters['getBase'])
+    return rootGetters['assets/getAssetBySymbol'](state.base)
   },
   quoteAsset: (state, getters, rootState, rootGetters) => {
-    return rootGetters['assets/getAssetBySymbol'](getters['getQuote'])
+    return rootGetters['assets/getAssetBySymbol'](state.quote)
   },
   getMarketPrices: (state, getters, rootState, rootGetters) => rootGetters['orderBook/getTopOrders'],
   getFees: (state) => state.fees,
@@ -77,25 +78,27 @@ const getters = {
   },
   getMaxBase: (state, getters, rootState, rootGetters) => {
     const rawAmount = rootGetters['portfolio/getTokensByAsset'](state.base)
+    const precisedAmount = floor(rawAmount, getters.baseAsset.precision)
     if (!getters.isBuyOrder) {
       const { value, asset } = getters.getFees.transaction
       if (state.base === asset) {
-        const reduced = rawAmount - value
+        const reduced = floor(rawAmount - value, getters.baseAsset.precision)
         return (reduced > 0) ? reduced : 0
       }
     }
-    return rawAmount
+    return precisedAmount
   },
   getMaxQuote: (state, getters, rootState, rootGetters) => {
     const rawAmount = rootGetters['portfolio/getTokensByAsset'](state.quote)
+    const precisedAmount = floor(rawAmount, getters.quoteAsset.precision)
     if (getters.isBuyOrder) {
       const { value, asset } = getters.getFees.transaction
       if (state.quote === asset) {
-        const reduced = rawAmount - value
+        const reduced = floor(rawAmount - value, getters.baseAsset.precision)
         return (reduced > 0) ? reduced : 0
       }
     }
-    return rawAmount
+    return precisedAmount
   },
   inProgress: state => state.inProgress,
   confirmDisplayed: state => state.showConfirm
@@ -121,11 +124,9 @@ const mutations = {
   },
   [types.SET_BASE_AMOUNT](state, value) {
     Vue.set(state, 'baseAmount', value)
-    // state.baseAmount = value
   },
   [types.SET_QUOTE_AMOUNT](state, value) {
     Vue.set(state, 'quoteAmount', value)
-    // state.quoteAmount = value
   },
   [types.SET_PRICE](state, value) {
     state.price = value
@@ -250,8 +251,8 @@ const actions = {
   async dispatchOrder({ commit, state, rootGetters, getters }) {
     const baseAsset = getters.baseAsset
     const quoteAsset = getters.quoteAsset
-    const baseAmount = state.baseAmount * 10 ** baseAsset.precision
-    const quoteAmount = state.quoteAmount * 10 ** quoteAsset.precision
+    const baseAmount = floor(state.baseAmount * 10 ** baseAsset.precision)
+    const quoteAmount = floor(state.quoteAmount * 10 ** quoteAsset.precision)
     const get = state.type === 'buy' ? baseAmount : quoteAmount
     const spend = state.type === 'buy' ? quoteAmount : baseAmount
 
