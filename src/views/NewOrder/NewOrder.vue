@@ -212,7 +212,7 @@ export default {
     }),
     clickCreateOrder() {
       if (this.hasFeeBalance) {
-        this.showConfirm();
+        this.showConfirm()
       } else {
         Vue.prototype.$toast.error('Not enough BTS to place order')
       }

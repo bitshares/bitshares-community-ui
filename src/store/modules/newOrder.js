@@ -73,7 +73,6 @@ const getters = {
   hasFeeBalance: (state, getters, rootState, rootGetters) => {
     const { value: fee, asset } = getters.getFees.transaction
     const feeAssetBalance = rootGetters['portfolio/getTokensByAsset'](asset)
-    console.log('Has fee balance!!', (feeAssetBalance >= fee))
     return (feeAssetBalance >= fee)
   },
   getMaxBase: (state, getters, rootState, rootGetters) => {
