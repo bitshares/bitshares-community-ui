@@ -130,7 +130,10 @@ const mutations = {
 }
 
 const actions = {
-  setType({ commit }, tab) {
+  setType({ commit, state }, tab) {
+    if (state.activeIndication === 'MARKET') {
+      commit(types.RESET_AMOUNTS)
+    }
     commit(types.SET_TYPE, tab)
   },
   setMarket({ commit, dispatch }, { base, quote }) {
