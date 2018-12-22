@@ -175,7 +175,6 @@ export default {
       if (this.maxChars && value.length > this.maxChars) {
         value = value.substr(0, this.maxChars)
       }
-      console.log('input: ', value)
       const newValue = this.isNumber ? (parseFloat(value) || null) : value
       this.$emit('input', newValue)
     },
