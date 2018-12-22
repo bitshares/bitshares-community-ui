@@ -6,7 +6,6 @@
       <LoadingContainer :loading="coinsPending">
         <div class="desposit-search">
           <SimpleInput
-            :value="searchStr"
             :centered="true"
             placeholder="SEARCH"
             @input="onSearch"

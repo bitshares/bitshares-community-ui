@@ -1,17 +1,33 @@
 <template>
   <div class="input-wrapper">
     <input
-      :placeholder="hint || placeholder"
-      :value="value"
+      v-model="value"
+      :placeholder="hint"
       :class="{'search-input--active': value.length }"
       class="search-input"
-      @input="$emit('input', $event.target.value)"
+      @input="$emit('input', value)"
+      @focus="inputMode = true"
+      @blur="inputMode = false"
     >
-    <div class="search-icon">
+    <div
+      v-if="!inputMode && !value.length"
+      class="search-icon"
+    >
       <svgicon
         width="20"
         height="20"
         name="search"
+      />
+    </div>
+    <div
+      v-if="value.length"
+      class="search-clear"
+    >
+      <svgicon
+        width="14"
+        height="14"
+        name="cancel"
+        @click="$emit('input', ''); value = ''"
       />
     </div>
     <!-- <Input
@@ -32,15 +48,12 @@ export default {
     hint: {
       type: String,
       default: ''
-    },
-    value: {
-      type: String,
-      default: ''
     }
   },
   data() {
     return {
-      placeholder: 'Search'
+      inputMode: false,
+      value: ''
     }
   }
 }
@@ -69,6 +82,13 @@ export default {
     right: .3rem;
     opacity: .5;
   }
+  .search-clear {
+    display: inline-block;
+    position: absolute;
+    bottom: .3rem;
+    right: .3rem;
+    opacity: .5;
+  }
   .input-wrapper {
     position: relative;
     &:hover {
@@ -77,7 +97,9 @@ export default {
       .search-icon {
         opacity: 1;
       }
-
+      .search-clear {
+        opacity: 1;
+      }
       .search-input {
         visibility: visible;
       }
