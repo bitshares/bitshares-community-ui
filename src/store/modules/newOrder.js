@@ -130,6 +130,7 @@ const mutations = {
   },
   [types.SET_PRICE](state, value) {
     state.price = value
+    // state.price = parseFloat((+value + '').substring(0, 9))
   },
   [types.RESET](state) {
     Object.assign(state, getDefaultState())
@@ -190,7 +191,7 @@ const actions = {
       commit(types.SET_QUOTE_AMOUNT, +(value / state.price).toFixed(quotePrecision))
     }
     if (state.quoteAmount && value && !state.price) {
-      commit(types.SET_PRICE, +(value / state.quoteAmount).toFixed(quotePrecision))
+      commit(types.SET_PRICE, value / state.quoteAmount)
     }
   },
   setQuoteAmount({ state, commit, getters }, value) {
@@ -202,7 +203,7 @@ const actions = {
       commit(types.SET_BASE_AMOUNT, +(value * state.price).toFixed(basePrecision))
     }
     if (state.baseAmount && value && !state.price) {
-      commit(types.SET_PRICE, +(state.baseAmount / value).toFixed(basePrecision))
+      commit(types.SET_PRICE, state.baseAmount / value)
     }
   },
   setPrice({ commit, state, getters }, value) {
@@ -210,8 +211,8 @@ const actions = {
 
     const basePrecision = getters.baseAsset.precision
     const quotePrecision = getters.quoteAsset.precision
-
-    const price = (state.type === 'buy') ? +(+value).toFixed(basePrecision) : +(+value).toFixed(quotePrecision)
+    const price = value
+    // const price = (state.type === 'buy') ? +(+value).toFixed(basePrecision) : +(+value).toFixed(quotePrecision)
     commit(types.SET_PRICE, price)
 
     if (state.type === 'buy' && state.quoteAmount) {
