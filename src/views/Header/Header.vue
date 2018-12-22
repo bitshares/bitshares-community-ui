@@ -49,6 +49,21 @@ import Button from '@/components/Button'
 import Dropdown from '@/components/Dropdown'
 import '@icons/bitshares'
 
+const menuItems = [{
+  title: 'settings',
+  event: 'settings',
+  disabled: true
+},
+{
+  title: 'faq',
+  event: 'faq',
+  disabled: true
+},
+{
+  title: 'log out',
+  event: 'logout'
+}]
+
 export default {
   name: 'Header',
   components: { UserInfo, Dropdown, Button },
@@ -57,25 +72,12 @@ export default {
       backupEnabled: 'acc/isWalletAcc'
     }),
     menuItems() {
-      return [{
+      const items = menuItems.slice()
+      if (this.backupEnabled) items.unshift({
         title: 'backup',
-        event: 'backup',
-        disabled: !this.backupEnabled
-      },
-      {
-        title: 'settings',
-        event: 'settings',
-        disabled: true
-      },
-      {
-        title: 'faq',
-        event: 'faq',
-        disabled: true
-      },
-      {
-        title: 'log out',
-        event: 'logout'
-      }]
+        event: 'backup'
+      })
+      return items
     }
   },
   methods: {
