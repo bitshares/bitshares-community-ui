@@ -6,7 +6,7 @@
         <OrderBookTable
           :items="orderBook.buying"
           :table-headers="tableHeaders.buy"
-          :max-sum="maxSum"
+          :max-sum="cumulativeMaxBuying"
           :anchor="true"
           title="Buying"
           align="left"
@@ -15,7 +15,7 @@
         <OrderBookTable
           :items="orderBook.selling"
           :table-headers="tableHeaders.sell"
-          :max-sum="maxSum"
+          :max-sum="cumulativeMaxSelling"
           title="Selling"
           align="right"
           @item-clicked="handleOrderClick('sell', $event)"
@@ -55,7 +55,9 @@ export default {
       maxSum: 'orderBook/getMaxOrderAmount',
       baseAsset: 'orderBook/getBaseAsset',
       quoteAsset: 'orderBook/getQuoteAsset',
-      fetching: 'orderBook/isFetching'
+      fetching: 'orderBook/isFetching',
+      cumulativeMaxBuying: 'orderBook/getCumulativeBuyAmount',
+      cumulativeMaxSelling: 'orderBook/getCumulativeSellAmount'
     }),
     baseAssetSymbol() {
       return removePrefix((this.baseAsset && this.baseAsset.symbol) || '')

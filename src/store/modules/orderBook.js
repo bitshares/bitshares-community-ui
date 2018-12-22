@@ -32,6 +32,8 @@ const getters = {
 
     return maxFromBuy > maxFromSell ? maxFromBuy : maxFromSell
   },
+  getCumulativeBuyAmount: state => state.orderBook.buying.length && state.orderBook.buying.slice().pop().cumulativeAmount,
+  getCumulativeSellAmount: state => state.orderBook.selling.length && state.orderBook.selling.slice().pop().cumulativeAmount,
   getOrderBook: state => state.orderBook,
   getLastOrder: state => state.lastOrder,
   getTopOrders: state => {
@@ -72,7 +74,13 @@ const processOrders = (orders, type, baseAsset, quoteAsset) => {
   })
 
   const sortType = type === 'buy' ? 'desc' : 'asc'
-  return orderBy(processedOrders, 'price', sortType).slice(0, 100)
+  const sortedOrders = orderBy(processedOrders, 'price', sortType).slice(0, 100)
+  let cumulativeAmount = 0
+  sortedOrders.map(order => {
+    cumulativeAmount += order.sum
+    order.cumulativeAmount = cumulativeAmount
+  })
+  return sortedOrders
 }
 
 const mutations = {
