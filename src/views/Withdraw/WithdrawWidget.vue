@@ -53,6 +53,7 @@ export default {
 
     .withdraw-title {
       font-size: config('textSizes.lg');
+      font-weight: 600;
       text-align: center;
       text-transform: uppercase;
       margin-bottom: 1rem;
