@@ -4,7 +4,7 @@
       v-for="(item, index) in items"
       :key="index"
       :style="{ width: itemWidth + '%' }"
-      :class="{'active': activeIndex === index }"
+      :class="{'active': activeTabTitle === item.title }"
       class="footer-item"
       @click="setActiveItem(index)"
     >
@@ -26,11 +26,10 @@ export default {
     items: {
       type: Array,
       required: true
-    }
-  },
-  data() {
-    return {
-      activeIndex: 0
+    },
+    activeTabTitle: {
+      type: String,
+      required: true
     }
   },
   computed: {
@@ -38,12 +37,8 @@ export default {
       return (100 / this.items.length)
     }
   },
-  created() {
-    this.setActiveItem(0)
-  },
   methods: {
     setActiveItem(index) {
-      this.activeIndex = index
       this.$emit('click', this.items[index].name)
     }
   }
