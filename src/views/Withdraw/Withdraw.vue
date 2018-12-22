@@ -9,7 +9,7 @@
           <Button
             v-for="(asset, index) in coinsList"
             :key="index"
-            :text="asset.tiker"
+            :text="getAssetName(asset)"
             type="secondary"
             width="full"
             class="withdraw-item"
@@ -47,6 +47,9 @@ export default {
       setWithdrawAsset: 'withdraw/setWithdrawAsset',
       setWithdrawStep: 'withdraw/setWithdrawStep'
     }),
+    getAssetName(asset) {
+      return asset.fullname ? `${asset.tiker} (${asset.fullname})` : asset.tiker
+    },
     selectAsset(asset) {
       this.setWithdrawAsset({ asset })
       this.setWithdrawStep('withdrawConfirmAmount')
