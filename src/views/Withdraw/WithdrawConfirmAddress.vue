@@ -104,6 +104,7 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100%;
+    padding: 1rem;
   }
   .withdraw-sub-title {
     font-size: config('textSizes.lg');

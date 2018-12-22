@@ -45,6 +45,7 @@ const actions = {
 
     const balancesIds = Object.keys(balances)
     balancesIds.push('1.3.121')
+    balancesIds.push('1.3.861')
     dispatch('history/fetchAll', {
       baseId: '1.3.0',
       assetsIds: balancesIds,

@@ -4,10 +4,10 @@
     <div class="deposit-sub-title">Choose token</div>
     <div class="deposit-loader-wrapper">
       <LoadingContainer :loading="coinsPending">
-        <div class="desposit-search">
+        <div class="deposit-search">
           <SimpleInput
             :centered="true"
-            placeholder="SEARCH"
+            title="SEARCH"
             @input="onSearch"
           />
         </div>
@@ -87,20 +87,22 @@ export default {
 <style lang="scss">
   .deposit-container {
     color: white;
-    padding: 1rem;
+    padding: 1rem 0 0;
     display: flex;
     flex-direction: column;
     height: 100%;
 
     .deposit-loader-wrapper {
       height: 100%;
-      overflow-y: auto;
       padding: .2rem 0 0;
       margin-top: 1rem;
     }
+    .deposit-search {
+      padding: 0 1rem;
+    }
     .deposit-content {
-      overflow-y: auto;
       height: 27rem;
+      padding: 1rem;
     }
     .deposit-title {
       font-size: config('textSizes.lg');
@@ -115,10 +117,13 @@ export default {
     }
     .deposit-item {
       margin-top: 0.9375rem;
-
+      &:first-child {
+        margin-top: 0;
+      }
       &:last-child {
         position: relative;
         z-index: 10;
+        margin-bottom: 1rem;
       }
     }
   }

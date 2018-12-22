@@ -47,7 +47,7 @@ export default {
 </script>
 <style lang="scss">
   .graph {
-    opacity: 0.7;
+    opacity: 1;
     cursor: disabled;
     color: config('colors.primary');
   }

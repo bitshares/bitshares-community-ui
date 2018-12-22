@@ -60,7 +60,7 @@ export default {
       return this.type === 'sell' ? '56, 9, 7, 1' : '29, 46, 7, 1'
     },
     styleBackground() {
-      const percent = Math.round(100 / this.maxSum * this.item.sum)
+      const percent = Math.round(100 / this.maxSum * this.item.cumulativeAmount)
       return {
         'background': `
           linear-gradient(${this.gradientDirection},
@@ -76,6 +76,7 @@ export default {
   .order-book-table-row {
     display: flex;
     font-size: config('textSizes.sm');
+    min-height: 1.65rem;
     .order-book-table-item {
       padding: 0.3rem 0;
       flex: 1;

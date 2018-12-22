@@ -20,11 +20,8 @@
           <span slot="bottom">/{{ formattedPayAsset }}</span>
         </TwoLineItem>
       </div>
-      <div class="table-item">
-        <TwoLineItem
-          :top="avg"
-          :bottom="price"
-        />
+      <div class="table-item single-item">
+        {{ price }}
       </div>
       <div class="table-item text-right">
         <TwoLineItem
@@ -54,12 +51,8 @@
           <span slot="bottom">/{{ formattedPayAsset }}</span>
         </TwoLineItem>
       </div>
-      <div class="table-item">
-        <TwoLineItem
-          :top="avg"
-          :bottom="price"
-          :expanded="expanded"
-        />
+      <div class="table-item single-item">
+        {{ price }}
       </div>
       <div class="table-item">
         <TwoLineItem
@@ -183,6 +176,11 @@ export default {
     margin-left: -0.15rem;
     .table-item--dates {
       position: relative;
+    }
+    .single-item {
+      display: flex;
+      align-items: center;
+      font-size: 1.125rem!important;
     }
   &.active-orders-table-row--expanded {
     grid-template-columns: repeat(6, 1fr);
