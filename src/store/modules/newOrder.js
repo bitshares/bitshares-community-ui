@@ -180,10 +180,11 @@ const actions = {
   setBaseAmount({ state, commit, getters }, value) {
     if (state.activeIndication === 'MARKET' && state.type === 'buy') return
 
+    const quotePrecision = getters.quoteAsset.precision
     const basePrecision = getters.baseAsset.precision
     commit(types.SET_BASE_AMOUNT, +value.toFixed(basePrecision))
     if (state.price && value) {
-      commit(types.SET_QUOTE_AMOUNT, value / state.price)
+      commit(types.SET_QUOTE_AMOUNT, +(value / state.price).toFixed(quotePrecision))
     }
     if (state.quoteAmount && value && !state.price) {
       commit(types.SET_PRICE, value / state.quoteAmount)
@@ -192,9 +193,10 @@ const actions = {
   setQuoteAmount({ state, commit, getters }, value) {
     if (state.activeIndication === 'MARKET' && state.type === 'sell') return
     const quotePrecision = getters.quoteAsset.precision
+    const basePrecision = getters.baseAsset.precision
     commit(types.SET_QUOTE_AMOUNT, +value.toFixed(quotePrecision))
     if (state.price && value) {
-      commit(types.SET_BASE_AMOUNT, value * state.price)
+      commit(types.SET_BASE_AMOUNT, +(value * state.price).toFixed(basePrecision))
     }
     if (state.baseAmount && value && !state.price) {
       commit(types.SET_PRICE, state.baseAmount / value)
