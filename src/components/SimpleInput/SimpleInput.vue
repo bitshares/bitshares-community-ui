@@ -19,6 +19,7 @@
       :autocorrect="false"
       :autocomplete="false"
       :spellcheck="false"
+      :maxlength="maxChars"
       class="input__input"
       @input="handleInput"
       @focus="handleFocus"
@@ -102,6 +103,10 @@ export default {
       type: Boolean,
       default: false
     },
+    maxChars: {
+      type: Number,
+      default: 99
+    },
     icon: {
       type: String,
       required: false,
@@ -167,6 +172,10 @@ export default {
   },
   methods: {
     handleInput({ target: { value } }) {
+      if (this.maxChars && value.length > this.maxChars) {
+        value = value.substr(0, this.maxChars)
+      }
+      console.log('input: ', value)
       const newValue = this.isNumber ? (parseFloat(value) || null) : value
       this.$emit('input', newValue)
     },

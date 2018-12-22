@@ -171,6 +171,7 @@ export default {
     display: flex;
     justify-content: center;
     margin-top: 0.9375rem;
+    flex-direction: column;
   }
   .confirm-order-price-section-item {
     margin: .2rem;
@@ -211,6 +212,12 @@ export default {
       .confirm-order-title {
         color: config('colors.sell');
       }
+    }
+  }
+
+  @screen sm {
+    .confirm-order-price-section {
+      flex-direction: row;
     }
   }
 </style>

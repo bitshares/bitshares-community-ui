@@ -92,10 +92,11 @@ export default {
   }
 
   .circle-container {
+    opacity: 0.7;
     transform: scale(1.2, 1.2);
     position: absolute;
-    top: 48%;
-    left: 33%;
+    bottom: 5.25rem;
+    left: calc(50% - 3.875rem);
     width: $default-size;
     height: $default-size;
   }

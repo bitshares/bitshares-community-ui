@@ -14,6 +14,7 @@
       <slot/>
       <Button
         :loading="pending"
+        class="confirm-btn"
         text="Confirm"
         width="full"
         @click="$emit('confirm')"
@@ -67,6 +68,12 @@ export default {
   .confirm-modal-content {
     padding: 0 1.3125rem;
     max-width: 30rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .confirm-btn {
+      margin-top: auto;
+    }
   }
 
   .modal-border-buy .modal-wrapper {

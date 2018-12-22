@@ -68,8 +68,8 @@ export default {
     pointer-events: none;
     z-index: 0;
     position: absolute;
-    top: 48%;
-    left: 33%;
+    bottom: 5.25rem;
+    left: calc(50% - 3.875rem);
     width: $default-size;
     height: $default-size;
   }

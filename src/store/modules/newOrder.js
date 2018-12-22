@@ -120,10 +120,12 @@ const mutations = {
     Vue.set(state.fees, 'market', market)
   },
   [types.SET_BASE_AMOUNT](state, value) {
-    state.baseAmount = value
+    Vue.set(state, 'baseAmount', value)
+    // state.baseAmount = value
   },
   [types.SET_QUOTE_AMOUNT](state, value) {
-    state.quoteAmount = value
+    Vue.set(state, 'quoteAmount', value)
+    // state.quoteAmount = value
   },
   [types.SET_PRICE](state, value) {
     state.price = value
@@ -182,7 +184,7 @@ const actions = {
 
     const quotePrecision = getters.quoteAsset.precision
     const basePrecision = getters.baseAsset.precision
-    commit(types.SET_BASE_AMOUNT, +value.toFixed(basePrecision))
+    commit(types.SET_BASE_AMOUNT, +(+value).toFixed(basePrecision))
     if (state.price && value) {
       commit(types.SET_QUOTE_AMOUNT, +(value / state.price).toFixed(quotePrecision))
     }
@@ -194,7 +196,7 @@ const actions = {
     if (state.activeIndication === 'MARKET' && state.type === 'sell') return
     const quotePrecision = getters.quoteAsset.precision
     const basePrecision = getters.baseAsset.precision
-    commit(types.SET_QUOTE_AMOUNT, +value.toFixed(quotePrecision))
+    commit(types.SET_QUOTE_AMOUNT, +(+value).toFixed(quotePrecision))
     if (state.price && value) {
       commit(types.SET_BASE_AMOUNT, +(value * state.price).toFixed(basePrecision))
     }
@@ -208,7 +210,7 @@ const actions = {
     const basePrecision = getters.baseAsset.precision
     const quotePrecision = getters.quoteAsset.precision
 
-    const price = (state.type === 'buy') ? +value.toFixed(basePrecision) : +value.toFixed(quotePrecision)
+    const price = (state.type === 'buy') ? +(+value).toFixed(basePrecision) : +(+value).toFixed(quotePrecision)
     commit(types.SET_PRICE, price)
 
     if (state.type === 'buy' && state.quoteAmount) {

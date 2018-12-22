@@ -10,6 +10,7 @@
       :placeholder="placeholder"
       :centered="true"
       :disabled="disabled"
+      :max-chars="9"
       type="number"
       @input="handleChange"
     />
@@ -65,7 +66,8 @@ export default {
 <style lang="scss">
   .new-order-input {
     text-align: center;
-    min-width: 7rem;
+    min-width: 6rem;
+    width: 8.5rem;
     font-size: config('textSizes.xl');
   }
   .new-order-input-note {
