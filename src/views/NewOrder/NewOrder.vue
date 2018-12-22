@@ -233,6 +233,7 @@ export default {
       this.setActiveIndication(type)
     },
     setMaxSpend(percent = 100) {
+      this.setActivePercent(percent)
       const max = this.type === 'buy' ? this.maxQuote : this.maxBase
       const amount = percent === 100 ? max : max / 100 * percent
       const price = this.price || 0
