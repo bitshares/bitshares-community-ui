@@ -68,7 +68,7 @@ export default {
     pointer-events: none;
     z-index: 0;
     position: absolute;
-    bottom: 6rem;
+    bottom: 5rem;
     left: calc(50% - 3.875rem);
     width: $default-size;
     height: $default-size;

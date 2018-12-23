@@ -73,6 +73,6 @@ export default {
   z-index: 10;
 }
 .mobile-new-order {
-  height: 25rem;
+  height: 23.4375rem;
 }
 </style>

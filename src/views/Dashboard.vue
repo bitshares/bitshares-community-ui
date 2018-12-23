@@ -1,9 +1,7 @@
 <template>
 
   <VBreakpoint>
-    <div
-      slot-scope="scope"
-      class="dashboard">
+    <div class="dashboard" slot-scope="scope">
       <Modal
         v-if="backupFlag"
         @close="toggleModal"
@@ -14,9 +12,8 @@
       <Deposit/>
       <Withdraw/>
 
-      <div
-        v-if="scope.isLarge || scope.isXlarge"
-        class="dashboard hidden lg:block">
+
+      <div class="dashboard hidden lg:block" v-if="scope.isLarge || scope.isXlarge">
         <div class="flex flex-col lg:flex-row mb-card-margin">
           <div class="flex flex-col lg:w-1/3 pr-card-row">
             <div>
@@ -116,8 +113,9 @@
 
         </div>
       </div>
-      <!-- TODO: use some vue plugin to disable when not on mobile -->
+
       <Mobile v-if="scope.isSmall || scope.isMedium || scope.noMatch"/>
+      
       <UnlockAccountPopup/>
     </div>
   </VBreakpoint>

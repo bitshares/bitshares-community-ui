@@ -560,8 +560,8 @@ module.exports = {
     '32': '8rem',
     '48': '12rem',
     '64': '16rem',
-    'card-height': '25rem',
-    'card-long-height': '50.625rem',
+    'card-height': '23.4375rem',
+    'card-long-height': '47.5rem',
     'full': '100%',
     'screen': '100vh'
   },

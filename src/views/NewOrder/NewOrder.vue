@@ -272,7 +272,7 @@ export default {
       padding: 0.5rem;
     }
     .new-order-fields {
-      margin-top: 1rem;
+      margin-top: 0.5rem;
       display: flex;
       justify-content: space-between;
     }

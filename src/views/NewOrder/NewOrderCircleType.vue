@@ -84,7 +84,7 @@ export default {
 }
 </script>
 <style lang="scss">
-  $default-size: 7.75rem;
+  $default-size: 7.25rem;
 
   .circles {
     pointer-events: none;
@@ -95,8 +95,8 @@ export default {
     opacity: 0.7;
     transform: scale(1.2, 1.2);
     position: absolute;
-    bottom: 6rem;
-    left: calc(50% - 3.875rem);
+    bottom: 5.1rem;
+    left: calc(50% - 3.6125rem);
     width: $default-size;
     height: $default-size;
   }
