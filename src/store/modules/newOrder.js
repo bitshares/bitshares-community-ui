@@ -2,6 +2,7 @@ import { removePrefix } from '@/helpers/utils'
 import API from 'vuex-bitshares/src/services/api'
 import Vue from 'vue'
 import floor from 'lodash/floor'
+console.log(floor)
 
 const types = {
   SET_TYPE: 'SET_TYPE',
@@ -182,25 +183,27 @@ const actions = {
     commit(types.HIDE_CONFIRM)
   },
   setBaseAmount({ state, commit, getters }, value) {
-    if (state.activeIndication === 'MARKET' && state.type === 'buy') return
+    if (state.activeIndication === 'MARKET' && state.type === 'sell') return
 
     const quotePrecision = getters.quoteAsset.precision
     const basePrecision = getters.baseAsset.precision
-    commit(types.SET_BASE_AMOUNT, +(+value).toFixed(basePrecision))
+    commit(types.SET_BASE_AMOUNT, floor(value, basePrecision))
     if (state.price && value) {
-      commit(types.SET_QUOTE_AMOUNT, +(value / state.price).toFixed(quotePrecision))
+      commit(types.SET_QUOTE_AMOUNT, floor(value / state.price, quotePrecision))
     }
     if (state.quoteAmount && value && !state.price) {
       commit(types.SET_PRICE, value / state.quoteAmount)
     }
   },
   setQuoteAmount({ state, commit, getters }, value) {
-    if (state.activeIndication === 'MARKET' && state.type === 'sell') return
+    if (state.activeIndication === 'MARKET' && state.type === 'buy') return
+
     const quotePrecision = getters.quoteAsset.precision
     const basePrecision = getters.baseAsset.precision
-    commit(types.SET_QUOTE_AMOUNT, +(+value).toFixed(quotePrecision))
+    const precisedAmount = floor(value, quotePrecision)
+    commit(types.SET_QUOTE_AMOUNT, precisedAmount)
     if (state.price && value) {
-      commit(types.SET_BASE_AMOUNT, +(value * state.price).toFixed(basePrecision))
+      commit(types.SET_BASE_AMOUNT, floor(value * state.price, basePrecision))
     }
     if (state.baseAmount && value && !state.price) {
       commit(types.SET_PRICE, state.baseAmount / value)
@@ -212,14 +215,13 @@ const actions = {
     const basePrecision = getters.baseAsset.precision
     const quotePrecision = getters.quoteAsset.precision
     const price = value
-    // const price = (state.type === 'buy') ? +(+value).toFixed(basePrecision) : +(+value).toFixed(quotePrecision)
     commit(types.SET_PRICE, price)
 
-    if (state.type === 'buy' && state.quoteAmount) {
-      const baseAmount = +(state.quoteAmount * price).toFixed(basePrecision)
+    if (state.type === 'sell' && state.quoteAmount) {
+      const baseAmount = floor(state.quoteAmount * price, basePrecision)
       commit(types.SET_BASE_AMOUNT, baseAmount)
-    } else if (state.type === 'sell' && state.baseAmount) {
-      const quoteAmount = +(state.baseAmount / price).toFixed(quotePrecision)
+    } else if (state.type === 'buy' && state.baseAmount) {
+      const quoteAmount = floor(state.baseAmount / price, quotePrecision)
       commit(types.SET_QUOTE_AMOUNT, quoteAmount)
     }
   },
@@ -254,18 +256,17 @@ const actions = {
     const quoteAsset = getters.quoteAsset
     const baseAmount = floor(state.baseAmount * 10 ** baseAsset.precision)
     const quoteAmount = floor(state.quoteAmount * 10 ** quoteAsset.precision)
-    const get = state.type === 'buy' ? baseAmount : quoteAmount
-    const spend = state.type === 'buy' ? quoteAmount : baseAmount
+    const get = state.type === 'buy' ? quoteAmount : baseAmount
+    const spend = state.type === 'buy' ? baseAmount : quoteAmount
 
     const market = API.Market(baseAsset)
     if (market) {
       const sides = market.getOrderSides({
-        type: state.type === 'sell' ? 'get' : 'spend',
+        type: state.type === 'sell' ? 'spend' : 'get',
         asset: quoteAsset,
         spend,
         get
       })
-      console.log(sides)
       const userId = rootGetters['acc/getAccountUserId']
       const newOrder = API.Transactions.createOrder(sides, userId)
       console.log('Order:', newOrder)
@@ -273,7 +274,6 @@ const actions = {
       commit(types.PLACE_ORDER_REQUEST)
       const result = await API.Transactions.placeOrder(newOrder, keys)
       commit(types.PLACE_ORDER_COMPLETE)
-      console.log(result)
       commit(types.HIDE_CONFIRM)
       if (result.success) {
         Vue.prototype.$toast.success('Order placed')

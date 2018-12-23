@@ -50,11 +50,11 @@ const processLastOrder = (order, baseAsset, quoteAsset) => {
   const type = order.pays.asset_id === baseAsset.id ? 'buy' : 'sell'
   const sellField = type === 'buy' ? 'pays' : 'receives'
   const buyField = type === 'buy' ? 'receives' : 'pays'
-  const sellAmount = order[sellField].amount / 10 ** baseAsset.precision
-  const buyAmount = order[buyField].amount / 10 ** quoteAsset.precision
-  const price = sellAmount / buyAmount
+  const baseAmount = order[sellField].amount / 10 ** baseAsset.precision
+  const quoteAmount = order[buyField].amount / 10 ** quoteAsset.precision
+  const price = baseAmount / quoteAmount
 
-  return { price, sum: sellAmount }
+  return { price, sum: baseAmount }
 }
 
 const processOrders = (orders, type, baseAsset, quoteAsset) => {
@@ -64,6 +64,7 @@ const processOrders = (orders, type, baseAsset, quoteAsset) => {
     const buyField = type === 'buy' ? 'quote' : 'base'
     const sellAmount = order.sell_price[sellField].amount / 10 ** baseAsset.precision
     const buyAmount = order.sell_price[buyField].amount / 10 ** quoteAsset.precision
+
     const price = sellAmount / buyAmount
 
     if (type === 'sell') sum = (order.for_sale / 10 ** quoteAsset.precision) * price

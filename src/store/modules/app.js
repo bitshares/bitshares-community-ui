@@ -1,3 +1,23 @@
+import Vue from 'vue'
+
+const newOperationCallback = type => {
+  let message
+  switch (type) {
+    case 'fill_order':
+      message = 'Order filled'
+      break
+    case 'cancel_order':
+      message = 'Order cancelled'
+      break
+    case 'transfered_order':
+      message = 'New Transfer'
+      break
+    default:
+      return
+  }
+  Vue.prototype.$toast.success(message)
+}
+
 const initialState = {
   theme: 'dark'
 }
@@ -31,7 +51,10 @@ const actions = {
     // dispatch('transactions/fetchComissions', null, { root: true }),
     dispatch(
       'operations/fetchAndSubscribe',
-      { userId, limit: 100 },
+      { userId,
+        limit: 100,
+        callback: newOperationCallback
+      },
       { root: true }
     )
     const balances = { ...rootGetters['acc/getUserBalances'] }

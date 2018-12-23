@@ -127,11 +127,11 @@ export default {
       return format(new Date(), 'DD-MMM-YY, HH:mm')
     },
     baseInputTitle() {
-      const type = this.type === 'buy' ? 'Get' : 'Spend'
+      const type = this.type === 'buy' ? 'Spend' : 'Get'
       return `${type} ${this.base}`
     },
     quoteInputTitle() {
-      const type = this.type === 'buy' ? 'Spend' : 'Get'
+      const type = this.type === 'buy' ? 'Get' : 'Spend'
       return `${type} ${this.quote}`
     }
   }

@@ -26,7 +26,7 @@
         :note="amountNote('quote')"
         :error="spendExceeded"
         :title="quoteInputTitle"
-        :disabled="isMarketTab && !isBuyTab"
+        :disabled="isMarketTab && isBuyTab"
         @change="setQuoteAmount"
         @note-click="setMaxSpend"
       />
@@ -35,7 +35,7 @@
         :value="baseAmount"
         :title="baseInputTitle"
         :error="spendExceeded"
-        :disabled="isMarketTab && isBuyTab"
+        :disabled="isMarketTab && !isBuyTab"
         :note="amountNote('base')"
         @change="setBaseAmount"
         @note-click="setMaxSpend"
@@ -87,7 +87,6 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import Vue from 'vue'
 import NewOrderTabs from './NewOrderTabs'
 import NewOrderInput from './NewOrderInput'
 import NewOrderPercentSelector from './NewOrderPercentSelector'
@@ -145,45 +144,47 @@ export default {
     spendExceeded() {
       const quoteExceeded = this.quoteAmount > this.maxQuote
       const baseExceeded = this.baseAmount > this.maxBase
-      return this.type === 'buy' ? quoteExceeded : baseExceeded
+      return this.type === 'sell' ? quoteExceeded : baseExceeded
     },
     priceTitle() {
       return `Price ${this.quote}`
     },
     baseInputTitle() {
-      const type = this.isBuyTab ? 'Get' : 'Spend'
+      const type = this.isBuyTab ? 'Spend' : 'Get'
       if (this.isMarketTab) {
         if (!this.isBuyTab) {
-          return (this.baseAmount !== null) ? `${type} ${this.base}` : type
+          return (this.baseAmount === null) ? `${type} ${this.base}` : type
         } else {
           return `${type} ${this.base}`
         }
       } else {
-        return (this.baseAmount !== null) ? `${type} ${this.base}` : type
+        return (this.baseAmount === null) ? `${type} ${this.base}` : type
       }
     },
     quoteInputTitle() {
-      const type = this.isBuyTab ? 'Spend' : 'Get'
+      const type = this.isBuyTab ? 'Get' : 'Spend'
       if (this.isMarketTab) {
         if (this.isBuyTab) {
-          return (this.quoteAmount !== null) ? `${type} ${this.quote}` : type
+          return (this.quoteAmount === null) ? `${type} ${this.quote}` : type
+          // return `${type} ${this.quote}`
         } else {
           return `${type} ${this.quote}`
         }
+        // return `${type} ${this.quote}`
       } else {
-        return (this.quoteAmount !== null) ? `${type} ${this.quote}` : type
+        return (this.quoteAmount === null) ? `${type} ${this.quote}` : type
       }
     },
     buttonTitle() {
-      const amount = (this.isMarketTab) ? '' : getFloatCurrency(this.baseAmount || 0)
-      return `${amount} ${this.base}`
+      const amount = (this.isMarketTab) ? '' : getFloatCurrency(this.quoteAmount || 0)
+      return `${amount} ${this.quote}`
     },
     maxBaseTitle() {
-      if (this.type === 'sell') return getFloatCurrency(this.maxBase)
+      if (this.type === 'buy') return getFloatCurrency(this.maxBase)
       return getFloatCurrency(this.maxQuote * (this.price || 0))
     },
     maxQuoteTitle() {
-      if (this.type === 'buy') return getFloatCurrency(this.maxQuote)
+      if (this.type === 'sell') return getFloatCurrency(this.maxQuote)
       return this.price ? getFloatCurrency(this.maxBase / this.price) : 0
     },
     invalidOrder() {
@@ -191,7 +192,7 @@ export default {
     },
     invalidOrderMarket() {
       if (this.activeIndication !== 'MARKET') return true
-      return ((this.type === 'buy' && !this.quoteAmount) || (this.type === 'sell' && !this.baseAmount))
+      return ((this.type === 'sell' && !this.quoteAmount) || (this.type === 'buy' && !this.baseAmount))
     },
     formattedPrice() {
       return getFloatCurrency(this.price)
@@ -210,11 +211,7 @@ export default {
       hideConfirm: 'newOrder/hideConfirm'
     }),
     clickCreateOrder() {
-      if (this.hasFeeBalance) {
-        this.showConfirm()
-      } else {
-        Vue.prototype.$toast.error('Not enough BTS to place order')
-      }
+      this.hasFeeBalance ? this.showConfirm() : this.$toast.error('Not enough BTS to place order')
     },
     amountNote(side) {
       if (this.isMarketSide(side)) return null
@@ -230,22 +227,20 @@ export default {
     },
     isMarketSide(side) {
       if (this.activeIndication === 'MARKET') {
-        return ((this.type === 'buy' && side === 'base') || (this.type === 'sell' && side === 'quote'))
+        return ((this.type === 'buy' && side === 'quote') || (this.type === 'sell' && side === 'base'))
       }
       return false
     },
     changeOrderType(type) {
-      if (type === 'MARKET') {
-        this.setPrice(0)
-      }
+      if (type === 'MARKET') this.setPrice(0)
       this.setActiveIndication(type)
     },
     setMaxSpend(percent = 100) {
       this.setActivePercent(percent)
-      const max = this.type === 'buy' ? this.maxQuote : this.maxBase
+      const max = this.type === 'sell' ? this.maxQuote : this.maxBase
       const amount = percent === 100 ? max : max / 100 * percent
       const price = this.price || 0
-      if (this.type === 'buy') {
+      if (this.type === 'sell') {
         this.setQuoteAmount(amount)
         this.setBaseAmount(amount * price)
       } else {
