@@ -152,27 +152,25 @@ export default {
     baseInputTitle() {
       const type = this.isBuyTab ? 'Spend' : 'Get'
       if (this.isMarketTab) {
-        if (!this.isBuyTab) {
-          return (this.baseAmount === null) ? `${type} ${this.base}` : type
+        if (this.isBuyTab) {
+          return (this.baseAmount !== null) ? `${type} ${this.base}` : type
         } else {
           return `${type} ${this.base}`
         }
       } else {
-        return (this.baseAmount === null) ? `${type} ${this.base}` : type
+        return (this.baseAmount !== null) ? `${type} ${this.base}` : type
       }
     },
     quoteInputTitle() {
       const type = this.isBuyTab ? 'Get' : 'Spend'
       if (this.isMarketTab) {
-        if (this.isBuyTab) {
-          return (this.quoteAmount === null) ? `${type} ${this.quote}` : type
-          // return `${type} ${this.quote}`
+        if (!this.isBuyTab) {
+          return (this.quoteAmount !== null) ? `${type} ${this.quote}` : type
         } else {
           return `${type} ${this.quote}`
         }
-        // return `${type} ${this.quote}`
       } else {
-        return (this.quoteAmount === null) ? `${type} ${this.quote}` : type
+        return (this.quoteAmount !== null) ? `${type} ${this.quote}` : type
       }
     },
     buttonTitle() {
