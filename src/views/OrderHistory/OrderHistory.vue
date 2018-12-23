@@ -49,7 +49,7 @@ export default {
       tableHeadersMini: [
         { title: 'Pair', field: 'payAssetSymbol', align: 'left' },
         { title: 'Avg./Price', field: 'price', align: 'left' },
-        { title: 'Filled/Date', field: 'filled', align: 'right' }
+        { title: 'Filled/Date', field: 'dateClose', align: 'right' }
       ]
     }
   },
