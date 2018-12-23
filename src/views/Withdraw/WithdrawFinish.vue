@@ -24,7 +24,8 @@ export default {
       withdrawAmount: 'withdraw/getWithdrawAmount',
       withdrawAddress: 'withdraw/getWithdrawAddress',
       withdrawType: 'withdraw/getWithdrawType',
-      withdrawMemo: 'withdraw/getWithdrawMemo'
+      withdrawMemo: 'withdraw/getWithdrawMemo',
+      asset: 'assets/getAssetBySymbol'
     })
   },
   methods: {
@@ -32,17 +33,20 @@ export default {
       toggle: 'withdraw/toggleModal',
       transferAsset: 'transactions/transferAsset'
     }),
-    confirm() {
-      if (this.withdrawType === 'transfer') {
-        console.log(this.withdrawAddress, this.withdrawAsset.tiker, this.withdrawAmount, this.withdrawMemo)
-        this.transferAsset({
-          to: this.withdrawAddress,
-          asset: this.withdrawAsset.tiker,
-          amount: this.withdrawAmount,
-          memo: this.withdrawMemo
-        })
-      } else {
+    async confirm() {
+      const unlocked = await this.$unlock()
+      if (unlocked) {
+        if (this.withdrawType === 'transfer') {
+          const res = await this.transferAsset({
+            to: this.withdrawAddress,
+            assetId: this.asset(this.withdrawAsset.tiker).id,
+            amount: this.withdrawAmount,
+            memo: this.withdrawMemo
+          });
+          console.log('Res!', res);
+        } else {
 
+        }
       }
       this.toggle()
     }
