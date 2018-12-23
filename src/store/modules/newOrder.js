@@ -130,8 +130,8 @@ const mutations = {
     Vue.set(state, 'quoteAmount', value)
   },
   [types.SET_PRICE](state, value) {
-    state.price = value
-    // state.price = parseFloat((+value + '').substring(0, 9))
+    // state.price = value
+    state.price = parseFloat((+value + '').substring(0, 9))
   },
   [types.RESET](state) {
     Object.assign(state, getDefaultState())

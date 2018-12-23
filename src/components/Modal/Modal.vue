@@ -68,7 +68,6 @@ export default {
 }
 
 .modal-wrapper {
-  border: 1px solid config('colors.modal-border');
   transition: all .3s ease;
   position: relative;
   background: rgb(0, 0, 0);
@@ -82,6 +81,12 @@ export default {
     right: 0.625rem;
     top: 0.4375rem;
     z-index: 2;
+  }
+}
+
+@screen sm {
+  .modal-wrapper {
+    border: 1px solid config('colors.modal-border');
   }
 }
 
