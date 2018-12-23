@@ -89,9 +89,12 @@ export default {
     checkAddressIsValid() {
       this.checkIfAddressIsValid({ address: this.address, asset: this.withdrawAsset.tiker })
     },
-    confirmAddress() {
-      this.setWithdrawStep('withdrawFinish')
-      this.setWithdrawAddress({ address: this.address })
+    async confirmAddress() {
+      const unlocked = await this.$unlock()
+      if (unlocked) {
+        this.setWithdrawStep('withdrawFinish')
+        this.setWithdrawAddress({ address: this.address })
+      }
     },
     saveMemo() {
       this.saveWithdrawMemo(this.memo)

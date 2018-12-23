@@ -3,6 +3,7 @@
     <div class="withdraw-content withdraw-content--auto">Are you sure you want to withdraw {{ withdrawAmount }} {{ withdrawAsset.tiker.toUpperCase() }} to {{ withdrawAddress }} address?</div>
     <div class="withdraw-footer">
       <Button
+        :loading="loading"
         text="confirm withdrawal"
         width="full"
         @click="confirm"
@@ -17,6 +18,11 @@ import Button from '@/components/Button'
 export default {
   components: {
     Button
+  },
+  data() {
+    return {
+      loading: false
+    }
   },
   computed: {
     ...mapGetters({
@@ -34,20 +40,24 @@ export default {
       transferAsset: 'transactions/transferAsset'
     }),
     async confirm() {
-      const unlocked = await this.$unlock()
-      if (unlocked) {
-        if (this.withdrawType === 'transfer') {
-          const res = await this.transferAsset({
-            to: this.withdrawAddress,
-            assetId: this.asset(this.withdrawAsset.tiker).id,
-            amount: this.withdrawAmount,
-            memo: this.withdrawMemo
-          });
-          console.log('Res!', res);
-        } else {
+      this.loading = true
+      if (this.withdrawType === 'transfer') {
+        const { success, error } = await this.transferAsset({
+          to: this.withdrawAddress,
+          assetId: this.asset(this.withdrawAsset.tiker).id,
+          amount: this.withdrawAmount,
+          memo: this.withdrawMemo
+        })
 
+        if (success) {
+          this.$toast.success(`${this.withdrawAmount} ${this.withdrawAsset.tiker} transfered to ${this.withdrawAddress}`)
+        } else {
+          this.$toast.error(error)
         }
+      } else {
+
       }
+      this.loading = false
       this.toggle()
     }
   }
