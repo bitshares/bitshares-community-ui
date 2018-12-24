@@ -2,7 +2,7 @@
   <div
     v-if="type === 'withdraw' && !olWorks"
     class="withdraw-form">
-    <div class="withdraw-sub-title">Sorry Openledger is down</div>
+    <div class="withdraw-sub-title">Sorry, Openledger is down</div>
     <div class="withdraw-footer">
       <Button
         text="I will try later"
