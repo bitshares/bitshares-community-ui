@@ -51,7 +51,9 @@
           {{ transactionFee }} BTS
         </div>
       </div>
-      <div class="item" v-if="type === 'withdraw'">
+      <div
+        v-if="type === 'withdraw'"
+        class="item">
         <div class="description">
           Gateway fee
         </div>
@@ -101,7 +103,7 @@ export default {
     isAmountInvalid() {
       if (this.type === 'withdraw') {
         const minToWithdraw = +this.openledgerFee * 2
-        if (+this.amount > minToWithdraw) {
+        if (+this.amount < minToWithdraw) {
           return true
         }
       }
@@ -113,7 +115,7 @@ export default {
       }
       if (this.type === 'withdraw') {
         const minToWithdraw = +this.openledgerFee * 2
-        if (+this.amount > minToWithdraw) {
+        if (+this.amount < minToWithdraw) {
           return `Min amount to withdraw ${minToWithdraw}`
         }
       }

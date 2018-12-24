@@ -1,4 +1,4 @@
-import API from "../../../vuex-bitshares/src/services/api";
+import API from '../../../vuex-bitshares/src/services/api'
 
 const types = {
   TOGGLE_WITHDRAW_MODAL: 'TOGGLE_WITHDRAW_MODAL',
