@@ -3,6 +3,7 @@
     <div class="withdraw-content withdraw-content--auto">Are you sure you want to withdraw {{ withdrawAmount }} {{ withdrawAsset.tiker.toUpperCase() }} to {{ withdrawAddress }} address?</div>
     <div class="withdraw-footer">
       <Button
+        :loading="loading"
         text="confirm withdrawal"
         width="full"
         @click="confirm"
@@ -18,13 +19,21 @@ export default {
   components: {
     Button
   },
+  data() {
+    return {
+      loading: false
+    }
+  },
   computed: {
     ...mapGetters({
       withdrawAsset: 'withdraw/getWithdrawAsset',
       withdrawAmount: 'withdraw/getWithdrawAmount',
+      transferAmount: 'withdraw/getWithdrawTransactionAmount',
       withdrawAddress: 'withdraw/getWithdrawAddress',
       withdrawType: 'withdraw/getWithdrawType',
-      withdrawMemo: 'withdraw/getWithdrawMemo'
+      withdrawMemo: 'withdraw/getWithdrawMemo',
+      openledgerAccount: 'withdraw/openledgerAccount',
+      openledgerMemo: 'withdraw/openledgerMemo'
     })
   },
   methods: {
@@ -32,18 +41,35 @@ export default {
       toggle: 'withdraw/toggleModal',
       transferAsset: 'transactions/transferAsset'
     }),
-    confirm() {
+    async confirm() {
+      this.loading = true
       if (this.withdrawType === 'transfer') {
-        console.log(this.withdrawAddress, this.withdrawAsset.tiker, this.withdrawAmount, this.withdrawMemo)
-        this.transferAsset({
+        const { success, error } = await this.transferAsset({
           to: this.withdrawAddress,
-          asset: this.withdrawAsset.tiker,
-          amount: this.withdrawAmount,
+          assetId: this.withdrawAsset.assetId,
+          amount: this.transferAmount,
           memo: this.withdrawMemo
         })
+        if (success) {
+          this.$toast.success(`${this.withdrawAmount} ${this.withdrawAsset.tiker} transfered to ${this.withdrawAddress}`)
+        } else {
+          this.$toast.error(error)
+        }
       } else {
+        const { success, error } = await this.transferAsset({
+          to: this.openledgerAccount,
+          assetId: this.withdrawAsset.assetId,
+          amount: this.transferAmount,
+          memo: this.openledgerMemo
+        })
 
+        if (success) {
+          this.$toast.success(`${this.withdrawAmount} ${this.withdrawAsset.tiker} transfered to ${this.withdrawAddress}`)
+        } else {
+          this.$toast.error(error)
+        }
       }
+      this.loading = false
       this.toggle()
     }
   }

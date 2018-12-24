@@ -1,5 +1,20 @@
 <template>
-  <div class="withdraw-form">
+  <div
+    v-if="type === 'withdraw' && !olWorks"
+    class="withdraw-form">
+    <div class="withdraw-sub-title">Sorry Openledger is down</div>
+    <div class="withdraw-footer">
+      <Button
+        text="I will try later"
+        width="full"
+        class="withdraw-btn"
+        @click="toggle"
+      />
+    </div>
+  </div>
+  <div
+    v-else
+    class="withdraw-form">
     <div class="withdraw-item">
       <svgicon
         class="withdraw-item-cancel"
@@ -27,6 +42,26 @@
       type="number"
       @note-clicked="amount = withdrawAsset.tokens"
     />
+    <div class="withdraw-comissions">
+      <div class="item">
+        <div class="description">
+          Transaction fee
+        </div>
+        <div class="value">
+          {{ transactionFee }} BTS
+        </div>
+      </div>
+      <div
+        v-if="type === 'withdraw'"
+        class="item">
+        <div class="description">
+          Gateway fee
+        </div>
+        <div class="value">
+          {{ openledgerFee }} {{ withdrawAsset.tiker }}
+        </div>
+      </div>
+    </div>
     <div class="withdraw-footer">
       <Button
         :disabled="isAmountInvalid"
@@ -56,17 +91,33 @@ export default {
   },
   computed: {
     ...mapGetters({
-      withdrawAsset: 'withdraw/getWithdrawAsset'
+      withdrawAsset: 'withdraw/getWithdrawAsset',
+      type: 'withdraw/getWithdrawType',
+      olWorks: 'withdraw/openledgerWorks',
+      openledgerFee: 'withdraw/openledgerFee',
+      transactionFee: 'withdraw/transactionFee'
     }),
     maxWithdrawTitle() {
       return `max ${this.withdrawAsset.tokens} ${this.withdrawAsset.tiker}`
     },
     isAmountInvalid() {
+      if (this.type === 'withdraw') {
+        const minToWithdraw = +this.openledgerFee * 2
+        if (+this.amount < minToWithdraw) {
+          return true
+        }
+      }
       return !!+this.amount <= 0 || +this.amount > this.withdrawAsset.tokens
     },
     error() {
       if (this.amount === undefined || this.amount === '') {
         return ''
+      }
+      if (this.type === 'withdraw') {
+        const minToWithdraw = +this.openledgerFee * 2
+        if (+this.amount < minToWithdraw) {
+          return `Min amount to withdraw ${minToWithdraw}`
+        }
       }
       return !this.isAmountInvalid ? '' : `Please enter valid amount less than or equal to ${this.withdrawAsset.tokens}`
     }
@@ -74,14 +125,15 @@ export default {
   methods: {
     ...mapActions({
       setWithdrawStep: 'withdraw/setWithdrawStep',
-      setWithdrawAmount: 'withdraw/setWithdrawAmount'
+      setWithdrawAmount: 'withdraw/setWithdrawAmount',
+      toggle: 'withdraw/toggleModal'
     }),
     cancelConfirm() {
       this.setWithdrawStep('withdraw')
     },
     confirmAmount() {
-      this.setWithdrawStep('withdrawConfirmAddress')
       this.setWithdrawAmount({ amount: this.amount })
+      this.setWithdrawStep('withdrawConfirmAddress')
     }
   }
 }
@@ -114,5 +166,32 @@ export default {
     margin-top: auto;
     display: flex;
     padding-top: 1rem;
+  }
+
+  .withdraw-comissions {
+    display: flex;
+    margin-top: 3rem;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: config('textSizes.4xl');
+
+    .item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .description {
+        margin: .1rem;
+        font-size: config('textSizes.xxs-xs');
+        color: config('colors.inactive');
+      }
+
+      .value {
+        margin: .1rem;
+        color: config('colors.primary');
+        font-size: config('textSizes.xs');
+      }
+    }
   }
 </style>

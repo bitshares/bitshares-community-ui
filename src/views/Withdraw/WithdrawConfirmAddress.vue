@@ -19,7 +19,7 @@
     />
     <div class="withdraw-footer">
       <Button
-        :disabled="!validUser || transferAddressValid"
+        :disabled="!formValid"
         text="Confirm address"
         width="full"
         class="withdraw-btn"
@@ -45,6 +45,7 @@ export default {
       address: '',
       memo: '',
       validUser: false,
+      validAddress: false,
       userLoaded: false,
       errorTitle: 'user not found'
     }
@@ -53,16 +54,22 @@ export default {
     ...mapGetters({
       withdrawType: 'withdraw/getWithdrawType',
       withdrawAsset: 'withdraw/getWithdrawAsset',
-      transferAddressValid: 'openledger/getTransferAddressValid'
+      coinsData: 'openledger/getCoinsData'
     }),
     error() {
       if (!this.validUser && this.address && this.userLoaded) {
         return this.errorTitle
       }
+      if (!this.validAddress && this.address && this.withdrawType === 'withdraw') {
+        return 'Address is not valid'
+      }
       return ''
     },
     inputTitle() {
       return `${this.withdrawType} address`
+    },
+    formValid() {
+      return (this.withdrawType === 'withdraw') ? this.validAddress : this.validUser
     }
   },
   created() {
@@ -76,8 +83,8 @@ export default {
     ...mapActions({
       setWithdrawStep: 'withdraw/setWithdrawStep',
       setWithdrawAddress: 'withdraw/setWithdrawAddress',
-      checkIfAddressIsValid: 'openledger/checkIfAddressIsValid',
-      saveWithdrawMemo: 'withdraw/setWithdrawMemo'
+      saveWithdrawMemo: 'withdraw/setWithdrawMemo',
+      checkAddress: 'openledger/checkIfAddressIsValid'
     }),
     async getUser() {
       this.validUser = false
@@ -86,12 +93,20 @@ export default {
       this.userLoaded = true
       this.validUser = user.success
     },
-    checkAddressIsValid() {
-      this.checkIfAddressIsValid({ address: this.address, asset: this.withdrawAsset.tiker })
+    async checkAddressIsValid() {
+      const formatedAsset = this.withdrawAsset.tiker.toLowerCase().replace('open.', '')
+      const isValidAdress = await this.checkAddress({
+        address: this.address,
+        asset: formatedAsset
+      })
+      this.validAddress = isValidAdress
     },
-    confirmAddress() {
-      this.setWithdrawStep('withdrawFinish')
-      this.setWithdrawAddress({ address: this.address })
+    async confirmAddress() {
+      const unlocked = await this.$unlock()
+      if (unlocked) {
+        this.setWithdrawStep('withdrawFinish')
+        this.setWithdrawAddress({ address: this.address })
+      }
     },
     saveMemo() {
       this.saveWithdrawMemo(this.memo)
