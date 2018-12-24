@@ -133,7 +133,7 @@ export default {
   background-color: config('colors.card-background');
   transition: 0.2s;
   &--expanded {
-    height: 35rem;
+    height: 30rem;
     .card-header {
       padding-right: 2rem;
       padding-top: 1rem;
