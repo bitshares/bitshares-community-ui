@@ -49,19 +49,19 @@ const actions = {
     }, { root: true })
     // await Promise.all([
     // dispatch('transactions/fetchComissions', null, { root: true }),
-    dispatch(
-      'operations/fetchAndSubscribe',
-      { userId,
-        limit: 100,
-        callback: newOperationCallback
-      },
-      { root: true }
-    )
     const balances = { ...rootGetters['acc/getUserBalances'] }
     await dispatch(
       'assets/fetchAssets',
       {
         assets: Object.keys(balances)
+      },
+      { root: true }
+    )
+    await dispatch(
+      'operations/fetchAndSubscribe',
+      { userId,
+        limit: 100,
+        callback: newOperationCallback
       },
       { root: true }
     )
