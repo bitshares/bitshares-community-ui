@@ -42,6 +42,24 @@
       type="number"
       @note-clicked="amount = withdrawAsset.tokens"
     />
+    <div class="withdraw-comissions">
+      <div class="item">
+        <div class="description">
+          Transaction fee
+        </div>
+        <div class="value">
+          {{ transactionFee }} BTS
+        </div>
+      </div>
+      <div class="item" v-if="type === 'withdraw'">
+        <div class="description">
+          Gateway fee
+        </div>
+        <div class="value">
+          {{ openledgerFee }} {{ withdrawAsset.tiker }}
+        </div>
+      </div>
+    </div>
     <div class="withdraw-footer">
       <Button
         :disabled="isAmountInvalid"
@@ -74,7 +92,8 @@ export default {
       withdrawAsset: 'withdraw/getWithdrawAsset',
       type: 'withdraw/getWithdrawType',
       olWorks: 'withdraw/openledgerWorks',
-      openledgerFee: 'withdraw/openledgerFee'
+      openledgerFee: 'withdraw/openledgerFee',
+      transactionFee: 'withdraw/transactionFee'
     }),
     maxWithdrawTitle() {
       return `max ${this.withdrawAsset.tokens} ${this.withdrawAsset.tiker}`
@@ -145,5 +164,32 @@ export default {
     margin-top: auto;
     display: flex;
     padding-top: 1rem;
+  }
+
+  .withdraw-comissions {
+    display: flex;
+    margin-top: 3rem;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: config('textSizes.4xl');
+
+    .item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .description {
+        margin: .1rem;
+        font-size: config('textSizes.xxs-xs');
+        color: config('colors.inactive');
+      }
+
+      .value {
+        margin: .1rem;
+        color: config('colors.primary');
+        font-size: config('textSizes.xs');
+      }
+    }
   }
 </style>

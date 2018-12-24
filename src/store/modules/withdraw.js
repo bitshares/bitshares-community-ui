@@ -1,3 +1,5 @@
+import API from "../../../vuex-bitshares/src/services/api";
+
 const types = {
   TOGGLE_WITHDRAW_MODAL: 'TOGGLE_WITHDRAW_MODAL',
   SET_WITHDRAW_ASSET: 'SET_WITHDRAW_ASSET',
@@ -7,7 +9,8 @@ const types = {
   SET_WITHDRAW_TYPE: 'SET_WITHDRAW_TYPE',
   SET_WITHDRAW_MEMO: 'SET_WITHDRAW_MEMO',
   OPENLEDGER_UNAVAILABLE: 'OPENLEDGER_UNAVAILABLE',
-  SET_OPENLEDGER_DATA: 'SET_OPENLEDGER_DATA'
+  SET_OPENLEDGER_DATA: 'SET_OPENLEDGER_DATA',
+  SET_WITHDRAW_FEE: 'SET_WITHDRAW_FEE'
 }
 
 const getInitialState = () => ({
@@ -18,6 +21,7 @@ const getInitialState = () => ({
   withdrawStep: 'withdraw',
   withdrawMemo: '',
   type: 'withdraw',
+  transactionFee: 0,
   openledger: {
     works: true,
     fee: 0,
@@ -45,7 +49,8 @@ const getters = {
   openledgerMemo: (state, getters) => {
     return `${state.openledger.asset}:${getters.getWithdrawAddress}`
   },
-  openledgerFee: state => state.openledger.fee
+  openledgerFee: state => state.openledger.fee,
+  transactionFee: state => state.transactionFee / (10 ** 5)
 }
 
 const mutations = {
@@ -77,6 +82,9 @@ const mutations = {
     state.openledger.fee = fee
     state.openledger.account = account
     state.openledger.asset = asset
+  },
+  [types.SET_WITHDRAW_FEE](state, fee) {
+    state.transactionFee = fee
   }
 }
 
@@ -88,6 +96,10 @@ const actions = {
   },
   async setWithdrawAsset({ commit, state, dispatch }, { asset }) {
     commit(types.SET_WITHDRAW_ASSET, { asset })
+
+    const { fee } = await API.Parameters.getComissionByType('transfer')
+    commit(types.SET_WITHDRAW_FEE, fee)
+
     if (state.type === 'withdraw') {
       const openledgerData = await dispatch('openledger/fetchCoins', false, { root: true })
       if (!openledgerData) {
