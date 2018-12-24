@@ -60,7 +60,7 @@ export default {
       if (!this.validUser && this.address && this.userLoaded) {
         return this.errorTitle
       }
-      if (!this.validAddress && this.address) {
+      if (!this.validAddress && this.address && this.withdrawType === 'withdraw') {
         return 'Address is not valid'
       }
       return ''
