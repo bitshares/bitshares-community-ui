@@ -28,10 +28,12 @@ export default {
     ...mapGetters({
       withdrawAsset: 'withdraw/getWithdrawAsset',
       withdrawAmount: 'withdraw/getWithdrawAmount',
+      transferAmount: 'withdraw/getWithdrawTransactionAmount',
       withdrawAddress: 'withdraw/getWithdrawAddress',
       withdrawType: 'withdraw/getWithdrawType',
       withdrawMemo: 'withdraw/getWithdrawMemo',
-      asset: 'assets/getAssetBySymbol'
+      openledgerAccount: 'withdraw/openledgerAccount',
+      openledgerMemo: 'withdraw/openledgerMemo'
     })
   },
   methods: {
@@ -44,9 +46,21 @@ export default {
       if (this.withdrawType === 'transfer') {
         const { success, error } = await this.transferAsset({
           to: this.withdrawAddress,
-          assetId: this.asset(this.withdrawAsset.tiker).id,
-          amount: this.withdrawAmount,
+          assetId: this.withdrawAsset.assetId,
+          amount: this.transferAmount,
           memo: this.withdrawMemo
+        })
+        if (success) {
+          this.$toast.success(`${this.withdrawAmount} ${this.withdrawAsset.tiker} transfered to ${this.withdrawAddress}`)
+        } else {
+          this.$toast.error(error)
+        }
+      } else {
+        const { success, error } = await this.transferAsset({
+          to: this.openledgerAccount,
+          assetId: this.withdrawAsset.assetId,
+          amount: this.transferAmount,
+          memo: this.openledgerMemo
         })
 
         if (success) {
@@ -54,8 +68,6 @@ export default {
         } else {
           this.$toast.error(error)
         }
-      } else {
-
       }
       this.loading = false
       this.toggle()
