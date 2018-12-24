@@ -2,7 +2,6 @@ import { removePrefix } from '@/helpers/utils'
 import API from 'vuex-bitshares/src/services/api'
 import Vue from 'vue'
 import floor from 'lodash/floor'
-console.log(floor)
 
 const types = {
   SET_TYPE: 'SET_TYPE',

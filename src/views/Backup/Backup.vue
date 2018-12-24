@@ -125,6 +125,7 @@ export default {
       const passwordString = password.toString()
 
       if (!this.isValidPassword(passwordString)) {
+        this.$toast.error('wrong password')
         return
       }
       if (this.isLocked) {

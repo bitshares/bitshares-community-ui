@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     getTitle(type) {
-      return `${type.toUpperCase()} ${this.base}/${this.quote}`
+      return `${type.toUpperCase()} ${this.quote}/${this.base}`
     }
   }
 }

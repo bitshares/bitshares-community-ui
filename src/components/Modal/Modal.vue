@@ -86,7 +86,7 @@ export default {
 
 @screen sm {
   .modal-wrapper {
-    border: 1px solid config('colors.modal-border');
+    border: 1px solid rgba(255, 255, 255, 0.5);
   }
 }
 

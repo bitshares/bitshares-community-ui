@@ -1,10 +1,10 @@
 <template>
   <div class="withdraw-form">
-    <div class="withdraw-content withdraw-content--auto">Are you sure you want to withdraw {{ withdrawAmount }} {{ withdrawAsset.tiker.toUpperCase() }} to {{ withdrawAddress }} address?</div>
+    <div class="withdraw-content withdraw-content--auto">Are you sure you want to {{ withdrawType }} {{ withdrawAmount }} {{ withdrawAsset.tiker.toUpperCase() }} to {{ withdrawAddress }} address?</div>
     <div class="withdraw-footer">
       <Button
         :loading="loading"
-        text="confirm withdrawal"
+        :text="'confirm ' + withdrawType"
         width="full"
         @click="confirm"
       />
