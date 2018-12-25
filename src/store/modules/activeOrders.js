@@ -17,7 +17,7 @@ const getters = {
     return state.isFetching
   },
   getActiveList: (state, getters, rootState, rootGetters) => {
-    return rootGetters['acc/getActiveOrders']
+    return rootGetters['operations/getActiveOrders']
   }
 }
 
