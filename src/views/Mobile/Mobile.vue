@@ -2,7 +2,7 @@
   <div class="mobile-mode flex lg:hidden">
     <div class="mobile-mode-main">
       <Card
-        :title="title"
+        :title="cardTitle"
         :mobile="true"
       >
         <AccountHeader
@@ -68,6 +68,9 @@ export default {
       userName: 'acc/getCurrentUserName',
       activeTab: 'mobile/getActiveTab'
     }),
+    cardTitle() {
+      return this.activeTab !== 'Orders' ? this.title : ''
+    },
     title() {
       switch (this.activeTab) {
         case 'Account':

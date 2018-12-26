@@ -86,12 +86,12 @@ export default {
     color: config('colors.primary');
     transform: rotate(90deg);
     left: 0.3125rem;
-    top: 0.4375rem;
+    top: 0.4875rem;
     z-index: 100;
   }
 }
 .mobile-orders-new-order-title {
-  font-size: 1rem;
+  font-size: 0.9375rem;
   font-weight: 600;
   color: white;
   padding: .6875rem 1rem;
