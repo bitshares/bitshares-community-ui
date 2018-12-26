@@ -9,6 +9,13 @@
           v-if="activeTab === 'Account'"
           slot="header"/>
 
+        <div
+          v-if="activeTab === 'OrdersContainer'"
+          slot="header"
+          class="orders-new"
+          @click="createOrder"
+        >+</div>
+
         <component
           slot="body"
           :is="activeTab"
@@ -33,6 +40,7 @@ import Account from '@/views/Mobile/MobileAccount.vue'
 import AccountHeader from '@/views/Mobile/MobileAccountHeader.vue'
 import Markets from '@/views/Markets/Markets.vue'
 import OrdersContainer from '@/views/OrdersContainer/OrdersContainer.vue'
+import Orders from '@/views/Mobile/MobileOrders.vue'
 
 import '@icons/markets'
 import '@icons/orders'
@@ -40,7 +48,7 @@ import '@icons/account'
 
 export default {
   name: 'Mobile',
-  components: { MobileFooter, Markets, Account, OrdersContainer, Card, Modal, AccountHeader },
+  components: { MobileFooter, Markets, Account, OrdersContainer, Orders, Card, Modal, AccountHeader },
   data() {
     return {
       activeComponentName: 'Markets',
@@ -50,6 +58,8 @@ export default {
         name: 'OrdersContainer', title: 'Orders', icon: 'orders'
       }, {
         name: 'Account', title: 'Account', icon: 'account'
+      }, {
+        name: 'Orders', title: 'Orders', icon: 'orders', hide: true
       }]
     }
   },
@@ -71,8 +81,13 @@ export default {
   },
   methods: {
     ...mapActions({
-      setActiveTab: 'mobile/setActiveTab'
-    })
+      setActiveTab: 'mobile/setActiveTab',
+      setOrdersMode: 'mobile/setOrdersMode'
+    }),
+    createOrder() {
+      this.setActiveTab('Orders')
+      this.setOrdersMode('Order Book')
+    }
   }
 }
 </script>
@@ -86,6 +101,11 @@ export default {
       flex-grow: 1;
       overflow: hidden;
       height: 100%;
+
+      .orders-new {
+        color: config('colors.inactive');
+        transform: scale(2, 2);
+      }
     }
   }
 </style>

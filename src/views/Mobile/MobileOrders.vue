@@ -1,7 +1,14 @@
 <template>
   <ScrollingContainer>
     <div class="mobile-orders">
-      <div class="mobile-orders-new-order-title">NEW ORDER</div>
+      <svgicon
+        width="20"
+        height="20"
+        class="mobile-orders-back"
+        name="arrowDown"
+        @click="goBack"
+      />
+      <div class="mobile-orders-new-order-title">{{ orderTitle }}</div>
       <div class="mobile-new-order">
         <NewOrder/>
       </div>
@@ -28,6 +35,8 @@ import OrderHistory from '@/views/OrderHistory/OrderHistory.vue'
 import ActiveOrders from '@/views/ActiveOrders/ActiveOrders.vue'
 import ScrollingContainer from '@/components/ScrollingContainer'
 
+import '@icons/arrowDown'
+
 export default {
   name: 'MobileOrders',
   components: { Tabs, OrderHistory, ActiveOrders, Accordion, NewOrder, OrderBook, ScrollingContainer },
@@ -38,13 +47,22 @@ export default {
   },
   computed: {
     ...mapGetters({
-      modeName: 'mobile/getOrdersMode'
-    })
+      modeName: 'mobile/getOrdersMode',
+      base: 'newOrder/getBase',
+      quote: 'newOrder/getQuote'
+    }),
+    orderTitle() {
+      return `NEW ORDER ${this.base}/${this.quote}`
+    }
   },
   methods: {
     ...mapActions({
-      setOrdersMode: 'mobile/setOrdersMode'
-    })
+      setOrdersMode: 'mobile/setOrdersMode',
+      setActiveTab: 'mobile/setActiveTab'
+    }),
+    goBack() {
+      this.setActiveTab('OrdersContainer')
+    }
   }
 }
 </script>
@@ -63,6 +81,14 @@ export default {
     display: flex;
     flex-direction: column;
   }
+  .mobile-orders-back {
+    position: absolute;
+    color: config('colors.primary');
+    transform: rotate(90deg);
+    left: 0.3125rem;
+    top: 0.4375rem;
+    z-index: 100;
+  }
 }
 .mobile-orders-new-order-title {
   font-size: 1rem;
@@ -71,6 +97,7 @@ export default {
   padding: .6875rem 1rem;
   position: relative;
   z-index: 10;
+  text-align: center;
 }
 .mobile-new-order {
   height: 23.4375rem;

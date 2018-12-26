@@ -5,20 +5,31 @@
       :active="activeTab"
       @change="changeTab"
     />
+    <ActiveOrders
+      v-if="activeTab === 'ACTIVE'"
+      slot="Active Orders"
+    />
+    <OrderHistory
+      v-else
+      slot="History"
+    />
   </div>
 </template>
 <script>
-import Card from '@/components/Card'
 import Tabs from '@/components/Tabs'
+import OrderHistory from '@/views/OrderHistory/OrderHistory.vue'
+import ActiveOrders from '@/views/ActiveOrders/ActiveOrders.vue'
 
 export default {
   components: {
-    Card,
-    Tabs
+    Tabs,
+    OrderHistory,
+    ActiveOrders
   },
   data() {
     return {
-      tabs: ['ACTIVE', 'HISTORY']
+      tabs: ['ACTIVE', 'HISTORY'],
+      activeTab: 'ACTIVE'
     }
   },
   methods: {
@@ -29,4 +40,7 @@ export default {
 }
 </script>
 <style lang="scss">
+  .orders-new {
+    color: config('colors.primary');
+  }
 </style>
