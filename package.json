@@ -14,6 +14,7 @@
     "svg": "vsvg -s ./src/assets/svg -t ./src/assets/icons --es6"
   },
   "dependencies": {
+    "bitsharesjs-ws": "^1.5.5",
     "chart.js": "^2.7.3",
     "date-fns": "^1.29.0",
     "js-cookie": "^2.2.0",
