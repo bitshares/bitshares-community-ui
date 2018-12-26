@@ -3,9 +3,10 @@
 // convert sum to currency format, exapmle: 1 000 000 (use in markets)
 export const getVolumeFormat = sum => sum < 1 ? sum : sum.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
 
-export const removePrefix = (string, prefix = 'OPEN.') => {
+export const removePrefix = (string, prefix1 = 'OPEN.', prefix2 = 'GDEX.') => {
   let trimmed = string
-  if (string.substring(0, prefix.length) === prefix) trimmed = string.slice(prefix.length)
+  if (string.substring(0, prefix1.length) === prefix1) trimmed = string.slice(prefix1.length)
+  if (string.substring(0, prefix2.length) === prefix2) trimmed = string.slice(prefix2.length)
   return trimmed
 }
 
