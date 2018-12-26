@@ -32,21 +32,22 @@ import Modal from '@/components/Modal/Modal'
 import Account from '@/views/Mobile/MobileAccount.vue'
 import AccountHeader from '@/views/Mobile/MobileAccountHeader.vue'
 import Markets from '@/views/Markets/Markets.vue'
-import Orders from '@/views/Mobile/MobileOrders.vue'
+import OrdersContainer from '@/views/OrdersContainer/OrdersContainer.vue'
+
 import '@icons/markets'
 import '@icons/orders'
 import '@icons/account'
 
 export default {
   name: 'Mobile',
-  components: { MobileFooter, Markets, Account, Orders, Card, Modal, AccountHeader },
+  components: { MobileFooter, Markets, Account, OrdersContainer, Card, Modal, AccountHeader },
   data() {
     return {
       activeComponentName: 'Markets',
       menuItems: [{
         name: 'Markets', title: 'Markets', icon: 'markets'
       }, {
-        name: 'Orders', title: 'Orders', icon: 'orders'
+        name: 'OrdersContainer', title: 'Orders', icon: 'orders'
       }, {
         name: 'Account', title: 'Account', icon: 'account'
       }]
@@ -61,8 +62,8 @@ export default {
       switch (this.activeTab) {
         case 'Account':
           return this.userName
-        case 'Orders':
-          return ''
+        case 'OrdersContainer':
+          return 'My orders'
         default:
           return this.activeTab
       }
