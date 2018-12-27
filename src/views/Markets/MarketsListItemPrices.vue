@@ -5,11 +5,11 @@
       class="tickers-list-row"
     >
       <div class="tickers-list__item">
-        <!--<Star
+        <Star
           :active="isFavourite"
           class="tickers__favourite"
           @click.stop.native="$emit('change', { item })"
-        />-->
+        />
         <TwoLineItem
           :top="formattedTiker"
           class="pl-8"
@@ -144,6 +144,7 @@ export default {
     position: absolute;
     left: .14rem;
     top: .6rem;
+    display: flex;
   }
   .tickers-list__item {
     font-weight: config('fontWeights.semibold');
@@ -221,6 +222,11 @@ export default {
           font-size: 1.5625rem;
         }
       }
+    }
+  }
+  @media screen and (max-width: 800px) {
+    .tickers__favourite {
+      display: none;
     }
   }
 </style>
