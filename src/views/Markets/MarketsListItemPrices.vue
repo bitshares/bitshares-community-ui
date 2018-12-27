@@ -5,11 +5,11 @@
       class="tickers-list-row"
     >
       <div class="tickers-list__item">
-        <Star
+        <!--<Star
           :active="isFavourite"
           class="tickers__favourite"
           @click.stop.native="$emit('change', { item })"
-        />
+        />-->
         <TwoLineItem
           :top="formattedTiker"
           class="pl-8"

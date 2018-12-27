@@ -9,6 +9,11 @@
         @click="goBack"
       />
       <div class="mobile-orders-new-order-title">{{ orderTitle }}</div>
+      <Star
+        :active="isFavourite"
+        class="mobile-orders-star"
+        @click.stop.native="changeFavourite"
+      />
       <div class="mobile-new-order">
         <NewOrder/>
       </div>
@@ -34,12 +39,13 @@ import OrderBook from '@/views/OrderBook/OrderBook.vue'
 import OrderHistory from '@/views/OrderHistory/OrderHistory.vue'
 import ActiveOrders from '@/views/ActiveOrders/ActiveOrders.vue'
 import ScrollingContainer from '@/components/ScrollingContainer'
+import Star from '@/components/Star'
 
 import '@icons/arrowDown'
 
 export default {
   name: 'MobileOrders',
-  components: { Tabs, OrderHistory, ActiveOrders, Accordion, NewOrder, OrderBook, ScrollingContainer },
+  components: { Tabs, OrderHistory, ActiveOrders, Accordion, NewOrder, OrderBook, ScrollingContainer, Star },
   data() {
     return {
       tabs: ['Order Book', 'Active Orders', 'History']
@@ -49,19 +55,27 @@ export default {
     ...mapGetters({
       modeName: 'mobile/getOrdersMode',
       base: 'newOrder/getBase',
-      quote: 'newOrder/getQuote'
+      quote: 'newOrder/getQuote',
+      isTickerFavourite: 'marketsMonitor/isTickerFavourite'
     }),
     orderTitle() {
       return `NEW ORDER ${this.base}/${this.quote}`
+    },
+    isFavourite() {
+      return this.isTickerFavourite(this.base, this.quote)
     }
   },
   methods: {
     ...mapActions({
       setOrdersMode: 'mobile/setOrdersMode',
-      setActiveTab: 'mobile/setActiveTab'
+      setActiveTab: 'mobile/setActiveTab',
+      toggleFavourite: 'marketsMonitor/toggleFavourite'
     }),
     goBack() {
       this.setActiveTab('OrdersContainer')
+    },
+    changeFavourite() {
+      this.toggleFavourite({ base: this.base, quote: this.quote })
     }
   }
 }
@@ -88,6 +102,12 @@ export default {
     left: 0.3125rem;
     top: 0.4875rem;
     z-index: 100;
+  }
+  .mobile-orders-star {
+    position: absolute;
+    right: 0.7125rem;
+    top: 0.4875rem;
+    z-index: 1000;
   }
 }
 .mobile-orders-new-order-title {
