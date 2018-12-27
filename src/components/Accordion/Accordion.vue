@@ -68,7 +68,6 @@ export default {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: height 0.2s;
   }
   .accordion-item-header {
     padding: 0 1rem;
