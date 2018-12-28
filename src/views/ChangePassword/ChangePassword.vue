@@ -37,6 +37,7 @@
       <Button
         text="Cancel"
         width="full"
+        type="faded"
         class="password-btn-item"
         @click="toggle"
       />
