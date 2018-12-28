@@ -5,12 +5,14 @@
       <SimpleInput
         v-model="oldPassword"
         :centered="isCentered"
+        type="password"
         title="Enter old password"
         class="password"
       />
       <SimpleInput
         v-model="newPassword"
         :centered="isCentered"
+        type="password"
         title="Create new password"
         tip="Min. 8 characters with different case including digits 0-9"
         class="password"
@@ -19,6 +21,7 @@
         v-model="confirmPassword"
         :centered="isCentered"
         :error="matchPasswordsError"
+        type="password"
         title="Reenter new password"
         class="password"
       />
@@ -63,8 +66,7 @@ export default {
       isValidPassword: 'acc/isValidPassword'
     }),
     validOldPassword() {
-      console.log('validate actual password', this.isValidPassword(this.oldPassword + ''))
-      return !this.isValidPassword(this.oldPassword + '')
+      return this.oldPassword.length >= 8 ? this.isValidPassword(this.oldPassword + '') : false
     },
     validNewPassword() {
       return !!this.newPassword.match(/[A-Z]/g) && !!this.newPassword.match(/[a-z]/g) && !!this.newPassword.match(/[0-9]/g) && this.newPassword.length >= 8
