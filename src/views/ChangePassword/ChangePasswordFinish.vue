@@ -6,16 +6,23 @@
         text="Finish"
         width="full"
         class="password-btn-item"
+        @click="toggle"
       />
     </div>
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 import Button from '@/components/Button'
 
 export default {
   components: {
     Button
+  },
+  methods: {
+    ...mapActions({
+      toggle: 'changePassword/toggleModal'
+    })
   }
 }
 </script>

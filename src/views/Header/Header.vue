@@ -54,6 +54,11 @@ const menuItems = [{
   event: 'changePassword'
 },
 {
+  title: 'CHANGE GATEWAY',
+  event: 'changeGateway',
+  disabled: true
+},
+{
   title: 'settings',
   event: 'settings',
   disabled: true

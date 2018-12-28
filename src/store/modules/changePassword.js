@@ -23,10 +23,14 @@ const mutations = {
 }
 
 const actions = {
-  toggleModal({ commit }) {
+  toggleModal({ commit, state }) {
     commit(types.TOGGLE_CHANGEPASSWORD_MODAL)
+
+    if (!state.modalDisplayed) {
+      commit(types.SET_PASSWORD_STEP, 'change')
+    }
   },
-  setPasswordStep({ commit }, step) {
+  setPasswordStep({ commit, state }, step) {
     commit(types.SET_PASSWORD_STEP, step)
   }
 }

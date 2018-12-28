@@ -25,10 +25,11 @@
     </div>
     <div class="password-btn-wrapper">
       <Button
-        :disabled="!validOldPassword || !validNewPassword || !!matchPasswordsError"
+        :disabled="!validOldPassword || !validNewPassword || !!matchPasswordsStr"
         text="Next"
         width="full"
         class="password-btn-item"
+        @click="setPasswordStep('finish')"
       />
       <Button
         text="Cancel"
@@ -40,7 +41,7 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import SimpleInput from '@/components/SimpleInput'
 import Button from '@/components/Button'
 
@@ -58,18 +59,25 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      isValidPassword: 'acc/isValidPassword'
+    }),
     validOldPassword() {
-      return true
+      console.log('validate actual password', this.isValidPassword(this.oldPassword + ''))
+      return !this.isValidPassword(this.oldPassword + '')
     },
     validNewPassword() {
-      return true
+      return !!this.newPassword.match(/[A-Z]/g) && !!this.newPassword.match(/[a-z]/g) && !!this.newPassword.match(/[0-9]/g) && this.newPassword.length >= 8
     },
-    matchPasswordsError() {
-      if (this.validOldPassword && this.newPassword) {
+    matchPasswordsStr() {
+      if (this.validOldPassword && this.newPassword.length && this.confirmPassword.length) {
         return this.newPassword === this.confirmPassword ? '' : 'Passwords don’t match'
       } else {
-        return ''
+        return 'empty'
       }
+    },
+    matchPasswordsError() {
+      return this.matchPasswordsStr === 'empty' ? '' : this.matchPasswordsStr
     }
   },
   created() {
@@ -77,7 +85,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      toggle: 'changePassword/toggleModal'
+      toggle: 'changePassword/toggleModal',
+      setPasswordStep: 'changePassword/setPasswordStep'
     })
   }
 }
