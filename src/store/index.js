@@ -12,6 +12,7 @@ import deposit from './modules/deposit'
 import withdraw from './modules/withdraw'
 import graph from './modules/graph'
 import mobile from './modules/mobile'
+import changePassword from './modules/changePassword'
 import createPersistedState from 'vuex-persistedstate'
 import vuexBitshares from 'vuex-bitshares'
 import Cookies from 'js-cookie'
@@ -37,6 +38,7 @@ const store = new Vuex.Store({
     activeOrders,
     graph,
     mobile,
+    changePassword,
     ...modules
   },
   plugins: [
