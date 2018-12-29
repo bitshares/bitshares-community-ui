@@ -175,8 +175,8 @@ export default {
       if (this.maxChars && value.length > this.maxChars) {
         value = value.substr(0, this.maxChars)
       }
-      const newValue = this.isNumber ? (parseFloat(value) || null) : value
-      this.$emit('input', newValue)
+      // const newValue = this.isNumber ? (parseFloat(value) || null) : value
+      this.$emit('input', value)
     },
     // prevent pasting non-numbers if this is a number input
     handlePaste(event) {

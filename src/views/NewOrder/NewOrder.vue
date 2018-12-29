@@ -213,8 +213,10 @@ export default {
     },
     amountNote(side) {
       if (this.isMarketSide(side)) return null
-      if (side === 'base') return `max ${this.maxBaseTitle}`
-      if (side === 'quote') return `max ${this.maxQuoteTitle}`
+
+      const parseStr = (str) => `max ${str}`.replace('Infinity', '0').replace('NaN', '0')
+      if (side === 'base') return parseStr(this.maxBaseTitle)
+      if (side === 'quote') return parseStr(this.maxQuoteTitle)
     },
     amountPlaceholder(side) {
       if (this.isMarketSide(side)) {
