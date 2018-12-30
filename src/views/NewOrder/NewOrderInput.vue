@@ -48,8 +48,8 @@ export default {
       default: false
     },
     value: {
-      type: Number,
-      default: null
+      type: [String, Number],
+      default: ''
     },
     error: {
       type: Boolean,
