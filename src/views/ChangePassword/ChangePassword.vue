@@ -32,7 +32,7 @@
         text="Next"
         width="full"
         class="password-btn-item"
-        @click="setPasswordStep('finish')"
+        @click="processChange"
       />
       <Button
         text="Cancel"
@@ -89,8 +89,16 @@ export default {
   methods: {
     ...mapActions({
       toggle: 'changePassword/toggleModal',
-      setPasswordStep: 'changePassword/setPasswordStep'
-    })
+      setPasswordStep: 'changePassword/setPasswordStep',
+      changePassword: 'acc/changePassword'
+    }),
+    async processChange() {
+      await this.changePassword({
+        oldPassword: this.oldPassword,
+        newPassword: this.newPassword
+      })
+      this.setPasswordStep('finish')
+    }
   }
 }
 </script>
