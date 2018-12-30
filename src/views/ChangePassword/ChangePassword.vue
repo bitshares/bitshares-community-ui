@@ -64,7 +64,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      isValidPassword: 'acc/isValidPassword'
+      isValidPassword: 'acc/isValidPassword',
+      loginType: 'acc/getLoginType'
     }),
     validOldPassword() {
       return this.oldPassword.length >= 8 ? this.isValidPassword(this.oldPassword + '') : false
@@ -85,6 +86,10 @@ export default {
   },
   created() {
     this.isCentered = document.querySelector('body').clientWidth < 800
+    if (this.loginType === 'password') {
+      this.toggle()
+      this.$toast.error('Password change allowed only for wallet types')
+    }
   },
   methods: {
     ...mapActions({
