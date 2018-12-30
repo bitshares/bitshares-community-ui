@@ -12,10 +12,12 @@
       :class="{'header-item__title--title-active': currentField === item.field }"
       class="header-item__title"
       @click="!disableSort && $emit('change', item.field)"
+      @mouseover="mouseOver"
+      @mouseleave="mouseLeave"
     >
       {{ item.title }}
       <div
-        v-if="showIcon && sort && currentField === item.field"
+        v-if="isHover || (showIcon && sort && currentField === item.field)"
         class="header-item__arrows">
         <svgicon
           :class="sort === 'desc' ? 'active' : ''"
@@ -101,6 +103,11 @@ export default {
       default: false
     }
   },
+  data() {
+    return {
+      isHover: false
+    }
+  },
   computed: {
     styleObject() {
       return {
@@ -112,6 +119,14 @@ export default {
     },
     secondFieldNotActive() {
       return this.item.secondField && (this.currentField !== this.item.field) && (this.currentField !== this.item.secondField)
+    }
+  },
+  methods: {
+    mouseOver() {
+      this.isHover = true
+    },
+    mouseLeave() {
+      this.isHover = false
     }
   }
 }

@@ -140,7 +140,7 @@ export default {
     color: config('colors.primary');
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    min-height: 3.9375rem;
+    min-height: 3.125rem;
     margin-left: -0.15rem;
 
   &.order-history-table-row--expanded {

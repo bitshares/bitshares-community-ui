@@ -130,13 +130,14 @@ export default {
 
 .portfolio-item {
   color: config('colors.text-primary');
-  padding: .725rem 1.5rem .525rem 1rem;
   font-size: config('textSizes.sm');
   display: grid;
+  align-items: center;
   padding-left: 0;
   padding-right: 0;
   transition: background-color 0.15s ease;
-  padding: config('padding.grid-table') 1.5rem config('padding.grid-table') 1rem;
+  padding: 0 1.5rem 0 1rem;
+  min-height: 3.125rem;
   &:hover {
     position: relative;
     z-index: 2;
