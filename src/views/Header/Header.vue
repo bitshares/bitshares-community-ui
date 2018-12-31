@@ -50,6 +50,15 @@ import Dropdown from '@/components/Dropdown'
 import '@icons/bitshares'
 
 const menuItems = [{
+  title: 'change password',
+  event: 'changePassword'
+},
+{
+  title: 'CHANGE GATEWAY',
+  event: 'changeGateway',
+  disabled: true
+},
+{
   title: 'settings',
   event: 'settings',
   disabled: true
@@ -87,7 +96,8 @@ export default {
       logout: 'acc/logout',
       showBackupModal: 'backup/toggleModal',
       showDepositModal: 'deposit/toggleModal',
-      showWithdrawModal: 'withdraw/toggleModal'
+      showWithdrawModal: 'withdraw/toggleModal',
+      showChangePasswordModal: 'changePassword/toggleModal'
     }),
     handleLogout() {
       this.$router.push({ name: 'login' }, () => {
@@ -96,6 +106,9 @@ export default {
     },
     handleDropdownClick(eventName) {
       switch (eventName) {
+        case 'changePassword':
+          this.showChangePasswordModal(true)
+          return
         case 'logout':
           this.handleLogout()
           return

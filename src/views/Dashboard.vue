@@ -13,6 +13,7 @@
 
       <Deposit/>
       <Withdraw/>
+      <ChangePassword/>
 
       <div
         v-if="scope.isLarge || scope.isXlarge"
@@ -143,6 +144,7 @@ import Mobile from '@/views/Mobile/Mobile'
 import NewOrder from '@/views/NewOrder/NewOrder'
 import Deposit from '@/views/Deposit/DepositWidget'
 import Withdraw from '@/views/Withdraw/WithdrawWidget'
+import ChangePassword from '@/views/ChangePassword/ChangePasswordWidget'
 import UnlockAccountPopup from '@/views/UnlockAccountPopup/UnlockAccountPopup'
 import Graph from '@/views/Graph/Graph'
 import { VBreakpoint } from 'vue-breakpoint-component'
@@ -172,7 +174,8 @@ export default {
     Withdraw,
     UnlockAccountPopup,
     Graph,
-    VBreakpoint
+    VBreakpoint,
+    ChangePassword
   },
   computed: {
     ...mapGetters({

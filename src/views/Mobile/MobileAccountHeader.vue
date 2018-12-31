@@ -27,6 +27,15 @@ export default {
       event: 'backup'
     },
     {
+      title: 'change password',
+      event: 'changePassword'
+    },
+    {
+      title: 'CHANGE GATEWAY',
+      event: 'changeGateway',
+      disabled: true
+    },
+    {
       title: 'settings',
       event: 'settings',
       disabled: true
@@ -51,7 +60,8 @@ export default {
       showDeposit: 'deposit/toggleModal',
       toggleBackupModal: 'backup/toggleModal',
       logout: 'acc/logout',
-      showBackupModal: 'backup/toggleModal'
+      showBackupModal: 'backup/toggleModal',
+      showChangePasswordModal: 'changePassword/toggleModal'
     }),
     handleLogout() {
       this.$router.push({ name: 'login' }, () => {
@@ -60,6 +70,9 @@ export default {
     },
     handleDropdownClick(eventName) {
       switch (eventName) {
+        case 'changePassword':
+          this.showChangePasswordModal(true)
+          return
         case 'logout':
           this.handleLogout()
           return

@@ -5,7 +5,7 @@
       <SInput
         v-model="password"
         :password="true"
-        type="number"
+        type="password"
         title="PASSWORD"
       />
       <Button
