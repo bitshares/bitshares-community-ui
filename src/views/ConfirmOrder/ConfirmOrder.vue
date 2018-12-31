@@ -140,7 +140,6 @@ export default {
 <style lang="scss">
   .confirm-order {
     position: relative;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -171,7 +170,7 @@ export default {
     display: flex;
     justify-content: center;
     margin-top: 0.9375rem;
-    flex-direction: column;
+    flex-direction: row;
   }
   .confirm-order-price-section-item {
     margin: .2rem;
