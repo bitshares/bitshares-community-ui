@@ -143,7 +143,7 @@ export default {
   .tickers__favourite {
     position: absolute;
     left: .14rem;
-    top: .6rem;
+    top: .5rem;
     display: flex;
   }
   .tickers-list__item {
@@ -166,12 +166,18 @@ export default {
     overflow: hidden;
   }
   .tickers-list-row {
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
     min-height: 3.125rem;
     display: grid;
+    align-items: center;
     grid-template-columns: 1.25fr 1.25fr 0.75fr 0.75fr;
-    padding: .2675rem 1rem .4375rem .54rem;
+    padding: 0 1rem 0 .54rem;
     transition: background 0.2s ease;
     cursor: pointer;
+
+    &:first-child {
+      border-top: 1px solid rgba(255, 255, 255, .1);
+    }
 
     &:hover {
       position: relative;
@@ -205,7 +211,7 @@ export default {
         .tickers__favourite {
           position: absolute;
           left: 0.21rem;
-          top: .35rem;
+          top: .25rem;
         }
         .tickers-list__itemVolume {
           font-size: 1.5625rem;
