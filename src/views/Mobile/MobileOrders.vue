@@ -8,7 +8,18 @@
         name="arrowDown"
         @click="goBack"
       />
-      <div class="mobile-orders-new-order-title">{{ orderTitle }}</div>
+      <div
+        class="mobile-orders-new-order-title"
+        @click="goBack"
+      >
+        {{ orderTitle }}
+        <svgicon
+          width="11"
+          height="11"
+          name="arrowDown"
+        />
+      </div>
+
       <Star
         :active="isFavourite"
         class="mobile-orders-star"
@@ -72,7 +83,7 @@ export default {
       toggleFavourite: 'marketsMonitor/toggleFavourite'
     }),
     goBack() {
-      this.setActiveTab('OrdersContainer')
+      this.setActiveTab('Markets')
     },
     changeFavourite() {
       this.toggleFavourite({ base: this.base, quote: this.quote })
@@ -118,6 +129,8 @@ export default {
   position: relative;
   z-index: 10;
   text-align: center;
+  width: 80%;
+  margin: 0 auto;
 }
 .mobile-new-order {
   height: 23.4375rem;
