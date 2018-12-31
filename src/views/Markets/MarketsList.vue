@@ -59,7 +59,7 @@ export default {
       },
       marketsField: {
         small: [
-          { title: 'Pair', field: 'ticker', align: 'left', paddingLeft: 1.5 },
+          { title: 'Pair', field: 'ticker', align: 'left', paddingLeft: document.querySelector('body').clientWidth < 480 ? 0.5 : 1.5 },
           { title: 'Price, USD', field: 'usdPrice', align: 'left' },
           { title: '24h', field: 'change24h', align: 'center' },
           { title: 'Vol, USD', field: 'usdVolume', align: 'right' }

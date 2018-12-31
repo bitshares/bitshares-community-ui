@@ -2,9 +2,10 @@
   <div class="mobile-footer">
     <div
       v-for="(item, index) in items"
+      v-if="!item.hide"
       :key="index"
       :style="{ width: itemWidth + '%' }"
-      :class="{'active': activeTabTitle === item.title }"
+      :class="{'active': activeTabTitle === item.title || activeTabTitle === item.name }"
       class="footer-item"
       @click="setActiveItem(index)"
     >
@@ -34,7 +35,7 @@ export default {
   },
   computed: {
     itemWidth() {
-      return (100 / this.items.length)
+      return (100 / this.items.filter(item => !item.hide).length)
     }
   },
   methods: {

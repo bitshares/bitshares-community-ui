@@ -12,7 +12,7 @@
         />
         <TwoLineItem
           :top="formattedTiker"
-          class="pl-8"
+          class="pl-8 _no-star-padding"
         >
           <span slot="bottom">/{{ formattedBase }}</span>
         </TwoLineItem>
@@ -144,6 +144,7 @@ export default {
     position: absolute;
     left: .14rem;
     top: .6rem;
+    display: flex;
   }
   .tickers-list__item {
     font-weight: config('fontWeights.semibold');
@@ -222,6 +223,16 @@ export default {
           font-size: 1.5625rem;
         }
       }
+    }
+  }
+  @media screen and (max-width: 800px) {
+    .tickers__favourite {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    ._no-star-padding {
+      padding-left: 1rem;
     }
   }
 </style>

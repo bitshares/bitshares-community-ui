@@ -1,7 +1,19 @@
 <template>
   <ScrollingContainer>
     <div class="mobile-orders">
-      <div class="mobile-orders-new-order-title">NEW ORDER</div>
+      <svgicon
+        width="20"
+        height="20"
+        class="mobile-orders-back"
+        name="arrowDown"
+        @click="goBack"
+      />
+      <div class="mobile-orders-new-order-title">{{ orderTitle }}</div>
+      <Star
+        :active="isFavourite"
+        class="mobile-orders-star"
+        @click.stop.native="changeFavourite"
+      />
       <div class="mobile-new-order">
         <NewOrder/>
       </div>
@@ -27,10 +39,13 @@ import OrderBook from '@/views/OrderBook/OrderBook.vue'
 import OrderHistory from '@/views/OrderHistory/OrderHistory.vue'
 import ActiveOrders from '@/views/ActiveOrders/ActiveOrders.vue'
 import ScrollingContainer from '@/components/ScrollingContainer'
+import Star from '@/components/Star'
+
+import '@icons/arrowDown'
 
 export default {
   name: 'MobileOrders',
-  components: { Tabs, OrderHistory, ActiveOrders, Accordion, NewOrder, OrderBook, ScrollingContainer },
+  components: { Tabs, OrderHistory, ActiveOrders, Accordion, NewOrder, OrderBook, ScrollingContainer, Star },
   data() {
     return {
       tabs: ['Order Book', 'Active Orders', 'History']
@@ -38,13 +53,30 @@ export default {
   },
   computed: {
     ...mapGetters({
-      modeName: 'mobile/getOrdersMode'
-    })
+      modeName: 'mobile/getOrdersMode',
+      base: 'newOrder/getBase',
+      quote: 'newOrder/getQuote',
+      isTickerFavourite: 'marketsMonitor/isTickerFavourite'
+    }),
+    orderTitle() {
+      return `NEW ORDER ${this.base}/${this.quote}`
+    },
+    isFavourite() {
+      return this.isTickerFavourite(this.base, this.quote)
+    }
   },
   methods: {
     ...mapActions({
-      setOrdersMode: 'mobile/setOrdersMode'
-    })
+      setOrdersMode: 'mobile/setOrdersMode',
+      setActiveTab: 'mobile/setActiveTab',
+      toggleFavourite: 'marketsMonitor/toggleFavourite'
+    }),
+    goBack() {
+      this.setActiveTab('OrdersContainer')
+    },
+    changeFavourite() {
+      this.toggleFavourite({ base: this.base, quote: this.quote })
+    }
   }
 }
 </script>
@@ -63,14 +95,29 @@ export default {
     display: flex;
     flex-direction: column;
   }
+  .mobile-orders-back {
+    position: absolute;
+    color: config('colors.primary');
+    transform: rotate(90deg);
+    left: 0.3125rem;
+    top: 0.4875rem;
+    z-index: 100;
+  }
+  .mobile-orders-star {
+    position: absolute;
+    right: 0.7125rem;
+    top: 0.4875rem;
+    z-index: 1000;
+  }
 }
 .mobile-orders-new-order-title {
-  font-size: 1rem;
+  font-size: 0.9375rem;
   font-weight: 600;
   color: white;
   padding: .6875rem 1rem;
   position: relative;
   z-index: 10;
+  text-align: center;
 }
 .mobile-new-order {
   height: 23.4375rem;
