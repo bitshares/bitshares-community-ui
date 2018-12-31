@@ -23,7 +23,7 @@ const types = {
 const getDefaultState = () => ({
   base: '',
   quote: '',
-  price: 0,
+  price: '',
   fees: {
     transaction: {
       value: 0,
@@ -66,7 +66,7 @@ const getters = {
   getActivePercent: state => state.activePercent,
   getActiveIndication: state => state.activeIndication,
   getPossibleIndications: state => state.possibleIndications,
-  getPrice: state => state.price,
+  getPrice: state => state.price.toString(),
   getFiatPrice: (state, getters, rootState, rootGetters) => {
 
     // calc usd price based on asset
@@ -129,8 +129,7 @@ const mutations = {
     Vue.set(state, 'quoteAmount', value)
   },
   [types.SET_PRICE](state, value) {
-    // state.price = value
-    state.price = parseFloat((+value + '').substring(0, 9))
+    state.price = value // parseFloat((+value + '').substring(0, 9))
   },
   [types.RESET](state) {
     Object.assign(state, getDefaultState())

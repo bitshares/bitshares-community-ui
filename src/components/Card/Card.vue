@@ -34,18 +34,22 @@
         v-if="title"
         class="card-header"
       >
-        <div class="title">
-          <div> {{ title }} </div>
+        <div
+          class="card-header-collapsible"
+          @click="collapsible && handleCollapseClick()"
+        >
+          <div class="title">
+            <div> {{ title }} </div>
+          </div>
+          <svgicon
+            v-if="collapsible"
+            :class="{'collapse-btn--active' : collapsed }"
+            class="collapse-btn"
+            width="20"
+            height="20"
+            name="arrowDown"
+          />
         </div>
-        <svgicon
-          v-if="collapsible"
-          :class="{'collapse-btn--active' : collapsed }"
-          class="collapse-btn"
-          width="20"
-          height="20"
-          name="arrowDown"
-          @click.stop="handleCollapseClick"
-        />
         <div
           v-if="expandable"
           class="expand-btn hidden lg:flex"
@@ -123,6 +127,12 @@ export default {
   .card {
     margin-right: 0;
   }
+}
+
+.card-header-collapsible {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
 }
 
 .card {

@@ -43,7 +43,10 @@
       @note-clicked="amount = withdrawAsset.tokens"
     />
     <div class="withdraw-comissions">
-      <div class="item">
+      <div
+        v-if="type === 'withdraw'"
+        class="item"
+      >
         <div class="description">
           Transaction fee
         </div>

@@ -166,6 +166,7 @@ export default {
     overflow: hidden;
   }
   .tickers-list-row {
+    min-height: 3.125rem;
     display: grid;
     grid-template-columns: 1.25fr 1.25fr 0.75fr 0.75fr;
     padding: .2675rem 1rem .4375rem .54rem;
