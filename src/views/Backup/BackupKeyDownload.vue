@@ -5,7 +5,7 @@
     <SimpleInput
       v-model="password"
       :password="true"
-      type="number"
+      type="password"
       title="password"/>
     <div class="backup-step-titles-wrapper">
       <div class="backup-step-subtitle--mini">key file</div>
