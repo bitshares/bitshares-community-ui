@@ -22,7 +22,7 @@
     <div class="new-order-fields">
       <NewOrderInput
         :placeholder="amountPlaceholder('quote')"
-        :value="quoteAmount"
+        :value="quoteAmountPrice"
         :note="amountNote('quote')"
         :error="spendExceeded"
         :title="quoteInputTitle"
@@ -32,7 +32,7 @@
       />
       <NewOrderInput
         :placeholder="amountPlaceholder('base')"
-        :value="baseAmount"
+        :value="baseAmountPrice"
         :title="baseInputTitle"
         :error="spendExceeded"
         :disabled="isMarketTab && !isBuyTab"
@@ -44,7 +44,7 @@
     <div class="new-order-price">
       <NewOrderInput
         :title="priceTitle"
-        :value="(price === 0) ? null : price"
+        :value="(price === 0) ? null : circlePrice"
         :disabled="isMarketTab"
         :placeholder="getPricePlaceholder"
         @change="setPrice"
@@ -132,6 +132,15 @@ export default {
       pending: 'newOrder/inProgress',
       hasFeeBalance: 'newOrder/hasFeeBalance'
     }),
+    circlePrice() {
+      return getFloatCurrency(this.price)
+    },
+    baseAmountPrice() {
+      return getFloatCurrency(this.baseAmount === null ? '' : this.baseAmount)
+    },
+    quoteAmountPrice() {
+      return getFloatCurrency(this.quoteAmount === null ? '' : this.quoteAmount)
+    },
     getPricePlaceholder() {
       return (this.isMarketTab) ? 'MARKET' : 'PRICE'
     },
