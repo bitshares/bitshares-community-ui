@@ -7,6 +7,12 @@
       <slot name="top">
         {{ top }}
       </slot>
+      <span
+        v-if="topSubItem"
+        class="two-line-item-top--sub-item"
+      >
+        /{{ topSubItem }}
+      </span>
     </div>
     <div class="two-line-item-bottom">
       <slot name="bottom">
@@ -21,6 +27,10 @@ export default {
   props: {
     top: {
       type: [String, Number],
+      default: ''
+    },
+    topSubItem: {
+      type: String,
       default: ''
     },
     bottom: {
@@ -43,6 +53,11 @@ export default {
       color: config('colors.primary');
       overflow: hidden;
       word-break: break-all;
+
+      &--sub-item {
+        font-size: config('textSizes.sm');
+        color: config('colors.inactive');
+      }
     }
     .two-line-item-bottom {
       font-size: config('textSizes.sm');
