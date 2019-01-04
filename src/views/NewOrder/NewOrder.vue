@@ -232,7 +232,6 @@ export default {
       return false
     },
     changeOrderType(type) {
-      if (type === 'MARKET') this.setPrice(0)
       this.setActiveIndication(type)
     },
     setMaxSpend(percent = 100) {
