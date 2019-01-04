@@ -57,6 +57,8 @@ export default {
       &--sub-item {
         font-size: config('textSizes.sm');
         color: config('colors.inactive');
+        display: inline-block;
+        margin-left: -0.1875rem;
       }
     }
     .two-line-item-bottom {
