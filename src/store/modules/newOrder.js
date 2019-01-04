@@ -159,12 +159,10 @@ const actions = {
       commit(types.RESET_AMOUNTS)
     }
     commit(types.SET_TYPE, tab)
-    commit(types.SET_PRICE, '')
   },
   setMarket({ commit, dispatch }, { base, quote }) {
     commit(types.RESET)
     commit(types.SET_MARKET, { base, quote })
-    commit(types.SET_PRICE, '')
     dispatch('fetchFees')
   },
   setActivePercent({ commit }, percent) {
@@ -175,6 +173,7 @@ const actions = {
       commit(types.RESET_AMOUNTS)
     }
     commit(types.SET_ACTIVE_INDICATION, indication)
+    commit(types.SET_PRICE, '')
   },
   showConfirm({ commit }) {
     commit(types.SHOW_CONFIRM)
