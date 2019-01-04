@@ -12,9 +12,10 @@
         />
         <TwoLineItem
           :top="formattedTiker"
+          :top-sub-item="formattedBase"
           class="pl-8 _no-star-padding"
         >
-          <span slot="bottom">/{{ formattedBase }}</span>
+          <span slot="bottom">{{ volUsd }} $</span>
         </TwoLineItem>
       </div>
       <div class="tickers-list__item">
@@ -22,15 +23,12 @@
           <span slot="bottom">${{ formattedUsdPrice }}</span>
         </TwoLineItem>
       </div>
-      <div class="tickers-list__item text-center _verticalCenter">
+      <div class="tickers-list__item text-right _verticalCenter">
         <div
           :class="getClassesOfDynamic({ price: item.change24h })"
           class="tickers-list__itemVolume _currencyTitle">
           {{ changeValue24 }}
         </div>
-      </div>
-      <div class="tickers-list__item text-right _verticalCenter">
-        <div class="tickers-list__itemVolume">{{ volUsd }}</div>
       </div>
     </div>
     <!--expand mode-->
@@ -153,7 +151,6 @@ export default {
     color: config('colors.tab-header');
     font-family: config('fonts.gotham');
     position: relative;
-    overflow: hidden;
   }
 
   .tickers-list__itemVolume {
@@ -170,7 +167,7 @@ export default {
     min-height: 3.125rem;
     display: grid;
     align-items: center;
-    grid-template-columns: 1.25fr 1.25fr 0.75fr 0.75fr;
+    grid-template-columns: 1.8fr 0.75fr 0.75fr;
     padding: 0 1rem 0 .54rem;
     transition: background 0.2s ease;
     cursor: pointer;

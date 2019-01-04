@@ -58,11 +58,26 @@ export const getFloatCurrency = (n, opts = {}) => {
   const hasPoint = () => !!~inputValue.indexOf('.')
   const value = hasPoint() ? inputValue.replace(/0+$/, '') : inputValue
 
-  if (value[0] === '0' && value.length > 9) {
-    const val = value.slice(1, 10)
+  let val
+
+  if (value[0] === '0') {
+    // after point - 0
+    if (value[2] === '0') {
+      val = value.slice(0, 6)
+    } else {
+      val = value.slice(0, 5)
+    }
     return isValidPretty(val) && options.formatSpaces ? convertToPretty(val) : val
+  } else {
+    // if first digit > 0, after point - 2 digit
+    const pointNdx = value.indexOf('.')
+    if (pointNdx > -1) {
+      val = value.slice(0, pointNdx + 3)
+    } else {
+      val = value
+    }
   }
-  const val = value.slice(0, 9)
+
   return isValidPretty(val) && options.formatSpaces ? convertToPretty(val) : val || '0'
 }
 

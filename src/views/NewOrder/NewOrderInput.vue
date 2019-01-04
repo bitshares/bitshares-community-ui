@@ -66,7 +66,7 @@ export default {
 <style lang="scss">
   .new-order-input {
     text-align: center;
-    min-width: 4.5rem;
+    max-width: 6rem;
     font-size: config('textSizes.xl');
   }
   .new-order-input-note {
