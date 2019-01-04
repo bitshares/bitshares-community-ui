@@ -153,7 +153,6 @@ export default {
     color: config('colors.tab-header');
     font-family: config('fonts.gotham');
     position: relative;
-    overflow: hidden;
   }
 
   .tickers-list__itemVolume {
