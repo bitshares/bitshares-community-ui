@@ -67,7 +67,6 @@ export default {
       top: 2.625rem;
       left: 0;
       padding: 0.125rem 0;
-      z-index: 100;
     }
   }
   .order-book__priceTitle {
