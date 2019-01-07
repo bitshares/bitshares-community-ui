@@ -6,6 +6,7 @@
       <LoadingContainer :loading="coinsPending">
         <div class="deposit-search">
           <SimpleInput
+            v-model="searchStr"
             :centered="true"
             title="SEARCH"
             @input="onSearch"
