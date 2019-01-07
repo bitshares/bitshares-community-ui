@@ -14,6 +14,7 @@
         :padding-left="header.paddingLeft + 0.56"
         :large="large"
         :disable-sort="header.disableSort"
+        :hide-hover-arrow="hideHoverArrow"
         :class="{ 'header-item--disabled' : header.disableSort }"
         @change="toggleSort"
       />
@@ -79,6 +80,10 @@ export default {
     columnsConfig: {
       type: Array,
       default: () => []
+    },
+    hideHoverArrow: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

@@ -15,6 +15,7 @@
       :header-right-padding="tableType === 'sell' ? 1 : 0.6"
       :default-sort="defaultSort"
       :empty-area="true"
+      :hide-hover-arrow="true"
     >
       <OrderBookLastPrice
         v-if="anchor"

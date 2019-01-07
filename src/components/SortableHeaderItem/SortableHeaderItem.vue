@@ -101,6 +101,10 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    hideHoverArrow: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -123,7 +127,7 @@ export default {
   },
   methods: {
     mouseOver() {
-      if (!this.item.secondField) this.isHover = true
+      if (!this.item.secondField && !this.hideHoverArrow) this.isHover = true
     },
     mouseLeave() {
       this.isHover = false
