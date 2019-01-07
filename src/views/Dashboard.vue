@@ -11,10 +11,6 @@
         <Backup/>
       </Modal>
 
-      <Deposit/>
-      <Withdraw/>
-      <ChangePassword/>
-
       <div
         v-if="scope.isLarge || scope.isXlarge"
         class="dashboard hidden lg:block">
@@ -118,6 +114,9 @@
         </div>
       </div>
 
+      <Deposit/>
+      <Withdraw/>
+      <ChangePassword/>
       <Mobile v-if="scope.isSmall || scope.isMedium || scope.noMatch"/>
 
       <UnlockAccountPopup/>

@@ -147,12 +147,10 @@ export default {
       setWithdrawStep: 'withdraw/setWithdrawStep'
     }),
     openDeposit() {
-      document.querySelector('.modal-mask').click()
       this.showDepositModal()
     },
     openWithdraw(asset) {
       if (this.withdrawActive) {
-        document.querySelector('.modal-mask').click()
         this.showWithdrawModal('withdraw')
         this.setWithdrawAsset({ asset: this.item })
         this.setWithdrawStep('withdrawConfirmAmount')
