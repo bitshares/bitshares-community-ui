@@ -88,7 +88,7 @@ export default {
       toggleAddressScreen: 'deposit/toggleAddressScreen'
     }),
     copyAddress() {
-      window.navigator.clipboard.writeText(this.address)
+      this.$copyText(this.address)
     }
   }
 }
