@@ -1,6 +1,10 @@
 <template>
   <div class="withdraw-form">
     <div class="withdraw-content withdraw-content--auto">Are you sure you want to {{ withdrawType }} {{ withdrawAmount }} {{ withdrawAsset.tiker.toUpperCase() }} to {{ withdrawAddress }} address?</div>
+    <div
+      v-if="withdrawType === 'transfer'"
+      class="withdraw-content withdraw-content--auto"
+    >MEMO: {{ withdrawMemo }}</div>
     <div class="withdraw-footer">
       <Button
         :loading="loading"
@@ -93,10 +97,7 @@ export default {
     font-size: config('textSizes.lg');
   }
   .withdraw-footer {
-    display: flex;
-    margin-top: auto;
     padding-top: 1rem;
-    margin-bottom: .5rem;
   }
   .withdraw-title {
     font-size: config('textSizes.lg');

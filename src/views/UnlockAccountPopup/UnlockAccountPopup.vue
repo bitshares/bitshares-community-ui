@@ -1,7 +1,6 @@
 <template>
   <Modal
     v-if="show"
-    :no-overlay="true"
     @close="closeModal"
   >
     <div class="unlock-account-popup__content sm:w-120">
@@ -77,9 +76,14 @@ export default {
     Vue.prototype.$unlock = this.showModal
   },
   methods: {
-    ...mapActions('acc', ['unlockWallet', 'cloudLogin']),
+    ...mapActions({
+      unlockWallet: 'acc/unlockWallet',
+      cloudLogin: 'acc/cloudLogin',
+      hideWithdrawModal: 'withdraw/toggleModal'
+    }),
 
     showModal() {
+      this.hideWithdrawModal()
       const promise = new Promise(resolve => {
         this.resolveCallback = resolve
       })

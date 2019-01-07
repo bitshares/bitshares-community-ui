@@ -31,14 +31,14 @@
         width="full"
       />
     </div>
-    <div class="withdraw-sub-title">Enter withdrawal amount</div>
+    <div class="withdraw-sub-title">Enter {{ type }} amount</div>
     <SimpleInput
       v-model="amount"
       :tip="maxWithdrawTitle"
       :centered="true"
       :error="error"
       :note-clickable="true"
-      title="withdrawal amount"
+      :title="inputAmountTitle"
       type="number"
       @note-clicked="amount = withdrawAsset.tokens"
     />
@@ -100,6 +100,9 @@ export default {
       openledgerFee: 'withdraw/openledgerFee',
       transactionFee: 'withdraw/transactionFee'
     }),
+    inputAmountTitle() {
+      return `${this.type} amount`
+    },
     maxWithdrawTitle() {
       return `max ${this.withdrawAsset.tokens} ${this.withdrawAsset.tiker}`
     },
