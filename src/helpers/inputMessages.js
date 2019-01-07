@@ -15,6 +15,19 @@ export default {
       required: 'Enter password'
     }
   },
+  oldPassword: {
+    title: 'Enter old password',
+    validation: {
+      valid: 'Enter valid password'
+    }
+  },
+  newPassword: {
+    title: 'Enter new password',
+    validation: {
+      required: 'Enter new password',
+      minLength: 'Min length is 6 symbols'
+    }
+  },
   confirmPassword: {
     title: 'confirm password',
     validation: {
