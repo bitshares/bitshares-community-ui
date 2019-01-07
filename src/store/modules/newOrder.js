@@ -159,6 +159,7 @@ const actions = {
       commit(types.RESET_AMOUNTS)
     }
     commit(types.SET_TYPE, tab)
+    commit(types.SET_PRICE, '')
   },
   setMarket({ commit, dispatch }, { base, quote }) {
     commit(types.RESET)

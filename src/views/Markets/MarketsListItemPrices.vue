@@ -2,6 +2,9 @@
   <div :class="{'ticker-list-row_expanded': expandMode}">
     <div
       v-if="!expandMode"
+      :class="{
+        'tickers-list-row--first': isFirst
+      }"
       class="tickers-list-row"
     >
       <div class="tickers-list__item">
@@ -111,6 +114,10 @@ export default {
     expandMode: {
       type: Boolean,
       default: false
+    },
+    isFirst: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -172,7 +179,7 @@ export default {
     transition: background 0.2s ease;
     cursor: pointer;
 
-    &:first-child {
+    &--first {
       border-top: 1px solid rgba(255, 255, 255, .1);
     }
 

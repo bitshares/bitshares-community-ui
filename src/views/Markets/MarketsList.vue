@@ -21,6 +21,7 @@
           :current-base="currentBase"
           :expand-mode="expandMode"
           :is-favourite="isFavourite(ticker)"
+          :is-first="index === 0"
         />
       </template>
     </SortableTable>

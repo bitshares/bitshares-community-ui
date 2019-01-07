@@ -113,7 +113,7 @@ export default {
   },
   computed: {
     confirmTitle() {
-      return `${this.type} ${this.base}/${this.quote}`
+      return `${this.type} ${this.quote}/${this.base}`
     },
     exchangeFee() {
       const { value, asset } = this.fees.transaction
@@ -141,6 +141,7 @@ export default {
   .confirm-order {
     position: relative;
     display: flex;
+    margin: 0 auto;
     flex-direction: column;
     align-items: center;
     background-color: config('colors.card-background');
@@ -170,7 +171,7 @@ export default {
     display: flex;
     justify-content: center;
     margin-top: 0.9375rem;
-    flex-direction: row;
+    flex-direction: column;
   }
   .confirm-order-price-section-item {
     margin: .2rem;
