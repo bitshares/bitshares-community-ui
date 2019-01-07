@@ -16,10 +16,19 @@
 
     <div
       v-show="expanded"
-      class="single-item deposit">deposit</div>
+      class="single-item deposit"
+      @click="openDeposit"
+    >
+      deposit
+    </div>
     <div
       v-show="expanded"
-      class="single-item withdraw">withdraw</div>
+      :class="{'withdraw--disabled': !withdrawActive}"
+      class="single-item withdraw"
+      @click="openWithdraw"
+    >
+      withdraw
+    </div>
 
     <div
       v-show="isBalancesMode && expanded"
@@ -71,6 +80,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import TwoLineItem from '@/components/TwoLineItem'
 import { getFloatCurrency, shortenFiatValue, removePrefix } from '@/helpers/utils'
 
@@ -91,6 +101,12 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      getAssetBySymbol: 'assets/getAssetBySymbol'
+    }),
+    withdrawActive() {
+      return this.getAssetBySymbol(this.item.tiker).issuer === '1.2.96397'
+    },
     isBalancesMode() {
       return this.mode === 'balances'
     },
@@ -120,6 +136,26 @@ export default {
 
       return {
         'grid-template-columns': `repeat(${columns}, 1fr)`
+      }
+    }
+  },
+  methods: {
+    ...mapActions({
+      showDepositModal: 'deposit/toggleModal',
+      showWithdrawModal: 'withdraw/toggleModal',
+      setWithdrawAsset: 'withdraw/setWithdrawAsset',
+      setWithdrawStep: 'withdraw/setWithdrawStep'
+    }),
+    openDeposit() {
+      document.querySelector('.modal-mask').click()
+      this.showDepositModal()
+    },
+    openWithdraw(asset) {
+      if (this.withdrawActive) {
+        document.querySelector('.modal-mask').click()
+        this.showWithdrawModal('withdraw')
+        this.setWithdrawAsset({ asset: this.item })
+        this.setWithdrawStep('withdrawConfirmAmount')
       }
     }
   }
@@ -171,6 +207,11 @@ export default {
   color: config('colors.withdraw-red');
   text-transform: uppercase;
   cursor: pointer;
+
+  &--disabled {
+    color: config('colors.sell-disabled');
+    cursor: default;
+  }
 }
 
 </style>
