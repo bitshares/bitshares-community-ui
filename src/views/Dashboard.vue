@@ -6,7 +6,7 @@
       class="dashboard">
       <Modal
         v-if="backupFlag"
-        @close="toggleModal"
+        @close="toggleBackupModal"
       >
         <Backup/>
       </Modal>
@@ -119,7 +119,7 @@
       <ChangePassword/>
       <Mobile v-if="scope.isSmall || scope.isMedium || scope.noMatch"/>
 
-      <UnlockAccountPopup/>
+      <UnlockAccountPopup :on-show="hideWithdrawModal"/>
     </div>
   </VBreakpoint>
 </template>
@@ -182,7 +182,10 @@ export default {
     })
   },
   methods: {
-    ...mapActions('backup', ['toggleModal'])
+    ...mapActions({
+      toggleBackupModal: 'backup/toggleModal',
+      hideWithdrawModal: 'withdraw/toggleModal'
+    })
   }
 }
 </script>

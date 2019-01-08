@@ -48,6 +48,12 @@ export default {
     pending: {
       type: Boolean,
       default: false
+    },
+    onShow: {
+      type: Function,
+      default() {
+        return () => {}
+      }
     }
   },
   data() {
@@ -78,12 +84,11 @@ export default {
   methods: {
     ...mapActions({
       unlockWallet: 'acc/unlockWallet',
-      cloudLogin: 'acc/cloudLogin',
-      hideWithdrawModal: 'withdraw/toggleModal'
+      cloudLogin: 'acc/cloudLogin'
     }),
 
     showModal() {
-      this.hideWithdrawModal()
+      this.onShow()
       const promise = new Promise(resolve => {
         this.resolveCallback = resolve
       })

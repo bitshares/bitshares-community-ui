@@ -7,7 +7,6 @@
     :is-favourite="isFavourite"
     :market-cap="marketCap"
     :expand-mode="expandMode"
-    :is-first="isFirst"
     @change="changeFavourite"
     @click.native="handleClick"
   />
@@ -34,10 +33,6 @@ export default {
       default: false
     },
     isFavourite: {
-      type: Boolean,
-      default: false
-    },
-    isFirst: {
       type: Boolean,
       default: false
     }
