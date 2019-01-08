@@ -13,6 +13,20 @@
       :active="activeIndication"
       @change="changeOrderType"
     />
+    <div
+      :class="{'new-order-decrement--disabled': !price}"
+      class="new-order-decrement"
+      @click="decPrice"
+    >
+      -
+    </div>
+    <div
+      :class="{'new-order-increment--disabled': !price}"
+      class="new-order-increment"
+      @click="incPrice"
+    >
+      +
+    </div>
     <NewOrderCirclePrice :percent="0"/>
     <NewOrderCircleType :value="0"/>
     <NewOrderPercentSelector
@@ -208,6 +222,14 @@ export default {
       showConfirm: 'newOrder/showConfirm',
       hideConfirm: 'newOrder/hideConfirm'
     }),
+    incPrice() {
+      const priceStep = 0.2
+      if (this.price) this.setPrice((+this.price + (+this.price / 100 * priceStep)).toFixed(4))
+    },
+    decPrice() {
+      const priceStep = 0.2
+      if (this.price) this.setPrice((+this.price - (+this.price / 100 * priceStep)).toFixed(4))
+    },
     clickCreateOrder() {
       this.hasFeeBalance ? this.showConfirm() : this.$toast.error('Not enough BTS to place order')
     },
@@ -263,6 +285,44 @@ export default {
     display: flex;
     flex-direction: column;
 
+    .new-order-decrement {
+      position: absolute;
+      top: 13.75rem;
+      left: 3.125rem;
+      text-align: center;
+      line-height: 1.875rem;
+      width: 1.875rem;
+      height: 1.875rem;
+      border-radius: 50%;
+      color: config('colors.sell');
+      border: 1px solid config('colors.sell');
+      cursor: pointer;
+
+      &--disabled {
+        cursor: default;
+        color: config('colors.sell-disabled');
+        border: 1px solid config('colors.sell-disabled');
+      }
+    }
+    .new-order-increment {
+      position: absolute;
+      top: 13.75rem;
+      right: 3.125rem;
+      text-align: center;
+      line-height: 1.875rem;
+      width: 1.875rem;
+      height: 1.875rem;
+      border-radius: 50%;
+      color: config('colors.buy');
+      border: 1px solid config('colors.buy');
+      cursor: pointer;
+
+      &--disabled {
+        cursor: default;
+        color: config('colors.buy-disabled');
+        border: 1px solid config('colors.buy-disabled');
+      }
+    }
     .operation-title {
       font-weight: 600;
       display: inline-block;
@@ -281,6 +341,16 @@ export default {
       margin-top: 1rem;
       display: flex;
       justify-content: center;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    .new-order {
+      .new-order-decrement {
+        left: 4.7rem;
+      }
+      .new-order-increment {
+        right: 4.7rem;
+      }
     }
   }
 </style>
