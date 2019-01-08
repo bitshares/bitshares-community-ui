@@ -119,7 +119,7 @@
       <ChangePassword/>
       <Mobile v-if="scope.isSmall || scope.isMedium || scope.noMatch"/>
 
-      <UnlockAccountPopup :on-show="hideWithdrawModal"/>
+      <UnlockAccountPopup/>
     </div>
   </VBreakpoint>
 </template>
@@ -183,8 +183,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      toggleBackupModal: 'backup/toggleModal',
-      hideWithdrawModal: 'withdraw/toggleModal'
+      toggleBackupModal: 'backup/toggleModal'
     })
   }
 }

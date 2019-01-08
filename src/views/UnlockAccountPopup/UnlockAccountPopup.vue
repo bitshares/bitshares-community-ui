@@ -1,6 +1,7 @@
 <template>
   <Modal
     v-if="show"
+    :no-overlay="true"
     @close="closeModal"
   >
     <div class="unlock-account-popup__content sm:w-120">
@@ -48,12 +49,6 @@ export default {
     pending: {
       type: Boolean,
       default: false
-    },
-    onShow: {
-      type: Function,
-      default() {
-        return () => {}
-      }
     }
   },
   data() {
@@ -88,7 +83,6 @@ export default {
     }),
 
     showModal() {
-      this.onShow()
       const promise = new Promise(resolve => {
         this.resolveCallback = resolve
       })
