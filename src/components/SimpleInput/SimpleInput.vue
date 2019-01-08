@@ -212,6 +212,7 @@ export default {
   &--centered {
     .input__input {
       text-align: center;
+      @apply pr-0;
     }
     .input__error {
       width: 100%;

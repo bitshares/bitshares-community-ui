@@ -6,14 +6,10 @@
       class="dashboard">
       <Modal
         v-if="backupFlag"
-        @close="toggleModal"
+        @close="toggleBackupModal"
       >
         <Backup/>
       </Modal>
-
-      <Deposit/>
-      <Withdraw/>
-      <ChangePassword/>
 
       <div
         v-if="scope.isLarge || scope.isXlarge"
@@ -118,6 +114,9 @@
         </div>
       </div>
 
+      <Deposit/>
+      <Withdraw/>
+      <ChangePassword/>
       <Mobile v-if="scope.isSmall || scope.isMedium || scope.noMatch"/>
 
       <UnlockAccountPopup/>
@@ -183,7 +182,9 @@ export default {
     })
   },
   methods: {
-    ...mapActions('backup', ['toggleModal'])
+    ...mapActions({
+      toggleBackupModal: 'backup/toggleModal'
+    })
   }
 }
 </script>

@@ -116,7 +116,6 @@ const actions = {
     }
   },
   setWithdrawAmount({ commit }, { amount }) {
-    console.log('Set withdraw amount', amount)
     commit(types.SET_WITHDRAW_AMOUNT, { amount })
   },
   setWithdrawAddress({ commit }, { address }) {

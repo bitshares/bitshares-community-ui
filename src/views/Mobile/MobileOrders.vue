@@ -19,7 +19,6 @@
           name="arrowDown"
         />
       </div>
-
       <Star
         :active="isFavourite"
         class="mobile-orders-star"

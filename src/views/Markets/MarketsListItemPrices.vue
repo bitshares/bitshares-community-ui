@@ -163,7 +163,7 @@ export default {
     overflow: hidden;
   }
   .tickers-list-row {
-    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    border-top: 1px solid rgba(255, 255, 255, .1);
     min-height: 3.125rem;
     display: grid;
     align-items: center;
@@ -171,10 +171,6 @@ export default {
     padding: 0 1rem 0 .54rem;
     transition: background 0.2s ease;
     cursor: pointer;
-
-    &:first-child {
-      border-top: 1px solid rgba(255, 255, 255, .1);
-    }
 
     &:hover {
       position: relative;

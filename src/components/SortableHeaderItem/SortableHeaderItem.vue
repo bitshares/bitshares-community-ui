@@ -123,7 +123,7 @@ export default {
   },
   methods: {
     mouseOver() {
-      if (!this.item.secondField) this.isHover = true
+      if (!this.item.secondField && !this.disableSort) this.isHover = true
     },
     mouseLeave() {
       this.isHover = false

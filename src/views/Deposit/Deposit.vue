@@ -6,6 +6,7 @@
       <LoadingContainer :loading="coinsPending">
         <div class="deposit-search">
           <SimpleInput
+            v-model="searchStr"
             :centered="true"
             title="SEARCH"
             @input="onSearch"
@@ -60,7 +61,7 @@ export default {
     },
     filteredList() {
       if (!this.searchStr) return this.coinslist
-      return this.coinslist.filter(deposit => deposit.indexOf(this.searchStr) > -1)
+      return this.coinslist.filter(deposit => deposit.toLowerCase().indexOf(this.searchStr.toLowerCase()) > -1)
     }
   },
   created() {
