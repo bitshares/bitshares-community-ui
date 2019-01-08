@@ -3,11 +3,14 @@
     :class="{ 'w-220': expandMode }"
     class="active-orders pt-3 lg:pt-0"
   >
-    <LoadingContainer :loading="isFetching">
+    <LoadingContainer
+      :loading="isFetching"
+      class="w-full"
+    >
       <ActiveOrdersTable
         v-if="filteredItems.length > 0"
         :table-headers="tableHeaders"
-        :items="filteredItems"
+        :items="filteredItems.concat(filteredItems.concat(filteredItems.concat(filteredItems.concat(filteredItems.concat(filteredItems)))))"
         :expanded="expandMode"
         @remove-order="confirmRemove"
       />
@@ -128,6 +131,8 @@ export default {
   .active-orders {
     position: relative;
     height: 100%;
+    flex-grow: 1;
+    display: flex;
   }
 
   .noActiveOrders {
