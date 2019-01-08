@@ -67,9 +67,4 @@ export default {
   .active-orders-table {
     height: 100%;
   }
-  @media (max-width: 50rem) {
-    .active-orders-table {
-      height: calc(100% - 3.125rem);
-    }
-  }
 </style>
