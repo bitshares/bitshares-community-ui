@@ -1,7 +1,6 @@
 <template>
   <Modal
     v-if="show"
-    :no-overlay="true"
     @close="closeModal"
   >
     <div class="unlock-account-popup__content sm:w-120">

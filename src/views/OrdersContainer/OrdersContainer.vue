@@ -40,6 +40,9 @@ export default {
 }
 </script>
 <style lang="scss">
+  .orders-container {
+    height: 100%;
+  }
   .orders-new {
     color: config('colors.primary');
   }
