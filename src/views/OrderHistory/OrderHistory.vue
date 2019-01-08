@@ -3,8 +3,8 @@
     :class="{ 'w-220': expandMode }"
     class="order-history pt-3 lg:pt-0"
   >
-    <LoadingContainer 
-      :loading="isFetching" 
+    <LoadingContainer
+      :loading="isFetching"
       class="w-full"
     >
       <OrderHistoryTable
