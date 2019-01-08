@@ -2,33 +2,38 @@
   <div class="password-container">
     <div class="password-title">First, confirm your current password and then create a new one</div>
     <div class="password-wrapper">
-      <SimpleInput
+      <VInput
         v-model="oldPassword"
         :centered="isCentered"
-        type="password"
+        :errors="$v.oldPassword"
+        :password="true"
+        input-name = "oldPassword"
         title="Enter old password"
         class="password"
       />
-      <SimpleInput
+      <VInput
         v-model="newPassword"
         :centered="isCentered"
-        type="password"
+        :errors="$v.newPassword"
+        :password="true"
+        input-name = "newPassword"
         title="Create new password"
-        tip="Min. 8 characters with different case including digits 0-9"
+        tip="Min. 6 characters"
         class="password"
       />
-      <SimpleInput
+      <VInput
         v-model="confirmPassword"
         :centered="isCentered"
-        :error="matchPasswordsError"
-        type="password"
+        :errors="$v.confirmPassword"
+        :password="true"
+        input-name = "confirmPassword"
         title="Reenter new password"
         class="password"
       />
     </div>
     <div class="password-btn-wrapper">
       <Button
-        :disabled="!validOldPassword || !validNewPassword || !!matchPasswordsStr"
+        :disabled="changeDisabled"
         text="Next"
         width="full"
         class="password-btn-item"
@@ -46,13 +51,28 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import SimpleInput from '@/components/SimpleInput'
+import VInput from '@/components/Input/'
+import { required, minLength, sameAs } from 'vuelidate/lib/validators'
+import { validationMixin } from 'vuelidate'
 import Button from '@/components/Button'
 
 export default {
   components: {
-    SimpleInput,
+    VInput,
     Button
+  },
+  mixins: [validationMixin],
+  validations() {
+    return {
+      oldPassword: {
+        valid: this.isValidPassword
+      },
+      newPassword: {
+        required,
+        minLength: minLength(6)
+      },
+      confirmPassword: { sameAsPassword: sameAs('newPassword') }
+    }
   },
   data() {
     return {
@@ -64,32 +84,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      isValidPassword: 'acc/isValidPassword',
-      loginType: 'acc/getLoginType'
+      isValidPassword: 'acc/isValidPassword'
     }),
-    validOldPassword() {
-      return this.oldPassword.length >= 8 ? this.isValidPassword(this.oldPassword + '') : false
-    },
-    validNewPassword() {
-      return !!this.newPassword.match(/[A-Z]/g) && !!this.newPassword.match(/[a-z]/g) && !!this.newPassword.match(/[0-9]/g) && this.newPassword.length >= 8
-    },
-    matchPasswordsStr() {
-      if (this.validOldPassword && this.newPassword.length && this.confirmPassword.length) {
-        return this.newPassword === this.confirmPassword ? '' : 'Passwords don’t match'
-      } else {
-        return 'empty'
-      }
-    },
-    matchPasswordsError() {
-      return this.matchPasswordsStr === 'empty' ? '' : this.matchPasswordsStr
+    changeDisabled() {
+      return this.$v.$dirty && this.$v.$invalid
     }
   },
   created() {
     this.isCentered = document.querySelector('body').clientWidth < 800
-    if (this.loginType === 'password') {
-      this.toggle()
-      this.$toast.error('Password change allowed only for wallet types')
-    }
   },
   methods: {
     ...mapActions({

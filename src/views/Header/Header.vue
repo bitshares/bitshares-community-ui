@@ -50,10 +50,6 @@ import Dropdown from '@/components/Dropdown'
 import '@icons/bitshares'
 
 const menuItems = [{
-  title: 'change password',
-  event: 'changePassword'
-},
-{
   title: 'CHANGE GATEWAY',
   event: 'changeGateway',
   disabled: true
@@ -78,7 +74,8 @@ export default {
   components: { UserInfo, Dropdown, Button },
   computed: {
     ...mapGetters({
-      backupEnabled: 'acc/isWalletAcc'
+      backupEnabled: 'acc/isWalletAcc',
+      loginType: 'acc/getLoginType'
     }),
     menuItems() {
       const items = menuItems.slice()
@@ -86,6 +83,12 @@ export default {
         items.unshift({
           title: 'backup',
           event: 'backup'
+        })
+      }
+      if (this.loginType !== 'password') {
+        items.unshift({
+          title: 'change password',
+          event: 'changePassword'
         })
       }
       return items

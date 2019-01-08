@@ -19,41 +19,51 @@ import AccountHeader from '@/views/Account/AccountHeader'
 import Dropdown from '@/components/Dropdown'
 import { mapGetters, mapActions } from 'vuex'
 
+const menuItems = [
+  {
+    title: 'CHANGE GATEWAY',
+    event: 'changeGateway',
+    disabled: true
+  },
+  {
+    title: 'settings',
+    event: 'settings',
+    disabled: true
+  },
+  {
+    title: 'faq',
+    event: 'faq',
+    disabled: true
+  },
+  {
+    title: 'log out',
+    event: 'logout'
+  }]
+
 export default {
   components: { Button, AccountHeader, Portfolio, Dropdown },
-  data: () => ({
-    menuItems: [{
-      title: 'backup',
-      event: 'backup'
-    },
-    {
-      title: 'change password',
-      event: 'changePassword'
-    },
-    {
-      title: 'CHANGE GATEWAY',
-      event: 'changeGateway',
-      disabled: true
-    },
-    {
-      title: 'settings',
-      event: 'settings',
-      disabled: true
-    },
-    {
-      title: 'faq',
-      event: 'faq',
-      disabled: true
-    },
-    {
-      title: 'log out',
-      event: 'logout'
-    }]
-  }),
   computed: {
     ...mapGetters({
-      username: 'acc/getCurrentUserName'
-    })
+      username: 'acc/getCurrentUserName',
+      backupEnabled: 'acc/isWalletAcc',
+      loginType: 'acc/getLoginType'
+    }),
+    menuItems() {
+      const items = menuItems.slice()
+      if (this.backupEnabled) {
+        items.unshift({
+          title: 'backup',
+          event: 'backup'
+        })
+      }
+      if (this.loginType !== 'password') {
+        items.unshift({
+          title: 'change password',
+          event: 'changePassword'
+        })
+      }
+      return items
+    }
   },
   methods: {
     ...mapActions({
