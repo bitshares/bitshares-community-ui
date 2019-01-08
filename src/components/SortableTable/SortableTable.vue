@@ -79,10 +79,6 @@ export default {
     columnsConfig: {
       type: Array,
       default: () => []
-    },
-    hideHoverArrow: {
-      type: Boolean,
-      default: false
     }
   },
   data() {
