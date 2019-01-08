@@ -10,7 +10,7 @@
       <ActiveOrdersTable
         v-if="filteredItems.length > 0"
         :table-headers="tableHeaders"
-        :items="filteredItems.concat(filteredItems.concat(filteredItems.concat(filteredItems.concat(filteredItems.concat(filteredItems)))))"
+        :items="filteredItems"
         :expanded="expandMode"
         @remove-order="confirmRemove"
       />
