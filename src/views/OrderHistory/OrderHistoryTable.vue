@@ -65,9 +65,4 @@ export default {
   .order-history-table {
     height: 100%;
   }
-  @media (max-width: 50rem) {
-    .order-history-table {
-      height: calc(100% - 3.125rem);
-    }
-  }
 </style>

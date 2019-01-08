@@ -41,6 +41,8 @@ export default {
 </script>
 <style lang="scss">
   .orders-container {
+    display: flex;
+    flex-direction: column;
     height: 100%;
   }
   .orders-new {

@@ -102,7 +102,7 @@ export default {
       padding: 0 1rem;
     }
     .deposit-content {
-      height: 27rem;
+      height: 20rem;
       padding: 1rem;
     }
     .deposit-title {

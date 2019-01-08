@@ -3,7 +3,10 @@
     :class="{ 'w-220': expandMode }"
     class="order-history pt-3 lg:pt-0"
   >
-    <LoadingContainer :loading="isFetching">
+    <LoadingContainer 
+      :loading="isFetching" 
+      class="w-full"
+    >
       <OrderHistoryTable
         v-if="filteredItems.length > 0"
         :table-headers="expandMode ? tableHeaders : tableHeadersMini"
@@ -81,6 +84,8 @@ export default {
   .order-history {
     position: relative;
     height: 100%;
+    flex-grow: 1;
+    display: flex;
   }
   .noOrderHistory {
     display: flex;
