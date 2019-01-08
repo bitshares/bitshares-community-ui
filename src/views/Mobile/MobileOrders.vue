@@ -24,13 +24,6 @@
         class="mobile-orders-star"
         @click.stop.native="changeFavourite"
       />
-      <div class="mobile-orders-chart">
-        <svgicon
-          width="375"
-          height="210"
-          name="chart"
-        />
-      </div>
       <div class="mobile-new-order">
         <NewOrder/>
       </div>
@@ -59,7 +52,6 @@ import ScrollingContainer from '@/components/ScrollingContainer'
 import Star from '@/components/Star'
 
 import '@icons/arrowDown'
-import '@icons/chart'
 
 export default {
   name: 'MobileOrders',
@@ -120,8 +112,6 @@ export default {
     left: 0.3125rem;
     top: 0.4875rem;
     z-index: 100;
-  }
-  .mobile-orders-chart {
   }
   .mobile-orders-star {
     position: absolute;
