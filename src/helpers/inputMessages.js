@@ -4,7 +4,7 @@ export default {
     validation: {
       required: 'Enter account name',
       minLength: 'Must be 4 characters or more',
-      isUnique: 'Username already exists',
+      isUnique: 'Account name already exists',
       hasSpecialSymbol: 'Should contain @, - or number',
       noBadSymbolAtEnd: 'Should not end with @, - or .'
     }

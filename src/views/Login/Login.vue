@@ -174,7 +174,7 @@ export default {
         })
         if (error) {
           this.inProgress = false
-          this.$toast.error('Invalid username or password')
+          this.$toast.error('Incorrect password')
         } else {
           this.$router.push({ name: 'main' })
         }
