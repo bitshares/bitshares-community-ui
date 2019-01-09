@@ -19,6 +19,13 @@
           name="arrowDown"
         />
       </div>
+      <div class="mobile-orders-chart">
+        <svgicon
+          width="100%"
+          height="210"
+          name="chart"
+        />
+      </div>
       <Star
         :active="isFavourite"
         class="mobile-orders-star"
@@ -52,6 +59,7 @@ import ScrollingContainer from '@/components/ScrollingContainer'
 import Star from '@/components/Star'
 
 import '@icons/arrowDown'
+import '@icons/chart'
 
 export default {
   name: 'MobileOrders',
@@ -104,6 +112,9 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
+  }
+  .mobile-orders-chart {
+    text-align: center;
   }
   .mobile-orders-back {
     position: absolute;
