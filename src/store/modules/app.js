@@ -1,3 +1,23 @@
+import Vue from 'vue'
+
+const newOperationCallback = type => {
+  let message
+  switch (type) {
+    case 'fill_order':
+      message = 'Order filled'
+      break
+    case 'cancel_order':
+      message = 'Order cancelled'
+      break
+    case 'transfered_order':
+      message = 'New Transfer'
+      break
+    default:
+      return
+  }
+  Vue.prototype.$toast.success(message)
+}
+
 const initialState = {
   theme: 'dark'
 }
@@ -17,21 +37,18 @@ const actions = {
     const userId = rootGetters['acc/getAccountUserId']
     dispatch('assets/fetchDefaultAssets', null, { root: true })
     dispatch('marketsMonitor/initialize', null, { root: true })
+
     await dispatch('acc/fetchCurrentUser', userId, { root: true })
+    dispatch('orderBook/initialize', {
+      baseSymbol: 'USD',
+      quoteSymbol: 'BTS' },
+    { root: true })
+    dispatch('newOrder/setMarket', {
+      base: 'USD',
+      quote: 'BTS'
+    }, { root: true })
     // await Promise.all([
     // dispatch('transactions/fetchComissions', null, { root: true }),
-    dispatch(
-      'operations/fetchAndSubscribe',
-      { userId, limit: 100 },
-      { root: true }
-    )
-    // ])
-    // const defaultAssetsIds = rootGetters['assets/getDefaultAssetsIds']
-    // defaultAssetsIds.forEach(id => {
-    //   if (balances[id]) return
-    //   balances[id] = { balance: 0 }
-    // })
-
     const balances = { ...rootGetters['acc/getUserBalances'] }
     await dispatch(
       'assets/fetchAssets',
@@ -40,9 +57,18 @@ const actions = {
       },
       { root: true }
     )
+    await dispatch(
+      'operations/fetchAndSubscribe',
+      { userId,
+        limit: 100,
+        callback: newOperationCallback
+      },
+      { root: true }
+    )
 
     const balancesIds = Object.keys(balances)
     balancesIds.push('1.3.121')
+    balancesIds.push('1.3.861')
     dispatch('history/fetchAll', {
       baseId: '1.3.0',
       assetsIds: balancesIds,

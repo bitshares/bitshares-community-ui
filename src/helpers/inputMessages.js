@@ -2,7 +2,7 @@ export default {
   userName: {
     title: 'account name',
     validation: {
-      required: 'Enter username',
+      required: 'Enter account name',
       minLength: 'Must be 4 characters or more',
       isUnique: 'Username already exists',
       hasSpecialSymbol: 'Should contain @, - or number',
@@ -13,6 +13,19 @@ export default {
     title: 'password',
     validation: {
       required: 'Enter password'
+    }
+  },
+  oldPassword: {
+    title: 'Enter old password',
+    validation: {
+      valid: 'Enter valid password'
+    }
+  },
+  newPassword: {
+    title: 'Enter new password',
+    validation: {
+      required: 'Enter new password',
+      minLength: 'Min length is 6 symbols'
     }
   },
   confirmPassword: {
@@ -43,5 +56,8 @@ export default {
       sameAsPin: 'PIN codes do not match'
 
     }
+  },
+  search: {
+    title: 'search'
   }
 }

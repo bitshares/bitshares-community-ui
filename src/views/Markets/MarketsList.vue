@@ -7,8 +7,9 @@
       :items="items"
       :headers="fields"
       :default-sort="defaultSort"
-      :header-left-padding="0.6"
+      :header-left-padding="0.5"
       :header-right-padding="1"
+      :columns-config="expandMode ? [] : [1.8, 0.75, 0.75]"
       :large="expandMode"
       class="tickers-list-header"
     >
@@ -58,10 +59,10 @@ export default {
       },
       marketsField: {
         small: [
-          { title: 'Pair', field: 'ticker', align: 'left', paddingLeft: 1.5 },
-          { title: 'Price, USD', field: 'usdPrice', align: 'right' },
-          { title: 'Vol, USD', field: 'usdVolume', align: 'right' },
+          { title: 'Pair', field: 'ticker', secondField: 'usdVolume', secondTitle: 'Volume', align: 'left', paddingLeft: document.querySelector('body').clientWidth < 480 ? 0.5 : 1.5 },
+          { title: 'Price, USD', field: 'usdPrice', align: 'left' },
           { title: '24h', field: 'change24h', align: 'right' }
+          // { title: 'Vol, USD', field: 'usdVolume', align: 'right' }
         ],
         large: [
           { title: 'Name', field: 'ticker', align: 'left', paddingLeft: 1.5 },

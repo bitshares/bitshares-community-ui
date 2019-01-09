@@ -3,7 +3,7 @@
     <SortableTable
       :items="items"
       :headers="tableHeaders"
-      :header-left-padding="1.6"
+      :header-left-padding="headerLeftPadding"
       :header-right-padding="1.5"
       :default-sort="defaultSort"
       :large="expanded">
@@ -13,7 +13,6 @@
           v-for="(item, index) in sortedItems"
           :key="index"
           :item="item"
-          :is-last="sortedItems.length - 1 === index"
           :expanded="expanded"
         />
       </template>
@@ -53,6 +52,11 @@ export default {
         field: 'dateClose',
         type: 'desc'
       }
+    }
+  },
+  computed: {
+    headerLeftPadding() {
+      return this.expanded ? 1.3 : 1
     }
   }
 }

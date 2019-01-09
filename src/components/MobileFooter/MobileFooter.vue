@@ -2,9 +2,10 @@
   <div class="mobile-footer">
     <div
       v-for="(item, index) in items"
+      v-if="!item.hide"
       :key="index"
       :style="{ width: itemWidth + '%' }"
-      :class="{'active': activeIndex === index }"
+      :class="{'active': activeTabTitle === item.title || activeTabTitle === item.name }"
       class="footer-item"
       @click="setActiveItem(index)"
     >
@@ -20,32 +21,25 @@
 </template>
 
 <script>
-import '@icons/paste'
-
 export default {
   name: 'MobileFooter',
   props: {
     items: {
       type: Array,
       required: true
-    }
-  },
-  data() {
-    return {
-      activeIndex: 0
+    },
+    activeTabTitle: {
+      type: String,
+      required: true
     }
   },
   computed: {
     itemWidth() {
-      return (100 / this.items.length)
+      return (100 / this.items.filter(item => !item.hide).length)
     }
-  },
-  created() {
-    this.setActiveItem(0)
   },
   methods: {
     setActiveItem(index) {
-      this.activeIndex = index
       this.$emit('click', this.items[index].name)
     }
   }

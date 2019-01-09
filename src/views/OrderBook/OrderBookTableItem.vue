@@ -57,10 +57,10 @@ export default {
       return this.type === 'sell' ? 'to right' : 'to left'
     },
     gradientColor() {
-      return this.type === 'sell' ? '30, 3, 2, 1' : '13, 23, 2, 1'
+      return this.type === 'sell' ? '56, 9, 7, 1' : '29, 46, 7, 1'
     },
     styleBackground() {
-      const percent = Math.round(100 / this.maxSum * this.item.sum)
+      const percent = Math.round(100 / this.maxSum * this.item.cumulativeAmount)
       return {
         'background': `
           linear-gradient(${this.gradientDirection},
@@ -76,7 +76,7 @@ export default {
   .order-book-table-row {
     display: flex;
     font-size: config('textSizes.sm');
-    // font-family: config('fonts.gotham');
+    min-height: 1.65rem;
     .order-book-table-item {
       padding: 0.3rem 0;
       flex: 1;
@@ -103,7 +103,7 @@ export default {
         margin-right: config('margin.book-item-m');
         padding-right: config('padding.book-item-p');
         .order-book-item-sum {
-          margin-left: config('margin.book-item-m10');
+          margin-left: 1rem;
           float: left;
         }
       }
@@ -125,7 +125,7 @@ export default {
         margin-left: config('margin.book-item-m');
         padding-left:config('padding.book-item-p');
         .order-book-item-sum {
-          margin-right: .5rem;
+          margin-right: 1rem;
           float: right;
         }
       }

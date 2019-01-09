@@ -7,15 +7,20 @@
     class="order-book-table"
   >
     <div class="order-book__column-title">{{ title }}</div>
-
     <SortableTable
       :items="items"
       :headers="tableHeaders"
       :type="tableType"
-      :header-left-padding="tableType === 'buy' ? 0.6 : 0.6"
-      :header-right-padding="tableType === 'sell' ? 0.4 : 0.6"
+      :header-left-padding="tableType === 'buy' ? 1 : 0.6"
+      :header-right-padding="tableType === 'sell' ? 1 : 0.6"
       :default-sort="defaultSort"
+      :empty-area="true"
     >
+      <OrderBookLastPrice
+        v-if="anchor"
+        slot="row"
+        type="row"
+      />
       <template slot-scope="{ sortedItems }">
         <OrderBookTableItem
           v-for="(item, index) in sortedItems"
@@ -25,6 +30,7 @@
           :type="tableType"
           :max-sum="maxSum"
           :is-last="sortedItems.length - 1 === index"
+          @click.native="$emit('item-clicked', item)"
         />
       </template>
     </SortableTable>
@@ -32,11 +38,13 @@
 </template>
 <script>
 import SortableTable from '@/components/SortableTable'
+import OrderBookLastPrice from './OrderBookLastPrice'
 import OrderBookTableItem from './OrderBookTableItem'
 
 export default {
   components: {
     SortableTable,
+    OrderBookLastPrice,
     OrderBookTableItem
   },
   props: {
@@ -59,6 +67,10 @@ export default {
     tableHeaders: {
       type: Array,
       required: true
+    },
+    anchor: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -90,7 +102,7 @@ export default {
     }
   }
   .order-book__column-title {
-    padding: 0 0.4rem 0 0.6rem;
+    padding: 0 1rem;
     margin-bottom: 0.6rem;
     color: config('colors.text-primary');
     // margin-bottom: -0.9375rem;

@@ -1,27 +1,17 @@
 <template>
   <div class="user-info">
-    <!-- <svgicon name="userIcon"/> -->
-    <div
-      class="backup-btn"
-      @click="setBackupFlag(true)"
-    >Backup</div>
-
-    <svgicon
-      v-show="userName"
-      class="mr-3 cursor-pointer"
-      name="logout"
-      @click.native="handleLogout"
-    />
     <p class="uppercase text-lg">{{ userName }}</p>
-    <!-- <svgicon name="arrowDown"/> -->
+    <!-- <svgicon
+      name="arrowDown"
+      height="10"
+      width="10"
+      class="icon"
+    /> -->
   </div>
 </template>
 
-<script type="text/javascript">
-import { mapGetters, mapActions } from 'vuex'
-import '@icons/userIcon'
-import '@icons/arrowDown'
-import '@icons/logout'
+<script>
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'UserInfo',
@@ -31,10 +21,6 @@ export default {
     })
   },
   methods: {
-    ...mapActions({
-      logout: 'acc/logout',
-      setBackupFlag: 'backup/setBackupFlag'
-    }),
     handleLogout() {
       this.$router.push({ name: 'login' })
       this.logout()
@@ -44,15 +30,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.backup-btn {
-  color: white;
-  margin-right: 2rem;
-  cursor: pointer;
-  &:hover {
-    border-bottom: 1px solid white;
-  }
-}
 .user-info {
+  margin-left: auto;
+  text-align: right;
   @apply inline-flex text-white;
+
+  p {
+    color: config('colors.text-primary');
+    width: 100%;
+    padding-right: 1rem;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+
+  svg {
+    fill: config('colors.text-primary');
+    transform: rotate(270deg);
+    display: block;
+    margin: auto;
+    margin-top: .15rem;
+  }
 }
 </style>

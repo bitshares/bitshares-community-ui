@@ -44,8 +44,10 @@ View the full documentation at https://tailwindcss.com.
 let colors = {
   'transparent': 'transparent',
 
-  'buy': '#79c610',
-  'sell': '#ff3030',
+  'buy': 'rgb(121,198,16)',
+  'buy-disabled': 'rgba(121,198,16,.5)',
+  'sell': 'rgb(255,48,48)',
+  'sell-disabled': 'rgb(255,48,48,.5)',
   'black': '#22292f',
   'grey-darkest': '#3d4852',
   'grey-darker': '#606f7b',
@@ -132,11 +134,11 @@ let colors = {
 
   'text-primary': '#ffffff',
   'inactive': 'rgba(255, 255, 255, 0.5)',
-  'bg-base': '#000000',
+  'bg-base': '#353535',
 
   'input-border': '#ced2d6',
   'card-background': '#000000',
-  'card-border': 'rgba(255, 255, 255, 0.5)',
+  'modal-border': 'rgba(255, 255, 255, 0.5)',
   'text-error': '#fff200',
   'button-text': 'black',
   'button-text-disabled': '#808080',
@@ -154,6 +156,7 @@ let colors = {
   'star': '#a7a9ac',
   'primary': '#ffffff',
   'book-item-hover': '#000',
+  'divider': 'rgba(255, 255, 255, 0.1)',
   'deposit-green': '#79c60f',
   'withdraw-red': '#ed1c24'
 }
@@ -198,7 +201,7 @@ module.exports = {
     'sm': '576px',
     'md': '768px',
     'lg': '992px',
-    'xl': '1200px'
+    'xl': '1157px'
   },
 
   /*
@@ -508,6 +511,8 @@ module.exports = {
     '32': '8rem',
     '48': '12rem',
     '64': '16rem',
+    '120': '30rem',
+    '220': '54rem',
     '1/2': '50%',
     '1/3': '33.33333%',
     '2/3': '66.66667%',
@@ -555,7 +560,8 @@ module.exports = {
     '32': '8rem',
     '48': '12rem',
     '64': '16rem',
-    'card-height': '25rem',
+    'card-height': '23.4375rem',
+    'card-long-height': '47.5rem',
     'full': '100%',
     'screen': '100vh'
   },
@@ -681,6 +687,8 @@ module.exports = {
     'book-item-p': '0.225rem',
     'card-ui': '0.6875rem',
     'card': '1.25rem',
+    'card-row': '0.625rem',
+    'half-card-row': '0.3125rem',
     'grid-table': '0.625rem'
   },
 
@@ -706,6 +714,7 @@ module.exports = {
     'small': '0.125rem',
     '1': '0.25rem',
     '2': '0.5rem',
+    'card-margin': '0.625rem',
     '3': '0.75rem',
     '4': '1rem',
     '5': '1.25rem',

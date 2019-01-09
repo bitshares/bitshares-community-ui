@@ -1,19 +1,41 @@
 <template>
   <div class="input-wrapper">
     <input
-      :placeholder="hint || placeholder"
-      :value="value"
+      v-model="value"
+      :placeholder="hint"
       :class="{'search-input--active': value.length }"
       class="search-input"
-      @input="$emit('input', $event.target.value)"
+      @input="$emit('input', value)"
+      @focus="inputMode = true"
+      @blur="inputMode = false"
     >
-    <div class="search-icon">
+    <div
+      v-if="!inputMode && !value.length"
+      class="search-icon"
+    >
       <svgicon
         width="20"
         height="20"
         name="search"
       />
     </div>
+    <div
+      v-if="value.length"
+      class="search-clear"
+    >
+      <svgicon
+        width="14"
+        height="14"
+        name="cancel"
+        @click="$emit('input', ''); value = ''"
+      />
+    </div>
+    <!-- <Input
+      :title="hint || placeholder"
+      :value="value"
+      input-name="search"
+      @input="$emit('input', $event)"
+    > -->
   </div>
 </template>
 
@@ -26,15 +48,12 @@ export default {
     hint: {
       type: String,
       default: ''
-    },
-    value: {
-      type: String,
-      default: ''
     }
   },
   data() {
     return {
-      placeholder: 'Search'
+      inputMode: false,
+      value: ''
     }
   }
 }
@@ -43,6 +62,7 @@ export default {
 <style scoped lang="scss">
   .search-input {
     width: 9.375rem;
+    padding-right: 1.65rem;
     border: none;
     outline: none;
     background: transparent;
@@ -57,21 +77,29 @@ export default {
   }
   .search-icon {
     display: inline-block;
-    width: 0.75rem;
-    height: 0.75rem;
-    position: relative;
-    top: 0.0625rem;
+    position: absolute;
+    bottom: .3rem;
+    right: .3rem;
     opacity: .5;
-    right: .95rem;
+  }
+  .search-clear {
+    display: inline-block;
+    position: absolute;
+    bottom: .3rem;
+    right: .3rem;
+    opacity: .5;
   }
   .input-wrapper {
+    position: relative;
     &:hover {
       cursor: pointer;
 
       .search-icon {
         opacity: 1;
       }
-
+      .search-clear {
+        opacity: 1;
+      }
       .search-input {
         visibility: visible;
       }

@@ -1,26 +1,26 @@
 const types = {
-  UPDATE_BACKUP_FLAG: 'UPDATE_BACKUP_FLAG'
+  TOGGLE_BACKUP_MODAL: 'TOGGLE_BACKUP_MODAL'
 }
 
 const state = {
-  backupFlag: false
+  showBackupModal: false
 }
 
 const getters = {
-  getBackupFlag(state) {
-    return state.backupFlag
+  modalDisplayed(state) {
+    return state.showBackupModal
   }
 }
 
 const mutations = {
-  [types.UPDATE_BACKUP_FLAG](state, value) {
-    state.backupFlag = value
+  [types.TOGGLE_BACKUP_MODAL](state, value) {
+    state.showBackupModal = value
   }
 }
 
 const actions = {
-  setBackupFlag({ commit }, value) {
-    commit(types.UPDATE_BACKUP_FLAG, value)
+  toggleModal({ commit }, value) {
+    commit(types.TOGGLE_BACKUP_MODAL, value)
   }
 }
 

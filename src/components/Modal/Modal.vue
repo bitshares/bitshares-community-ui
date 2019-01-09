@@ -1,10 +1,21 @@
 <template>
   <transition name="modal">
     <div
-      class="modal-mask"
+      :class="{'modal-mask--no-overlay': noOverlay}"
+      class="modal-mask sm:pt-32"
       @click.self.stop="$emit('close')"
     >
-      <div class="modal-wrapper">
+      <div
+        class="modal-wrapper w-full sm:w-auto h-full sm:h-auto"
+      >
+        <svgicon
+          class="modal-wrapper__close"
+          width="12"
+          height="12"
+          color="rgba(255,255,255,0.5)"
+          name="cancel"
+          @click="$emit('close')"
+        />
         <slot/>
       </div>
     </div>
@@ -12,8 +23,30 @@
 </template>
 
 <script>
+import '@icons/cancel'
 
-export default {}
+export default {
+  props: {
+    widthAuto: {
+      type: Boolean,
+      default: false
+    },
+    width: {
+      type: String,
+      required: false,
+      default: 'auto'
+    },
+    height: {
+      type: String,
+      required: false,
+      default: 'auto'
+    },
+    noOverlay: {
+      type: Boolean,
+      default: false
+    }
+  }
+}
 </script>
 
 <style lang="scss">
@@ -24,16 +57,37 @@ export default {}
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   transition: opacity .3s ease;
+  &--no-overlay {
+    background: none;
+  }
 }
 
 .modal-wrapper {
-  width: 56rem;
   transition: all .3s ease;
+  position: relative;
+  background: rgb(0, 0, 0);
+
+  &--width-auto {
+    width: auto;
+  }
+  &__close {
+    cursor: pointer;
+    position: absolute;
+    right: 0.625rem;
+    top: 0.4375rem;
+    z-index: 2;
+  }
+}
+
+@screen sm {
+  .modal-wrapper {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
 }
 
 .modal-enter {

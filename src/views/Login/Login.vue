@@ -31,16 +31,15 @@
           slot="secure key"
           class="login__form">
           <VInput
+            v-show="!file"
             v-model="brainkey"
             :errors="$v.brainkey"
             input-name="brainkey"
             class="mb-6"
-            @focus="onBrainkeyInputFocus"
-            @blur="onBrainkeyInputBlur"
           />
 
           <KeyfileLoader
-            v-if="showFileField"
+            v-if="!brainkey"
             @select="selectFile"
             @remove="removeFile"
           />
@@ -132,7 +131,7 @@ export default {
               if (this.file) return true
               return required(value)
             },
-            brainkeyValidator: value => (value.split(' ').length - 1 >= 15)
+            brainkeyValidator: value => (value.split(' ').length - 1 === 15)
           },
           pin: { required, minLength: minLength(6) },
           confirmPin: { sameAsPin: sameAs('pin') }
@@ -173,8 +172,12 @@ export default {
           name: this.name.toLowerCase(),
           password: this.password
         })
-        if (error) this.$toast.error('Invalid username or password')
-        else this.$router.push({ name: 'main' })
+        if (error) {
+          this.inProgress = false
+          this.$toast.error('Invalid username or password')
+        } else {
+          this.$router.push({ name: 'main' })
+        }
       } else {
         if (this.file) {
           this.handleLoginFile()
@@ -184,10 +187,13 @@ export default {
           brainkey: this.brainkey.toLowerCase(),
           password: this.pin
         })
-        if (error) this.$toast.error('Invalid brainkey')
-        else this.$router.push({ name: 'main' })
+        if (error) {
+          this.$toast.error('Invalid brainkey')
+          this.inProgress = false
+        } else {
+          this.$router.push({ name: 'main' })
+        }
       }
-      this.inProgress = false
     },
     async handleLoginFile() {
       const { success, error } = await this.fileLogin({
@@ -195,9 +201,11 @@ export default {
         backup: this.file
       })
       console.log('Result', success, error, this.pin)
-      this.inProgress = false
       if (success) this.$router.push({ name: 'main' })
-      else this.$toast.error(error)
+      else {
+        this.$toast.error('Invalid file or password')
+        this.inProgress = false
+      }
     },
     changeLoginType(type) {
       this.type = type
@@ -209,12 +217,6 @@ export default {
     },
     removeFile() {
       this.file = null
-    },
-    onBrainkeyInputFocus() {
-      this.showFileField = false
-    },
-    onBrainkeyInputBlur() {
-      this.showFileField = true
     }
   }
 }
@@ -228,7 +230,6 @@ export default {
   }
   .login {
     @apply max-w-sm w-full shadow-md;
-    border: 1px solid config('colors.card-border');
     border-radius: 2px;
     background-color: black;
     &__title {

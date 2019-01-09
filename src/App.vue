@@ -1,10 +1,12 @@
 <template>
+  <!-- <perfect-scrollbar> -->
   <div
     id="app"
     class="app container mx-auto"
   >
     <router-view/>
   </div>
+  <!-- </perfect-scrollbar> -->
 </template>
 
 <style lang="scss">

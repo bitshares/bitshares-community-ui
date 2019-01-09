@@ -1,3 +1,5 @@
+@import '~vuejs-noty/dist/vuejs-noty.css';
+
 /* recommended css code for vue-svgicon */
 .svg-icon {
     display: inline-block;
@@ -42,21 +44,143 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0 30px black inset;
 }
 
+.noty_bar {
+    border: none!important;
+    @apply font-gotham;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 0.3rem 1rem;
+}
 
-/* Notie toasts styles */
-.notie-container {
-  @apply font-gotham;
-  text-transform: uppercase;
-}
-.notie-background-success {
-    background-color: rgba(26, 74, 16, 0.95)!important;
-}
-.notie-background-error {
+.noty_type__error {
     background-color: rgba(128, 29, 32, 0.95)!important;
 }
-.notie-background-warning {
+
+.noty_type__success {
+    background-color: rgba(26, 74, 16, 0.95)!important;
+}
+
+.noty_type__warning {
     background-color: rgba(130, 106, 29, 0.95)!important;
 }
-.notie-background-info {
+
+.noty_type__info {
     background-color: rgba(28, 57, 130, 0.95)!important;
 }
+
+.noty_progressbar {
+    display: none!important;
+}
+
+
+
+
+/*
+* Container style
+*/
+.ps {
+    overflow: hidden !important;
+    overflow-anchor: none;
+    -ms-overflow-style: none;
+    touch-action: auto;
+    -ms-touch-action: auto;
+    }
+    /*
+    * Scrollbar rail styles
+    */
+    .ps__rail-x {
+    display: none;
+    opacity: 0;
+    transition: background-color .2s linear, opacity .2s linear;
+    -webkit-transition: background-color .2s linear, opacity .2s linear;
+    height: 15px;
+    /* there must be 'bottom' or 'top' for ps__rail-x */
+    bottom: 0px;
+    /* please don't change 'position' */
+    position: absolute;
+    }
+    .ps__rail-y {
+    display: none;
+    opacity: 0;
+    transition: background-color .2s linear, opacity .2s linear;
+    -webkit-transition: background-color .2s linear, opacity .2s linear;
+    width: 15px;
+    /* there must be 'right' or 'left' for ps__rail-y */
+    right: 0;
+    /* please don't change 'position' */
+    position: absolute;
+    z-index: 1000;
+    }
+    .ps--active-x > .ps__rail-x,
+    .ps--active-y > .ps__rail-y {
+    display: block;
+    background-color: transparent;
+    }
+    .ps:hover > .ps__rail-x,
+    .ps:hover > .ps__rail-y,
+    .ps--focus > .ps__rail-x,
+    .ps--focus > .ps__rail-y,
+    .ps--scrolling-x > .ps__rail-x,
+    .ps--scrolling-y > .ps__rail-y {
+    opacity: 0.6;
+    }
+    .ps .ps__rail-x:hover,
+    .ps .ps__rail-y:hover,
+    .ps .ps__rail-x:focus,
+    .ps .ps__rail-y:focus,
+    .ps .ps__rail-x.ps--clicking,
+    .ps .ps__rail-y.ps--clicking {
+    background-color: none;
+    }
+    /*
+    * Scrollbar thumb styles
+    */
+    .ps__thumb-x {
+    background-color: #aaa;
+    border-radius: 6px;
+    transition: background-color .2s linear, height .2s ease-in-out;
+    -webkit-transition: background-color .2s linear, height .2s ease-in-out;
+    height: 3px;
+    /* there must be 'bottom' for ps__thumb-x */
+    bottom: 2px;
+    /* please don't change 'position' */
+    position: absolute;
+    z-index: 1000;
+    }
+    .ps__thumb-y {
+    background-color: #b3b3b3;
+    border-radius: 8px;
+    transition: background-color .2s linear, width .2s ease-in-out;
+    -webkit-transition: background-color .2s linear, width .2s ease-in-out;
+    width: 3px;
+    /* there must be 'right' for ps__thumb-y */
+    right: 4px;
+    /* please don't change 'position' */
+    position: absolute;
+    }
+    .ps__rail-x:hover > .ps__thumb-x,
+    .ps__rail-x:focus > .ps__thumb-x,
+    .ps__rail-x.ps--clicking .ps__thumb-x {
+    background-color: green;
+    height: 11px;
+    }
+    .ps__rail-y:hover > .ps__thumb-y,
+    .ps__rail-y:focus > .ps__thumb-y,
+    .ps__rail-y.ps--clicking .ps__thumb-y {
+    background-color: #b3b3b3d;
+    width: 4px;
+    }
+    /* MS supports */
+    @supports (-ms-overflow-style: none) {
+    .ps {
+        overflow: auto !important;
+    }
+    }
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .ps {
+        overflow: auto !important;
+    }
+    }
+    .ps {
+        position: relative;
+    }

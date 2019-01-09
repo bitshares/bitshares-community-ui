@@ -1,12 +1,8 @@
 <template>
   <LoadingContainer
     :loading="!historyLoaded"
+    :class="{'w-220': expanded }"
     class="portfolio-container h-full">
-
-    <AccountHeader
-      :large-mode="true"
-      class="flex md:hidden"
-    />
 
     <div class="portfolio-header">
       <LinkButton
@@ -51,12 +47,11 @@ import { mapGetters } from 'vuex'
 import LoadingContainer from '@/components/LoadingContainer'
 import LinkButton from '@/components/LinkButton'
 import PortfolioItem from './PortfolioItem.vue'
-import AccountHeader from './AccountHeader'
 
 import SortableTable from '@/components/SortableTable'
 
 export default {
-  components: { PortfolioItem, LoadingContainer, LinkButton, SortableTable, AccountHeader },
+  components: { PortfolioItem, LoadingContainer, LinkButton, SortableTable },
   props: {
     expanded: {
       type: Boolean,
@@ -68,7 +63,7 @@ export default {
       mode: 'balances',
       showSmallAssets: true,
       defaultSort: {
-        field: 'fiatValue',
+        field: 'share',
         type: 'desc'
       }
     }
@@ -80,24 +75,31 @@ export default {
     }),
     tableHeaders() {
       return this.mode === 'balances' ? [
-        { title: 'Tiker', field: 'tiker', align: 'left' },
-        { title: 'Tokens', field: 'tokens' },
-        { title: '$Value', field: 'fiatValue' },
+        { title: 'Asset', field: 'tiker', align: 'left' },
+        { title: 'Balance', field: 'tokens', align: 'left' },
         { title: 'Share', field: 'share' }
       ] : [
-        { title: 'Tiker', field: 'tiker', align: 'left' },
-        { title: '$Price', field: 'tokenPrice' },
-        { title: '24h%', field: 'change1' },
-        { title: '7d%', field: 'change7' }
+        { title: 'Asset', field: 'tiker', align: 'left' },
+        { title: 'Price', field: 'tokenPrice', align: 'left' },
+        { title: '24h', field: 'change1' }
       ]
     },
     tableHeadersExpanded() {
-      const headers = this.tableHeaders.slice()
-      headers.splice(1, 0, {
-        title: '', field: '', align: 'center'
-      }, { title: '', field: '', align: 'center' })
-
-      return headers
+      return this.mode === 'balances' ? [
+        { title: 'Asset', field: 'tiker', align: 'left' },
+        { title: '', field: '', align: 'center' },
+        { title: '', field: '', align: 'center' },
+        { title: 'Tokens', field: 'tokens', align: 'right' },
+        { title: '$Value', field: 'usdValue', align: 'right' },
+        { title: 'Share', field: 'share', align: 'right' }
+      ] : [
+        { title: 'Asset', field: 'tiker', align: 'left' },
+        { title: '', field: '', align: 'center' },
+        { title: '', field: '', align: 'center' },
+        { title: 'Price', field: 'tokenPrice', align: 'right' },
+        { title: '24h', field: 'change1', align: 'right' },
+        { title: '7d', field: 'change7', align: 'right' }
+      ]
     },
     filteredItems() {
       if (this.showSmallAssets) return this.items

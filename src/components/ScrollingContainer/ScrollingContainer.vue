@@ -1,12 +1,17 @@
 <template>
-  <div class="scrollable-container">
+  <div
+    :class="{'scrollable-container--empty-area': emptyArea}"
+    class="scrollable-container"
+  >
+    <perfect-scrollbar :options="{ wheelPropagation: true }">
+      <slot/>
+    </perfect-scrollbar>
     <div
       :style="{ height: shadowerHeight + 'px' }"
       class="scrollable-container__shadower-top"/>
     <div
       :style="{ height: shadowerHeight + 'px' }"
       class="scrollable-container__shadower-bottom"/>
-    <slot/>
   </div>
 </template>
 
@@ -16,6 +21,10 @@ export default {
     shadowerHeight: {
       type: Number,
       default: 30
+    },
+    emptyArea: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -27,6 +36,10 @@ export default {
   position: relative;
   height: 100%;
   overflow: hidden;
+
+  &--empty-area {
+    margin-top: 1.5rem;
+  }
   &__shadower-top {
     position: absolute;
     top: 0;
@@ -46,6 +59,9 @@ export default {
     background: linear-gradient(rgba(0, 0, 0, 0), black);
     pointer-events: none;
     z-index: 2;
+  }
+  .ps {
+    height: 100%;
   }
 }
 </style>

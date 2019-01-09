@@ -3,59 +3,92 @@
     :class="{
       'order-history-table-item--buy': item.order === 'buy',
       'order-history-table-item--sell': item.order === 'sell',
-      'order-history-table-item--last': isLast
+      'order-history-table-item--expanded': expanded
     }"
     class="order-history-table-item"
   >
     <div
+      v-if="!expanded"
+      class="order-history-table-row"
+    >
+      <div class="table-item">
+        <TwoLineItem
+          :top="formattedPayAsset"
+          :bottom="formattedReceiveAsset"
+        />
+      </div>
+      <div class="table-item">
+        <TwoLineItem
+          :top="avg"
+          :bottom="price"
+        />
+      </div>
+      <div class="table-item text-right">
+        <TwoLineItem
+          :top="item.order === 'buy' ? get : spend"
+          :bottom="fullCloseTitle"
+        />
+      </div>
+    </div>
+    <div
+      v-if="expanded"
       :class="{'order-history-table-row--expanded': expanded}"
       class="order-history-table-row"
     >
       <div class="table-item">
-        <div class="table-item-base">{{ item.payAssetSymbol }}</div>
-        <div class="table-item--ticker">/{{ item.receiveAssetSymbol }}</div>
+        <TwoLineItem
+          :top="formattedPayAsset"
+          :bottom="formattedReceiveAsset"
+          :expanded="expanded"
+        />
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ price }}</div>
-        <div class="table-item--ticker">{{ item.receiveAssetSymbol }}</div>
+        <TwoLineItem
+          :top="avg"
+          :bottom="price"
+          :expanded="expanded"
+        />
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ get }}</div>
-        <div class="table-item--ticker">{{ item.receiveAssetSymbol }}</div>
+        <TwoLineItem
+          :top="get"
+          :bottom="formattedReceiveAsset"
+          :expanded="expanded"
+        />
       </div>
       <div class="table-item">
-        <div class="table-item-base">{{ spend }}</div>
-        <div class="table-item--ticker">{{ item.payAssetSymbol }}</div>
+        <TwoLineItem
+          :top="spend"
+          :bottom="formattedPayAsset"
+          :expanded="expanded"
+        />
       </div>
-      <div
-        v-if="expanded"
-        class="table-item--dates"
-      >
+      <!-- <div class="table-item--dates">
         <div class="table-item-date">{{ dateOpen }}</div>
         <div class="table-item-date">{{ timeOpen }}</div>
-      </div>
+      </div> -->
       <div class="table-item--dates">
-        <div class="table-item-date">{{ dateClose }}</div>
-        <div class="table-item-date">{{ timeClose }}</div>
+        <div class="table-item-date">{{ dateClose }} {{ timeClose }}</div>
+        <!-- <div class="table-item-date">{{ timeClose }}</div> -->
       </div>
     </div>
   </div>
 </template>
 <script>
 import { format } from 'date-fns'
-// import { getVolumeFormat } from '@/helpers/utils'
+import { getFloatCurrency, removePrefix } from '@/helpers/utils'
+import TwoLineItem from '@/components/TwoLineItem'
 
 export default {
+  components: {
+    TwoLineItem
+  },
   props: {
     item: {
       type: Object,
       default() {
         return {}
       }
-    },
-    isLast: {
-      type: Boolean,
-      default: false
     },
     expanded: {
       type: Boolean,
@@ -66,6 +99,12 @@ export default {
     return {}
   },
   computed: {
+    formattedPayAsset() {
+      return removePrefix(this.item.payAssetSymbol)
+    },
+    formattedReceiveAsset() {
+      return removePrefix(this.item.receiveAssetSymbol)
+    },
     dateOpen() {
       return format(this.item.dateOpen, 'DD/MM')
     },
@@ -78,46 +117,48 @@ export default {
     timeClose() {
       return format(this.item.dateClose, 'HH:mm')
     },
+    fullCloseTitle() {
+      return `${this.dateClose} ${this.timeClose}`
+    },
     price() {
-      return this.item.price
+      return getFloatCurrency(this.item.price)
+    },
+    avg() {
+      return getFloatCurrency(this.item.avg)
     },
     get() {
-      return this.item.get
+      return getFloatCurrency(this.item.get)
     },
     spend() {
-      return this.item.spend
+      return getFloatCurrency(this.item.spend)
     }
   }
 }
 </script>
 <style lang="scss">
   .order-history-table-row {
-    color: config('colors.white');
+    color: config('colors.primary');
     display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    min-height: 3.125rem;
+    margin-left: -0.15rem;
+
+  &.order-history-table-row--expanded {
     grid-template-columns: repeat(5, 1fr);
-    height: 3.9375rem;
 
-    &--expanded {
-      grid-template-columns: repeat(6, 1fr);
-
-      .table-item {
-        .table-item-base {
-          font-size: config('textSizes.lg');
-          padding-top: .3rem;
-        }
-        .table-item--ticker {
-          font-size: config('textSizes.base');
-        }
-      }
-      .table-item--dates {
-        color: config('colors.inactive');
-        .table-item-date {
-          font-size: config('textSizes.base');
-        }
+    .table-item--dates {
+      color: config('colors.inactive');
+      .table-item-date {
+        font-size: config('textSizes.base');
       }
     }
   }
+  }
   .order-history-table-item {
+    &:last-child {
+      position: relative;
+      z-index: 100;
+    }
     color: config('colors.text-primary');
     margin: 0.1250rem 0 0.1250rem 0.1250rem;
 
@@ -126,8 +167,10 @@ export default {
     grid-row: 1;
 
     transition: background-color 0.15s ease;
-    padding: 0 1.5rem 0 1rem;
-
+    padding: 0 1.5rem 0 .8rem;
+    &--expanded {
+      padding-left: 1rem;
+    }
     &:hover {
       position: relative;
       z-index: 2;
@@ -135,23 +178,16 @@ export default {
     }
 
     &--buy {
-      border-left: 7px solid config('colors.buy');
+      border-left: .3125rem solid config('colors.buy');
     }
     &--sell {
-      border-left: 7px solid config('colors.sell');
-    }
-    &--last {
-      position: relative;
-      z-index: 100;
+      border-left: .3125rem solid config('colors.sell');
     }
   }
   .order-history-table-row .table-item {
-    padding-right: 0.25rem;
-    // align-self: center;
-    padding-top: 0.5rem;
+    padding-top: 0.6rem;
     overflow: hidden;
     word-wrap: break-word;
-    // text-overflow: ellipsis;
     font-size: config('textSizes.sm');
     &--ticker {
       margin-top: 0.1rem;
@@ -163,11 +199,5 @@ export default {
       text-align: right;
       font-size: config('textSizes.xs-sm');
     }
-  }
-  .table-item > .table-item-base {
-    // white-space: nowrap;
-    overflow: hidden;
-    word-break: break-all;
-    // text-overflow: ellipsis;
   }
 </style>

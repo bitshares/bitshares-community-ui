@@ -1,20 +1,16 @@
-import { alert } from 'notie'
-import 'notie/dist/notie.min.css'
+import Vue from 'vue'
 
 export default {
   error(text) {
-    this.alert('error', text)
+    Vue.prototype.$noty.error(text)
   },
   warning(text) {
-    this.alert('warning', text)
+    Vue.prototype.$noty.warning(text)
   },
   success(text) {
-    this.alert('success', text)
+    Vue.prototype.$noty.success(text)
   },
   info(text) {
-    this.alert('info', text)
-  },
-  alert(type, text) {
-    alert({ type, text, position: 'bottom' })
+    Vue.prototype.$noty.info(text)
   }
 }
