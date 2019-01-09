@@ -307,49 +307,70 @@ export default {
     .new-order-decrement {
       position: absolute;
       top: 13.75rem;
-      left: 3.125rem;
+      left: 17%;
       text-align: center;
       line-height: 1.875rem;
       width: 1.875rem;
       height: 1.875rem;
       border-radius: 50%;
       color: config('colors.sell');
-      border: 1px solid config('colors.sell');
+      border: 1px solid config('colors.sell-disabled');
+      font-size: config('textSizes.2xl');
+
       cursor: pointer;
 
       &--disabled {
         cursor: default;
         color: config('colors.sell-disabled');
-        border: 1px solid config('colors.sell-disabled');
       }
     }
     .new-order-increment {
       position: absolute;
       top: 13.75rem;
-      right: 3.125rem;
+      right: 17%;
       text-align: center;
       line-height: 1.875rem;
       width: 1.875rem;
       height: 1.875rem;
       border-radius: 50%;
       color: config('colors.buy');
-      border: 1px solid config('colors.buy');
+      border: 1px solid config('colors.buy-disabled');
+      font-size: config('textSizes.2xl');
       cursor: pointer;
 
       &--disabled {
         cursor: default;
         color: config('colors.buy-disabled');
-        border: 1px solid config('colors.buy-disabled');
       }
     }
   }
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 560px) {
     .new-order {
       .new-order-decrement {
-        left: 4.7rem;
+        left: 23%;
       }
       .new-order-increment {
-        right: 4.7rem;
+        right: 23%;
+      }
+    }
+  }
+  @media screen and (max-width: 400px) {
+    .new-order {
+      .new-order-decrement {
+        left: 20%;
+      }
+      .new-order-increment {
+        right: 20%;
+      }
+    }
+  }
+  @media screen and (max-width: 350px) {
+    .new-order {
+      .new-order-decrement {
+        left: 15%;
+      }
+      .new-order-increment {
+        right: 15%;
       }
     }
   }
