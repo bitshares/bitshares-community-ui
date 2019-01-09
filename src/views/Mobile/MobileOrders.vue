@@ -69,7 +69,7 @@ export default {
       isTickerFavourite: 'marketsMonitor/isTickerFavourite'
     }),
     orderTitle() {
-      return `NEW ORDER ${this.base}/${this.quote}`
+      return `NEW ORDER ${this.quote}/${this.base}`
     },
     isFavourite() {
       return this.isTickerFavourite(this.base, this.quote)
