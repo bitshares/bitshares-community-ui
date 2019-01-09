@@ -307,7 +307,7 @@ export default {
     .new-order-decrement {
       position: absolute;
       top: 13.75rem;
-      left: 17%;
+      left: 20%;
       text-align: center;
       line-height: 1.875rem;
       width: 1.875rem;
@@ -327,7 +327,7 @@ export default {
     .new-order-increment {
       position: absolute;
       top: 13.75rem;
-      right: 17%;
+      right: 20%;
       text-align: center;
       line-height: 1.875rem;
       width: 1.875rem;
