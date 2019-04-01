@@ -47,7 +47,7 @@ let colors = {
   'buy': 'rgb(121,198,16)',
   'buy-disabled': 'rgba(121,198,16,.5)',
   'sell': 'rgb(255,48,48)',
-  'sell-disabled': 'rgb(255,48,48,.5)',
+  'sell-disabled': 'rgba(255,48,48,.5)',
   'black': '#22292f',
   'grey-darkest': '#3d4852',
   'grey-darker': '#606f7b',

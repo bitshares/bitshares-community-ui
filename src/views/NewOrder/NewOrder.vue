@@ -13,6 +13,20 @@
       :active="activeIndication"
       @change="changeOrderType"
     />
+    <div
+      :class="{'new-order-decrement--disabled': !price}"
+      class="new-order-decrement"
+      @click="decPrice"
+    >
+      -
+    </div>
+    <div
+      :class="{'new-order-increment--disabled': !price}"
+      class="new-order-increment"
+      @click="incPrice"
+    >
+      +
+    </div>
     <NewOrderCirclePrice :percent="0"/>
     <NewOrderCircleType :value="0"/>
     <NewOrderPercentSelector
@@ -208,6 +222,14 @@ export default {
       showConfirm: 'newOrder/showConfirm',
       hideConfirm: 'newOrder/hideConfirm'
     }),
+    incPrice() {
+      const priceStep = 0.2
+      if (this.price) this.setPrice((+this.price + (+this.price / 100 * priceStep)).toFixed(4))
+    },
+    decPrice() {
+      const priceStep = 0.2
+      if (this.price) this.setPrice((+this.price - (+this.price / 100 * priceStep)).toFixed(4))
+    },
     clickCreateOrder() {
       this.hasFeeBalance ? this.showConfirm() : this.$toast.error('Not enough BTS to place order')
     },
@@ -281,6 +303,75 @@ export default {
       margin-top: 1rem;
       display: flex;
       justify-content: center;
+    }
+    .new-order-decrement {
+      position: absolute;
+      top: 13.75rem;
+      left: 20%;
+      text-align: center;
+      line-height: 1.875rem;
+      width: 1.875rem;
+      height: 1.875rem;
+      border-radius: 50%;
+      color: config('colors.sell');
+      border: 1px solid config('colors.sell-disabled');
+      font-size: config('textSizes.2xl');
+
+      cursor: pointer;
+
+      &--disabled {
+        cursor: default;
+        color: config('colors.sell-disabled');
+      }
+    }
+    .new-order-increment {
+      position: absolute;
+      top: 13.75rem;
+      right: 20%;
+      text-align: center;
+      line-height: 1.875rem;
+      width: 1.875rem;
+      height: 1.875rem;
+      border-radius: 50%;
+      color: config('colors.buy');
+      border: 1px solid config('colors.buy-disabled');
+      font-size: config('textSizes.2xl');
+      cursor: pointer;
+
+      &--disabled {
+        cursor: default;
+        color: config('colors.buy-disabled');
+      }
+    }
+  }
+  @media screen and (max-width: 560px) {
+    .new-order {
+      .new-order-decrement {
+        left: 23%;
+      }
+      .new-order-increment {
+        right: 23%;
+      }
+    }
+  }
+  @media screen and (max-width: 400px) {
+    .new-order {
+      .new-order-decrement {
+        left: 20%;
+      }
+      .new-order-increment {
+        right: 20%;
+      }
+    }
+  }
+  @media screen and (max-width: 350px) {
+    .new-order {
+      .new-order-decrement {
+        left: 15%;
+      }
+      .new-order-increment {
+        right: 15%;
+      }
     }
   }
 </style>

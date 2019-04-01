@@ -50,7 +50,7 @@ export default {
     return {
       layoutItems: [
         { color: 'rgba(121,198,16,.5)', isPositive: true },
-        { color: 'rgb(255,48,48,.5)', isPositive: false }
+        { color: 'rgba(255,48,48,.5)', isPositive: false }
       ]
     }
   },
