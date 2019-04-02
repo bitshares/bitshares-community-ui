@@ -1,6 +1,6 @@
 <template>
 
-  <VBreakpoint>
+  <v-breakpoint>
     <div
       slot-scope="scope"
       class="dashboard">
@@ -121,7 +121,7 @@
 
       <UnlockAccountPopup/>
     </div>
-  </VBreakpoint>
+  </v-breakpoint>
 </template>
 
 <script>
