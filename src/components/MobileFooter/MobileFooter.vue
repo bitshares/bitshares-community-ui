@@ -48,6 +48,8 @@ export default {
 
 <style lang="scss" scoped>
 .mobile-footer {
+  position: absolute;
+  bottom: 0;
   flex-grow: 0;
   flex-shrink: 0;
   display: flex;

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height: 100%;">
     <v-breakpoint v-model="scope" />
     <div class="dashboard">
       <Modal
