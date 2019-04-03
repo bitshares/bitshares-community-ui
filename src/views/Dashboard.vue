@@ -1,9 +1,7 @@
 <template>
-
-  <v-breakpoint>
-    <div
-      slot-scope="scope"
-      class="dashboard">
+  <div>
+    <v-breakpoint v-model="scope" />
+    <div class="dashboard">
       <Modal
         v-if="backupFlag"
         @close="toggleBackupModal"
@@ -121,7 +119,7 @@
 
       <UnlockAccountPopup/>
     </div>
-  </v-breakpoint>
+  </div>
 </template>
 
 <script>
@@ -146,7 +144,7 @@ import Withdraw from '@/views/Withdraw/WithdrawWidget'
 import ChangePassword from '@/views/ChangePassword/ChangePasswordWidget'
 import UnlockAccountPopup from '@/views/UnlockAccountPopup/UnlockAccountPopup'
 import Graph from '@/views/Graph/Graph'
-import { VBreakpoint } from 'vue-breakpoint-component'
+import { VBreakpoint, Model } from 'vue-breakpoint-component'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -176,6 +174,9 @@ export default {
     VBreakpoint,
     ChangePassword
   },
+  data: () => ({
+    scope: new Model()
+  }),
   computed: {
     ...mapGetters({
       backupFlag: 'backup/modalDisplayed'
