@@ -21,7 +21,7 @@
     "lodash": "^4.17.11",
     "v-click-outside": "^2.0.1",
     "vue": "^2.5.17",
-    "vue-breakpoint-component": "^1.1.1",
+    "vue-breakpoint-component": "^1.2.2",
     "vue-chartjs": "^3.4.0",
     "vue-clipboard2": "^0.2.1",
     "vue-router": "^3.0.1",
