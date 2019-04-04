@@ -6,9 +6,9 @@
 - http://staging.community-ui.bitshares.org (ver 1.1.1)
 - http://testing.community-ui.bitshares.org (ver 1.2.2)
 
-- All updates on this worker/repository will be maintained through GitHub. 
+All updates on this worker/repository will be maintained through GitHub. 
 
-- Worker P1 details can be found [here](https://www.bitshares.foundation/workers/2018-08-trusty-community-ui-p1).
+Worker P1 details can be found [here](https://www.bitshares.foundation/workers/2018-08-trusty-community-ui-p1).
 
 # bitshares-community-ui (Worker Part 2/2 COMING SOON)
 
@@ -20,7 +20,7 @@
 |:---------------------------------- |:-------------:|
 | General Manager (**Milos Preocanin**)   |  [dls-cipher](https://github.com/dls-cipher)     |
 
-Rest of the team will be announced with upcoming worker proposal (Part 2)
+*Rest of the team will be announced with upcoming worker proposal (Part 2)*
 
 - Worker hourly reports (by TopTracker) and worker sprint reports (by Worker Manager) can be found under [public Accounting page for the worker](https://workers.bitshares.foundation/201808-trusty-community-ui-p1)
 
