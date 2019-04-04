@@ -3,12 +3,12 @@
 
 ## Demo is available!
 
-http://staging.community-ui.bitshares.org (ver 1.1.1)
-http://testing.community-ui.bitshares.org (ver 1.2.2)
+- http://staging.community-ui.bitshares.org (ver 1.1.1)
+- http://testing.community-ui.bitshares.org (ver 1.2.2)
 
-- All updates on this worker/repository will be maintained through github. 
+- All updates on this worker/repository will be maintained through GitHub. 
 
-- Worker details can be found [here](https://www.bitshares.foundation/workers/2018-08-trusty-community-ui-p1).
+- Worker P1 details can be found [here](https://www.bitshares.foundation/workers/2018-08-trusty-community-ui-p1).
 
 # bitshares-community-ui (Worker Part 2/2 COMING SOON)
 
