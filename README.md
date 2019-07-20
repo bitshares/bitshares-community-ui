@@ -6,6 +6,10 @@
 - http://staging.community-ui.bitshares.org (ver 1.1.1)
 - http://testing.community-ui.bitshares.org (ver 1.2.2)
 
+## Source ai/design
+
+- (designer-replace/paste-url-here)
+
 All updates on this worker/repository will be maintained through GitHub. 
 
 Worker P1 details can be found [here](https://www.bitshares.foundation/workers/2018-08-trusty-community-ui-p1).
