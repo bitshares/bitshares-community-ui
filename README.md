@@ -8,7 +8,7 @@
 
 ## Source ai/design
 
-- (designer-replace/paste-url-here)
+- https://disk.yandex.ru/d/xfBmv2CGt18w_Q
 
 All updates on this worker/repository will be maintained through GitHub. 
 
