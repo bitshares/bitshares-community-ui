@@ -8,7 +8,7 @@
 
 ## Source ai/design
 
-- (designer-replace/paste-url-here)
+- https://mega.nz/#F!wYwXHADB
 
 All updates on this worker/repository will be maintained through GitHub. 
 
